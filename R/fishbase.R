@@ -78,19 +78,3 @@ fishbase <- function(fish.id, curl=getCurlHandle()){
 }
 
 
-# Example call with error handling
-weights <- function(fish){
-# function pulls out the weight information, could be more efficient
-# Example call:
-#   weights(2:100)
-  suppressWarnings(
-  sapply(fish, function(i){
-                 out <- try(fishbase(i))
-                 if(!(is(out,"try-error")))
-                  weight <- out$size_values[["weight"]]
-                 else
-                   weight <- NA
-                 weight
-               })
-  )
-}
