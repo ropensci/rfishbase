@@ -1,6 +1,6 @@
 # demo.R
 
-require(fishbase)
+require(rfishbase)
 require(socialR)
 script <- "demo.R" # Must specify the script name! 
 gitaddr <- gitcommit(script)     # Must commmit at start and store id.
