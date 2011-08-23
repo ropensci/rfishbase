@@ -21,14 +21,11 @@ fishbase <- function(fish.id, curl=getCurlHandle()){
                "maintenance/FB/showXML.php?identifier=FB-",
               fish.id, "&ProviderDbase=03", sep="")
 
-  # these are probably guessed by xmlNamespaceDefinitions in the xpath functions
-  namespaces <- c(xsd="http://www.w3.org/2001/XMLSchema", 
-                  dc="http://purl.org/dc/elements/1.1/", 
-                  dcterms="http://purl.org/dc/terms/", 
-                  geo="http://www.w3.org/2003/01/geo/wgs84_pos#", 
-                  dwc="http://rs.tdwg.org/dwc/dwcore/", 
-                  xsi="http://www.w3.org/2001/XMLSchema-instance", 
-                  schemaLocation="http://www.eol.org/transfer/content/0.1")
+  # these are probably guessed by xmlNamespaceDefinitions function in the 
+  # xpath function calls, so could be ommitted. We only need these
+  # two namespaces, so we'll just load them.  
+  namespaces <- c(dc="http://purl.org/dc/elements/1.1/", 
+                  dwc="http://rs.tdwg.org/dwc/dwcore/")
 
 
   tt <- getURLContent(url, followlocation=TRUE, curl=curl)
@@ -43,15 +40,57 @@ fishbase <- function(fish.id, curl=getCurlHandle()){
   # Size information: go to the parent node of the dc:identifier node
   # which has FB-Size-2 property.  The child of that node which is a dc:description
   # is where we'll find the size information
-  size_node <- getNodeSet(doc, "//dc:identifier[string(.) = 'FB-Size-2']/..", namespaces)
+  size_node <- getNodeSet(doc, paste("//dc:identifier[string(.) =
+                          'FB-Size-", fish.id, "']/..", sep=""), namespaces)
   size <- xmlValue( size_node[[1]][["description"]] )
-  # Likewise for distribution information
-  dist_node <- getNodeSet(doc, "//dc:identifier[string(.) = 'FB-Distribution-2']/..", namespaces)
+
+
+  # Have to do some grep processing to extract the size information 
+  # as numbers instead of this text description.
+  length <- gsub("^((\\d|,)*\\.?\\d*) cm.+", "\\1", size)
+  length <- as.numeric(gsub(",", "", length)) # remove commas
+
+  units <- gsub(".+published weight: \\d.* (g|kg).+", "\\1", size)
+  weight <- gsub(".+published weight: ((\\d|,)*\\.?\\d*) (g|kg).+", "\\1", size)
+  weight <- as.numeric(gsub(",", "", weight)) # remove commas
+  if(units=="kg") 
+    weight <- weight*1000
+  age <-  as.numeric(gsub(".+reported age: (\\d.*) years.*", "\\1", size))
+  size_values <- c(length=length, weight=weight, age=age)  
+
+  # Likewise for distribution information 
+  dist_node <- getNodeSet(doc, paste("//dc:identifier[string(.) =
+                          'FB-Distribution-", fish.id, "']/..", sep=""),
+                          namespaces)
   distribution <- xmlValue( dist_node[[1]][["description"]] )
+  # The dist_node may have other useful information, including maps 
+
+  # Likewise for distribution information 
+  habitat_node <- getNodeSet(doc, paste("//dc:identifier[string(.) =
+                          'FB-Habitat-", fish.id, "']/..", sep=""), namespaces)
+  habitat <- xmlValue( habitat_node[[1]][["description"]] )
+  # The dist_node may have other useful information, including maps 
+
 
   # Format the output 
  list(Genus=Genus, Family=Family, ScientificName=ScientificName,
-      distribution=distribution, size=size)
+      distribution=distribution, size=size, size_values=size_values)
 }
 
 
+# Example call with error handling
+weights <- function(fish){
+# function pulls out the weight information, could be more efficient
+# Example call:
+#   weights(2:100)
+  suppressWarnings(
+  sapply(fish, function(i){
+                 out <- try(fishbase(i))
+                 if(!(is(out,"try-error")))
+                  weight <- out$size_values[["weight"]]
+                 else
+                   weight <- NA
+                 weight
+               })
+  )
+}
