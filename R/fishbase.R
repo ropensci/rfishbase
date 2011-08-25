@@ -32,8 +32,8 @@ fishbase <- function(fish.id, curl=getCurlHandle()){
   doc <- xmlParse(tt)
   Genus <- xmlValue(getNodeSet(doc, "//dwc:Genus", 
                   namespaces=namespaces)[[1]])
-  Family <- sapply(getNodeSet(doc, "//dwc:Family", 
-                   namespaces=namespaces), xmlToList) 
+  Family <- xmlValue(getNodeSet(doc, "//dwc:Family", 
+                   namespaces=namespaces)[[1]]) 
   ScientificName <- sapply(getNodeSet(doc, "//dwc:ScientificName", 
                            namespaces=namespaces), xmlToList)
  

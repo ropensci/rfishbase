@@ -5,4 +5,4 @@ Version: 0.0-1
 License: BSD
 Author: Carl Boettiger 
 Maintainer: Carl Boettiger, <cboettig@gmail.com> 
-Imports: RJSONIO, RCurl (>= 1.6) 
+Imports: XML, RCurl (>= 1.6) 
