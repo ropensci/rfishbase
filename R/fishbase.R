@@ -78,3 +78,17 @@ fishbase <- function(fish.id, curl=getCurlHandle()){
 }
 
 
+## a general function to loop over all fish ids to get data
+## Drops the missing entries
+getData <- function(fish.ids){
+  data <- 
+  suppressWarnings(
+    lapply(fish.ids, function(i) try(fishbase(i)))
+  )
+    lapply(data, function(x){
+                  if(!is(x, "try-error"))
+                    x
+                 })
+}
+
+

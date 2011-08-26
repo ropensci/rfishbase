@@ -1,29 +1,18 @@
 # demo.R
 
 require(rfishbase)
-
-## a general function to loop over all fish ids to get data
-getData <- function(fish.ids){
-  suppressWarnings(
-    lapply(fish.ids, function(i) try(fishbase(i)))
-  )
-}
-
 # A function to extract the ages, handling missing values
 get.ages <- function(fish.data){
-              sapply(fish.data, function(out){
-                 if(!(is(out,"try-error")))
-                   x <- out$size_values[["age"]]
-                 else
-                   x <- NA
-                 x
+              x <- sapply(fish.data, 
+                     function(out){
+                       out$size_values[["age"]]
                })
-  
+              unlist(x)
 }
 
 
 # Process all the XML first, then extract the ages 
-fish.data <- getData(2:500)
+fish.data <- getData(2:100)
 yr <- get.ages(fish.data)
 
 # Plot data

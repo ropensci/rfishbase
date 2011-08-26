@@ -1,4 +1,4 @@
 import(XML)
 import(RCurl)
 
-export(fishbase)
+export(fishbase,getData)
