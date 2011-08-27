@@ -36,6 +36,7 @@ fishbase <- function(fish.id, curl=getCurlHandle()){
   ## lets see if the page exists.
   if(is(Genus, "try-error")){
     output <- "try-error"
+    class(output) <- "try-error"
   } else {
     Family <- xmlValue(getNodeSet(doc, "//dwc:Family", 
                      namespaces=namespaces)[[1]]) 

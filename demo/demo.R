@@ -1,8 +1,6 @@
 # demo.R
 
 require(rfishbase)
-require(XML)
-require(RCurl)
 
 # A function to extract the ages, handling missing values
 get.ages <- function(fish.data){
