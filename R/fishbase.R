@@ -35,8 +35,7 @@ fishbase <- function(fish.id, curl=getCurlHandle()){
 
   ## lets see if the page exists.
   if(is(Genus, "try-error")){
-    output <- "try-error"
-    class(output) <- "try-error"
+    output <- NULL
   } else {
     Family <- xmlValue(getNodeSet(doc, "//dwc:Family", 
                      namespaces=namespaces)[[1]]) 
@@ -113,10 +112,8 @@ getData <- function(fish.ids){
   suppressWarnings(
     lapply(fish.ids, function(i) try(fishbase(i)))
   )
-    lapply(data, function(x){
-                  if(!is(x, "try-error"))
-                    x
-                 })
+  data <- sapply(data, function(x) if(!is(x, "try-error")) x)
+  data[!sapply(data, is.null)]
 }
 
 

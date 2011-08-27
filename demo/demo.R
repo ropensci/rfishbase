@@ -31,7 +31,7 @@ dev.off()
 
 
 # Now let's just grab the entire fishbase database, 
-#fish.data <- getData(1:30000)
+fish.data <- getData(1:30000)
 
 
 habitatSearch <- function(keyword, fish.data){
@@ -52,7 +52,7 @@ reef <- sum(x, na.rm=T)
 nonreef <- sum(is.na(x))
 percent_reef <- reef/(reef+nonreef) 
 
-
+save(list=ls(), file="fishbase.Rdat")
 
 ## Log in lab notebook for Reproducible Research 
 require(socialR)
