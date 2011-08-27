@@ -1,6 +1,9 @@
 # demo.R
 
 require(rfishbase)
+require(XML)
+require(RCurl)
+
 # A function to extract the ages, handling missing values
 get.ages <- function(fish.data){
               x <- sapply(fish.data, 
@@ -30,7 +33,7 @@ dev.off()
 
 
 # Now let's just grab the entire fishbase database, 
-fish.data <- getData(1:30000)
+#fish.data <- getData(1:30000)
 
 
 habitatSearch <- function(keyword, fish.data){
