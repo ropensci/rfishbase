@@ -31,7 +31,7 @@ dev.off()
 
 
 # Now let's just grab the entire fishbase database, 
-#fish.data <- getData(1:30000)
+fish.data <- getData(1:30000)
 
 
 habitatSearch <- function(keyword, fish.data){
