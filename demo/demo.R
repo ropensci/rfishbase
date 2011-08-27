@@ -13,7 +13,7 @@ get.ages <- function(fish.data){
 
 
 # Process all the XML first, then extract the ages 
-fish.data <- getData(2:100)
+fish.data <- getData(2:40)
 
 
 
@@ -58,7 +58,7 @@ percent_reef <- reef/(reef+nonreef)
 require(socialR)
 script <- "demo.R" # Must specify the script name! 
 gitaddr <- gitcommit(script)     # Must commmit at start and store id.
-upload("age.png", script=script, gitaddr=gitaddr)
+#upload("age.png", script=script, gitaddr=gitaddr)
 
 
 
