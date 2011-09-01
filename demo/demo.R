@@ -1,4 +1,5 @@
 # demo.R
+rm(list=ls())
 require(rfishbase)
 # A function to extract the ages, handling missing values
 get.ages <- function(fish.data){
