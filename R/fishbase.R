@@ -30,13 +30,15 @@ fishbase <- function(fish.id, curl=getCurlHandle()){
 
   tt <- getURLContent(url, followlocation=TRUE, curl=curl)
   doc <- xmlParse(tt)
-  Genus <- try(xmlValue(getNodeSet(doc, "//dwc:Genus", 
-                  namespaces=namespaces)[[1]]))
+  node <- getNodeSet(doc, "//dwc:Genus", 
+                  namespaces=namespaces)
 
   ## lets see if the page exists.
-  if(is(Genus, "try-error")){
+  if(is.null(node)){
+    warning(paste("ID", fish.id, "has no public data"))
     output <- NULL
   } else {
+    Genus <- xmlValue(node[[1]])
     Family <- xmlValue(getNodeSet(doc, "//dwc:Family", 
                      namespaces=namespaces)[[1]]) 
     ScientificName <- sapply(getNodeSet(doc, "//dwc:ScientificName", 
