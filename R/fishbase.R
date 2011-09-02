@@ -51,6 +51,10 @@ fishbase <- function(fish.id, curl=getCurlHandle()){
     Genus <- xmlValue(genus_node[[1]])
     Family <- sapply(getNodeSet(doc, "//dwc:Family", 
                      namespaces=namespaces), xmlToList)
+    Order <- sapply(getNodeSet(doc, "//dwc:Order", 
+                     namespaces=namespaces), xmlToList)
+    Class <- sapply(getNodeSet(doc, "//dwc:Class", 
+                     namespaces=namespaces), xmlToList)
     ScientificName <- sapply(getNodeSet(doc, "//dwc:ScientificName", 
                              namespaces=namespaces), xmlToList)
    
@@ -116,8 +120,8 @@ fishbase <- function(fish.id, curl=getCurlHandle()){
   # Format the output 
   output <- list(Genus=Genus, Family=Family, ScientificName=ScientificName,
       distribution=distribution, size=size, size_values=size_values,
-      habitat=habitat, trophic=trophic, lifecycle=lifecycle, 
-      morphology=morphology, diagnostic=diagnostic, id=fish.id)
+      habitat=habitat, trophic=trophic, lifecycle=lifecycle, Class=Class, 
+      morphology=morphology, diagnostic=diagnostic, Order=Order, id=fish.id)
   }
   output
 }
