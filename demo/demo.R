@@ -11,14 +11,23 @@ get.ages <- function(fish.data){
 }
 
 
-# Process all the XML first, then extract the ages 
-fish.data <- getData(2:40)
+## Download and parse data for first 40 ids (36 fish)
+#fish.data <- getData(1:40)
+
+## Or just load the cached copy of the full fishbase data:
+load(fishbase)
+
+
 yr <- get.ages(fish.data)
 
 # Plot data
 png("age.png"); 
 hist(yr, breaks=40, main="Age Distribution", xlab="age (years)"); 
 dev.off()
+
+
+
+
 
 habitatSearch <- function(keyword, fish.data){
 # A function to search for the occurances of any keyword in habitat description
