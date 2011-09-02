@@ -21,4 +21,4 @@ for(i in 2:14){
 }
 
 print(length(all.fishbase))
-save(list="all.fishbase", file=paste(Sys.Date(), "-fishbase", ".rda")
+save(list="all.fishbase", file=paste(Sys.Date(), "-fishbase", ".rda"), sep="")
