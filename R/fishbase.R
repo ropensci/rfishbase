@@ -132,12 +132,14 @@ getData <- function(fish.ids, silent=TRUE){
 #   also drops the missing entries
 # Example:
 #   all.fishbase <- getData(1:30000)
+
+  curl <- getCurlHandle()
   data <- 
   suppressWarnings(
     lapply(fish.ids, function(i){ 
 			if(!silent) 
 			  print(i)
-			try(fishbase(i))
+			try(fishbase(i, curl=curl))
 		      })
   )
   data <- sapply(data, function(x) if(!is(x, "try-error")) x)
