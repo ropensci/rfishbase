@@ -13,7 +13,6 @@ hist(yr, breaks=40, main="Age Distribution", xlab="age (years)");
 nfish <- length(all.fishbase)
 
 
-
 # We can create partitions by taxon.  For instance, we get the index
 # to all fish wrasses and parrotfish by searching for both families
 # note the use of a "regular expression" to specify the OR command in the search
@@ -93,7 +92,13 @@ ou <- fitContinuous(tr, depth, model="OU")
 
 
 
-sapply(all.fishbase[myfish], function(x) length(grep("invertebrate", x$trophic))>0)
+invert <- sapply(all.fishbase, function(x) length(grep("invertebrate", x$trophic))>0)
+piscivore <- sapply(all.fishbase, function(x) length(grep("(piscivore|fish)", x$trophic))>0)
+hist(log( getSize (all.fishbase[invert], "length")),
+         col=rgb(1,0,0,.5), breaks=40, freq=F, xlab="length", main="invert eaters vs piscivores")
+hist(log( getSize (all.fishbase[piscivore], "length")),
+          col=rgb(0,0,1,.5), breaks=40, add=T, freq=F)
+
 
 
 
