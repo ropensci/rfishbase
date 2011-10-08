@@ -2,4 +2,4 @@ import(XML)
 import(RCurl)
 
 export(fishbase,getData)
-export(familySearch, habitatSearch, getSize)
+export(familySearch, habitatSearch, getSize, getDepth, getQuantTraits, findSpecies)
