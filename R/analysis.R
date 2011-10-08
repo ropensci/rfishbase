@@ -24,4 +24,59 @@ getSize <- function(fish.data, value=c("length", "weight", "age")){
   unlist(y)
 }
 
+getQuantTraits <- function(fish.data){
+# Return quantitative trait values from morphology data, if available
+# Args:
+#   keyword: pattern to be used by grep
+#   fish.data: list of outputs from fishbase(), or from getData()
+# Example:
+#   data <- getData(1:10)
+  morph <- function(x){
+    str <- x$morphology
+    # remove tabs and newlines that seem to appear in this data
+    str <- gsub("\\n", " ", str)
+    str <- gsub("\\t", "", str)
+    # match a range if given, otherwise just match first number
+    min.vertebrae <- as.integer(gsub(".*Vertebrae: (\\d*)( - (\\d*))*.*", "\\1", str))
+    max.vertebrae <- as.integer(gsub(".*Vertebrae: (\\d*)( - (\\d*))*.*", "\\3", str))
+    min.anal.spines <- as.integer(gsub(".*Anal spines: (\\d*)( - (\\d*))*.*", "\\1", str))
+    max.anal.spines <- as.integer(gsub(".*Anal spines: (\\d*)( - (\\d*))*.*", "\\3", str))
+    min.dorsal.spines <- as.integer(gsub(".*Dorsal spines.*: (\\d*)( - (\\d*))*.*", "\\1", str))
+    max.dorsal.spines <- as.integer(gsub(".*Dorsal spines.*: (\\d*)( - (\\d*))*.*", "\\3", str))
+    min.dorsal.rays <- as.integer(gsub(".*Dorsal.* rays.*: (\\d*)( - (\\d*))*.*", "\\1", str))
+    max.dorsal.rays <- as.integer(gsub(".*Dorsal.* rays.*: (\\d*)( - (\\d*))*.*", "\\3", str))
+    min.anal.rays <- as.integer(gsub(".*Anal.* rays: (\\d*)( - (\\d*))*.*", "\\1", str))
+    max.anal.rays <- as.integer(gsub(".*Anal.* rays: (\\d*)( - (\\d*))*.*", "\\3", str))
+    
+    c(min.vertebrae=min.vertebrae, max.vertebrae=max.vertebrae, 
+      min.anal.spines=min.anal.spines, max.anal.spines=max.anal.spines,
+      min.dorsal.spines=min.dorsal.spines, max.dorsal.spines=max.dorsal.spines,
+      min.dorsal.rays=min.dorsal.rays, max.dorsal.rays=max.dorsal.rays,
+      min.anal.rays=min.anal.rays, max.anal.rays=max.anal.rays)
+  }
+  # Apply to the data range, ignoring warnings due to missing data
+  suppressWarnings(sapply(fish.data, morph))
+}
+
+getDepth <- function(fish.data){
+  depthfn <- function(fish){
+    x <- fish$habitat
+    shallow <- as.integer(gsub(".*depth range (\\?|\\d+) - (\\?|\\d+) m.*)", "\\1", x))
+    deep <- as.integer(gsub(".*depth range (\\?|\\d+) - (\\?|\\d+) m.*)", "\\2", x))
+    usual.shallow <- as.integer(gsub(".*usually (\\?|\\d+) - (\\?|\\d+) m.*)", "\\1", x))
+    usual.deep <- as.integer(gsub(".*usually (\\?|\\d+) - (\\?|\\d+) m.*)", "\\2", x))
+    c(shallow=shallow, deep=deep, usual.shallow=usual.shallow, usual.deep=usual.deep)
+  }
+  suppressWarnings(sapply(fish.data, depthfn))
+}
+
+
+
+findSpecies <- function(species){
+  # takes a vector of species names and queries for their id numbers in the dataset
+  # ideally, it would query names against taxize to get the correct name types
+  
+
+}
+
 
