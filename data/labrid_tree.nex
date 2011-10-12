@@ -1,0 +1,193 @@
+#NEXUS
+begin taxa;
+	dimensions ntax=114;
+	taxlabels
+	Lachnolaimus_maximus
+	Pseudodax_moluccanus
+	Bodianus_mesothorax
+	Bodianus_perditio
+	Bodianus_rufus
+	Clepticus_parrae
+	Choerodon_fasciatus
+	Choerodon_cephalotes
+	Choerodon_anchorago
+	Choerodon_schoenleinii
+	Choerodon_venustus
+	Sparisoma_radians
+	Sparisoma_chrysopterum
+	Sparisoma_viride
+	Sparisoma_aurofrenatum
+	Sparisoma_rubripinne
+	Sparisoma_atomarium
+	Cryptotomus_roseus
+	Calotomus_spinidens
+	Bolbometopon_muricatum
+	Cetoscarus_bicolor
+	Hipposcarus_longiceps
+	Chlorurus_bleekeri
+	Chlorurus_microrhinos
+	Chlorurus_sordidus
+	Scarus_schlegeli
+	Scarus_flavipectoralis
+	Scarus_psittacus
+	Scarus_rivulatus
+	Scarus_globiceps
+	Scarus_oviceps
+	Scarus_chameleon
+	Scarus_niger
+	Scarus_altipinnis
+	Scarus_dimidiatus
+	Scarus_frenatus
+	Scarus_ghobban
+	Scarus_taeniopterus
+	Scarus_iseri
+	Scarus_spinus
+	Oxycheilinus_bimaculatus
+	Cheilinus_chlorourus
+	Cheilinus_trilobatus
+	Cheilinus_oxycephalus
+	Wetmorella_nigropinnata
+	Cheilinus_fasciatus
+	Cheilinus_undulatus
+	Epibulus_insidiator
+	Oxycheilinus_digrammus
+	Oxycheilinus_unifasciatus
+	Coris_aygula
+	Coris_dorsomacula
+	Coris_gaimard
+	Pseudocoris_yamashiroi
+	Hologymnosus_annulatus
+	Hologymnosus_doliatus
+	Hemigymnus_melapterus
+	Stethojulis_trilineata
+	Stethojulis_bandanensis
+	Thalassoma_lutescens
+	Thalassoma_lunare
+	Thalassoma_amblycephalum
+	Thalassoma_trilobatum
+	Gomphosus_varius
+	Thalassoma_bifasciatum
+	Thalassoma_hardwicke
+	Thalassoma_quinquevittatum
+	Thalassoma_jansenii
+	Halichoeres_maculipinna
+	Halichoeres_hortulanus
+	Halichoeres_scapularis
+	Halichoeres_trimaculatus
+	Macropharyngodon_negrosensis
+	Macropharyngodon_choati
+	Macropharyngodon_meleagris
+	Macropharyngodon_kuiteri
+	Halichoeres_chloropterus
+	Coris_batuensis
+	Halichoeres_miniatus
+	Halichoeres_margaritaceus
+	Halichoeres_nebulosus
+	Halichoeres_chrysus
+	Halichoeres_biocellatus
+	Halichoeres_ornatissimus
+	Coris_pictoides
+	Halichoeres_prosopeion
+	Halichoeres_nigrescens
+	Halichoeres_marginatus
+	Halichoeres_melanurus
+	Leptojulis_cyanopleura
+	Anampses_neoguinaicus
+	Anampses_meleagrides
+	Anampses_caeruleopunctatus
+	Anampses_geographicus
+	Labrichthys_unilineatus
+	Diproctacanthus_xanthurus
+	Labropsis_australis
+	Labroides_bicolor
+	Labroides_dimidiatus
+	Pseudojuloides_cerasinus
+	Halichoeres_bivittatus
+	Halichoeres_garnoti
+	Halichoeres_radiatus
+	Halichoeres_poeyi
+	Halichoeres_pictus
+	Pseudolabrus_guentheri
+	Cheilio_inermis
+	Xyrichtys_novacula
+	Novaculichthys_taeniourus
+	Xyrichtys_martinicensis
+	Cymolutes_torquatus
+	Cymolutes_praetextatus
+	Pteragogus_cryptus
+	Pseudocheilinus_octotaenia
+;
+end;
+
+begin trees;
+	tree tree_1 = [&R] ((Lachnolaimus_maximus:44.67291689,(Pseudodax_moluccanus:36.7685767,(((Bodianus_mesothorax:16.63737796,Bodianus_perditio:16.63737796):1.628820062,(Bodianus_rufus:14.46324501,Clepticus_parrae:14.46324501):3.802953012):16.62711087,((Choerodon_fasciatus:17.63222103,(Choerodon_cephalotes:14.66624033,(Choerodon_anchorago:11.92618716,Choerodon_schoenleinii:11.92618716):2.74005317):2.965980702):4.745802826,Choerodon_venustus:22.37802386):12.51528503):1.875267809):7.904340197):10.20951918,(((((((Sparisoma_radians:11.04556825,(Sparisoma_chrysopterum:7.348783871,(Sparisoma_viride:6.894915768,(Sparisoma_aurofrenatum:6.361777335,Sparisoma_rubripinne:6.361777335):0.5331384331):0.4538681029):3.696784374):1.603664386,Sparisoma_atomarium:12.64923263):7.525607565,Cryptotomus_roseus:20.1748402):3.694809748,Calotomus_spinidens:23.86964995):4.451886038,((Bolbometopon_muricatum:12.3848841,Cetoscarus_bicolor:12.3848841):7.467239999,(Hipposcarus_longiceps:16.21607348,(((Chlorurus_bleekeri:3.248617373,Chlorurus_microrhinos:3.248617373):1.159188138,Chlorurus_sordidus:4.407805511):6.523478719,(((Scarus_schlegeli:3.712664414,Scarus_flavipectoralis:3.712664414):3.078930658,Scarus_psittacus:6.791595072):1.831867908,(((Scarus_rivulatus:0.7965798107,(Scarus_globiceps:0.3128955848,Scarus_oviceps:0.3128955848):0.4836842258):3.704562485,Scarus_chameleon:4.501142296):2.901167899,((((Scarus_niger:3.590712564,Scarus_altipinnis:3.590712565):1.441099843,(Scarus_dimidiatus:3.370322724,Scarus_frenatus:3.370322724):1.661489683):0.7640195533,(Scarus_ghobban:5.108421146,(Scarus_taeniopterus:4.309638478,Scarus_iseri:4.309638478):0.798782668):0.6874108139):1.044921454,Scarus_spinus:6.840753414):0.561556781):1.221152785):2.30782125):5.284789248):3.636050618):8.469411887):19.16431496,((Oxycheilinus_bimaculatus:13.14851267,(Cheilinus_chlorourus:7.061588748,(Cheilinus_trilobatus:4.258952869,Cheilinus_oxycephalus:4.258952869):2.802635879):6.086923921):6.806553711,(((Wetmorella_nigropinnata:9.457626444,Cheilinus_fasciatus:9.457626444):4.074530639,(Cheilinus_undulatus:11.02615923,Epibulus_insidiator:11.02615923):2.505997853):4.580982614,(Oxycheilinus_digrammus:5.306693132,Oxycheilinus_unifasciatus:5.306693132):12.80644657):1.841926683):27.53078456):5.142629903,(((((Coris_aygula:20.92857567,((Coris_dorsomacula:15.97275858,(Coris_gaimard:9.508179963,Pseudocoris_yamashiroi:9.508179963):6.464578617):3.241307262,(Hologymnosus_annulatus:0.9655457122,Hologymnosus_doliatus:0.9655457122):18.24852013):1.714509827):8.61125558,(((Hemigymnus_melapterus:25.9015019,(((Stethojulis_trilineata:7.759043987,Stethojulis_bandanensis:7.759043987):14.31918314,((Thalassoma_lutescens:10.76227267,((Thalassoma_lunare:8.268683852,(Thalassoma_amblycephalum:6.036146237,Thalassoma_trilobatum:6.036146237):2.232537616):1.59126649,(Gomphosus_varius:8.880991265,Thalassoma_bifasciatum:8.880991265):0.9789590768):0.9023223308):0.8682712912,((Thalassoma_hardwicke:5.374939809,Thalassoma_quinquevittatum:5.374939809):1.960732144,Thalassoma_jansenii:7.335671954):4.294872011):10.44768316):1.531351747,Halichoeres_maculipinna:23.60957888):2.29192302):1.048170692,(((((Halichoeres_hortulanus:17.51177193,(Halichoeres_scapularis:5.862634135,Halichoeres_trimaculatus:5.862634135):11.6491378):5.531535939,((((Macropharyngodon_negrosensis:7.47513763,Macropharyngodon_choati:7.47513763):0.691808817,Macropharyngodon_meleagris:8.166946447):3.91228445,Macropharyngodon_kuiteri:12.0792309):8.736371029,(((Halichoeres_chloropterus:9.422858142,Coris_batuensis:9.422858142):5.105357758,(Halichoeres_miniatus:10.38717889,(Halichoeres_margaritaceus:6.282102263,Halichoeres_nebulosus:6.282102263):4.105076624):4.141037014):4.743091282,((Halichoeres_chrysus:11.59682222,(Halichoeres_biocellatus:8.340824065,Halichoeres_ornatissimus:8.340824065):3.255998157):6.195540594,((Coris_pictoides:6.877308374,Halichoeres_prosopeion:6.877308375):8.419915917,(Halichoeres_nigrescens:10.57706771,(Halichoeres_marginatus:7.855720201,Halichoeres_melanurus:7.855720201):2.721347505):4.720156586):2.495138525):1.478944366):1.544294743):2.227705945):1.735957528,Leptojulis_cyanopleura:24.7792654):0.8707082344,((Anampses_neoguinaicus:6.959051144,Anampses_meleagrides:6.959051144):4.560898362,(Anampses_caeruleopunctatus:6.603716781,Anampses_geographicus:6.603716781):4.916232725):14.13002413):0.8463366507,(Labrichthys_unilineatus:19.53359264,((Diproctacanthus_xanthurus:6.444104353,Labropsis_australis:6.444104353):9.206266862,(Labroides_bicolor:5.58697248,Labroides_dimidiatus:5.58697248):10.06339873):3.88322143):6.962717638):0.4533623048):1.054538046,(Pseudojuloides_cerasinus:25.07866956,((((Halichoeres_bivittatus:4.997695097,Halichoeres_garnoti:4.997695097):0.6696201711,Halichoeres_radiatus:5.667315268):0.9231465937,Halichoeres_poeyi:6.590461862):5.47128008,Halichoeres_pictus:12.06174194):13.01692762):2.925541076):1.535620614):5.991258345,Pseudolabrus_guentheri:35.53108959):6.726796341,((Cheilio_inermis:29.34568549,Xyrichtys_novacula:29.34568549):11.09841358,(Novaculichthys_taeniourus:22.46771108,(Xyrichtys_martinicensis:17.22822727,(Cymolutes_torquatus:6.20869214,Cymolutes_praetextatus:6.20869214):11.01953513):5.239483812):17.97638799):1.813786865):7.000325579,(Pteragogus_cryptus:36.55802535,Pseudocheilinus_octotaenia:36.55802535):12.70018616):3.37026933):2.253955233);
+end;
+
+begin figtree;
+	set appearance.backgroundColorAttribute="User Selection";
+	set appearance.backgroundColour=#-1;
+	set appearance.branchColorAttribute="User Selection";
+	set appearance.branchLineWidth=1.0;
+	set appearance.foregroundColour=#-16777216;
+	set appearance.selectionColour=#-2144520576;
+	set branchLabels.colorAttribute="User Selection";
+	set branchLabels.displayAttribute="Branch times";
+	set branchLabels.fontName="sansserif";
+	set branchLabels.fontSize=8;
+	set branchLabels.fontStyle=0;
+	set branchLabels.isShown=false;
+	set branchLabels.significantDigits=4;
+	set layout.expansion=0;
+	set layout.layoutType="RECTILINEAR";
+	set layout.zoom=0;
+	set nodeBars.barWidth=4.0;
+	set nodeLabels.colorAttribute="User Selection";
+	set nodeLabels.displayAttribute="Node ages";
+	set nodeLabels.fontName="sansserif";
+	set nodeLabels.fontSize=8;
+	set nodeLabels.fontStyle=0;
+	set nodeLabels.isShown=false;
+	set nodeLabels.significantDigits=4;
+	set polarLayout.alignTipLabels=false;
+	set polarLayout.angularRange=0;
+	set polarLayout.rootAngle=0;
+	set polarLayout.rootLength=100;
+	set polarLayout.showRoot=true;
+	set radialLayout.spread=0.0;
+	set rectilinearLayout.alignTipLabels=false;
+	set rectilinearLayout.curvature=0;
+	set rectilinearLayout.rootLength=100;
+	set scale.offsetAge=0.0;
+	set scale.rootAge=1.0;
+	set scale.scaleFactor=1.0;
+	set scale.scaleRoot=false;
+	set scaleAxis.automaticScale=true;
+	set scaleAxis.fontSize=8.0;
+	set scaleAxis.isShown=false;
+	set scaleAxis.lineWidth=1.0;
+	set scaleAxis.majorTicks=1.0;
+	set scaleAxis.origin=0.0;
+	set scaleAxis.reverseAxis=false;
+	set scaleAxis.showGrid=true;
+	set scaleAxis.significantDigits=4;
+	set scaleBar.automaticScale=true;
+	set scaleBar.fontSize=10.0;
+	set scaleBar.isShown=true;
+	set scaleBar.lineWidth=1.0;
+	set scaleBar.scaleRange=0.0;
+	set scaleBar.significantDigits=4;
+	set tipLabels.colorAttribute="User Selection";
+	set tipLabels.displayAttribute="Names";
+	set tipLabels.fontName="sansserif";
+	set tipLabels.fontSize=8;
+	set tipLabels.fontStyle=0;
+	set tipLabels.isShown=true;
+	set tipLabels.significantDigits=4;
+	set trees.order=false;
+	set trees.orderType="increasing";
+	set trees.rooting=false;
+	set trees.rootingType="User Selection";
+	set trees.transform=false;
+	set trees.transformType="cladogram";
+end;
+

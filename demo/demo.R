@@ -1,13 +1,23 @@
 # demo.R
 rm(list=ls())
 require(rfishbase)
+
+###### Grabbing, Loading & Caching Fishbase Data ######
+
 ## Download and parse data for first 40 ids (36 fish)
 #fish.data <- getData(1:40)
 
 ## Or just load the cached copy of the full fishbase data:
+## Note that this loads the copy distributed with rfishbase.
 data(fishbase)
-## Note that the cache 
 
+## To get the most recent copy of fishbase, update the cache
+## and load that.  The update may take up to 24 hours.  
+# updateCache() 
+# loadCache("2011-10-12fishdata.Rdat")
+
+
+###### Sample Analysis #########
 
 ## Lets start by looking at the distribution of all age data available:
 yr <- getSize(all.fishbase, "age")
@@ -45,7 +55,7 @@ anadromous <-  habitatSearch("anadromous", all.fishbase)
 
 # this is useful for phylogenetic comparative methods.  For instance, load the labrid tree:
 require(ape)
-tree <- read.nexus("../data/labrid_tree.nex")
+data(labridtree)
 
 # get the species names (& remove underscores)
 tree$tip.label<-gsub("_", " ", tree$tip.label)
@@ -91,9 +101,6 @@ bm <- fitContinuous(tr, depth, model="BM")
 ou <- fitContinuous(tr, depth, model="OU")
 
 
-
-
-
 invert <- sapply(all.fishbase, function(x) length(grep("invertebrate", x$trophic))>0)
 piscivore <- sapply(all.fishbase, function(x) length(grep("(piscivore|fish)", x$trophic))>0)
 hist(log( getSize (all.fishbase[invert], "length")),
@@ -105,8 +112,7 @@ hist(log( getSize (all.fishbase[piscivore], "length")),
 
 
 
-
-# repeat with a treebase tree (?)
+## Using a treebase tree
 require(rtreebase)
 fish <- all.fishbase[[2]]$ScientificName
 trees <- search_treebase(paste("%22", fish, "%22", sep=""), by="taxon", branch=TRUE)
