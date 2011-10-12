@@ -6,6 +6,8 @@ require(rfishbase)
 
 ## Or just load the cached copy of the full fishbase data:
 data(fishbase)
+## Note that the cache 
+
 
 ## Lets start by looking at the distribution of all age data available:
 yr <- getSize(all.fishbase, "age")
