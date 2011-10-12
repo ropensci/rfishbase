@@ -15,6 +15,7 @@ habitatSearch <- function(keyword, fish.data){
 familySearch <- function(family, fish.data){
 #  x <- sapply(fish.data, function(x) x$Family==family)
   x <- sapply(fish.data, function(x) length(grep(family,x$Family)>1))
+  as.logical(x)
 }
 
 

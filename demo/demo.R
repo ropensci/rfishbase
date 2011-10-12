@@ -20,36 +20,36 @@ data(fishbase)
 ###### Sample Analysis #########
 
 ## Lets start by looking at the distribution of all age data available:
-yr <- getSize(all.fishbase, "age")
+yr <- getSize(fish.data, "age")
 hist(yr, breaks=40, main="Age Distribution", xlab="age (years)"); 
-nfish <- length(all.fishbase)
+nfish <- length(fish.data)
 
 
 # We can create partitions by taxon.  For instance, we get the index
 # to all fish wrasses and parrotfish by searching for both families
 # note the use of a "regular expression" to specify the OR command in the search
-labrid <- familySearch("(Labridae|Scaridae)", all.fishbase)
-goby <- familySearch("Gobiidae", all.fishbase)
+labrid <- familySearch("(Labridae|Scaridae)", fish.data)
+goby <- familySearch("Gobiidae", fish.data)
 
 
 ## Let's see if there are more labrid species or goby speices on reefs:
 
 # get all the labrids that are reefs 
-labrid.reef <- habitatSearch("reef", all.fishbase[labrid])
+labrid.reef <- habitatSearch("reef", fish.data[labrid])
 # How many species are reef labrids:
-sum(labrid.reef) # same as: length(all.fishbase[labrid][labrid.reef])
+sum(labrid.reef) # same as: length(fish.data[labrid][labrid.reef])
 # How many reef gobies:
-sum (habitatSearch("reef", all.fishbase[goby]) )
+sum (habitatSearch("reef", fish.data[goby]) )
 
 
 # Let's plot the log length distribution of freshwater vs marine fish: 
-hist(log( getSize (all.fishbase[habitatSearch("freshwater", all.fishbase)], "length")),
+hist(log( getSize (fish.data[habitatSearch("freshwater", fish.data)], "length")),
          col=rgb(1,0,0,.5), breaks=40, freq=F, xlab="length", main="marine fish are bigger")
-hist(log( getSize (all.fishbase[habitatSearch("marine", all.fishbase)], "length")),
+hist(log( getSize (fish.data[habitatSearch("marine", fish.data)], "length")),
           col=rgb(0,0,1,.5), breaks=40, add=T, freq=F)
 
 # Note that we can also find anadromous fish:
-anadromous <-  habitatSearch("anadromous", all.fishbase)
+anadromous <-  habitatSearch("anadromous", fish.data)
 
 
 
@@ -62,16 +62,16 @@ tree$tip.label<-gsub("_", " ", tree$tip.label)
 tip.labels <- tree$tip.label
 
 
-myfish <- findSpecies(tip.labels, all.fishbase) 
-species.names <- sapply(all.fishbase[myfish], function(x) x$ScientificName)
+myfish <- findSpecies(tip.labels, fish.data) 
+species.names <- sapply(fish.data[myfish], function(x) x$ScientificName)
 
 # create a trait matrix of fin data
-traits <- getQuantTraits(all.fishbase[myfish])
+traits <- getQuantTraits(fish.data[myfish])
 rownames(traits) <- species.names
-depths <- getDepth(all.fishbase[myfish])
+depths <- getDepth(fish.data[myfish])
 rownames(depths) <- species.names
 
-size <- getSize(all.fishbase[myfish], "length")
+size <- getSize(fish.data[myfish], "length")
 names(size) <- species.names
 
 # who's missing from treebase entirely?
@@ -101,11 +101,11 @@ bm <- fitContinuous(tr, depth, model="BM")
 ou <- fitContinuous(tr, depth, model="OU")
 
 
-invert <- sapply(all.fishbase, function(x) length(grep("invertebrate", x$trophic))>0)
-piscivore <- sapply(all.fishbase, function(x) length(grep("(piscivore|fish)", x$trophic))>0)
-hist(log( getSize (all.fishbase[invert], "length")),
+invert <- sapply(fish.data, function(x) length(grep("invertebrate", x$trophic))>0)
+piscivore <- sapply(fish.data, function(x) length(grep("(piscivore|fish)", x$trophic))>0)
+hist(log( getSize (fish.data[invert], "length")),
          col=rgb(1,0,0,.5), breaks=40, freq=F, xlab="length", main="invert eaters vs piscivores")
-hist(log( getSize (all.fishbase[piscivore], "length")),
+hist(log( getSize (fish.data[piscivore], "length")),
           col=rgb(0,0,1,.5), breaks=40, add=T, freq=F)
 
 
@@ -114,12 +114,12 @@ hist(log( getSize (all.fishbase[piscivore], "length")),
 
 ## Using a treebase tree
 require(rtreebase)
-fish <- all.fishbase[[2]]$ScientificName
-trees <- search_treebase(paste("%22", fish, "%22", sep=""), by="taxon", branch=TRUE)
-str <- trees[[1]]$tip.label
-gsub("(\\w+)_(\\w+)_.*", "\\1 \\2", str)
-myfish <- findSpecies(species, all.fishbase) 
-getQuantTraits(all.fishbase[myfish])
+## Need to find an example of a fish tree on treebase that has branchlengths
+#trees <- search_treebase("Scarus", by="taxon", branch=TRUE)
+#str <- trees[[1]]$tip.label
+#gsub("(\\w+)_(\\w+)_.*", "\\1 \\2", str)
+#myfish <- findSpecies(species, fish.data) 
+#getQuantTraits(fish.data[myfish])
 
 
 
