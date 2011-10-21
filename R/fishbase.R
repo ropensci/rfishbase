@@ -3,21 +3,18 @@
 # date: 22 Aug 2011
 # Description: Grab information from fishbase XML files 
 
+#' Query the XML page of fishbase given a fishbase id 
+#' and return the XML R object
+#' @param fish.id: the id number used by fishbase, ranges 1:70000
+#'  though wiht many missing values
+#' @return a list object with the contents of the major datatypes in the 
+#'   the fishbase database.  
+#' @details Typically this function will only be called internally by
+#'   the caching function.  
+#' @seealso \code{\link{getData}} and \code{\link{updateCache}}.  
+#' @examples: 
+#'   NileTilapia <- fishbase("2")
 fishbase <- function(fish.id, curl=getCurlHandle()){
-  # Query the XML page of fishbase given a fishbase id 
-  # and return the XML R object
-  #
-  # common name, family, max length, max published weight, max
-  # reported age, length at first maturity, range of length at first
-  # maturity, environment, climate/range, distribution, short description,
-  # and biology.
-  #
-  #
-  # Examples: 
-  #   NileTilapia <- fishbase("2")
-  #   metadata(tree$S.id)
-  #  
-
 
   # Grab and parse page matching id
   url <- paste("http://fishbase.sinica.edu.tw/",
@@ -126,12 +123,17 @@ fishbase <- function(fish.id, curl=getCurlHandle()){
   output
 }
 
-
+#' Description: a general function to loop over all fish ids to get data
+#'   also drops the missing entries
+#' @param fish.ids used by fishbase. An integer between 1:70000, though many
+#'   missing values in between.  
+#' @param returns a list object with the information for those fish, if avaialble.  
+#' @details Typically this function will only be called internally by
+#'   the caching function.  
+#' @seealso \code{\link{getData}} and \code{\link{updateCache}}.  
+#' @example:
+#'   all.fishbase <- getData(1:3)
 getData <- function(fish.ids, silent=TRUE){
-# Description: a general function to loop over all fish ids to get data
-#   also drops the missing entries
-# Example:
-#   all.fishbase <- getData(1:30000)
 
   curl <- getCurlHandle()
   data <- 
