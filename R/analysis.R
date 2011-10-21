@@ -1,17 +1,82 @@
+#' A function to search for the occurances of any keyword in habitat description
+#' @param  keyword: pattern to be used by grep
+#' @param fish.data: the fishbase database fish.data; or a subset, fish.data[..] 
+#' @return a logical vector of length(fish.data) indicating the matches.
+#' @examples
+#' data(fishbase) 
+#' freshwater <- habitatSearch("feshwater", fish.data)
+#' fish.data[freshwater]
+#' @export
 habitatSearch <- function(keyword, fish.data){
-# A function to search for the occurances of any keyword in habitat description
-# Args:
-#   keyword: pattern to be used by grep
-#   fish.data: list of outputs from fishbase(), or from getData()
-# Example:
-#   data <- getData(1:10)
-#   habitatSearch("feshwater", data)
   x <- sapply(fish.data, function(x) grep(keyword, x$habitat) )
   x <- as.integer(x) # clean up data 
   x[is.na(x)] <- 0   # cean up data
   as.logical(x)
 }
 
+
+#' A function to search for the occurances of any keyword in 
+#'  a variety of description types
+#' @param  keyword: pattern to be used by grep
+#' @param the type of search, one of: "trophic", "habitat", "lifecycle", 
+#'    "morphology","diagnostic", "distribution."  See examples.  
+#' @param fish.data the fishbase database; or a subset, fish.data[..] 
+#' @return a logical vector of length(fish.data) indicating the matches.
+#' @examples
+#' data(fishbase) 
+#' invert <- which_fish("invertebrate|mollusk", using="trophic", fish.data)
+#' sex_swap <- which_fish("change sex", using="lifecycle", fish.data)
+#' africa <- which_fish("Africa", using="distribution", fish.data)
+#' ## recall we can sub-set
+#' fish_names(fish.data[africa & sex_swap])
+#' reef <- which_fish("reef", "habitat", fish.data)
+#' redfish  <- which_fish(" red ", "diagnostic", fish.data) 
+#' bluefish  <- which_fish(" blue ", "diagnostic", fish.data) 
+#' sum(redfish) > sum(bluefish)
+#' 
+#' @export
+which_fish <- function(keyword, using=c("trophic", "habitat", "lifecycle", 
+                       "morphology","diagnostic", "distribution"), fish.data){
+  using <- match.arg(using)
+  sapply(fish.data, function(x) length(grep(keyword, x[[using]]))>0)
+}
+
+
+#' A function to give the names of the matched fish 
+#' @param fish.data the fishbase database; or a subset, fish.data[..] 
+#' @param name return the Scientific Name (default)? or Family, Class, or Order.
+#' @return the names of the matching fish.   
+#' @examples
+#' data(fishbase) 
+#' sex_swap <- which_fish("change sex", using="lifecycle", fish.data)
+#' africa <- which_fish("Africa", using="distribution", fish.data)
+#' fish_names(fish.data[africa & sex_swap])
+#' 
+#' @export
+fish_names <- function(fish.data, name=c("ScientificName", "Family", "Class", "Order")){
+  name <- match.arg(name)
+  sapply(fish.data, function(x) x[[name]])
+}
+
+
+#' A function to find all fish that are members of a scientific Family 
+#' @param  family: The scientific family name.  Can include grep matching, see examples 
+#' @param fish.data: the fishbase database fish.data; or a subset, fish.data[..] 
+#' @return a logical vector of length(fish.data) indicating the matches.
+#' @details The return value can be summed to give the number of matches, can
+#'   be used as an index, e.g. fish.data[goby], to return the matches or to
+#'   pass to another function.  See examples.  
+#' @examples
+#' data(fishbase) 
+#' goby <- familySearch("Gobiidae", fish.data)
+#' labrid <- familySearch("(Labridae|Scaridae)", fish.data)
+#' ## Example 2
+#' # get all the labrids that are reefs 
+#' labrid.reef <- habitatSearch("reef", fish.data[labrid])
+#' # How many species are reef labrids:
+#' sum(labrid.reef)
+#' 
+#' @export
 familySearch <- function(family, fish.data){
 #  x <- sapply(fish.data, function(x) x$Family==family)
   x <- sapply(fish.data, function(x) length(grep(family,x$Family)>1))
@@ -19,20 +84,38 @@ familySearch <- function(family, fish.data){
 }
 
 
+#' A function to return size information from fishbase data 
+#' @param fish.data: the fishbase database fish.data; or a subset, fish.data[..] 
+#' @param value: the measure to return: maximum recorded length (cm), 
+#'   maximum weight (g), or maximum age (years). Defaults to length; many 
+#'   entries lack weight and age.  
+#' @return a numeric vector of length(fish.data) with the values requested 
+#' @examples
+#' data(fishbase)
+#' yr <- getSize(fish.data, "age")
+#' hist(yr, breaks=40, main="Age Distribution", xlab="age (years)"); 
+#' nfish <- length(fish.data)
+#' 
+#' @export
 getSize <- function(fish.data, value=c("length", "weight", "age")){
-# A function to extract 
   value <- match.arg(value)
   y <- sapply(fish.data, function(x) x$size_values[[value]])
   unlist(y)
 }
 
+#' Return quantitative trait values from morphology data, if available
+#' @param fish.data: the fishbase database fish.data; or a subset, fish.data[..] 
+#' @return a matrix of traits by fish.  Returns min/max numbers recorded for vertebrae,
+#' spines (anal & dorsal), and rays (anal and dorsal).  
+#' @examples
+#' data(fishbase)
+#' ## The distribution of anal ray fins in red-colored fish  
+#' redfish  <- which_fish(" red ", "diagnostic", fish.data) 
+#' traits <- getQuantTraits(fish.data[redfish])
+#' hist(traits[, "min.anal.rays"])
+#' 
+#'@ export
 getQuantTraits <- function(fish.data){
-# Return quantitative trait values from morphology data, if available
-# Args:
-#   keyword: pattern to be used by grep
-#   fish.data: list of outputs from fishbase(), or from getData()
-# Example:
-#   data <- getData(1:10)
   morph <- function(x){
     str <- x$morphology
     if(is.null(str)) 
@@ -65,6 +148,14 @@ getQuantTraits <- function(fish.data){
   t(suppressWarnings(sapply(fish.data, morph, simplify="array")))
 }
 
+
+
+#' Return quantitative trait values from morphology data, if available
+#' @param fish.data: the fishbase database fish.data; or a subset, fish.data[..] 
+#' @return a matrix of traits by fish.  Returns min/max numbers recorded for vertebrae,
+#' spines (anal & dorsal), and rays (anal and dorsal).  
+#' @examples
+#' @export
 getDepth <- function(fish.data){
   depthfn <- function(fish){
     x <- fish$habitat

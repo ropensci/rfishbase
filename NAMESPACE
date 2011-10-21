@@ -1,6 +1,0 @@
-import(XML)
-import(RCurl)
-
-export(updateCache, loadCache)
-export(fishbase,getData)
-export(familySearch, habitatSearch, getSize, getDepth, getQuantTraits, findSpecies)
