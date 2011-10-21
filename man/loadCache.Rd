@@ -15,11 +15,13 @@
   loads an updated cache by the date
 }
 \examples{
-## not run
-#updateCache()
-#loadCache()
+\dontrun{
+updateCache()
+loadCache()
+}
 }
 \seealso{
   \code{\link{updateCache}}
 }
+\keyword{cache}
 

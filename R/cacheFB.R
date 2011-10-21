@@ -5,10 +5,11 @@
 #' @seealso \code{\link{loadCache}}
 #' @details the update is slow, avoiding straining the server or client.
 #'   please allow this call to run overnight for a complete upgrade.  
-#' @examples
-#' ## not run
-#' #updateCache()
-#' #loadCache()
+#' @keywords cache
+#' @examples \dontrun{
+#'  updateCache()
+#'  loadCache()
+#' }
 updateCache <- function(){
   date=Sys.Date()
   file=paste(date, "fishdata.Rdat", sep="")
@@ -21,10 +22,11 @@ updateCache <- function(){
 #'  in yyyy-mm-dd format. 
 #' @return loads the object fish.data into the working space. 
 #' @seealso \code{\link{updateCache}}
-#' @examples
-#'  ## not run
-#'  #updateCache()
-#'  #loadCache()
+#' @keywords cache
+#' @examples \dontrun{
+#'  updateCache()
+#'  loadCache()
+#' }
 loadCache <- function(date=Sys.Date()){
   # load a file from the cache
   file=paste(date, "fishdata.Rdat", sep="")

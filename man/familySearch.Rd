@@ -5,7 +5,7 @@
   familySearch(family, fish.data)
 }
 \arguments{
-  \item{family:}{The scientific family name.  Can include
+  \item{family}{The scientific family name.  Can include
   grep matching, see examples}
 
   \item{fish.data}{the fishbase database or a subset}
@@ -36,4 +36,5 @@ labrid.reef <- habitatSearch("reef", fish.data[labrid])
 # How many species are reef labrids:
 sum(labrid.reef)
 }
+\keyword{utilities}
 

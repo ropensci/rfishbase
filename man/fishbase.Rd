@@ -6,8 +6,11 @@ and return the XML R object}
   fishbase(fish.id, curl = getCurlHandle())
 }
 \arguments{
-  \item{fish.id:}{the id number used by fishbase, ranges
+  \item{fish.id}{the id number used by fishbase, ranges
   1:70000 though wiht many missing values}
+
+  \item{curl}{curlHandle(), please store value to avoid
+  repeated handshaking.}
 }
 \value{
   a list object with the contents of the major datatypes in
@@ -24,9 +27,12 @@ and return the XML R object}
   caching function.
 }
 \examples{
-NileTilapia <- fishbase("2")
+\dontrun{
+# NileTilapia <- fishbase("2")
+}
 }
 \seealso{
   \code{\link{getData}} and \code{\link{updateCache}}.
 }
+\keyword{internal}
 

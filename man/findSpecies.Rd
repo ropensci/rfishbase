@@ -26,10 +26,10 @@
 }
 \examples{
 ## The distribution of maximum depth in Arctic fishes
-#data(fishbase)
-#require(ape)
-#data(labridtree)
-#myfish <- findSpecies(tree$tip.label, fish.data)
-#getDepth(fish.data[myfish])
+data(fishbase)
+data(labridtree)
+myfish <- findSpecies(tree$tip.label, fish.data)
+getDepth(fish.data[myfish])
 }
+\keyword{utilities}
 

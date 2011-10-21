@@ -7,7 +7,7 @@
 \arguments{
   \item{fish.data}{the fishbase database or a subset}
 
-  \item{value:}{the measure to return: maximum recorded
+  \item{value}{the measure to return: maximum recorded
   length (cm), maximum weight (g), or maximum age (years).
   Defaults to length; many entries lack weight and age.}
 }
@@ -24,4 +24,5 @@ yr <- getSize(fish.data, "age")
 hist(yr, breaks=40, main="Age Distribution", xlab="age (years)");
 nfish <- length(fish.data)
 }
+\keyword{utilities}
 

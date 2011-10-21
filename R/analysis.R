@@ -1,9 +1,10 @@
 #' A function to search for the occurances of any keyword in habitat description
 #' 
-#' @param  keyword: pattern to be used by grep
+#' @param keyword pattern to be used by grep
 #' @param fish.data the fishbase database fish.data or a subset,
 #' @return a logical vector of length(fish.data) indicating the matches, that can 
 #'   be used to subset the full database in calls to other functions. 
+#' @keywords utilities
 #' @examples
 #' data(fishbase) 
 #' freshwater <- habitatSearch("feshwater", fish.data)
@@ -21,12 +22,13 @@ habitatSearch <- function(keyword, fish.data){
 
 #' A function to find all fish that are members of a scientific Family 
 #' 
-#' @param  family: The scientific family name.  Can include grep matching, see examples 
+#' @param family The scientific family name.  Can include grep matching, see examples 
 #' @param fish.data the fishbase database or a subset
 #' @return a logical vector of length(fish.data) indicating the matches.
 #' @details The return value can be summed to give the number of matches, can
 #'   be used as an index, e.g. fish.data[goby], to return the matches or to
 #'   pass to another function.  See examples.  
+#' @keywords utilities
 #' @examples
 #' data(fishbase) 
 #' goby <- familySearch("Gobiidae", fish.data)
@@ -47,11 +49,12 @@ familySearch <- function(family, fish.data){
 #' A function to search for the occurances of any keyword in 
 #'  a variety of description types
 #' 
-#' @param  keyword: pattern to be used by grep
-#' @param the type of search, one of: "trophic", "habitat", "lifecycle", 
+#' @param keyword pattern to be used by grep
+#' @param using the type of search, one of: "trophic", "habitat", "lifecycle", 
 #'    "morphology","diagnostic", "distribution."  See examples.  
-#' @param fishdata the fishbase database fish.data or a subset
+#' @param fish.data the fishbase database fish.data or a subset
 #' @return a logical vector of length(fish.data) indicating the matches.
+#' @keywords utilities
 #' @examples
 #' data(fishbase) 
 #' invert <- which_fish("invertebrate|mollusk", using="trophic", fish.data)
@@ -77,6 +80,7 @@ which_fish <- function(keyword, using=c("trophic", "habitat", "lifecycle",
 #' @param name return the Scientific Name (default)? or Family, Class, or Order.
 #' @param fish.data the fishbase database fish.data or a subset,
 #' @return the names of the matching fish.   
+#' @keywords utilities
 #' @examples
 #' data(fishbase) 
 #' sex_swap <- which_fish("change sex", using="lifecycle", fish.data)
@@ -92,10 +96,11 @@ fish_names <- function(fish.data, name=c("ScientificName", "Family", "Class", "O
 #' A function to return size information from fishbase data 
 #' 
 #' @param fish.data the fishbase database or a subset
-#' @param value: the measure to return: maximum recorded length (cm), 
+#' @param value the measure to return: maximum recorded length (cm), 
 #'   maximum weight (g), or maximum age (years). Defaults to length; many 
-#'   entries lack weight and age.  
+#'   entries lack weight and age. 
 #' @return a numeric vector of length(fish.data) with the values requested 
+#' @keywords utilities
 #' @examples
 #' data(fishbase)
 #' yr <- getSize(fish.data, "age")
@@ -118,16 +123,16 @@ getSize <- function(fish.data, value=c("length", "weight", "age")){
 #     against ITIS.gov database using the taxize package.  
 #' @return a logical vector of length(fish.data) indicating the matches, that can 
 #'   be used to subset the full database in calls to other functions. 
+#' @keywords utilities
 #' @examples
 #' ## The distribution of maximum depth in Arctic fishes
-#' #data(fishbase)
-#' #require(ape)
-#' #data(labridtree)
-#' #myfish <- findSpecies(tree$tip.label, fish.data) 
-#' #getDepth(fish.data[myfish])
+#' data(fishbase)
+#' data(labridtree)
+#' myfish <- findSpecies(tree$tip.label, fish.data) 
+#' getDepth(fish.data[myfish])
+#' 
+#' @export
 findSpecies <- function(species, fish.data){
-  # takes a vector of species names and queries for their id numbers in the dataset
-  # ideally, it would query names against taxize to get the correct name types
   species<-gsub("_", " ", species)
   sapply(fish.data, function(x) x$ScientificName %in% species)
 }
@@ -141,6 +146,7 @@ findSpecies <- function(species, fish.data){
 #' @param fish.data the fishbase database or a subset
 #' @return a matrix of traits by fish.  
 #'   Returns min-max depth, min-max usual depth
+#; @keywords utilities
 #' @examples
 #' ## The distribution of maximum depth in Arctic fishes
 #' data(fishbase)
@@ -179,6 +185,7 @@ getDepth <- function(fish.data){
 #' @return a matrix of traits by fish. Returns min-max numbers 
 #'   recorded for vertebrae, spines (anal and dorsal), and 
 #'   rays (anal and dorsal).  
+#' @keywords utilities
 #' @examples
 #' data(fishbase)
 #' ## The distribution of anal ray fins in red-colored fish  

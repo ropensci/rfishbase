@@ -15,11 +15,13 @@
   upgrade.
 }
 \examples{
-## not run
-#updateCache()
-#loadCache()
+\dontrun{
+updateCache()
+loadCache()
+}
 }
 \seealso{
   \code{\link{loadCache}}
 }
+\keyword{cache}
 

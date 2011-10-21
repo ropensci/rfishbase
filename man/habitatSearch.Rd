@@ -5,7 +5,7 @@
   habitatSearch(keyword, fish.data)
 }
 \arguments{
-  \item{keyword:}{pattern to be used by grep}
+  \item{keyword}{pattern to be used by grep}
 
   \item{fish.data}{the fishbase database fish.data or a
   subset,}
@@ -24,4 +24,5 @@ data(fishbase)
 freshwater <- habitatSearch("feshwater", fish.data)
 fish.data[freshwater]
 }
+\keyword{utilities}
 

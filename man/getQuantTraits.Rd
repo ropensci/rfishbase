@@ -23,4 +23,5 @@ redfish  <- which_fish(" red ", "diagnostic", fish.data)
 traits <- getQuantTraits(fish.data[redfish])
 hist(traits[, "min.anal.rays"])
 }
+\keyword{utilities}
 

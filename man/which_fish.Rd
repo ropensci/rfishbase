@@ -8,13 +8,13 @@ a variety of description types}
   fish.data)
 }
 \arguments{
-  \item{keyword:}{pattern to be used by grep}
+  \item{keyword}{pattern to be used by grep}
 
-  \item{the}{type of search, one of: "trophic", "habitat",
-  "lifecycle", "morphology","diagnostic", "distribution."
-  See examples.}
+  \item{using}{the type of search, one of: "trophic",
+  "habitat", "lifecycle", "morphology","diagnostic",
+  "distribution."  See examples.}
 
-  \item{fishdata}{the fishbase database fish.data or a
+  \item{fish.data}{the fishbase database fish.data or a
   subset}
 }
 \value{
@@ -37,4 +37,5 @@ redfish  <- which_fish(" red ", "diagnostic", fish.data)
 bluefish  <- which_fish(" blue ", "diagnostic", fish.data)
 sum(redfish) > sum(bluefish)
 }
+\keyword{utilities}
 

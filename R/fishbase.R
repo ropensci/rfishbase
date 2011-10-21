@@ -3,17 +3,49 @@
 # date: 22 Aug 2011
 # Description: Grab information from fishbase XML files 
 
+
+
+
+
+#' The fishbase data set, cached.  
+#' @name fish.data
+#' @docType data
+#' @references Froese, R. and D. Pauly. Editors. 2011.FishBase.
+#'   World Wide Web electronic publication.
+#'   \url{www.fishbase.org}, version (10/2011).
+#' @keywords data
+NULL
+
+#' An example phylogeny of some labrids.  
+#' @name tree
+#' @docType data
+#' @references Price, S. a, Wainwright, P. C., Bellwood, D. R., 
+#' Kazancioglu, E., Collar, D. C., & Near, T. J. (2010). 
+#' Functional innovations and morphological diversification in parrotfishes. 
+#' Evolution; international journal of organic evolution, 
+#' 3057-3068. doi:10.1111/j.1558-5646.2010.01036.x
+#' @keywords data
+NULL
+
+
+
+
 #' Query the XML page of fishbase given a fishbase id 
 #' and return the XML R object
-#' @param fish.id: the id number used by fishbase, ranges 1:70000
+#' @param fish.id the id number used by fishbase, ranges 1:70000
 #'  though wiht many missing values
+#' @param curl curlHandle(), please store value to avoid repeated handshaking.  
 #' @return a list object with the contents of the major datatypes in the 
 #'   the fishbase database.  
 #' @details Typically this function will only be called internally by
-#'   the caching function.  
+#'   the caching function. 
+#' @keywords internal
 #' @seealso \code{\link{getData}} and \code{\link{updateCache}}.  
-#' @examples: 
-#'   NileTilapia <- fishbase("2")
+#' @import XML
+#' @import RCurl
+#' @examples \dontrun{ 
+#'   # NileTilapia <- fishbase("2")
+#' }
 fishbase <- function(fish.id, curl=getCurlHandle()){
 
   # Grab and parse page matching id
@@ -127,14 +159,16 @@ fishbase <- function(fish.id, curl=getCurlHandle()){
 #'   also drops the missing entries
 #' @param fish.ids used by fishbase. An integer between 1:70000, though many
 #'   missing values in between.  
-#' @param returns a list object with the information for those fish, if avaialble.  
+#' @param silent a logical of whether to supress warnings.  default is TRUE
+#' @return a list object with the information for those fish, if avaialble. 
 #' @details Typically this function will only be called internally by
 #'   the caching function.  
+#' @keywords internal
 #' @seealso \code{\link{getData}} and \code{\link{updateCache}}.  
-#' @example:
-#'   all.fishbase <- getData(1:3)
+#' @examples \dontrun{
+#'   fish.data <- getData(1:3)
+#' }
 getData <- function(fish.ids, silent=TRUE){
-
   curl <- getCurlHandle()
   data <- 
   suppressWarnings(
