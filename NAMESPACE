@@ -1,0 +1,7 @@
+export(familySearch)
+export(fish_names)
+export(getDepth)
+export(getQuantTraits)
+export(getSize)
+export(habitatSearch)
+export(which_fish)
