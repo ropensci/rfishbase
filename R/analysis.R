@@ -1,11 +1,13 @@
 #' A function to search for the occurances of any keyword in habitat description
 #' @param  keyword: pattern to be used by grep
 #' @param fish.data: the fishbase database fish.data; or a subset, fish.data[..] 
-#' @return a logical vector of length(fish.data) indicating the matches.
+#' @return a logical vector of length(fish.data) indicating the matches, that can 
+#'   be used to subset the full database in calls to other functions. 
 #' @examples
 #' data(fishbase) 
 #' freshwater <- habitatSearch("feshwater", fish.data)
 #' fish.data[freshwater]
+#'
 #' @export
 habitatSearch <- function(keyword, fish.data){
   x <- sapply(fish.data, function(x) grep(keyword, x$habitat) )
@@ -148,13 +150,16 @@ getQuantTraits <- function(fish.data){
   t(suppressWarnings(sapply(fish.data, morph, simplify="array")))
 }
 
-
-
-#' Return quantitative trait values from morphology data, if available
+#' Return available depth ranges
 #' @param fish.data: the fishbase database fish.data; or a subset, fish.data[..] 
-#' @return a matrix of traits by fish.  Returns min/max numbers recorded for vertebrae,
-#' spines (anal & dorsal), and rays (anal and dorsal).  
+#' @return a matrix of traits by fish.  Returns min/max depth, min/max usual depth
 #' @examples
+#' ## The distribution of maximum depth in Arctic fishes
+#' data(fishbase)
+#' arctic  <- which_fish(" Arctic ", "distribution", fish.data) 
+#' traits <- getDepth(fish.data[arctic])
+#' hist(traits[, "deep"])
+#'
 #' @export
 getDepth <- function(fish.data){
   depthfn <- function(fish){
@@ -174,9 +179,26 @@ getDepth <- function(fish.data){
 }
 
 
+#' Return fish matching the search names 
+#' @param species a list of species names as "Genus_species" or "Genus species"
+#' @param fish.data: the fishbase database fish.data; or a subset, fish.data[..] 
+#' @details underscores are removed automatically.  Later versions may check names 
+#     against ITIS.gov database using the taxize package.  
+#' @return a logical vector of length(fish.data) indicating the matches, that can 
+#'   be used to subset the full database in calls to other functions. 
+#' @examples
+#' ## The distribution of maximum depth in Arctic fishes
+#' data(fishbase)
+#' require(ape)
+#' data(labridtree)
+#' myfish <- findSpecies(tree$tip.label, fish.data) 
+#' getDepth(fish.data[myfish])
+#'
+#' @export
 findSpecies <- function(species, fish.data){
   # takes a vector of species names and queries for their id numbers in the dataset
   # ideally, it would query names against taxize to get the correct name types
+  species<-gsub("_", " ", species)
   sapply(fish.data, function(x) x$ScientificName %in% species)
 }
 
