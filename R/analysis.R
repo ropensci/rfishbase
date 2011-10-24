@@ -173,6 +173,10 @@ getDepth <- function(fish.data){
        c(shallow = shallow, deep = deep, 
          usual.shallow = usual.shallow, usual.deep = usual.deep)
     }
+    # handle some more error cases
+    if(length(ans)==0) 
+      ans <- rep(NA, 4)
+    names(ans) = c("shallow", "deep", "usual.shallow", "usual.deep")
     ans
   }
   t(suppressWarnings(sapply(fish.data, depthfn)))
@@ -200,37 +204,44 @@ getQuantTraits <- function(fish.data){
     if(is.null(str)) 
       ans <- rep(NA, 10)
     else {
-    # remove tabs and newlines that seem to appear in this data
-    str <- gsub("\\n", " ", str)
-    str <- gsub("\\t", "", str)
-    # match a range if given, otherwise just match first number
-    min.vertebrae <- 
-     as.integer(gsub(".*Vertebrae: (\\d*)( - (\\d*))*.*", "\\1", str))
-    max.vertebrae <- 
-     as.integer(gsub(".*Vertebrae: (\\d*)( - (\\d*))*.*", "\\3", str))
-    min.anal.spines <- 
-     as.integer(gsub(".*Anal spines: (\\d*)( - (\\d*))*.*", "\\1", str))
-    max.anal.spines <- 
-     as.integer(gsub(".*Anal spines: (\\d*)( - (\\d*))*.*", "\\3", str))
-    min.dorsal.spines <-
-     as.integer(gsub(".*Dorsal spines.*: (\\d*)( - (\\d*))*.*", "\\1", str))
-    max.dorsal.spines <-
-     as.integer(gsub(".*Dorsal spines.*: (\\d*)( - (\\d*))*.*", "\\3", str))
-    min.dorsal.rays <- 
-     as.integer(gsub(".*Dorsal.* rays.*: (\\d*)( - (\\d*))*.*", "\\1", str))
-    max.dorsal.rays <- 
-     as.integer(gsub(".*Dorsal.* rays.*: (\\d*)( - (\\d*))*.*", "\\3", str))
-    min.anal.rays <- 
-     as.integer(gsub(".*Anal.* rays: (\\d*)( - (\\d*))*.*", "\\1", str))
-    max.anal.rays <- 
-     as.integer(gsub(".*Anal.* rays: (\\d*)( - (\\d*))*.*", "\\3", str))
+      # remove tabs and newlines that seem to appear in this data
+      str <- gsub("\\n", " ", str)
+      str <- gsub("\\t", "", str)
+      # match a range if given, otherwise just match first number
+      min.vertebrae <- 
+       as.integer(gsub(".*Vertebrae: (\\d*)( - (\\d*))*.*", "\\1", str))
+      max.vertebrae <- 
+       as.integer(gsub(".*Vertebrae: (\\d*)( - (\\d*))*.*", "\\3", str))
+      min.anal.spines <- 
+       as.integer(gsub(".*Anal spines: (\\d*)( - (\\d*))*.*", "\\1", str))
+      max.anal.spines <- 
+       as.integer(gsub(".*Anal spines: (\\d*)( - (\\d*))*.*", "\\3", str))
+      min.dorsal.spines <-
+       as.integer(gsub(".*Dorsal spines.*: (\\d*)( - (\\d*))*.*", "\\1", str))
+      max.dorsal.spines <-
+       as.integer(gsub(".*Dorsal spines.*: (\\d*)( - (\\d*))*.*", "\\3", str))
+      min.dorsal.rays <- 
+       as.integer(gsub(".*Dorsal.* rays.*: (\\d*)( - (\\d*))*.*", "\\1", str))
+      max.dorsal.rays <- 
+       as.integer(gsub(".*Dorsal.* rays.*: (\\d*)( - (\\d*))*.*", "\\3", str))
+      min.anal.rays <- 
+       as.integer(gsub(".*Anal.* rays: (\\d*)( - (\\d*))*.*", "\\1", str))
+      max.anal.rays <- 
+       as.integer(gsub(".*Anal.* rays: (\\d*)( - (\\d*))*.*", "\\3", str))
+      ans <- c( min.vertebrae=min.vertebrae, max.vertebrae=max.vertebrae, 
+        min.anal.spines=min.anal.spines, max.anal.spines=max.anal.spines,
+        min.dorsal.spines=min.dorsal.spines, max.dorsal.spines=max.dorsal.spines,
+        min.dorsal.rays=min.dorsal.rays, max.dorsal.rays=max.dorsal.rays,
+        min.anal.rays=min.anal.rays, max.anal.rays=max.anal.rays)
+     }
+    # handle some more error cases
+    if(length(ans)==0)
+      ans <- rep(NA, 10)
+    names(ans) <- c("min.vertebrae", "max.vertebrae", "min.anal.spines", 
+               "max.anal.spines", "min.dorsal.spines", "max.dorsal.spines",
+               "min.dorsal.rays", "max.dorsal.rays", "min.anal.rays", 
+               "max.anal.rays")
     
-    ans <- c(min.vertebrae=min.vertebrae, max.vertebrae=max.vertebrae, 
-      min.anal.spines=min.anal.spines, max.anal.spines=max.anal.spines,
-      min.dorsal.spines=min.dorsal.spines, max.dorsal.spines=max.dorsal.spines,
-      min.dorsal.rays=min.dorsal.rays, max.dorsal.rays=max.dorsal.rays,
-      min.anal.rays=min.anal.rays, max.anal.rays=max.anal.rays)
-    }
     ans
   }
   # Apply to the data range, ignoring warnings due to missing data
