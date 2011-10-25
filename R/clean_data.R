@@ -5,8 +5,7 @@
 #' @return the string after dropping all html tags to spaces
 #' @keywords internal
 drop_nonascii <- function(string){
-  string <- gsub("<.*>", " ", string)
-  string <- gsub("\\(\\S*)", " (\\1)", string)
+  string <- gsub("\302\260", " (degrees )", string)
   string
 }
 
