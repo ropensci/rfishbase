@@ -13,5 +13,11 @@
 \description{
   clean the fish.base data into pure ASCII
 }
+\examples{
+\dontrun{
+data(fishbase)
+fish.data <- clean_data(fish.data)
+}
+}
 \keyword{internal}
 
