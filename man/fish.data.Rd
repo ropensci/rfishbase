@@ -6,9 +6,10 @@
   The fishbase data set, cached.
 }
 \references{
-  Froese, R. and D. Pauly. Editors. 2011.FishBase. World
-  Wide Web electronic publication. \url{www.fishbase.org},
+  Froese, R. and D. Pauly. Editors. 2011.FishBase.  World
+  Wide Web electronic publication.  \url{www.fishbase.org},
   version (10/2011).
 }
 \keyword{data}
+\keyword{dataset}
 

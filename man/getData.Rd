@@ -1,7 +1,7 @@
 \name{getData}
 \alias{getData}
 \title{Description: a general function to loop over all fish ids to get data
-also drops the missing entries}
+  also drops the missing entries}
 \usage{
   getData(fish.ids, silent = TRUE)
 }
@@ -21,14 +21,12 @@ also drops the missing entries}
   to get data also drops the missing entries
 }
 \details{
-  Typically
-
-  this function will only be called internally by the
-  caching function.
+  Typically this function will only be called internally by
+  the caching function.
 }
 \examples{
 \dontrun{
-fish.data <- getData(1:3)
+  fish.data <- getData(1:3)
 }
 }
 \seealso{

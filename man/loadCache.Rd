@@ -16,8 +16,8 @@
 }
 \examples{
 \dontrun{
-updateCache()
-loadCache()
+ updateCache()
+ loadCache()
 }
 }
 \seealso{
