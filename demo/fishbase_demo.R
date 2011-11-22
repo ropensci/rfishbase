@@ -18,12 +18,12 @@ data(fishbase)
 
 
 ###### Sample Analysis #########
+# how many fish are in the dataset?
+length(fish.data)
 
 ## Lets start by looking at the distribution of all age data available:
 yr <- getSize(fish.data, "age")
-hist(yr, breaks=40, main="Age Distribution", xlab="age (years)"); 
-nfish <- length(fish.data)
-
+qplot(yr, main="Age Distribution", xlab="age (years)"); 
 
 # We can create partitions by taxon.  For instance, we get the index
 # to all fish wrasses and parrotfish by searching for both families

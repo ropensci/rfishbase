@@ -1,0 +1,142 @@
+\documentclass{elsarticle}
+
+%% Redefines the elsarticle footer
+\makeatletter
+\def\ps@pprintTitle{%
+ \let\@oddhead\@empty
+ \let\@evenhead\@empty
+ \def\@oddfoot{\it \hfill\today}%
+ \let\@evenfoot\@oddfoot}
+\makeatother
+
+
+\bibliographystyle{elsarticle-harv}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage[pdftex, colorlinks]{hyperref}
+\usepackage{amsmath, amsfonts}  % extended mathematics
+\usepackage{booktabs} % book-quality tables
+\usepackage{units}    % non-stacked fractions and better unit spacing
+\usepackage{multicol} % multiple column layout facilities
+\usepackage{lipsum}   % filler text
+\usepackage{fancyvrb} % extended verbatim environments
+\fvset{fontsize=\normalsize}% default font size for fancy-verbatim environments
+\usepackage{xspace}
+
+\textwidth 6.75in
+\oddsidemargin -0.15in
+\evensidemargin -0.15in
+\textheight 9in
+\topmargin -0.5in
+\newcommand{\ud}{\mathrm{d}}
+
+% should be able to set figure size with:
+%  <<label=test, fig=TRUE, width=5, height=5>>=
+
+%-------------------------------------------------------------------------------
+\RequirePackage{fancyvrb}
+\RequirePackage{listings}
+%% important: keep the following comment in
+%% (see https://mailman.stat.ethz.ch/pipermail/r-help/2009-July/204747.html)
+%% this comment persuades Sweav enot to insert\usepackage{Sweave}
+%-------------------------------------------------------------------------------
+\SweaveOpts{keep.source=TRUE}
+%-------------------------------------------------------------------------------
+<<SweaveListingsPreparations,results=tex,echo=FALSE,strip.white=false>>=
+## Must require any other packages to be loaded here!! 
+require(SweaveListingUtils)
+require(ggplot2)
+require(rfishbase)
+## must call this setup 
+SweaveListingPreparations()
+## you may also wish to pass arguments to SweaveListingPreparations()
+## This next line may be skipped in general, see ?SweaveListingPreparations 
+setToBeDefinedPkgs(pkgs=c("SweaveListingUtils","distr", "ggplot2"),
+                   keywordstyles=c("\\bf\\color{blue}","\\bf\\color{red}"))
+@
+                   
+
+\begin{document}
+\begin{frontmatter}
+  \title{An introduction to the \texttt{package-name} Package}
+  \author[davis]{Carl Boettiger\corref{cor1}}
+  \ead{cboettig@ucdavis.edu}
+  %\author[davis]{}
+  \cortext[cor1]{Corresponding author.}
+  \address[davis]{Center for Population Biology, University of California, Davis, United States}
+
+  \begin{abstract}
+  Here's an abstract
+  \end{abstract}
+
+  \begin{keyword}
+   R  \sep vignette
+   \end{keyword}
+ \end{frontmatter}
+
+\section{Introduction}
+\texttt{rfishbase} includes a cached copy of the full fishbase data to increase speed of queries and decrease the load on the fishbase server.  Load the cached copy with 
+
+<<load, echo=TRUE>>=
+data(fishbase)
+@
+
+To get the most recent copy of fishbase, update the cache instead. The update may take up to 24 hours. This copy is stored in the working directory with the current date and can be loaded when finished.   
+<<update, eval=false>>=
+updateCache() 
+loadCache("2011-10-12fishdata.Rdat")
+@
+
+Either command loads an object called fish.data, with one entry per fish species for which data was successfully found, a total count of
+<<nfish, echo=TRUE>>=
+length(fish.data)
+@
+
+\begin{figure}
+<<AgeHist, fig=TRUE, echo=TRUE, width=3, height=3>>=
+yr <- getSize(fish.data, "age")
+nfish <- length(fish.data)
+qplot(yr, main="Age Distribution", xlab="age (years)"); 
+@
+\end{figure}
+
+
+Typical use of the package constructs queries to identify those species matching certain criteria, which can easily be combined with other queries to quickly answer potentially questions that would otherwise be tedious to evaluate.  For instance, we can ask ``are there more labrids or goby species of reef fish?'' using the following queries:
+
+<<reefcount, echo=TRUE>>=
+# Labrids include parrotfish, Scaridae, indicated by the "or" symbol |
+labrid <- familySearch("(Labridae|Scaridae)", fish.data)
+goby <- familySearch("Gobiidae", fish.data)
+# get all the labrids that are reefs:  
+labrid.reef <- habitatSearch("reef", fish.data[labrid])
+# How many species are reef labrids:
+sum(labrid.reef) # same as: length(fish.data[labrid][labrid.reef])
+# How many reef gobies:
+sum (habitatSearch("reef", fish.data[goby]) )
+@
+
+Note that any function can take a subset of the data, as specified by the square brackets.  
+
+
+
+
+
+One of the greatest advantages about accessing fishbase directly through R is the ability to take advantage of the suite of specialized analyses available through R packages.  Likewise, users familiar with these packages can more easily take advantage of the data available on fishbase.  We illustrate this with 
+
+
+ \section{Acknowledgements}
+ CB is supported by a Computational Sciences Graduate Fellowship from the Department of Energy under grant number DE-FG02-97ER25308. 
+ \section*{ }%bibliography
+ \bibliography{/home/cboettig/Documents/Mendeley/bib/library.bib}
+
+
+<<cleanup, echo=FALSE>>=
+unloadNamespace("SweaveListingUtils")
+unloadNamespace("ggplot2") # perhaps unnecessary
+@
+
+\end{document}
+
+
+
+
