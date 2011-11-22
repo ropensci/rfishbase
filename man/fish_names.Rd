@@ -2,8 +2,8 @@
 \alias{fish_names}
 \title{A function to give the names of the matched fish}
 \usage{
-  fish_names(fish.data, name = c("ScientificName",
-  "Family", "Class", "Order"))
+  fish_names(fish.data,
+    name = c("ScientificName", "Family", "Class", "Order"))
 }
 \arguments{
   \item{name}{return the Scientific Name (default)? or

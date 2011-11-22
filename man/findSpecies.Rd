@@ -19,10 +19,8 @@
   Return fish matching the search names
 }
 \details{
-  underscores
-
-  are removed automatically.  Later versions may check
-  names
+  underscores are removed automatically.  Later versions
+  may check names
 }
 \examples{
 ## The distribution of maximum depth in Arctic fishes

@@ -1,6 +1,9 @@
 \name{updateCache}
 \alias{updateCache}
 \title{update the cached copy of fishbase data}
+\usage{
+  updateCache()
+}
 \value{
   a date-fishdata.Rdat file in the working directory
 }
@@ -8,16 +11,14 @@
   update the cached copy of fishbase data
 }
 \details{
-  the
-
-  update is slow, avoiding straining the server or client.
-  please allow this call to run overnight for a complete
-  upgrade.
+  the update is slow, avoiding straining the server or
+  client.  please allow this call to run overnight for a
+  complete upgrade.
 }
 \examples{
 \dontrun{
-updateCache()
-loadCache()
+ updateCache()
+ loadCache()
 }
 }
 \seealso{
