@@ -110,7 +110,15 @@ fish_names <- function(fish.data, name=c("ScientificName", "Family", "Class", "O
 #' @export
 getSize <- function(fish.data, value=c("length", "weight", "age")){
   value <- match.arg(value)
-  y <- sapply(fish.data, function(x) x$size_values[[value]])
+  y <- sapply(fish.data, function(x){
+     z <- c("length"= NA, "weight"=NA, "age"=NA)
+     y <- x$size_values
+    if(length(y) < 1)
+      y <- z
+    for(i in 1:length(y)) 
+      z[i] <- y[i]    
+    as.numeric(z[[value]])
+  })
   unlist(y)
 }
 

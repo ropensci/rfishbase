@@ -3,9 +3,9 @@
 #' @return the string after dropping all html tags to spaces
 #' @keywords internal
 drop_nonascii <- function(string){
-#  string <- gsub("\302\260", " (degrees )", string)
-#  string <- gsub("\342\200\223", " ( - )", string)  # <c2><96>
-#  Other violating codes<c2><b0>,  <c3><a9>, <c3><ad>, <c2><bd>, <c3><b3>
+#  string <- gsub("\302\260", " degrees ", string)
+#  string <- gsub("\342\200\223", " - ", string)  # <c2><96>
+#  Other violating codes <c2><b0>, <c3><a9>, <c3><ad>, <c2><bd>, <c3><b3>
 #  Faster solution to drop the offending codes:
    Encoding(string) <- "UTF-8"
 #  string <- iconv(string, "UTF-8", "ASCII", "byte") # return hex code
@@ -17,7 +17,7 @@ string
 #' @param a list item with fishbase data
 #' @return the item scrubbed of non-ASCII characters
 #' @keywords internal
-#' @example \dontrun{
+#' @examples \dontrun{
 #'  data(fishbase)
 #'  fish.data <- clean_data(fish.data)
 #' }
