@@ -1,11 +1,11 @@
 \name{which_fish}
 \alias{which_fish}
 \title{A function to search for the occurances of any keyword in
- a variety of description types}
+a variety of description types}
 \usage{
-  which_fish(keyword,
-    using = c("trophic", "habitat", "lifecycle", "morphology", "diagnostic", "distribution"),
-    fish.data)
+  which_fish(keyword, using = c("trophic", "habitat",
+  "lifecycle", "morphology", "diagnostic", "distribution"),
+  fish.data)
 }
 \arguments{
   \item{keyword}{pattern to be used by grep}

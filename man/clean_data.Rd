@@ -15,8 +15,8 @@
 }
 \examples{
 \dontrun{
- data(fishbase)
- fish.data <- clean_data(fish.data)
+data(fishbase)
+fish.data <- clean_data(fish.data)
 }
 }
 \keyword{internal}

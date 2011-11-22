@@ -8,7 +8,7 @@
   \item{fish.data}{the fishbase database or a subset}
 }
 \value{
-  a matrix of traits by fish.  Returns min-max depth,
+  a matrix of traits by fish. Returns min-max depth,
   min-max usual depth
 }
 \description{

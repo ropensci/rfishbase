@@ -19,10 +19,12 @@
   scientific Family
 }
 \details{
-  The return value can be summed to give the number of
-  matches, can be used as an index, e.g. fish.data[goby],
-  to return the matches or to pass to another function.
-  See examples.
+  The
+
+  return value can be summed to give the number of matches,
+  can be used as an index, e.g. fish.data[goby], to return
+  the matches or to pass to another function.  See
+  examples.
 }
 \examples{
 data(fishbase)

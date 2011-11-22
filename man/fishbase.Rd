@@ -21,12 +21,14 @@ and return the XML R object}
   return the XML R object
 }
 \details{
-  Typically this function will only be called internally by
-  the caching function.
+  Typically
+
+  this function will only be called internally by the
+  caching function.
 }
 \examples{
 \dontrun{
-  # NileTilapia <- fishbase("2")
+# NileTilapia <- fishbase("2")
 }
 }
 \seealso{
