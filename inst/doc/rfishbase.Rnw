@@ -27,12 +27,7 @@
 %% Looks like a comment but it isn't! (?) 
 % \SweaveOpts{prefix.string=figure/graphics-, prefix.cache=cache/graphics-, fig=TRUE, align=center, dev=tikz, external=TRUE, width=5, height=5, fig.hold=TRUE, cache=TRUE, align=center}
 
-
-<<libs>>=
-require(ggplot2)
-require(rfishbase)
-@
-                   
+                  
 
 \begin{document}
 \begin{frontmatter}
@@ -55,27 +50,49 @@ require(rfishbase)
 
 \section{Introduction}
 
+\emph{Describe the fishbase database ... extent, information avialable, etc  }
+\emph{Briefly describe R}
+
+Stuff about Machine access to data, role of largescale data in ecology \citep{Jones2006d}, \citep{Hanson2011a}, \citep{Reichman2011a}
+
 \citet{fishbase} 
 
-\texttt{rfishbase} includes a cached copy of the full fishbase data to increase speed of queries and decrease the load on the fishbase server.  Load the cached copy with 
 
-<<load, echo=TRUE>>=
+
+\section{Examples}
+
+The \texttt{rfishbase} package works by creating a cached copy of all data on fishbase currently available in XML format.  Caching increases the speed of queries and places minimal demands on the fishbase server, which in it's present form is not built to support direct access to application programming interfaces (APIs).   The cached copy can be loaded in to R using the command:  
+
+
+<<load, echo=FALSE>>=
+require(rfishbase)
+# don't state dependencies
+suppressMessages(require(ggplot2)) # better plotting library for examples 
+suppressMessages(require(ape)) # for first phylogenetics interface example
+suppressMessages(require(geiger)) # another phylogenetics example
+@
+
+
+
+<<load, echo=TRUE, warning=FALSE, tidy=TRUE>>=
 data(fishbase)
 @
 
 To get the most recent copy of fishbase, update the cache instead. The update may take up to 24 hours. This copy is stored in the working directory with the current date and can be loaded when finished.   
-%%<<update, eval=false>>=
-%%updateCache() 
-%%loadCache("2011-10-12fishdata.Rdat")
-%%@
-
-Either command loads an object called fish.data, with one entry per fish species for which data was successfully found, a total count of
-<<nfish, echo=TRUE>>=
+<<update, eval=FALSE>>=
+updateCache() 
+loadCache("2011-10-12fishdata.Rdat")
+@
+Loading the database creates an object called fish.data, with one entry per fish species for which data was successfully found, for a total of 
+<<nfish, echo=TRUE, warning=FALSE, tidy=TRUE>>=
 length(fish.data)
 @
 
+\subsection{Simple queries}
+The examples we give here are meant to be illustrative of the kinds of queries that are possible, and also provide a simple introduction to assist the reader in using the software itself.  
+
 \begin{figure}
-<<AgeHist, fig=TRUE, echo=TRUE, width=3, height=3>>=
+<<AgeHist, fig=TRUE, echo=TRUE, width=3, height=3, warning=FALSE, tidy=TRUE>>=
 yr <- getSize(fish.data, "age")
 nfish <- length(fish.data)
 qplot(yr, main="Age Distribution", xlab="age (years)"); 
@@ -85,7 +102,7 @@ qplot(yr, main="Age Distribution", xlab="age (years)");
 
 Typical use of the package constructs queries to identify those species matching certain criteria, which can easily be combined with other queries to quickly answer potentially questions that would otherwise be tedious to evaluate.  For instance, we can ask ``are there more labrids or goby species of reef fish?'' using the following queries:
 
-<<reefcount, echo=TRUE>>=
+<<reefcount, echo=TRUE, warning=FALSE, tidy=TRUE>>=
 # Labrids include parrotfish, Scaridae, indicated by the "or" symbol |
 labrid <- familySearch("(Labridae|Scaridae)", fish.data)
 goby <- familySearch("Gobiidae", fish.data)
@@ -97,10 +114,81 @@ sum(labrid.reef) # same as: length(fish.data[labrid][labrid.reef])
 sum (habitatSearch("reef", fish.data[goby]) )
 @
 
+\begin{figure}
+<<size, echo=TRUE, warning=FALSE, tidy=TRUE>>=
+# Let's plot the log length distribution of freshwater vs marine fish:
+hist(log( getSize (fish.data[habitatSearch("freshwater", fish.data)], "length")),
+         col=rgb(1,0,0,.5), breaks=40, freq=F, xlab="length", main="marine fish are bigger")
+hist(log( getSize (fish.data[habitatSearch("marine", fish.data)], "length")),
+          col=rgb(0,0,1,.5), breaks=40, add=T, freq=F)
+@
+\end{figure}
+
+
 Note that any function can take a subset of the data, as specified by the square brackets.  
 
+\subsection{Interfacing with other software}
+One of the greatest advantages about accessing fishbase directly through R is the ability to take advantage of the suite of specialized analyses available through R packages.  Likewise, users familiar with these packages can more easily take advantage of the data available on fishbase.  We illustrate this with an example that combines phylogenetic methods available in R with quantitative trait data available from \texttt{rfishbase}.  
 
-One of the greatest advantages about accessing fishbase directly through R is the ability to take advantage of the suite of specialized analyses available through R packages.  Likewise, users familiar with these packages can more easily take advantage of the data available on fishbase.  We illustrate this with 
+This series of commands illustrates testing for a phylogenetically corrected correlation between the maximum observed size of a species and the maximum observed depth at which it is found.   
+<<phylo, echo=TRUE, warning=FALSE, tidy=TRUE>>=
+# load a phylogenetic tree
+data(labridtree)
+
+# Find those species on FishBase 
+tree$tip.label<-gsub("_", " ", tree$tip.label)
+tip.labels <- tree$tip.label
+myfish <- findSpecies(tip.labels, fish.data)
+species.names <- sapply(fish.data[myfish], function(x) x$ScientificName)
+
+
+# Get the maxium depth of each species  
+depths <- getDepth(fish.data[myfish])
+rownames(depths) <- species.names
+
+# also get the maximum size of each species
+size <- getSize(fish.data[myfish], "length")
+names(size) <- species.names
+
+# Drop unmatched or missing data 
+missing<-tip.labels[! tip.labels %in% species.names ]
+tr<- drop.tip(tree, missing)
+depth <- depths[,2]
+missing<-names(depth[is.na(depth)])
+tr<- drop.tip(tr, missing)
+missing<-names(size[is.na(size)])
+tr<- drop.tip(tr, missing)
+
+# drop all the data not in the tree
+pruned.names <- tr$tip.label
+size <- size[pruned.names]
+depth <- depth[pruned.names]
+
+# Does depth correlate with size after correcting for phylogeny?
+x <- pic(size, tr)
+y <- pic(depth, tr)
+summary(lm(y~x-1)) # Yes
+@
+
+
+We can also estimate different evolutionary models for these traits to decide which best describes the data.  
+<<models, echo=TRUE>>=
+bm <- fitContinuous(tr, depth, model="BM")[[1]]
+ou <- fitContinuous(tr, depth, model="OU")[[1]]
+bm$aic < ou$aic
+@
+
+In a similar fashion, programmers of other R software packages can make use of the rfishbase package to make this data available to their functions, further increasing the use and impact of fishbase.  For instance, the project OpenFisheries.org makes use of the fishbase package to provide information about commercially relevant species.  
+
+\section{Discussion}
+
+\subsection{The self-updating study}
+
+Describe how this package could help make studies that could be automatically updated as the dataset is improved and expanded (like the examples in this document which are automatically run when the pdf is created).  \citep{Merali2010}, \citep{Peng2011b}.  
+
+
+\subsection{Limitations and future directions}
+Fishbase contains much additional data that has not been made accessible in it's machine-readable XML format.  We are in contact with the database managers and look forward to providing access to additional types of data as they become available.  
 
 
  \section{Acknowledgements}
