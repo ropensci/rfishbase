@@ -1,16 +1,17 @@
 # rfishbase
 
- Notes
- -----
+## Notes
+ 
  
  This package is currently available for download through the CRAN repository.  
- Install using ```install.packages("rfishbase")''' from within R.  
+ Install using `install.packages("rfishbase")` from within R.  
  
  Further development continues as part of the [ropensci](http://ropensci.org) project, visit
  our [active development fork on github](https://github.com/ropensci/rfishbase).  
 
- Accessing data from fishbase using R
- -------------------------------------
+ ---------------------------------------------------------------
+## Accessing data from fishbase using R
+ 
  
  rfishbase is a package for interfacing with the fishbase.org database.
  Provides codes to download and parse a local copy of fishbase, which 
