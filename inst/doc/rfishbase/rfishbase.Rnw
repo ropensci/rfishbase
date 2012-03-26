@@ -40,7 +40,7 @@
   \address[davis]{Center for Population Biology, University of California, Davis, United States}
 
   \begin{abstract}
- We introduce a package that provides programmatic access to the FishBase repository~\citep{fishbase}.  This package allows us to interact with data on over 30,000 fish species in the rich statistical computing environment, \texttt{R}, and can also allow the user to integration with other research software, such as the phylogenetics package~\texttt{ape}.  
+ We introduce a package that provides interactive and programmatic access to the FishBase repository~\citep{fishbase}.  This package allows us to interact with data on over 30,000 fish species in the rich statistical computing environment, \texttt{R}.  We illustrate how this direct, scriptable interface to FishBase data enables better discovery and integration essential for large-scale comparative analyses.  We provide several examples to illustrate how the package works, and how it can be integrated into such as phylogenetics packages~\texttt{ape} and \texttt{geiger}.  
   \end{abstract}
 
   \begin{keyword}
@@ -62,14 +62,11 @@ Stuff about Machine access to data, role of large scale data in ecology \citep{J
 <<load, results='hide'>>=
 require(rfishbase)
 require(ggplot2) 
-require(ape) 
-require(geiger) 
 @
 
 
 \section{Examples}
 The \texttt{rfishbase} package works by creating a cached copy of all data on fishbase currently available in XML format.  Caching increases the speed of queries and places minimal demands on the fishbase server, which in it's present form is not built to support direct access to application programming interfaces (APIs).   The cached copy can be loaded in to R using the command:  
-
 
 <<loaddata>>=
 data(fishbase)
@@ -139,68 +136,48 @@ One of the greatest advantages about accessing fishbase directly through R is th
 This series of commands illustrates testing for a phylogenetically corrected correlation between the maximum observed size of a species and the maximum observed depth at which it is found.   
 
 
-load a phylogenetic tree
-<<>>=
+load a phylogenetic tree and some phylogenetics packages
+<<results="hide", message=FALSE>>=
 data(labridtree)
+require(geiger) 
 @
 
  Find those species on FishBase 
 <<>>=
-tree$tip.label<-gsub("_", " ", tree$tip.label)
-tip.labels <- tree$tip.label
-myfish <- findSpecies(tip.labels, fish.data)
-species.names <- sapply(fish.data[myfish], `[[`, 'ScientificName')
+myfish <- findSpecies(tree$tip.label, fish.data)
 @
 
-Get the maxium depth of each species  
+Get the maxium depth of each species and sizes of each species: 
 <<>>=
-depths <- getDepth(fish.data[myfish])
-rownames(depths) <- species.names
-@
-
-also get the maximum size of each species
-<<>>=
+depths <- getDepth(fish.data[myfish])[,"deep"]
 size <- getSize(fish.data[myfish], "length")
-names(size) <- species.names
 @
 
-Drop any taxa for which we were unable to find data from the tree
+Drop tips from the phylogeny for unmatched species.  
 <<>>=
-missing<-tip.labels[! tip.labels %in% species.names ]
-tr<- drop.tip(tree, missing)
-depth <- depths[,2]
-missing<-names(depth[is.na(depth)])
-tr<- drop.tip(tr, missing)
-missing<-names(size[is.na(size)])
-tr<- drop.tip(tr, missing)
-@
-
-drop any character data that doesn't match a species on the tree
-<<>>=
-pruned.names <- tr$tip.label
-size <- size[pruned.names]
-depth <- depth[pruned.names]
+data <- na.omit(data.frame(size,depths))
+attach(treedata(tree, data))
 @
 
 Use phylogenetically independent contrasts~\cite{Felsenstein1985} to determine if depth correlates with size after correcting for phylogeny:
 <<pic, results='tex'>>=
-x <- pic(size, tr)
-y <- pic(depth, tr)
+x <- pic(data[["size"]],phy)
+y <- pic(data[["depths"]],phy)
 xtable::xtable(summary(lm(y ~ x - 1)))
 @
 
 
 \begin{figure}
 <<>>=
-plot(lm(y ~ x - 1))
+ggplot(data.frame(x=x,y=y), aes(x,y)) + geom_point() + stat_smooth(method=lm)
 @
 \end{figure}
 
 
 We can also estimate different evolutionary models for these traits to decide which best describes the data,
 <<models, results='hide'>>=
-bm <- fitContinuous(tr, depth, model="BM")[[1]]
-ou <- fitContinuous(tr, depth, model="OU")[[1]]
+bm <- fitContinuous(phy, data[["depths"]], model="BM")[[1]]
+ou <- fitContinuous(phy, data[["depths"]], model="OU")[[1]]
 @
 where the Brownian motion model has an AIC score of~\Sexpr{bm$aic} while the OU model has a score of~\Sexpr{ou$aic}, suggesting that~\Sexpr{names(which.min(list(BM=bm$aic, OU=ou$aic)))} is the better model.  
 
@@ -222,7 +199,8 @@ Fishbase contains much additional data that has not been made accessible in it's
  \section{Acknowledgements}
  CB is supported by a Computational Sciences Graduate Fellowship from the Department of Energy under grant number DE-FG02-97ER25308. 
  \section*{ }%bibliography
- \bibliography{/home/cboettig/Documents/Mendeley/bib/library}
+% \bibliography{/home/cboettig/Documents/Mendeley/bib/library}
+ \bibliography{rfishbase}
 
 
 \end{document}

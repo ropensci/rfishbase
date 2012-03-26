@@ -119,7 +119,10 @@ getSize <- function(fish.data, value=c("length", "weight", "age")){
       z[i] <- y[i]    
     as.numeric(z[[value]])
   })
-  unlist(y)
+  out <- unlist(y)
+  species.names <- sapply(fish.data, `[[`, 'ScientificName')
+  names(out) <- gsub(" ", "_", species.names) # use underscores instead of spaces
+  out
 }
 
 
@@ -187,7 +190,10 @@ getDepth <- function(fish.data){
     names(ans) = c("shallow", "deep", "usual.shallow", "usual.deep")
     ans
   }
-  t(suppressWarnings(sapply(fish.data, depthfn)))
+  out <- t(suppressWarnings(sapply(fish.data, depthfn)))
+  species.names <- sapply(fish.data, `[[`, 'ScientificName')
+  rownames(out) <- gsub(" ", "_", species.names) # use underscores instead of spaces
+  out
 }
 
 
@@ -253,6 +259,9 @@ getQuantTraits <- function(fish.data){
     ans
   }
   # Apply to the data range, ignoring warnings due to missing data
-  t(suppressWarnings(sapply(fish.data, morph, simplify="array")))
+  out <- t(suppressWarnings(sapply(fish.data, morph, simplify="array")))
+  species.names <- sapply(fish.data, `[[`, 'ScientificName')
+  rownames(out) <- gsub(" ", "_", species.names) # use underscores instead of spaces
+  out
 }
 
