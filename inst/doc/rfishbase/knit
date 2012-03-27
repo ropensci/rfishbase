@@ -23,12 +23,16 @@ knit_hooks$set(par=function(before, options, envir){
     par(mar=c(4,4,.1,.1), cex.lab=.95, cex.axis=.9, mgp=c(2,.7,0), tcl=-.3)
 })
 
+
+## verbose compile
+opts_knit$set(progress = TRUE, verbose = TRUE)
+
 local({
   fmt = commandArgs(TRUE)
   if (length(fmt) == 0L) fmt = 'epub'
   if (fmt %in% c('github', 'html')) {
-    # upload to Imgur when output is for github or html
-    opts_knit$set(upload.fun = imgur_upload)
+    # upload to flickr when output is for github or html
+    opts_knit$set(upload.fun = socialR::flickr.url)
     opts_chunk$set(cache.path = 'cache-upload/')
   } else if (fmt == 'pdf') {
     opts_chunk$set(cache.path = 'cache-pdf/')
