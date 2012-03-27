@@ -55,6 +55,22 @@
 
 Stuff about Machine access to data, role of large scale data in ecology \citep{Jones2006d}, \citep{Hanson2011a}, \citep{Reichman2011a}
 
+<<load, echo=FALSE>>=
+require(rfishbase)
+data(fishbase)
+@
+
+
+Stuff about Machine access to data, role of large scale data in ecology \citep{Jones2006d}, \citep{Hanson2011a}, \citep{Reichman2011a}
+
+Informatics
+
+FishBase (\href{http://fishbase.org}{fishbase.org}) is an award-winning online database of information about the morphology, trophic ecology, physiology, ecotoxicology, reproduction, economic relevance of the world's fish, organized by species~\citep{fishbase2012}.  FishBase was developed in collaboration with the United Nations Food and Agriculture Organization and is supported by a consortium of nine research institutions.  In addition to its web-based interface, FishBase provides machine readable XML files for \Sexpr{length(fish.data)} of its species entries.  
+
+To facilitate the  extraction, visualization, and integration of this data in research, we have written the \texttt{rfishbase} package for the R language for statistical computing and graphics~\citep{RTeam2012}.  R is a freely available open source computing environment that is used extensively in ecological research, with a large library of packages built explicitly for this purpose \citep{Kneib2007}.  
+
+
+
 \citet{fishbase} 
 
 \setkeys{Gin}{width=.5\linewidth}
@@ -65,7 +81,7 @@ require(ggplot2)
 @
 
 
-\section{Examples}
+\section{A programmatic interface}
 The \texttt{rfishbase} package works by creating a cached copy of all data on fishbase currently available in XML format.  Caching increases the speed of queries and places minimal demands on the fishbase server, which in it's present form is not built to support direct access to application programming interfaces (APIs).   The cached copy can be loaded in to R using the command:  
 
 <<loaddata>>=
@@ -81,23 +97,78 @@ Loading the database creates an object called fish.data, with one entry per fish
 <<nfish>>=
 length(fish.data)
 @
+\section{Data extraction, analysis, and visualization}
+Comparative studies 
 
-\subsection{Simple queries}
 The examples we give here are meant to be illustrative of the kinds of queries that are possible, and also provide a simple introduction to assist the reader in using the software itself.  
+
+
+Quantitatve queries
+<<AgeHist>>=
+yr <- getSize(fish.data, "age")
+@
+
+
+<<nocturnal>>=
+nocturnal <- which_fish("nocturnal", "trophic", fish.data)
+@
+The object returned is a list of true/false values, indicating all fish in the dataset that match this query.  
+This format is useful because it allows us to subset the original data and pass it to another query. 
+For instance, we can use the \verb|fish_names| function to return the names of these fish.  
+\verb|fish_names| can return more than just species names -- here we ask it to give us the top taxonomic Orders 
+of these nocturnal fish, organized into a table:
+
+<<nocturnaltable, results="tex">>=
+nocturnal_orders <- fish_names(fish.data[nocturnal], "Order")
+dat <- sort(table(nocturnal_orders),decreasing=TRUE)
+xtable::xtable(head(dat))
+@
+
+
+The real power of programatic access the ease with which we can combine, visualize, and statistically test a custom compilation of this data.  
+We begin by generating a custom data table of characteristics of interest
+<<>>=
+reef <- which_fish("reef", "habitat", fish.data)
+nocturnal <- which_fish("nocturnal", "trophic", fish.data)
+marine <- which_fish("marine", "habitat", fish.data)
+africa <- which_fish("Africa:", "distribution", fish.data)
+age <- getSize(fish.data, "age")
+length <- getSize(fish.data, "length")
+order <- fish_names(fish.data, "Order")
+dat <- data.frame(reef, nocturnal, carnivore, marine, freshwater, age, length, order)
+@
+
+This data frame contains categorical data (\emph{e.g.} is the fish a carnivore) and continuous data (\emph{e.g.} weight or age of fish). 
+We can take advantage of the rich data visualization in R to begin exploring this data. 
 
 \setkeys{Gin}{width=.5\linewidth}
 \begin{figure}
-<<AgeHist>>=
-yr <- getSize(fish.data, "age")
-nfish <- length(fish.data)
-qplot(yr, main="Age Distribution", xlab="age (years)"); 
+<<>>=
+ggplot(dat,aes(age, length, color=marine)) + geom_point(position='jitter',alpha=.8) + scale_y_log10() + scale_x_log10() 
+# In which orders are carnivores bigger than non-carnivores?
+# More nocturnal species are found on reefs: 
+qplot(reef[nocturnal])
+# Are reef species longer lived than non-reef species in the marine environment?
+ggplot(subset(dat, marine),aes(reef, log(age))) + geom_boxplot() 
+
+# Are reef species longer lived than non-reef species in the marine environment?
+ggplot(aes(reef, table(order))) + geom_bar() 
+
+biggest <- names(head(sort(table(orders),decr=T), 10))
+ggplot(subset(dat,order %in% biggest), aes(marine, fill=order)) + geom_bar() 
+
+
 @
 \end{figure}
 
 
-Typical use of the package constructs queries to identify those species matching certain criteria, which can easily be combined with other queries to quickly answer potentially questions that would otherwise be tedious to evaluate.  For instance, we can ask ``are there more labrids or goby species of reef fish?'' using the following queries:
 
-Get all species in fishbase from the families ``Labridae'' (wrasses) or ``Scaridae'' (parrotfishes), which are both labrids:
+Typical use of the package involves constructing queries to identify species matching certain criteria. The powerful R interface makes it easy to combine queries in complex ways to answer particular questions.  For instance, we can ask ``are there more labrids or goby species of reef fish?'' using the following queries:
+
+Get all species in fishbase from the families ``Labridae'' (wrasses) or ``Scaridae'' (parrotfishes):
+
+
+
 <<reefcount>>=
 labrid <- familySearch("(Labridae|Scaridae)", fish.data)
 @
@@ -120,18 +191,17 @@ showing us that there are~\Sexpr{nlabrids} labrid species associated with reefs,
 \setkeys{Gin}{width=.5\linewidth}
 \begin{figure}
 <<size>>=
-hist(log( getSize (fish.data[habitatSearch("freshwater", fish.data)], "length")),
+hist(log( getSize(fish.data[habitatSearch("freshwater", fish.data)], "length")),
          col=rgb(1,0,0,.5), breaks=40, freq=F, xlab="length", main="marine fish are bigger")
-hist(log( getSize (fish.data[habitatSearch("marine", fish.data)], "length")),
+hist(log( getSize(fish.data[habitatSearch("marine", fish.data)], "length")),
           col=rgb(0,0,1,.5), breaks=40, add=T, freq=F)
 @
 \end{figure}
 
 
 Note that any function can take a subset of the data, as specified by the square brackets.  
-
-\subsection{Interfacing with other software}
-One of the greatest advantages about accessing fishbase directly through R is the ability to take advantage of the suite of specialized analyses available through R packages.  Likewise, users familiar with these packages can more easily take advantage of the data available on fishbase.  We illustrate this with an example that combines phylogenetic methods available in R with quantitative trait data available from \texttt{rfishbase}.  
+\section{Integration of analyses}
+One of the greatest advantages about accessing FishBase directly through R is the ability to take advantage of the suite of specialized analyses available through R packages.  Likewise, users familiar with these packages can more easily take advantage of the data available on fishbase.  We illustrate this with an example that combines phylogenetic methods available in R with quantitative trait data available from \texttt{rfishbase}.  
 
 This series of commands illustrates testing for a phylogenetically corrected correlation between the maximum observed size of a species and the maximum observed depth at which it is found.   
 
