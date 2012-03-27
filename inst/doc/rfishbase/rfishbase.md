@@ -30,10 +30,8 @@ R | vignette | fishbase
 
 
 
-```r
-require(methods)
-require(rfishbase)
-data(fishbase)
+```
+Error: there is no package called 'ggplot'
 ```
 
 
@@ -49,7 +47,7 @@ world’s fish, organized by species . FishBase was developed in
 collaboration with the United Nations Food and Agriculture Organization
 and is supported by a consortium of nine research institutions. In
 addition to its web-based interface, FishBase provides machine readable
-XML files for `3.0622 &times; 10<sup>4</sup>` of its species entries.
+XML files for `30622` of its species entries.
 
 To facilitate the extraction, visualization, and integration of this
 data in research, we have written the `rfishbase` package for the R
@@ -57,15 +55,6 @@ language for statistical computing and graphics. R is a freely
 available open source computing environment that is used extensively in
 ecological research, with a large library of packages built explicitly
 for this purpose.
-
-
-
-
-```r
-require(rfishbase)
-require(ggplot2)
-```
-
 
 
 
@@ -95,14 +84,14 @@ directory with the current date and can be loaded when finished.
 
 ```r
 updateCache()
-loadCache("2011-10-12fishdata.Rdat")
+loadCache("2012-03-26fishdata.Rdat")
 ```
 
 
 
 Loading the database creates an object called fish.data, with one entry
 per fish species for which data was successfully found, for a total of
-`3.0622 &times; 10<sup>4</sup>` species.  
+`30622` species.  
 
 ## Data extraction, analysis, and visualization
 
@@ -147,17 +136,13 @@ these nocturnal fish, organized into a table:
 nocturnal_orders <- fish_names(fish.data[nocturnal], 
     "Order")
 dat <- sort(table(nocturnal_orders), decreasing = TRUE)
-head(dat)
+xtable(head(dat))
 ```
 
 
 
 ```
-nocturnal_orders
-    Perciformes    Beryciformes    Siluriformes  Anguilliformes 
-             56              10              10               4 
-Scorpaeniformes      Gadiformes 
-              3               2 
+Error: no applicable method for 'xtable' applied to an object of class "c('array', 'integer', 'numeric')"
 ```
 
 
@@ -254,11 +239,11 @@ Fraction of marine species found in the 10 largest orders
 ```r
 biggest <- names(head(sort(table(order), decr = T), 
     10))
-ggplot(subset(dat, order %in% biggest), aes(marine, 
-    fill = order)) + geom_bar()
+ggplot(subset(dat, order %in% biggest), aes(order, 
+    fill = marine)) + geom_bar()
 ```
 
-![plot of chunk fraction_marine](http://farm8.staticflickr.com/7118/7021918531_28c8d97d27_o.png) 
+![plot of chunk fraction_marine](http://farm7.staticflickr.com/6031/7022006951_0433f37451_o.png) 
 
 Typical use of the package involves constructing queries to identify
 species matching certain criteria. The powerful R interface makes it
@@ -392,28 +377,43 @@ Use phylogenetically independent contrasts [@Felsenstein1985] to determine if de
 
 ```r
 x <- pic(data[["size"]], phy)
+```
+
+
+
+```
+Error: object 'phy' not found
+```
+
+
+
+```r
 y <- pic(data[["depths"]], phy)
-summary(lm(y ~ x - 1))
 ```
 
 
 
 ```
+Error: object 'phy' not found
+```
 
-Call:
-lm(formula = y ~ x - 1)
 
-Residuals:
-   Min     1Q Median     3Q    Max 
--29.32  -2.13   0.19   3.36  63.84 
 
-Coefficients:
-  Estimate Std. Error t value Pr(>|t|)
-x   0.0713     0.0993    0.72     0.47
+```r
+xtable(summary(lm(y ~ x - 1)))
+```
 
-Residual standard error: 9.13 on 98 degrees of freedom
-Multiple R-squared: 0.00523,	Adjusted R-squared: -0.00492 
-F-statistic: 0.516 on 1 and 98 DF,  p-value: 0.474 
+
+
+```
+recover called non-interactively; frames dumped, use debugger() to view
+```
+
+
+
+```
+Error: error in evaluating the argument 'object' in selecting a method for function 'summary': Error in eval(expr, envir, enclos) : object 'y' not found
+Calls: lm ... eval -> model.frame -> model.frame.default -> eval -> eval
 
 ```
 
@@ -424,7 +424,13 @@ ggplot(data.frame(x = x, y = y), aes(x, y)) +
     geom_point() + stat_smooth(method = lm)
 ```
 
-![plot of chunk unnamed-chunk-8](http://farm8.staticflickr.com/7280/6875816080_6fab05c9a7_o.png) 
+
+
+```
+Error: object 'x' not found
+```
+
+
 
 
 We can also estimate different evolutionary models for these traits to decide which best describes the data,

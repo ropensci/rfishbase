@@ -24,6 +24,10 @@ knit_hooks$set(par=function(before, options, envir){
 })
 
 
+## xtable html format for github/html output.  
+## otherwise this should be ignored (defaults to 'latex') for pdf output
+options(xtable.type = 'html')
+
 ## verbose compile
 opts_knit$set(progress = TRUE, verbose = TRUE)
 

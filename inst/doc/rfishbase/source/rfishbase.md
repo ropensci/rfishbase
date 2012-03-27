@@ -1,8 +1,8 @@
 # Rfishbase
 
-`ro warning=FALSE, message=FALSE, comment=NA or`
+`ro warning=FALSE, message=FALSE, comment=NA, error=FALSE or`
 <!-- debugging -->
-`ro warning=TRUE, message=TRUE, comment=NA or`
+`ro warning=TRUE, message=TRUE, comment=NA, error=TRUE or`
 
 * Authors Carl Boettiger\* and Peter Wainwright
 * Center for Population Biology, University of California, 
@@ -28,9 +28,10 @@ R | vignette | fishbase
 ## Introduction
 
 
-``` {r libraries}
-require(methods)
-require(rfishbase) 
+``` {r libraries, echo=FALSE}
+library(rfishbase) 
+library(xtable) 
+library(ggplot)
 data(fishbase) 
 ````
 
@@ -44,7 +45,7 @@ world’s fish, organized by species . FishBase was developed in
 collaboration with the United Nations Food and Agriculture Organization
 and is supported by a consortium of nine research institutions. In
 addition to its web-based interface, FishBase provides machine readable
-XML files for `ri length(fish.data) ir` of its species entries.
+XML files for `ri sprintf("%d", length(fish.data)) ir` of its species entries.
 
 To facilitate the extraction, visualization, and integration of this
 data in research, we have written the `rfishbase` package for the R
@@ -54,10 +55,6 @@ ecological research, with a large library of packages built explicitly
 for this purpose.
 
 
-``` {r load, results="hide"}
-require(rfishbase) 
-require(ggplot2) 
-````
 
 ## A programmatic interface
 
@@ -78,11 +75,11 @@ directory with the current date and can be loaded when finished.
 
 ``` {r update, eval=FALSE}
 updateCache()
-loadCache("2011-10-12fishdata.Rdat")
+loadCache("2012-03-26fishdata.Rdat")
 ````
 Loading the database creates an object called fish.data, with one entry
 per fish species for which data was successfully found, for a total of
-`ri length(fish.data) ir` species.  
+`ri sprintf("%d", length(fish.data)) ir` species.  
 
 ## Data extraction, analysis, and visualization
 
@@ -113,7 +110,7 @@ these nocturnal fish, organized into a table:
 ``` {r nocturnal_table}
 nocturnal_orders <-fish_names(fish.data[nocturnal], "Order") 
 dat <- sort(table(nocturnal_orders),decreasing=TRUE) 
-head(dat)
+xtable(head(dat))
 ````
 
 The real power of programatic access the ease with which we can combine,
@@ -155,7 +152,7 @@ ggplot(dat, aes(reef, table(order))) + geom_bar()
 Fraction of marine species found in the 10 largest orders
 ``` {r fraction_marine}
 biggest <- names(head(sort(table(order),decr=T), 10))
-ggplot(subset(dat,order %in% biggest), aes(marine, fill=order)) + geom_bar() 
+ggplot(subset(dat,order %in% biggest), aes(order, fill=marine)) + geom_bar() 
 ````
 Typical use of the package involves constructing queries to identify
 species matching certain criteria. The powerful R interface makes it
@@ -233,7 +230,7 @@ Use phylogenetically independent contrasts [@Felsenstein1985] to determine if de
 ``` {r }
 x <- pic(data[["size"]],phy)
 y <- pic(data[["depths"]],phy)
-summary(lm(y ~ x - 1))
+xtable(summary(lm(y ~ x - 1)))
 ggplot(data.frame(x=x,y=y), aes(x,y)) + geom_point() + stat_smooth(method=lm)
 ````
 
