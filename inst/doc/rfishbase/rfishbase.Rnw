@@ -53,7 +53,6 @@
 \emph{Describe the fishbase database ... extent, information avialable, etc  }
 \emph{Briefly describe R}
 
-Stuff about Machine access to data, role of large scale data in ecology \citep{Jones2006d}, \citep{Hanson2011a}, \citep{Reichman2011a}
 
 <<load, echo=FALSE>>=
 require(rfishbase)
@@ -61,7 +60,6 @@ data(fishbase)
 @
 
 
-Stuff about Machine access to data, role of large scale data in ecology \citep{Jones2006d}, \citep{Hanson2011a}, \citep{Reichman2011a}
 
 Informatics
 
@@ -71,7 +69,6 @@ To facilitate the  extraction, visualization, and integration of this data in re
 
 
 
-\citet{fishbase} 
 
 \setkeys{Gin}{width=.5\linewidth}
 
