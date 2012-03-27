@@ -27,12 +27,12 @@ R | vignette | fishbase
 # Introduction
 
 
-``` {r libraries, echo=FALSE}
+<!--begin.rcode libraries, echo=FALSE
 library(rfishbase) 
 library(xtable) 
 library(ggplot2)
 data(fishbase)
-````
+end.rcode-->
 
 
 Informatics
@@ -45,7 +45,7 @@ world’s fish, organized by species [@fishbase2012]. FishBase was developed in
 collaboration with the United Nations Food and Agriculture Organization
 and is supported by a consortium of nine research institutions. In
 addition to its web-based interface, FishBase provides machine readable
-XML files for `ri I(sprintf("%d", length(fish.data))) ir` of its species entries.
+XML files for <!--rinline I(sprintf("%d", length(fish.data))) --> of its species entries.
 
 To facilitate the extraction, visualization, and integration of this
 data in research, we have written the `rfishbase` package for the R
@@ -65,21 +65,21 @@ it’s present form is not built to support direct access to application
 programming interfaces (APIs). The cached copy can be loaded in to R
 using the command:
 
-``` {r loaddata}
+<!--begin.rcode loaddata
 data(fishbase) 
-````
+end.rcode-->
 
 To get the most recent copy of fishbase, update the cache instead. The
 update may take up to 24 hours. This copy is stored in the working
 directory with the current date and can be loaded when finished.
 
-``` {r update, eval=FALSE}
+<!--begin.rcode update, eval=FALSE
 updateCache()
 loadCache("2012-03-26fishdata.Rdat")
-````
+end.rcode-->
 Loading the database creates an object called fish.data, with one entry
 per fish species for which data was successfully found, for a total of
-`ri I(sprintf("%d", length(fish.data))) ir` species.  
+<!--rinline I(sprintf("%d", length(fish.data))) --> species.  
 
 # Data extraction, analysis, and visualization
 
@@ -91,14 +91,16 @@ assist the reader in using the software itself.
 
 Quantitatve queries 
 
-``` {r AgeHist}
+<!--begin.rcode AgeHist
 yr <- getSize(fish.data, "age")
-````
+end.rcode-->
 
 Identify fish with mention of noturnal behavior in the their trophic description.
-``` {r nocturnal}
+
+<!--begin.rcode nocturnal
 nocturnal <- which_fish("nocturnal", "trophic", fish.data)
-````
+end.rcode-->
+
 The object returned is a list of true/false values,
 indicating all fish in the dataset that match this query. This format is
 useful because it allows us to subset the original data and pass it to
@@ -107,17 +109,17 @@ return the names of these fish. `fish_names` can return more than just
 species names – here we ask it to give us the top taxonomic Orders of
 these nocturnal fish, organized into a table:
 
-``` {r nocturnal_table}
+<!--begin.rcode nocturnal_table
 nocturnal_orders <-fish_names(fish.data[nocturnal], "Order") 
 xtable(table(nocturnal_orders))
-````
+end.rcode-->
 
 The real power of programatic access the ease with which we can combine,
 visualize, and statistically test a custom compilation of this data. We
 begin by generating a custom data table of characteristics of interest
 
 
-``` {r fishdataframe}
+<!--begin.rcode fishdataframe
 reef <- which_fish("reef", "habitat", fish.data)
 nocturnal <- which_fish("nocturnal", "trophic", fish.data)
 marine <- which_fish("marine", "habitat", fish.data)
@@ -126,30 +128,37 @@ age <- getSize(fish.data, "age")
 length <- getSize(fish.data, "length")
 order <- fish_names(fish.data, "Order")
 dat <- data.frame(reef, nocturnal,  marine,  africa, age, length, order)
-````
+end.rcode-->
 
 This data frame contains categorical data (*e.g.* is the fish a
 carnivore) and continuous data (*e.g.* weight or age of fish). We can
 take advantage of the rich data visualization in R to begin exploring
 this data.
-``` {r dataplots, fig.width=10}
-ggplot(dat,aes(age, length, color=marine)) + geom_point(position='jitter',alpha=.8) + scale_y_log10() + scale_x_log10() 
-````
- More nocturnal species are found on reefs than non-reefs
-``` {r }
-xtable(table(reef[nocturnal])))
-````
-Are reef species longer lived than non-reef species in the marine environment?
-``` {r } 
-ggplot(subset(dat, marine),aes(reef, log(age))) + geom_boxplot() 
-````
 
-````
+<!--begin.rcode dataplots, fig.width=10
+ggplot(dat,aes(age, length, color=marine)) + geom_point(position='jitter',alpha=.8) + scale_y_log10() + scale_x_log10() 
+end.rcode-->
+
+More nocturnal species are found on reefs than non-reefs
+
+<!--begin.rcode 
+qplot(reef[nocturnal])
+end.rcode-->
+
+Are reef species longer lived than non-reef species in the marine environment?
+
+<!--begin.rcode  
+ggplot(subset(dat, marine),aes(reef, log(age))) + geom_boxplot() 
+end.rcode-->
+
 Fraction of marine species found in the 10 largest orders
-``` {r fraction_marine}
+
+<!--begin.rcode fraction_marine
 biggest <- names(head(sort(table(order),decr=T), 10))
 ggplot(subset(dat,order %in% biggest), aes(order, fill=marine)) + geom_bar() 
-````
+end.rcode-->
+
+
 Typical use of the package involves constructing queries to identify
 species matching certain criteria. The powerful R interface makes it
 easy to combine queries in complex ways to answer particular questions.
@@ -158,24 +167,32 @@ fish?" using the following queries:
 
 Get all species in fishbase from the families "Labridae" (wrasses) or
 "Scaridae" (parrotfishes):
-``` {r labrid}
+
+<!--begin.rcode labrid
 labrid <- familySearch("(Labridae|Scaridae)", fish.data)
-````
+end.rcode-->
+
 and get all the species of gobies
-``` {r gobycoount}
+
+<!--begin.rcode gobycoount
 goby <- familySearch("Gobiidae", fish.data)
-````
+end.rcode-->
+
 Identify how many labrids are found on reefs
-``` {r labridreef}
+
+<!--begin.rcode labridreef
 labrid.reef <- habitatSearch("reef", fish.data[labrid])
 nlabrids <- sum(labrid.reef)
-````
+end.rcode-->
+
 and how many gobies are found on reefs:
-``` {r gobyreef}
+
+<!--begin.rcode gobyreef
 ngobies <- sum (habitatSearch("reef", fish.data[goby]) )
-````
-showing us that there are `ri I(nlabrids) ir` labrid species associated with reefs,
-and `ri I(ngobies) ir` goby species associated with reefs.  
+end.rcode-->
+
+showing us that there are <!--rinline I(nlabrids) --> labrid species associated with reefs,
+and <!--rinline I(ngobies) --> goby species associated with reefs.  
 
 
 
@@ -199,48 +216,48 @@ the maximum observed depth at which it is found.
 
 
 load a phylogenetic tree and some phylogenetics packages
-``` {r results="hide", message=FALSE}
+<!--begin.rcode results="hide", message=FALSE
 data(labridtree)
 require(geiger) 
-````
+end.rcode-->
 
  Find those species on FishBase 
-``` {r }
+<!--begin.rcode 
 myfish <- findSpecies(tree$tip.label, fish.data)
-````
+end.rcode-->
 
 Get the maxium depth of each species and sizes of each species: 
-``` {r } 
+<!--begin.rcode  
 depths <- getDepth(fish.data[myfish])[,"deep"]
 size <- getSize(fish.data[myfish], "length")
-````
+end.rcode-->
 
 Drop tips from the phylogeny for unmatched species.  
-``` {r } 
+<!--begin.rcode  
 data <- na.omit(data.frame(size,depths))
 pruned <- treedata(tree, data)
-````
+end.rcode-->
 
 
 Use phylogenetically independent contrasts [@felsenstein1985] to determine if depth correlates with size after correcting for phylogeny:
 
-``` {r }
+<!--begin.rcode 
 x <- pic(pruned$data[["size"]],pruned$phy)
 y <- pic(pruned$data[["depths"]],pruned$phy)
 xtable(summary(lm(y ~ x - 1)))
 ggplot(data.frame(x=x,y=y), aes(x,y)) + geom_point() + stat_smooth(method=lm)
-````
+end.rcode-->
 
 We can also estimate different evolutionary models for these traits to decide which best describes the data,
 
-``` {r models, results="hide"}
+<!--begin.rcode models, results="hide"
 bm <- fitContinuous(pruned$phy, pruned$data[["depths"]], model="BM")[[1]]
 ou <- fitContinuous(pruned$phy, pruned$data[["depths"]], model="OU")[[1]]
-````
+end.rcode-->
 
-where the Brownian motion model has an AIC score of `ri I(bm$aic) ir` while
+where the Brownian motion model has an AIC score of <!--rinline I(bm$aic) --> while
 the OU model has a score
-of `ri I(ou$aic) ir`, suggesting that `ri I(names(which.min(list(BM=bm$aic,OU=ou$aic)))) ir` is the better model.
+of <!--rinline I(ou$aic) -->, suggesting that <!--rinline I(names(which.min(list(BM=bm$aic,OU=ou$aic)))) --> is the better model.
 
 In a similar fashion, programmers of other R software packages can make
 use of the rfishbase package to make this data available to their

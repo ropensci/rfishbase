@@ -139,7 +139,7 @@ ggplot(dat,aes(age, length, color=marine)) + geom_point(position='jitter',alpha=
 ````
  More nocturnal species are found on reefs than non-reefs
 ``` {r }
-xtable(table(reef[nocturnal])))
+qplot(reef[nocturnal])
 ````
 Are reef species longer lived than non-reef species in the marine environment?
 ``` {r } 
