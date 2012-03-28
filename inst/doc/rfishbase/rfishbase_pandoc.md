@@ -1,12 +1,3 @@
-<!-- 
-  Uses PANDOC style citations 
-  filename_pandoc_.markdown is the pandoc source file. 
-  It requires the html-comment style  knitr blocks to avoid conflict with pandoc. 
-  You can generate a markdown file with citations inserted using the Makefile or using:
-  pandoc -s -S --biblio rfishbase.bib rfishbase_pandoc_.markdown -o rfishbase_pandoc.md
-  knitr can then operate smoothly on the .md output
---> *This is a work in progress*
-
 % Rfishbase % Carl Boettiger[^1][^2] and Peter Wainwright[^3] %
 
 Abstract
@@ -35,7 +26,7 @@ in ecology (M. B. Jones et al. 2006), (Hanson, Sugden, and Alberts
 FishBase ([fishbase.org](http://fishbase.org)) is an award-winning
 online database of information about the morphology, trophic ecology,
 physiology, ecotoxicology, reproduction, economic relevance of the
-world’s fish, organized by species [@fishbase2012]. FishBase was
+world’s fish, organized by species (Froese and Pauly 2012). FishBase was
 developed in collaboration with the United Nations Food and Agriculture
 Organization and is supported by a consortium of nine research
 institutions. In addition to its web-based interface, FishBase provides
@@ -110,32 +101,120 @@ nocturnal_orders <-fish_names(fish.data[nocturnal], "Order")
 xtable(table(nocturnal_orders))
 ~~~~
 
-    <!-- html table generated in R 2.14.2 by xtable 1.7-0 package -->
-    <!-- Tue Mar 27 20:59:38 2012 -->
-    <TABLE border=1>
-    <TR> <TH>  </TH> <TH> nocturnal_orders </TH>  </TR>
-      <TR> <TD align="right"> Anguilliformes </TD> <TD align="right">   4 </TD> </TR>
-      <TR> <TD align="right"> Atheriniformes </TD> <TD align="right">   1 </TD> </TR>
-      <TR> <TD align="right"> Aulopiformes </TD> <TD align="right">   1 </TD> </TR>
-      <TR> <TD align="right"> Beloniformes </TD> <TD align="right">   1 </TD> </TR>
-      <TR> <TD align="right"> Beryciformes </TD> <TD align="right">  10 </TD> </TR>
-      <TR> <TD align="right"> Clupeiformes </TD> <TD align="right">   1 </TD> </TR>
-      <TR> <TD align="right"> Elopiformes </TD> <TD align="right">   1 </TD> </TR>
-      <TR> <TD align="right"> Gadiformes </TD> <TD align="right">   2 </TD> </TR>
-      <TR> <TD align="right"> Gymnotiformes </TD> <TD align="right">   1 </TD> </TR>
-      <TR> <TD align="right"> Heterodontiformes </TD> <TD align="right">   1 </TD> </TR>
-      <TR> <TD align="right"> Myctophiformes </TD> <TD align="right">   1 </TD> </TR>
-      <TR> <TD align="right"> Myxiniformes </TD> <TD align="right">   1 </TD> </TR>
-      <TR> <TD align="right"> Ophidiiformes </TD> <TD align="right">   2 </TD> </TR>
-      <TR> <TD align="right"> Orectolobiformes </TD> <TD align="right">   2 </TD> </TR>
-      <TR> <TD align="right"> Osmeriformes </TD> <TD align="right">   1 </TD> </TR>
-      <TR> <TD align="right"> Osteoglossiformes </TD> <TD align="right">   1 </TD> </TR>
-      <TR> <TD align="right"> Perciformes </TD> <TD align="right">  56 </TD> </TR>
-      <TR> <TD align="right"> Scorpaeniformes </TD> <TD align="right">   3 </TD> </TR>
-      <TR> <TD align="right"> Siluriformes </TD> <TD align="right">  10 </TD> </TR>
-      <TR> <TD align="right"> Tetraodontiformes </TD> <TD align="right">   2 </TD> </TR>
-      <TR> <TD align="right"> Torpediniformes </TD> <TD align="right">   1 </TD> </TR>
-       </TABLE>
+<!-- html table generated in R 2.14.2 by xtable 1.7-0 package -->
+<!-- Tue Mar 27 22:07:23 2012 -->
+<TABLE border=1>
+<TR> <TH>  </TH> <TH> 
+nocturnal\_orders
+</TH>  </TR>
+  <TR> <TD align="right"> 
+Anguilliformes
+</TD> <TD align="right">   
+4
+</TD> </TR>
+  <TR> <TD align="right"> 
+Atheriniformes
+</TD> <TD align="right">   
+1
+</TD> </TR>
+  <TR> <TD align="right"> 
+Aulopiformes
+</TD> <TD align="right">   
+1
+</TD> </TR>
+  <TR> <TD align="right"> 
+Beloniformes
+</TD> <TD align="right">   
+1
+</TD> </TR>
+  <TR> <TD align="right"> 
+Beryciformes
+</TD> <TD align="right">  
+10
+</TD> </TR>
+  <TR> <TD align="right"> 
+Clupeiformes
+</TD> <TD align="right">   
+1
+</TD> </TR>
+  <TR> <TD align="right"> 
+Elopiformes
+</TD> <TD align="right">   
+1
+</TD> </TR>
+  <TR> <TD align="right"> 
+Gadiformes
+</TD> <TD align="right">   
+2
+</TD> </TR>
+  <TR> <TD align="right"> 
+Gymnotiformes
+</TD> <TD align="right">   
+1
+</TD> </TR>
+  <TR> <TD align="right"> 
+Heterodontiformes
+</TD> <TD align="right">   
+1
+</TD> </TR>
+  <TR> <TD align="right"> 
+Myctophiformes
+</TD> <TD align="right">   
+1
+</TD> </TR>
+  <TR> <TD align="right"> 
+Myxiniformes
+</TD> <TD align="right">   
+1
+</TD> </TR>
+  <TR> <TD align="right"> 
+Ophidiiformes
+</TD> <TD align="right">   
+2
+</TD> </TR>
+  <TR> <TD align="right"> 
+Orectolobiformes
+</TD> <TD align="right">   
+2
+</TD> </TR>
+  <TR> <TD align="right"> 
+Osmeriformes
+</TD> <TD align="right">   
+1
+</TD> </TR>
+  <TR> <TD align="right"> 
+Osteoglossiformes
+</TD> <TD align="right">   
+1
+</TD> </TR>
+  <TR> <TD align="right"> 
+Perciformes
+</TD> <TD align="right">  
+56
+</TD> </TR>
+  <TR> <TD align="right"> 
+Scorpaeniformes
+</TD> <TD align="right">   
+3
+</TD> </TR>
+  <TR> <TD align="right"> 
+Siluriformes
+</TD> <TD align="right">  
+10
+</TD> </TR>
+  <TR> <TD align="right"> 
+Tetraodontiformes
+</TD> <TD align="right">   
+2
+</TD> </TR>
+  <TR> <TD align="right"> 
+Torpediniformes
+</TD> <TD align="right">   
+1
+</TD> </TR>
+   </TABLE>
+
+
 
 The real power of programatic access the ease with which we can combine,
 visualize, and statistically test a custom compilation of this data. We
@@ -161,7 +240,8 @@ this data.
 ggplot(dat,aes(age, length, color=marine)) + geom_point(position='jitter',alpha=.8) + scale_y_log10() + scale_x_log10() 
 ~~~~
 
-![plot of chunk dataplots](figure/dataplots.png)
+![plot of chunk
+dataplots](http://farm8.staticflickr.com/7275/7023036839_be28ceda4a_o.png)
 
 More nocturnal species are found on reefs than non-reefs
 
@@ -169,7 +249,8 @@ More nocturnal species are found on reefs than non-reefs
 qplot(reef[nocturnal])
 ~~~~
 
-![plot of chunk unnamed-chunk-1](figure/unnamed-chunk-1.png)
+![plot of chunk
+unnamed-chunk-1](http://farm8.staticflickr.com/7187/6876936294_f585ebbd76_o.png)
 
 Are reef species longer lived than non-reef species in the marine
 environment?
@@ -178,7 +259,8 @@ environment?
 ggplot(subset(dat, marine),aes(reef, log(age))) + geom_boxplot() 
 ~~~~
 
-![plot of chunk unnamed-chunk-2](figure/unnamed-chunk-2.png)
+![plot of chunk
+unnamed-chunk-2](http://farm8.staticflickr.com/7199/6876936454_90d62b6c29_o.png)
 
 Fraction of marine species found in the 10 largest orders
 
@@ -187,7 +269,8 @@ biggest <- names(head(sort(table(order),decr=T), 10))
 ggplot(subset(dat,order %in% biggest), aes(order, fill=marine)) + geom_bar() 
 ~~~~
 
-![plot of chunk fraction\_marine](figure/fraction_marine.png)
+![plot of chunk
+fraction\_marine](http://farm8.staticflickr.com/7059/7023037379_d1574fa106_o.png)
 
 Typical use of the package involves constructing queries to identify
 species matching certain criteria. The powerful R interface makes it
@@ -287,18 +370,38 @@ y <- pic(pruned$data[["depths"]],pruned$phy)
 xtable(summary(lm(y ~ x - 1)))
 ~~~~
 
-    <!-- html table generated in R 2.14.2 by xtable 1.7-0 package -->
-    <!-- Tue Mar 27 20:59:56 2012 -->
-    <TABLE border=1>
-    <TR> <TH>  </TH> <TH> Estimate </TH> <TH> Std. Error </TH> <TH> t value </TH> <TH> Pr(&gt |t|) </TH>  </TR>
-      <TR> <TD align="right"> x </TD> <TD align="right"> 0.0713 </TD> <TD align="right"> 0.0993 </TD> <TD align="right"> 0.72 </TD> <TD align="right"> 0.4744 </TD> </TR>
-       </TABLE>
+<!-- html table generated in R 2.14.2 by xtable 1.7-0 package -->
+<!-- Tue Mar 27 22:08:01 2012 -->
+<TABLE border=1>
+<TR> <TH>  </TH> <TH> 
+Estimate
+</TH> <TH> 
+Std. Error
+</TH> <TH> 
+t value
+</TH> <TH> 
+Pr(&gt |t|)
+</TH>  </TR>
+  <TR> <TD align="right"> 
+x
+</TD> <TD align="right"> 
+0.0713
+</TD> <TD align="right"> 
+0.0993
+</TD> <TD align="right"> 
+0.72
+</TD> <TD align="right"> 
+0.4744
+</TD> </TR>
+   </TABLE>
+
 
 ~~~~ {.r}
 ggplot(data.frame(x=x,y=y), aes(x,y)) + geom_point() + stat_smooth(method=lm)
 ~~~~
 
-![plot of chunk unnamed-chunk-7](figure/unnamed-chunk-7.png)
+![plot of chunk
+unnamed-chunk-7](http://farm8.staticflickr.com/7233/7023037673_936f809311_o.png)
 
 We can also estimate different evolutionary models for these traits to
 decide which best describes the data,
@@ -308,9 +411,8 @@ bm <- fitContinuous(pruned$phy, pruned$data[["depths"]], model="BM")[[1]]
 ou <- fitContinuous(pruned$phy, pruned$data[["depths"]], model="OU")[[1]]
 ~~~~
 
-where the Brownian motion model has an AIC score of 1185.3621539563
-while the OU model has a score of 918.158041141656, suggesting that OU
-is the better model.
+where the Brownian motion model has an AIC score of 1185.3622 while the
+OU model has a score of 918.158, suggesting that OU is the better model.
 
 In a similar fashion, programmers of other R software packages can make
 use of the rfishbase package to make this data available to their
@@ -349,6 +451,10 @@ References
 Felsenstein, Joseph. 1985. “Phylogenies and the Comparative Method.”
 *The American Naturalist* 125 (jan): 1–15. doi:10.1086/284325.
 [http://www.journals.uchicago.edu/doi/abs/10.1086/284325](http://www.journals.uchicago.edu/doi/abs/10.1086/284325 "http://www.journals.uchicago.edu/doi/abs/10.1086/284325").
+
+Froese, R., and Daniel Pauly. 2012. “FishBase.” World Wide Web
+electronic publication..
+[www.fishbase.org](www.fishbase.org "www.fishbase.org").
 
 Hanson, Brooks, Andrew Sugden, and Bruce Alberts. 2011. “Making data
 maximally available.” *Science (New York, N.Y.)* 331 (feb): 649.

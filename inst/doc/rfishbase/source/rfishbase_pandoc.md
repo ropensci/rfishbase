@@ -1,13 +1,4 @@
 `ro warning=FALSE, message=FALSE, comment=NA, tidy=FALSE, cache=TRUE or`
-<!-- 
-  Uses PANDOC style citations 
-  filename_pandoc_.markdown is the pandoc source file. 
-  It requires the html-comment style  knitr blocks to avoid conflict with pandoc. 
-  You can generate a markdown file with citations inserted using the Makefile or using:
-  pandoc -s -S --biblio rfishbase.bib rfishbase_pandoc_.markdown -o rfishbase_pandoc.md
-  knitr can then operate smoothly on the .md output
--->
-*This is a work in progress*
 
 % Rfishbase
 % Carl Boettiger[^\*][^a] and Peter Wainwright[^a]
@@ -116,7 +107,7 @@ return the names of these fish. `fish_names` can return more than just
 species names – here we ask it to give us the top taxonomic Orders of
 these nocturnal fish, organized into a table:
 
-``` {r nocturnal_table }
+``` {r nocturnal_table, results="asis"}
 nocturnal_orders <-fish_names(fish.data[nocturnal], "Order") 
 xtable(table(nocturnal_orders))
 ````
@@ -248,7 +239,7 @@ pruned <- treedata(tree, data)
 
 Use phylogenetically independent contrasts [@felsenstein1985] to determine if depth correlates with size after correcting for phylogeny:
 
-``` {r  }
+``` {r results="asis" }
 x <- pic(pruned$data[["size"]],pruned$phy)
 y <- pic(pruned$data[["depths"]],pruned$phy)
 xtable(summary(lm(y ~ x - 1)))

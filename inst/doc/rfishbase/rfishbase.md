@@ -133,11 +133,8 @@ nocturnal_orders <-fish_names(fish.data[nocturnal], "Order")
 xtable(table(nocturnal_orders))
 ```
 
-
-
-```
 <!-- html table generated in R 2.14.2 by xtable 1.7-0 package -->
-<!-- Tue Mar 27 21:43:16 2012 -->
+<!-- Tue Mar 27 22:07:23 2012 -->
 <TABLE border=1>
 <TR> <TH>  </TH> <TH> nocturnal_orders </TH>  </TR>
   <TR> <TD align="right"> Anguilliformes </TD> <TD align="right">   4 </TD> </TR>
@@ -162,8 +159,6 @@ xtable(table(nocturnal_orders))
   <TR> <TD align="right"> Tetraodontiformes </TD> <TD align="right">   2 </TD> </TR>
   <TR> <TD align="right"> Torpediniformes </TD> <TD align="right">   1 </TD> </TR>
    </TABLE>
-```
-
 
 
 
@@ -198,7 +193,7 @@ this data.
 ggplot(dat,aes(age, length, color=marine)) + geom_point(position='jitter',alpha=.8) + scale_y_log10() + scale_x_log10() 
 ```
 
-![plot of chunk dataplots](http://farm8.staticflickr.com/7239/7022995011_7d9bd3c145_o.png) 
+![plot of chunk dataplots](http://farm8.staticflickr.com/7275/7023036839_be28ceda4a_o.png) 
 
  More nocturnal species are found on reefs than non-reefs
 
@@ -207,7 +202,7 @@ ggplot(dat,aes(age, length, color=marine)) + geom_point(position='jitter',alpha=
 qplot(reef[nocturnal])
 ```
 
-![plot of chunk unnamed-chunk-1](http://farm7.staticflickr.com/6097/7022995187_0b3bafaed6_o.png) 
+![plot of chunk unnamed-chunk-1](http://farm8.staticflickr.com/7187/6876936294_f585ebbd76_o.png) 
 
 Are reef species longer lived than non-reef species in the marine environment?
 
@@ -216,7 +211,7 @@ Are reef species longer lived than non-reef species in the marine environment?
 ggplot(subset(dat, marine),aes(reef, log(age))) + geom_boxplot() 
 ```
 
-![plot of chunk unnamed-chunk-2](http://farm7.staticflickr.com/6225/6876894774_7ac0e0fba2_o.png) 
+![plot of chunk unnamed-chunk-2](http://farm8.staticflickr.com/7199/6876936454_90d62b6c29_o.png) 
 
 
 
@@ -228,7 +223,7 @@ biggest <- names(head(sort(table(order),decr=T), 10))
 ggplot(subset(dat,order %in% biggest), aes(order, fill=marine)) + geom_bar() 
 ```
 
-![plot of chunk fraction_marine](http://farm7.staticflickr.com/6092/7022995557_83bc04c9e7_o.png) 
+![plot of chunk fraction_marine](http://farm8.staticflickr.com/7059/7023037379_d1574fa106_o.png) 
 
 Typical use of the package involves constructing queries to identify
 species matching certain criteria. The powerful R interface makes it
@@ -356,7 +351,7 @@ Dropped tips from the tree because there were no matching names in the data:
 
 
 
-Use phylogenetically independent contrasts [@felsenstein1985] to determine if depth correlates with size after correcting for phylogeny:
+Use phylogenetically independent contrasts Felsenstein, (1985) to determine if depth correlates with size after correcting for phylogeny:
 
 
 
@@ -366,24 +361,19 @@ y <- pic(pruned$data[["depths"]],pruned$phy)
 xtable(summary(lm(y ~ x - 1)))
 ```
 
-
-
-```
 <!-- html table generated in R 2.14.2 by xtable 1.7-0 package -->
-<!-- Tue Mar 27 21:43:53 2012 -->
+<!-- Tue Mar 27 22:08:01 2012 -->
 <TABLE border=1>
 <TR> <TH>  </TH> <TH> Estimate </TH> <TH> Std. Error </TH> <TH> t value </TH> <TH> Pr(&gt |t|) </TH>  </TR>
   <TR> <TD align="right"> x </TD> <TD align="right"> 0.0713 </TD> <TD align="right"> 0.0993 </TD> <TD align="right"> 0.72 </TD> <TD align="right"> 0.4744 </TD> </TR>
    </TABLE>
-```
-
 
 
 ```r
 ggplot(data.frame(x=x,y=y), aes(x,y)) + geom_point() + stat_smooth(method=lm)
 ```
 
-![plot of chunk unnamed-chunk-7](http://farm8.staticflickr.com/7101/7022995849_4fa2148fa9_o.png) 
+![plot of chunk unnamed-chunk-7](http://farm8.staticflickr.com/7233/7023037673_936f809311_o.png) 
 
 
 We can also estimate different evolutionary models for these traits to decide which best describes the data,
@@ -442,8 +432,6 @@ Department of Energy under grant number DE-FG02-97ER25308.
 bibliography()
 ```
 
-
-
 Jones MB, Schildhauer MP, Reichman O and Bowers S (2006). "The New
 Bioinformatics: Integrating Ecological Data from the Gene to the
 Biosphere." _Annual Review of Ecology, Evolution, and Systematics_,
@@ -472,6 +460,11 @@ Kneib T (2007). "Introduction to the Special Volume on 'Ecology and
 Ecological Modelling in R'." _Journal of Statistical Software_,
 *22*(1), pp. 1-7. <URL: http://www.jstatsoft.org/v22/i01/paper>.
 
+Felsenstein J (1985). "Phylogenies and the Comparative Method." _The
+American Naturalist_, *125*(1), pp. 1-15. ISSN 0003-0147, <URL:
+http://dx.doi.org/10.1086/284325>, <URL:
+http://www.journals.uchicago.edu/doi/abs/10.1086/284325>.
+
 Peng RD (2011). "Reproducible Research in Computational Science."
 _Science_, *334*(6060), pp. 1226-1227. ISSN 0036-8075, <URL:
 http://dx.doi.org/10.1126/science.1213847>, <URL:
@@ -480,7 +473,6 @@ http://www.sciencemag.org/cgi/doi/10.1126/science.1213847>.
 Merali Z (2010). "Computational science: Error." _Nature_, *467*(7317),
 pp. 775-777. ISSN 0028-0836, <URL: http://dx.doi.org/10.1038/467775a>,
 <URL: http://www.nature.com/doifinder/10.1038/467775a>.
-
 
 
 

@@ -27,7 +27,7 @@ R | vignette | fishbase
 # Introduction
 
 
-``` {r libraries, echo=FALSE}
+``` {r libraries, echo=FALSE, cache=FALSE}
 library(rfishbase) 
 library(xtable) 
 library(ggplot2)
@@ -113,7 +113,7 @@ return the names of these fish. `fish_names` can return more than just
 species names – here we ask it to give us the top taxonomic Orders of
 these nocturnal fish, organized into a table:
 
-``` {r nocturnal_table}
+``` {r nocturnal_table, results="asis"}
 nocturnal_orders <-fish_names(fish.data[nocturnal], "Order") 
 xtable(table(nocturnal_orders))
 ````
@@ -228,9 +228,9 @@ pruned <- treedata(tree, data)
 ````
 
 
-Use phylogenetically independent contrasts [@felsenstein1985] to determine if depth correlates with size after correcting for phylogeny:
+Use phylogenetically independent contrasts `ri citet(bib["felsenstein1985"]) ir` to determine if depth correlates with size after correcting for phylogeny:
 
-``` {r }
+``` {r results="asis"}
 x <- pic(pruned$data[["size"]],pruned$phy)
 y <- pic(pruned$data[["depths"]],pruned$phy)
 xtable(summary(lm(y ~ x - 1)))
