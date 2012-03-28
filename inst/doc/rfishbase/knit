@@ -24,9 +24,6 @@ knit_hooks$set(par=function(before, options, envir){
 })
 
 
-## xtable html format for github/html output.  
-## otherwise this should be ignored (defaults to 'latex') for pdf output
-options(xtable.type = 'html')
 
 ## verbose compile
 opts_knit$set(progress = TRUE, verbose = TRUE)
@@ -35,16 +32,23 @@ local({
   fmt = commandArgs(TRUE)
   if (length(fmt) == 0L) fmt = 'github'
   if (fmt %in% c('github', 'html')) {
+    ## xtable html format for github/html output.  
+    ## otherwise this should be ignored (defaults to 'latex') for pdf output
+    options(xtable.type = 'html')
     # upload to flickr when output is for github or html
     opts_knit$set(upload.fun = socialR::flickr.url)
     opts_chunk$set(cache.path = 'cache-upload/')
   } else if (fmt == 'pdf') {
+    # um, we're gonna still make markdown first, so we need html output
+    options(xtable.type = 'html')
     opts_chunk$set(cache.path = 'cache-pdf/')
     # use high quality tikz graphics for PDF output
-    opts_chunk$set(dev = 'tikz', fig.width=4, fig.height=4)
-    x = readLines('template.tex')
-    options(tikzDocumentDeclaration = x[1], tikzDefaultEngine = 'xetex')
-    assign('tikzPackages', c(x[2:13], '\n'), envir = knitr:::.knitEnv)
+#    opts_chunk$set(dev = 'tikz', fig.width=4, fig.height=4)
+#    x = readLines('template.tex')
+#    options(tikzDocumentDeclaration = x[1], tikzDefaultEngine = 'xetex')
+#    assign('tikzPackages', c(x[2:13], '\n'), envir = knitr:::.knitEnv)
+    # use pdf graphics for PDF output
+    opts_chunk$set(dev = 'pdf', fig.width=5, fig.height=5)
   }
   
   # knit all md files under ./source

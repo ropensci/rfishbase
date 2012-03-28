@@ -1,8 +1,8 @@
-`ro warning=FALSE, message=FALSE, comment=NA, tidy=FALSE, cache=TRUE or`
+`ro warning=FALSE, message=FALSE, comment=NA or`
 
 % Rfishbase
-% Carl Boettiger and Peter Wainwright
-% 
+% Carl Boettiger; Peter Wainwright
+% March 28, 2012
 
 Center for Population Biology, University of California, Davis, United  States
 
@@ -24,16 +24,13 @@ R | vignette | fishbase
 # Introduction
 
 
-``` {r libraries, echo=FALSE }
+``` {r libraries, echo=FALSE, cache=FALSE }
 library(rfishbase) 
 library(xtable) 
 library(ggplot2)
 data(fishbase)
 ````
 
-
-Informatics
-Stuff about Machine access to data, role of large scale data in ecology [@jones2006d], [@hanson2011a], [@reichman2011a]
 
 FishBase ([fishbase.org](http://fishbase.org)) is an award-winning
 online database of information about the morphology, trophic ecology,
@@ -162,7 +159,7 @@ morphology_numbers <- getQuantTraits(fish.data)
 
 and extract the depth range (extremes and usual range) from the habitat field,
 
-```{ r depths}
+``` { r depths}
 depths <- getDepth(fish.data)
 ````
 
@@ -220,9 +217,14 @@ ggplot(subset(dat, marine),aes(reef, log(age))) + geom_boxplot()
 Many ecological and evolutionary studies rely on comparisons between
 taxa to pursue questions that cannot be approached experimentally.  
 Instead, we rely on evolution to have performed the experiment already.
-For instance, recent studies have looked at differences in diversification
-rate in different groups [*e.g.* @Ackerly2008].  
+For instance, recent studies have attempted to identify whether 
+reef-associated clades experience greater species diversification rates
+than non-reef-associated groups [*e.g.* @Alfaro2009a].  We can easily
+identify and compare the numbers of reef associated species in different
+families using the `rfishbase` functions presented above.  
 
+In this example, we answer the simpler question "Are there more reef-associated
+species in labrids than in gobies?
 
 Get all species in fishbase from the families "Labridae" (wrasses) or
 "Scaridae" (parrotfishes):
@@ -324,17 +326,24 @@ the OU model has a score of `ri I(ou$aic) ir`, suggesting that
 
 # Discussion
 
+
+
+With more and more data readily available, informatics is becoming increasingly
+important in ecology and evolution research [@jones2006], bringing new opportunities
+for research [@parr2011a; @michener2012] while also raising new challenges [@reichman2011].
+It is in this spirit that we introduce the `rfishbase` package to provide programmatic
+access to the data available on the already widely recognized database, FishBase.  
+We believe that such tools can help take greater advantage of the data available,
+facilitating deeper and richer analyses than would be feasible under only manual access
+to the data.  We hope the examples in this manuscript serve not only to illustrate how
+this package works, but to help inspire readers to consider and explore questions
+that would otherwise be too time consuming or challenging to pursue.  
+
+
 In this paper we have introduced the functions of the `rfishbase` package
 and described how they can be used to improve the extraction, visualization,
 and integration of FishBase data in ecological and evolutionary research.  
 
-
-
-In a similar fashion, programmers of other R software packages can make
-use of the `rfishbase` package to make this data available to their
-functions, further increasing the use and impact of FishBase. For
-instance, the project [OpenFisheries](http://OpenFisheries.org) makes use 
-of the `rfishbase` package to provide information about commercially relevant species.
 
 ## The self-updating study
 Because analyses using this data are written in R scripts, it becomes easy to update
@@ -368,6 +377,12 @@ to evolve with the needs of its users.  Users can view the most recent changes
 and file issues with the package on its development website on Github,
 ([https://github.com/ropensci/rfishbase](https://github.com/ropensci/rfishbase))
 and developers can submit changes to the code or adapt it into their own software. 
+
+Programmers of other R software packages can make
+use of the `rfishbase` package to make this data available to their
+functions, further increasing the use and impact of FishBase. For
+instance, the project [OpenFisheries](http://OpenFisheries.org) makes use 
+of the `rfishbase` package to provide information about commercially relevant species.
 
 
 # Acknowledgements

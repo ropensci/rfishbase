@@ -1,9 +1,11 @@
 all: 
 
+odt:
+	pandoc -s -S --biblio rfishbase.bib rfishbase.md -o rfishbase.odt
 
-pandoc:
-	pandoc -s -S --biblio rfishbase.bib rfishbase_pandoc.md -o rfishbase_pandoc.md
+pdf:
+	pandoc -s -S --biblio rfishbase.bib rfishbase.md -o rfishbase.pdf
 
 bibtool:
-	bibtool -s -d -x *.aux ~/Documents/Mendeley/bib/library.bib > rfishbase.bib
+	bibtool -s -d -x *.aux ~/Documents/Mendeley/bib/*.bib > rfishbase.bib
 
