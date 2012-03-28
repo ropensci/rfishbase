@@ -31,13 +31,16 @@ R | vignette | fishbase
 
 
 
+
+
+
 Informatics
 Stuff about Machine access to data, role of large scale data in ecology (Jones _et. al._ 2006; Hanson _et. al._ 2011; Reichman _et. al._ 2011)
 
 FishBase ([fishbase.org](http://fishbase.org)) is an award-winning
 online database of information about the morphology, trophic ecology,
 physiology, ecotoxicology, reproduction, economic relevance of the
-world’s fish, organized by species (NULL). FishBase was developed in
+world’s fish, organized by species (Froese & Pauly, 2012). FishBase was developed in
 collaboration with the United Nations Food and Agriculture Organization
 and is supported by a consortium of nine research institutions. In
 addition to its web-based interface, FishBase provides machine readable
@@ -45,17 +48,7 @@ XML files for 30622 of its species entries.
 
 To facilitate the extraction, visualization, and integration of this
 data in research, we have written the `rfishbase` package for the R
-language for statistical computing and graphics 
-
-```
-
-Error in parse(text = code[i]) : 1:11: unexpected INCOMPLETE_STRING
-1: citep(bib["rteam2012}])
-             ^
-
-```
-
-. R is a freely
+language for statistical computing and graphics (R Development Core Team, 2012). R is a freely
 available open source computing environment that is used extensively in
 ecological research, with a large library of packages built explicitly
 for this purpose (Kneib, 2007).
@@ -144,7 +137,7 @@ xtable(table(nocturnal_orders))
 
 ```
 <!-- html table generated in R 2.14.2 by xtable 1.7-0 package -->
-<!-- Tue Mar 27 17:53:33 2012 -->
+<!-- Tue Mar 27 21:43:16 2012 -->
 <TABLE border=1>
 <TR> <TH>  </TH> <TH> nocturnal_orders </TH>  </TR>
   <TR> <TD align="right"> Anguilliformes </TD> <TD align="right">   4 </TD> </TR>
@@ -205,7 +198,7 @@ this data.
 ggplot(dat,aes(age, length, color=marine)) + geom_point(position='jitter',alpha=.8) + scale_y_log10() + scale_x_log10() 
 ```
 
-![plot of chunk dataplots](http://farm8.staticflickr.com/7122/7022512679_025d849767_o.png) 
+![plot of chunk dataplots](http://farm8.staticflickr.com/7239/7022995011_7d9bd3c145_o.png) 
 
  More nocturnal species are found on reefs than non-reefs
 
@@ -214,7 +207,7 @@ ggplot(dat,aes(age, length, color=marine)) + geom_point(position='jitter',alpha=
 qplot(reef[nocturnal])
 ```
 
-![plot of chunk unnamed-chunk-1](http://farm7.staticflickr.com/6229/7022512791_aac696a1b3_o.png) 
+![plot of chunk unnamed-chunk-1](http://farm7.staticflickr.com/6097/7022995187_0b3bafaed6_o.png) 
 
 Are reef species longer lived than non-reef species in the marine environment?
 
@@ -223,7 +216,7 @@ Are reef species longer lived than non-reef species in the marine environment?
 ggplot(subset(dat, marine),aes(reef, log(age))) + geom_boxplot() 
 ```
 
-![plot of chunk unnamed-chunk-2](http://farm7.staticflickr.com/6108/6876411390_2b351e51a7_o.png) 
+![plot of chunk unnamed-chunk-2](http://farm7.staticflickr.com/6225/6876894774_7ac0e0fba2_o.png) 
 
 
 
@@ -235,7 +228,7 @@ biggest <- names(head(sort(table(order),decr=T), 10))
 ggplot(subset(dat,order %in% biggest), aes(order, fill=marine)) + geom_bar() 
 ```
 
-![plot of chunk fraction_marine](http://farm7.staticflickr.com/6091/7022513097_4c6f203e5f_o.png) 
+![plot of chunk fraction_marine](http://farm7.staticflickr.com/6092/7022995557_83bc04c9e7_o.png) 
 
 Typical use of the package involves constructing queries to identify
 species matching certain criteria. The powerful R interface makes it
@@ -377,7 +370,7 @@ xtable(summary(lm(y ~ x - 1)))
 
 ```
 <!-- html table generated in R 2.14.2 by xtable 1.7-0 package -->
-<!-- Tue Mar 27 17:54:06 2012 -->
+<!-- Tue Mar 27 21:43:53 2012 -->
 <TABLE border=1>
 <TR> <TH>  </TH> <TH> Estimate </TH> <TH> Std. Error </TH> <TH> t value </TH> <TH> Pr(&gt |t|) </TH>  </TR>
   <TR> <TD align="right"> x </TD> <TD align="right"> 0.0713 </TD> <TD align="right"> 0.0993 </TD> <TD align="right"> 0.72 </TD> <TD align="right"> 0.4744 </TD> </TR>
@@ -390,7 +383,7 @@ xtable(summary(lm(y ~ x - 1)))
 ggplot(data.frame(x=x,y=y), aes(x,y)) + geom_point() + stat_smooth(method=lm)
 ```
 
-![plot of chunk unnamed-chunk-7](http://farm7.staticflickr.com/6050/7022513371_a21b5427f1_o.png) 
+![plot of chunk unnamed-chunk-7](http://farm8.staticflickr.com/7101/7022995849_4fa2148fa9_o.png) 
 
 
 We can also estimate different evolutionary models for these traits to decide which best describes the data,
@@ -451,9 +444,42 @@ bibliography()
 
 
 
-```
-Error: EXPR must be a length 1 vector
-```
+Jones MB, Schildhauer MP, Reichman O and Bowers S (2006). "The New
+Bioinformatics: Integrating Ecological Data from the Gene to the
+Biosphere." _Annual Review of Ecology, Evolution, and Systematics_,
+*37*(1), pp. 519-544. ISSN 1543-592X, <URL:
+http://dx.doi.org/10.1146/annurev.ecolsys.37.091305.110031>, <URL:
+http://arjournals.annualreviews.org/doi/abs/10.1146/annurev.ecolsys.37.091305.110031>.
+
+Hanson B, Sugden A and Alberts B (2011). "Making data maximally
+available." _Science (New York, N.Y.)_, *331*(6018), pp. 649. ISSN
+1095-9203, <URL: http://dx.doi.org/10.1126/science.1203354>, <URL:
+http://www.ncbi.nlm.nih.gov/pubmed/21310971>.
+
+Reichman O, Jones MB and Schildhauer MP (2011). "Challenges and
+Opportunities of Open Data in Ecology." _Science_, *331*(6018), pp.
+692-693. ISSN 0036-8075, <URL:
+http://dx.doi.org/10.1126/science.1197962>, <URL:
+http://www.sciencemag.org/cgi/doi/10.1126/science.1197962
+http://www.sciencemag.org/cgi/doi/10.1126/science.331.6018.692>.
+
+Froese R and Pauly D (2012). "FishBase." <URL: www.fishbase.org>.
+
+R Development Core Team T (2012). "R: A language and environment for
+statistical computing." <URL: http://www.r-project.org/>.
+
+Kneib T (2007). "Introduction to the Special Volume on 'Ecology and
+Ecological Modelling in R'." _Journal of Statistical Software_,
+*22*(1), pp. 1-7. <URL: http://www.jstatsoft.org/v22/i01/paper>.
+
+Peng RD (2011). "Reproducible Research in Computational Science."
+_Science_, *334*(6060), pp. 1226-1227. ISSN 0036-8075, <URL:
+http://dx.doi.org/10.1126/science.1213847>, <URL:
+http://www.sciencemag.org/cgi/doi/10.1126/science.1213847>.
+
+Merali Z (2010). "Computational science: Error." _Nature_, *467*(7317),
+pp. 775-777. ISSN 0028-0836, <URL: http://dx.doi.org/10.1038/467775a>,
+<URL: http://www.nature.com/doifinder/10.1038/467775a>.
 
 
 

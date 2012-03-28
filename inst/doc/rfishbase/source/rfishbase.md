@@ -31,9 +31,13 @@ R | vignette | fishbase
 library(rfishbase) 
 library(xtable) 
 library(ggplot2)
-data(fishbase)
 library(knitcitations)
+````
+
+``` {r prelimary-data, echo=FALSE}
+data(fishbase)
 bib <- read.bibtex("rfishbase.bib")
+cleanbib()
 ````
 
 
@@ -51,7 +55,7 @@ XML files for `ri I(sprintf("%d", length(fish.data))) ir` of its species entries
 
 To facilitate the extraction, visualization, and integration of this
 data in research, we have written the `rfishbase` package for the R
-language for statistical computing and graphics `ri citep(bib["rteam2012}]) ir`. R is a freely
+language for statistical computing and graphics `ri citep(bib["rteam2012"]) ir`. R is a freely
 available open source computing environment that is used extensively in
 ecological research, with a large library of packages built explicitly
 for this purpose `ri citep(bib["kneib2007"]) ir`.
@@ -278,7 +282,7 @@ Department of Energy under grant number DE-FG02-97ER25308.
 
 
 # References
-``` {r bib}
+``` {r bib, results="asis"}
 bibliography()
 ````
 

@@ -33,7 +33,7 @@ opts_knit$set(progress = TRUE, verbose = TRUE)
 
 local({
   fmt = commandArgs(TRUE)
-  if (length(fmt) == 0L) fmt = 'epub'
+  if (length(fmt) == 0L) fmt = 'github'
   if (fmt %in% c('github', 'html')) {
     # upload to flickr when output is for github or html
     opts_knit$set(upload.fun = socialR::flickr.url)
@@ -48,10 +48,11 @@ local({
   }
   
   # knit all md files under ./source
-  for (f in list.files('./source/', full.names = TRUE)) {
+  files <- list.files('./source/',  full.names = TRUE)
+  files <- files[grep(".*\\.md", files)]
+  for (f in files) {
     knit(f, output = basename(f))
   }
 })
 
-## convert to an ebook (EPUB) or other formats
-source('mdconvert.sh')
+## convert to an ebook (EPUB) or other formats with pandoc shell commands
