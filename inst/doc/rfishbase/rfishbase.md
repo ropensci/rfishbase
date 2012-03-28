@@ -29,37 +29,15 @@ R | vignette | fishbase
 
 
 
-```
-Error: unable to open file to read
-```
-
-
-
 
 
 Informatics
-Stuff about Machine access to data, role of large scale data in ecology 
-
-```
-
-Error in lapply(X = X, FUN = FUN, ...) : object 'bib' not found
-
-```
-
-
+Stuff about Machine access to data, role of large scale data in ecology (Jones _et. al._ 2006; Hanson _et. al._ 2011; Reichman _et. al._ 2011)
 
 FishBase ([fishbase.org](http://fishbase.org)) is an award-winning
 online database of information about the morphology, trophic ecology,
 physiology, ecotoxicology, reproduction, economic relevance of the
-world’s fish, organized by species 
-
-```
-
-Error in lapply(X = X, FUN = FUN, ...) : object 'bib' not found
-
-```
-
-. FishBase was developed in
+world’s fish, organized by species (NULL). FishBase was developed in
 collaboration with the United Nations Food and Agriculture Organization
 and is supported by a consortium of nine research institutions. In
 addition to its web-based interface, FishBase provides machine readable
@@ -80,15 +58,7 @@ Error in parse(text = code[i]) : 1:11: unexpected INCOMPLETE_STRING
 . R is a freely
 available open source computing environment that is used extensively in
 ecological research, with a large library of packages built explicitly
-for this purpose 
-
-```
-
-Error in lapply(X = X, FUN = FUN, ...) : object 'bib' not found
-
-```
-
-.
+for this purpose (Kneib, 2007).
 
 
 
@@ -174,7 +144,7 @@ xtable(table(nocturnal_orders))
 
 ```
 <!-- html table generated in R 2.14.2 by xtable 1.7-0 package -->
-<!-- Tue Mar 27 17:50:42 2012 -->
+<!-- Tue Mar 27 17:53:33 2012 -->
 <TABLE border=1>
 <TR> <TH>  </TH> <TH> nocturnal_orders </TH>  </TR>
   <TR> <TD align="right"> Anguilliformes </TD> <TD align="right">   4 </TD> </TR>
@@ -235,7 +205,7 @@ this data.
 ggplot(dat,aes(age, length, color=marine)) + geom_point(position='jitter',alpha=.8) + scale_y_log10() + scale_x_log10() 
 ```
 
-![plot of chunk dataplots](http://farm8.staticflickr.com/7198/7022507425_1a834f5f4f_o.png) 
+![plot of chunk dataplots](http://farm8.staticflickr.com/7122/7022512679_025d849767_o.png) 
 
  More nocturnal species are found on reefs than non-reefs
 
@@ -244,7 +214,7 @@ ggplot(dat,aes(age, length, color=marine)) + geom_point(position='jitter',alpha=
 qplot(reef[nocturnal])
 ```
 
-![plot of chunk unnamed-chunk-1](http://farm8.staticflickr.com/7096/7022507569_484f24fabe_o.png) 
+![plot of chunk unnamed-chunk-1](http://farm7.staticflickr.com/6229/7022512791_aac696a1b3_o.png) 
 
 Are reef species longer lived than non-reef species in the marine environment?
 
@@ -253,7 +223,7 @@ Are reef species longer lived than non-reef species in the marine environment?
 ggplot(subset(dat, marine),aes(reef, log(age))) + geom_boxplot() 
 ```
 
-![plot of chunk unnamed-chunk-2](http://farm8.staticflickr.com/7095/6876405846_cc241a58d0_o.png) 
+![plot of chunk unnamed-chunk-2](http://farm7.staticflickr.com/6108/6876411390_2b351e51a7_o.png) 
 
 
 
@@ -265,7 +235,7 @@ biggest <- names(head(sort(table(order),decr=T), 10))
 ggplot(subset(dat,order %in% biggest), aes(order, fill=marine)) + geom_bar() 
 ```
 
-![plot of chunk fraction_marine](http://farm7.staticflickr.com/6216/6876406010_1fd2688496_o.png) 
+![plot of chunk fraction_marine](http://farm7.staticflickr.com/6091/7022513097_4c6f203e5f_o.png) 
 
 Typical use of the package involves constructing queries to identify
 species matching certain criteria. The powerful R interface makes it
@@ -407,7 +377,7 @@ xtable(summary(lm(y ~ x - 1)))
 
 ```
 <!-- html table generated in R 2.14.2 by xtable 1.7-0 package -->
-<!-- Tue Mar 27 17:51:15 2012 -->
+<!-- Tue Mar 27 17:54:06 2012 -->
 <TABLE border=1>
 <TR> <TH>  </TH> <TH> Estimate </TH> <TH> Std. Error </TH> <TH> t value </TH> <TH> Pr(&gt |t|) </TH>  </TR>
   <TR> <TD align="right"> x </TD> <TD align="right"> 0.0713 </TD> <TD align="right"> 0.0993 </TD> <TD align="right"> 0.72 </TD> <TD align="right"> 0.4744 </TD> </TR>
@@ -420,7 +390,7 @@ xtable(summary(lm(y ~ x - 1)))
 ggplot(data.frame(x=x,y=y), aes(x,y)) + geom_point() + stat_smooth(method=lm)
 ```
 
-![plot of chunk unnamed-chunk-7](http://farm8.staticflickr.com/7277/7022508185_916d333ac4_o.png) 
+![plot of chunk unnamed-chunk-7](http://farm7.staticflickr.com/6050/7022513371_a21b5427f1_o.png) 
 
 
 We can also estimate different evolutionary models for these traits to decide which best describes the data,
@@ -453,15 +423,7 @@ Describe how this package could help make studies that could be
 automatically updated as the dataset is improved and expanded (like the
 examples in this document which are automatically run when the pdf is
 created). 
-
-
-```
-
-Error in lapply(X = X, FUN = FUN, ...) : object 'bib' not found
-
-```
-
-.
+(Peng, 2011; Merali, 2010).
 
 
 ## Limitations and future directions
@@ -487,6 +449,11 @@ Department of Energy under grant number DE-FG02-97ER25308.
 bibliography()
 ```
 
+
+
+```
+Error: EXPR must be a length 1 vector
+```
 
 
 
