@@ -1,5 +1,12 @@
 `ro warning=FALSE, message=FALSE, comment=NA, tidy=FALSE, cache=TRUE or`
-<!-- Uses PANDOC style citations -->
+<!-- 
+  Uses PANDOC style citations 
+  filename_pandoc_.markdown is the pandoc source file. 
+  It requires the html-comment style  knitr blocks to avoid conflict with pandoc. 
+  You can generate a markdown file with citations inserted using the Makefile or using:
+  pandoc -s -S --biblio rfishbase.bib rfishbase_pandoc_.markdown -o rfishbase_pandoc.md
+  knitr can then operate smoothly on the .md output
+-->
 *This is a work in progress*
 
 % Rfishbase

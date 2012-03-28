@@ -33,7 +33,7 @@ library(xtable)
 library(ggplot2)
 data(fishbase)
 library(knitcitations)
-bib <- read.bibtex("../rfishbase.bib")
+bib <- read.bibtex("rfishbase.bib")
 ````
 
 
@@ -43,7 +43,7 @@ Stuff about Machine access to data, role of large scale data in ecology `ri cite
 FishBase ([fishbase.org](http://fishbase.org)) is an award-winning
 online database of information about the morphology, trophic ecology,
 physiology, ecotoxicology, reproduction, economic relevance of the
-world’s fish, organized by species [@fishbase2012]. FishBase was developed in
+world’s fish, organized by species `ri citep(bib["fishbase2012"]) ir`. FishBase was developed in
 collaboration with the United Nations Food and Agriculture Organization
 and is supported by a consortium of nine research institutions. In
 addition to its web-based interface, FishBase provides machine readable
@@ -51,10 +51,10 @@ XML files for `ri I(sprintf("%d", length(fish.data))) ir` of its species entries
 
 To facilitate the extraction, visualization, and integration of this
 data in research, we have written the `rfishbase` package for the R
-language for statistical computing and graphics [@rteam2012]. R is a freely
+language for statistical computing and graphics `ri citep(bib["rteam2012}]) ir`. R is a freely
 available open source computing environment that is used extensively in
 ecological research, with a large library of packages built explicitly
-for this purpose [@kneib2007].
+for this purpose `ri citep(bib["kneib2007"]) ir`.
 
 
 
@@ -240,9 +240,9 @@ bm <- fitContinuous(pruned$phy, pruned$data[["depths"]], model="BM")[[1]]
 ou <- fitContinuous(pruned$phy, pruned$data[["depths"]], model="OU")[[1]]
 ````
 
-where the Brownian motion model has an AIC score of `ri I(bm$aic) ir` while
+where the Brownian motion model has an AIC score of `ri I(round(bm$aic,digits=0)) ir` while
 the OU model has a score
-of `ri I(ou$aic) ir`, suggesting that `ri I(names(which.min(list(BM=bm$aic,OU=ou$aic)))) ir` is the better model.
+of `ri I(round(ou$aic,digits=0)) ir`, suggesting that `ri I(names(which.min(list(BM=bm$aic,OU=ou$aic)))) ir` is the better model.
 
 In a similar fashion, programmers of other R software packages can make
 use of the rfishbase package to make this data available to their
@@ -258,7 +258,7 @@ Describe how this package could help make studies that could be
 automatically updated as the dataset is improved and expanded (like the
 examples in this document which are automatically run when the pdf is
 created). 
-[@peng2011b; @merali2010].
+`ri citep(bib[c("peng2011b","merali2010")]) ir`.
 
 
 ## Limitations and future directions
@@ -278,7 +278,7 @@ Department of Energy under grant number DE-FG02-97ER25308.
 
 
 # References
-```{r bib}
+``` {r bib}
 bibliography()
 ````
 
