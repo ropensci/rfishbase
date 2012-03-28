@@ -4,7 +4,7 @@
  a variety of description types}
 \usage{
   which_fish(keyword,
-    using = c("trophic", "habitat", "lifecycle", "morphology", "diagnostic", "distribution"),
+    using = c("trophic", "habitat", "lifecycle", "morphology", "diagnostic", "distribution", "ScientificName", "Genus", "Family", "Class", "Order", "size"),
     fish.data)
 }
 \arguments{
@@ -12,7 +12,8 @@
 
   \item{using}{the type of search, one of: "trophic",
   "habitat", "lifecycle", "morphology","diagnostic",
-  "distribution."  See examples.}
+  "distribution", "ScientificName", "Genus", "Family",
+  "Class", "Order", or "size" See examples.}
 
   \item{fish.data}{the fishbase database fish.data or a
   subset}

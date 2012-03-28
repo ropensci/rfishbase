@@ -11,5 +11,5 @@
   version (10/2011).
 }
 \keyword{data}
-\keyword{dataset}
+\keyword{datasets}
 

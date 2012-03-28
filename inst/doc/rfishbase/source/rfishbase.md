@@ -1,11 +1,10 @@
 `ro warning=FALSE, message=FALSE, comment=NA, tidy=FALSE, cache=TRUE or`
 
 % Rfishbase
-% Carl Boettiger[^\*][^a] and Peter Wainwright[^a]
+% Carl Boettiger and Peter Wainwright
 % 
 
-[^a]: Center for Population Biology, University of California, Davis, United  States
-  
+Center for Population Biology, University of California, Davis, United  States
 
 # Abstract 
 We introduce a package that provides interactive and programmatic
@@ -65,8 +64,8 @@ comparative phylogenetics software.
 
 The `rfishbase` package works by creating a cached copy of all data on
 FishBase currently available in XML format. Caching increases the speed
-of queries and places minimal demands on the fishbase server, which in
-it’s present form is not built to support direct access to application
+of queries and places minimal demands on the FishBase server, which in
+its present form is not built to support direct access to application
 programming interfaces (APIs). A cached copy is included in the package 
 and can be loaded in to R using the command:
 
@@ -78,7 +77,7 @@ This loads a copy of all available data from FishBase into the R list,
 `fish.data`, which can be passed to the various functions of `rfishbase`
 to extraction, manipulation and visualization.  The online repository
 is frequently updated as new information is uploaded.  To get the most 
-recent copy of fishbase, update the cache instead. The
+recent copy of FishBase, update the cache instead. The
 update may take up to 24 hours. This copy is stored in the working
 directory with the current date and can be loaded when finished.
 
@@ -92,10 +91,10 @@ per fish species for which data was successfully found, for a total of
 
 Not all the data available in FishBase is included in these machine-readable 
 XML files.  Consequently, `rfishbase` returns taxonomic information, trophic
-discription, habitat, distribution, size, lifecycle, morphology and diagnostic
+description, habitat, distribution, size, life-cycle, morphology and diagnostic
 information.  The information returned in each category is provided as plain-text,
 consequently `rfishbase` must use regular expression matching to identify
-the occurence of particular words or patterns in this text corresponding to 
+the occurrence of particular words or patterns in this text corresponding to 
 data of interest. 
 
 Quantitative traits such as length, maximum known age, spine and ray counts,
@@ -154,6 +153,20 @@ data and returning the requested information.  For instance, the function
 age <- getSize(fish.data, "age")
 ````
 
+`rfishbase` can also extract a table of quantitative traits from the morphology field,
+describing the number of vertebrate, dorsal and anal rays and spines,
+
+``` {r quantify-morphology}
+morphology_numbers <- getQuantTraits(fish.data)
+````
+
+and extract the depth range (extremes and usual range) from the habitat field,
+
+```{ r depths}
+depths <- getDepth(fish.data)
+````
+
+
 
 The real power of programatic access the ease with which we can combine,
 visualize, and statistically test a custom compilation of this data. 
@@ -204,45 +217,43 @@ ggplot(subset(dat, marine),aes(reef, log(age))) + geom_boxplot()
 ````
 
 ## Comparative studies
+Many ecological and evolutionary studies rely on comparisons between
+taxa to pursue questions that cannot be approached experimentally.  
+Instead, we rely on evolution to have performed the experiment already.
+For instance, recent studies have looked at differences in diversification
+rate in different groups [*e.g.* @Ackerly2008].  
 
-
-For instance, we can ask "are there more labrids or goby species of reef
-fish?" using the following queries:
 
 Get all species in fishbase from the families "Labridae" (wrasses) or
 "Scaridae" (parrotfishes):
 
 ``` {r labrid }
-labrid <- familySearch("(Labridae|Scaridae)", fish.data)
+labrid <- which_fish("(Labridae|Scaridae)", "Family", fish.data)
 ````
 
 and get all the species of gobies
 
-``` {r gobycoount }
-goby <- familySearch("Gobiidae", fish.data)
+``` {r gobycount }
+goby <- which_fish("Gobiidae", "Family", fish.data)
 ````
 
 Identify how many labrids are found on reefs
 
 ``` {r labridreef }
-labrid.reef <- habitatSearch("reef", fish.data[labrid])
+labrid.reef <- which_fish("reef", "habitat", fish.data[labrid])
 nlabrids <- sum(labrid.reef)
 ````
 
 and how many gobies are found on reefs:
 
 ``` {r gobyreef }
-ngobies <- sum (habitatSearch("reef", fish.data[goby]) )
+ngobies <- sum (which_fish("reef", "habitat", fish.data[goby]) )
 ````
 
-showing us that there are `ri I(nlabrids) ir` labrid species associated with reefs,
+Note that summing the list of true/false values returned gives the total number of matches.  
+This tells us that there are `ri I(nlabrids) ir` labrid species associated with reefs,
 and `ri I(ngobies) ir` goby species associated with reefs.  
 
-
-
-
-Note that any function can take a subset of the data, as specified by
-the square brackets.
 
 # Integration of analyses
 
@@ -250,9 +261,11 @@ One of the greatest advantages about accessing FishBase directly through
 R is the ability to take advantage of the suite of specialized analyses
 available through R packages. Likewise, users familiar with these
 packages can more easily take advantage of the data available on
-fishbase. We illustrate this with an example that combines phylogenetic
+FishBase. We illustrate this with an example that combines phylogenetic
 methods available in R with quantitative trait data available from
 `rfishbase`.
+
+
 
 This series of commands illustrates testing for a phylogenetically
 corrected correlation between the maximum observed size of a species and
@@ -260,30 +273,35 @@ the maximum observed depth at which it is found.
 
 
 load a phylogenetic tree and some phylogenetics packages
+
 ``` {r results="hide", message=FALSE }
 data(labridtree)
 require(geiger) 
 ````
 
  Find those species on FishBase 
+
 ``` {r  }
 myfish <- findSpecies(tree$tip.label, fish.data)
 ````
 
-Get the maxium depth of each species and sizes of each species: 
+Get the maximum depth of each species and sizes of each species: 
+
 ``` {r   }
 depths <- getDepth(fish.data[myfish])[,"deep"]
 size <- getSize(fish.data[myfish], "length")
 ````
 
 Drop tips from the phylogeny for unmatched species.  
+
 ``` {r   }
 data <- na.omit(data.frame(size,depths))
 pruned <- treedata(tree, data)
 ````
 
 
-Use phylogenetically independent contrasts [@felsenstein1985] to determine if depth correlates with size after correcting for phylogeny:
+Use phylogenetically independent contrasts [@felsenstein1985] to 
+determine if depth correlates with size after correcting for phylogeny:
 
 ``` {r results="asis" }
 x <- pic(pruned$data[["size"]],pruned$phy)
@@ -300,41 +318,62 @@ ou <- fitContinuous(pruned$phy, pruned$data[["depths"]], model="OU")[[1]]
 ````
 
 where the Brownian motion model has an AIC score of `ri I(bm$aic) ir` while
-the OU model has a score
-of `ri I(ou$aic) ir`, suggesting that `ri I(names(which.min(list(BM=bm$aic,OU=ou$aic)))) ir` is the better model.
+the OU model has a score of `ri I(ou$aic) ir`, suggesting that
+`ri I(names(which.min(list(BM=bm$aic,OU=ou$aic)))) ir` is the better model.
 
-In a similar fashion, programmers of other R software packages can make
-use of the rfishbase package to make this data available to their
-functions, further increasing the use and impact of fishbase. For
-instance, the project OpenFisheries.org makes use of the fishbase
-package to provide information about commercially relevant species.
 
 # Discussion
 
+In this paper we have introduced the functions of the `rfishbase` package
+and described how they can be used to improve the extraction, visualization,
+and integration of FishBase data in ecological and evolutionary research.  
+
+
+
+In a similar fashion, programmers of other R software packages can make
+use of the `rfishbase` package to make this data available to their
+functions, further increasing the use and impact of FishBase. For
+instance, the project [OpenFisheries](http://OpenFisheries.org) makes use 
+of the `rfishbase` package to provide information about commercially relevant species.
+
 ## The self-updating study
-
-Describe how this package could help make studies that could be
-automatically updated as the dataset is improved and expanded (like the
-examples in this document which are automatically run when the pdf is
-created). 
-[@peng2011b; @merali2010].
-
+Because analyses using this data are written in R scripts, it becomes easy to update
+the results as more data becomes available on FishBase. Programmatic access to data
+coupled with script-able analyses can help ensure that research is more easily reproduced
+and also facilitate extending the work in future studies [@peng2011b; @merali2010].
+This document is an example of this, using a dynamic documentation interpreter program 
+which runs the code displayed to produce the results shown, eliminating the possibility
+of faulty code [@knitr].  As FishBase is updated, we can regenerate these results 
+with less missing data.  Readers can find the original document which combines the 
+source-code and text on the project's [Github page](https://github.com/ropensci/rfishbase/tree/master/inst/doc/rfishbase)
 
 ## Limitations and future directions
 
-Fishbase contains much additional data that has not been made accessible
-in it’s machine-readable XML format. We are in contact with the database
+FishBase contains much additional data that has not been made accessible
+in its machine-readable XML format. We are in contact with the database
 managers and look forward to providing access to additional types of
-data as they become available.
+data as they become available.  Because most of the data provided in the 
+XML comes as plain text rather that being identified with machine-readable
+tags, reliability of the results is limited by text matching.  Meanwhile,
+improved text matching queries could provide more reliable and other custom
+information, such as extracting geographic distribution details as categorical
+variables or latitude/longitude coordinates.  FishBase taxonomy is inconsistent
+with taxonomy provided elsewhere, and additional package functions could help
+resolve these differences in assignments.  
+
+`rfishbase` has been available to R users through the [Comprehensive R Archive 
+Network](http://cran.r-project.org/web/packages/rfishbase/) since October 2011, 
+and has an established user base.  The project remains in active development
+to evolve with the needs of its users.  Users can view the most recent changes 
+and file issues with the package on its development website on Github,
+([https://github.com/ropensci/rfishbase](https://github.com/ropensci/rfishbase))
+and developers can submit changes to the code or adapt it into their own software. 
+
 
 # Acknowledgements
 
 CB is supported by a Computational Sciences Graduate Fellowship from the
 Department of Energy under grant number DE-FG02-97ER25308.
-
-
-[^\*]: Corresponding author <cboettig@ucdavis.edu> 
-
 
 # References
 
