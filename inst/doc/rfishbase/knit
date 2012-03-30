@@ -1,6 +1,6 @@
 #!/usr/bin/Rscript
 
-## ./knit [epub|github|html|pdf] to generate different types of output
+## ./knit [epub|github|html|pdf|doc] to generate different types of output
 
 library(knitr)
 
@@ -38,6 +38,16 @@ local({
     # upload to flickr when output is for github or html
     opts_knit$set(upload.fun = socialR::flickr.url)
     opts_chunk$set(cache.path = 'cache-upload/')
+
+  } else if (fmt %in% c('odt', 'docx', 'epub')) {
+    options(xtable.type = 'html')
+
+  } else if (fmt == 'tex') {
+    opts_chunk$set(cache.path = 'cache-pdf/')
+    options(xtable.type = "latex" )
+    # use pdf graphics for PDF output
+    opts_chunk$set(dev = 'pdf', fig.width=5, fig.height=5)
+
   } else if (fmt == 'pdf') {
     # um, we're gonna still make markdown first, so we need html output
     options(xtable.type = 'html')

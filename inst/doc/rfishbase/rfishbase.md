@@ -1,6 +1,6 @@
 
 
-% Rfishbase
+% rfishbase: programmatic access for exploring, manipulating and visualizing FishBase data from R
 % Carl Boettiger; Peter Wainwright
 % March 28, 2012
 
@@ -192,8 +192,13 @@ morphology_numbers <- getQuantTraits(fish.data)
 
 and extract the depth range (extremes and usual range) from the habitat field,
 
-``` { r depths}
+
+
+```r
 depths <- getDepth(fish.data)
+```
+
+
 
 
 
@@ -238,7 +243,7 @@ ggplot(subset(dat, order %in% biggest), aes(order,
     fill = marine)) + geom_bar()
 ```
 
-![plot of chunk fraction_marine](figure/fraction_marine.pdf) 
+![plot of chunk fraction_marine](figure/fraction_marine.png) 
 
 
 Is age correlated with size?
@@ -251,7 +256,7 @@ ggplot(dat, aes(age, length, color = marine)) +
     scale_x_log10()
 ```
 
-![plot of chunk Figure1](figure/Figure1.pdf) 
+![plot of chunk Figure1](figure/Figure1.png) 
 
 
 A statistical test of this pattern: 
@@ -259,15 +264,16 @@ A statistical test of this pattern:
 
 
 ```r
-xtable(summary(lm(data = dat, log(length) ~ log(age))))
+xtable(summary(lm(data = dat, length ~ age)))
 ```
 
-
-
-```
-Error: NA/NaN/Inf in foreign function call (arg 1)
-```
-
+<!-- html table generated in R 2.14.2 by xtable 1.7-0 package -->
+<!-- Wed Mar 28 17:23:57 2012 -->
+<TABLE border=1>
+<TR> <TH>  </TH> <TH> Estimate </TH> <TH> Std. Error </TH> <TH> t value </TH> <TH> Pr(&gt |t|) </TH>  </TR>
+  <TR> <TD align="right"> (Intercept) </TD> <TD align="right"> 38.9025 </TD> <TD align="right"> 3.7424 </TD> <TD align="right"> 10.40 </TD> <TD align="right"> 0.0000 </TD> </TR>
+  <TR> <TD align="right"> age </TD> <TD align="right"> 1.9529 </TD> <TD align="right"> 0.1452 </TD> <TD align="right"> 13.45 </TD> <TD align="right"> 0.0000 </TD> </TR>
+   </TABLE>
 
 
 
@@ -281,7 +287,7 @@ ggplot(subset(dat, marine), aes(reef, log(age))) +
     geom_boxplot()
 ```
 
-![plot of chunk unnamed-chunk-3](figure/unnamed-chunk-3.pdf) 
+![plot of chunk unnamed-chunk-3](figure/unnamed-chunk-3.png) 
 
 
 ## Comparative studies
@@ -290,7 +296,7 @@ taxa to pursue questions that cannot be approached experimentally.
 Instead, we rely on evolution to have performed the experiment already.
 For instance, recent studies have attempted to identify whether 
 reef-associated clades experience greater species diversification rates
-than non-reef-associated groups [*e.g.* @Alfaro2009a].  We can easily
+than non-reef-associated groups [*e.g.* @alfaro2009a].  We can easily
 identify and compare the numbers of reef associated species in different
 families using the `rfishbase` functions presented above.  
 
@@ -366,19 +372,20 @@ corrected correlation between the maximum observed size of a species and
 the maximum observed depth at which it is found.
 
 
-load a phylogenetic tree and some phylogenetics packages
+load a phylogenetic tree of labrid fish (provided in the package), 
+and some the phylogenetics package `geiger` [@geiger].
 
 
 
 ```r
 data(labridtree)
-require(geiger)
+library(geiger)
 ```
 
 
 
 
- Find those species on FishBase 
+Find the species represented on this tree in FishBase 
 
 
 
@@ -440,7 +447,7 @@ xtable(summary(lm(y ~ x - 1)))
 ```
 
 <!-- html table generated in R 2.14.2 by xtable 1.7-0 package -->
-<!-- Wed Mar 28 16:12:30 2012 -->
+<!-- Wed Mar 28 17:24:03 2012 -->
 <TABLE border=1>
 <TR> <TH>  </TH> <TH> Estimate </TH> <TH> Std. Error </TH> <TH> t value </TH> <TH> Pr(&gt |t|) </TH>  </TR>
   <TR> <TD align="right"> x </TD> <TD align="right"> 0.0713 </TD> <TD align="right"> 0.0993 </TD> <TD align="right"> 0.72 </TD> <TD align="right"> 0.4744 </TD> </TR>
@@ -452,7 +459,7 @@ ggplot(data.frame(x = x, y = y), aes(x, y)) +
     geom_point() + stat_smooth(method = lm)
 ```
 
-![plot of chunk unnamed-chunk-8](figure/unnamed-chunk-8.pdf) 
+![plot of chunk unnamed-chunk-7](figure/unnamed-chunk-7.png) 
 
 
 We can also estimate different evolutionary models for these traits to decide which best describes the data,
