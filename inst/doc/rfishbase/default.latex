@@ -130,6 +130,8 @@ $endif$
               colorlinks=true,
               linkcolor=blue]{hyperref}
 \fi
+
+
 \hypersetup{breaklinks=true, pdfborder={0 0 0}}
 $if(strikeout)$
 \usepackage[normalem]{ulem}
@@ -157,6 +159,8 @@ $if(lang)$
   \usepackage[$lang$]{babel}
 \fi
 $endif$
+
+
 $for(header-includes)$
 $header-includes$
 $endfor$
@@ -184,7 +188,12 @@ $if(toc)$
 \tableofcontents
 
 $endif$
+
+
+
 $body$
+
+
 
 $if(natbib)$
 $if(biblio-files)$
@@ -197,14 +206,20 @@ $endif$
 $endif$
 \bibliography{$biblio-files$}
 
+
+
 $endif$
 $endif$
 $if(biblatex)$
 \printbibliography$if(biblio-title)$[title=$biblio-title$]$endif$
 
+
+
 $endif$
 $for(include-after)$
 $include-after$
+
+
 
 $endfor$
 \end{document}

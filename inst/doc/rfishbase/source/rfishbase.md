@@ -1,6 +1,6 @@
 `ro warning=FALSE, message=FALSE, comment=NA or`
 
-% Rfishbase
+% rfishbase: programmatic access for exploring, manipulating and visualizing FishBase data from R
 % Carl Boettiger; Peter Wainwright
 % March 28, 2012
 
@@ -159,7 +159,7 @@ morphology_numbers <- getQuantTraits(fish.data)
 
 and extract the depth range (extremes and usual range) from the habitat field,
 
-``` { r depths}
+``` {r depths}
 depths <- getDepth(fish.data)
 ````
 
@@ -203,7 +203,7 @@ ggplot(dat,aes(age, length, color=marine)) + geom_point(position='jitter',alpha=
 A statistical test of this pattern: 
 
 ``` {r Table1, results="asis"}
-xtable(summary(lm(data=dat,  log(length) ~ log(age)) ))
+xtable(summary(lm(data=dat,  length ~ age) ))
 ````
 
 
@@ -219,7 +219,7 @@ taxa to pursue questions that cannot be approached experimentally.
 Instead, we rely on evolution to have performed the experiment already.
 For instance, recent studies have attempted to identify whether 
 reef-associated clades experience greater species diversification rates
-than non-reef-associated groups [*e.g.* @Alfaro2009a].  We can easily
+than non-reef-associated groups [*e.g.* @alfaro2009a].  We can easily
 identify and compare the numbers of reef associated species in different
 families using the `rfishbase` functions presented above.  
 
@@ -274,14 +274,15 @@ corrected correlation between the maximum observed size of a species and
 the maximum observed depth at which it is found.
 
 
-load a phylogenetic tree and some phylogenetics packages
+load a phylogenetic tree of labrid fish (provided in the package), 
+and some the phylogenetics package `geiger` [@geiger].
 
-``` {r results="hide", message=FALSE }
+``` {r results="hide", message=FALSE, cache = FALSE }
 data(labridtree)
-require(geiger) 
+library(geiger) 
 ````
 
- Find those species on FishBase 
+Find the species represented on this tree in FishBase 
 
 ``` {r  }
 myfish <- findSpecies(tree$tip.label, fish.data)
@@ -289,7 +290,7 @@ myfish <- findSpecies(tree$tip.label, fish.data)
 
 Get the maximum depth of each species and sizes of each species: 
 
-``` {r   }
+``` {r depthslabrid }
 depths <- getDepth(fish.data[myfish])[,"deep"]
 size <- getSize(fish.data[myfish], "length")
 ````

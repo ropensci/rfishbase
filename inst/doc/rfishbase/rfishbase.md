@@ -1,6 +1,6 @@
 
 
-% Rfishbase
+% rfishbase: programmatic access for exploring, manipulating and visualizing FishBase data from R
 % Carl Boettiger; Peter Wainwright
 % March 28, 2012
 
@@ -26,12 +26,6 @@ R | vignette | fishbase
 
 
 
-```
-Error: there is no package called 'xtable'
-```
-
-
-
 
 
 FishBase ([fishbase.org](http://fishbase.org)) is an award-winning
@@ -41,7 +35,7 @@ world’s fish, organized by species [@fishbase2012]. FishBase was developed in
 collaboration with the United Nations Food and Agriculture Organization
 and is supported by a consortium of nine research institutions. In
 addition to its web-based interface, FishBase provides machine readable
-XML files for `30622` of its species entries.
+XML files for 30622 of its species entries.
 
 To facilitate the extraction, visualization, and integration of this
 data in research, we have written the `rfishbase` package for the R
@@ -96,7 +90,7 @@ loadCache("2012-03-26fishdata.Rdat")
 
 Loading the database creates an object called fish.data, with one entry
 per fish species for which data was successfully found, for a total of
-`30622` species.  
+30622 species.  
 
 Not all the data available in FishBase is included in these machine-readable 
 XML files.  Consequently, `rfishbase` returns taxonomic information, trophic
@@ -183,12 +177,6 @@ age <- getSize(fish.data, "age")
 
 
 
-```
-Error: 'names' attribute [3] must be the same length as the vector [0]
-```
-
-
-
 
 `rfishbase` can also extract a table of quantitative traits from the morphology field,
 describing the number of vertebrate, dorsal and anal rays and spines,
@@ -204,8 +192,13 @@ morphology_numbers <- getQuantTraits(fish.data)
 
 and extract the depth range (extremes and usual range) from the habitat field,
 
-``` { r depths}
+
+
+```r
 depths <- getDepth(fish.data)
+```
+
+
 
 
 
@@ -225,26 +218,9 @@ marine <- which_fish("marine", "habitat", fish.data)
 africa <- which_fish("Africa:", "distribution", 
     fish.data)
 length <- getSize(fish.data, "length")
-```
-
-
-
-```
-Error: 'names' attribute [3] must be the same length as the vector [0]
-```
-
-
-
-```r
 order <- fish_names(fish.data, "Order")
 dat <- data.frame(reef, nocturnal, age, marine, 
     africa, length, order)
-```
-
-
-
-```
-Error: object 'age' not found
 ```
 
 
@@ -267,13 +243,7 @@ ggplot(subset(dat, order %in% biggest), aes(order,
     fill = marine)) + geom_bar()
 ```
 
-
-
-```
-Error: object 'dat' not found
-```
-
-
+![plot of chunk fraction_marine](figure/fraction_marine.pdf) 
 
 
 Is age correlated with size?
@@ -286,13 +256,7 @@ ggplot(dat, aes(age, length, color = marine)) +
     scale_x_log10()
 ```
 
-
-
-```
-Error: object 'dat' not found
-```
-
-
+![plot of chunk Figure1](figure/Figure1.pdf) 
 
 
 A statistical test of this pattern: 
@@ -300,15 +264,23 @@ A statistical test of this pattern:
 
 
 ```r
-xtable(summary(lm(data = dat, log(length) ~ log(age))))
+xtable(summary(lm(data = dat, length ~ age)))
 ```
 
-
-
-```
-Error: could not find function "xtable"
-```
-
+% latex table generated in R 2.14.2 by xtable 1.7-0 package
+% Fri Mar 30 17:06:37 2012
+\begin{table}[ht]
+\begin{center}
+\begin{tabular}{rrrrr}
+  \hline
+ & Estimate & Std. Error & t value & p \\ 
+  \hline
+(Intercept) & 38.9025 & 3.7424 & 10.40 & 0.0000 \\ 
+  age & 1.9529 & 0.1452 & 13.45 & 0.0000 \\ 
+   \hline
+\end{tabular}
+\end{center}
+\end{table}
 
 
 
@@ -322,13 +294,7 @@ ggplot(subset(dat, marine), aes(reef, log(age))) +
     geom_boxplot()
 ```
 
-
-
-```
-Error: object 'dat' not found
-```
-
-
+![plot of chunk unnamed-chunk-3](figure/unnamed-chunk-3.pdf) 
 
 
 ## Comparative studies
@@ -337,7 +303,7 @@ taxa to pursue questions that cannot be approached experimentally.
 Instead, we rely on evolution to have performed the experiment already.
 For instance, recent studies have attempted to identify whether 
 reef-associated clades experience greater species diversification rates
-than non-reef-associated groups [*e.g.* @Alfaro2009a].  We can easily
+than non-reef-associated groups [*e.g.* @alfaro2009a].  We can easily
 identify and compare the numbers of reef associated species in different
 families using the `rfishbase` functions presented above.  
 
@@ -356,12 +322,6 @@ labrid <- which_fish("(Labridae|Scaridae)", "Family",
 
 
 
-```
-Error: 'arg' should be one of "trophic", "habitat", "lifecycle", "morphology", "diagnostic", "distribution"
-```
-
-
-
 
 and get all the species of gobies
 
@@ -373,12 +333,6 @@ goby <- which_fish("Gobiidae", "Family", fish.data)
 
 
 
-```
-Error: 'arg' should be one of "trophic", "habitat", "lifecycle", "morphology", "diagnostic", "distribution"
-```
-
-
-
 
 Identify how many labrids are found on reefs
 
@@ -386,24 +340,7 @@ Identify how many labrids are found on reefs
 
 ```r
 labrid.reef <- which_fish("reef", "habitat", fish.data[labrid])
-```
-
-
-
-```
-Error: object 'labrid' not found
-```
-
-
-
-```r
 nlabrids <- sum(labrid.reef)
-```
-
-
-
-```
-Error: object 'labrid.reef' not found
 ```
 
 
@@ -419,32 +356,10 @@ ngobies <- sum(which_fish("reef", "habitat", fish.data[goby]))
 
 
 
-```
-Error: object 'goby' not found
-```
-
-
-
 
 Note that summing the list of true/false values returned gives the total number of matches.  
-This tells us that there are 
-
-```
-
-Error in unique(c("AsIs", oldClass(x))) : object 'nlabrids' not found
-
-```
-
- labrid species associated with reefs,
-and 
-
-```
-
-Error in unique(c("AsIs", oldClass(x))) : object 'ngobies' not found
-
-```
-
- goby species associated with reefs.  
+This tells us that there are 503 labrid species associated with reefs,
+and 401 goby species associated with reefs.  
 
 
 # Integration of analyses
@@ -464,19 +379,20 @@ corrected correlation between the maximum observed size of a species and
 the maximum observed depth at which it is found.
 
 
-load a phylogenetic tree and some phylogenetics packages
+load a phylogenetic tree of labrid fish (provided in the package), 
+and some the phylogenetics package `geiger` [@geiger].
 
 
 
 ```r
 data(labridtree)
-require(geiger)
+library(geiger)
 ```
 
 
 
 
- Find those species on FishBase 
+Find the species represented on this tree in FishBase 
 
 
 
@@ -512,75 +428,13 @@ pruned <- treedata(tree, data)
 
 ```
 Dropped tips from the tree because there were no matching names in the data:
-  [1] "Anampses_caeruleopunctatus"   "Anampses_geographicus"       
-  [3] "Anampses_meleagrides"         "Anampses_neoguinaicus"       
-  [5] "Bodianus_mesothorax"          "Bodianus_perditio"           
-  [7] "Bodianus_rufus"               "Bolbometopon_muricatum"      
-  [9] "Calotomus_spinidens"          "Cetoscarus_bicolor"          
- [11] "Cheilinus_chlorourus"         "Cheilinus_fasciatus"         
- [13] "Cheilinus_oxycephalus"        "Cheilinus_trilobatus"        
- [15] "Cheilinus_undulatus"          "Cheilio_inermis"             
- [17] "Chlorurus_bleekeri"           "Chlorurus_microrhinos"       
- [19] "Chlorurus_sordidus"           "Choerodon_anchorago"         
- [21] "Choerodon_cephalotes"         "Choerodon_fasciatus"         
- [23] "Choerodon_schoenleinii"       "Choerodon_venustus"          
- [25] "Clepticus_parrae"             "Coris_aygula"                
- [27] "Coris_batuensis"              "Coris_dorsomacula"           
- [29] "Coris_gaimard"                "Coris_pictoides"             
- [31] "Cryptotomus_roseus"           "Cymolutes_praetextatus"      
- [33] "Cymolutes_torquatus"          "Diproctacanthus_xanthurus"   
- [35] "Epibulus_insidiator"          "Gomphosus_varius"            
- [37] "Halichoeres_biocellatus"      "Halichoeres_bivittatus"      
- [39] "Halichoeres_chloropterus"     "Halichoeres_chrysus"         
- [41] "Halichoeres_garnoti"          "Halichoeres_hortulanus"      
- [43] "Halichoeres_maculipinna"      "Halichoeres_margaritaceus"   
- [45] "Halichoeres_marginatus"       "Halichoeres_melanurus"       
- [47] "Halichoeres_miniatus"         "Halichoeres_nebulosus"       
- [49] "Halichoeres_nigrescens"       "Halichoeres_ornatissimus"    
- [51] "Halichoeres_pictus"           "Halichoeres_poeyi"           
- [53] "Halichoeres_prosopeion"       "Halichoeres_radiatus"        
- [55] "Halichoeres_scapularis"       "Halichoeres_trimaculatus"    
- [57] "Hemigymnus_melapterus"        "Hipposcarus_longiceps"       
- [59] "Hologymnosus_annulatus"       "Hologymnosus_doliatus"       
- [61] "Labrichthys_unilineatus"      "Labroides_bicolor"           
- [63] "Labroides_dimidiatus"         "Labropsis_australis"         
- [65] "Lachnolaimus_maximus"         "Leptojulis_cyanopleura"      
- [67] "Macropharyngodon_choati"      "Macropharyngodon_kuiteri"    
- [69] "Macropharyngodon_meleagris"   "Macropharyngodon_negrosensis"
- [71] "Novaculichthys_taeniourus"    "Oxycheilinus_bimaculatus"    
- [73] "Oxycheilinus_digrammus"       "Oxycheilinus_unifasciatus"   
- [75] "Pseudocheilinus_octotaenia"   "Pseudocoris_yamashiroi"      
- [77] "Pseudodax_moluccanus"         "Pseudojuloides_cerasinus"    
- [79] "Pseudolabrus_guentheri"       "Pteragogus_cryptus"          
- [81] "Scarus_altipinnis"            "Scarus_chameleon"            
- [83] "Scarus_dimidiatus"            "Scarus_flavipectoralis"      
- [85] "Scarus_frenatus"              "Scarus_ghobban"              
- [87] "Scarus_globiceps"             "Scarus_iseri"                
- [89] "Scarus_niger"                 "Scarus_oviceps"              
- [91] "Scarus_psittacus"             "Scarus_rivulatus"            
- [93] "Scarus_schlegeli"             "Scarus_spinus"               
- [95] "Scarus_taeniopterus"          "Sparisoma_atomarium"         
- [97] "Sparisoma_aurofrenatum"       "Sparisoma_chrysopterum"      
- [99] "Sparisoma_radians"            "Sparisoma_rubripinne"        
-[101] "Sparisoma_viride"             "Stethojulis_bandanensis"     
-[103] "Stethojulis_trilineata"       "Thalassoma_amblycephalum"    
-[105] "Thalassoma_bifasciatum"       "Thalassoma_hardwicke"        
-[107] "Thalassoma_jansenii"          "Thalassoma_lunare"           
-[109] "Thalassoma_lutescens"         "Thalassoma_quinquevittatum"  
-[111] "Thalassoma_trilobatum"        "Wetmorella_nigropinnata"     
-[113] "Xyrichtys_martinicensis"      "Xyrichtys_novacula"          
-
-Dropped rows from the data because there were no matching tips in the tree:
-  [1] "1"   "10"  "100" "101" "103" "105" "106" "109" "11"  "110" "113"
- [12] "12"  "13"  "14"  "15"  "16"  "17"  "18"  "19"  "2"   "20"  "21" 
- [23] "22"  "23"  "24"  "26"  "27"  "28"  "29"  "3"   "30"  "31"  "32" 
- [34] "36"  "37"  "38"  "39"  "4"   "41"  "42"  "43"  "45"  "46"  "47" 
- [45] "48"  "49"  "5"   "50"  "51"  "52"  "53"  "54"  "55"  "56"  "57" 
- [56] "58"  "59"  "6"   "60"  "61"  "62"  "63"  "64"  "65"  "66"  "67" 
- [67] "68"  "69"  "7"   "70"  "71"  "72"  "73"  "74"  "75"  "76"  "77" 
- [78] "78"  "79"  "8"   "80"  "81"  "82"  "83"  "84"  "85"  "86"  "87" 
- [89] "88"  "89"  "9"   "90"  "91"  "92"  "93"  "94"  "95"  "96"  "98" 
-[100] "99" 
+ [1] "Anampses_geographicus"     "Bodianus_perditio"        
+ [3] "Chlorurus_bleekeri"        "Choerodon_cephalotes"     
+ [5] "Choerodon_venustus"        "Coris_batuensis"          
+ [7] "Diproctacanthus_xanthurus" "Halichoeres_melanurus"    
+ [9] "Halichoeres_miniatus"      "Halichoeres_nigrescens"   
+[11] "Macropharyngodon_choati"   "Oxycheilinus_digrammus"   
+[13] "Scarus_flavipectoralis"    "Scarus_rivulatus"         
 
 ```
 
@@ -595,38 +449,23 @@ determine if depth correlates with size after correcting for phylogeny:
 
 ```r
 x <- pic(pruned$data[["size"]], pruned$phy)
-```
-
-
-
-```
-Error: 'phy' is not rooted and fully dichotomous
-```
-
-
-
-```r
 y <- pic(pruned$data[["depths"]], pruned$phy)
-```
-
-
-
-```
-Error: 'phy' is not rooted and fully dichotomous
-```
-
-
-
-```r
 xtable(summary(lm(y ~ x - 1)))
 ```
 
-
-
-```
-Error: could not find function "xtable"
-```
-
+% latex table generated in R 2.14.2 by xtable 1.7-0 package
+% Fri Mar 30 17:06:40 2012
+\begin{table}[ht]
+\begin{center}
+\begin{tabular}{rrrrr}
+  \hline
+ & Estimate & Std. Error & t value & p \\ 
+  \hline
+x & 0.0713 & 0.0993 & 0.72 & 0.4744 \\ 
+   \hline
+\end{tabular}
+\end{center}
+\end{table}
 
 
 ```r
@@ -634,13 +473,7 @@ ggplot(data.frame(x = x, y = y), aes(x, y)) +
     geom_point() + stat_smooth(method = lm)
 ```
 
-
-
-```
-Error: object 'x' not found
-```
-
-
+![plot of chunk unnamed-chunk-7](figure/unnamed-chunk-7.pdf) 
 
 
 We can also estimate different evolutionary models for these traits to decide which best describes the data,
@@ -655,7 +488,7 @@ bm <- fitContinuous(pruned$phy, pruned$data[["depths"]],
 
 
 ```
-Error: subscript out of bounds
+Error: error code 1 from Lapack routine 'dsyevr'
 ```
 
 
@@ -668,7 +501,7 @@ ou <- fitContinuous(pruned$phy, pruned$data[["depths"]],
 
 
 ```
-Error: subscript out of bounds
+Error: error code 1 from Lapack routine 'dsyevr'
 ```
 
 
