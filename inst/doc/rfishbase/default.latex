@@ -160,35 +160,24 @@ $if(lang)$
 \fi
 $endif$
 
-
-$for(header-includes)$
-$header-includes$
-$endfor$
-
-$if(title)$
-\title{$title$}
-$endif$
-$if(author)$
-\author{$for(author)$$author$$sep$ \and $endfor$}
-$endif$
-$if(date)$
-\date{$date$}
-$endif$
-
 \begin{document}
-$if(title)$
-\maketitle
-$endif$
+\begin{frontmatter}
+  \title{An introduction to the \texttt{rfishbase} Package}
+  \author[davis]{Carl Boettiger\corref{cor1}}
+  \author[davis]{Peter Wainwright}
+  \ead{cboettig@ucdavis.edu}
+  %\author[davis]{}
+  \cortext[cor1]{Corresponding author.}
+  \address[davis]{Center for Population Biology, University of California, Davis, United States}
 
-$for(include-before)$
-$include-before$
+  \begin{abstract}
+ We introduce a package that provides interactive and programmatic access to the FishBase repository~\citep{fishbase}.  This package allows us to interact with data on over 30,000 fish species in the rich statistical computing environment, \texttt{R}.  We illustrate how this direct, scriptable interface to FishBase data enables better discovery and integration essential for large-scale comparative analyses.  We provide several examples to illustrate how the package works, and how it can be integrated into such as phylogenetics packages~\texttt{ape} and \texttt{geiger}.  
+  \end{abstract}
 
-$endfor$
-$if(toc)$
-\tableofcontents
-
-$endif$
-
+  \begin{keyword}
+   R  \sep vignette \sep fishbase
+   \end{keyword}
+ \end{frontmatter}
 
 
 $body$

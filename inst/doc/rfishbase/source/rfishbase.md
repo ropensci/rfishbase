@@ -189,14 +189,14 @@ kinds of analysis possible and how they would be constructed.
 
 Fraction of marine species found in the 10 largest orders
 
-``` {r fraction_marine, fig.width=10}
+``` {r fraction_marine, fig.height=3}
 biggest <- names(head(sort(table(order),decr=T), 10))
 ggplot(subset(dat,order %in% biggest), aes(order, fill=marine)) + geom_bar() 
 ````
 
 Is age correlated with size?
 
-``` {r Figure1, fig.width=10}
+``` {r Figure1, fig.height=3}
 ggplot(dat,aes(age, length, color=marine)) + geom_point(position='jitter',alpha=.8) + scale_y_log10() + scale_x_log10() 
 ````
 

@@ -268,12 +268,12 @@ xtable(summary(lm(data = dat, length ~ age)))
 ```
 
 % latex table generated in R 2.14.2 by xtable 1.7-0 package
-% Fri Mar 30 17:06:37 2012
+% Fri Mar 30 17:49:16 2012
 \begin{table}[ht]
 \begin{center}
 \begin{tabular}{rrrrr}
   \hline
- & Estimate & Std. Error & t value & p \\ 
+ & Estimate & Std. Error & t value & Pr($>$$|$t$|$) \\ 
   \hline
 (Intercept) & 38.9025 & 3.7424 & 10.40 & 0.0000 \\ 
   age & 1.9529 & 0.1452 & 13.45 & 0.0000 \\ 
@@ -454,12 +454,12 @@ xtable(summary(lm(y ~ x - 1)))
 ```
 
 % latex table generated in R 2.14.2 by xtable 1.7-0 package
-% Fri Mar 30 17:06:40 2012
+% Fri Mar 30 17:49:21 2012
 \begin{table}[ht]
 \begin{center}
 \begin{tabular}{rrrrr}
   \hline
- & Estimate & Std. Error & t value & p \\ 
+ & Estimate & Std. Error & t value & Pr($>$$|$t$|$) \\ 
   \hline
 x & 0.0713 & 0.0993 & 0.72 & 0.4744 \\ 
    \hline
@@ -488,7 +488,7 @@ bm <- fitContinuous(pruned$phy, pruned$data[["depths"]],
 
 
 ```
-Error: error code 1 from Lapack routine 'dsyevr'
+Error: L-BFGS-B needs finite values of 'fn'
 ```
 
 
@@ -501,7 +501,7 @@ ou <- fitContinuous(pruned$phy, pruned$data[["depths"]],
 
 
 ```
-Error: error code 1 from Lapack routine 'dsyevr'
+Error: L-BFGS-B needs finite values of 'fn'
 ```
 
 
