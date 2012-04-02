@@ -1,12 +1,12 @@
 Package: rfishbase
-Description: A programmatic interface to fishbase.org. This
-    package does not require an API key, but makes direct
-    queries to the XML versions of fishbase pages.
+Description: A programmatic interface to fishbase.org.
 Title: R Interface to FishBASE
-Version: 0.0-7
+Version: 0.0-9
 License: BSD
 Author: Carl Boettiger
 Maintainer: Carl Boettiger, <cboettig@gmail.com>
+Depends:
+    R (>= 2.10)
 Imports:
     XML,
     RCurl (>= 1.6)

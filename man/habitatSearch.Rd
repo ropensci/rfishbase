@@ -19,6 +19,10 @@
   A function to search for the occurances of any keyword in
   habitat description
 }
+\details{
+  Depricated.  This functionality is provided by
+  which_fish.
+}
 \examples{
 data(fishbase)
 freshwater <- habitatSearch("feshwater", fish.data)
