@@ -1,3 +1,5 @@
+
+
 % rfishbase: programmatic access for exploring, manipulating and visualizing FishBase data from R
 % Carl Boettiger; Peter Wainwright
 % March 28, 2012
@@ -24,6 +26,18 @@ R | vignette | fishbase
 
 
 
+```
+Error: there is no package called 'rfishbase'
+```
+
+
+
+```
+Error: there is no package called 'xtable'
+```
+
+
+
 
 
 FishBase ([fishbase.org](http://fishbase.org)) is an award-winning
@@ -33,7 +47,15 @@ world’s fish, organized by species [@fishbase2012]. FishBase was developed in
 collaboration with the United Nations Food and Agriculture Organization
 and is supported by a consortium of nine research institutions. In
 addition to its web-based interface, FishBase provides machine readable
-XML files for 30622 of its species entries.
+XML files for 
+
+```
+
+Error in sprintf("%d", length(fish.data)) : object 'fish.data' not found
+
+```
+
+ of its species entries.
 
 To facilitate the extraction, visualization, and integration of this
 data in research, we have written the `rfishbase` package for the R
@@ -88,7 +110,15 @@ loadCache("2012-03-26fishdata.Rdat")
 
 Loading the database creates an object called fish.data, with one entry
 per fish species for which data was successfully found, for a total of
-30622 species.  
+
+
+```
+
+Error in sprintf("%d", length(fish.data)) : object 'fish.data' not found
+
+```
+
+ species.  
 
 Not all the data available in FishBase is included in these machine-readable 
 XML files.  Consequently, `rfishbase` returns taxonomic information, trophic
@@ -123,8 +153,24 @@ and second query for fish that have "nocturnal" in their trophic description:
 
 ```r
 reef <- which_fish("reef", "habitat", fish.data)
-nocturnal <- which_fish("nocturnal", "trophic", 
-    fish.data)
+```
+
+
+
+```
+Error: could not find function "which_fish"
+```
+
+
+
+```r
+nocturnal <- which_fish("nocturnal", "trophic", fish.data)
+```
+
+
+
+```
+Error: could not find function "which_fish"
 ```
 
 
@@ -144,6 +190,12 @@ reef_species <- fish_names(fish.data[reef])
 
 
 
+```
+Error: could not find function "fish_names"
+```
+
+
+
 
 Because our `reef` object is a list of logical values (true/false), we can
 combine this in intuitive ways with other queries.  For instance, give us the 
@@ -152,8 +204,14 @@ names for all fish that are nocturnal and not reef associated,
 
 
 ```r
-nocturnal_nonreef_orders <- fish_names(fish.data[nocturnal & 
-    !reef], "Class")
+nocturnal_nonreef_orders <- fish_names(fish.data[nocturnal & !reef], 
+    "Class")
+```
+
+
+
+```
+Error: could not find function "fish_names"
 ```
 
 
@@ -175,6 +233,12 @@ age <- getSize(fish.data, "age")
 
 
 
+```
+Error: could not find function "getSize"
+```
+
+
+
 
 `rfishbase` can also extract a table of quantitative traits from the morphology field,
 describing the number of vertebrate, dorsal and anal rays and spines,
@@ -187,6 +251,12 @@ morphology_numbers <- getQuantTraits(fish.data)
 
 
 
+```
+Error: could not find function "getQuantTraits"
+```
+
+
+
 
 and extract the depth range (extremes and usual range) from the habitat field,
 
@@ -194,6 +264,12 @@ and extract the depth range (extremes and usual range) from the habitat field,
 
 ```r
 depths <- getDepth(fish.data)
+```
+
+
+
+```
+Error: could not find function "getDepth"
 ```
 
 
@@ -213,12 +289,60 @@ represents a variable.
 
 ```r
 marine <- which_fish("marine", "habitat", fish.data)
-africa <- which_fish("Africa:", "distribution", 
-    fish.data)
+```
+
+
+
+```
+Error: could not find function "which_fish"
+```
+
+
+
+```r
+africa <- which_fish("Africa:", "distribution", fish.data)
+```
+
+
+
+```
+Error: could not find function "which_fish"
+```
+
+
+
+```r
 length <- getSize(fish.data, "length")
+```
+
+
+
+```
+Error: could not find function "getSize"
+```
+
+
+
+```r
 order <- fish_names(fish.data, "Order")
-dat <- data.frame(reef, nocturnal, age, marine, 
-    africa, length, order)
+```
+
+
+
+```
+Error: could not find function "fish_names"
+```
+
+
+
+```r
+dat <- data.frame(reef, nocturnal, age, marine, africa, length, order)
+```
+
+
+
+```
+Error: object 'reef' not found
 ```
 
 
@@ -235,13 +359,29 @@ Fraction of marine species found in the 10 largest orders
 
 
 ```r
-biggest <- names(head(sort(table(order), decr = T), 
-    10))
-ggplot(subset(dat, order %in% biggest), aes(order, 
-    fill = marine)) + geom_bar()
+biggest <- names(head(sort(table(order), decr = T), 10))
 ```
 
-![plot of chunk fraction_marine](figure/fraction_marine.pdf) 
+
+
+```
+Error: unique() applies only to vectors
+```
+
+
+
+```r
+ggplot(subset(dat, order %in% biggest), aes(order, fill = marine)) + 
+    geom_bar()
+```
+
+
+
+```
+Error: object 'dat' not found
+```
+
+
 
 
 Is age correlated with size?
@@ -249,12 +389,17 @@ Is age correlated with size?
 
 
 ```r
-ggplot(dat, aes(age, length, color = marine)) + 
-    geom_point(position = "jitter", alpha = 0.8) + scale_y_log10() + 
-    scale_x_log10()
+ggplot(dat, aes(age, length, color = marine)) + geom_point(position = "jitter", 
+    alpha = 0.8) + scale_y_log10() + scale_x_log10()
 ```
 
-![plot of chunk Figure1](figure/Figure1.pdf) 
+
+
+```
+Error: object 'dat' not found
+```
+
+
 
 
 A statistical test of this pattern: 
@@ -265,20 +410,12 @@ A statistical test of this pattern:
 xtable(summary(lm(data = dat, length ~ age)))
 ```
 
-% latex table generated in R 2.14.2 by xtable 1.7-0 package
-% Fri Mar 30 17:49:16 2012
-\begin{table}[ht]
-\begin{center}
-\begin{tabular}{rrrrr}
-  \hline
- & Estimate & Std. Error & t value & Pr($>$$|$t$|$) \\ 
-  \hline
-(Intercept) & 38.9025 & 3.7424 & 10.40 & 0.0000 \\ 
-  age & 1.9529 & 0.1452 & 13.45 & 0.0000 \\ 
-   \hline
-\end{tabular}
-\end{center}
-\end{table}
+
+
+```
+Error: could not find function "xtable"
+```
+
 
 
 
@@ -288,11 +425,16 @@ Are reef species longer lived than non-reef species in the marine environment?
 
 
 ```r
-ggplot(subset(dat, marine), aes(reef, log(age))) + 
-    geom_boxplot()
+ggplot(subset(dat, marine), aes(reef, log(age))) + geom_boxplot()
 ```
 
-![plot of chunk unnamed-chunk-3](figure/unnamed-chunk-3.pdf) 
+
+
+```
+Error: object 'dat' not found
+```
+
+
 
 
 ## Comparative studies
@@ -314,8 +456,13 @@ Get all species in fishbase from the families "Labridae" (wrasses) or
 
 
 ```r
-labrid <- which_fish("(Labridae|Scaridae)", "Family", 
-    fish.data)
+labrid <- which_fish("(Labridae|Scaridae)", "Family", fish.data)
+```
+
+
+
+```
+Error: could not find function "which_fish"
 ```
 
 
@@ -331,6 +478,12 @@ goby <- which_fish("Gobiidae", "Family", fish.data)
 
 
 
+```
+Error: could not find function "which_fish"
+```
+
+
+
 
 Identify how many labrids are found on reefs
 
@@ -338,7 +491,24 @@ Identify how many labrids are found on reefs
 
 ```r
 labrid.reef <- which_fish("reef", "habitat", fish.data[labrid])
+```
+
+
+
+```
+Error: could not find function "which_fish"
+```
+
+
+
+```r
 nlabrids <- sum(labrid.reef)
+```
+
+
+
+```
+Error: object 'labrid.reef' not found
 ```
 
 
@@ -354,10 +524,32 @@ ngobies <- sum(which_fish("reef", "habitat", fish.data[goby]))
 
 
 
+```
+Error: could not find function "which_fish"
+```
+
+
+
 
 Note that summing the list of true/false values returned gives the total number of matches.  
-This tells us that there are 503 labrid species associated with reefs,
-and 401 goby species associated with reefs.  
+This tells us that there are 
+
+```
+
+Error in unique(c("AsIs", oldClass(x))) : object 'nlabrids' not found
+
+```
+
+ labrid species associated with reefs,
+and 
+
+```
+
+Error in unique(c("AsIs", oldClass(x))) : object 'ngobies' not found
+
+```
+
+ goby species associated with reefs.  
 
 
 # Integration of analyses
@@ -400,6 +592,12 @@ myfish <- findSpecies(tree$tip.label, fish.data)
 
 
 
+```
+Error: could not find function "findSpecies"
+```
+
+
+
 
 Get the maximum depth of each species and sizes of each species: 
 
@@ -407,7 +605,24 @@ Get the maximum depth of each species and sizes of each species:
 
 ```r
 depths <- getDepth(fish.data[myfish])[, "deep"]
+```
+
+
+
+```
+Error: could not find function "getDepth"
+```
+
+
+
+```r
 size <- getSize(fish.data[myfish], "length")
+```
+
+
+
+```
+Error: could not find function "getSize"
 ```
 
 
@@ -419,21 +634,24 @@ Drop tips from the phylogeny for unmatched species.
 
 ```r
 data <- na.omit(data.frame(size, depths))
+```
+
+
+
+```
+Error: object 'size' not found
+```
+
+
+
+```r
 pruned <- treedata(tree, data)
 ```
 
 
 
 ```
-Dropped tips from the tree because there were no matching names in the data:
- [1] "Anampses_geographicus"     "Bodianus_perditio"        
- [3] "Chlorurus_bleekeri"        "Choerodon_cephalotes"     
- [5] "Choerodon_venustus"        "Coris_batuensis"          
- [7] "Diproctacanthus_xanthurus" "Halichoeres_melanurus"    
- [9] "Halichoeres_miniatus"      "Halichoeres_nigrescens"   
-[11] "Macropharyngodon_choati"   "Oxycheilinus_digrammus"   
-[13] "Scarus_flavipectoralis"    "Scarus_rivulatus"         
-
+Error: object 'tree' not found
 ```
 
 
@@ -447,31 +665,51 @@ determine if depth correlates with size after correcting for phylogeny:
 
 ```r
 x <- pic(pruned$data[["size"]], pruned$phy)
-y <- pic(pruned$data[["depths"]], pruned$phy)
-xtable(summary(lm(y ~ x - 1)))
 ```
 
-% latex table generated in R 2.14.2 by xtable 1.7-0 package
-% Fri Mar 30 17:49:21 2012
-\begin{table}[ht]
-\begin{center}
-\begin{tabular}{rrrrr}
-  \hline
- & Estimate & Std. Error & t value & Pr($>$$|$t$|$) \\ 
-  \hline
-x & 0.0713 & 0.0993 & 0.72 & 0.4744 \\ 
-   \hline
-\end{tabular}
-\end{center}
-\end{table}
+
+
+```
+Error: object 'pruned' not found
+```
+
 
 
 ```r
-ggplot(data.frame(x = x, y = y), aes(x, y)) + 
-    geom_point() + stat_smooth(method = lm)
+y <- pic(pruned$data[["depths"]], pruned$phy)
 ```
 
-![plot of chunk unnamed-chunk-7](figure/unnamed-chunk-7.pdf) 
+
+
+```
+Error: object 'pruned' not found
+```
+
+
+
+```r
+xtable(summary(lm(y ~ x - 1)))
+```
+
+
+
+```
+Error: could not find function "xtable"
+```
+
+
+
+```r
+ggplot(data.frame(x = x, y = y), aes(x, y)) + geom_point() + stat_smooth(method = lm)
+```
+
+
+
+```
+Error: object 'x' not found
+```
+
+
 
 
 We can also estimate different evolutionary models for these traits to decide which best describes the data,
@@ -479,27 +717,25 @@ We can also estimate different evolutionary models for these traits to decide wh
 
 
 ```r
-bm <- fitContinuous(pruned$phy, pruned$data[["depths"]], 
-    model = "BM")[[1]]
+bm <- fitContinuous(pruned$phy, pruned$data[["depths"]], model = "BM")[[1]]
 ```
 
 
 
 ```
-Error: L-BFGS-B needs finite values of 'fn'
+Error: object 'pruned' not found
 ```
 
 
 
 ```r
-ou <- fitContinuous(pruned$phy, pruned$data[["depths"]], 
-    model = "OU")[[1]]
+ou <- fitContinuous(pruned$phy, pruned$data[["depths"]], model = "OU")[[1]]
 ```
 
 
 
 ```
-Error: L-BFGS-B needs finite values of 'fn'
+Error: object 'pruned' not found
 ```
 
 

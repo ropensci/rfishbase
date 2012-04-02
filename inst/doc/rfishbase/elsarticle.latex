@@ -96,11 +96,6 @@ $endfor$
   %\author[davis]{}
   \cortext[cor1]{Corresponding author.}
   \address[davis]{Center for Population Biology, University of California, Davis, United States}
-
-  \begin{abstract}
-    abstract
-  \end{abstract}
-
  \end{frontmatter}
 
 

@@ -9,7 +9,7 @@ docx:
 
 tex:
 	./knit tex
-	pandoc -s -S --biblio rfishbase.bib rfishbase.md -o rfishbase.tex
+	pandoc -s -S --biblio rfishbase.bib --template=elsarticle.latex --latex-engine=xelatex rfishbase.md -o rfishbase.tex
 
 odt:
 	./knit odt
@@ -17,7 +17,7 @@ odt:
 
 pdf:
 	./knit pdf
-	pandoc -s -S --biblio rfishbase.bib rfishbase.md --template=template.tex --latex-engine=xelatex -o rfishbase.pdf
+	pandoc -s -S --biblio rfishbase.bib rfishbase.md --template=elsarticle.latex --latex-engine=xelatex -o rfishbase.pdf
 
 bib:
 	bibtool -s -d -x *.aux ~/Documents/Mendeley/bib/*.bib > rfishbase.bib
@@ -28,5 +28,5 @@ epub:
 
 
 elsarticle:
-	pandoc -s -S --biblio rfishbase.bib rfishbase.md --template=default.latex --latex-engine=xelatex -o rfishbase.pdf
+	pandoc -s -S --biblio rfishbase.bib rfishbase.md --template=elsarticle.latex --latex-engine=xelatex -o rfishbase.pdf
 
