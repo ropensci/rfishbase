@@ -1,5 +1,8 @@
 all: 
 
+github:
+	./knit github
+
 md:
 	pandoc -s -S --biblio rfishbase.bib rfishbase.md -o rfishbase.md
 
