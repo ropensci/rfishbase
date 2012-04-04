@@ -1,6 +1,7 @@
 % rfishbase: programmatic access for exploring, manipulating and
-visualizing FishBase data from R % Carl Boettiger; Peter Wainwright %
-March 28, 2012
+  visualizing FishBase data from R
+% Carl Boettiger; Peter Wainwright
+% March 28, 2012
 
 Center for Population Biology, University of California, Davis, United
 States
@@ -48,8 +49,8 @@ illustrate how having access to FishBase data through R allows a user to
 interface with other kinds of analyses, such as comparative
 phylogenetics software.
 
-A programmatic interface
-========================
+Accessing FishBase data from R
+==============================
 
 The `rfishbase` package works by creating a cached copy of all data on
 FishBase currently available in XML format. Caching increases the speed
@@ -98,8 +99,8 @@ identification of number strings, and much more. The interested user
 should consult a reference on regular expressions after studying the
 simple examples provided here to learn more.
 
-Data extraction, analysis, and visualization
-============================================
+Tools for data extraction, analysis, and visualization
+======================================================
 
 The basic function data extraction function in `rfishbase` is
 `which_fish()`. The function takes a list of fishbase data (usually the
@@ -142,12 +143,10 @@ nocturnal_nonreef_orders <- fish_names(fish.data[nocturnal & !reef],
 Note that this time we have also specified that we want taxanomic Class
 of the fish matching the query, rather than the species names.
 `fish_names` will allow us to specify any taxanomic level for it to
-return.
-
-Quantitative trait queries work like `fish_names`, taking a the FishBase
-data and returning the requested information. For instance, the function
-`getSize` returns the length (default), weight, or age of the fish in
-the query:
+return. Quantitative trait queries work in a similar manner to
+`fish_names`, taking a the FishBase data and returning the requested
+information. For instance, the function `getSize` returns the length
+(default), weight, or age of the fish in the query:
 
 ~~~~ {.r}
 age <- getSize(fish.data, "age")
@@ -168,10 +167,10 @@ field,
 depths <- getDepth(fish.data)
 ~~~~
 
-The real power of programatic access the ease with which we can combine,
-visualize, and statistically test a custom compilation of this data. To
-do so it is useful to organize a collection of queries into a data
-frame. Here we combine the queries we have made above and a few
+The real power of programmatic access the ease with which we can
+combine, visualize, and statistically test a custom compilation of this
+data. To do so it is useful to organize a collection of queries into a
+data frame. Here we combine the queries we have made above and a few
 additional queries into a data frame in which each row represents a
 species and each column represents a variable.
 
@@ -189,28 +188,57 @@ take advantage of the rich data visualization in R to begin exploring
 this data. These examples are simply meant to be illustrative of the
 kinds of analysis possible and how they would be constructed.
 
-Fraction of marine species found in the 10 largest orders
+For instance, we can identify which orders contain the greatest number
+of species, and for each of them, plot the fraction in which the species
+are marine.
 
 ~~~~ {.r}
-biggest <- names(head(sort(table(order), decr = T), 10))
+biggest <- names(head(sort(table(order), decr = T), 8))
 ggplot(subset(dat, order %in% biggest), aes(order, fill = marine)) + 
-    geom_bar()
+    geom_bar() + opts(axis.text.x = theme_text(angle = 60, hjust = 0.2))
 ~~~~
 
-![plot of chunk
-fraction\_marine](http://farm8.staticflickr.com/7085/7040386475_33072b6841_o.png)
+![Fraction of marine species found in the 8 largest
+orders](http://farm6.staticflickr.com/5331/7043131067_b0e099f36d_o.png)
 
-Is age correlated with size?
+FishBase data excels for comparative studies across many species, but
+searching through over 30,000 species to extract data makes such
+exploratory analyses infeasible. Having access to the data in R, we can
+answer such questions as fast as we can pose them. Here we look for a
+correlation between the maximum age and the maximum size of fish. We can
+partition the data by any variable of interest as well. Here we color
+code the points based on whether or not the species is
+marine-associated. The `ggplot2` package [@ggplot2] provides a
+particularly powerful and flexible language for visual exploration of
+such patterns.
 
 ~~~~ {.r}
 ggplot(dat, aes(age, length, color = marine)) + geom_point(position = "jitter", 
     alpha = 0.8) + scale_y_log10() + scale_x_log10()
 ~~~~
 
-![plot of chunk
-Figure1](http://farm8.staticflickr.com/7118/6894290554_b357acbaa6_o.png)
+![Correlation of maximum age with maximum length observed in each
+species. Color indicates marine or freshwater
+species.](http://farm6.staticflickr.com/5118/6897385948_e54f3d9cc8_o.png)
 
-A statistical test of this pattern:
+A wide array of visualizations are available for different kinds of
+data. A box-plot is natural way to compare the distributions of
+categorical variables, such as asking “Are reef species longer lived
+than non-reef species in the marine environment?”
+
+~~~~ {.r}
+ggplot(subset(dat, marine), aes(reef, log(age))) + geom_boxplot()
+~~~~
+
+![Distribution of maximum age for reef-associated and non-reef
+associated
+fish](http://farm8.staticflickr.com/7193/6897037030_9ea5007e80_o.png)
+
+In addition to powerful visualizations R provides an unparalleled array
+of statistical analysis methods. Generating a table of the results from
+a linear model testing the correlation of maximum length with maximum
+size takes a single line: (The `xtable` command formats the table for
+printing, in this case, in LaTeX.)
 
 ~~~~ {.r}
 xtable(summary(lm(data = dat, length ~ age)))
@@ -253,17 +281,6 @@ age
    </TABLE>
 
 
-
-
-Are reef species longer lived than non-reef species in the marine
-environment?
-
-~~~~ {.r}
-ggplot(subset(dat, marine), aes(reef, log(age))) + geom_boxplot()
-~~~~
-
-![plot of chunk
-unnamed-chunk-3](http://farm8.staticflickr.com/7098/7040386981_f0b41a71d2_o.png)
 
 Comparative studies
 -------------------
@@ -373,7 +390,7 @@ xtable(summary(lm(y ~ x - 1)))
 ~~~~
 
 <!-- html table generated in R 2.15.0 by xtable 1.7-0 package -->
-<!-- Mon Apr  2 17:05:39 2012 -->
+<!-- Tue Apr  3 14:33:52 2012 -->
 <TABLE border=1>
 <TR> <TH>  </TH> <TH> 
 Estimate
@@ -399,11 +416,15 @@ x
 
 
 ~~~~ {.r}
+~~~~
+
+~~~~ {.r}
 ggplot(data.frame(x = x, y = y), aes(x, y)) + geom_point() + stat_smooth(method = lm)
 ~~~~
 
-![plot of chunk
-unnamed-chunk-7](http://farm8.staticflickr.com/7221/6894291360_0132216bdb_o.png)
+![Correcting for phylogeny, maximum size is not correlated with maximum
+depth observed in a
+species](http://farm8.staticflickr.com/7095/6897037346_56bd881c3e_o.png)
 
 We can also estimate different evolutionary models for these traits to
 decide which best describes the data,

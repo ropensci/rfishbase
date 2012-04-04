@@ -12,10 +12,13 @@ pat_gfm()
 ## recognize it)
 render_gfm()
 
-## global chunk options: use high quality Cairo PNG device
+## global chunk options: default uses high quality Cairo PNG device
 pdf.options(pointsize = 10)  # smaller pointsize for recording plots
 opts_chunk$set(cache=TRUE, fig.path='figure/', dev='Cairo_png',
   fig.width=5, fig.height=5, cache.path = 'cache-local/', par=TRUE)
+
+## Global options 
+opts_chunk$set(warning=FALSE, message=FALSE, comment=NA)
 
 ## chunk hooks
 knit_hooks$set(par=function(before, options, envir){
@@ -42,21 +45,20 @@ local({
   } else if (fmt %in% c('odt', 'docx', 'epub')) {
     options(xtable.type = 'html')
 
-  } else if (fmt == 'tex') {
-    opts_chunk$set(cache.path = 'cache-pdf/')
-    options(xtable.type = "latex" )
-    # use pdf graphics for PDF output
-    opts_chunk$set(dev = 'pdf', fig.width=5, fig.height=5)
-
-  } else if (fmt == 'pdf') {
-    # um, we're gonna still make markdown first, so we need html output
+  } else if (fmt %in% c('tex','pdf')) {
+   # xtable shouldn't print comments 
+    options(xtable.print.comment=FALSE)
+   # xtable should print latex formatting into markdown, which Pandoc will intepret 
     options(xtable.type = 'latex')
+
     opts_chunk$set(cache.path = 'cache-pdf/')
+
     # use high quality tikz graphics for PDF output
 #    opts_chunk$set(dev = 'tikz', fig.width=4, fig.height=4)
-#    x = readLines('template.tex')
+#    x = readLines('elsarticle.latex')
 #    options(tikzDocumentDeclaration = x[1], tikzDefaultEngine = 'xetex')
 #    assign('tikzPackages', c(x[2:13], '\n'), envir = knitr:::.knitEnv)
+
     # use pdf graphics for PDF output
     opts_chunk$set(dev = 'pdf', fig.width=5, fig.height=5)
   }
@@ -69,4 +71,3 @@ local({
   }
 })
 
-## convert to an ebook (EPUB) or other formats with pandoc shell commands
