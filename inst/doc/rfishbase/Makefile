@@ -23,9 +23,6 @@ pdf:
 	./knit pdf
 	pandoc -s -S --biblio rfishbase.bib rfishbase.md --template=elsarticle.latex --latex-engine=xelatex -o rfishbase.pdf
 
-bib:
-	bibtool -s -d -x *.aux ~/Documents/Mendeley/bib/*.bib > rfishbase.bib
-
 epub:
 	./knit epub
 	pandoc -s -S --biblio rfishbase.bib rfishbase.md -o rfishbase.epub
@@ -33,4 +30,8 @@ epub:
 
 elsarticle:
 	pandoc -s -S --biblio rfishbase.bib rfishbase.md --template=elsarticle.latex --latex-engine=xelatex -o rfishbase.pdf
+
+bib:
+	bibtool -s -d -x citations.aux ~/Documents/Mendeley/bib/*.bib > rfishbase.bib
+
 
