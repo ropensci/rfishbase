@@ -28,7 +28,7 @@ Introduction
 FishBase ([fishbase.org](http://fishbase.org)) is an award-winning
 online database of information about the morphology, trophic ecology,
 physiology, ecotoxicology, reproduction, economic relevance of the
-world’s fish, organized by species [@fishbase2012]. FishBase was
+world’s fish, organized by species (Froese and Pauly 2012). FishBase was
 developed in collaboration with the United Nations Food and Agriculture
 Organization and is supported by a consortium of nine research
 institutions. In addition to its web-based interface, FishBase provides
@@ -36,10 +36,10 @@ machine readable XML files for 30622 of its species entries.
 
 To facilitate the extraction, visualization, and integration of this
 data in research, we have written the `rfishbase` package for the R
-language for statistical computing and graphics [@rteam2012]. R is a
-freely available open source computing environment that is used
-extensively in ecological research, with a large library of packages
-built explicitly for this purpose [@kneib2007].
+language for statistical computing and graphics (R Development Core Team
+2012). R is a freely available open source computing environment that is
+used extensively in ecological research, with a large library of
+packages built explicitly for this purpose (Kneib 2007).
 
 In this paper, we illustrate how the `rfishbase` package is synchronized
 with the FishBase database, describe its functions for extracting,
@@ -344,7 +344,7 @@ corrected correlation between the maximum observed size of a species and
 the maximum observed depth at which it is found.
 
 load a phylogenetic tree of labrid fish (provided in the package), and
-some the phylogenetics package `geiger` [@geiger].
+some the phylogenetics package `geiger` (L. Harmon et al. 2009).
 
 ~~~~ {.r}
 data(labridtree)
@@ -380,7 +380,7 @@ pruned <- treedata(tree, data)
     [11] "Macropharyngodon_choati"   "Oxycheilinus_digrammus"   
     [13] "Scarus_flavipectoralis"    "Scarus_rivulatus"         
 
-Use phylogenetically independent contrasts [@felsenstein1985] to
+Use phylogenetically independent contrasts (Felsenstein 1985) to
 determine if depth correlates with size after correcting for phylogeny:
 
 ~~~~ {.r}
@@ -441,10 +441,10 @@ Discussion
 ==========
 
 With more and more data readily available, informatics is becoming
-increasingly important in ecology and evolution research [@jones2006],
-bringing new opportunities for research [Parr et al. (2011);
-@michener2012] while also raising new challenges (Reichman, Jones, and
-Schildhauer 2011). It is in this spirit that we introduce the
+increasingly important in ecology and evolution research (Jones et al.
+2006), bringing new opportunities for research (Parr et al. 2011;
+Michener and Jones 2012) while also raising new challenges (Reichman,
+Jones, and Schildhauer 2011). It is in this spirit that we introduce the
 `rfishbase` package to provide programmatic access to the data available
 on the already widely recognized database, FishBase.\
 We believe that such tools can help take greater advantage of the data
@@ -466,7 +466,7 @@ Because analyses using this data are written in R scripts, it becomes
 easy to update the results as more data becomes available on FishBase.
 Programmatic access to data coupled with script-able analyses can help
 ensure that research is more easily reproduced and also facilitate
-extending the work in future studies [@peng2011b; @merali2010]. This
+extending the work in future studies (Peng 2011; Merali 2010). This
 document is an example of this, using a dynamic documentation
 interpreter program which runs the code displayed to produce the results
 shown, eliminating the possibility of faulty code (Xie 2012). As
@@ -523,11 +523,51 @@ diversity in jawed vertebrates.” *Proceedings of the National Academy of
 Sciences* 106 (aug): 13410–14. doi:10.1073/pnas.0811087106.
 [http://www.pubmedcentral.nih.gov/articlerender.fcgi?artid=2715324\\&tool=pmcentrez\\&rendertype=abstract](http://www.pubmedcentral.nih.gov/articlerender.fcgi?artid=2715324\&tool=pmcentrez\&rendertype=abstract "http://www.pubmedcentral.nih.gov/articlerender.fcgi?artid=2715324\&tool=pmcentrez\&rendertype=abstract").
 
+Felsenstein, Joseph. 1985. “Phylogenies and the Comparative Method.”
+*The American Naturalist* 125 (jan): 1–15. doi:10.1086/284325.
+[http://www.journals.uchicago.edu/doi/abs/10.1086/284325](http://www.journals.uchicago.edu/doi/abs/10.1086/284325 "http://www.journals.uchicago.edu/doi/abs/10.1086/284325").
+
+Froese, R., and Daniel Pauly. 2012. “FishBase.” World Wide Web
+electronic publication..
+[www.fishbase.org](www.fishbase.org "www.fishbase.org").
+
+Harmon, Luke, Jason Weir, Chad Brock, Rich Glor, Wendell Challenger, and
+Gene Hunt. 2009. “geiger: Analysis of evolutionary diversification.”
+[http://cran.r-project.org/package=geiger](http://cran.r-project.org/package=geiger "http://cran.r-project.org/package=geiger").
+
+Jones, Matthew B., Mark P. Schildhauer, O. J. Reichman, and Shawn
+Bowers. 2006. “The New Bioinformatics: Integrating Ecological Data from
+the Gene to the Biosphere.” *Annual Review of Ecology, Evolution, and
+Systematics* 37 (dec): 519–544.
+doi:10.1146/annurev.ecolsys.37.091305.110031.
+[http://arjournals.annualreviews.org/doi/abs/10.1146/annurev.ecolsys.37.091305.110031](http://arjournals.annualreviews.org/doi/abs/10.1146/annurev.ecolsys.37.091305.110031 "http://arjournals.annualreviews.org/doi/abs/10.1146/annurev.ecolsys.37.091305.110031").
+
+Kneib, Thomas. 2007. “Introduction to the Special Volume on ’Ecology and
+Ecological Modelling in R’.” *Journal of Statistical Software* 22: 1–7.
+[http://www.jstatsoft.org/v22/i01/paper](http://www.jstatsoft.org/v22/i01/paper "http://www.jstatsoft.org/v22/i01/paper").
+
+Merali, Zeeya. 2010. “Why Scientific programming does not compute.”
+*Nature*: 6–8.
+
+Michener, William K., and Matthew B. Jones. 2012. “Ecoinformatics:
+supporting ecology as a data-intensive science.” *Trends in Ecology &
+Evolution* 27 (jan): 85–93. doi:10.1016/j.tree.2011.11.016.
+[http://linkinghub.elsevier.com/retrieve/pii/S0169534711003399](http://linkinghub.elsevier.com/retrieve/pii/S0169534711003399 "http://linkinghub.elsevier.com/retrieve/pii/S0169534711003399").
+
 Parr, Cynthia S., Robert Guralnick, Nico Cellinese, and Roderic D. M.
 Page. 2011. “Evolutionary informatics: unifying knowledge about the
 diversity of life.” *Trends in ecology & evolution* 27 (dec): 94–103.
 doi:10.1016/j.tree.2011.11.001.
 [http://www.ncbi.nlm.nih.gov/pubmed/22154516](http://www.ncbi.nlm.nih.gov/pubmed/22154516 "http://www.ncbi.nlm.nih.gov/pubmed/22154516").
+
+Peng, R. D. 2011. “Reproducible Research in Computational Science.”
+*Science* 334 (dec): 1226–1227. doi:10.1126/science.1213847.
+[http://www.sciencemag.org/cgi/doi/10.1126/science.1213847](http://www.sciencemag.org/cgi/doi/10.1126/science.1213847 "http://www.sciencemag.org/cgi/doi/10.1126/science.1213847").
+
+R Development Core Team, The. 2012. “R: A language and environment for
+statistical computing.” Vienna, Austria: R Foundation for Statistical
+Computing.
+[http://www.r-project.org/](http://www.r-project.org/ "http://www.r-project.org/").
 
 Reichman, O. J., Matthew B. Jones, and Mark P. Schildhauer. 2011.
 “Challenges and Opportunities of Open Data in Ecology.” *Science* 331
