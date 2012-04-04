@@ -347,7 +347,7 @@ With more and more data readily available, informatics is becoming increasingly
 important in ecology and evolution research [@jones2006], bringing new opportunities
 for research [@parr2011a; @michener2012] while also raising new challenges [@reichman2011].
 It is in this spirit that we introduce the `rfishbase` package to provide programmatic
-access to the data available on the already widely recognized database, FishBase.  
+access to the data available on the already widely recognized database, FishBase. 
 We believe that such tools can help take greater advantage of the data available,
 facilitating deeper and richer analyses than would be feasible under only manual access
 to the data.  We hope the examples in this manuscript serve not only to illustrate how
