@@ -18,7 +18,7 @@ opts_chunk$set(cache=TRUE, fig.path='figure/', dev='Cairo_png',
   fig.width=5, fig.height=5, cache.path = 'cache-local/', par=TRUE)
 
 ## Global options 
-opts_chunk$set(warning=FALSE, message=FALSE, comment=NA)
+opts_chunk$set(warning=FALSE, message=FALSE, comment=NA, tidy=FALSE)
 
 ## chunk hooks
 knit_hooks$set(par=function(before, options, envir){
@@ -41,10 +41,14 @@ local({
     # upload to flickr when output is for github or html
     opts_knit$set(upload.fun = socialR::flickr.url)
     opts_chunk$set(cache.path = 'cache-upload/')
-
-  } else if (fmt %in% c('odt', 'docx', 'epub')) {
+  } else if (fmt == 'epub') {
     options(xtable.type = 'html')
-
+  } else if (fmt %in% c('odt', 'docx')) {
+    options(xtable.type = 'html')
+    opts_chunk$set(dev = 'postscript', fig.width=5, fig.height=5, 
+                   cache.path = 'cache-doc/')
+    # We'll want plots to be external only in the case of doc generation:
+    knit_hooks$set(plot = function(x, options) "") 
   } else if (fmt %in% c('tex','pdf')) {
    # xtable shouldn't print comments 
     options(xtable.print.comment=FALSE)
