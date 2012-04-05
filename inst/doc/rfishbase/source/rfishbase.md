@@ -1,8 +1,6 @@
-% rfishbase: programmatic access for exploring, manipulating and visualizing FishBase data from R
-% Carl Boettiger; Peter Wainwright
+% rfishbase: exploring, manipulating and visualizing FishBase data from R
+% Carl Boettiger; Duncan Temple Lang; Peter C. Wainwright
 % March 28, 2012
-
-Center for Population Biology, University of California, Davis, United  States
 
 # Abstract 
 We introduce a package that provides interactive and programmatic
@@ -26,25 +24,24 @@ R | vignette | fishbase
 library(rfishbase) 
 library(xtable) 
 library(ggplot2)
+theme_set(theme_bw())
 data(fishbase)
 ````
-
-
 FishBase ([fishbase.org](http://fishbase.org)) is an award-winning
 online database of information about the morphology, trophic ecology,
 physiology, ecotoxicology, reproduction, economic relevance of the
-world’s fish, organized by species [@fishbase2012]. FishBase was developed in
-collaboration with the United Nations Food and Agriculture Organization
-and is supported by a consortium of nine research institutions. In
-addition to its web-based interface, FishBase provides machine readable
-XML files for `ri I(sprintf("%d", length(fish.data))) ir` of its species entries.
+world's fish, organized by species [@fishbase2012]. 
+This repository of information about fishes has proven to be a
+profoundly valuable community resource and the data has the potential
+to be used in a wide range of studies. However, assembling subsets of
+data housed in FishBase for use in focused analyses can be tedious 
+and time-consuming. To facilitate the extraction, visualization, and 
+integration of this data, we have written the `rfishbase` package for 
+the R language for statistical computing and graphics [@rteam2012] 
+R is a freely available open source computing environment that is 
+used extensively in ecological research, with a large library of 
+packages built explicitly for this purpose [@kneib 2007]. 
 
-To facilitate the extraction, visualization, and integration of this
-data in research, we have written the `rfishbase` package for the R
-language for statistical computing and graphics [@rteam2012]. R is a freely
-available open source computing environment that is used extensively in
-ecological research, with a large library of packages built explicitly
-for this purpose [@kneib2007].  
 
 In this paper, we illustrate how the `rfishbase` package is synchronized 
 with the FishBase database, describe its functions for extracting, 
@@ -57,6 +54,8 @@ comparative phylogenetics software.
 
 # Accessing FishBase data from R
 
+In addition to its web-based interface, FishBase provides machine readable
+XML files for `ri I(sprintf("%d", length(fish.data))) ir` of its species entries.
 The `rfishbase` package works by creating a cached copy of all data on
 FishBase currently available in XML format. Caching increases the speed
 of queries and places minimal demands on the FishBase server, which in
@@ -90,7 +89,7 @@ description, habitat, distribution, size, life-cycle, morphology and diagnostic
 information.  The information returned in each category is provided as plain-text,
 consequently `rfishbase` must use regular expression matching to identify
 the occurrence of particular words or patterns in this text corresponding to 
-data of interest. 
+data of interest [@friedl2006] 
 
 Quantitative traits such as length, maximum known age, spine and ray counts,
 and depth information are provided consistently for most species, allowing 
@@ -103,8 +102,8 @@ studying the simple examples provided here to learn more.
 
 # Tools for data extraction, analysis, and visualization
 
-The basic function data extraction function in `rfishbase` is `which_fish()`. 
-The function takes a list of fishbase data (usually the entire database, `fish.data`,
+The basic tool for data extraction in `rfishbase` is the `which_fish()` function. 
+This function takes a list of FishBase data (usually the entire database, `fish.data`,
 or a subset thereof, as illustrated later) and returns an array of those
 species matching the query.  This array is given as a list of true/false values
 for every species in the query.  This return structure has several advantages which
@@ -136,10 +135,10 @@ names for all fish that are nocturnal and not reef associated,
 nocturnal_nonreef_orders <- fish_names(fish.data[nocturnal & !reef], "Class")
 ````
 
-Note that this time we have also specified that we want taxanomic Class
+Note that this time we have also specified that we want taxonomic Class
 of the fish matching the query, rather than the species names.  `fish_names`
-will allow us to specify any taxanomic level for it to return.  Quantitative 
-trait queries work in a similar manner to `fish_names`, taking a the FishBase 
+will allow us to specify any taxonomic level for it to return.  Quantitative 
+trait queries work in a similar manner to `fish_names`, taking the FishBase 
 data and returning the requested information.  For instance, the function
 `getSize` returns the length (default), weight, or age of the fish in the query:
 
@@ -160,7 +159,7 @@ and extract the depth range (extremes and usual range) from the habitat field,
 depths <- getDepth(fish.data)
 ````
 
-The real power of programmatic access the ease with which we can combine,
+The real power of programmatic access is the ease with which we can combine,
 visualize, and statistically test a custom compilation of this data. 
 To do so it is useful to organize a collection of queries into a data frame.
 Here we combine the queries we have made above and a few additional queries
@@ -185,10 +184,10 @@ kinds of analysis possible and how they would be constructed.
 For instance, we can identify which orders contain the greatest number of species,
 and for each of them, plot the fraction in which the species are marine.
 
-``` {r fig.height=3, fig.width=6, fig.cap='Fraction of marine species found in the 8 largest orders'}
+``` {r fig.height=4, fig.width=6, fig.cap='Fraction of marine species in the eight largest orders of teleost fishes'}
 biggest <- names(head(sort(table(order),decr=T), 8))
 ggplot(subset(dat,order %in% biggest), aes(order, fill=marine)) +
-  geom_bar() + opts(axis.text.x=theme_text(angle=60, hjust=.2))
+  geom_bar() + opts(axis.text.x=theme_text(angle=90, hjust=1))
 ````
 
 FishBase data excels for comparative studies across many species, but searching through 
@@ -234,14 +233,15 @@ than non-reef-associated groups [*e.g.* @alfaro2009a].  We can easily
 identify and compare the numbers of reef associated species in different
 families using the `rfishbase` functions presented above.  
 
-In this example, we answer the simpler question "Are there more reef-associated
-species in labrids than in gobies?
-
-Get all species in fishbase from the families "Labridae" (wrasses) or
-"Scaridae" (parrotfishes):
+In this example we answer the simpler question "Are there more reef-associated
+species in *Labridae* than in *Gobiidae*. Recent research has shown that the 
+families Scaridae and Odacidae are nested within Labridae (Westneat and Alfaro 2005),
+although the three groups are listed as separate families in fishbase. We get all
+the species in fishbase from *Labridae* (wrasses), *Scaridae* (parrotfishes) and 
+*Odacidae* (weed-whitings):
 
 ``` {r labrid }
-labrid <- which_fish("(Labridae|Scaridae)", "Family", fish.data)
+labrid <- which_fish("(Labridae|Scaridae|Odacidae)", "Family", fish.data)
 ````
 
 and get all the species of gobies
@@ -263,10 +263,15 @@ and how many gobies are found on reefs:
 ngobies <- sum (which_fish("reef", "habitat", fish.data[goby]) )
 ````
 
-Note that summing the list of true/false values returned gives the total number of matches.  
-This tells us that there are `ri I(nlabrids) ir` labrid species associated with reefs,
-and `ri I(ngobies) ir` goby species associated with reefs.  
-
+Note that summing the list of true/false values returned gives the total
+number of matches.  This tells us that there are `ri I(nlabrids) ir` 
+labrid species associated with reefs, and `ri I(ngobies) ir` goby species
+associated with reefs.  This example illustrates the power of accessing the
+FishBase data: Gobies are routinely listed as the biggest group of reef 
+fishes (e.g. Bellwood and Wainwright, 2002) but this is because there are
+more species in *Gobiidae* than any other family of reef fish. When we count 
+the species in each group that live on reefs we find that labrids are actually
+the most species-rich group on reefs.
 
 # Integration of analyses
 

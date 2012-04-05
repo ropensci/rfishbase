@@ -1,8 +1,8 @@
 % rfishbase: programmatic access for exploring, manipulating and visualizing FishBase data from R
-% Carl Boettiger; Peter Wainwright
+% Carl Boettiger; Duncan Temple Lang; Peter C. Wainwright
 % March 28, 2012
 
-Center for Population Biology, University of California, Davis, United  States
+Center for Population Biology, University of California, Davis, California 95616 United  States
 
 # Abstract 
 We introduce a package that provides interactive and programmatic
@@ -235,7 +235,7 @@ ggplot(subset(dat, order %in% biggest), aes(order, fill = marine)) +
     geom_bar() + opts(axis.text.x = theme_text(angle = 60, hjust = 0.2))
 ```
 
-![Fraction of marine species found in the 8 largest orders](http://farm6.staticflickr.com/5331/7043131067_b0e099f36d_o.png) 
+![Fraction of marine species found in the 8 largest orders](figure/unnamed-chunk-3.pdf) 
 
 
 FishBase data excels for comparative studies across many species, but searching through 
@@ -253,7 +253,7 @@ ggplot(dat, aes(age, length, color = marine)) + geom_point(position = "jitter",
     alpha = 0.8) + scale_y_log10() + scale_x_log10()
 ```
 
-![Correlation of maximum age with maximum length observed in each species. Color indicates marine or freshwater species.](http://farm6.staticflickr.com/5118/6897385948_e54f3d9cc8_o.png) 
+![Correlation of maximum age with maximum length observed in each species. Color indicates marine or freshwater species.](figure/unnamed-chunk-4.pdf) 
 
 
 A wide array of visualizations are available for different kinds of data. 
@@ -266,7 +266,7 @@ such as asking "Are reef species longer lived than non-reef species in the marin
 ggplot(subset(dat, marine), aes(reef, log(age))) + geom_boxplot()
 ```
 
-![Distribution of maximum age for reef-associated and non-reef associated fish](http://farm8.staticflickr.com/7193/6897037030_9ea5007e80_o.png) 
+![Distribution of maximum age for reef-associated and non-reef associated fish](figure/unnamed-chunk-5.pdf) 
 
 
 
@@ -282,13 +282,18 @@ takes a single line:
 xtable(summary(lm(data = dat, length ~ age)))
 ```
 
-<!-- html table generated in R 2.15.0 by xtable 1.7-0 package -->
-<!-- Mon Apr  2 17:05:30 2012 -->
-<TABLE border=1>
-<TR> <TH>  </TH> <TH> Estimate </TH> <TH> Std. Error </TH> <TH> t value </TH> <TH> Pr(&gt |t|) </TH>  </TR>
-  <TR> <TD align="right"> (Intercept) </TD> <TD align="right"> 38.9025 </TD> <TD align="right"> 3.7424 </TD> <TD align="right"> 10.40 </TD> <TD align="right"> 0.0000 </TD> </TR>
-  <TR> <TD align="right"> age </TD> <TD align="right"> 1.9529 </TD> <TD align="right"> 0.1452 </TD> <TD align="right"> 13.45 </TD> <TD align="right"> 0.0000 </TD> </TR>
-   </TABLE>
+\begin{table}[ht]
+\begin{center}
+\begin{tabular}{rrrrr}
+  \hline
+ & Estimate & Std. Error & t value & Pr($>$$|$t$|$) \\ 
+  \hline
+(Intercept) & 38.9025 & 3.7424 & 10.40 & 0.0000 \\ 
+  age & 1.9529 & 0.1452 & 13.45 & 0.0000 \\ 
+   \hline
+\end{tabular}
+\end{center}
+\end{table}
 
 
 
@@ -447,12 +452,17 @@ y <- pic(pruned$data[["depths"]], pruned$phy)
 xtable(summary(lm(y ~ x - 1)))
 ```
 
-<!-- html table generated in R 2.15.0 by xtable 1.7-0 package -->
-<!-- Tue Apr  3 14:33:52 2012 -->
-<TABLE border=1>
-<TR> <TH>  </TH> <TH> Estimate </TH> <TH> Std. Error </TH> <TH> t value </TH> <TH> Pr(&gt |t|) </TH>  </TR>
-  <TR> <TD align="right"> x </TD> <TD align="right"> 0.0713 </TD> <TD align="right"> 0.0993 </TD> <TD align="right"> 0.72 </TD> <TD align="right"> 0.4744 </TD> </TR>
-   </TABLE>
+\begin{table}[ht]
+\begin{center}
+\begin{tabular}{rrrrr}
+  \hline
+ & Estimate & Std. Error & t value & Pr($>$$|$t$|$) \\ 
+  \hline
+x & 0.0713 & 0.0993 & 0.72 & 0.4744 \\ 
+   \hline
+\end{tabular}
+\end{center}
+\end{table}
 
 
 ```r
@@ -466,7 +476,7 @@ xtable(summary(lm(y ~ x - 1)))
 ggplot(data.frame(x = x, y = y), aes(x, y)) + geom_point() + stat_smooth(method = lm)
 ```
 
-![Correcting for phylogeny, maximum size is not correlated with maximum depth observed in a species](http://farm8.staticflickr.com/7095/6897037346_56bd881c3e_o.png) 
+![Correcting for phylogeny, maximum size is not correlated with maximum depth observed in a species](figure/unnamed-chunk-10.pdf) 
 
 
 We can also estimate different evolutionary models for these traits to decide which best describes the data,
@@ -494,7 +504,7 @@ With more and more data readily available, informatics is becoming increasingly
 important in ecology and evolution research [@jones2006], bringing new opportunities
 for research [@parr2011a; @michener2012] while also raising new challenges [@reichman2011].
 It is in this spirit that we introduce the `rfishbase` package to provide programmatic
-access to the data available on the already widely recognized database, FishBase.  
+access to the data available on the already widely recognized database, FishBase. 
 We believe that such tools can help take greater advantage of the data available,
 facilitating deeper and richer analyses than would be feasible under only manual access
 to the data.  We hope the examples in this manuscript serve not only to illustrate how

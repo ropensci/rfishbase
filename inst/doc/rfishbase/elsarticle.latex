@@ -1,4 +1,4 @@
-\documentclass[author-year, preprint]{elsarticle} %5p
+\documentclass[author-year, review, 12pt]{elsarticle} %review=doublespace preprint=single 5p=2 column
 \usepackage{amsmath, amsfonts, amssymb}  % extended mathematics
 \usepackage{ifxetex}
 \ifxetex
@@ -12,9 +12,14 @@
   \usepackage[utf8x]{inputenc}
 \fi
 
+% My package additions
 \usepackage[hyphens]{url}
-\usepackage{lineno} % add \linenumbers
+\usepackage{lineno} % add 
+% \linenumbers % turns line numbering on 
+\bibliographystyle{elsarticle-harv}
 \biboptions{sort&compress} % For natbib
+\usepackage{graphicx}
+\usepackage{booktabs} % book-quality tables
 
 %% Redefines the elsarticle footer
 \makeatletter
@@ -25,25 +30,29 @@
  \let\@evenfoot\@oddfoot}
 \makeatother
 
-
-\bibliographystyle{elsarticle-harv}
-\usepackage{booktabs} % book-quality tables
+% A modified page layout
 \textwidth 6.75in
 \oddsidemargin -0.15in
 \evensidemargin -0.15in
 \textheight 9in
 \topmargin -0.5in
-\newcommand{\ud}{\mathrm{d}}
 
 
 \usepackage{microtype}
 \usepackage{fancyhdr}
 \pagestyle{fancy}
 \pagenumbering{arabic}
+
 \usepackage{listings}
 \lstnewenvironment{code}{\lstset{language=Haskell,basicstyle=\small\ttfamily}}{}
+
+
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{6pt plus 2pt minus 1pt}
+
+
+%%% Syntax Highlighting for code  %%%
+%%% Adapted from knitr book %%% 
 \usepackage{fancyvrb}
 \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
 % Add ',fontsize=\small' for more characters per line
@@ -66,35 +75,42 @@
 \usepackage{ctable}
 \usepackage{float}
 
-
 % This is needed because raggedright in table elements redefines \\:
 \newcommand{\PreserveBackslash}[1]{\let\temp=\\#1\let\\=\temp}
 \let\PBS=\PreserveBackslash
 \usepackage[normalem]{ulem}
 \newcommand{\textsubscr}[1]{\ensuremath{_{\scriptsize\textrm{#1}}}}
+
+% Configure hyperlinks package
 \usepackage[breaklinks=true,linktocpage,pdftitle={$title$},pdfauthor={$for(author)$$author$$sep$; $endfor$},xetex,colorlinks]{hyperref}
-\usepackage{graphicx}
+\hypersetup{breaklinks=true, pdfborder={0 0 0}}
+
+% Pandoc toggle for numbering sections (defaults to be off)
 $if(numbersections)$
 $else$
 \setcounter{secnumdepth}{0}
 $endif$
+
+
 \VerbatimFootnotes % allows verbatim text in footnotes
+
+% Pandoc header
 $for(header-includes)$
 $header-includes$
 $endfor$
 
-\hypersetup{breaklinks=true, pdfborder={0 0 0}}
 
 
 \begin{document}
 \begin{frontmatter}
   \title{$title$}
-  \author[davis]{$author$\corref{cor1}}
-  \author[davis]{Peter Wainwright}
+  \author[cpb]{Carl Boettiger\corref{cor1}}
+  \author[stats]{Duncan Temple Lang}
+  \author[cpb]{Peter C. Wainwright}
   \ead{cboettig@ucdavis.edu}
-  %\author[davis]{}
-  \cortext[cor1]{Corresponding author.}
-  \address[davis]{Center for Population Biology, University of California, Davis, United States}
+  \cortext[cor1]{Corresponding author, cboettig@ucdavis.edu}
+  \address[cpb]{Center for Population Biology, University of California, Davis, California 95616}
+  \address[stats]{Department of Statistics, University of California, Davis, California 95616}
  \end{frontmatter}
 
 
