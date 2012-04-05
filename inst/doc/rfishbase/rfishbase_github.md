@@ -231,7 +231,7 @@ ggplot(subset(dat, marine),aes(reef, log(age))) + geom_boxplot()
 
 ![Distribution of maximum age for reef-associated and non-reef
 associated
-fish](http://farm8.staticflickr.com/7072/6902754180_9e16b99da5_o.png)
+fish](http://farm8.staticflickr.com/7205/7049122469_b4cc7f60de_o.png)
 
 In addition to powerful visualizations R provides an unparalleled array
 of statistical analysis methods. Generating a table of the results from
@@ -428,12 +428,12 @@ x
 ~~~~ {.r}
 ggplot(data.frame(x=x,y=y), aes(x,y)) + geom_point() + stat_smooth(method=lm) + 
  xlab("Phylogenetically corrected maximum size") +
- ylab("Phylogenetically corrected maximum depth")
+ ylab("corrected max depth")
 ~~~~
 
 ![Correcting for phylogeny, maximum size is not correlated with maximum
 depth observed in a
-labrids](http://farm6.staticflickr.com/5344/6902754568_b259edd97a_o.png)
+labrids](http://farm8.staticflickr.com/7264/7049122701_2572067e1d_o.png)
 
 One can also estimate different evolutionary models for these traits to
 decide which best describes the data,

@@ -209,7 +209,7 @@ A box-plot is  natural way to compare the distributions of categorical
 variables, such as asking "Are reef species longer lived than non-reef species
 in the marine environment?"
 
-``` {r fig.height=2, fig.width=2, fig.cap='Distribution of maximum age for reef-associated and non-reef associated fish'}
+``` {r fig.height=3.5, fig.width=3.5, fig.cap='Distribution of maximum age for reef-associated and non-reef associated fish'}
 ggplot(subset(dat, marine),aes(reef, log(age))) + geom_boxplot() 
 ````
 
@@ -327,7 +327,7 @@ xtable(summary(lm(y ~ x - 1)))
 ``` {r fig.height=3, fig.width=6, fig.cap='Correcting for phylogeny, maximum size is not correlated with maximum depth observed in a labrids'}
 ggplot(data.frame(x=x,y=y), aes(x,y)) + geom_point() + stat_smooth(method=lm) + 
  xlab("Phylogenetically corrected maximum size") +
- ylab("Phylogenetically corrected maximum depth")
+ ylab("corrected max depth")
 ````
 
 One can also estimate different evolutionary models for these traits 
