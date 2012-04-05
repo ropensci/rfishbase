@@ -1,6 +1,4 @@
 % rfishbase: exploring, manipulating and visualizing FishBase data from R
-% Carl Boettiger; Duncan Temple Lang; Peter C. Wainwright
-% March 28, 2012
 
 # Abstract 
 We introduce a package that provides interactive and programmatic
