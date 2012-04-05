@@ -235,7 +235,7 @@ families using the `rfishbase` functions presented above.
 
 In this example we answer the simpler question "Are there more reef-associated
 species in *Labridae* than in *Gobiidae*. Recent research has shown that the 
-families Scaridae and Odacidae are nested within Labridae (Westneat and Alfaro 2005),
+families Scaridae and Odacidae are nested within Labridae [@westneat2005],
 although the three groups are listed as separate families in fishbase. We get all
 the species in fishbase from *Labridae* (wrasses), *Scaridae* (parrotfishes) and 
 *Odacidae* (weed-whitings):
@@ -268,7 +268,7 @@ number of matches.  This tells us that there are `ri I(nlabrids) ir`
 labrid species associated with reefs, and `ri I(ngobies) ir` goby species
 associated with reefs.  This example illustrates the power of accessing the
 FishBase data: Gobies are routinely listed as the biggest group of reef 
-fishes (e.g. Bellwood and Wainwright, 2002) but this is because there are
+fishes [*e.g.* @bellwood2002] but this is because there are
 more species in *Gobiidae* than any other family of reef fish. When we count 
 the species in each group that live on reefs we find that labrids are actually
 the most species-rich group on reefs.
@@ -287,14 +287,13 @@ methods available in R with quantitative trait data available from
 
 This series of commands illustrates testing for a phylogenetically
 corrected correlation between the maximum observed size of a species and
-the maximum observed depth at which it is found.
-
-
-load a phylogenetic tree of labrid fish (provided in the package), 
-and some the phylogenetics package `geiger` [@geiger].
+the maximum observed depth at which it is found.  We begin by reading in the
+data for a phylogenetic tree of labrid fish (provided in the package), 
+and the phylogenetics packages `ape` [@ape] and `geiger` [@geiger].
 
 ``` {r results="hide", message=FALSE, cache = FALSE }
 data(labridtree)
+library(ape)
 library(geiger) 
 ````
 
@@ -328,11 +327,14 @@ y <- pic(pruned$data[["depths"]],pruned$phy)
 xtable(summary(lm(y ~ x - 1)))
 
 
-``` {r fig.height=3, fig.width=6, fig.cap='Correcting for phylogeny, maximum size is not correlated with maximum depth observed in a species'}
-ggplot(data.frame(x=x,y=y), aes(x,y)) + geom_point() + stat_smooth(method=lm)
+``` {r fig.height=3, fig.width=6, fig.cap='Correcting for phylogeny, maximum size is not correlated with maximum depth observed in a labrids'}
+ggplot(data.frame(x=x,y=y), aes(x,y)) + geom_point() + stat_smooth(method=lm) + 
+ xlab("Phylogenetically corrected maximum size") +
+ ylab("Phylogenetically corrected maximum depth")
 ````
 
-We can also estimate different evolutionary models for these traits to decide which best describes the data,
+We can also estimate different evolutionary models for these traits 
+to decide which best describes the data,
 
 ``` {r models, results="hide" }
 bm <- fitContinuous(pruned$phy, pruned$data[["depths"]], model="BM")[[1]]
@@ -346,23 +348,20 @@ the OU model has a score of `ri I(ou$aic) ir`, suggesting that
 
 # Discussion
 
-
-
 With more and more data readily available, informatics is becoming increasingly
-important in ecology and evolution research [@jones2006], bringing new opportunities
-for research [@parr2011a; @michener2012] while also raising new challenges [@reichman2011].
-It is in this spirit that we introduce the `rfishbase` package to provide programmatic
-access to the data available on the already widely recognized database, FishBase. 
-We believe that such tools can help take greater advantage of the data available,
-facilitating deeper and richer analyses than would be feasible under only manual access
-to the data.  We hope the examples in this manuscript serve not only to illustrate how
-this package works, but to help inspire readers to consider and explore questions
-that would otherwise be too time consuming or challenging to pursue.  
-
-
-In this paper we have introduced the functions of the `rfishbase` package
-and described how they can be used to improve the extraction, visualization,
-and integration of FishBase data in ecological and evolutionary research.  
+important in ecology and evolution research [@jones2006], bringing new 
+opportunities for research [@parr2011a; @michener2012] while also raising new
+challenges [@reichman2011]. It is in this spirit that we introduce the 
+`rfishbase` package to provide programmatic access to the data available on the
+already widely recognized database, FishBase.  We believe that such tools can help
+take greater advantage of the data available, facilitating deeper and richer 
+analyses than would be feasible under only manual access to the data.  We hope 
+the examples in this manuscript serve not only to illustrate how this package 
+works, but to help inspire readers to consider and explore questions that would
+otherwise be too time consuming or challenging to pursue.  We have introduced
+the functions of the `rfishbase` package and described how they can be used to
+improve the extraction, visualization, and integration of FishBase data in 
+ecological and evolutionary research.  
 
 
 ## The self-updating study
@@ -407,8 +406,9 @@ of the `rfishbase` package to provide information about commercially relevant sp
 
 # Acknowledgements
 
-CB is supported by a Computational Sciences Graduate Fellowship from the
-Department of Energy under grant number DE-FG02-97ER25308.
+This work was supported by a Computational Sciences Graduate Fellowship from the
+Department of Energy under grant number DE-FG02-97ER25308 to CB and NSF grant
+DEB-1061981 to PCW.  
 
 # References
 
