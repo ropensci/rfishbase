@@ -1,6 +1,6 @@
 #!/usr/bin/Rscript
 
-## ./knit [epub|github|html|pdf|doc] to generate different types of output
+## ./knit [epub|github|html|pdf|docx] to generate different types of output
 
 library(knitr)
 
@@ -43,10 +43,12 @@ local({
     opts_chunk$set(cache.path = 'cache-upload/')
   } else if (fmt == 'epub') {
     options(xtable.type = 'html')
-  } else if (fmt %in% c('odt', 'docx')) {
-    options(xtable.type = 'html')
+  } else if (fmt %in% c('odt', 'docx', 'doc')) {
+    options(xtable.type = 'latex')
     opts_chunk$set(dev = 'postscript', fig.width=5, fig.height=5, 
                    cache.path = 'cache-doc/')
+    options(knitr.include=TRUE)
+    options(knitr.split=TRUE)
     # We'll want plots to be external only in the case of doc generation:
     knit_hooks$set(plot = function(x, options) "") 
   } else if (fmt %in% c('tex','pdf')) {

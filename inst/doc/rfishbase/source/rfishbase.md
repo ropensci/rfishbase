@@ -218,8 +218,11 @@ In addition to powerful visualizations R provides an unparalleled array of stati
 single line: (The `xtable` command formats the table for printing, in this 
 case, in LaTeX.)
 
-``` {r Table1, results="asis"}
-xtable(summary(lm(data=dat,  length ~ age) ))
+``` {r } 
+corr.model <- summary(lm(data=dat,  length ~ age))
+````
+``` {r Table1, results="asis", include = getOption("knitr.include"), split = getOption("knitr.split")}
+xtable(corr.model)
 ````
 
 ## Comparative studies
@@ -318,13 +321,17 @@ pruned <- treedata(tree, data)
 Use phylogenetically independent contrasts [@felsenstein1985] to 
 determine if depth correlates with size after correcting for phylogeny:
 
-``` {r results="asis"}
+``` {r }
 x <- pic(pruned$data[["size"]],pruned$phy)
 y <- pic(pruned$data[["depths"]],pruned$phy)
-xtable(summary(lm(y ~ x - 1)))
+corr.summary <- summary(lm(y ~ x - 1))
+````
 
+``` {r Table2, results="asis", include = getOption("knitr.include"), split = getOption("knitr.split") }
+xtable(corr.summary)
+````
 
-``` {r fig.height=3, fig.width=6, fig.cap='Correcting for phylogeny, maximum size is not correlated with maximum depth observed in a labrids'}
+``` {r Figure4, fig.height=3, fig.width=6, fig.cap='Correcting for phylogeny, maximum size is not correlated with maximum depth observed in a labrids'}
 ggplot(data.frame(x=x,y=y), aes(x,y)) + geom_point() + stat_smooth(method=lm) + 
  xlab("Phylogenetically corrected maximum size") +
  ylab("corrected max depth")

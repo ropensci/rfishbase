@@ -15,7 +15,7 @@
 % My package additions
 \usepackage[hyphens]{url}
 \usepackage{lineno} % add 
-% \linenumbers % turns line numbering on 
+\linenumbers % turns line numbering on 
 \bibliographystyle{elsarticle-harv}
 \biboptions{sort&compress} % For natbib
 \usepackage{graphicx}
