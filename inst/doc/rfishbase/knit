@@ -45,8 +45,12 @@ local({
     options(xtable.type = 'html')
   } else if (fmt %in% c('odt', 'docx', 'doc')) {
     options(xtable.type = 'latex')
+   # xtable shouldn't print comments 
+    options(xtable.print.comment=FALSE)
+    # Journal probably wants eps formatted graphics.  
     opts_chunk$set(dev = 'postscript', fig.width=5, fig.height=5, 
                    cache.path = 'cache-doc/')
+    # try splitting the tables out with special options?
     options(knitr.include=TRUE)
     options(knitr.split=TRUE)
     # We'll want plots to be external only in the case of doc generation:
