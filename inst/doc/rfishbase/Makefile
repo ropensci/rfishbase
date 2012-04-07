@@ -14,7 +14,10 @@ docx:
 
 pdf:
 	./knit pdf
-	pandoc -s -S --biblio rfishbase.bib rfishbase.md --template=elsarticle.latex --latex-engine=xelatex -o rfishbase.pdf
+	pandoc -s -S --biblio rfishbase.bib rfishbase.md --template=elsarticle.latex --latex-engine=xelatex -o rfishbase.tex
+	xelatex rfishbase.tex
+	xelatex rfishbase.tex
+	xelatex rfishbase.tex
 
 epub:
 	./knit epub

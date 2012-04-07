@@ -231,7 +231,7 @@ taxa to pursue questions that cannot be approached experimentally.
 Instead, one can rely on evolution to have performed the experiment already.
 For instance, recent studies have attempted to identify whether 
 reef-associated clades experience greater species diversification rates
-than non-reef-associated groups [*e.g.* @alfaro2009a].  One can easily
+than non-reef-associated groups [*e.g.* @alfaro2009a].  One can 
 identify and compare the numbers of reef associated species in different
 families using the `rfishbase` functions presented above.  
 
@@ -256,18 +256,18 @@ Identify how many labrids are found on reefs
 
 ``` {r labridreef }
 labrid.reef <- which_fish("reef", "habitat", fish.data[labrid])
-nlabrids <- sum(labrid.reef)
+nlabrids <- table(labrid.reef)
 ````
 
 and how many gobies are found on reefs:
 
 ``` {r gobyreef }
-ngobies <- sum (which_fish("reef", "habitat", fish.data[goby]) )
+ngobies <- table(which_fish("reef", "habitat", fish.data[goby]) )
 ````
 
 Note that summing the list of true/false values returned gives the total
-number of matches.  This reveals that there are `ri I(nlabrids) ir` 
-labrid species associated with reefs, and `ri I(ngobies) ir` goby species
+number of matches.  This reveals that there are `ri I(nlabrids$TRUE) ir` 
+labrid species associated with reefs, and `ri I(ngobies$TRUE) ir` goby species
 associated with reefs.  This example illustrates the power of accessing the
 FishBase data: Gobies are routinely listed as the biggest group of reef 
 fishes [*e.g.* @bellwood2002] but this is because there are
@@ -310,7 +310,7 @@ depths <- getDepth(fish.data[myfish])[,"deep"]
 size <- getSize(fish.data[myfish], "length")
 ````
 
-Drop tips from the phylogeny for unmatched species.  
+Drop missing data, and then drop tips from the phylogeny for which data was not available: 
 
 ``` {r   }
 data <- na.omit(data.frame(size,depths))
@@ -322,9 +322,9 @@ Use phylogenetically independent contrasts [@felsenstein1985] to
 determine if depth correlates with size after correcting for phylogeny:
 
 ``` {r }
-x <- pic(pruned$data[["size"]],pruned$phy)
-y <- pic(pruned$data[["depths"]],pruned$phy)
-corr.summary <- summary(lm(y ~ x - 1))
+corr.size <- pic(pruned$data[["size"]],pruned$phy)
+corr.depth <- pic(pruned$data[["depths"]],pruned$phy)
+corr.summary <- summary(lm(corr.depth ~ corr.size - 1))
 ````
 
 ``` {r Table2, results="asis", include = getOption("knitr.include"), split = getOption("knitr.split") }
@@ -345,8 +345,8 @@ bm <- fitContinuous(pruned$phy, pruned$data[["depths"]], model="BM")[[1]]
 ou <- fitContinuous(pruned$phy, pruned$data[["depths"]], model="OU")[[1]]
 ````
 
-where the Brownian motion model has an AIC score of `ri I(bm$aic) ir` while
-the OU model has a score of `ri I(ou$aic) ir`, suggesting that
+where the Brownian motion model has an AIC score of `ri I(round(bm$aic, digits=0)) ir` while
+the OU model has a score of `ri I(round(ou$aic, digits=0)) ir`, suggesting that
 `ri I(names(which.min(list(BM=bm$aic,OU=ou$aic)))) ir` is the better model.
 
 
@@ -374,8 +374,8 @@ the results as more data becomes available on FishBase. Programmatic access to d
 coupled with script-able analyses can help ensure that research is more easily reproduced
 and also facilitate extending the work in future studies [@peng2011b; @merali2010].
 This document is an example of this, using a dynamic documentation interpreter program 
-which runs the code displayed to produce the results shown, eliminating the possibility
-of faulty code [@knitr].  As FishBase is updated, one can regenerate these results 
+which runs the code displayed to produce the results shown, decreasing the possibility
+for faulty code [@knitr].  As FishBase is updated, one can regenerate these results 
 with less missing data.  Readers can find the original document which combines the 
 source-code and text on the project's [Github page](https://github.com/ropensci/rfishbase/tree/master/inst/doc/rfishbase)
 
@@ -386,8 +386,8 @@ in its machine-readable XML format. The authors are in contact with the database
 managers and look forward to providing access to additional types of
 data as they become available.  Because most of the data provided in the 
 XML comes as plain text rather that being identified with machine-readable
-tags, reliability of the results is limited by text matching.  Meanwhile,
-improved text matching queries could provide more reliable and other custom
+tags, reliability of the results is limited by text matching.  
+Improved text matching queries could provide more reliable and other custom
 information, such as extracting geographic distribution details as categorical
 variables or latitude/longitude coordinates.  FishBase taxonomy is inconsistent
 with taxonomy provided elsewhere, and additional package functions could help
@@ -395,7 +395,7 @@ resolve these differences in assignments.
 
 `rfishbase` has been available to R users through the [Comprehensive R Archive 
 Network](http://cran.r-project.org/web/packages/rfishbase/) since October 2011, 
-and has an established user base.  The project remains in active development
+and has a growing user base.  The project remains in active development
 to evolve with the needs of its users.  Users can view the most recent changes 
 and file issues with the package on its development website on Github,
 ([https://github.com/ropensci/rfishbase](https://github.com/ropensci/rfishbase))

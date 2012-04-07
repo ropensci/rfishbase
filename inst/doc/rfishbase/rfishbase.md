@@ -230,7 +230,7 @@ ggplot(subset(dat,order %in% biggest), aes(order, fill=marine)) +
   geom_bar() + opts(axis.text.x=theme_text(angle=90, hjust=1))
 ```
 
-
+![Fraction of marine species in the eight largest orders of teleost fishes](figure/unnamed-chunk-3.pdf) 
 
 
 FishBase data excels for comparative studies across many species, but searching 
@@ -251,7 +251,7 @@ ggplot(dat,aes(age, length, color=marine)) +
   scale_y_log10() + scale_x_log10() 
 ```
 
-
+![Correlation of maximum age with maximum length observed in each species. Color indicates marine or freshwater species.](figure/unnamed-chunk-4.pdf) 
 
 
 A wide array of visualizations are available for different kinds of data. 
@@ -265,7 +265,7 @@ in the marine environment?"
 ggplot(subset(dat, marine),aes(reef, log(age))) + geom_boxplot() 
 ```
 
-
+![Distribution of maximum age for reef-associated and non-reef associated fish](figure/unnamed-chunk-5.pdf) 
 
 
 
@@ -287,8 +287,6 @@ corr.model <- summary(lm(data=dat,  length ~ age))
 xtable(corr.model)
 ```
 
-% latex table generated in R 2.15.0 by xtable 1.7-0 package
-% Thu Apr  5 16:55:38 2012
 \begin{table}[ht]
 \begin{center}
 \begin{tabular}{rrrrr}
@@ -471,8 +469,6 @@ corr.summary <- summary(lm(y ~ x - 1))
 xtable(corr.summary)
 ```
 
-% latex table generated in R 2.15.0 by xtable 1.7-0 package
-% Thu Apr  5 16:55:40 2012
 \begin{table}[ht]
 \begin{center}
 \begin{tabular}{rrrrr}
@@ -495,7 +491,7 @@ ggplot(data.frame(x=x,y=y), aes(x,y)) + geom_point() + stat_smooth(method=lm) +
  ylab("corrected max depth")
 ```
 
-
+![Correcting for phylogeny, maximum size is not correlated with maximum depth observed in a labrids](figure/Figure4.pdf) 
 
 
 One can also estimate different evolutionary models for these traits 
