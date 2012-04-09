@@ -12,6 +12,13 @@ pat_gfm()
 ## recognize it)
 render_gfm()
 
+## Formatting for printed numbers
+knit_hooks$set(inline = function(x) {
+  if(is.numeric(x))
+   I(prettyNum(round(x,2), big.mark=","))
+})
+
+
 ## global chunk options: default uses high quality Cairo PNG device
 pdf.options(pointsize = 10)  # smaller pointsize for recording plots
 opts_chunk$set(cache=TRUE, fig.path='figure/', dev='Cairo_png',
