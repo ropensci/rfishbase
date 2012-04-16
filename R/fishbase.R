@@ -5,9 +5,7 @@
 
 
 
-
-
-#' The fishbase data set, cached.  
+#' A cached copy of extracted FishBase data, 03/2012.  
 #' @name fish.data
 #' @docType data
 #' @references Froese, R. and D. Pauly. Editors. 2011.FishBase.
@@ -16,8 +14,8 @@
 #' @keywords data
 NULL
 
-#' An example phylogeny of some labrids.  
-#' @name tree
+#' An example phylogeny of labrid fish
+#' @name labridtree
 #' @docType data
 #' @references Price, S. a, Wainwright, P. C., Bellwood, D. R., 
 #' Kazancioglu, E., Collar, D. C., & Near, T. J. (2010). 

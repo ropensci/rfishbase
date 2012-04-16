@@ -162,8 +162,9 @@ depths <- getDepth(fish.data)
 
 Table 1 lists each of the functions provided by `rfishbase`
 
-``` {r Table1, results="asis", include = getOption("knitr.include"), split = getOption("knitr.split")}
-knitcitations::functiontable("rfishbase", include.rownames=FALSE)
+``` {r Table1, results="asis", echo=FALSE}
+options(xtable.include.rownames=FALSE)
+knitcitations::functiontable("rfishbase", caption='A list of each of the functions and data objects provided by rfishbase')
 ````
 
 The real power of programmatic access is the ease with which one can combine,
@@ -310,7 +311,7 @@ library(geiger)
 Find the species represented on this tree in FishBase 
 
 ``` {r  }
-myfish <- findSpecies(tree$tip.label, fish.data)
+myfish <- findSpecies(labridtree$tip.label, fish.data)
 ````
 
 Get the maximum depth of each species and sizes of each species: 
@@ -324,7 +325,7 @@ Drop missing data, and then drop tips from the phylogeny for which data was not 
 
 ``` {r   }
 data <- na.omit(data.frame(size,depths))
-pruned <- treedata(tree, data)
+pruned <- treedata(labridtree, data)
 ````
 
 

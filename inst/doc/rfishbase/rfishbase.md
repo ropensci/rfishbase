@@ -197,40 +197,32 @@ depths <- getDepth(fish.data)
 
 Table 1 lists each of the functions provided by `rfishbase`
 
-
-
-```r
-knitcitations::functiontable("rfishbase", include.rownames=FALSE)
-```
-
-\begin{table}[ht]
-\begin{center}
-\begin{tabular}{rll}
-  \hline
- & namefn & descrb \\ 
-  \hline
-1 & familySearch & A function to find all fish that are members of \\ 
-  2 &  & a scientific Family \\ 
-  3 & findSpecies & Return fish matching the search names \\ 
-  4 & fish.data & The fishbase data set, cached. \\ 
-  5 & fish\_names & A function to give the names of the matched \\ 
-  6 &  & fish \\ 
-  7 & getDepth & Return available depth ranges \\ 
-  8 & getQuantTraits & Return quantitative trait values from \\ 
-  9 &  & morphology data, if available \\ 
-  10 & getSize & A function to return size information from \\ 
-  11 &  & fishbase data \\ 
-  12 & habitatSearch & A function to search for the occurances of any \\ 
-  13 &  & keyword in habitat description \\ 
-  14 & loadCache & loads an updated cache by the date \\ 
-  15 & tree & An example phylogeny of some labrids. \\ 
-  16 & updateCache & update the cached copy of fishbase data \\ 
-  17 & which\_fish & A function to search for the occurances of any \\ 
-  18 &  & keyword in a variety of description types \\ 
-   \hline
-\end{tabular}
-\end{center}
-\end{table}
+<!-- html table generated in R 2.15.0 by xtable 1.7-0 package -->
+<!-- Mon Apr 16 16:10:08 2012 -->
+<TABLE border=1>
+<CAPTION ALIGN="bottom"> A list of each of the functions and data objects provided by rfishbase </CAPTION>
+<TR> <TH> function.name </TH> <TH> description </TH>  </TR>
+  <TR> <TD> familySearch </TD> <TD> A function to find all fish that are members of </TD> </TR>
+  <TR> <TD>  </TD> <TD> a scientific Family </TD> </TR>
+  <TR> <TD> findSpecies </TD> <TD> Returns the matching indices in the data given </TD> </TR>
+  <TR> <TD>  </TD> <TD> a list of species names </TD> </TR>
+  <TR> <TD> fish.data </TD> <TD> A cached copy of extracted FishBase data, </TD> </TR>
+  <TR> <TD>  </TD> <TD> 03/2012. </TD> </TR>
+  <TR> <TD> fish_names </TD> <TD> Return the scientific names, families, classes, </TD> </TR>
+  <TR> <TD>  </TD> <TD> or orders of the input data </TD> </TR>
+  <TR> <TD> getDepth </TD> <TD> Returns available depth range data </TD> </TR>
+  <TR> <TD> getQuantTraits </TD> <TD> Returns all quantitative trait values found in </TD> </TR>
+  <TR> <TD>  </TD> <TD> the morphology data </TD> </TR>
+  <TR> <TD> getSize </TD> <TD> Returns available size data of specified type </TD> </TR>
+  <TR> <TD>  </TD> <TD> (length, weight, or age) </TD> </TR>
+  <TR> <TD> habitatSearch </TD> <TD> A function to search for the occurances of any </TD> </TR>
+  <TR> <TD>  </TD> <TD> keyword in habitat description </TD> </TR>
+  <TR> <TD> labridtree </TD> <TD> An example phylogeny of labrid fish </TD> </TR>
+  <TR> <TD> loadCache </TD> <TD> Load an updated cache </TD> </TR>
+  <TR> <TD> updateCache </TD> <TD> Update the cached copy of fishbase data </TD> </TR>
+  <TR> <TD> which_fish </TD> <TD> The generic search function a variety of </TD> </TR>
+  <TR> <TD>  </TD> <TD> description types </TD> </TR>
+   </TABLE>
 
 
 
@@ -273,7 +265,7 @@ ggplot(subset(dat,order %in% biggest), aes(order, fill=marine)) +
   geom_bar() + opts(axis.text.x=theme_text(angle=90, hjust=1))
 ```
 
-![Fraction of marine species in the eight largest orders of teleost fishes](figure/unnamed-chunk-3.pdf) 
+![Fraction of marine species in the eight largest orders of teleost fishes](http://farm6.staticflickr.com/5345/6939464542_d900dd1e94_o.png) 
 
 
 FishBase data excels for comparative studies across many species, but searching 
@@ -294,7 +286,7 @@ ggplot(dat,aes(age, length, color=marine)) +
   scale_y_log10() + scale_x_log10() 
 ```
 
-![Scatterplot maximum age with maximum length observed in each species. Color indicates marine or freshwater species.](figure/unnamed-chunk-4.pdf) 
+![Scatterplot maximum age with maximum length observed in each species. Color indicates marine or freshwater species.](http://farm8.staticflickr.com/7123/6939464800_42640ae15e_o.png) 
 
 
 A wide array of visual displays are available for different kinds of data. 
@@ -308,7 +300,7 @@ in the marine environment?"
 ggplot(subset(dat, marine),aes(reef, log(age))) + geom_boxplot() 
 ```
 
-![Distribution of maximum age for reef-associated and non-reef associated fish](figure/unnamed-chunk-5.pdf) 
+![Distribution of maximum age for reef-associated and non-reef associated fish](http://farm6.staticflickr.com/5311/6939464978_19f2203732_o.png) 
 
 
 
@@ -330,18 +322,13 @@ corr.model <- summary(lm(data=dat,  length ~ age))
 xtable(corr.model)
 ```
 
-\begin{table}[ht]
-\begin{center}
-\begin{tabular}{rrrrr}
-  \hline
- & Estimate & Std. Error & t value & Pr($>$$|$t$|$) \\ 
-  \hline
-(Intercept) & 38.9025 & 3.7424 & 10.40 & 0.0000 \\ 
-  age & 1.9529 & 0.1452 & 13.45 & 0.0000 \\ 
-   \hline
-\end{tabular}
-\end{center}
-\end{table}
+<!-- html table generated in R 2.15.0 by xtable 1.7-0 package -->
+<!-- Mon Apr 16 16:10:40 2012 -->
+<TABLE border=1>
+<TR> <TH> Estimate </TH> <TH> Std. Error </TH> <TH> t value </TH> <TH> Pr(&gt |t|) </TH>  </TR>
+  <TR> <TD align="right"> 38.9025 </TD> <TD align="right"> 3.7424 </TD> <TD align="right"> 10.40 </TD> <TD align="right"> 0.0000 </TD> </TR>
+  <TR> <TD align="right"> 1.9529 </TD> <TD align="right"> 0.1452 </TD> <TD align="right"> 13.45 </TD> <TD align="right"> 0.0000 </TD> </TR>
+   </TABLE>
 
 
 
@@ -447,7 +434,7 @@ Find the species represented on this tree in FishBase
 
 
 ```r
-myfish <- findSpecies(tree$tip.label, fish.data)
+myfish <- findSpecies(labridtree$tip.label, fish.data)
 ```
 
 
@@ -471,7 +458,7 @@ Drop missing data, and then drop tips from the phylogeny for which data was not 
 
 ```r
 data <- na.omit(data.frame(size,depths))
-pruned <- treedata(tree, data)
+pruned <- treedata(labridtree, data)
 ```
 
 
@@ -512,17 +499,12 @@ corr.summary <- summary(lm(corr.depth ~ corr.size - 1))
 xtable(corr.summary)
 ```
 
-\begin{table}[ht]
-\begin{center}
-\begin{tabular}{rrrrr}
-  \hline
- & Estimate & Std. Error & t value & Pr($>$$|$t$|$) \\ 
-  \hline
-corr.size & 0.0713 & 0.0993 & 0.72 & 0.4744 \\ 
-   \hline
-\end{tabular}
-\end{center}
-\end{table}
+<!-- html table generated in R 2.15.0 by xtable 1.7-0 package -->
+<!-- Mon Apr 16 16:10:45 2012 -->
+<TABLE border=1>
+<TR> <TH> Estimate </TH> <TH> Std. Error </TH> <TH> t value </TH> <TH> Pr(&gt |t|) </TH>  </TR>
+  <TR> <TD align="right"> 0.0713 </TD> <TD align="right"> 0.0993 </TD> <TD align="right"> 0.72 </TD> <TD align="right"> 0.4744 </TD> </TR>
+   </TABLE>
 
 
 
@@ -534,7 +516,7 @@ ggplot(data.frame(corr.size,corr.depth), aes(corr.size,corr.depth)) + geom_point
  ylab("corrected max depth")
 ```
 
-![Correcting for phylogeny, maximum size is not correlated with maximum depth observed in a labrids](figure/Figure4.pdf) 
+![Correcting for phylogeny, maximum size is not correlated with maximum depth observed in a labrids](http://farm8.staticflickr.com/7086/6939465342_9deef67ef7_o.png) 
 
 
 One can also estimate different evolutionary models for these traits 

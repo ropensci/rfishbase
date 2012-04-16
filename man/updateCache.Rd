@@ -1,14 +1,18 @@
 \name{updateCache}
 \alias{updateCache}
-\title{update the cached copy of fishbase data}
+\title{Update the cached copy of fishbase data}
 \usage{
-  updateCache()
+  updateCache(path = ".")
+}
+\arguments{
+  \item{path}{where cache should be stored. (default to
+  working directory)}
 }
 \value{
-  a date-fishdata.Rdat file in the working directory
+  a date-fishdata.Rdat file.
 }
 \description{
-  update the cached copy of fishbase data
+  Update the cached copy of fishbase data
 }
 \details{
   the update is slow, avoiding straining the server or

@@ -1,22 +1,26 @@
 \name{fish_names}
 \alias{fish_names}
-\title{A function to give the names of the matched fish}
+\title{Return the scientific names, families, classes, or orders of the input data}
 \usage{
-  fish_names(fish.data,
-    name = c("ScientificName", "Family", "Class", "Order"))
+  fish_names(fish.data = NULL,
+    name = c("ScientificName", "Family", "Class", "Order"),
+    path = NULL)
 }
 \arguments{
-  \item{name}{return the Scientific Name (default)? or
-  Family, Class, or Order.}
+  \item{name}{return the Scientific Name or Family, Class,
+  or Order.}
 
   \item{fish.data}{the fishbase database fish.data or a
-  subset,}
+  subset. Defaults to cached copy}
+
+  \item{path}{to updated copy of the cache; optional.}
 }
 \value{
   the names of the matching fish.
 }
 \description{
-  A function to give the names of the matched fish
+  Return the scientific names, families, classes, or orders
+  of the input data
 }
 \examples{
 data(fishbase)

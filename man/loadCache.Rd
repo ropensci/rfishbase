@@ -1,18 +1,17 @@
 \name{loadCache}
 \alias{loadCache}
-\title{loads an updated cache by the date}
+\title{Load an updated cache}
 \usage{
-  loadCache(date = Sys.Date())
+  loadCache(path = NULL)
 }
 \arguments{
-  \item{date}{the date of the cache to be loaded, in
-  yyyy-mm-dd format.}
+  \item{path}{location where cache is located}
 }
 \value{
   loads the object fish.data into the working space.
 }
 \description{
-  loads an updated cache by the date
+  Load an updated cache
 }
 \examples{
 \dontrun{

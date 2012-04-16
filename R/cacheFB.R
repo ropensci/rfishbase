@@ -1,7 +1,8 @@
 # cacheFB.R
 
-#' update the cached copy of fishbase data
-#' @return a date-fishdata.Rdat file in the working directory
+#' Update the cached copy of fishbase data
+#' @param path where cache should be stored. (default to working directory)
+#' @return a date-fishdata.Rdat file.  
 #' @seealso \code{\link{loadCache}}
 #' @details the update is slow, avoiding straining the server or client.
 #'   please allow this call to run overnight for a complete upgrade.  
@@ -10,16 +11,15 @@
 #'  updateCache()
 #'  loadCache()
 #' }
-updateCache <- function(){
+updateCache <- function(path="."){
   date=Sys.Date()
-  file=paste(date, "fishdata.Rdat", sep="")
+  file=paste(path, "/", date, "fishdata.Rdat", sep="")
   fish.data <- getData(1:70000, silent=FALSE)
   save(list="fish.data", file=file)
 }
 
-#' loads an updated cache by the date
-#' @param date the date of the cache to be loaded,
-#'  in yyyy-mm-dd format. 
+#' Load an updated cache
+#' @param path location where cache is located
 #' @return loads the object fish.data into the working space. 
 #' @seealso \code{\link{updateCache}}
 #' @keywords cache
@@ -27,10 +27,17 @@ updateCache <- function(){
 #'  updateCache()
 #'  loadCache()
 #' }
-loadCache <- function(date=Sys.Date()){
-  # load a file from the cache
-  file=paste(date, "fishdata.Rdat", sep="")
+loadCache <- function(path=NULL){
+  if(is.null(path))
+    data(fishbase)
+  else {
+  # load the most recent file from the cache
+  files <- list.files(path) 
+  copies <- grep("fishdata.Rdat", files)
+  most_recent <- files[copies[length(copies)]]
+  file=paste(path, "/", most_recent, sep="")
   load(file)
+  }
 }
 
 

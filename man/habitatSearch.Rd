@@ -2,7 +2,7 @@
 \alias{habitatSearch}
 \title{A function to search for the occurances of any keyword in habitat description}
 \usage{
-  habitatSearch(keyword, fish.data)
+  habitatSearch(keyword, fish.data = NULL)
 }
 \arguments{
   \item{keyword}{pattern to be used by grep}
@@ -22,11 +22,6 @@
 \details{
   Depricated.  This functionality is provided by
   which_fish.
-}
-\examples{
-data(fishbase)
-freshwater <- habitatSearch("feshwater", fish.data)
-fish.data[freshwater]
 }
 \keyword{utilities}
 

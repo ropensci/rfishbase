@@ -1,11 +1,14 @@
 \name{getQuantTraits}
 \alias{getQuantTraits}
-\title{Return quantitative trait values from morphology data, if available}
+\title{Returns all quantitative trait values found in the morphology data}
 \usage{
-  getQuantTraits(fish.data)
+  getQuantTraits(fish.data = NULL, path = NULL)
 }
 \arguments{
   \item{fish.data}{the fishbase database or a subset}
+
+  \item{path}{to cached copy of fishbase (optional,
+  defaults to copy in package).}
 }
 \value{
   a matrix of traits by fish. Returns min-max numbers
@@ -13,8 +16,8 @@
   rays (anal and dorsal).
 }
 \description{
-  Return quantitative trait values from morphology data, if
-  available
+  Returns all quantitative trait values found in the
+  morphology data
 }
 \examples{
 data(fishbase)
