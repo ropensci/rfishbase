@@ -49,7 +49,7 @@ comparative phylogenetics software.
 # Accessing FishBase data from R
 
 In addition to its web-based interface, FishBase provides machine readable
-XML files for `ri length(fish.data) ir` of its species entries.
+XML files for 30,622 of its species entries.
 The `rfishbase` package works by creating a cached copy of all data on
 FishBase currently available in XML format on the FishBase webpages.
 This process relies on the @rcurl and @xml packages to access these
@@ -87,7 +87,7 @@ loadCache("2012-03-26fishdata.Rdat")
 
 Loading the database creates an object called fish.data, with one entry
 per fish species for which data was successfully found, for a total of
-`ri length(fish.data) ir` species.  
+30,622 species.  
 
 Not all the data available in FishBase is included in these machine-readable 
 XML files.  Consequently, `rfishbase` returns taxonomic information, trophic
@@ -203,11 +203,8 @@ Table 1 lists each of the functions provided by `rfishbase`
 knitcitations::functiontable("rfishbase")
 ```
 
-
-
-```
 <!-- html table generated in R 2.15.0 by xtable 1.7-0 package -->
-<!-- Mon Apr 16 13:52:28 2012 -->
+<!-- Mon Apr 16 14:00:54 2012 -->
 <TABLE border=1>
 <TR> <TH>  </TH> <TH> namefn </TH> <TH> descrb </TH>  </TR>
   <TR> <TD align="right"> 1 </TD> <TD> familySearch </TD> <TD> A function to find all fish that are members of </TD> </TR>
@@ -229,8 +226,6 @@ knitcitations::functiontable("rfishbase")
   <TR> <TD align="right"> 17 </TD> <TD> which_fish </TD> <TD> A function to search for the occurances of any </TD> </TR>
   <TR> <TD align="right"> 18 </TD> <TD>  </TD> <TD> keyword in a variety of description types </TD> </TR>
    </TABLE>
-```
-
 
 
 
@@ -401,8 +396,8 @@ gobies.on.reefs <- table(which_fish("reef", "habitat", fish.data[goby]) )
 
 
 Note that summing the list of true/false values returned gives the total
-number of matches.  This reveals that there are `ri I(labrids.on.reefs[["TRUE"]]) ir` 
-labrid species associated with reefs, and `ri I(gobies.on.reefs[["TRUE"]]) ir` goby species
+number of matches.  This reveals that there are 505 
+labrid species associated with reefs, and 401 goby species
 associated with reefs.  This example illustrates the power of accessing the
 FishBase data: Gobies are routinely listed as the biggest group of reef 
 fishes [*e.g.* @bellwood2002] but this is because there are
@@ -519,18 +514,12 @@ xtable(corr.summary)
 
 
 ```r
-ggplot(data.frame(x=x,y=y), aes(x,y)) + geom_point() + stat_smooth(method=lm) + 
+ggplot(data.frame(corr.size,corr.depth), aes(corr.size,corr.depth)) + geom_point() + stat_smooth(method=lm) + 
  xlab("Phylogenetically corrected maximum size") +
  ylab("corrected max depth")
 ```
 
-
-
-```
-Error: object 'x' not found
-```
-
-
+![Correcting for phylogeny, maximum size is not correlated with maximum depth observed in a labrids](http://farm8.staticflickr.com/7045/6939152716_d5c7c15058_o.png) 
 
 
 One can also estimate different evolutionary models for these traits 
@@ -546,9 +535,9 @@ ou <- fitContinuous(pruned$phy, pruned$data[["depths"]], model="OU")[[1]]
 
 
 
-where the Brownian motion model has an AIC score of `ri bm$aic ir` while
-the OU model has a score of `ri ou$aic ir`, suggesting that
-`ri I(names(which.min(list(BM=bm$aic,OU=ou$aic)))) ir` is the better model.
+where the Brownian motion model has an AIC score of 1,185 while
+the OU model has a score of 918.2, suggesting that
+ is the better model.
 
 
 # Discussion

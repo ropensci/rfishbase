@@ -49,16 +49,15 @@ Accessing FishBase data from R
 ==============================
 
 In addition to its web-based interface, FishBase provides machine
-readable XML files for `ri length(fish.data) ir` of its species entries.
-The `rfishbase` package works by creating a cached copy of all data on
-FishBase currently available in XML format on the FishBase webpages.
-This process relies on the Lang (2012a) and Lang (2012b) packages to
-access these pages and parse the resulting XML into a local cache.
-Caching increases the speed of queries and places minimal demands on the
-FishBase server, which in its present form is not built to support
-direct access to application programming interfaces (APIs). A cached
-copy is included in the package and can be loaded in to R using the
-command:
+readable XML files for 30,622 of its species entries. The `rfishbase`
+package works by creating a cached copy of all data on FishBase
+currently available in XML format on the FishBase webpages. This process
+relies on the Lang (2012a) and Lang (2012b) packages to access these
+pages and parse the resulting XML into a local cache. Caching increases
+the speed of queries and places minimal demands on the FishBase server,
+which in its present form is not built to support direct access to
+application programming interfaces (APIs). A cached copy is included in
+the package and can be loaded in to R using the command:
 
 ~~~~ {.r}
 data(fishbase) 
@@ -79,7 +78,7 @@ loadCache("2012-03-26fishdata.Rdat")
 
 Loading the database creates an object called fish.data, with one entry
 per fish species for which data was successfully found, for a total of
-`ri length(fish.data) ir` species.
+30,622 species.
 
 Not all the data available in FishBase is included in these
 machine-readable XML files. Consequently, `rfishbase` returns taxonomic
@@ -174,29 +173,131 @@ Table 1 lists each of the functions provided by `rfishbase`
 knitcitations::functiontable("rfishbase")
 ~~~~
 
-    <!-- html table generated in R 2.15.0 by xtable 1.7-0 package -->
-    <!-- Mon Apr 16 13:52:28 2012 -->
-    <TABLE border=1>
-    <TR> <TH>  </TH> <TH> namefn </TH> <TH> descrb </TH>  </TR>
-      <TR> <TD align="right"> 1 </TD> <TD> familySearch </TD> <TD> A function to find all fish that are members of </TD> </TR>
-      <TR> <TD align="right"> 2 </TD> <TD>  </TD> <TD> a scientific Family </TD> </TR>
-      <TR> <TD align="right"> 3 </TD> <TD> findSpecies </TD> <TD> Return fish matching the search names </TD> </TR>
-      <TR> <TD align="right"> 4 </TD> <TD> fish.data </TD> <TD> The fishbase data set, cached. </TD> </TR>
-      <TR> <TD align="right"> 5 </TD> <TD> fish_names </TD> <TD> A function to give the names of the matched </TD> </TR>
-      <TR> <TD align="right"> 6 </TD> <TD>  </TD> <TD> fish </TD> </TR>
-      <TR> <TD align="right"> 7 </TD> <TD> getDepth </TD> <TD> Return available depth ranges </TD> </TR>
-      <TR> <TD align="right"> 8 </TD> <TD> getQuantTraits </TD> <TD> Return quantitative trait values from </TD> </TR>
-      <TR> <TD align="right"> 9 </TD> <TD>  </TD> <TD> morphology data, if available </TD> </TR>
-      <TR> <TD align="right"> 10 </TD> <TD> getSize </TD> <TD> A function to return size information from </TD> </TR>
-      <TR> <TD align="right"> 11 </TD> <TD>  </TD> <TD> fishbase data </TD> </TR>
-      <TR> <TD align="right"> 12 </TD> <TD> habitatSearch </TD> <TD> A function to search for the occurances of any </TD> </TR>
-      <TR> <TD align="right"> 13 </TD> <TD>  </TD> <TD> keyword in habitat description </TD> </TR>
-      <TR> <TD align="right"> 14 </TD> <TD> loadCache </TD> <TD> loads an updated cache by the date </TD> </TR>
-      <TR> <TD align="right"> 15 </TD> <TD> tree </TD> <TD> An example phylogeny of some labrids. </TD> </TR>
-      <TR> <TD align="right"> 16 </TD> <TD> updateCache </TD> <TD> update the cached copy of fishbase data </TD> </TR>
-      <TR> <TD align="right"> 17 </TD> <TD> which_fish </TD> <TD> A function to search for the occurances of any </TD> </TR>
-      <TR> <TD align="right"> 18 </TD> <TD>  </TD> <TD> keyword in a variety of description types </TD> </TR>
-       </TABLE>
+<!-- html table generated in R 2.15.0 by xtable 1.7-0 package -->
+<!-- Mon Apr 16 14:00:54 2012 -->
+<TABLE border=1>
+<TR> <TH>  </TH> <TH> 
+namefn
+</TH> <TH> 
+descrb
+</TH>  </TR>
+  <TR> <TD align="right"> 
+1
+</TD> <TD> 
+familySearch
+</TD> <TD> 
+A function to find all fish that are members of
+</TD> </TR>
+  <TR> <TD align="right"> 
+2
+</TD> <TD>  </TD> <TD> 
+a scientific Family
+</TD> </TR>
+  <TR> <TD align="right"> 
+3
+</TD> <TD> 
+findSpecies
+</TD> <TD> 
+Return fish matching the search names
+</TD> </TR>
+  <TR> <TD align="right"> 
+4
+</TD> <TD> 
+fish.data
+</TD> <TD> 
+The fishbase data set, cached.
+</TD> </TR>
+  <TR> <TD align="right"> 
+5
+</TD> <TD> 
+fish\_names
+</TD> <TD> 
+A function to give the names of the matched
+</TD> </TR>
+  <TR> <TD align="right"> 
+6
+</TD> <TD>  </TD> <TD> 
+fish
+</TD> </TR>
+  <TR> <TD align="right"> 
+7
+</TD> <TD> 
+getDepth
+</TD> <TD> 
+Return available depth ranges
+</TD> </TR>
+  <TR> <TD align="right"> 
+8
+</TD> <TD> 
+getQuantTraits
+</TD> <TD> 
+Return quantitative trait values from
+</TD> </TR>
+  <TR> <TD align="right"> 
+9
+</TD> <TD>  </TD> <TD> 
+morphology data, if available
+</TD> </TR>
+  <TR> <TD align="right"> 
+10
+</TD> <TD> 
+getSize
+</TD> <TD> 
+A function to return size information from
+</TD> </TR>
+  <TR> <TD align="right"> 
+11
+</TD> <TD>  </TD> <TD> 
+fishbase data
+</TD> </TR>
+  <TR> <TD align="right"> 
+12
+</TD> <TD> 
+habitatSearch
+</TD> <TD> 
+A function to search for the occurances of any
+</TD> </TR>
+  <TR> <TD align="right"> 
+13
+</TD> <TD>  </TD> <TD> 
+keyword in habitat description
+</TD> </TR>
+  <TR> <TD align="right"> 
+14
+</TD> <TD> 
+loadCache
+</TD> <TD> 
+loads an updated cache by the date
+</TD> </TR>
+  <TR> <TD align="right"> 
+15
+</TD> <TD> 
+tree
+</TD> <TD> 
+An example phylogeny of some labrids.
+</TD> </TR>
+  <TR> <TD align="right"> 
+16
+</TD> <TD> 
+updateCache
+</TD> <TD> 
+update the cached copy of fishbase data
+</TD> </TR>
+  <TR> <TD align="right"> 
+17
+</TD> <TD> 
+which\_fish
+</TD> <TD> 
+A function to search for the occurances of any
+</TD> </TR>
+  <TR> <TD align="right"> 
+18
+</TD> <TD>  </TD> <TD> 
+keyword in a variety of description types
+</TD> </TR>
+   </TABLE>
+
+
 
 The real power of programmatic access is the ease with which one can
 combine, visualize, and statistically test a custom compilation of this
@@ -362,15 +463,14 @@ gobies.on.reefs <- table(which_fish("reef", "habitat", fish.data[goby]) )
 ~~~~
 
 Note that summing the list of true/false values returned gives the total
-number of matches. This reveals that there are
-`ri I(labrids.on.reefs[["TRUE"]]) ir` labrid species associated with
-reefs, and `ri I(gobies.on.reefs[["TRUE"]]) ir` goby species associated
-with reefs. This example illustrates the power of accessing the FishBase
-data: Gobies are routinely listed as the biggest group of reef fishes
-(*e.g.* Bellwood and Wainwright 2002) but this is because there are more
-species in *Gobiidae* than any other family of reef fish. When one
-counts the species in each group that live on reefs one finds that
-labrids are actually the most species-rich group on reefs.
+number of matches. This reveals that there are 505 labrid species
+associated with reefs, and 401 goby species associated with reefs. This
+example illustrates the power of accessing the FishBase data: Gobies are
+routinely listed as the biggest group of reef fishes (*e.g.* Bellwood
+and Wainwright 2002) but this is because there are more species in
+*Gobiidae* than any other family of reef fish. When one counts the
+species in each group that live on reefs one finds that labrids are
+actually the most species-rich group on reefs.
 
 Integration of analyses
 =======================
@@ -469,12 +569,14 @@ corr.size
 
 
 ~~~~ {.r}
-ggplot(data.frame(x=x,y=y), aes(x,y)) + geom_point() + stat_smooth(method=lm) + 
+ggplot(data.frame(corr.size,corr.depth), aes(corr.size,corr.depth)) + geom_point() + stat_smooth(method=lm) + 
  xlab("Phylogenetically corrected maximum size") +
  ylab("corrected max depth")
 ~~~~
 
-    Error: object 'x' not found
+![Correcting for phylogeny, maximum size is not correlated with maximum
+depth observed in a
+labrids](http://farm8.staticflickr.com/7045/6939152716_d5c7c15058_o.png)
 
 One can also estimate different evolutionary models for these traits to
 decide which best describes the data,
@@ -484,10 +586,8 @@ bm <- fitContinuous(pruned$phy, pruned$data[["depths"]], model="BM")[[1]]
 ou <- fitContinuous(pruned$phy, pruned$data[["depths"]], model="OU")[[1]]
 ~~~~
 
-where the Brownian motion model has an AIC score of `ri bm$aic ir` while
-the OU model has a score of `ri ou$aic ir`, suggesting that
-`ri I(names(which.min(list(BM=bm$aic,OU=ou$aic)))) ir` is the better
-model.
+where the Brownian motion model has an AIC score of 1,185 while the OU
+model has a score of 918.2, suggesting that is the better model.
 
 Discussion
 ==========
