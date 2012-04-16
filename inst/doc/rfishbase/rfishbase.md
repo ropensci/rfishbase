@@ -49,7 +49,7 @@ comparative phylogenetics software.
 # Accessing FishBase data from R
 
 In addition to its web-based interface, FishBase provides machine readable
-XML files for 30,622 of its species entries.
+XML files for `ri length(fish.data) ir` of its species entries.
 The `rfishbase` package works by creating a cached copy of all data on
 FishBase currently available in XML format on the FishBase webpages.
 This process relies on the @rcurl and @xml packages to access these
@@ -59,12 +59,7 @@ its present form is not built to support direct access to application
 programming interfaces (APIs). A cached copy is included in the package 
 and can be loaded in to R using the command:
 
-
-
-```r
 data(fishbase) 
-```
-
 
 
 
@@ -76,18 +71,13 @@ recent copy of FishBase, update the cache instead. The
 update may take up to 24 hours. This copy is stored in the working
 directory with the current date and can be loaded when finished.
 
-
-
-```r
 updateCache()
 loadCache("2012-03-26fishdata.Rdat")
-```
-
 
 
 Loading the database creates an object called fish.data, with one entry
 per fish species for which data was successfully found, for a total of
-30,622 species.  
+`ri length(fish.data) ir` species.  
 
 Not all the data available in FishBase is included in these machine-readable 
 XML files.  Consequently, `rfishbase` returns taxonomic information, trophic
@@ -119,13 +109,8 @@ Here is a query for reef-associated fish (mention of "reef" in the habitat
 description), and second query for fish that have "nocturnal" in their trophic 
 description:
 
-
-
-```r
 reef <- which_fish("reef", "habitat", fish.data)
 nocturnal <- which_fish("nocturnal", "trophic", fish.data)
-```
-
 
 
 One way these returned values are commonly used is to obtain a subset of the 
@@ -135,12 +120,7 @@ one can use the `fish_names` function.  Like the `which_fish` function, it
 takes the list of FishBase data, `fish.data` as input.  In this example, just the 
 subset that are reef affiliated are passed to the function,
 
-
-
-```r
 reef_species <- fish_names(fish.data[reef])
-```
-
 
 
 
@@ -148,12 +128,7 @@ Because our `reef` object is a list of logical values (true/false), one can
 combine this in intuitive ways with other queries.  For instance, one can 
 query for the names of all fish that are both nocturnal and not reef associated,
 
-
-
-```r
 nocturnal_nonreef_orders <- fish_names(fish.data[nocturnal & !reef], "Class")
-```
-
 
 
 
@@ -162,53 +137,27 @@ return.  Quantitative trait queries work in a similar manner to `fish_names`, ta
 instance, the function `getSize` returns the length (default), weight, or age 
 of the fish in the query:
 
-
-
-```r
 age <- getSize(fish.data, "age")
-```
-
 
 
 
 `rfishbase` can also extract a table of quantitative traits from the morphology 
 field, describing the number of vertebrate, dorsal and anal rays and spines,
 
-
-
-```r
 morphology_numbers <- getQuantTraits(fish.data)
-```
-
 
 
 
 and extract the depth range (extremes and usual range) from the habitat field,
 
-
-
-```r
 depths <- getDepth(fish.data)
-```
-
 
 
 
 
 Table 1 lists each of the functions provided by `rfishbase`
 
-
-
-```r
 knitcitations::functiontable("rfishbase")
-```
-
-
-
-```
-Error: 'functiontable' is not an exported object from 'namespace:knitcitations'
-```
-
 
 
 
@@ -220,16 +169,11 @@ queries into a data frame in which each row represents a species and each
 column represents a variable.  
 
 
-
-
-```r
 marine <- which_fish("marine", "habitat", fish.data)
 africa <- which_fish("Africa:", "distribution", fish.data)
 length <- getSize(fish.data, "length")
 order <- fish_names(fish.data, "Order")
 dat <- data.frame(reef, nocturnal,  age, marine, africa, length, order)
-```
-
 
 
 
@@ -243,15 +187,13 @@ For instance, one can identify which orders contain the greatest number of
 species, and for each of them, plot the fraction in which the species are 
 marine.
 
-
-
-```r
 biggest <- names(head(sort(table(order),decr=T), 8))
 ggplot(subset(dat,order %in% biggest), aes(order, fill=marine)) +
   geom_bar() + opts(axis.text.x=theme_text(angle=90, hjust=1))
-```
+\begin{figure}[]
+\includegraphics{figure/unnamed-chunk-3} \caption[Fraction of marine species in the eight largest orders of teleost fishes]{Fraction of marine species in the eight largest orders of teleost fishes\label{fig:unnamed-chunk-3}}
+\end{figure}
 
-![Fraction of marine species in the eight largest orders of teleost fishes](http://farm8.staticflickr.com/7138/7085017685_ac10ecacfc_o.png) 
 
 
 FishBase data excels for comparative studies across many species, but searching 
@@ -264,15 +206,13 @@ not the species is marine-associated.  The `ggplot2` package [@ggplot2]
 provides a particularly powerful and flexible language for visual exploration 
 of such patterns.
 
-
-
-```r
 ggplot(dat,aes(age, length, color=marine)) +
   geom_point(position='jitter',alpha=.8) +
   scale_y_log10() + scale_x_log10() 
-```
+\begin{figure}[]
+\includegraphics{figure/unnamed-chunk-4} \caption[Scatterplot maximum age with maximum length observed in each species]{Scatterplot maximum age with maximum length observed in each species. Color indicates marine or freshwater species.\label{fig:unnamed-chunk-4}}
+\end{figure}
 
-![Scatterplot maximum age with maximum length observed in each species. Color indicates marine or freshwater species.](http://farm8.staticflickr.com/7251/7085018301_23a4b193a6_o.png) 
 
 
 A wide array of visual displays are available for different kinds of data. 
@@ -280,13 +220,11 @@ A box-plot is  natural way to compare the distributions of categorical
 variables, such as asking "Are reef species longer lived than non-reef species
 in the marine environment?"
 
-
-
-```r
 ggplot(subset(dat, marine),aes(reef, log(age))) + geom_boxplot() 
-```
+\begin{figure}[]
+\includegraphics{figure/unnamed-chunk-5} \caption[Distribution of maximum age for reef-associated and non-reef associated fish]{Distribution of maximum age for reef-associated and non-reef associated fish\label{fig:unnamed-chunk-5}}
+\end{figure}
 
-![Distribution of maximum age for reef-associated and non-reef associated fish](http://farm8.staticflickr.com/7114/6938942642_8605d7029f_o.png) 
 
 
 
@@ -294,22 +232,12 @@ In addition to powerful visualizations R provides an unparalleled array of stati
 single line (The `xtable` command formats the table for printing, in this 
 case, in LaTeX): 
 
-
-
-```r
 corr.model <- summary(lm(data=dat,  length ~ age))
-```
 
 
-
-
-
-```r
 xtable(corr.model)
-```
-
 <!-- html table generated in R 2.15.0 by xtable 1.7-0 package -->
-<!-- Mon Apr 16 13:05:02 2012 -->
+<!-- Mon Apr 16 13:19:33 2012 -->
 <TABLE border=1>
 <TR> <TH>  </TH> <TH> Estimate </TH> <TH> Std. Error </TH> <TH> t value </TH> <TH> Pr(&gt |t|) </TH>  </TR>
   <TR> <TD align="right"> (Intercept) </TD> <TD align="right"> 38.9025 </TD> <TD align="right"> 3.7424 </TD> <TD align="right"> 10.40 </TD> <TD align="right"> 0.0000 </TD> </TR>
@@ -335,52 +263,32 @@ although the three groups are listed as separate families in fishbase. We get
 all the species in fishbase from *Labridae* (wrasses), *Scaridae* 
 (parrotfishes) and *Odacidae* (weed-whitings):
 
-
-
-```r
 labrid <- which_fish("(Labridae|Scaridae|Odacidae)", "Family", fish.data)
-```
-
 
 
 
 and get all the species of gobies
 
-
-
-```r
 goby <- which_fish("Gobiidae", "Family", fish.data)
-```
-
 
 
 
 Identify how many labrids are found on reefs
 
-
-
-```r
 labrid.reef <- which_fish("reef", "habitat", fish.data[labrid])
 labrids.on.reefs <- table(labrid.reef)
-```
-
 
 
 
 and how many gobies are found on reefs:
 
-
-
-```r
 gobies.on.reefs <- table(which_fish("reef", "habitat", fish.data[goby]) )
-```
-
 
 
 
 Note that summing the list of true/false values returned gives the total
-number of matches.  This reveals that there are 505 
-labrid species associated with reefs, and 401 goby species
+number of matches.  This reveals that there are `ri I(labrids.on.reefs[["TRUE"]]) ir` 
+labrid species associated with reefs, and `ri I(gobies.on.reefs[["TRUE"]]) ir` goby species
 associated with reefs.  This example illustrates the power of accessing the
 FishBase data: Gobies are routinely listed as the biggest group of reef 
 fishes [*e.g.* @bellwood2002] but this is because there are
@@ -404,52 +312,29 @@ the maximum observed depth at which it is found.  One begins by reading in the
 data for a phylogenetic tree of labrid fish (provided in the package), 
 and the phylogenetics packages `ape` [@ape] and `geiger` [@geiger].
 
-
-
-```r
 data(labridtree)
 library(ape)
 library(geiger) 
-```
-
 
 
 
 Find the species represented on this tree in FishBase 
 
-
-
-```r
 myfish <- findSpecies(tree$tip.label, fish.data)
-```
-
 
 
 
 Get the maximum depth of each species and sizes of each species: 
 
-
-
-```r
 depths <- getDepth(fish.data[myfish])[,"deep"]
 size <- getSize(fish.data[myfish], "length")
-```
-
 
 
 
 Drop missing data, and then drop tips from the phylogeny for which data was not available: 
 
-
-
-```r
 data <- na.omit(data.frame(size,depths))
 pruned <- treedata(tree, data)
-```
-
-
-
-```
 Dropped tips from the tree because there were no matching names in the data:
  [1] "Anampses_geographicus"     "Bodianus_perditio"        
  [3] "Chlorurus_bleekeri"        "Choerodon_cephalotes"     
@@ -459,8 +344,6 @@ Dropped tips from the tree because there were no matching names in the data:
 [11] "Macropharyngodon_choati"   "Oxycheilinus_digrammus"   
 [13] "Scarus_flavipectoralis"    "Scarus_rivulatus"         
 
-```
-
 
 
 
@@ -468,25 +351,15 @@ Dropped tips from the tree because there were no matching names in the data:
 Use phylogenetically independent contrasts [@felsenstein1985] to 
 determine if depth correlates with size after correcting for phylogeny:
 
-
-
-```r
 corr.size <- pic(pruned$data[["size"]],pruned$phy)
 corr.depth <- pic(pruned$data[["depths"]],pruned$phy)
 corr.summary <- summary(lm(corr.depth ~ corr.size - 1))
-```
 
 
 
-
-
-
-```r
 xtable(corr.summary)
-```
-
 <!-- html table generated in R 2.15.0 by xtable 1.7-0 package -->
-<!-- Mon Apr 16 13:05:07 2012 -->
+<!-- Mon Apr 16 13:19:38 2012 -->
 <TABLE border=1>
 <TR> <TH>  </TH> <TH> Estimate </TH> <TH> Std. Error </TH> <TH> t value </TH> <TH> Pr(&gt |t|) </TH>  </TR>
   <TR> <TD align="right"> corr.size </TD> <TD align="right"> 0.0713 </TD> <TD align="right"> 0.0993 </TD> <TD align="right"> 0.72 </TD> <TD align="right"> 0.4744 </TD> </TR>
@@ -494,39 +367,24 @@ xtable(corr.summary)
 
 
 
-
-
-```r
 ggplot(data.frame(x=x,y=y), aes(x,y)) + geom_point() + stat_smooth(method=lm) + 
  xlab("Phylogenetically corrected maximum size") +
  ylab("corrected max depth")
-```
-
-
-
-```
 Error: object 'x' not found
-```
-
 
 
 
 One can also estimate different evolutionary models for these traits 
 to decide which best describes the data,
 
-
-
-```r
 bm <- fitContinuous(pruned$phy, pruned$data[["depths"]], model="BM")[[1]]
 ou <- fitContinuous(pruned$phy, pruned$data[["depths"]], model="OU")[[1]]
-```
 
 
 
-
-where the Brownian motion model has an AIC score of 1,185 while
-the OU model has a score of 918.2, suggesting that
- is the better model.
+where the Brownian motion model has an AIC score of `ri bm$aic ir` while
+the OU model has a score of `ri ou$aic ir`, suggesting that
+`ri I(names(which.min(list(BM=bm$aic,OU=ou$aic)))) ir` is the better model.
 
 
 # Discussion
