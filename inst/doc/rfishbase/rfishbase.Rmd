@@ -54,7 +54,7 @@ comparative phylogenetics software.
 # Accessing FishBase data from R
 
 In addition to its web-based interface, FishBase provides machine readable
-XML files for `ri length(fish.data) ir` of its species entries.
+XML files for `r length(fish.data)` of its species entries.
 The `rfishbase` package works by creating a cached copy of all data on
 FishBase currently available in XML format on the FishBase webpages.
 This process relies on the @rcurl and @xml packages to access these
@@ -82,7 +82,7 @@ loadCache("2012-03-26fishdata.Rdat")
 ````
 Loading the database creates an object called fish.data, with one entry
 per fish species for which data was successfully found, for a total of
-`ri length(fish.data) ir` species.  
+`r length(fish.data)` species.  
 
 Not all the data available in FishBase is included in these machine-readable 
 XML files.  Consequently, `rfishbase` returns taxonomic information, trophic
@@ -162,8 +162,8 @@ depths <- getDepth(fish.data)
 
 Table 1 lists each of the functions provided by `rfishbase`
 
-``` {r Table1}
-knitcitations::functiontable("rfishbase")
+``` {r Table1, results="asis", include = getOption("knitr.include"), split = getOption("knitr.split")}
+knitcitations::functiontable("rfishbase", include.rownames=FALSE)
 ````
 
 The real power of programmatic access is the ease with which one can combine,
@@ -276,8 +276,8 @@ gobies.on.reefs <- table(which_fish("reef", "habitat", fish.data[goby]) )
 ````
 
 Note that summing the list of true/false values returned gives the total
-number of matches.  This reveals that there are `ri I(labrids.on.reefs[["TRUE"]]) ir` 
-labrid species associated with reefs, and `ri I(gobies.on.reefs[["TRUE"]]) ir` goby species
+number of matches.  This reveals that there are `r I(labrids.on.reefs[["TRUE"]])` 
+labrid species associated with reefs, and `r I(gobies.on.reefs[["TRUE"]])` goby species
 associated with reefs.  This example illustrates the power of accessing the
 FishBase data: Gobies are routinely listed as the biggest group of reef 
 fishes [*e.g.* @bellwood2002] but this is because there are
@@ -342,7 +342,7 @@ xtable(corr.summary)
 ````
 
 ``` {r Figure4, fig.height=3, fig.width=6, fig.cap='Correcting for phylogeny, maximum size is not correlated with maximum depth observed in a labrids'}
-ggplot(data.frame(x=x,y=y), aes(x,y)) + geom_point() + stat_smooth(method=lm) + 
+ggplot(data.frame(corr.size,corr.depth), aes(corr.size,corr.depth)) + geom_point() + stat_smooth(method=lm) + 
  xlab("Phylogenetically corrected maximum size") +
  ylab("corrected max depth")
 ````
@@ -355,9 +355,9 @@ bm <- fitContinuous(pruned$phy, pruned$data[["depths"]], model="BM")[[1]]
 ou <- fitContinuous(pruned$phy, pruned$data[["depths"]], model="OU")[[1]]
 ````
 
-where the Brownian motion model has an AIC score of `ri bm$aic ir` while
-the OU model has a score of `ri ou$aic ir`, suggesting that
-`ri I(names(which.min(list(BM=bm$aic,OU=ou$aic)))) ir` is the better model.
+where the Brownian motion model has an AIC score of `r bm$aic` while
+the OU model has a score of `r ou$aic`, suggesting that
+`r I(names(which.min(list(BM=bm$aic,OU=ou$aic))))` is the better model.
 
 
 # Discussion

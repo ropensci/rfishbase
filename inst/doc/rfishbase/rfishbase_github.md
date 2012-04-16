@@ -170,11 +170,11 @@ depths <- getDepth(fish.data)
 Table 1 lists each of the functions provided by `rfishbase`
 
 ~~~~ {.r}
-knitcitations::functiontable("rfishbase")
+knitcitations::functiontable("rfishbase", include.rownames=FALSE)
 ~~~~
 
 <!-- html table generated in R 2.15.0 by xtable 1.7-0 package -->
-<!-- Mon Apr 16 14:00:54 2012 -->
+<!-- Mon Apr 16 14:29:51 2012 -->
 <TABLE border=1>
 <TR> <TH>  </TH> <TH> 
 namefn
@@ -331,7 +331,7 @@ ggplot(subset(dat,order %in% biggest), aes(order, fill=marine)) +
 ~~~~
 
 ![Fraction of marine species in the eight largest orders of teleost
-fishes](http://farm8.staticflickr.com/7206/6939097304_939d0dba3c_o.png)
+fishes](http://farm8.staticflickr.com/7100/6939206818_73544a2df1_o.png)
 
 FishBase data excels for comparative studies across many species, but
 searching through over 30,000 species to extract data makes such
@@ -352,7 +352,7 @@ ggplot(dat,aes(age, length, color=marine)) +
 
 ![Scatterplot maximum age with maximum length observed in each species.
 Color indicates marine or freshwater
-species.](http://farm6.staticflickr.com/5470/6939097694_2819b6271b_o.png)
+species.](http://farm6.staticflickr.com/5231/7085281923_42e6871b89_o.png)
 
 A wide array of visual displays are available for different kinds of
 data. A box-plot is natural way to compare the distributions of
@@ -365,7 +365,7 @@ ggplot(subset(dat, marine),aes(reef, log(age))) + geom_boxplot()
 
 ![Distribution of maximum age for reef-associated and non-reef
 associated
-fish](http://farm8.staticflickr.com/7104/6939097934_d149659a2f_o.png)
+fish](http://farm8.staticflickr.com/7110/7085282129_577314daee_o.png)
 
 In addition to powerful visualizations R provides an unparalleled array
 of statistical analysis methods. Generating a table of the results from
@@ -382,7 +382,7 @@ xtable(corr.model)
 ~~~~
 
 <!-- html table generated in R 2.15.0 by xtable 1.7-0 package -->
-<!-- Mon Apr 16 13:53:01 2012 -->
+<!-- Mon Apr 16 14:30:22 2012 -->
 <TABLE border=1>
 <TR> <TH>  </TH> <TH> 
 Estimate
@@ -540,7 +540,7 @@ xtable(corr.summary)
 ~~~~
 
 <!-- html table generated in R 2.15.0 by xtable 1.7-0 package -->
-<!-- Mon Apr 16 13:53:06 2012 -->
+<!-- Mon Apr 16 14:30:27 2012 -->
 <TABLE border=1>
 <TR> <TH>  </TH> <TH> 
 Estimate
@@ -576,7 +576,7 @@ ggplot(data.frame(corr.size,corr.depth), aes(corr.size,corr.depth)) + geom_point
 
 ![Correcting for phylogeny, maximum size is not correlated with maximum
 depth observed in a
-labrids](http://farm8.staticflickr.com/7045/6939152716_d5c7c15058_o.png)
+labrids](http://farm6.staticflickr.com/5470/7085282661_0eb7301ec0_o.png)
 
 One can also estimate different evolutionary models for these traits to
 decide which best describes the data,
