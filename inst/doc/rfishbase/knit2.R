@@ -1,6 +1,7 @@
 #!/usr/bin/Rscript
 library(knitr)
 ## Formatting for printed numbers
+render_markdown()
 knit_hooks$set(inline = function(x) {
   if(is.numeric(x))
    I(prettyNum(round(x,2), big.mark=","))

@@ -4,13 +4,8 @@
 
 library(knitr)
 
-## use a custom pattern list: begin by ``` {r code begin} and end by ````; `ri
-## [inline code] ir`; `ro [global options] or`
-pat_gfm()
-
-## use GFM as the output format: R code in ```r and ``` (both GitHub and pandoc
-## recognize it)
-render_gfm()
+## use markdown as the output format: R code in ```r and ``` 
+render_markdown()
 
 ## Formatting for printed numbers
 knit_hooks$set(inline = function(x) {
@@ -18,11 +13,14 @@ knit_hooks$set(inline = function(x) {
    I(prettyNum(round(x,2), big.mark=","))
 })
 
-
 ## global chunk options: default uses high quality Cairo PNG device
 pdf.options(pointsize = 10)  # smaller pointsize for recording plots
 opts_chunk$set(cache=TRUE, fig.path='figure/', dev='Cairo_png',
   fig.width=5, fig.height=5, cache.path = 'cache-local/', par=TRUE)
+
+## xtable html format for github/html output.  
+## otherwise this should be ignored (defaults to 'latex') for pdf output
+options(xtable.type = 'html')
 
 ## Global options 
 opts_chunk$set(warning=FALSE, message=FALSE, comment=NA, tidy=FALSE)
@@ -33,8 +31,6 @@ knit_hooks$set(par=function(before, options, envir){
     par(mar=c(4,4,.1,.1), cex.lab=.95, cex.axis=.9, mgp=c(2,.7,0), tcl=-.3)
 })
 
-
-
 ## verbose compile
 opts_knit$set(progress = TRUE, verbose = TRUE)
 
@@ -42,17 +38,15 @@ local({
   fmt = commandArgs(TRUE)
   if (length(fmt) == 0L) fmt = 'github'
   if (fmt %in% c('github', 'html')) {
-    ## xtable html format for github/html output.  
-    ## otherwise this should be ignored (defaults to 'latex') for pdf output
-    options(xtable.type = 'html')
     # upload to flickr when output is for github or html
     opts_knit$set(upload.fun = socialR::flickr.url)
     opts_chunk$set(cache.path = 'cache-upload/')
+
   } else if (fmt == 'epub') {
-    options(xtable.type = 'html')
+
   } else if (fmt %in% c('odt', 'docx', 'doc')) {
-    options(xtable.type = 'latex')
-   # xtable shouldn't print comments 
+    options(xtable.type = 'html')
+    # xtable shouldn't print comments 
     options(xtable.print.comment=FALSE)
     # Journal probably wants eps formatted graphics.  
     opts_chunk$set(dev = 'postscript', fig.width=5, fig.height=5, 
@@ -62,29 +56,15 @@ local({
     options(knitr.split=TRUE)
     # We'll want plots to be external only in the case of doc generation:
     knit_hooks$set(plot = function(x, options) "") 
+
   } else if (fmt %in% c('tex','pdf')) {
-   # xtable shouldn't print comments 
     options(xtable.print.comment=FALSE)
-   # xtable should print latex formatting into markdown, which Pandoc will intepret 
     options(xtable.type = 'latex')
-
     opts_chunk$set(cache.path = 'cache-pdf/')
-
-    # use high quality tikz graphics for PDF output
-#    opts_chunk$set(dev = 'tikz', fig.width=4, fig.height=4)
-#    x = readLines('elsarticle.latex')
-#    options(tikzDocumentDeclaration = x[1], tikzDefaultEngine = 'xetex')
-#    assign('tikzPackages', c(x[2:13], '\n'), envir = knitr:::.knitEnv)
-
     # use pdf graphics for PDF output
-    opts_chunk$set(dev = 'pdf', fig.width=5, fig.height=5)
+    opts_chunk$set(dev = 'Cairo_pdf', fig.width=5, fig.height=5)
   }
   
-  # knit all md files under ./source
-  files <- list.files('./source/',  full.names = TRUE)
-  files <- files[grep(".*\\.md", files)]
-  for (f in files) {
-    knit(f, output = basename(f))
-  }
+    knit("rfishbase.Rmd")
 })
 
