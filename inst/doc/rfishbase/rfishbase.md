@@ -194,6 +194,24 @@ depths <- getDepth(fish.data)
 
 
 
+
+Table 1 lists each of the functions provided by `rfishbase`
+
+
+
+```r
+knitcitations::functiontable("rfishbase")
+```
+
+
+
+```
+Error: 'functiontable' is not an exported object from 'namespace:knitcitations'
+```
+
+
+
+
 The real power of programmatic access is the ease with which one can combine,
 visualize, and statistically test a custom compilation of this data. 
 To do so it is useful to organize a collection of queries into a data frame.
@@ -233,7 +251,7 @@ ggplot(subset(dat,order %in% biggest), aes(order, fill=marine)) +
   geom_bar() + opts(axis.text.x=theme_text(angle=90, hjust=1))
 ```
 
-
+![Fraction of marine species in the eight largest orders of teleost fishes](http://farm8.staticflickr.com/7138/7085017685_ac10ecacfc_o.png) 
 
 
 FishBase data excels for comparative studies across many species, but searching 
@@ -254,7 +272,7 @@ ggplot(dat,aes(age, length, color=marine)) +
   scale_y_log10() + scale_x_log10() 
 ```
 
-
+![Scatterplot maximum age with maximum length observed in each species. Color indicates marine or freshwater species.](http://farm8.staticflickr.com/7251/7085018301_23a4b193a6_o.png) 
 
 
 A wide array of visual displays are available for different kinds of data. 
@@ -268,7 +286,7 @@ in the marine environment?"
 ggplot(subset(dat, marine),aes(reef, log(age))) + geom_boxplot() 
 ```
 
-
+![Distribution of maximum age for reef-associated and non-reef associated fish](http://farm8.staticflickr.com/7114/6938942642_8605d7029f_o.png) 
 
 
 
@@ -290,20 +308,13 @@ corr.model <- summary(lm(data=dat,  length ~ age))
 xtable(corr.model)
 ```
 
-% latex table generated in R 2.15.0 by xtable 1.7-0 package
-% Thu Apr  5 16:55:38 2012
-\begin{table}[ht]
-\begin{center}
-\begin{tabular}{rrrrr}
-  \hline
- & Estimate & Std. Error & t value & Pr($>$$|$t$|$) \\ 
-  \hline
-(Intercept) & 38.9025 & 3.7424 & 10.40 & 0.0000 \\ 
-  age & 1.9529 & 0.1452 & 13.45 & 0.0000 \\ 
-   \hline
-\end{tabular}
-\end{center}
-\end{table}
+<!-- html table generated in R 2.15.0 by xtable 1.7-0 package -->
+<!-- Mon Apr 16 13:05:02 2012 -->
+<TABLE border=1>
+<TR> <TH>  </TH> <TH> Estimate </TH> <TH> Std. Error </TH> <TH> t value </TH> <TH> Pr(&gt |t|) </TH>  </TR>
+  <TR> <TD align="right"> (Intercept) </TD> <TD align="right"> 38.9025 </TD> <TD align="right"> 3.7424 </TD> <TD align="right"> 10.40 </TD> <TD align="right"> 0.0000 </TD> </TR>
+  <TR> <TD align="right"> age </TD> <TD align="right"> 1.9529 </TD> <TD align="right"> 0.1452 </TD> <TD align="right"> 13.45 </TD> <TD align="right"> 0.0000 </TD> </TR>
+   </TABLE>
 
 
 
@@ -474,17 +485,12 @@ corr.summary <- summary(lm(corr.depth ~ corr.size - 1))
 xtable(corr.summary)
 ```
 
-\begin{table}[ht]
-\begin{center}
-\begin{tabular}{rrrrr}
-  \hline
- & Estimate & Std. Error & t value & Pr($>$$|$t$|$) \\ 
-  \hline
-corr.size & 0.0713 & 0.0993 & 0.72 & 0.4744 \\ 
-   \hline
-\end{tabular}
-\end{center}
-\end{table}
+<!-- html table generated in R 2.15.0 by xtable 1.7-0 package -->
+<!-- Mon Apr 16 13:05:07 2012 -->
+<TABLE border=1>
+<TR> <TH>  </TH> <TH> Estimate </TH> <TH> Std. Error </TH> <TH> t value </TH> <TH> Pr(&gt |t|) </TH>  </TR>
+  <TR> <TD align="right"> corr.size </TD> <TD align="right"> 0.0713 </TD> <TD align="right"> 0.0993 </TD> <TD align="right"> 0.72 </TD> <TD align="right"> 0.4744 </TD> </TR>
+   </TABLE>
 
 
 
@@ -494,6 +500,12 @@ corr.size & 0.0713 & 0.0993 & 0.72 & 0.4744 \\
 ggplot(data.frame(x=x,y=y), aes(x,y)) + geom_point() + stat_smooth(method=lm) + 
  xlab("Phylogenetically corrected maximum size") +
  ylab("corrected max depth")
+```
+
+
+
+```
+Error: object 'x' not found
 ```
 
 

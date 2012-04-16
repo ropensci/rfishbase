@@ -167,6 +167,14 @@ field,
 depths <- getDepth(fish.data)
 ~~~~
 
+Table 1 lists each of the functions provided by `rfishbase`
+
+~~~~ {.r}
+knitcitations::functiontable("rfishbase")
+~~~~
+
+    Error: 'functiontable' is not an exported object from 'namespace:knitcitations'
+
 The real power of programmatic access is the ease with which one can
 combine, visualize, and statistically test a custom compilation of this
 data. To do so it is useful to organize a collection of queries into a
@@ -199,7 +207,7 @@ ggplot(subset(dat,order %in% biggest), aes(order, fill=marine)) +
 ~~~~
 
 ![Fraction of marine species in the eight largest orders of teleost
-fishes](http://farm8.staticflickr.com/7129/6915958124_28ba7fd1f4_o.png)
+fishes](http://farm8.staticflickr.com/7138/7085017685_ac10ecacfc_o.png)
 
 FishBase data excels for comparative studies across many species, but
 searching through over 30,000 species to extract data makes such
@@ -220,7 +228,7 @@ ggplot(dat,aes(age, length, color=marine)) +
 
 ![Scatterplot maximum age with maximum length observed in each species.
 Color indicates marine or freshwater
-species.](http://farm6.staticflickr.com/5330/6916226490_efce933131_o.png)
+species.](http://farm8.staticflickr.com/7251/7085018301_23a4b193a6_o.png)
 
 A wide array of visual displays are available for different kinds of
 data. A box-plot is natural way to compare the distributions of
@@ -233,7 +241,7 @@ ggplot(subset(dat, marine),aes(reef, log(age))) + geom_boxplot()
 
 ![Distribution of maximum age for reef-associated and non-reef
 associated
-fish](http://farm6.staticflickr.com/5079/6915958796_7665fa6ccb_o.png)
+fish](http://farm8.staticflickr.com/7114/6938942642_8605d7029f_o.png)
 
 In addition to powerful visualizations R provides an unparalleled array
 of statistical analysis methods. Generating a table of the results from
@@ -250,7 +258,7 @@ xtable(corr.model)
 ~~~~
 
 <!-- html table generated in R 2.15.0 by xtable 1.7-0 package -->
-<!-- Mon Apr  9 13:37:13 2012 -->
+<!-- Mon Apr 16 13:05:02 2012 -->
 <TABLE border=1>
 <TR> <TH>  </TH> <TH> 
 Estimate
@@ -408,7 +416,7 @@ xtable(corr.summary)
 ~~~~
 
 <!-- html table generated in R 2.15.0 by xtable 1.7-0 package -->
-<!-- Mon Apr  9 13:37:18 2012 -->
+<!-- Mon Apr 16 13:05:07 2012 -->
 <TABLE border=1>
 <TR> <TH>  </TH> <TH> 
 Estimate

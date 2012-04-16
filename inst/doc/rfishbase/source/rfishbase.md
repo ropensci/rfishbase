@@ -159,6 +159,13 @@ and extract the depth range (extremes and usual range) from the habitat field,
 depths <- getDepth(fish.data)
 ````
 
+
+Table 1 lists each of the functions provided by `rfishbase`
+
+``` {r Table1}
+knitcitations::functiontable("rfishbase")
+````
+
 The real power of programmatic access is the ease with which one can combine,
 visualize, and statistically test a custom compilation of this data. 
 To do so it is useful to organize a collection of queries into a data frame.
@@ -224,7 +231,7 @@ case, in LaTeX):
 ``` {r } 
 corr.model <- summary(lm(data=dat,  length ~ age))
 ````
-``` {r Table1, results="asis", include = getOption("knitr.include"), split = getOption("knitr.split")}
+``` {r Table2, results="asis", include = getOption("knitr.include"), split = getOption("knitr.split")}
 xtable(corr.model)
 ````
 
@@ -330,7 +337,7 @@ corr.depth <- pic(pruned$data[["depths"]],pruned$phy)
 corr.summary <- summary(lm(corr.depth ~ corr.size - 1))
 ````
 
-``` {r Table2, results="asis", include = getOption("knitr.include"), split = getOption("knitr.split") }
+``` {r Table3, results="asis", include = getOption("knitr.include"), split = getOption("knitr.split") }
 xtable(corr.summary)
 ````
 

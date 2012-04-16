@@ -27,3 +27,5 @@ bib:
 	bibtool -s -d -x citations.aux ~/Documents/Mendeley/bib/*.bib > rfishbase.bib
 
 
+clean:
+	rm -rf *.log *.bbl *.blg *.out *.spl
