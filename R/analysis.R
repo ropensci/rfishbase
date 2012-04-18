@@ -266,9 +266,9 @@ getQuantTraits <- function(fish.data=NULL, path=NULL){
   out
 }
 
-#' Returns all quantitative trait values found in the morphology data
+#' Returns the FishBase reference id numbers matching a query. 
 #'
-#' @param using which entry type for the search?
+#' @param using which entry type for the search
 #' @param fish.data the fishbase database or a subset
 #' @param path to cached copy of fishbase (optional, defaults to copy in package).
 #' @keywords utilities
