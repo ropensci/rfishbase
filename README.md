@@ -12,6 +12,7 @@
  package (which is on CRAN):
 
  ```
+ library(devtools)
  install_github("rfishbase", "ropensci")
  ```
 
