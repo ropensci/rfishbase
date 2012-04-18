@@ -30,7 +30,7 @@
 ## The distribution of maximum depth in Arctic fishes
 data(fishbase)
 data(labridtree)
-myfish <- findSpecies(tree$tip.label, fish.data)
+myfish <- findSpecies(labridtree$tip.label, fish.data)
 getDepth(fish.data[myfish])
 }
 \keyword{utilities}

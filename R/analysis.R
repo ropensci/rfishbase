@@ -55,7 +55,7 @@ which_fish <- function(keyword, using=c("trophic", "habitat", "lifecycle",
                        "ScientificName", "Genus", "Family",
                        "Class", "Order", "size"), fish.data=NULL, path=NULL){
   if(is.null(fish.data))
-    loadCache(path=path)
+    fish.data <- loadCache(path=path)
   using <- match.arg(using)
   sapply(fish.data, function(x) length(grep(keyword, x[[using]]))>0)
 }
@@ -77,7 +77,7 @@ which_fish <- function(keyword, using=c("trophic", "habitat", "lifecycle",
 #' @export
 fish_names <- function(fish.data=NULL, name=c("ScientificName", "Family", "Class", "Order"), path=NULL){
   if(is.null(fish.data))
-    loadCache(path=path)
+    fish.data <- loadCache(path=path)
   name <- match.arg(name)
   sapply(fish.data, function(x) x[[name]])
 }
@@ -100,7 +100,7 @@ fish_names <- function(fish.data=NULL, name=c("ScientificName", "Family", "Class
 #' @export
 getSize <- function(fish.data=NULL, value=c("length", "weight", "age"), path=NULL){
   if(is.null(fish.data))
-    loadCache(path=path)
+    fish.data <- loadCache(path=path)
   value <- match.arg(value)
   y <- sapply(fish.data, function(x){
      z <- c("length"= NA, "weight"=NA, "age"=NA)
@@ -132,13 +132,13 @@ getSize <- function(fish.data=NULL, value=c("length", "weight", "age"), path=NUL
 #' ## The distribution of maximum depth in Arctic fishes
 #' data(fishbase)
 #' data(labridtree)
-#' myfish <- findSpecies(tree$tip.label, fish.data) 
+#' myfish <- findSpecies(labridtree$tip.label, fish.data) 
 #' getDepth(fish.data[myfish])
 #' 
 #' @export
 findSpecies <- function(species, fish.data=NULL, path=NULL){
   if(is.null(fish.data))
-    loadCache(path=path)
+    fish.data <- loadCache(path=path)
   species<-gsub("_", " ", species)
   sapply(fish.data, function(x) x$ScientificName %in% species)
 }
@@ -164,7 +164,7 @@ findSpecies <- function(species, fish.data=NULL, path=NULL){
 #' @export
 getDepth <- function(fish.data=NULL, path=NULL){
   if(is.null(fish.data))
-    loadCache(path=path)
+    fish.data <- loadCache(path=path)
   depthfn <- function(fish){
     x <- fish$habitat
     if(is.null(x)) 
@@ -213,7 +213,7 @@ getDepth <- function(fish.data=NULL, path=NULL){
 #' @export
 getQuantTraits <- function(fish.data=NULL, path=NULL){
   if(is.null(fish.data))
-    loadCache(path=path)
+    fish.data <- loadCache(path=path)
   morph <- function(x){
     str <- x$morphology
     if(is.null(str)) 
@@ -281,10 +281,19 @@ getRefs <- function(using=c("trophic", "habitat", "lifecycle",
                     "ScientificName", "Genus", "Family",
                     "Class", "Order", "size"), fish.data=NULL, path=NULL){
   if(is.null(fish.data))
-    loadCache(path=path)
+    fish.data <- loadCache(path=path)
   using <- match.arg(using)
-  sapply(fish.data, function(x) gsub(".*(Ref. (\\d+)).*", "\\1", x[[using]]))
+  sapply(fish.data, function(x){
+    extractMatches(x[[using]], "Ref. (\\d+)")
+  })
 }
 
+extractMatches <- function(data, pattern) {
+    start <-  gregexpr(pattern, data)[[1]]
+    stop  <-  start + attr(start, "match.length") - 1
+    if(-1 %in% start) {""} else {
+        mapply(substr, start, stop, MoreArgs = list(x = data))
+    }
+}    
 
 

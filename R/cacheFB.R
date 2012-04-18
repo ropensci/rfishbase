@@ -40,6 +40,7 @@ loadCache <- function(path=NULL){
   file=paste(path, "/", most_recent, sep="")
   load(file)
   }
+  fish.data
 }
 
 
