@@ -59,7 +59,7 @@ local({
 
   } else if (fmt %in% c('tex','pdf')) {
     options(xtable.print.comment=FALSE)
-    options(xtable.type = 'latex')
+    options(xtable.type = 'latex', table.placement="H")
     opts_chunk$set(cache.path = 'cache-pdf/')
     # use pdf graphics for PDF output
     opts_chunk$set(dev = 'Cairo_pdf', fig.width=5, fig.height=5)

@@ -11,6 +11,7 @@
 #'  updateCache()
 #'  loadCache()
 #' }
+#' @export
 updateCache <- function(path="."){
   date=Sys.Date()
   file=paste(path, "/", date, "fishdata.Rdat", sep="")
@@ -27,6 +28,7 @@ updateCache <- function(path="."){
 #'  updateCache()
 #'  loadCache()
 #' }
+#' @export
 loadCache <- function(path=NULL){
   if(is.null(path))
     data(fishbase)

@@ -210,7 +210,7 @@ getDepth <- function(fish.data=NULL, path=NULL){
 #' traits <- getQuantTraits(fish.data[redfish])
 #' hist(traits[, "min.anal.rays"])
 #' 
-#'@export
+#' @export
 getQuantTraits <- function(fish.data=NULL, path=NULL){
   if(is.null(fish.data))
     loadCache(path=path)
@@ -265,4 +265,26 @@ getQuantTraits <- function(fish.data=NULL, path=NULL){
   rownames(out) <- gsub(" ", "_", species.names) # use underscores instead of spaces
   out
 }
+
+#' Returns all quantitative trait values found in the morphology data
+#'
+#' @param using which entry type for the search?
+#' @param fish.data the fishbase database or a subset
+#' @param path to cached copy of fishbase (optional, defaults to copy in package).
+#' @keywords utilities
+#' @examples
+#' a <- which_fish("invertebrates", "trophic")
+#' refs <- getRefs("trophic", fish.data[a])
+#' @export
+getRefs <- function(using=c("trophic", "habitat", "lifecycle", 
+                    "morphology","diagnostic", "distribution",
+                    "ScientificName", "Genus", "Family",
+                    "Class", "Order", "size"), fish.data=NULL, path=NULL){
+  if(is.null(fish.data))
+    loadCache(path=path)
+  using <- match.arg(using)
+  sapply(fish.data, function(x) gsub(".*(Ref. (\\d+)).*", "\\1", x[[using]]))
+}
+
+
 

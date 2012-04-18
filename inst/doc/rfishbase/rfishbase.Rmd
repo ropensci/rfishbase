@@ -73,12 +73,16 @@ This loads a copy of all available data from FishBase into the R list,
 to extraction, manipulation and visualization.  The online repository
 is frequently updated as new information is uploaded.  To get the most 
 recent copy of FishBase, update the cache instead. The
-update may take up to 24 hours. This copy is stored in the working
-directory with the current date and can be loaded when finished.
+update may take up to 24 hours. This copy is stored in the specified 
+directory (note that "." can be used to indicate the current working directory)
+with the current date.  The most recent copy of the data
+in the specified path can be loaded with the `loadCache()` function.  
+If no cached set is found, `rfishbase` will load thie copy originally
+included in the package.  
 
 ``` {r update, eval=FALSE }
-updateCache()
-loadCache("2012-03-26fishdata.Rdat")
+updateCache(".")
+loadCache(".")
 ````
 Loading the database creates an object called fish.data, with one entry
 per fish species for which data was successfully found, for a total of
@@ -90,7 +94,7 @@ description, habitat, distribution, size, life-cycle, morphology and diagnostic
 information.  The information returned in each category is provided as plain-text,
 consequently `rfishbase` must use regular expression matching to identify
 the occurrence of particular words or patterns in this text corresponding to 
-data of interest [@friedl2006] 
+data of interest [@friedl2006]. 
 
 Quantitative traits such as length, maximum known age, spine and ray counts,
 and depth information are provided consistently for most species, allowing 
@@ -160,7 +164,9 @@ depths <- getDepth(fish.data)
 ````
 
 
-Table 1 lists each of the functions provided by `rfishbase`
+A list of all the functions provided by `rfishbase` can be found in Table 1.  
+The `rfishbase` manual provided with the package provides more detail about
+each of these functions, together with examples for their use.  
 
 ``` {r Table1, results="asis", echo=FALSE}
 options(xtable.include.rownames=FALSE)
@@ -343,7 +349,8 @@ xtable(corr.summary)
 ````
 
 ``` {r Figure4, fig.height=3, fig.width=6, fig.cap='Correcting for phylogeny, maximum size is not correlated with maximum depth observed in a labrids'}
-ggplot(data.frame(corr.size,corr.depth), aes(corr.size,corr.depth)) + geom_point() + stat_smooth(method=lm) + 
+ggplot(data.frame(corr.size,corr.depth), aes(corr.size,corr.depth)) +
+ geom_point() + stat_smooth(method=lm) + 
  xlab("Phylogenetically corrected maximum size") +
  ylab("corrected max depth")
 ````

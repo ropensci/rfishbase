@@ -73,14 +73,18 @@ This loads a copy of all available data from FishBase into the R list,
 to extraction, manipulation and visualization.  The online repository
 is frequently updated as new information is uploaded.  To get the most 
 recent copy of FishBase, update the cache instead. The
-update may take up to 24 hours. This copy is stored in the working
-directory with the current date and can be loaded when finished.
+update may take up to 24 hours. This copy is stored in the specified 
+directory (note that "." can be used to indicate the current working directory)
+with the current date.  The most recent copy of the data
+in the specified path can be loaded with the `loadCache()` function.  
+If no cached set is found, `rfishbase` will load thie copy originally
+included in the package.  
 
 
 
 ```r
-updateCache()
-loadCache("2012-03-26fishdata.Rdat")
+updateCache(".")
+loadCache(".")
 ```
 
 
@@ -95,7 +99,7 @@ description, habitat, distribution, size, life-cycle, morphology and diagnostic
 information.  The information returned in each category is provided as plain-text,
 consequently `rfishbase` must use regular expression matching to identify
 the occurrence of particular words or patterns in this text corresponding to 
-data of interest [@friedl2006] 
+data of interest [@friedl2006]. 
 
 Quantitative traits such as length, maximum known age, spine and ray counts,
 and depth information are provided consistently for most species, allowing 
@@ -195,34 +199,41 @@ depths <- getDepth(fish.data)
 
 
 
-Table 1 lists each of the functions provided by `rfishbase`
+A list of all the functions provided by `rfishbase` can be found in Table 1.  
+The `rfishbase` manual provided with the package provides more detail about
+each of these functions, together with examples for their use.  
 
-<!-- html table generated in R 2.15.0 by xtable 1.7-0 package -->
-<!-- Mon Apr 16 16:10:08 2012 -->
-<TABLE border=1>
-<CAPTION ALIGN="bottom"> A list of each of the functions and data objects provided by rfishbase </CAPTION>
-<TR> <TH> function.name </TH> <TH> description </TH>  </TR>
-  <TR> <TD> familySearch </TD> <TD> A function to find all fish that are members of </TD> </TR>
-  <TR> <TD>  </TD> <TD> a scientific Family </TD> </TR>
-  <TR> <TD> findSpecies </TD> <TD> Returns the matching indices in the data given </TD> </TR>
-  <TR> <TD>  </TD> <TD> a list of species names </TD> </TR>
-  <TR> <TD> fish.data </TD> <TD> A cached copy of extracted FishBase data, </TD> </TR>
-  <TR> <TD>  </TD> <TD> 03/2012. </TD> </TR>
-  <TR> <TD> fish_names </TD> <TD> Return the scientific names, families, classes, </TD> </TR>
-  <TR> <TD>  </TD> <TD> or orders of the input data </TD> </TR>
-  <TR> <TD> getDepth </TD> <TD> Returns available depth range data </TD> </TR>
-  <TR> <TD> getQuantTraits </TD> <TD> Returns all quantitative trait values found in </TD> </TR>
-  <TR> <TD>  </TD> <TD> the morphology data </TD> </TR>
-  <TR> <TD> getSize </TD> <TD> Returns available size data of specified type </TD> </TR>
-  <TR> <TD>  </TD> <TD> (length, weight, or age) </TD> </TR>
-  <TR> <TD> habitatSearch </TD> <TD> A function to search for the occurances of any </TD> </TR>
-  <TR> <TD>  </TD> <TD> keyword in habitat description </TD> </TR>
-  <TR> <TD> labridtree </TD> <TD> An example phylogeny of labrid fish </TD> </TR>
-  <TR> <TD> loadCache </TD> <TD> Load an updated cache </TD> </TR>
-  <TR> <TD> updateCache </TD> <TD> Update the cached copy of fishbase data </TD> </TR>
-  <TR> <TD> which_fish </TD> <TD> The generic search function a variety of </TD> </TR>
-  <TR> <TD>  </TD> <TD> description types </TD> </TR>
-   </TABLE>
+\begin{table}[ht]
+\begin{center}
+\begin{tabular}{ll}
+  \hline
+function.name & description \\ 
+  \hline
+familySearch & A function to find all fish that are members of \\ 
+   & a scientific Family \\ 
+  findSpecies & Returns the matching indices in the data given \\ 
+   & a list of species names \\ 
+  fish.data & A cached copy of extracted FishBase data, \\ 
+   & 03/2012. \\ 
+  fish\_names & Return the scientific names, families, classes, \\ 
+   & or orders of the input data \\ 
+  getDepth & Returns available depth range data \\ 
+  getQuantTraits & Returns all quantitative trait values found in \\ 
+   & the morphology data \\ 
+  getSize & Returns available size data of specified type \\ 
+   & (length, weight, or age) \\ 
+  habitatSearch & A function to search for the occurances of any \\ 
+   & keyword in habitat description \\ 
+  labridtree & An example phylogeny of labrid fish \\ 
+  loadCache & Load an updated cache \\ 
+  updateCache & Update the cached copy of fishbase data \\ 
+  which\_fish & The generic search function a variety of \\ 
+   & description types \\ 
+   \hline
+\end{tabular}
+\caption{A list of each of the functions and data objects provided by rfishbase}
+\end{center}
+\end{table}
 
 
 
@@ -265,7 +276,7 @@ ggplot(subset(dat,order %in% biggest), aes(order, fill=marine)) +
   geom_bar() + opts(axis.text.x=theme_text(angle=90, hjust=1))
 ```
 
-![Fraction of marine species in the eight largest orders of teleost fishes](http://farm6.staticflickr.com/5345/6939464542_d900dd1e94_o.png) 
+![Fraction of marine species in the eight largest orders of teleost fishes](figure/unnamed-chunk-3.pdf) 
 
 
 FishBase data excels for comparative studies across many species, but searching 
@@ -286,7 +297,7 @@ ggplot(dat,aes(age, length, color=marine)) +
   scale_y_log10() + scale_x_log10() 
 ```
 
-![Scatterplot maximum age with maximum length observed in each species. Color indicates marine or freshwater species.](http://farm8.staticflickr.com/7123/6939464800_42640ae15e_o.png) 
+![Scatterplot maximum age with maximum length observed in each species. Color indicates marine or freshwater species.](figure/unnamed-chunk-4.pdf) 
 
 
 A wide array of visual displays are available for different kinds of data. 
@@ -300,7 +311,7 @@ in the marine environment?"
 ggplot(subset(dat, marine),aes(reef, log(age))) + geom_boxplot() 
 ```
 
-![Distribution of maximum age for reef-associated and non-reef associated fish](http://farm6.staticflickr.com/5311/6939464978_19f2203732_o.png) 
+![Distribution of maximum age for reef-associated and non-reef associated fish](figure/unnamed-chunk-5.pdf) 
 
 
 
@@ -322,13 +333,18 @@ corr.model <- summary(lm(data=dat,  length ~ age))
 xtable(corr.model)
 ```
 
-<!-- html table generated in R 2.15.0 by xtable 1.7-0 package -->
-<!-- Mon Apr 16 16:10:40 2012 -->
-<TABLE border=1>
-<TR> <TH> Estimate </TH> <TH> Std. Error </TH> <TH> t value </TH> <TH> Pr(&gt |t|) </TH>  </TR>
-  <TR> <TD align="right"> 38.9025 </TD> <TD align="right"> 3.7424 </TD> <TD align="right"> 10.40 </TD> <TD align="right"> 0.0000 </TD> </TR>
-  <TR> <TD align="right"> 1.9529 </TD> <TD align="right"> 0.1452 </TD> <TD align="right"> 13.45 </TD> <TD align="right"> 0.0000 </TD> </TR>
-   </TABLE>
+\begin{table}[ht]
+\begin{center}
+\begin{tabular}{rrrr}
+  \hline
+Estimate & Std. Error & t value & Pr($>$$|$t$|$) \\ 
+  \hline
+38.9025 & 3.7424 & 10.40 & 0.0000 \\ 
+  1.9529 & 0.1452 & 13.45 & 0.0000 \\ 
+   \hline
+\end{tabular}
+\end{center}
+\end{table}
 
 
 
@@ -499,12 +515,17 @@ corr.summary <- summary(lm(corr.depth ~ corr.size - 1))
 xtable(corr.summary)
 ```
 
-<!-- html table generated in R 2.15.0 by xtable 1.7-0 package -->
-<!-- Mon Apr 16 16:10:45 2012 -->
-<TABLE border=1>
-<TR> <TH> Estimate </TH> <TH> Std. Error </TH> <TH> t value </TH> <TH> Pr(&gt |t|) </TH>  </TR>
-  <TR> <TD align="right"> 0.0713 </TD> <TD align="right"> 0.0993 </TD> <TD align="right"> 0.72 </TD> <TD align="right"> 0.4744 </TD> </TR>
-   </TABLE>
+\begin{table}[ht]
+\begin{center}
+\begin{tabular}{rrrr}
+  \hline
+Estimate & Std. Error & t value & Pr($>$$|$t$|$) \\ 
+  \hline
+0.0713 & 0.0993 & 0.72 & 0.4744 \\ 
+   \hline
+\end{tabular}
+\end{center}
+\end{table}
 
 
 
@@ -516,7 +537,7 @@ ggplot(data.frame(corr.size,corr.depth), aes(corr.size,corr.depth)) + geom_point
  ylab("corrected max depth")
 ```
 
-![Correcting for phylogeny, maximum size is not correlated with maximum depth observed in a labrids](http://farm8.staticflickr.com/7086/6939465342_9deef67ef7_o.png) 
+![Correcting for phylogeny, maximum size is not correlated with maximum depth observed in a labrids](figure/Figure4.pdf) 
 
 
 One can also estimate different evolutionary models for these traits 
