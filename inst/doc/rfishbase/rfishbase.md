@@ -203,37 +203,32 @@ A list of all the functions provided by `rfishbase` can be found in Table 1.
 The `rfishbase` manual provided with the package provides more detail about
 each of these functions, together with examples for their use.  
 
-\begin{table}[ht]
-\begin{center}
-\begin{tabular}{ll}
-  \hline
-function.name & description \\ 
-  \hline
-familySearch & A function to find all fish that are members of \\ 
-   & a scientific Family \\ 
-  findSpecies & Returns the matching indices in the data given \\ 
-   & a list of species names \\ 
-  fish.data & A cached copy of extracted FishBase data, \\ 
-   & 03/2012. \\ 
-  fish\_names & Return the scientific names, families, classes, \\ 
-   & or orders of the input data \\ 
-  getDepth & Returns available depth range data \\ 
-  getQuantTraits & Returns all quantitative trait values found in \\ 
-   & the morphology data \\ 
-  getSize & Returns available size data of specified type \\ 
-   & (length, weight, or age) \\ 
-  habitatSearch & A function to search for the occurances of any \\ 
-   & keyword in habitat description \\ 
-  labridtree & An example phylogeny of labrid fish \\ 
-  loadCache & Load an updated cache \\ 
-  updateCache & Update the cached copy of fishbase data \\ 
-  which\_fish & The generic search function a variety of \\ 
-   & description types \\ 
-   \hline
-\end{tabular}
-\caption{A list of each of the functions and data objects provided by rfishbase}
-\end{center}
-\end{table}
+<TABLE border=1>
+<CAPTION ALIGN="bottom"> A list of each of the functions and data objects provided by rfishbase </CAPTION>
+<TR> <TH> function.name </TH> <TH> description </TH>  </TR>
+  <TR> <TD> familySearch </TD> <TD> A function to find all fish that are members of </TD> </TR>
+  <TR> <TD>  </TD> <TD> a scientific Family </TD> </TR>
+  <TR> <TD> findSpecies </TD> <TD> Returns the matching indices in the data given </TD> </TR>
+  <TR> <TD>  </TD> <TD> a list of species names </TD> </TR>
+  <TR> <TD> fish.data </TD> <TD> A cached copy of extracted FishBase data, </TD> </TR>
+  <TR> <TD>  </TD> <TD> 03/2012. </TD> </TR>
+  <TR> <TD> fish_names </TD> <TD> Return the scientific names, families, classes, </TD> </TR>
+  <TR> <TD>  </TD> <TD> or orders of the input data </TD> </TR>
+  <TR> <TD> getDepth </TD> <TD> Returns available depth range data </TD> </TR>
+  <TR> <TD> getQuantTraits </TD> <TD> Returns all quantitative trait values found in </TD> </TR>
+  <TR> <TD>  </TD> <TD> the morphology data </TD> </TR>
+  <TR> <TD> getRefs </TD> <TD> Returns all quantitative trait values found in </TD> </TR>
+  <TR> <TD>  </TD> <TD> the morphology data </TD> </TR>
+  <TR> <TD> getSize </TD> <TD> Returns available size data of specified type </TD> </TR>
+  <TR> <TD>  </TD> <TD> (length, weight, or age) </TD> </TR>
+  <TR> <TD> habitatSearch </TD> <TD> A function to search for the occurances of any </TD> </TR>
+  <TR> <TD>  </TD> <TD> keyword in habitat description </TD> </TR>
+  <TR> <TD> labridtree </TD> <TD> An example phylogeny of labrid fish </TD> </TR>
+  <TR> <TD> loadCache </TD> <TD> Load an updated cache </TD> </TR>
+  <TR> <TD> updateCache </TD> <TD> Update the cached copy of fishbase data </TD> </TR>
+  <TR> <TD> which_fish </TD> <TD> The generic search function a variety of </TD> </TR>
+  <TR> <TD>  </TD> <TD> description types </TD> </TR>
+   </TABLE>
 
 
 
@@ -276,7 +271,7 @@ ggplot(subset(dat,order %in% biggest), aes(order, fill=marine)) +
   geom_bar() + opts(axis.text.x=theme_text(angle=90, hjust=1))
 ```
 
-![Fraction of marine species in the eight largest orders of teleost fishes](figure/unnamed-chunk-3.pdf) 
+
 
 
 FishBase data excels for comparative studies across many species, but searching 
@@ -297,7 +292,7 @@ ggplot(dat,aes(age, length, color=marine)) +
   scale_y_log10() + scale_x_log10() 
 ```
 
-![Scatterplot maximum age with maximum length observed in each species. Color indicates marine or freshwater species.](figure/unnamed-chunk-4.pdf) 
+
 
 
 A wide array of visual displays are available for different kinds of data. 
@@ -311,7 +306,7 @@ in the marine environment?"
 ggplot(subset(dat, marine),aes(reef, log(age))) + geom_boxplot() 
 ```
 
-![Distribution of maximum age for reef-associated and non-reef associated fish](figure/unnamed-chunk-5.pdf) 
+
 
 
 
@@ -333,18 +328,11 @@ corr.model <- summary(lm(data=dat,  length ~ age))
 xtable(corr.model)
 ```
 
-\begin{table}[ht]
-\begin{center}
-\begin{tabular}{rrrr}
-  \hline
-Estimate & Std. Error & t value & Pr($>$$|$t$|$) \\ 
-  \hline
-38.9025 & 3.7424 & 10.40 & 0.0000 \\ 
-  1.9529 & 0.1452 & 13.45 & 0.0000 \\ 
-   \hline
-\end{tabular}
-\end{center}
-\end{table}
+<TABLE border=1>
+<TR> <TH> Estimate </TH> <TH> Std. Error </TH> <TH> t value </TH> <TH> Pr(&gt |t|) </TH>  </TR>
+  <TR> <TD align="right"> 38.9025 </TD> <TD align="right"> 3.7424 </TD> <TD align="right"> 10.40 </TD> <TD align="right"> 0.0000 </TD> </TR>
+  <TR> <TD align="right"> 1.9529 </TD> <TD align="right"> 0.1452 </TD> <TD align="right"> 13.45 </TD> <TD align="right"> 0.0000 </TD> </TR>
+   </TABLE>
 
 
 
@@ -515,29 +503,23 @@ corr.summary <- summary(lm(corr.depth ~ corr.size - 1))
 xtable(corr.summary)
 ```
 
-\begin{table}[ht]
-\begin{center}
-\begin{tabular}{rrrr}
-  \hline
-Estimate & Std. Error & t value & Pr($>$$|$t$|$) \\ 
-  \hline
-0.0713 & 0.0993 & 0.72 & 0.4744 \\ 
-   \hline
-\end{tabular}
-\end{center}
-\end{table}
+<TABLE border=1>
+<TR> <TH> Estimate </TH> <TH> Std. Error </TH> <TH> t value </TH> <TH> Pr(&gt |t|) </TH>  </TR>
+  <TR> <TD align="right"> 0.0713 </TD> <TD align="right"> 0.0993 </TD> <TD align="right"> 0.72 </TD> <TD align="right"> 0.4744 </TD> </TR>
+   </TABLE>
 
 
 
 
 
 ```r
-ggplot(data.frame(corr.size,corr.depth), aes(corr.size,corr.depth)) + geom_point() + stat_smooth(method=lm) + 
+ggplot(data.frame(corr.size,corr.depth), aes(corr.size,corr.depth)) +
+ geom_point() + stat_smooth(method=lm) + 
  xlab("Phylogenetically corrected maximum size") +
  ylab("corrected max depth")
 ```
 
-![Correcting for phylogeny, maximum size is not correlated with maximum depth observed in a labrids](figure/Figure4.pdf) 
+
 
 
 One can also estimate different evolutionary models for these traits 

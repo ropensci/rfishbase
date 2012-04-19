@@ -9,7 +9,7 @@ md:
 
 docx:
 	./knit docx
-	pandoc -s -S --biblio rfishbase.bib rfishbase.md -o rfishbase.docx
+	pandoc -s -S --biblio rfishbase.bib rfishbase.md --reference-docx=doctemplate.docx -o rfishbase.docx
 
 
 pdf:
