@@ -77,7 +77,7 @@ update may take up to 24 hours. This copy is stored in the specified
 directory (note that "." can be used to indicate the current working directory)
 with the current date.  The most recent copy of the data
 in the specified path can be loaded with the `loadCache()` function.  
-If no cached set is found, `rfishbase` will load thie copy originally
+If no cached set is found, `rfishbase` will load the copy originally
 included in the package.  
 
 ``` {r update, eval=FALSE }

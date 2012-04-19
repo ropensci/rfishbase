@@ -7,9 +7,14 @@ github:
 md:
 	pandoc -s -S --biblio rfishbase.bib rfishbase.md -o rfishbase.md
 
+odt:
+	./knit docx
+	pandoc -s -S --biblio rfishbase.bib rfishbase.md --reference-odt=reference.odt -o rfishbase.odt
+
+
 docx:
 	./knit docx
-	pandoc -s -S --biblio rfishbase.bib rfishbase.md --reference-docx=doctemplate.docx -o rfishbase.docx
+	pandoc -s -S --biblio rfishbase.bib rfishbase.md --reference-docx=reference.docx -o rfishbase.docx
 
 
 pdf:
