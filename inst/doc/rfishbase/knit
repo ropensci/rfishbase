@@ -9,8 +9,10 @@ render_markdown()
 
 ## Formatting for printed numbers
 knit_hooks$set(inline = function(x) {
-  if(is.numeric(x))
+  if(is.numeric(x) && x > 0.001)
    I(prettyNum(round(x,2), big.mark=","))
+  else
+    I(x)
 })
 
 ## global chunk options: default uses high quality Cairo PNG device
@@ -23,7 +25,7 @@ opts_chunk$set(cache=TRUE, fig.path='figure/', dev='Cairo_png',
 options(xtable.type = 'html')
 
 ## Global options 
-opts_chunk$set(warning=FALSE, message=FALSE, comment=NA, tidy=FALSE)
+opts_chunk$set(warning=FALSE, message=FALSE, comment=NA, tidy=FALSE, refresh=1.5)
 
 ## chunk hooks
 knit_hooks$set(par=function(before, options, envir){

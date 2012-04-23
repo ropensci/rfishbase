@@ -199,7 +199,7 @@ For instance, one can identify which orders contain the greatest number of
 species, and for each of them, plot the fraction in which the species are 
 marine.
 
-``` {r fig.height=4, fig.width=6, fig.cap='Fraction of marine species in the eight largest orders of teleost fishes'}
+``` {r Figure1, fig.height=4, fig.width=6, fig.cap='Fraction of marine species in the eight largest orders of teleost fishes'}
 biggest <- names(head(sort(table(order),decr=T), 8))
 ggplot(subset(dat,order %in% biggest), aes(order, fill=marine)) +
   geom_bar() + opts(axis.text.x=theme_text(angle=90, hjust=1))
@@ -215,10 +215,10 @@ not the species is marine-associated.  The `ggplot2` package [@ggplot2]
 provides a particularly powerful and flexible language for visual exploration 
 of such patterns.
 
-``` {r fig.height=3, fig.width=6, fig.cap='Scatterplot maximum age with maximum length observed in each species. Color indicates marine or freshwater species.'}
+``` {r Figure2, fig.height=4, fig.width=6, fig.cap='Scatterplot maximum age with maximum length observed in each species. Color indicates marine or freshwater species.'}
 ggplot(dat,aes(age, length, color=marine)) +
   geom_point(position='jitter',alpha=.8) +
-  scale_y_log10() + scale_x_log10() 
+  scale_y_log10() + scale_x_log10(breaks=c(50,100,200)) 
 ````
 
 A wide array of visual displays are available for different kinds of data. 
@@ -226,21 +226,21 @@ A box-plot is  natural way to compare the distributions of categorical
 variables, such as asking "Are reef species longer lived than non-reef species
 in the marine environment?"
 
-``` {r fig.height=3.5, fig.width=3.5, fig.cap='Distribution of maximum age for reef-associated and non-reef associated fish'}
+``` {r Figure3, fig.height=3, fig.width=3, fig.cap='Distribution of maximum age for reef-associated and non-reef associated fish'}
 ggplot(subset(dat, marine),aes(reef, log(age))) + geom_boxplot() 
 ````
 
 
-In addition to powerful visualizations R provides an unparalleled array of statistical analysis methods.  Generating a table of the results from a linear model testing the correlation of maximum length with maximum size takes a
-single line (The `xtable` command formats the table for printing, in this 
-case, in LaTeX): 
+In addition to powerful visualizations R provides an unparalleled array of statistical analysis methods.  
+Testing the linear model testing the correlation of maximum length with maximum size takes a
+single line, 
 
 ``` {r } 
 corr.model <- summary(lm(data=dat,  length ~ age))
 ````
-``` {r Table2, results="asis", include = getOption("knitr.include"), split = getOption("knitr.split")}
-xtable(corr.model)
-````
+
+which shows a significant correlation between length and age (p = `r corr.model$coefficients[,4]`).  
+
 
 ## Comparative studies
 Many ecological and evolutionary studies rely on comparisons between
@@ -283,8 +283,8 @@ gobies.on.reefs <- table(which_fish("reef", "habitat", fish.data[goby]) )
 ````
 
 Note that summing the list of true/false values returned gives the total
-number of matches.  This reveals that there are `r I(labrids.on.reefs[["TRUE"]])` 
-labrid species associated with reefs, and `r I(gobies.on.reefs[["TRUE"]])` goby species
+number of matches.  This reveals that there are `r labrids.on.reefs[["TRUE"]]` 
+labrid species associated with reefs, and `r gobies.on.reefs[["TRUE"]]` goby species
 associated with reefs.  This example illustrates the power of accessing the
 FishBase data: Gobies are routinely listed as the biggest group of reef 
 fishes [*e.g.* @bellwood2002] but this is because there are
@@ -344,11 +344,9 @@ corr.depth <- pic(pruned$data[["depths"]],pruned$phy)
 corr.summary <- summary(lm(corr.depth ~ corr.size - 1))
 ````
 
-``` {r Table3, results="asis", include = getOption("knitr.include"), split = getOption("knitr.split") }
-xtable(corr.summary)
-````
+which returns a non-significant correlation (p = `r corr.summary$coefficients[,4]`). 
 
-``` {r Figure4, fig.height=3, fig.width=6, fig.cap='Correcting for phylogeny, maximum size is not correlated with maximum depth observed in a labrids'}
+``` {r Figure4, fig.height=3, fig.width=6, fig.cap='Correcting for phylogeny, maximum size is not correlated with maximum depth observed in  labrids'}
 ggplot(data.frame(corr.size,corr.depth), aes(corr.size,corr.depth)) +
  geom_point() + stat_smooth(method=lm) + 
  xlab("Phylogenetically corrected maximum size") +
@@ -365,7 +363,7 @@ ou <- fitContinuous(pruned$phy, pruned$data[["depths"]], model="OU")[[1]]
 
 where the Brownian motion model has an AIC score of `r bm$aic` while
 the OU model has a score of `r ou$aic`, suggesting that
-`r I(names(which.min(list(BM=bm$aic,OU=ou$aic))))` is the better model.
+`r names(which.min(list(BM=bm$aic,OU=ou$aic)))` is the better model.
 
 
 # Discussion
@@ -431,6 +429,11 @@ of the `rfishbase` package to provide information about commercially relevant sp
 This work was supported by a Computational Sciences Graduate Fellowship from the
 Department of Energy under grant number DE-FG02-97ER25308 to CB and NSF grant
 DEB-1061981 to PCW.  
+
+
+``` {r echo=FALSE}
+save(list=ls(), file="rfishbase.rda")
+````
 
 # References
 

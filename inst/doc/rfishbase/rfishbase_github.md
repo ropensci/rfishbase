@@ -68,12 +68,16 @@ This loads a copy of all available data from FishBase into the R list,
 to extraction, manipulation and visualization. The online repository is
 frequently updated as new information is uploaded. To get the most
 recent copy of FishBase, update the cache instead. The update may take
-up to 24 hours. This copy is stored in the working directory with the
-current date and can be loaded when finished.
+up to 24 hours. This copy is stored in the specified directory (note
+that “.” can be used to indicate the current working directory) with the
+current date. The most recent copy of the data in the specified path can
+be loaded with the `loadCache()` function.\
+If no cached set is found, `rfishbase` will load the copy originally
+included in the package.
 
 ~~~~ {.r}
-updateCache()
-loadCache("2012-03-26fishdata.Rdat")
+updateCache(".")
+loadCache(".")
 ~~~~
 
 Loading the database creates an object called fish.data, with one entry
@@ -87,7 +91,7 @@ life-cycle, morphology and diagnostic information. The information
 returned in each category is provided as plain-text, consequently
 `rfishbase` must use regular expression matching to identify the
 occurrence of particular words or patterns in this text corresponding to
-data of interest (Friedl 2006)
+data of interest (Friedl 2006).
 
 Quantitative traits such as length, maximum known age, spine and ray
 counts, and depth information are provided consistently for most
@@ -167,10 +171,13 @@ field,
 depths <- getDepth(fish.data)
 ~~~~
 
-Table 1 lists each of the functions provided by `rfishbase`
+A list of all the functions provided by `rfishbase` can be found in
+Table 1.\
+The `rfishbase` manual provided with the package provides more detail
+about each of these functions, together with examples for their use.
 
 <!-- html table generated in R 2.15.0 by xtable 1.7-0 package -->
-<!-- Mon Apr 16 16:10:08 2012 -->
+<!-- Fri Apr 20 23:42:58 2012 -->
 <TABLE border=1>
 <CAPTION ALIGN="bottom"> A list of each of the functions and data
 objects provided by rfishbase </CAPTION>
@@ -223,6 +230,14 @@ Returns all quantitative trait values found in
 </TD> </TR>
   <TR> <TD>  </TD> <TD> 
 the morphology data
+</TD> </TR>
+  <TR> <TD> 
+getRefs
+</TD> <TD> 
+Returns the FishBase reference id numbers
+</TD> </TR>
+  <TR> <TD>  </TD> <TD> 
+matching a query.
 </TD> </TR>
   <TR> <TD> 
 getSize
@@ -299,7 +314,7 @@ ggplot(subset(dat,order %in% biggest), aes(order, fill=marine)) +
 ~~~~
 
 ![Fraction of marine species in the eight largest orders of teleost
-fishes](http://farm6.staticflickr.com/5345/6939464542_d900dd1e94_o.png)
+fishes](http://farm6.staticflickr.com/5324/6952128820_427548dbc8_o.png)
 
 FishBase data excels for comparative studies across many species, but
 searching through over 30,000 species to extract data makes such
@@ -315,12 +330,12 @@ such patterns.
 ~~~~ {.r}
 ggplot(dat,aes(age, length, color=marine)) +
   geom_point(position='jitter',alpha=.8) +
-  scale_y_log10() + scale_x_log10() 
+  scale_y_log10() + scale_x_log10(breaks=c(50,100,200)) 
 ~~~~
 
 ![Scatterplot maximum age with maximum length observed in each species.
 Color indicates marine or freshwater
-species.](http://farm8.staticflickr.com/7123/6939464800_42640ae15e_o.png)
+species.](http://farm8.staticflickr.com/7044/7098199503_6ea7687c1e_o.png)
 
 A wide array of visual displays are available for different kinds of
 data. A box-plot is natural way to compare the distributions of
@@ -333,55 +348,19 @@ ggplot(subset(dat, marine),aes(reef, log(age))) + geom_boxplot()
 
 ![Distribution of maximum age for reef-associated and non-reef
 associated
-fish](http://farm6.staticflickr.com/5311/6939464978_19f2203732_o.png)
+fish](http://farm8.staticflickr.com/7248/6952129098_093f4fb030_o.png)
 
 In addition to powerful visualizations R provides an unparalleled array
-of statistical analysis methods. Generating a table of the results from
-a linear model testing the correlation of maximum length with maximum
-size takes a single line (The `xtable` command formats the table for
-printing, in this case, in LaTeX):
+of statistical analysis methods.\
+Testing the linear model testing the correlation of maximum length with
+maximum size takes a single line,
 
 ~~~~ {.r}
 corr.model <- summary(lm(data=dat,  length ~ age))
 ~~~~
 
-~~~~ {.r}
-xtable(corr.model)
-~~~~
-
-<!-- html table generated in R 2.15.0 by xtable 1.7-0 package -->
-<!-- Mon Apr 16 16:10:40 2012 -->
-<TABLE border=1>
-<TR> <TH> 
-Estimate
-</TH> <TH> 
-Std. Error
-</TH> <TH> 
-t value
-</TH> <TH> 
-Pr(&gt |t|)
-</TH>  </TR>
-  <TR> <TD align="right"> 
-38.9025
-</TD> <TD align="right"> 
-3.7424
-</TD> <TD align="right"> 
-10.40
-</TD> <TD align="right"> 
-0.0000
-</TD> </TR>
-  <TR> <TD align="right"> 
-1.9529
-</TD> <TD align="right"> 
-0.1452
-</TD> <TD align="right"> 
-13.45
-</TD> <TD align="right"> 
-0.0000
-</TD> </TR>
-   </TABLE>
-
-
+which shows a significant correlation between length and age (p =
+2.90303819046825e-24).
 
 Comparative studies
 -------------------
@@ -398,10 +377,10 @@ families using the `rfishbase` functions presented above.
 In this example, consider the simpler question “Are there more
 reef-associated species in *Labridae* than in *Gobiidae*?” Recent
 research has shown that the families Scaridae and Odacidae are nested
-within Labridae [@westneat2005], although the three groups are listed as
-separate families in fishbase. We get all the species in fishbase from
-*Labridae* (wrasses), *Scaridae* (parrotfishes) and *Odacidae*
-(weed-whitings):
+within Labridae (Westneat and Alfaro 2005), although the three groups
+are listed as separate families in fishbase. We get all the species in
+fishbase from *Labridae* (wrasses), *Scaridae* (parrotfishes) and
+*Odacidae* (weed-whitings):
 
 ~~~~ {.r}
 labrid <- which_fish("(Labridae|Scaridae|Odacidae)", "Family", fish.data)
@@ -499,46 +478,18 @@ corr.depth <- pic(pruned$data[["depths"]],pruned$phy)
 corr.summary <- summary(lm(corr.depth ~ corr.size - 1))
 ~~~~
 
-~~~~ {.r}
-xtable(corr.summary)
-~~~~
-
-<!-- html table generated in R 2.15.0 by xtable 1.7-0 package -->
-<!-- Mon Apr 16 16:10:45 2012 -->
-<TABLE border=1>
-<TR> <TH> 
-Estimate
-</TH> <TH> 
-Std. Error
-</TH> <TH> 
-t value
-</TH> <TH> 
-Pr(&gt |t|)
-</TH>  </TR>
-  <TR> <TD align="right"> 
-0.0713
-</TD> <TD align="right"> 
-0.0993
-</TD> <TD align="right"> 
-0.72
-</TD> <TD align="right"> 
-0.4744
-</TD> </TR>
-   </TABLE>
-
-
-
-
+which returns a non-significant correlation (p = 0.47).
 
 ~~~~ {.r}
-ggplot(data.frame(corr.size,corr.depth), aes(corr.size,corr.depth)) + geom_point() + stat_smooth(method=lm) + 
+ggplot(data.frame(corr.size,corr.depth), aes(corr.size,corr.depth)) +
+ geom_point() + stat_smooth(method=lm) + 
  xlab("Phylogenetically corrected maximum size") +
  ylab("corrected max depth")
 ~~~~
 
 ![Correcting for phylogeny, maximum size is not correlated with maximum
-depth observed in a
-labrids](http://farm8.staticflickr.com/7086/6939465342_9deef67ef7_o.png)
+depth observed in
+labrids](http://farm8.staticflickr.com/7128/6952129328_6da133d086_o.png)
 
 One can also estimate different evolutionary models for these traits to
 decide which best describes the data,
@@ -549,7 +500,7 @@ ou <- fitContinuous(pruned$phy, pruned$data[["depths"]], model="OU")[[1]]
 ~~~~
 
 where the Brownian motion model has an AIC score of 1,185 while the OU
-model has a score of 918.2, suggesting that is the better model.
+model has a score of 918.2, suggesting that OU is the better model.
 
 Discussion
 ==========
@@ -709,6 +660,12 @@ Reichman, O. J., Matthew B. Jones, and Mark P. Schildhauer. 2011.
 (feb): 703–705. doi:10.1126/science.1197962.
 [http://www.sciencemag.org/cgi/doi/10.1126/science.1197962
 http://www.ncbi.nlm.nih.gov/pubmed/21311007](http://www.sciencemag.org/cgi/doi/10.1126/science.1197962 http://www.ncbi.nlm.nih.gov/pubmed/21311007 "http://www.sciencemag.org/cgi/doi/10.1126/science.1197962 http://www.ncbi.nlm.nih.gov/pubmed/21311007").
+
+Westneat, Mark W., and Michael E. Alfaro. 2005. “Phylogenetic
+relationships and evolutionary history of the reef fish family
+Labridae.” *Molecular phylogenetics and evolution* 36 (aug): 370–90.
+doi:10.1016/j.ympev.2005.02.001.
+[http://www.ncbi.nlm.nih.gov/pubmed/15955516](http://www.ncbi.nlm.nih.gov/pubmed/15955516 "http://www.ncbi.nlm.nih.gov/pubmed/15955516").
 
 Wickham, Hadley. 2009. *ggplot2: elegant graphics for data analysis*.
 Springer New York.

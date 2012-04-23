@@ -77,7 +77,7 @@ update may take up to 24 hours. This copy is stored in the specified
 directory (note that "." can be used to indicate the current working directory)
 with the current date.  The most recent copy of the data
 in the specified path can be loaded with the `loadCache()` function.  
-If no cached set is found, `rfishbase` will load thie copy originally
+If no cached set is found, `rfishbase` will load the copy originally
 included in the package.  
 
 
@@ -203,6 +203,8 @@ A list of all the functions provided by `rfishbase` can be found in Table 1.
 The `rfishbase` manual provided with the package provides more detail about
 each of these functions, together with examples for their use.  
 
+<!-- html table generated in R 2.15.0 by xtable 1.7-0 package -->
+<!-- Fri Apr 20 23:42:58 2012 -->
 <TABLE border=1>
 <CAPTION ALIGN="bottom"> A list of each of the functions and data objects provided by rfishbase </CAPTION>
 <TR> <TH> function.name </TH> <TH> description </TH>  </TR>
@@ -217,8 +219,8 @@ each of these functions, together with examples for their use.
   <TR> <TD> getDepth </TD> <TD> Returns available depth range data </TD> </TR>
   <TR> <TD> getQuantTraits </TD> <TD> Returns all quantitative trait values found in </TD> </TR>
   <TR> <TD>  </TD> <TD> the morphology data </TD> </TR>
-  <TR> <TD> getRefs </TD> <TD> Returns all quantitative trait values found in </TD> </TR>
-  <TR> <TD>  </TD> <TD> the morphology data </TD> </TR>
+  <TR> <TD> getRefs </TD> <TD> Returns the FishBase reference id numbers </TD> </TR>
+  <TR> <TD>  </TD> <TD> matching a query. </TD> </TR>
   <TR> <TD> getSize </TD> <TD> Returns available size data of specified type </TD> </TR>
   <TR> <TD>  </TD> <TD> (length, weight, or age) </TD> </TR>
   <TR> <TD> habitatSearch </TD> <TD> A function to search for the occurances of any </TD> </TR>
@@ -271,7 +273,7 @@ ggplot(subset(dat,order %in% biggest), aes(order, fill=marine)) +
   geom_bar() + opts(axis.text.x=theme_text(angle=90, hjust=1))
 ```
 
-
+![Fraction of marine species in the eight largest orders of teleost fishes](http://farm6.staticflickr.com/5324/6952128820_427548dbc8_o.png) 
 
 
 FishBase data excels for comparative studies across many species, but searching 
@@ -289,10 +291,10 @@ of such patterns.
 ```r
 ggplot(dat,aes(age, length, color=marine)) +
   geom_point(position='jitter',alpha=.8) +
-  scale_y_log10() + scale_x_log10() 
+  scale_y_log10() + scale_x_log10(breaks=c(50,100,200)) 
 ```
 
-
+![Scatterplot maximum age with maximum length observed in each species. Color indicates marine or freshwater species.](http://farm8.staticflickr.com/7044/7098199503_6ea7687c1e_o.png) 
 
 
 A wide array of visual displays are available for different kinds of data. 
@@ -306,13 +308,13 @@ in the marine environment?"
 ggplot(subset(dat, marine),aes(reef, log(age))) + geom_boxplot() 
 ```
 
+![Distribution of maximum age for reef-associated and non-reef associated fish](http://farm8.staticflickr.com/7248/6952129098_093f4fb030_o.png) 
 
 
 
-
-In addition to powerful visualizations R provides an unparalleled array of statistical analysis methods.  Generating a table of the results from a linear model testing the correlation of maximum length with maximum size takes a
-single line (The `xtable` command formats the table for printing, in this 
-case, in LaTeX): 
+In addition to powerful visualizations R provides an unparalleled array of statistical analysis methods.  
+Testing the linear model testing the correlation of maximum length with maximum size takes a
+single line, 
 
 
 
@@ -323,17 +325,7 @@ corr.model <- summary(lm(data=dat,  length ~ age))
 
 
 
-
-```r
-xtable(corr.model)
-```
-
-<TABLE border=1>
-<TR> <TH> Estimate </TH> <TH> Std. Error </TH> <TH> t value </TH> <TH> Pr(&gt |t|) </TH>  </TR>
-  <TR> <TD align="right"> 38.9025 </TD> <TD align="right"> 3.7424 </TD> <TD align="right"> 10.40 </TD> <TD align="right"> 0.0000 </TD> </TR>
-  <TR> <TD align="right"> 1.9529 </TD> <TD align="right"> 0.1452 </TD> <TD align="right"> 13.45 </TD> <TD align="right"> 0.0000 </TD> </TR>
-   </TABLE>
-
+which shows a significant correlation between length and age (p = 2.90303819046825e-24).  
 
 
 ## Comparative studies
@@ -497,18 +489,7 @@ corr.summary <- summary(lm(corr.depth ~ corr.size - 1))
 
 
 
-
-
-```r
-xtable(corr.summary)
-```
-
-<TABLE border=1>
-<TR> <TH> Estimate </TH> <TH> Std. Error </TH> <TH> t value </TH> <TH> Pr(&gt |t|) </TH>  </TR>
-  <TR> <TD align="right"> 0.0713 </TD> <TD align="right"> 0.0993 </TD> <TD align="right"> 0.72 </TD> <TD align="right"> 0.4744 </TD> </TR>
-   </TABLE>
-
-
+which returns a non-significant correlation (p = 0.47). 
 
 
 
@@ -519,7 +500,7 @@ ggplot(data.frame(corr.size,corr.depth), aes(corr.size,corr.depth)) +
  ylab("corrected max depth")
 ```
 
-
+![Correcting for phylogeny, maximum size is not correlated with maximum depth observed in  labrids](http://farm8.staticflickr.com/7128/6952129328_6da133d086_o.png) 
 
 
 One can also estimate different evolutionary models for these traits 
@@ -537,7 +518,7 @@ ou <- fitContinuous(pruned$phy, pruned$data[["depths"]], model="OU")[[1]]
 
 where the Brownian motion model has an AIC score of 1,185 while
 the OU model has a score of 918.2, suggesting that
- is the better model.
+OU is the better model.
 
 
 # Discussion
@@ -603,6 +584,10 @@ of the `rfishbase` package to provide information about commercially relevant sp
 This work was supported by a Computational Sciences Graduate Fellowship from the
 Department of Energy under grant number DE-FG02-97ER25308 to CB and NSF grant
 DEB-1061981 to PCW.  
+
+
+
+
 
 # References
 
