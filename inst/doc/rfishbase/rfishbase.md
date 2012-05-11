@@ -273,7 +273,6 @@ ggplot(subset(dat,order %in% biggest), aes(order, fill=marine)) +
   geom_bar() + opts(axis.text.x=theme_text(angle=90, hjust=1))
 ```
 
-![Fraction of marine species in the eight largest orders of teleost fishes](http://farm6.staticflickr.com/5324/6952128820_427548dbc8_o.png) 
 
 
 FishBase data excels for comparative studies across many species, but searching 
@@ -294,7 +293,6 @@ ggplot(dat,aes(age, length, color=marine)) +
   scale_y_log10() + scale_x_log10(breaks=c(50,100,200)) 
 ```
 
-![Scatterplot maximum age with maximum length observed in each species. Color indicates marine or freshwater species.](http://farm8.staticflickr.com/7044/7098199503_6ea7687c1e_o.png) 
 
 
 A wide array of visual displays are available for different kinds of data. 
@@ -308,7 +306,6 @@ in the marine environment?"
 ggplot(subset(dat, marine),aes(reef, log(age))) + geom_boxplot() 
 ```
 
-![Distribution of maximum age for reef-associated and non-reef associated fish](http://farm8.staticflickr.com/7248/6952129098_093f4fb030_o.png) 
 
 
 
@@ -500,7 +497,6 @@ ggplot(data.frame(corr.size,corr.depth), aes(corr.size,corr.depth)) +
  ylab("corrected max depth")
 ```
 
-![Correcting for phylogeny, maximum size is not correlated with maximum depth observed in  labrids](http://farm8.staticflickr.com/7128/6952129328_6da133d086_o.png) 
 
 
 One can also estimate different evolutionary models for these traits 
