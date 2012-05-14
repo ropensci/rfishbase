@@ -5,7 +5,7 @@
     <title>rfishbase 0.0-9</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
-    <meta name="author" content="Carl Boettiger, Duncan Temple Lang, Peter C. Wainwright">
+    <meta name="author" content="">
 
     <!-- Le styles -->
     <link href="css/bootstrap.css" rel="stylesheet">
@@ -44,33 +44,38 @@
 
 <p><em>Accessing data from FishBase using R</em></p>
 
-<p><code>rfishbase</code> is a package for interfacing with the <a href="http://fishbase.org">fishbase.org</a> database.<br/>
- It provides code to download and parse a local copy of fishbase, which can be used for <br/>
- rapid access for a variety of analysis functions. </p>
+<p><code>rfishbase</code> is a package for interfacing with the <a href="http://fishbase.org">fishbase.org</a> database. It provides code to download and parse a local copy of fishbase, which can be used for rapid access for a variety of analysis functions. </p>
 
-<p><code>rfishbase</code> is available <a href="http://cran.r-project.org/web/packages/rfishbase/">on CRAN</a> and can<br/>
- be installed through the R package manager (see <code>install.packages</code>).  The latest (development)<br/>
- version is hosted here on github, and can be installed using the <a href="https://github.com/hadley/devtools">devtools</a><br/>
- package (which is on CRAN):</p>
+<ul>
+<li><a href="https://github.com/ropensci/rfishbase">Development version source code on github</a></li>
+<li><a href="http://ropensci.github.com/rfishbase/">HTML package documentation</a></li>
+<li><a href="https://github.com/ropensci/rfishbase/issues">Report issues, bugs or feature requests</a></li>
+</ul>
 
-<pre><code> library(devtools)
- install_github(&quot;rfishbase&quot;, &quot;ropensci&quot;)
+<h2>Installation</h2>
+
+<p><code>rfishbase</code> is available <a href="http://cran.r-project.org/web/packages/rfishbase/">on CRAN</a> and can be installed through the R package manager (see <code>install.packages</code>).  The latest (development) version is hosted here on github, and can be installed using the <a href="https://github.com/hadley/devtools">devtools</a> package:</p>
+
+<pre><code class="r">library(devtools)
+install_github(&quot;rfishbase&quot;, &quot;ropensci&quot;)
 </code></pre>
 
-<p><code>rfishbase</code> is developed by <a href="https://github.com/cboettig">Carl Boettiger</a><br/>
- in collaboration with <a href="https://github.com/duncantl">Duncan Temple Lang</a> <br/>
- and Peter Wainwright, and is part of the <a href="http://github.com/ropensci">rOpenSci project</a>. <br/>
- This software, examples, and documentation are freely provided under the <a href="http://creativecommons.org/publicdomain/zero/1.0/">CC0 license</a>.</p>
+<h2>Getting started</h2>
 
-<p>A <a href="https://github.com/ropensci/rfishbase/blob/master/inst/doc/rfishbase/rfishbase_github.md">preprint</a><br/>
- of our manuscript introducing the package can be found in the <br/>
- <a href="https://github.com/ropensci/rfishbase/tree/master/inst/doc">inst/doc</a> directory.</p>
+<ul>
+<li>Read our <a href="https://github.com/ropensci/rfishbase/blob/master/inst/doc/rfishbase/rfishbase_github.md">tutorial</a></li>
+<li>Browse the examples in the <a href="http://ropensci.github.com/rfishbase/">documentation</a></li>
+</ul>
+
+<p><code>rfishbase</code> is developed by <a href="https://github.com/cboettig">Carl Boettiger</a> in collaboration with <a href="https://github.com/duncantl">Duncan Temple Lang</a> and Peter Wainwright, and is part of the <a href="http://github.com/ropensci">rOpenSci project</a>.  This software, examples, and documentation are freely provided under the <a href="http://creativecommons.org/publicdomain/zero/1.0/">CC0 license</a>.</p>
+
+<p>A <a href="https://github.com/ropensci/rfishbase/blob/master/inst/doc/rfishbase/rfishbase_github.md">preprint</a> of our manuscript introducing the package can be found in the <a href="https://github.com/ropensci/rfishbase/tree/master/inst/doc">inst/doc</a> directory.</p>
 
 <h2>References</h2>
 
 <p>Froese, R. and D. Pauly. Editors. 2011. FishBase.<br/>
-  World Wide Web electronic publication.<br/>
-  <a href="http://www.fishbase.org">www.fishbase.org</a>, version (08/2011).</p>
+World Wide Web electronic publication.<br/>
+<a href="http://www.fishbase.org">www.fishbase.org</a>, version (08/2011).</p>
 
 
           <h2>Help topics</h2>
@@ -116,7 +121,7 @@ and return the XML R object</li>
             
            
           <h2>Authors</h2>
-          
+          Carl Boettiger, Duncan Temple Lang and Peter C. Wainwright
           
         </div>
       </div>
