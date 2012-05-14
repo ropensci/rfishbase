@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Returns available size data of specified type (length, weight, or age). rfishbase 0.0-9</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Le styles -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <style>
+      body {padding-top: 60px;}
+      h2 {padding-top: 20px}
+    </style>
+    <link href="css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="css/highlight.css" rel="stylesheet">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class = "container">
+          <a class="brand" href="#">rfishbase 0.0-9</a>
+          <div class="nav">
+            <ul class="nav">
+              <li><a href="index.html"><i class="icon-home icon-white"></i> Index</a></li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <h1>Returns available size data of specified type (length, weight, or age)</h1>
+
+      <div class="row">
+        <div class="span8">
+          <h2>Usage</h2>
+          <pre><span class="functioncall"><a href='getSize.html.html'>getSize</a></span><span class="keyword">(</span><span class="argument">fish.data</span> <span class="argument">=</span> NULL<span class="keyword">,</span> <span class="argument">value</span> <span class="argument">=</span> <span class="functioncall"><a href='http://www.inside-r.org/r-doc/base/c'>c</a></span><span class="keyword">(</span><span class="string">"length"</span><span class="keyword">,</span> <span class="string">"weight"</span><span class="keyword">,</span> <span class="string">"age"</span><span class="keyword">)</span><span class="keyword">,</span> <span class="argument">path</span> <span class="argument">=</span> NULL<span class="keyword">)</span></pre>
+          
+          <h2>Arguments</h2>
+          <dl>
+            <dt>fish.data</dt>
+            <dd>the fishbase database or a subset</dd>
+            <dt>value</dt>
+            <dd>the measure to return: maximum recorded
+  length (cm), maximum weight (g), or maximum age (years).
+  Defaults to length; many entries lack weight and age.</dd>
+            <dt>path</dt>
+            <dd>to updated copy of the cache; optional.</dd>
+          </dl>
+          
+          <div class="Value">
+            <h2>Value</h2>
+            
+            <p>a numeric vector of length(fish.data) with the values
+  requested</p>
+        
+          </div>
+
+          <div class="Description">
+            <h2>Description</h2>
+            
+            <p>Returns available size data of specified type (length,
+  weight, or age)</p>
+        
+          </div>
+      
+          <h2 id="examples">Examples</h2>
+          <pre class="examples"><div class='input'><span class="functioncall"><a href='http://www.inside-r.org/r-doc/utils/data'>data</a></span><span class="keyword">(</span><span class="symbol">fishbase</span><span class="keyword">)</span>
+<span class="symbol">yr</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='getSize.html.html'>getSize</a></span><span class="keyword">(</span><span class="symbol">fish.data</span><span class="keyword">,</span> <span class="string">"age"</span><span class="keyword">)</span>
+<span class="functioncall"><a href='http://www.inside-r.org/r-doc/graphics/hist'>hist</a></span><span class="keyword">(</span><span class="symbol">yr</span><span class="keyword">,</span> <span class="argument">breaks</span><span class="argument">=</span><span class="number">40</span><span class="keyword">,</span> <span class="argument">main</span><span class="argument">=</span><span class="string">"Age Distribution"</span><span class="keyword">,</span> <span class="argument">xlab</span><span class="argument">=</span><span class="string">"age (years)"</span><span class="keyword">)</span><span class="keyword">;</span></div>
+<p><img src='getSize-2.png' alt='' width='400' height='400' /></p>
+<div class='input'><span class="symbol">nfish</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='http://www.inside-r.org/r-doc/base/length'>length</a></span><span class="keyword">(</span><span class="symbol">fish.data</span><span class="keyword">)</span></div></pre>
+        </div>
+        <div class="span4">
+          <!-- <ul>
+            <li>getSize</li>
+          </ul>
+          <ul>
+            <li>utilities</li>
+          </ul> -->
+            
+                    
+        </div>
+      </div>
+      <footer class="footer">
+        <p class="pull-right"><a href="#">Back to top</a></p>
+        <p>Built by <a href="https://github.com/hadley/staticdocs">staticdocs</a>. Styled with <a href="http://twitter.github.com/bootstrap">bootstrap</a>.</p>
+      </footer>
+    </div> <!-- /container -->
+  </body>
+</html>

@@ -1,6 +1,6 @@
 \name{which_fish}
 \alias{which_fish}
-\title{The generic search function
+\title{which_fish is the the generic search function for fishbase
  a variety of description types}
 \usage{
   which_fish(keyword,
@@ -26,12 +26,13 @@
   matches.
 }
 \description{
-  The generic search function a variety of description
-  types
+  which_fish is the the generic search function for
+  fishbase a variety of description types
 }
 \examples{
 data(fishbase)
 invert <- which_fish("invertebrate|mollusk", using="trophic", fish.data)
+fish_names(fish.data[invert])
 sex_swap <- which_fish("change sex", using="lifecycle", fish.data)
 africa <- which_fish("Africa", using="distribution", fish.data)
 ## recall we can sub-set
@@ -40,6 +41,9 @@ reef <- which_fish("reef", "habitat", fish.data)
 redfish  <- which_fish(" red ", "diagnostic", fish.data)
 bluefish  <- which_fish(" blue ", "diagnostic", fish.data)
 sum(redfish) > sum(bluefish)
+}
+\seealso{
+  fish_names
 }
 \keyword{utilities}
 

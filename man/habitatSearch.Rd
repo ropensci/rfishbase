@@ -16,8 +16,7 @@
   calls to other functions.
 }
 \description{
-  A function to search for the occurances of any keyword in
-  habitat description
+  deprecrated, see \code{which_fish}
 }
 \details{
   Depricated.  This functionality is provided by

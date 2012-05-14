@@ -15,8 +15,7 @@
   matches.
 }
 \description{
-  A function to find all fish that are members of a
-  scientific Family
+  deprecrated, see \code{which_fish}
 }
 \details{
   The return value can be summed to give the number of

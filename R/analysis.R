@@ -1,5 +1,6 @@
 #' A function to search for the occurances of any keyword in habitat description
 #' 
+#' deprecrated, see \code{which_fish}
 #' @param keyword pattern to be used by grep
 #' @param fish.data the fishbase database fish.data or a subset,
 #' @return a logical vector of length(fish.data) indicating the matches, that can 
@@ -14,6 +15,7 @@ habitatSearch <- function(keyword, fish.data=NULL){
 
 #' A function to find all fish that are members of a scientific Family 
 #' 
+#' deprecrated, see \code{which_fish}
 #' @param family The scientific family name.  Can include grep matching, see examples 
 #' @param fish.data the fishbase database or a subset
 #' @return a logical vector of length(fish.data) indicating the matches.
@@ -21,12 +23,11 @@ habitatSearch <- function(keyword, fish.data=NULL){
 #'   be used as an index, e.g. fish.data[goby], to return the matches or to
 #'   pass to another function.  See examples.  
 #' @keywords utilities
-#' 
 familySearch <- function(family, fish.data=NULL){
   which_fish(family, using="Family", fish.data)
 }
 
-#' The generic search function  
+#' which_fish is the the generic search function for fishbase
 #'  a variety of description types
 #' 
 #' @param keyword pattern to be used by grep
@@ -40,6 +41,7 @@ familySearch <- function(family, fish.data=NULL){
 #' @examples
 #' data(fishbase) 
 #' invert <- which_fish("invertebrate|mollusk", using="trophic", fish.data)
+#' fish_names(fish.data[invert])
 #' sex_swap <- which_fish("change sex", using="lifecycle", fish.data)
 #' africa <- which_fish("Africa", using="distribution", fish.data)
 #' ## recall we can sub-set
@@ -48,6 +50,7 @@ familySearch <- function(family, fish.data=NULL){
 #' redfish  <- which_fish(" red ", "diagnostic", fish.data) 
 #' bluefish  <- which_fish(" blue ", "diagnostic", fish.data) 
 #' sum(redfish) > sum(bluefish)
+#' @seealso fish_names
 #' 
 #' @export
 which_fish <- function(keyword, using=c("trophic", "habitat", "lifecycle", 

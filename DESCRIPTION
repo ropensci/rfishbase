@@ -2,9 +2,13 @@ Package: rfishbase
 Description: A programmatic interface to fishbase.org.
 Title: R Interface to FishBASE
 Version: 0.0-9
-License: BSD
-Author: Carl Boettiger
+License: CC0
+Author: Carl Boettiger, Duncan Temple Lang, Peter C. Wainwright
 Maintainer: Carl Boettiger, <cboettig@gmail.com>
+Date: 2012
+Authors@R: c(person("Carl", "Boettiger", role = c("aut", "cre"), email =
+    "cboettig@gmail.com"), person("Duncan", "Temple Lang", role = "aut"),
+    person("Peter", "Wainwright", "C.", role = "aut"))
 Depends:
     R (>= 2.10)
 Imports:

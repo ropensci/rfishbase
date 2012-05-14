@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>a few simple demonstrations of the rfishbase package.. rfishbase 0.0-9</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="Carl Boettiger">
+
+    <!-- Le styles -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <style>
+      body {padding-top: 60px;}
+      h2 {padding-top: 20px}
+    </style>
+    <link href="css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="css/highlight.css" rel="stylesheet">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class = "container">
+          <a class="brand" href="#">rfishbase 0.0-9</a>
+          <div class="nav">
+            <ul class="nav">
+              <li><a href="index.html"><i class="icon-home icon-white"></i> Index</a></li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <h1>a few simple demonstrations of the rfishbase package.</h1>
+      
+      <div class="row">
+      <div class="span8">
+        <pre>
+        <div class='input'><span class="comment"># demo.R</span>
+<span class="functioncall"><a href='http://www.inside-r.org/r-doc/base/rm'>rm</a></span><span class="keyword">(</span><span class="argument">list</span><span class="argument">=</span><span class="functioncall"><a href='http://www.inside-r.org/r-doc/base/ls'>ls</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">)</span>
+<span class="functioncall"><a href='http://www.inside-r.org/r-doc/base/library'>require</a></span><span class="keyword">(</span><span class="symbol">rfishbase</span><span class="keyword">)</span>
+
+<span class="comment">###### Grabbing, Loading &amp; Caching Fishbase Data ######</span>
+
+<span class="comment">## Download and parse data for first 40 ids (36 fish)</span>
+<span class="comment">#fish.data &lt;- getData(1:40)</span>
+
+<span class="comment">## Or just load the cached copy of the full fishbase data:</span>
+<span class="comment">## Note that this loads the copy distributed with rfishbase.</span>
+<span class="functioncall"><a href='http://www.inside-r.org/r-doc/utils/data'>data</a></span><span class="keyword">(</span><span class="symbol">fishbase</span><span class="keyword">)</span>
+
+<span class="comment">## To get the most recent copy of fishbase, update the cache</span>
+<span class="comment">## and load that.  The update may take up to 24 hours.  </span>
+<span class="comment"># updateCache() </span>
+<span class="comment"># loadCache("2011-10-12fishdata.Rdat")</span>
+
+
+<span class="comment">###### Sample Analysis #########</span>
+<span class="comment"># how many fish are in the dataset?</span>
+<span class="functioncall"><a href='http://www.inside-r.org/r-doc/base/length'>length</a></span><span class="keyword">(</span><span class="symbol">fish.data</span><span class="keyword">)</span></div>
+<div class='output'>[1] 30622
+</div>
+<div class='input'>
+<span class="comment">## Lets start by looking at the distribution of all age data available:</span>
+<span class="symbol">yr</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='getSize.html.html'>getSize</a></span><span class="keyword">(</span><span class="symbol">fish.data</span><span class="keyword">,</span> <span class="string">"age"</span><span class="keyword">)</span>
+<span class="functioncall">qplot</span><span class="keyword">(</span><span class="symbol">yr</span><span class="keyword">,</span> <span class="argument">main</span><span class="argument">=</span><span class="string">"Age Distribution"</span><span class="keyword">,</span> <span class="argument">xlab</span><span class="argument">=</span><span class="string">"age (years)"</span><span class="keyword">)</span><span class="keyword">;</span></div>
+<strong class='error'>Error in eval(expr, envir, enclos): could not find function "qplot"</strong>
+<div class='input'>
+<span class="comment"># We can create partitions by taxon.  For instance, we get the index</span>
+<span class="comment"># to all fish wrasses and parrotfish by searching for both families</span>
+<span class="comment"># note the use of a "regular expression" to specify the OR command in the search</span>
+<span class="symbol">labrid</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='familySearch.html.html'>familySearch</a></span><span class="keyword">(</span><span class="string">"(Labridae|Scaridae)"</span><span class="keyword">,</span> <span class="symbol">fish.data</span><span class="keyword">)</span></div>
+<strong class='error'>Error in eval(expr, envir, enclos): could not find function "familySearch"</strong>
+<div class='input'><span class="symbol">goby</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='familySearch.html.html'>familySearch</a></span><span class="keyword">(</span><span class="string">"Gobiidae"</span><span class="keyword">,</span> <span class="symbol">fish.data</span><span class="keyword">)</span></div>
+<strong class='error'>Error in eval(expr, envir, enclos): could not find function "familySearch"</strong>
+<div class='input'>
+
+<span class="comment">## Let's see if there are more labrid species or goby speices on reefs:</span>
+
+<span class="comment"># get all the labrids that are reefs </span>
+<span class="symbol">labrid.reef</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='habitatSearch.html.html'>habitatSearch</a></span><span class="keyword">(</span><span class="string">"reef"</span><span class="keyword">,</span> <span class="symbol">fish.data</span><span class="keyword">[</span><span class="symbol">labrid</span><span class="keyword">]</span><span class="keyword">)</span></div>
+<strong class='error'>Error in eval(expr, envir, enclos): could not find function "habitatSearch"</strong>
+<div class='input'><span class="comment"># How many species are reef labrids:</span>
+<span class="functioncall"><a href='http://www.inside-r.org/r-doc/base/sum'>sum</a></span><span class="keyword">(</span><span class="symbol">labrid.reef</span><span class="keyword">)</span> <span class="comment"># same as: length(fish.data[labrid][labrid.reef])</span></div>
+<strong class='error'>Error in eval(expr, envir, enclos): object 'labrid.reef' not found</strong>
+<div class='input'><span class="comment"># How many reef gobies:</span>
+<span class="functioncall"><a href='http://www.inside-r.org/r-doc/base/sum'>sum</a></span> <span class="keyword">(</span><span class="functioncall"><a href='habitatSearch.html.html'>habitatSearch</a></span><span class="keyword">(</span><span class="string">"reef"</span><span class="keyword">,</span> <span class="symbol">fish.data</span><span class="keyword">[</span><span class="symbol">goby</span><span class="keyword">]</span><span class="keyword">)</span> <span class="keyword">)</span></div>
+<strong class='error'>Error in eval(expr, envir, enclos): could not find function "habitatSearch"</strong>
+<div class='input'>
+
+<span class="comment"># Let's plot the log length distribution of freshwater vs marine fish: </span>
+<span class="functioncall"><a href='http://www.inside-r.org/r-doc/graphics/hist'>hist</a></span><span class="keyword">(</span><span class="functioncall"><a href='http://www.inside-r.org/r-doc/base/Log'>log</a></span><span class="keyword">(</span> <span class="functioncall"><a href='getSize.html.html'>getSize</a></span> <span class="keyword">(</span><span class="symbol">fish.data</span><span class="keyword">[</span><span class="functioncall"><a href='habitatSearch.html.html'>habitatSearch</a></span><span class="keyword">(</span><span class="string">"freshwater"</span><span class="keyword">,</span> <span class="symbol">fish.data</span><span class="keyword">)</span><span class="keyword">]</span><span class="keyword">,</span> <span class="string">"length"</span><span class="keyword">)</span><span class="keyword">)</span><span class="keyword">,</span>
+         <span class="argument">col</span><span class="argument">=</span><span class="functioncall"><a href='http://www.inside-r.org/r-doc/grDevices/rgb'>rgb</a></span><span class="keyword">(</span><span class="number">1</span><span class="keyword">,</span><span class="number">0</span><span class="keyword">,</span><span class="number">0</span><span class="keyword">,</span><span class="number">.5</span><span class="keyword">)</span><span class="keyword">,</span> <span class="argument">breaks</span><span class="argument">=</span><span class="number">40</span><span class="keyword">,</span> <span class="argument">freq</span><span class="argument">=</span><span class="symbol">F</span><span class="keyword">,</span> <span class="argument">xlab</span><span class="argument">=</span><span class="string">"length"</span><span class="keyword">,</span> <span class="argument">main</span><span class="argument">=</span><span class="string">"marine fish are bigger"</span><span class="keyword">)</span></div>
+<strong class='error'>Error in getSize(fish.data[habitatSearch("freshwater", fish.data)], "length"): could not find function "habitatSearch"</strong>
+<div class='input'><span class="functioncall"><a href='http://www.inside-r.org/r-doc/graphics/hist'>hist</a></span><span class="keyword">(</span><span class="functioncall"><a href='http://www.inside-r.org/r-doc/base/Log'>log</a></span><span class="keyword">(</span> <span class="functioncall"><a href='getSize.html.html'>getSize</a></span> <span class="keyword">(</span><span class="symbol">fish.data</span><span class="keyword">[</span><span class="functioncall"><a href='habitatSearch.html.html'>habitatSearch</a></span><span class="keyword">(</span><span class="string">"marine"</span><span class="keyword">,</span> <span class="symbol">fish.data</span><span class="keyword">)</span><span class="keyword">]</span><span class="keyword">,</span> <span class="string">"length"</span><span class="keyword">)</span><span class="keyword">)</span><span class="keyword">,</span>
+          <span class="argument">col</span><span class="argument">=</span><span class="functioncall"><a href='http://www.inside-r.org/r-doc/grDevices/rgb'>rgb</a></span><span class="keyword">(</span><span class="number">0</span><span class="keyword">,</span><span class="number">0</span><span class="keyword">,</span><span class="number">1</span><span class="keyword">,</span><span class="number">.5</span><span class="keyword">)</span><span class="keyword">,</span> <span class="argument">breaks</span><span class="argument">=</span><span class="number">40</span><span class="keyword">,</span> <span class="argument">add</span><span class="argument">=</span><span class="symbol">T</span><span class="keyword">,</span> <span class="argument">freq</span><span class="argument">=</span><span class="symbol">F</span><span class="keyword">)</span></div>
+<strong class='error'>Error in getSize(fish.data[habitatSearch("marine", fish.data)], "length"): could not find function "habitatSearch"</strong>
+<div class='input'>
+<span class="comment"># Note that we can also find anadromous fish:</span>
+<span class="symbol">anadromous</span> <span class="assignement">&lt;-</span>  <span class="functioncall"><a href='habitatSearch.html.html'>habitatSearch</a></span><span class="keyword">(</span><span class="string">"anadromous"</span><span class="keyword">,</span> <span class="symbol">fish.data</span><span class="keyword">)</span></div>
+<strong class='error'>Error in eval(expr, envir, enclos): could not find function "habitatSearch"</strong>
+<div class='input'>
+
+
+<span class="comment"># this is useful for phylogenetic comparative methods.  For instance, load the labrid tree:</span>
+<span class="functioncall"><a href='http://www.inside-r.org/r-doc/base/library'>require</a></span><span class="keyword">(</span><span class="symbol">ape</span><span class="keyword">)</span>
+<span class="functioncall"><a href='http://www.inside-r.org/r-doc/utils/data'>data</a></span><span class="keyword">(</span><span class="symbol">labridtree</span><span class="keyword">)</span>
+
+<span class="comment"># get the species names (&amp; remove underscores)</span>
+<span class="symbol">tree</span><span class="keyword">$</span><span class="symbol">tip.label</span><span class="assignement">&lt;-</span><span class="functioncall"><a href='http://www.inside-r.org/r-doc/base/grep'>gsub</a></span><span class="keyword">(</span><span class="string">"_"</span><span class="keyword">,</span> <span class="string">" "</span><span class="keyword">,</span> <span class="symbol">tree</span><span class="keyword">$</span><span class="symbol">tip.label</span><span class="keyword">)</span></div>
+<strong class='error'>Error in gsub("_", " ", tree$tip.label): object 'tree' not found</strong>
+<div class='input'><span class="symbol">tip.labels</span> <span class="assignement">&lt;-</span> <span class="symbol">tree</span><span class="keyword">$</span><span class="symbol">tip.label</span></div>
+<strong class='error'>Error in eval(expr, envir, enclos): object 'tree' not found</strong>
+<div class='input'>
+
+<span class="symbol">myfish</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='findSpecies.html.html'>findSpecies</a></span><span class="keyword">(</span><span class="symbol">tip.labels</span><span class="keyword">,</span> <span class="symbol">fish.data</span><span class="keyword">)</span></div>
+<strong class='error'>Error in gsub("_", " ", species): object 'tip.labels' not found</strong>
+<div class='input'><span class="symbol">species.names</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='http://www.inside-r.org/r-doc/base/lapply'>sapply</a></span><span class="keyword">(</span><span class="symbol">fish.data</span><span class="keyword">[</span><span class="symbol">myfish</span><span class="keyword">]</span><span class="keyword">,</span> <span class="keyword">function</span><span class="keyword">(</span><span class="formalargs">x</span><span class="keyword">)</span> <span class="symbol">x</span><span class="keyword">$</span><span class="symbol">ScientificName</span><span class="keyword">)</span></div>
+<strong class='error'>Error in lapply(X = X, FUN = FUN, ...): object 'myfish' not found</strong>
+<div class='input'>
+<span class="comment"># create a trait matrix of fin data</span>
+<span class="symbol">traits</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='getQuantTraits.html.html'>getQuantTraits</a></span><span class="keyword">(</span><span class="symbol">fish.data</span><span class="keyword">[</span><span class="symbol">myfish</span><span class="keyword">]</span><span class="keyword">)</span></div>
+<strong class='error'>Error in getQuantTraits(fish.data[myfish]): object 'myfish' not found</strong>
+<div class='input'><span class="functioncall"><a href='http://www.inside-r.org/r-doc/base/colnames'>rownames</a></span><span class="keyword">(</span><span class="symbol">traits</span><span class="keyword">)</span> <span class="assignement">&lt;-</span> <span class="symbol">species.names</span></div>
+<strong class='error'>Error in eval(expr, envir, enclos): object 'species.names' not found</strong>
+<div class='input'><span class="symbol">depths</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='getDepth.html.html'>getDepth</a></span><span class="keyword">(</span><span class="symbol">fish.data</span><span class="keyword">[</span><span class="symbol">myfish</span><span class="keyword">]</span><span class="keyword">)</span></div>
+<strong class='error'>Error in getDepth(fish.data[myfish]): object 'myfish' not found</strong>
+<div class='input'><span class="functioncall"><a href='http://www.inside-r.org/r-doc/base/colnames'>rownames</a></span><span class="keyword">(</span><span class="symbol">depths</span><span class="keyword">)</span> <span class="assignement">&lt;-</span> <span class="symbol">species.names</span></div>
+<strong class='error'>Error in eval(expr, envir, enclos): object 'species.names' not found</strong>
+<div class='input'>
+<span class="symbol">size</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='getSize.html.html'>getSize</a></span><span class="keyword">(</span><span class="symbol">fish.data</span><span class="keyword">[</span><span class="symbol">myfish</span><span class="keyword">]</span><span class="keyword">,</span> <span class="string">"length"</span><span class="keyword">)</span></div>
+<strong class='error'>Error in getSize(fish.data[myfish], "length"): object 'myfish' not found</strong>
+<div class='input'><span class="functioncall"><a href='http://www.inside-r.org/r-doc/base/names'>names</a></span><span class="keyword">(</span><span class="symbol">size</span><span class="keyword">)</span> <span class="assignement">&lt;-</span> <span class="symbol">species.names</span></div>
+<strong class='error'>Error in eval(expr, envir, enclos): object 'species.names' not found</strong>
+<div class='input'>
+<span class="comment"># who's missing from treebase entirely?</span>
+<span class="symbol">missing</span><span class="assignement">&lt;-</span><span class="symbol">tip.labels</span><span class="keyword">[</span><span class="keyword">!</span> <span class="symbol">tip.labels</span> <span class="keyword">%in%</span> <span class="symbol">species.names</span> <span class="keyword">]</span></div>
+<strong class='error'>Error in eval(expr, envir, enclos): object 'tip.labels' not found</strong>
+<div class='input'><span class="symbol">tr</span><span class="assignement">&lt;-</span> <span class="functioncall"><a href='http://www.inside-r.org/r-doc/ape/drop.tip'>drop.tip</a></span><span class="keyword">(</span><span class="symbol">tree</span><span class="keyword">,</span> <span class="symbol">missing</span><span class="keyword">)</span></div>
+<strong class='error'>Error in inherits(phy, "phylo"): object 'tree' not found</strong>
+<div class='input'><span class="comment"># drop species with NAs for max depth</span>
+<span class="symbol">depth</span> <span class="assignement">&lt;-</span> <span class="symbol">depths</span><span class="keyword">[</span><span class="keyword">,</span><span class="number">2</span><span class="keyword">]</span></div>
+<strong class='error'>Error in eval(expr, envir, enclos): object 'depths' not found</strong>
+<div class='input'><span class="symbol">missing</span><span class="assignement">&lt;-</span><span class="functioncall"><a href='http://www.inside-r.org/r-doc/base/names'>names</a></span><span class="keyword">(</span><span class="symbol">depth</span><span class="keyword">[</span><span class="functioncall"><a href='http://www.inside-r.org/r-doc/base/NA'>is.na</a></span><span class="keyword">(</span><span class="symbol">depth</span><span class="keyword">)</span><span class="keyword">]</span><span class="keyword">)</span></div>
+<strong class='error'>Error in eval(expr, envir, enclos): object 'depth' not found</strong>
+<div class='input'><span class="symbol">tr</span><span class="assignement">&lt;-</span> <span class="functioncall"><a href='http://www.inside-r.org/r-doc/ape/drop.tip'>drop.tip</a></span><span class="keyword">(</span><span class="symbol">tr</span><span class="keyword">,</span> <span class="symbol">missing</span><span class="keyword">)</span></div>
+<strong class='error'>Error in inherits(phy, "phylo"): object 'tr' not found</strong>
+<div class='input'><span class="comment"># repeat for NAs for length</span>
+<span class="symbol">missing</span><span class="assignement">&lt;-</span><span class="functioncall"><a href='http://www.inside-r.org/r-doc/base/names'>names</a></span><span class="keyword">(</span><span class="symbol">size</span><span class="keyword">[</span><span class="functioncall"><a href='http://www.inside-r.org/r-doc/base/NA'>is.na</a></span><span class="keyword">(</span><span class="symbol">size</span><span class="keyword">)</span><span class="keyword">]</span><span class="keyword">)</span></div>
+<strong class='error'>Error in eval(expr, envir, enclos): object 'size' not found</strong>
+<div class='input'><span class="symbol">tr</span><span class="assignement">&lt;-</span> <span class="functioncall"><a href='http://www.inside-r.org/r-doc/ape/drop.tip'>drop.tip</a></span><span class="keyword">(</span><span class="symbol">tr</span><span class="keyword">,</span> <span class="symbol">missing</span><span class="keyword">)</span></div>
+<strong class='error'>Error in inherits(phy, "phylo"): object 'tr' not found</strong>
+<div class='input'>
+<span class="comment"># drop all the data not in the tree </span>
+<span class="symbol">pruned.names</span> <span class="assignement">&lt;-</span> <span class="symbol">tr</span><span class="keyword">$</span><span class="symbol">tip.label</span></div>
+<strong class='error'>Error in eval(expr, envir, enclos): object 'tr' not found</strong>
+<div class='input'><span class="symbol">size</span> <span class="assignement">&lt;-</span> <span class="symbol">size</span><span class="keyword">[</span><span class="symbol">pruned.names</span><span class="keyword">]</span></div>
+<strong class='error'>Error in eval(expr, envir, enclos): object 'size' not found</strong>
+<div class='input'><span class="symbol">depth</span> <span class="assignement">&lt;-</span> <span class="symbol">depth</span><span class="keyword">[</span><span class="symbol">pruned.names</span><span class="keyword">]</span></div>
+<strong class='error'>Error in eval(expr, envir, enclos): object 'depth' not found</strong>
+<div class='input'>
+<span class="comment"># Does depth correlate with size after correcting for phylogeny?</span>
+<span class="symbol">x</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='http://www.inside-r.org/r-doc/ape/pic'>pic</a></span><span class="keyword">(</span><span class="symbol">size</span><span class="keyword">,</span> <span class="symbol">tr</span><span class="keyword">)</span></div>
+<strong class='error'>Error in inherits(phy, "phylo"): object 'tr' not found</strong>
+<div class='input'><span class="symbol">y</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='http://www.inside-r.org/r-doc/ape/pic'>pic</a></span><span class="keyword">(</span><span class="symbol">depth</span><span class="keyword">,</span> <span class="symbol">tr</span><span class="keyword">)</span></div>
+<strong class='error'>Error in inherits(phy, "phylo"): object 'tr' not found</strong>
+<div class='input'><span class="functioncall"><a href='http://www.inside-r.org/r-doc/base/summary'>summary</a></span><span class="keyword">(</span><span class="functioncall"><a href='http://www.inside-r.org/r-doc/stats/lm'>lm</a></span><span class="keyword">(</span><span class="symbol">y</span><span class="keyword">~</span><span class="symbol">x</span><span class="keyword">-</span><span class="number">1</span><span class="keyword">)</span><span class="keyword">)</span> <span class="comment"># Yes</span></div>
+<div class='output'>
+Enter a frame number, or 0 to exit   
+
+ 1: build_package(".", "inst/doc/html")
+ 2: build_demos(package)
+ 3: evaluate(demo_code, new.env(parent = globalenv()))
+ 4: unlist(mapply(eval.with.details, parsed$expr, parsed$src, MoreArgs = list(e
+ 5: mapply(eval.with.details, parsed$expr, parsed$src, MoreArgs = list(envir = 
+ 6: function (expr, envir = parent.frame(), enclos = NULL, src = NULL, debug = 
+ 7: try(ev <- withCallingHandlers(withVisible(eval(expr, envir, enclos)), warni
+ 8: tryCatch(expr, error = function(e) {
+    call <- conditionCall(e)
+    if (!is
+ 9: tryCatchList(expr, classes, parentenv, handlers)
+10: tryCatchOne(expr, names, parentenv, handlers[[1]])
+11: doTryCatch(return(expr), name, parentenv, handler)
+12: withCallingHandlers(withVisible(eval(expr, envir, enclos)), warning = wHand
+13: withVisible(eval(expr, envir, enclos))
+14: eval(expr, envir, enclos)
+15: eval(expr, envir, enclos)
+16: summary(lm(y ~ x - 1))
+17: lm(y ~ x - 1)
+18: eval(mf, parent.frame())
+19: eval(expr, envir, enclos)
+20: model.frame(formula = y ~ x - 1, drop.unused.levels = TRUE)
+21: model.frame.default(formula = y ~ x - 1, drop.unused.levels = TRUE)
+22: eval(predvars, data, env)
+23: eval(expr, envir, enclos)
+
+</div>
+<strong class='error'>Error in summary(lm(y ~ x - 1)): error in evaluating the argument 'object' in selecting a method for function 'summary': Error in eval(expr, envir, enclos) : object 'y' not found
+</strong>
+<div class='input'>
+
+<span class="functioncall"><a href='http://www.inside-r.org/r-doc/base/library'>require</a></span><span class="keyword">(</span><span class="symbol">geiger</span><span class="keyword">)</span>
+<span class="symbol">bm</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='http://www.inside-r.org/r-doc/geiger/fitContinuous'>fitContinuous</a></span><span class="keyword">(</span><span class="symbol">tr</span><span class="keyword">,</span> <span class="symbol">depth</span><span class="keyword">,</span> <span class="argument">model</span><span class="argument">=</span><span class="string">"BM"</span><span class="keyword">)</span></div>
+<strong class='error'>Error in is.vector(data): object 'depth' not found</strong>
+<div class='input'><span class="symbol">ou</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='http://www.inside-r.org/r-doc/geiger/fitContinuous'>fitContinuous</a></span><span class="keyword">(</span><span class="symbol">tr</span><span class="keyword">,</span> <span class="symbol">depth</span><span class="keyword">,</span> <span class="argument">model</span><span class="argument">=</span><span class="string">"OU"</span><span class="keyword">)</span></div>
+<strong class='error'>Error in is.vector(data): object 'depth' not found</strong>
+<div class='input'>
+
+<span class="symbol">invert</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='http://www.inside-r.org/r-doc/base/lapply'>sapply</a></span><span class="keyword">(</span><span class="symbol">fish.data</span><span class="keyword">,</span> <span class="keyword">function</span><span class="keyword">(</span><span class="formalargs">x</span><span class="keyword">)</span> <span class="functioncall"><a href='http://www.inside-r.org/r-doc/base/length'>length</a></span><span class="keyword">(</span><span class="functioncall"><a href='http://www.inside-r.org/r-doc/base/grep'>grep</a></span><span class="keyword">(</span><span class="string">"invertebrate"</span><span class="keyword">,</span> <span class="symbol">x</span><span class="keyword">$</span><span class="symbol">trophic</span><span class="keyword">)</span><span class="keyword">)</span><span class="keyword">&gt;</span><span class="number">0</span><span class="keyword">)</span>
+<span class="symbol">piscivore</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='http://www.inside-r.org/r-doc/base/lapply'>sapply</a></span><span class="keyword">(</span><span class="symbol">fish.data</span><span class="keyword">,</span> <span class="keyword">function</span><span class="keyword">(</span><span class="formalargs">x</span><span class="keyword">)</span> <span class="functioncall"><a href='http://www.inside-r.org/r-doc/base/length'>length</a></span><span class="keyword">(</span><span class="functioncall"><a href='http://www.inside-r.org/r-doc/base/grep'>grep</a></span><span class="keyword">(</span><span class="string">"(piscivore|fish)"</span><span class="keyword">,</span> <span class="symbol">x</span><span class="keyword">$</span><span class="symbol">trophic</span><span class="keyword">)</span><span class="keyword">)</span><span class="keyword">&gt;</span><span class="number">0</span><span class="keyword">)</span>
+<span class="functioncall"><a href='http://www.inside-r.org/r-doc/graphics/hist'>hist</a></span><span class="keyword">(</span><span class="functioncall"><a href='http://www.inside-r.org/r-doc/base/Log'>log</a></span><span class="keyword">(</span> <span class="functioncall"><a href='getSize.html.html'>getSize</a></span> <span class="keyword">(</span><span class="symbol">fish.data</span><span class="keyword">[</span><span class="symbol">invert</span><span class="keyword">]</span><span class="keyword">,</span> <span class="string">"length"</span><span class="keyword">)</span><span class="keyword">)</span><span class="keyword">,</span>
+         <span class="argument">col</span><span class="argument">=</span><span class="functioncall"><a href='http://www.inside-r.org/r-doc/grDevices/rgb'>rgb</a></span><span class="keyword">(</span><span class="number">1</span><span class="keyword">,</span><span class="number">0</span><span class="keyword">,</span><span class="number">0</span><span class="keyword">,</span><span class="number">.5</span><span class="keyword">)</span><span class="keyword">,</span> <span class="argument">breaks</span><span class="argument">=</span><span class="number">40</span><span class="keyword">,</span> <span class="argument">freq</span><span class="argument">=</span><span class="symbol">F</span><span class="keyword">,</span> <span class="argument">xlab</span><span class="argument">=</span><span class="string">"length"</span><span class="keyword">,</span> <span class="argument">main</span><span class="argument">=</span><span class="string">"invert eaters vs piscivores"</span><span class="keyword">)</span></div>
+<p><img src='fishbase_demo-73.png' alt='' width='400' height='400' /></p>
+<div class='input'><span class="functioncall"><a href='http://www.inside-r.org/r-doc/graphics/hist'>hist</a></span><span class="keyword">(</span><span class="functioncall"><a href='http://www.inside-r.org/r-doc/base/Log'>log</a></span><span class="keyword">(</span> <span class="functioncall"><a href='getSize.html.html'>getSize</a></span> <span class="keyword">(</span><span class="symbol">fish.data</span><span class="keyword">[</span><span class="symbol">piscivore</span><span class="keyword">]</span><span class="keyword">,</span> <span class="string">"length"</span><span class="keyword">)</span><span class="keyword">)</span><span class="keyword">,</span>
+          <span class="argument">col</span><span class="argument">=</span><span class="functioncall"><a href='http://www.inside-r.org/r-doc/grDevices/rgb'>rgb</a></span><span class="keyword">(</span><span class="number">0</span><span class="keyword">,</span><span class="number">0</span><span class="keyword">,</span><span class="number">1</span><span class="keyword">,</span><span class="number">.5</span><span class="keyword">)</span><span class="keyword">,</span> <span class="argument">breaks</span><span class="argument">=</span><span class="number">40</span><span class="keyword">,</span> <span class="argument">add</span><span class="argument">=</span><span class="symbol">T</span><span class="keyword">,</span> <span class="argument">freq</span><span class="argument">=</span><span class="symbol">F</span><span class="keyword">)</span></div>
+<p><img src='fishbase_demo-75.png' alt='' width='400' height='400' /></p>
+<div class='input'>
+
+
+
+
+<span class="comment">## Using a treebase tree</span>
+<span class="functioncall"><a href='http://www.inside-r.org/r-doc/base/library'>require</a></span><span class="keyword">(</span><span class="symbol">rtreebase</span><span class="keyword">)</span></div>
+<strong class='message'>Loading required package: rtreebase</strong>
+<strong class='warning'>Warning message:
+there is no package called 'rtreebase'</strong>
+<div class='input'>## Need to find an example of a fish tree on treebase that has branchlengths
+#trees <- search_treebase("Scarus", by="taxon", branch=TRUE)
+#str <- trees[[1]]$tip.label
+#gsub("(\\w+)_(\\w+)_.*", "\\1 \\2", str)
+#myfish <- findSpecies(species, fish.data) 
+#getQuantTraits(fish.data[myfish])
+
+
+</div>
+        </pre>
+      </div>
+      </div>
+
+      <footer class="footer">
+        <p class="pull-right"><a href="#">Back to top</a></p>
+        <p>Built by <a href="https://github.com/hadley/staticdocs">staticdocs</a>. Styled with <a href="http://twitter.github.com/bootstrap">bootstrap</a>.</p>
+      </footer>
+    </div>
+  </body>
+</html>
