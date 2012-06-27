@@ -22,39 +22,49 @@ R | vignette | fishbase
 library(rfishbase) 
 library(xtable) 
 library(ggplot2)
-theme_set(theme_bw())
+theme_set(theme_bw(8))
 data(fishbase)
 ````
-FishBase ([fishbase.org](http://fishbase.org)) is an award-winning
-online database of information about the morphology, trophic ecology,
-physiology, ecotoxicology, reproduction and economic relevance of the
-world's fish, organized by species [@fishbase2012]. 
-This repository of information has proven to be a
-profoundly valuable community resource and the data has the potential
-to be used in a wide range of studies. However, assembling subsets of
-data housed in FishBase for use in focused analyses can be tedious 
-and time-consuming. To facilitate the extraction, visualization, and 
-integration of this data, the `rfishbase` package was been written for 
-the R language for statistical computing and graphics [@rteam2012]. 
-R is a freely available open source computing environment that is 
-used extensively in ecological research, with a large collection of 
-packages built explicitly for this purpose [@kneib2007]. 
+FishBase ([fishbase.org](http://fishbase.org)) is an award-winning online
+database of information about the morphology, trophic ecology, physiology,
+ecotoxicology, reproduction and economic relevance of the world's fish,
+organized by species [@fishbase2012].  This repository of information
+has proven to be a profoundly valuable community resource and the data has
+the potential to be used in a wide range of studies. However, assembling
+subsets of data housed in FishBase for use in focused analyses can be
+tedious and time-consuming. To facilitate the extraction, visualization,
+and integration of this data, the `rfishbase` package was been written
+for the R language for statistical computing and graphics [@rteam2012].
+R is a freely available open source computing environment that is used
+extensively in ecological research, with a large collection of packages
+built explicitly for this purpose [@kneib2007].
 
 
-This paper illustrates how the `rfishbase` package is dynamically 
-updated from the the FishBase database, 
-describe its functions for extracting, 
-manipulating and visualizing data, and then illustrate how these 
-functions can be combined for more complicated analyses.  Lastly it 
-illustrates how having access to FishBase data through R allows 
-a user to interface with other kinds of analyses, such as 
-comparative phylogenetics software.  
+This paper illustrates how the `rfishbase` package is dynamically updated
+from the the FishBase database, describe its functions for extracting,
+manipulating and visualizing data, and then illustrate how these functions
+can be combined for more complicated analyses.  Lastly it illustrates
+how having access to FishBase data through R allows a user to interface
+with other kinds of analyses, such as comparative phylogenetics software.
 
 
 # Accessing FishBase data from R
 
 In addition to its web-based interface, FishBase provides machine readable
-XML files for `r length(fish.data)` of its species entries.
+XML files for `r length(fish.data)` (as accessed on 14 May, 2012) of
+its species entries to facilitate programmatic access of FishBase data.
+As complete downloads of the FishBase database are not available, the
+FishBase team encouraged us to use these XML files as an entry point
+for programmatic access. We have introduced caching and pausing features
+into the package to prevent access from over taxing FishBase servers.  
+While FishBase encourages the use of its data by programmatic access,
+(Froese, pers. comm), users of `rfishbase` should respect these load-limiting
+functions, and provide appropriate acknowledgement. For a more detailed 
+discussion of incentives, ethics, and legal requirements in sharing and 
+accessing such repositories can be found in the respective literature, _e.g._ 
+@fisher2010 or @markcostello2009.  
+
+
 The `rfishbase` package works by creating a cached copy of all data on
 FishBase currently available in XML format on the FishBase webpages.
 This process relies on the @rcurl and @xml packages to access these
@@ -94,7 +104,14 @@ description, habitat, distribution, size, life-cycle, morphology and diagnostic
 information.  The information returned in each category is provided as plain-text,
 consequently `rfishbase` must use regular expression matching to identify
 the occurrence of particular words or patterns in this text corresponding to 
-data of interest [@friedl2006]. 
+data of interest [@friedl2006].  `rfishbase` users may include any regular expression
+in their search query.  Whle these expressions allows for very precise pattern matching,
+applying such approaches to plain text always exposes some risk of error which should
+not be ignored.  Visual inspection of matches and careful construction of these expressions
+can help mitigate this risk. We provide example functions for reliably matching 
+several quantitative traits from these text-based descriptions, which can 
+be used as a basis for writing functions to identify other terms of interest.  
+
 
 Quantitative traits such as length, maximum known age, spine and ray counts,
 and depth information are provided consistently for most species, allowing 
@@ -199,10 +216,28 @@ For instance, one can identify which orders contain the greatest number of
 species, and for each of them, plot the fraction in which the species are 
 marine.
 
-``` {r Figure1, fig.height=4, fig.width=6, fig.cap='Fraction of marine species in the eight largest orders of teleost fishes'}
+
+``` {r relabel, include=FALSE, echo=FALSE }
+# Relabel marine=true/false to Marine, Non-marine
+i <- dat[["marine"]] 
+dat$marine[i] <- "Marine"
+dat$marine[!i] <- "Non-marine"
+i <- dat[["reef"]] 
+dat$reef[i] <- "Reef"
+dat$reef[!i] <- "Non-reef"
+````
+
+
+``` {r biggest}
 biggest <- names(head(sort(table(order),decr=T), 8))
-ggplot(subset(dat,order %in% biggest), aes(order, fill=marine)) +
-  geom_bar() + opts(axis.text.x=theme_text(angle=90, hjust=1))
+primary_orders <- subset(dat, order %in% biggest)
+````
+
+
+``` {r Figure1, fig.height=4, fig.width=6, fig.cap='Fraction of marine species in the eight largest orders of teleost fishes', dependson="libraries"}
+ggplot(primary_orders, aes(order, fill=marine)) +
+  geom_bar() + opts(axis.text.x=theme_text(angle=90, hjust=1, size=6)) +
+  opts(legend.title=theme_blank())
 ````
 
 FishBase data excels for comparative studies across many species, but searching 
@@ -215,10 +250,13 @@ not the species is marine-associated.  The `ggplot2` package [@ggplot2]
 provides a particularly powerful and flexible language for visual exploration 
 of such patterns.
 
-``` {r Figure2, fig.height=4, fig.width=6, fig.cap='Scatterplot maximum age with maximum length observed in each species. Color indicates marine or freshwater species.'}
+``` {r Figure2, fig.height=4, fig.width=6, fig.cap='Scatterplot maximum age with maximum length observed in each species. Color indicates marine or freshwater species.', dependson="libraries"}
 ggplot(dat,aes(age, length, color=marine)) +
   geom_point(position='jitter',alpha=.8) +
-  scale_y_log10() + scale_x_log10(breaks=c(50,100,200)) 
+  scale_y_log10() + scale_x_log10(breaks=c(50,100,200)) +
+  ylab("Maximum observed length (cm)") + xlab("Maximum observed age (years)") +
+  opts(legend.title=theme_blank())
+
 ````
 
 A wide array of visual displays are available for different kinds of data. 
@@ -226,8 +264,13 @@ A box-plot is  natural way to compare the distributions of categorical
 variables, such as asking "Are reef species longer lived than non-reef species
 in the marine environment?"
 
-``` {r Figure3, fig.height=3, fig.width=3, fig.cap='Distribution of maximum age for reef-associated and non-reef associated fish'}
-ggplot(subset(dat, marine),aes(reef, log(age))) + geom_boxplot() 
+``` {r Figure3, fig.height=3, fig.width=3, fig.cap='Distribution of maximum age for reef-associated and non-reef associated fish', dependson="libraries"}
+ggplot(subset(dat, marine=="Marine")) + 
+  geom_boxplot(aes(reef, age)) + 
+  scale_y_log10() + xlab("") +
+  ylab("Maximum observed age (years)")  +
+  opts(axis.text.x = theme_text(size = 12))
+
 ````
 
 
@@ -235,11 +278,11 @@ In addition to powerful visualizations R provides an unparalleled array of stati
 Testing the linear model testing the correlation of maximum length with maximum size takes a
 single line, 
 
-``` {r } 
-corr.model <- summary(lm(data=dat,  length ~ age))
+``` {r }
+library(MASS)
+corr.model <- summary(rlm(data=dat,  length ~ age))
 ````
 
-which shows a significant correlation between length and age (p = `r corr.model$coefficients[,4]`).  
 
 
 ## Comparative studies
@@ -346,7 +389,7 @@ corr.summary <- summary(lm(corr.depth ~ corr.size - 1))
 
 which returns a non-significant correlation (p = `r corr.summary$coefficients[,4]`). 
 
-``` {r Figure4, fig.height=3, fig.width=6, fig.cap='Correcting for phylogeny, maximum size is not correlated with maximum depth observed in  labrids'}
+``` {r Figure4, fig.height=3, fig.width=6, fig.cap='Correcting for phylogeny, maximum size is not correlated with maximum depth observed in  labrids', dependson="libraries"}
 ggplot(data.frame(corr.size,corr.depth), aes(corr.size,corr.depth)) +
  geom_point() + stat_smooth(method=lm) + 
  xlab("Phylogenetically corrected maximum size") +

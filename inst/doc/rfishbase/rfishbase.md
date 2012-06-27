@@ -20,36 +20,46 @@ R | vignette | fishbase
 
 
 
-FishBase ([fishbase.org](http://fishbase.org)) is an award-winning
-online database of information about the morphology, trophic ecology,
-physiology, ecotoxicology, reproduction and economic relevance of the
-world's fish, organized by species [@fishbase2012]. 
-This repository of information has proven to be a
-profoundly valuable community resource and the data has the potential
-to be used in a wide range of studies. However, assembling subsets of
-data housed in FishBase for use in focused analyses can be tedious 
-and time-consuming. To facilitate the extraction, visualization, and 
-integration of this data, the `rfishbase` package was been written for 
-the R language for statistical computing and graphics [@rteam2012]. 
-R is a freely available open source computing environment that is 
-used extensively in ecological research, with a large collection of 
-packages built explicitly for this purpose [@kneib2007]. 
+FishBase ([fishbase.org](http://fishbase.org)) is an award-winning online
+database of information about the morphology, trophic ecology, physiology,
+ecotoxicology, reproduction and economic relevance of the world's fish,
+organized by species [@fishbase2012].  This repository of information
+has proven to be a profoundly valuable community resource and the data has
+the potential to be used in a wide range of studies. However, assembling
+subsets of data housed in FishBase for use in focused analyses can be
+tedious and time-consuming. To facilitate the extraction, visualization,
+and integration of this data, the `rfishbase` package was been written
+for the R language for statistical computing and graphics [@rteam2012].
+R is a freely available open source computing environment that is used
+extensively in ecological research, with a large collection of packages
+built explicitly for this purpose [@kneib2007].
 
 
-This paper illustrates how the `rfishbase` package is dynamically 
-updated from the the FishBase database, 
-describe its functions for extracting, 
-manipulating and visualizing data, and then illustrate how these 
-functions can be combined for more complicated analyses.  Lastly it 
-illustrates how having access to FishBase data through R allows 
-a user to interface with other kinds of analyses, such as 
-comparative phylogenetics software.  
+This paper illustrates how the `rfishbase` package is dynamically updated
+from the the FishBase database, describe its functions for extracting,
+manipulating and visualizing data, and then illustrate how these functions
+can be combined for more complicated analyses.  Lastly it illustrates
+how having access to FishBase data through R allows a user to interface
+with other kinds of analyses, such as comparative phylogenetics software.
 
 
 # Accessing FishBase data from R
 
 In addition to its web-based interface, FishBase provides machine readable
-XML files for 30,622 of its species entries.
+XML files for 30,622 (as accessed on 14 May, 2012) of
+its species entries to facilitate programmatic access of FishBase data.
+As complete downloads of the FishBase database are not available, the
+FishBase team encouraged us to use these XML files as an entry point
+for programmatic access. We have introduced caching and pausing features
+into the package to prevent access from over taxing FishBase servers.  
+While FishBase encourages the use of its data by programmatic access,
+(Froese, pers. comm), users of `rfishbase` should respect these load-limiting
+functions, and provide appropriate acknowledgement. For a more detailed 
+discussion of incentives, ethics, and legal requirements in sharing and 
+accessing such repositories can be found in the respective literature, _e.g._ 
+@fisher2010 or @markcostello2009.  
+
+
 The `rfishbase` package works by creating a cached copy of all data on
 FishBase currently available in XML format on the FishBase webpages.
 This process relies on the @rcurl and @xml packages to access these
@@ -99,7 +109,14 @@ description, habitat, distribution, size, life-cycle, morphology and diagnostic
 information.  The information returned in each category is provided as plain-text,
 consequently `rfishbase` must use regular expression matching to identify
 the occurrence of particular words or patterns in this text corresponding to 
-data of interest [@friedl2006]. 
+data of interest [@friedl2006].  `rfishbase` users may include any regular expression
+in their search query.  Whle these expressions allows for very precise pattern matching,
+applying such approaches to plain text always exposes some risk of error which should
+not be ignored.  Visual inspection of matches and careful construction of these expressions
+can help mitigate this risk. We provide example functions for reliably matching 
+several quantitative traits from these text-based descriptions, which can 
+be used as a basis for writing functions to identify other terms of interest.  
+
 
 Quantitative traits such as length, maximum known age, spine and ray counts,
 and depth information are provided consistently for most species, allowing 
@@ -203,34 +220,39 @@ A list of all the functions provided by `rfishbase` can be found in Table 1.
 The `rfishbase` manual provided with the package provides more detail about
 each of these functions, together with examples for their use.  
 
-<!-- html table generated in R 2.15.0 by xtable 1.7-0 package -->
-<!-- Fri Apr 20 23:42:58 2012 -->
-<TABLE border=1>
-<CAPTION ALIGN="bottom"> A list of each of the functions and data objects provided by rfishbase </CAPTION>
-<TR> <TH> function.name </TH> <TH> description </TH>  </TR>
-  <TR> <TD> familySearch </TD> <TD> A function to find all fish that are members of </TD> </TR>
-  <TR> <TD>  </TD> <TD> a scientific Family </TD> </TR>
-  <TR> <TD> findSpecies </TD> <TD> Returns the matching indices in the data given </TD> </TR>
-  <TR> <TD>  </TD> <TD> a list of species names </TD> </TR>
-  <TR> <TD> fish.data </TD> <TD> A cached copy of extracted FishBase data, </TD> </TR>
-  <TR> <TD>  </TD> <TD> 03/2012. </TD> </TR>
-  <TR> <TD> fish_names </TD> <TD> Return the scientific names, families, classes, </TD> </TR>
-  <TR> <TD>  </TD> <TD> or orders of the input data </TD> </TR>
-  <TR> <TD> getDepth </TD> <TD> Returns available depth range data </TD> </TR>
-  <TR> <TD> getQuantTraits </TD> <TD> Returns all quantitative trait values found in </TD> </TR>
-  <TR> <TD>  </TD> <TD> the morphology data </TD> </TR>
-  <TR> <TD> getRefs </TD> <TD> Returns the FishBase reference id numbers </TD> </TR>
-  <TR> <TD>  </TD> <TD> matching a query. </TD> </TR>
-  <TR> <TD> getSize </TD> <TD> Returns available size data of specified type </TD> </TR>
-  <TR> <TD>  </TD> <TD> (length, weight, or age) </TD> </TR>
-  <TR> <TD> habitatSearch </TD> <TD> A function to search for the occurances of any </TD> </TR>
-  <TR> <TD>  </TD> <TD> keyword in habitat description </TD> </TR>
-  <TR> <TD> labridtree </TD> <TD> An example phylogeny of labrid fish </TD> </TR>
-  <TR> <TD> loadCache </TD> <TD> Load an updated cache </TD> </TR>
-  <TR> <TD> updateCache </TD> <TD> Update the cached copy of fishbase data </TD> </TR>
-  <TR> <TD> which_fish </TD> <TD> The generic search function a variety of </TD> </TR>
-  <TR> <TD>  </TD> <TD> description types </TD> </TR>
-   </TABLE>
+\begin{table}[ht]
+\begin{center}
+\begin{tabular}{ll}
+  \hline
+function.name & description \\ 
+  \hline
+familySearch & A function to find all fish that are members of \\ 
+   & a scientific Family \\ 
+  findSpecies & Returns the matching indices in the data given \\ 
+   & a list of species names \\ 
+  fish.data & A cached copy of extracted FishBase data, \\ 
+   & 03/2012. \\ 
+  fish\_names & Return the scientific names, families, classes, \\ 
+   & or orders of the input data \\ 
+  getDepth & Returns available depth range data \\ 
+  getQuantTraits & Returns all quantitative trait values found in \\ 
+   & the morphology data \\ 
+  getRefs & Returns the FishBase reference id numbers \\ 
+   & matching a query. \\ 
+  getSize & Returns available size data of specified type \\ 
+   & (length, weight, or age) \\ 
+  habitatSearch & A function to search for the occurances of any \\ 
+   & keyword in habitat description \\ 
+  labridtree & An example phylogeny of labrid fish \\ 
+  loadCache & Load an updated cache \\ 
+  updateCache & Update the cached copy of fishbase data \\ 
+  which\_fish & which\_fish is the the generic search function \\ 
+   & for fishbase a variety of description types \\ 
+   \hline
+\end{tabular}
+\caption{A list of each of the functions and data objects provided by rfishbase}
+\end{center}
+\end{table}
 
 
 
@@ -267,12 +289,29 @@ marine.
 
 
 
+
+
+
+
+
 ```r
 biggest <- names(head(sort(table(order),decr=T), 8))
-ggplot(subset(dat,order %in% biggest), aes(order, fill=marine)) +
-  geom_bar() + opts(axis.text.x=theme_text(angle=90, hjust=1))
+primary_orders <- subset(dat, order %in% biggest)
 ```
 
+
+
+
+
+
+
+```r
+ggplot(primary_orders, aes(order, fill=marine)) +
+  geom_bar() + opts(axis.text.x=theme_text(angle=90, hjust=1, size=6)) +
+  opts(legend.title=theme_blank())
+```
+
+![Fraction of marine species in the eight largest orders of teleost fishes](figure/Figure1.pdf) 
 
 
 FishBase data excels for comparative studies across many species, but searching 
@@ -290,9 +329,12 @@ of such patterns.
 ```r
 ggplot(dat,aes(age, length, color=marine)) +
   geom_point(position='jitter',alpha=.8) +
-  scale_y_log10() + scale_x_log10(breaks=c(50,100,200)) 
+  scale_y_log10() + scale_x_log10(breaks=c(50,100,200)) +
+  ylab("Maximum observed length (cm)") + xlab("Maximum observed age (years)") +
+  opts(legend.title=theme_blank())
 ```
 
+![Scatterplot maximum age with maximum length observed in each species. Color indicates marine or freshwater species.](figure/Figure2.pdf) 
 
 
 A wide array of visual displays are available for different kinds of data. 
@@ -303,9 +345,14 @@ in the marine environment?"
 
 
 ```r
-ggplot(subset(dat, marine),aes(reef, log(age))) + geom_boxplot() 
+ggplot(subset(dat, marine=="Marine")) + 
+  geom_boxplot(aes(reef, age)) + 
+  scale_y_log10() + xlab("") +
+  ylab("Maximum observed age (years)")  +
+  opts(axis.text.x = theme_text(size = 12))
 ```
 
+![Distribution of maximum age for reef-associated and non-reef associated fish](figure/Figure3.pdf) 
 
 
 
@@ -316,13 +363,13 @@ single line,
 
 
 ```r
-corr.model <- summary(lm(data=dat,  length ~ age))
+library(MASS)
+corr.model <- summary(rlm(data=dat,  length ~ age))
 ```
 
 
 
 
-which shows a significant correlation between length and age (p = 2.90303819046825e-24).  
 
 
 ## Comparative studies
@@ -454,8 +501,6 @@ data <- na.omit(data.frame(size,depths))
 pruned <- treedata(labridtree, data)
 ```
 
-
-
 ```
 Dropped tips from the tree because there were no matching names in the data:
  [1] "Anampses_geographicus"     "Bodianus_perditio"        
@@ -497,6 +542,7 @@ ggplot(data.frame(corr.size,corr.depth), aes(corr.size,corr.depth)) +
  ylab("corrected max depth")
 ```
 
+![Correcting for phylogeny, maximum size is not correlated with maximum depth observed in  labrids](figure/Figure4.pdf) 
 
 
 One can also estimate different evolutionary models for these traits 
