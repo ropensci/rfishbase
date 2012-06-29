@@ -220,39 +220,34 @@ A list of all the functions provided by `rfishbase` can be found in Table 1.
 The `rfishbase` manual provided with the package provides more detail about
 each of these functions, together with examples for their use.  
 
-\begin{table}[ht]
-\begin{center}
-\begin{tabular}{ll}
-  \hline
-function.name & description \\ 
-  \hline
-familySearch & A function to find all fish that are members of \\ 
-   & a scientific Family \\ 
-  findSpecies & Returns the matching indices in the data given \\ 
-   & a list of species names \\ 
-  fish.data & A cached copy of extracted FishBase data, \\ 
-   & 03/2012. \\ 
-  fish\_names & Return the scientific names, families, classes, \\ 
-   & or orders of the input data \\ 
-  getDepth & Returns available depth range data \\ 
-  getQuantTraits & Returns all quantitative trait values found in \\ 
-   & the morphology data \\ 
-  getRefs & Returns the FishBase reference id numbers \\ 
-   & matching a query. \\ 
-  getSize & Returns available size data of specified type \\ 
-   & (length, weight, or age) \\ 
-  habitatSearch & A function to search for the occurances of any \\ 
-   & keyword in habitat description \\ 
-  labridtree & An example phylogeny of labrid fish \\ 
-  loadCache & Load an updated cache \\ 
-  updateCache & Update the cached copy of fishbase data \\ 
-  which\_fish & which\_fish is the the generic search function \\ 
-   & for fishbase a variety of description types \\ 
-   \hline
-\end{tabular}
-\caption{A list of each of the functions and data objects provided by rfishbase}
-\end{center}
-\end{table}
+<!-- html table generated in R 2.15.1 by xtable 1.7-0 package -->
+<!-- Fri Jun 29 11:18:42 2012 -->
+<TABLE border=1>
+<CAPTION ALIGN="bottom"> A list of each of the functions and data objects provided by rfishbase </CAPTION>
+<TR> <TH> function.name </TH> <TH> description </TH>  </TR>
+  <TR> <TD> familySearch </TD> <TD> A function to find all fish that are members of </TD> </TR>
+  <TR> <TD>  </TD> <TD> a scientific Family </TD> </TR>
+  <TR> <TD> findSpecies </TD> <TD> Returns the matching indices in the data given </TD> </TR>
+  <TR> <TD>  </TD> <TD> a list of species names </TD> </TR>
+  <TR> <TD> fish.data </TD> <TD> A cached copy of extracted FishBase data, </TD> </TR>
+  <TR> <TD>  </TD> <TD> 03/2012. </TD> </TR>
+  <TR> <TD> fish_names </TD> <TD> Return the scientific names, families, classes, </TD> </TR>
+  <TR> <TD>  </TD> <TD> or orders of the input data </TD> </TR>
+  <TR> <TD> getDepth </TD> <TD> Returns available depth range data </TD> </TR>
+  <TR> <TD> getQuantTraits </TD> <TD> Returns all quantitative trait values found in </TD> </TR>
+  <TR> <TD>  </TD> <TD> the morphology data </TD> </TR>
+  <TR> <TD> getRefs </TD> <TD> Returns the FishBase reference id numbers </TD> </TR>
+  <TR> <TD>  </TD> <TD> matching a query. </TD> </TR>
+  <TR> <TD> getSize </TD> <TD> Returns available size data of specified type </TD> </TR>
+  <TR> <TD>  </TD> <TD> (length, weight, or age) </TD> </TR>
+  <TR> <TD> habitatSearch </TD> <TD> A function to search for the occurances of any </TD> </TR>
+  <TR> <TD>  </TD> <TD> keyword in habitat description </TD> </TR>
+  <TR> <TD> labridtree </TD> <TD> An example phylogeny of labrid fish </TD> </TR>
+  <TR> <TD> loadCache </TD> <TD> Load an updated cache </TD> </TR>
+  <TR> <TD> updateCache </TD> <TD> Update the cached copy of fishbase data </TD> </TR>
+  <TR> <TD> which_fish </TD> <TD> which_fish is the the generic search function </TD> </TR>
+  <TR> <TD>  </TD> <TD> for fishbase a variety of description types </TD> </TR>
+   </TABLE>
 
 
 
@@ -306,19 +301,20 @@ primary_orders <- subset(dat, order %in% biggest)
 
 
 ```r
-ggplot(primary_orders, aes(order, fill=marine)) +
-  geom_bar() + opts(axis.text.x=theme_text(angle=90, hjust=1, size=6)) +
-  opts(legend.title=theme_blank())
+ggplot(primary_orders, aes(order, fill=marine)) + geom_bar(color=1) +
+opts(axis.text.x=theme_text(angle=90, hjust=1, size=6)) + # appearance
+  opts(legend.title=theme_blank()) + scale_fill_grey(labels=c("Marine", "Non-marine")) + # appearance
+  xlab("") + ylab("Number of species")
 ```
 
-![Fraction of marine species in the eight largest orders of teleost fishes](figure/Figure1.pdf) 
+![Fraction of marine species in the eight largest orders of teleost fishes](http://farm9.staticflickr.com/8160/7468021502_cfb8d0be23_o.png) 
 
 
 FishBase data excels for comparative studies across many species, but searching 
 through over 30,000 species to extract data makes such exploratory analyses 
 infeasible.  Having access to the data in R, one can answer such questions as 
 fast as they are posed. Consider looking for a correlation between the maximum 
-age and the maximum size of fish.  One can partition the data by any variable 
+age and the size of fish.  One can partition the data by any variable 
 of interest as well -- this example color codes the points based on whether or 
 not the species is marine-associated.  The `ggplot2` package [@ggplot2] 
 provides a particularly powerful and flexible language for visual exploration 
@@ -327,14 +323,14 @@ of such patterns.
 
 
 ```r
-ggplot(dat,aes(age, length, color=marine)) +
-  geom_point(position='jitter',alpha=.8) +
+ggplot(dat,aes(age, length, shape=marine)) +
+  geom_point(position='jitter') +
   scale_y_log10() + scale_x_log10(breaks=c(50,100,200)) +
-  ylab("Maximum observed length (cm)") + xlab("Maximum observed age (years)") +
-  opts(legend.title=theme_blank())
+  ylab("Standard length (cm)") + xlab("Maximum observed age (years)") +
+  opts(legend.title=theme_blank()) + scale_shape_manual(values=c(5,15), labels=c("Marine", "Non-marine"))
 ```
 
-![Scatterplot maximum age with maximum length observed in each species. Color indicates marine or freshwater species.](figure/Figure2.pdf) 
+![Scatterplot maximum age with length observed in each species. Color indicates marine or freshwater species.](http://farm9.staticflickr.com/8160/7468021988_12dcf3061b_o.png) 
 
 
 A wide array of visual displays are available for different kinds of data. 
@@ -349,15 +345,15 @@ ggplot(subset(dat, marine=="Marine")) +
   geom_boxplot(aes(reef, age)) + 
   scale_y_log10() + xlab("") +
   ylab("Maximum observed age (years)")  +
-  opts(axis.text.x = theme_text(size = 12))
+  opts(axis.text.x = theme_text(size = 8))
 ```
 
-![Distribution of maximum age for reef-associated and non-reef associated fish](figure/Figure3.pdf) 
+![Distribution of maximum age for reef-associated and non-reef associated fish](http://farm8.staticflickr.com/7138/7468022344_91376aa7f2_o.png) 
 
 
 
 In addition to powerful visualizations R provides an unparalleled array of statistical analysis methods.  
-Testing the linear model testing the correlation of maximum length with maximum size takes a
+Testing the linear model testing the correlation of length with maximum size takes a
 single line, 
 
 
@@ -370,7 +366,7 @@ corr.model <- summary(rlm(data=dat,  length ~ age))
 
 
 
-
+which shows a significant correlation between maximum age and standard length, p-value 0.001. 
 
 ## Comparative studies
 Many ecological and evolutionary studies rely on comparisons between
@@ -453,7 +449,7 @@ methods available in R with quantitative trait data available from
 `rfishbase`.
 
 This series of commands illustrates testing for a phylogenetically
-corrected correlation between the maximum observed size of a species and
+corrected correlation between the observed length of a species and
 the maximum observed depth at which it is found.  One begins by reading in the
 data for a phylogenetic tree of labrid fish (provided in the package), 
 and the phylogenetics packages `ape` [@ape] and `geiger` [@geiger].
@@ -537,12 +533,12 @@ which returns a non-significant correlation (p = 0.47).
 
 ```r
 ggplot(data.frame(corr.size,corr.depth), aes(corr.size,corr.depth)) +
- geom_point() + stat_smooth(method=lm) + 
- xlab("Phylogenetically corrected maximum size") +
- ylab("corrected max depth")
+ geom_point() + stat_smooth(method=lm, col=1) + 
+ xlab("Contrast of standard length (cm)") +
+ ylab("Contrast maximum depth (m)") + opts(title="Phylogenetically standardized contrasts")
 ```
 
-![Correcting for phylogeny, maximum size is not correlated with maximum depth observed in  labrids](figure/Figure4.pdf) 
+![Correcting for phylogeny, size is not correlated with maximum depth observed in  labrids](http://farm9.staticflickr.com/8015/7468023424_b1dc0b6815_o.png) 
 
 
 One can also estimate different evolutionary models for these traits 

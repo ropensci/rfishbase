@@ -22,7 +22,11 @@ R | vignette | fishbase
 library(rfishbase) 
 library(xtable) 
 library(ggplot2)
-theme_set(theme_bw(8))
+theme_publish <- theme_set(theme_bw(8))
+theme_publish <- theme_update(
+  panel_background = theme_blank(), 
+  panel.grid.major = theme_blank(),
+  panel.grid.minor = theme_blank())
 data(fishbase)
 ````
 FishBase ([fishbase.org](http://fishbase.org)) is an award-winning online
@@ -219,9 +223,6 @@ marine.
 
 ``` {r relabel, include=FALSE, echo=FALSE }
 # Relabel marine=true/false to Marine, Non-marine
-i <- dat[["marine"]] 
-dat$marine[i] <- "Marine"
-dat$marine[!i] <- "Non-marine"
 i <- dat[["reef"]] 
 dat$reef[i] <- "Reef"
 dat$reef[!i] <- "Non-reef"
@@ -235,28 +236,28 @@ primary_orders <- subset(dat, order %in% biggest)
 
 
 ``` {r Figure1, fig.height=4, fig.width=6, fig.cap='Fraction of marine species in the eight largest orders of teleost fishes', dependson="libraries"}
-ggplot(primary_orders, aes(order, fill=marine)) +
-  geom_bar() + opts(axis.text.x=theme_text(angle=90, hjust=1, size=6)) +
-  opts(legend.title=theme_blank())
+ggplot(primary_orders, aes(order, fill=marine)) + geom_bar(color=1) +
+opts(axis.text.x=theme_text(angle=90, hjust=1, size=6)) + # appearance
+  opts(legend.title=theme_blank()) + scale_fill_grey(labels=c("Marine", "Non-marine")) + # appearance
+  xlab("") + ylab("Number of species")
 ````
 
 FishBase data excels for comparative studies across many species, but searching 
 through over 30,000 species to extract data makes such exploratory analyses 
 infeasible.  Having access to the data in R, one can answer such questions as 
 fast as they are posed. Consider looking for a correlation between the maximum 
-age and the maximum size of fish.  One can partition the data by any variable 
+age and the size of fish.  One can partition the data by any variable 
 of interest as well -- this example color codes the points based on whether or 
 not the species is marine-associated.  The `ggplot2` package [@ggplot2] 
 provides a particularly powerful and flexible language for visual exploration 
 of such patterns.
 
-``` {r Figure2, fig.height=4, fig.width=6, fig.cap='Scatterplot maximum age with maximum length observed in each species. Color indicates marine or freshwater species.', dependson="libraries"}
-ggplot(dat,aes(age, length, color=marine)) +
-  geom_point(position='jitter',alpha=.8) +
+``` {r Figure2, fig.height=4, fig.width=6, fig.cap='Scatterplot maximum age with length observed in each species. Color indicates marine or freshwater species.', dependson="libraries"}
+ggplot(dat,aes(age, length, shape=marine)) +
+  geom_point(position='jitter') +
   scale_y_log10() + scale_x_log10(breaks=c(50,100,200)) +
-  ylab("Maximum observed length (cm)") + xlab("Maximum observed age (years)") +
-  opts(legend.title=theme_blank())
-
+  ylab("Standard length (cm)") + xlab("Maximum observed age (years)") +
+  opts(legend.title=theme_blank()) + scale_shape_manual(values=c(5,15), labels=c("Marine", "Non-marine"))
 ````
 
 A wide array of visual displays are available for different kinds of data. 
@@ -264,18 +265,17 @@ A box-plot is  natural way to compare the distributions of categorical
 variables, such as asking "Are reef species longer lived than non-reef species
 in the marine environment?"
 
-``` {r Figure3, fig.height=3, fig.width=3, fig.cap='Distribution of maximum age for reef-associated and non-reef associated fish', dependson="libraries"}
+``` {r Figure3, fig.height=3, fig.width=4, fig.cap='Distribution of maximum age for reef-associated and non-reef associated fish', dependson="libraries"}
 ggplot(subset(dat, marine=="Marine")) + 
   geom_boxplot(aes(reef, age)) + 
   scale_y_log10() + xlab("") +
   ylab("Maximum observed age (years)")  +
-  opts(axis.text.x = theme_text(size = 12))
-
+  opts(axis.text.x = theme_text(size = 8))
 ````
 
 
 In addition to powerful visualizations R provides an unparalleled array of statistical analysis methods.  
-Testing the linear model testing the correlation of maximum length with maximum size takes a
+Testing the linear model testing the correlation of length with maximum size takes a
 single line, 
 
 ``` {r }
@@ -283,7 +283,7 @@ library(MASS)
 corr.model <- summary(rlm(data=dat,  length ~ age))
 ````
 
-
+which shows a significant correlation between maximum age and standard length, p-value `r format.pval(2*pt(abs(coef(corr.model)[,'t value']["age"]), corr.model$df, lower.tail=F))`. 
 
 ## Comparative studies
 Many ecological and evolutionary studies rely on comparisons between
@@ -346,7 +346,7 @@ methods available in R with quantitative trait data available from
 `rfishbase`.
 
 This series of commands illustrates testing for a phylogenetically
-corrected correlation between the maximum observed size of a species and
+corrected correlation between the observed length of a species and
 the maximum observed depth at which it is found.  One begins by reading in the
 data for a phylogenetic tree of labrid fish (provided in the package), 
 and the phylogenetics packages `ape` [@ape] and `geiger` [@geiger].
@@ -389,11 +389,11 @@ corr.summary <- summary(lm(corr.depth ~ corr.size - 1))
 
 which returns a non-significant correlation (p = `r corr.summary$coefficients[,4]`). 
 
-``` {r Figure4, fig.height=3, fig.width=6, fig.cap='Correcting for phylogeny, maximum size is not correlated with maximum depth observed in  labrids', dependson="libraries"}
+``` {r Figure4, fig.height=3, fig.width=6, fig.cap='Correcting for phylogeny, size is not correlated with maximum depth observed in  labrids', dependson="libraries"}
 ggplot(data.frame(corr.size,corr.depth), aes(corr.size,corr.depth)) +
- geom_point() + stat_smooth(method=lm) + 
- xlab("Phylogenetically corrected maximum size") +
- ylab("corrected max depth")
+ geom_point() + stat_smooth(method=lm, col=1) + 
+ xlab("Contrast of standard length (cm)") +
+ ylab("Contrast maximum depth (m)") + opts(title="Phylogenetically standardized contrasts")
 ````
 
 One can also estimate different evolutionary models for these traits 

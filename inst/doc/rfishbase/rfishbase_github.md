@@ -25,17 +25,17 @@ Introduction
 FishBase ([fishbase.org](http://fishbase.org)) is an award-winning
 online database of information about the morphology, trophic ecology,
 physiology, ecotoxicology, reproduction and economic relevance of the
-world’s fish, organized by species [@fishbase2012]. This repository of
-information has proven to be a profoundly valuable community resource
-and the data has the potential to be used in a wide range of studies.
-However, assembling subsets of data housed in FishBase for use in
-focused analyses can be tedious and time-consuming. To facilitate the
-extraction, visualization, and integration of this data, the `rfishbase`
-package was been written for the R language for statistical computing
-and graphics [@rteam2012]. R is a freely available open source computing
-environment that is used extensively in ecological research, with a
-large collection of packages built explicitly for this purpose
-[@kneib2007].
+world’s fish, organized by species (Froese and Pauly 2012). This
+repository of information has proven to be a profoundly valuable
+community resource and the data has the potential to be used in a wide
+range of studies. However, assembling subsets of data housed in FishBase
+for use in focused analyses can be tedious and time-consuming. To
+facilitate the extraction, visualization, and integration of this data,
+the `rfishbase` package was been written for the R language for
+statistical computing and graphics (R Development Core Team 2012). R is
+a freely available open source computing environment that is used
+extensively in ecological research, with a large collection of packages
+built explicitly for this purpose (Kneib 2007).
 
 This paper illustrates how the `rfishbase` package is dynamically
 updated from the the FishBase database, describe its functions for
@@ -65,12 +65,13 @@ respective literature, *e.g.* Fisher and Fortmann (2010) or Costello
 
 The `rfishbase` package works by creating a cached copy of all data on
 FishBase currently available in XML format on the FishBase webpages.
-This process relies on the @rcurl and @xml packages to access these
-pages and parse the resulting XML into a local cache. Caching increases
-the speed of queries and places minimal demands on the FishBase server,
-which in its present form is not built to support direct access to
-application programming interfaces (APIs). A cached copy is included in
-the package and can be loaded in to R using the command:
+This process relies on the Lang (2012a) and Lang (2012b) packages to
+access these pages and parse the resulting XML into a local cache.
+Caching increases the speed of queries and places minimal demands on the
+FishBase server, which in its present form is not built to support
+direct access to application programming interfaces (APIs). A cached
+copy is included in the package and can be loaded in to R using the
+command:
 
 ~~~~ {.r}
 data(fishbase) 
@@ -104,7 +105,7 @@ life-cycle, morphology and diagnostic information. The information
 returned in each category is provided as plain-text, consequently
 `rfishbase` must use regular expression matching to identify the
 occurrence of particular words or patterns in this text corresponding to
-data of interest [@friedl2006]. `rfishbase` users may include any
+data of interest (Friedl 2006). `rfishbase` users may include any
 regular expression in their search query. Whle these expressions allows
 for very precise pattern matching, applying such approaches to plain
 text always exposes some risk of error which should not be ignored.
@@ -198,7 +199,7 @@ The `rfishbase` manual provided with the package provides more detail
 about each of these functions, together with examples for their use.
 
 <!-- html table generated in R 2.15.1 by xtable 1.7-0 package -->
-<!-- Wed Jun 27 12:21:19 2012 -->
+<!-- Fri Jun 29 11:18:42 2012 -->
 <TABLE border=1>
 <CAPTION ALIGN="bottom"> A list of each of the functions and data
 objects provided by rfishbase </CAPTION>
@@ -334,37 +335,37 @@ primary_orders <- subset(dat, order %in% biggest)
 ~~~~
 
 ~~~~ {.r}
-
-ggplot(primary_orders, aes(order, fill=marine)) +
-  geom_bar() + opts(axis.text.x=theme_text(angle=90, hjust=1)) +
-  opts(legend.title=theme_blank())
+ggplot(primary_orders, aes(order, fill=marine)) + geom_bar(color=1) +
+opts(axis.text.x=theme_text(angle=90, hjust=1, size=6)) + # appearance
+  opts(legend.title=theme_blank()) + scale_fill_grey(labels=c("Marine", "Non-marine")) + # appearance
+  xlab("") + ylab("Number of species")
 ~~~~
 
 ![Fraction of marine species in the eight largest orders of teleost
-fishes](http://farm8.staticflickr.com/7136/7456247038_56d2de3e29_o.png)
+fishes](http://farm9.staticflickr.com/8160/7468021502_cfb8d0be23_o.png)
 
 FishBase data excels for comparative studies across many species, but
 searching through over 30,000 species to extract data makes such
 exploratory analyses infeasible. Having access to the data in R, one can
 answer such questions as fast as they are posed. Consider looking for a
-correlation between the maximum age and the maximum size of fish. One
-can partition the data by any variable of interest as well – this
-example color codes the points based on whether or not the species is
-marine-associated. The `ggplot2` package [@ggplot2] provides a
+correlation between the maximum age and the size of fish. One can
+partition the data by any variable of interest as well – this example
+color codes the points based on whether or not the species is
+marine-associated. The `ggplot2` package (Wickham 2009) provides a
 particularly powerful and flexible language for visual exploration of
 such patterns.
 
 ~~~~ {.r}
-ggplot(dat,aes(age, length, color=marine)) +
-  geom_point(position='jitter',alpha=.8) +
+ggplot(dat,aes(age, length, shape=marine)) +
+  geom_point(position='jitter') +
   scale_y_log10() + scale_x_log10(breaks=c(50,100,200)) +
-  ylab("Maximum observed length (cm)") + xlab("Maximum observed age (years)") +
-  opts(legend.title=theme_blank())
+  ylab("Standard length (cm)") + xlab("Maximum observed age (years)") +
+  opts(legend.title=theme_blank()) + scale_shape_manual(values=c(5,15), labels=c("Marine", "Non-marine"))
 ~~~~
 
-![Scatterplot maximum age with maximum length observed in each species.
-Color indicates marine or freshwater
-species.](http://farm9.staticflickr.com/8144/7456247706_50e36e7643_o.png)
+![Scatterplot maximum age with length observed in each species. Color
+indicates marine or freshwater
+species.](http://farm9.staticflickr.com/8160/7468021988_12dcf3061b_o.png)
 
 A wide array of visual displays are available for different kinds of
 data. A box-plot is natural way to compare the distributions of
@@ -376,22 +377,25 @@ ggplot(subset(dat, marine=="Marine")) +
   geom_boxplot(aes(reef, age)) + 
   scale_y_log10() + xlab("") +
   ylab("Maximum observed age (years)")  +
-  opts(axis.text.x = theme_text(size = 12))
+  opts(axis.text.x = theme_text(size = 8))
 ~~~~
 
 ![Distribution of maximum age for reef-associated and non-reef
 associated
-fish](http://farm8.staticflickr.com/7120/7456248182_00c3a8aa76_o.png)
+fish](http://farm8.staticflickr.com/7138/7468022344_91376aa7f2_o.png)
 
 In addition to powerful visualizations R provides an unparalleled array
 of statistical analysis methods.\
-Testing the linear model testing the correlation of maximum length with
-maximum size takes a single line,
+Testing the linear model testing the correlation of length with maximum
+size takes a single line,
 
 ~~~~ {.r}
 library(MASS)
 corr.model <- summary(rlm(data=dat,  length ~ age))
 ~~~~
+
+which shows a significant correlation between maximum age and standard
+length, p-value 0.001.
 
 Comparative studies
 -------------------
@@ -401,17 +405,17 @@ taxa to pursue questions that cannot be approached experimentally.\
 Instead, one can rely on evolution to have performed the experiment
 already. For instance, recent studies have attempted to identify whether
 reef-associated clades experience greater species diversification rates
-than non-reef-associated groups [*e.g.* @alfaro2009a]. One can identify
-and compare the numbers of reef associated species in different families
-using the `rfishbase` functions presented above.
+than non-reef-associated groups (*e.g.* Alfaro et al. 2009). One can
+identify and compare the numbers of reef associated species in different
+families using the `rfishbase` functions presented above.
 
 In this example, consider the simpler question “Are there more
 reef-associated species in *Labridae* than in *Gobiidae*?” Recent
 research has shown that the families Scaridae and Odacidae are nested
-within Labridae [@westneat2005], although the three groups are listed as
-separate families in fishbase. We get all the species in fishbase from
-*Labridae* (wrasses), *Scaridae* (parrotfishes) and *Odacidae*
-(weed-whitings):
+within Labridae (Westneat and Alfaro 2005), although the three groups
+are listed as separate families in fishbase. We get all the species in
+fishbase from *Labridae* (wrasses), *Scaridae* (parrotfishes) and
+*Odacidae* (weed-whitings):
 
 ~~~~ {.r}
 labrid <- which_fish("(Labridae|Scaridae|Odacidae)", "Family", fish.data)
@@ -458,11 +462,11 @@ methods available in R with quantitative trait data available from
 `rfishbase`.
 
 This series of commands illustrates testing for a phylogenetically
-corrected correlation between the maximum observed size of a species and
-the maximum observed depth at which it is found. One begins by reading
-in the data for a phylogenetic tree of labrid fish (provided in the
-package), and the phylogenetics packages `ape` [@ape] and `geiger`
-[@geiger].
+corrected correlation between the observed length of a species and the
+maximum observed depth at which it is found. One begins by reading in
+the data for a phylogenetic tree of labrid fish (provided in the
+package), and the phylogenetics packages `ape` (Paradis, Claude, and
+Strimmer 2004) and `geiger` (Harmon et al. 2009).
 
 ~~~~ {.r}
 data(labridtree)
@@ -500,7 +504,7 @@ pruned <- treedata(labridtree, data)
     [11] "Macropharyngodon_choati"   "Oxycheilinus_digrammus"   
     [13] "Scarus_flavipectoralis"    "Scarus_rivulatus"         
 
-Use phylogenetically independent contrasts [@felsenstein1985] to
+Use phylogenetically independent contrasts (Felsenstein 1985) to
 determine if depth correlates with size after correcting for phylogeny:
 
 ~~~~ {.r}
@@ -513,14 +517,14 @@ which returns a non-significant correlation (p = 0.47).
 
 ~~~~ {.r}
 ggplot(data.frame(corr.size,corr.depth), aes(corr.size,corr.depth)) +
- geom_point() + stat_smooth(method=lm) + 
- xlab("Phylogenetically corrected maximum size") +
- ylab("corrected max depth")
+ geom_point() + stat_smooth(method=lm, col=1) + 
+ xlab("Contrast of standard length (cm)") +
+ ylab("Contrast maximum depth (m)") + opts(title="Phylogenetically standardized contrasts")
 ~~~~
 
-![Correcting for phylogeny, maximum size is not correlated with maximum
-depth observed in
-labrids](http://farm8.staticflickr.com/7264/7456249158_33c3bc339d_o.png)
+![Correcting for phylogeny, size is not correlated with maximum depth
+observed in
+labrids](http://farm9.staticflickr.com/8015/7468023424_b1dc0b6815_o.png)
 
 One can also estimate different evolutionary models for these traits to
 decide which best describes the data,
@@ -537,21 +541,21 @@ Discussion
 ==========
 
 With more and more data readily available, informatics is becoming
-increasingly important in ecology and evolution research [@jones2006],
-bringing new opportunities for research [@parr2011a; @michener2012]
-while also raising new challenges [@reichman2011]. It is in this spirit
-that this paper introduces the `rfishbase` package to provide
-programmatic access to the data available on the already widely
-recognized database, FishBase. Such tools can help take greater
-advantage of the data available, facilitating deeper and richer analyses
-than would be feasible under only manual access to the data. The
-examples in this manuscript serve not only to illustrate how this
-package works, but to help inspire readers to consider and explore
-questions that would otherwise be too time consuming or challenging to
-pursue. This paper has introduced the functions of the `rfishbase`
-package and described how they can be used to improve the extraction,
-visualization, and integration of FishBase data in ecological and
-evolutionary research.
+increasingly important in ecology and evolution research (Jones et al.
+2006), bringing new opportunities for research (Parr et al. 2011;
+Michener and Jones 2012) while also raising new challenges (Reichman,
+Jones, and Schildhauer 2011). It is in this spirit that this paper
+introduces the `rfishbase` package to provide programmatic access to the
+data available on the already widely recognized database, FishBase. Such
+tools can help take greater advantage of the data available,
+facilitating deeper and richer analyses than would be feasible under
+only manual access to the data. The examples in this manuscript serve
+not only to illustrate how this package works, but to help inspire
+readers to consider and explore questions that would otherwise be too
+time consuming or challenging to pursue. This paper has introduced the
+functions of the `rfishbase` package and described how they can be used
+to improve the extraction, visualization, and integration of FishBase
+data in ecological and evolutionary research.
 
 The self-updating study
 -----------------------
@@ -560,13 +564,13 @@ Because analyses using this data are written in R scripts, it becomes
 easy to update the results as more data becomes available on FishBase.
 Programmatic access to data coupled with script-able analyses can help
 ensure that research is more easily reproduced and also facilitate
-extending the work in future studies [@peng2011b; @merali2010]. This
+extending the work in future studies (Peng 2011; Merali 2010). This
 document is an example of this, using a dynamic documentation
 interpreter program which runs the code displayed to produce the results
-shown, decreasing the possibility for faulty code [@knitr]. As FishBase
-is updated, one can regenerate these results with less missing data.
-Readers can find the original document which combines the source-code
-and text on the project’s [Github
+shown, decreasing the possibility for faulty code (Xie 2012). As
+FishBase is updated, one can regenerate these results with less missing
+data. Readers can find the original document which combines the
+source-code and text on the project’s [Github
 page](https://github.com/ropensci/rfishbase/tree/master/inst/doc/rfishbase).
 
 Limitations and future directions
@@ -612,6 +616,13 @@ and NSF grant DEB-1061981 to PCW.
 References
 ==========
 
+Alfaro, Michael E., Francesco Santini, Chad D. Brock, Hugo Alamillo,
+Alex Dornburg, Daniel L. Rabosky, Giorgio Carnevale, and Luke J. Harmon.
+2009. “Nine exceptional radiations plus high turnover explain species
+diversity in jawed vertebrates.” *Proceedings of the National Academy of
+Sciences* 106 (aug): 13410–14. doi:10.1073/pnas.0811087106.
+[http://www.pubmedcentral.nih.gov/articlerender.fcgi?artid=2715324\\&tool=pmcentrez\\&rendertype=abstract](http://www.pubmedcentral.nih.gov/articlerender.fcgi?artid=2715324\&tool=pmcentrez\&rendertype=abstract "http://www.pubmedcentral.nih.gov/articlerender.fcgi?artid=2715324\&tool=pmcentrez\&rendertype=abstract").
+
 Bellwood, D. R., and Peter C. Wainwright. 2002. “The history and
 biogeography of fishes on coral reefs.” In *Coral Reef Fishes. Dynamics
 and diversity in a complex ecosystem*, ed. P. F. Sale, 5–32. San Diego:
@@ -622,7 +633,89 @@ Costello, Mark J. 2009. “Motivating Online Publication of Data.”
 [http://caliber.ucpress.net/doi/abs/10.1525/bio.2009.59.5.9
 http://www.jstor.org/stable/25502450](http://caliber.ucpress.net/doi/abs/10.1525/bio.2009.59.5.9 http://www.jstor.org/stable/25502450 "http://caliber.ucpress.net/doi/abs/10.1525/bio.2009.59.5.9 http://www.jstor.org/stable/25502450").
 
+Felsenstein, Joseph. 1985. “Phylogenies and the Comparative Method.”
+*The American Naturalist* 125 (jan): 1–15. doi:10.1086/284325.
+[http://www.journals.uchicago.edu/doi/abs/10.1086/284325](http://www.journals.uchicago.edu/doi/abs/10.1086/284325 "http://www.journals.uchicago.edu/doi/abs/10.1086/284325").
+
 Fisher, Joshua B., and Louise Fortmann. 2010. “Governing the data
 commons: Policy, practice, and the advancement of science.” *Information
 & Management* 47 (may): 237–245. doi:10.1016/j.im.2010.04.001.
 [http://linkinghub.elsevier.com/retrieve/pii/S0378720610000376](http://linkinghub.elsevier.com/retrieve/pii/S0378720610000376 "http://linkinghub.elsevier.com/retrieve/pii/S0378720610000376").
+
+Friedl, Jeffrey E. F. 2006. *Mastering regular expressions*. O’Reilly
+Media, Inc..
+[http://books.google.com/books?id=NYEX-Q9evKoC\\&pgis=1](http://books.google.com/books?id=NYEX-Q9evKoC\&pgis=1 "http://books.google.com/books?id=NYEX-Q9evKoC\&pgis=1").
+
+Froese, R., and Daniel Pauly. 2012. “FishBase.” World Wide Web
+electronic publication..
+[www.fishbase.org](www.fishbase.org "www.fishbase.org").
+
+Harmon, Luke, Jason Weir, Chad Brock, Rich Glor, Wendell Challenger, and
+Gene Hunt. 2009. “geiger: Analysis of evolutionary diversification.”
+[http://cran.r-project.org/package=geiger](http://cran.r-project.org/package=geiger "http://cran.r-project.org/package=geiger").
+
+Jones, Matthew B., Mark P. Schildhauer, O. J. Reichman, and Shawn
+Bowers. 2006. “The New Bioinformatics: Integrating Ecological Data from
+the Gene to the Biosphere.” *Annual Review of Ecology, Evolution, and
+Systematics* 37 (dec): 519–544.
+doi:10.1146/annurev.ecolsys.37.091305.110031.
+[http://arjournals.annualreviews.org/doi/abs/10.1146/annurev.ecolsys.37.091305.110031](http://arjournals.annualreviews.org/doi/abs/10.1146/annurev.ecolsys.37.091305.110031 "http://arjournals.annualreviews.org/doi/abs/10.1146/annurev.ecolsys.37.091305.110031").
+
+Kneib, Thomas. 2007. “Introduction to the Special Volume on ’Ecology and
+Ecological Modelling in R’.” *Journal of Statistical Software* 22: 1–7.
+[http://www.jstatsoft.org/v22/i01/paper](http://www.jstatsoft.org/v22/i01/paper "http://www.jstatsoft.org/v22/i01/paper").
+
+Lang, Duncan Temple. 2012a. “RCurl: General network (HTTP/FTP/...)
+client interface for R.”
+[http://cran.r-project.org/package=RCurl](http://cran.r-project.org/package=RCurl "http://cran.r-project.org/package=RCurl").
+
+———. 2012b. “XML: Tools for parsing and generating XML within R and
+S-Plus.”
+[http://cran.r-project.org/package=XML](http://cran.r-project.org/package=XML "http://cran.r-project.org/package=XML").
+
+Merali, Zeeya. 2010. “Why Scientific programming does not compute.”
+*Nature*: 6–8.
+
+Michener, William K., and Matthew B. Jones. 2012. “Ecoinformatics:
+supporting ecology as a data-intensive science.” *Trends in Ecology &
+Evolution* 27 (jan): 85–93. doi:10.1016/j.tree.2011.11.016.
+[http://linkinghub.elsevier.com/retrieve/pii/S0169534711003399](http://linkinghub.elsevier.com/retrieve/pii/S0169534711003399 "http://linkinghub.elsevier.com/retrieve/pii/S0169534711003399").
+
+Paradis, E., J. Claude, and K. Strimmer. 2004. “APE: analyses of
+phylogenetics and evolution in R language.” *Bioinformatics* 20:
+289–290.
+
+Parr, Cynthia S., Robert Guralnick, Nico Cellinese, and Roderic D. M.
+Page. 2011. “Evolutionary informatics: unifying knowledge about the
+diversity of life.” *Trends in ecology & evolution* 27 (dec): 94–103.
+doi:10.1016/j.tree.2011.11.001.
+[http://www.ncbi.nlm.nih.gov/pubmed/22154516](http://www.ncbi.nlm.nih.gov/pubmed/22154516 "http://www.ncbi.nlm.nih.gov/pubmed/22154516").
+
+Peng, R. D. 2011. “Reproducible Research in Computational Science.”
+*Science* 334 (dec): 1226–1227. doi:10.1126/science.1213847.
+[http://www.sciencemag.org/cgi/doi/10.1126/science.1213847](http://www.sciencemag.org/cgi/doi/10.1126/science.1213847 "http://www.sciencemag.org/cgi/doi/10.1126/science.1213847").
+
+R Development Core Team, The. 2012. “R: A language and environment for
+statistical computing.” Vienna, Austria: R Foundation for Statistical
+Computing.
+[http://www.r-project.org/](http://www.r-project.org/ "http://www.r-project.org/").
+
+Reichman, O. J., Matthew B. Jones, and Mark P. Schildhauer. 2011.
+“Challenges and Opportunities of Open Data in Ecology.” *Science* 331
+(feb): 703–705. doi:10.1126/science.1197962.
+[http://www.sciencemag.org/cgi/doi/10.1126/science.1197962
+http://www.ncbi.nlm.nih.gov/pubmed/21311007](http://www.sciencemag.org/cgi/doi/10.1126/science.1197962 http://www.ncbi.nlm.nih.gov/pubmed/21311007 "http://www.sciencemag.org/cgi/doi/10.1126/science.1197962 http://www.ncbi.nlm.nih.gov/pubmed/21311007").
+
+Westneat, Mark W., and Michael E. Alfaro. 2005. “Phylogenetic
+relationships and evolutionary history of the reef fish family
+Labridae.” *Molecular phylogenetics and evolution* 36 (aug): 370–90.
+doi:10.1016/j.ympev.2005.02.001.
+[http://www.ncbi.nlm.nih.gov/pubmed/15955516](http://www.ncbi.nlm.nih.gov/pubmed/15955516 "http://www.ncbi.nlm.nih.gov/pubmed/15955516").
+
+Wickham, Hadley. 2009. *ggplot2: elegant graphics for data analysis*.
+Springer New York.
+[http://had.co.nz/ggplot2/book](http://had.co.nz/ggplot2/book "http://had.co.nz/ggplot2/book").
+
+Xie, Yihui. 2012. “knitr: A general-purpose package for dynamic report
+generation in R.”
+[http://yihui.name/knitr/](http://yihui.name/knitr/ "http://yihui.name/knitr/").
