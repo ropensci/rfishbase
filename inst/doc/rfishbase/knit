@@ -25,7 +25,7 @@ opts_chunk$set(cache=TRUE, fig.path='figure/', dev='Cairo_png',
 options(xtable.type = 'html')
 
 ## Global options 
-opts_chunk$set(warning=FALSE, message=FALSE, comment=NA, tidy=FALSE, refresh=1.5)
+opts_chunk$set(warning=FALSE, message=FALSE, comment=NA, tidy=FALSE, refresh=TRUE)
 
 ## chunk hooks
 knit_hooks$set(par=function(before, options, envir){
