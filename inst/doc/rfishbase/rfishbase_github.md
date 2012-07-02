@@ -613,7 +613,9 @@ Acknowledgements
 
 This work was supported by a Computational Sciences Graduate Fellowship
 from the Department of Energy under grant number DE-FG02-97ER25308 to CB
-and National Science Foundation grant DEB-1061981 to PCW.
+and National Science Foundation grant DEB-1061981 to PCW. The
+`rfishbase` package part of the rOpenSci project
+([ropensci.org](http://ropensci.org)).
 
 References
 ==========
