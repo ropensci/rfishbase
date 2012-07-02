@@ -224,6 +224,8 @@ A list of all the functions provided by `rfishbase` can be found in Table 1.
 The `rfishbase` manual provided with the package provides more detail about
 each of these functions, together with examples for their use.  
 
+<!-- html table generated in R 2.15.1 by xtable 1.7-0 package -->
+<!-- Fri Jun 29 16:57:08 2012 -->
 <TABLE border=1>
 <CAPTION ALIGN="bottom"> A list of each of the functions and data objects provided by rfishbase </CAPTION>
 <TR> <TH> function.name </TH> <TH> description </TH>  </TR>
@@ -312,7 +314,7 @@ ggplot(primary_orders, aes(order, fill=marine)) + geom_bar() +
   xlab("") + ylab("Number of species")
 ```
 
-
+![Fraction of marine species in the eight largest orders of teleost fishes](http://farm8.staticflickr.com/7120/7469598298_570490b787_o.png) 
 
 
 FishBase data excels for comparative studies across many species, but searching 
@@ -337,7 +339,7 @@ ggplot(dat,aes(age, length, shape=marine)) +
   opts(legend.key = theme_blank())
 ```
 
-
+![Scatterplot maximum age with length observed in each species. Color indicates marine or freshwater species.](http://farm9.staticflickr.com/8005/7469598786_4ef285a467_o.png) 
 
 
 A wide array of visual displays are available for different kinds of data. 
@@ -355,7 +357,7 @@ ggplot(subset(dat, marine)) +
   opts(axis.text.x = theme_text(size = 8))
 ```
 
-
+![Distribution of maximum age for reef-associated and non-reef associated fish](http://farm9.staticflickr.com/8156/7469599084_4e01eedd35_o.png) 
 
 
 
@@ -544,7 +546,7 @@ ggplot(data.frame(corr.size,corr.depth), aes(corr.size,corr.depth)) +
  ylab("Contrast maximum depth (m)") + opts(title="Phylogenetically standardized contrasts")
 ```
 
-
+![Correcting for phylogeny, size is not correlated with maximum depth observed in  labrids](http://farm8.staticflickr.com/7130/7469599798_7173b8416e_o.png) 
 
 
 One can also estimate different evolutionary models for these traits 
@@ -627,7 +629,7 @@ of the `rfishbase` package to provide information about commercially relevant sp
 
 This work was supported by a Computational Sciences Graduate Fellowship from the
 Department of Energy under grant number DE-FG02-97ER25308 to CB and National Science Foundation grant
-DEB-1061981 to PCW. The `rfishbase` package part of the rOpenSci project ([ropensci.org](http://ropensci.org)).
+DEB-1061981 to PCW. The `rfishbase` package is part of the rOpenSci project ([ropensci.org](http://ropensci.org)).
 
 
 
