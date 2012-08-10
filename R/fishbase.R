@@ -44,10 +44,11 @@ NULL
 #' @examples \dontrun{ 
 #'   # NileTilapia <- fishbase("2")
 #' }
-fishbase <- function(fish.id, curl=getCurlHandle()){
-
+fishbase <- function(fish.id, curl=getCurlHandle(), server=2){
+  servers <- c("http://fishbase.sinica.edu.tw/", "http://www.fishbase.us/")
+  
   # Grab and parse page matching id
-  url <- paste("http://fishbase.sinica.edu.tw/",
+  url <- paste(servers[2],
                "maintenance/FB/showXML.php?identifier=FB-",
               fish.id, "&ProviderDbase=03", sep="")
   tt <- getURLContent(url, followlocation=TRUE, curl=curl)
