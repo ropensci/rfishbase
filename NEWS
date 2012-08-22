@@ -1,3 +1,9 @@
+rfishbase 0.1-1
+===============
+
+* Bug Fix: uses the alternative (US based) server to access data, which seems to be more stable.   
+
+
 rfishbase 0.0-9
 ===============
 

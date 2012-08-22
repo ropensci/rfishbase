@@ -32,7 +32,8 @@ NULL
 #' and return the XML R object
 #' @param fish.id the id number used by fishbase, ranges 1:70000
 #'  though wiht many missing values
-#' @param curl curlHandle(), please store value to avoid repeated handshaking.  
+#' @param curl curlHandle(), please store value to avoid repeated handshaking. 
+#' @param server the index of the server to use.  1 is sinica (Tiawan), 2 is US.
 #' @return a list object with the contents of the major datatypes in the 
 #'   the fishbase database.  
 #' @details Typically this function will only be called internally by

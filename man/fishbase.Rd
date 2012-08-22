@@ -3,7 +3,7 @@
 \title{Query the XML page of fishbase given a fishbase id
 and return the XML R object}
 \usage{
-  fishbase(fish.id, curl = getCurlHandle())
+  fishbase(fish.id, curl = getCurlHandle(), server = 2)
 }
 \arguments{
   \item{fish.id}{the id number used by fishbase, ranges
@@ -11,6 +11,9 @@ and return the XML R object}
 
   \item{curl}{curlHandle(), please store value to avoid
   repeated handshaking.}
+
+  \item{server}{the index of the server to use.  1 is
+  sinica (Tiawan), 2 is US.}
 }
 \value{
   a list object with the contents of the major datatypes in
