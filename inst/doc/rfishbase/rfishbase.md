@@ -19,6 +19,9 @@ R | vignette | fishbase
 
 
 
+```
+Error: "panel_background" is not a valid theme element name.
+```
 
 FishBase ([fishbase.org](http://fishbase.org)) is an award-winning online
 database of information about the morphology, trophic ecology, physiology,
@@ -71,12 +74,9 @@ programming interfaces (APIs). A cached copy is included in the package
 and can be loaded in to R using the command:
 
 
-
 ```r
 data(fishbase) 
 ```
-
-
 
 
 This loads a copy of all available data from FishBase into the R list, 
@@ -92,13 +92,10 @@ If no cached set is found, `rfishbase` will load the copy originally
 included in the package.  
 
 
-
 ```r
 updateCache(".")
 loadCache(".")
 ```
-
-
 
 Loading the database creates an object called fish.data, with one entry
 per fish species for which data was successfully found, for a total of
@@ -142,13 +139,10 @@ description), and second query for fish that have "nocturnal" in their trophic
 description:
 
 
-
 ```r
 reef <- which_fish("reef", "habitat", fish.data)
 nocturnal <- which_fish("nocturnal", "trophic", fish.data)
 ```
-
-
 
 One way these returned values are commonly used is to obtain a subset of the 
 database that meets this criteria, which can then be passed on to other 
@@ -158,12 +152,9 @@ takes the list of FishBase data, `fish.data` as input.  In this example, just th
 subset that are reef affiliated are passed to the function,
 
 
-
 ```r
 reef_species <- fish_names(fish.data[reef])
 ```
-
-
 
 
 Because our `reef` object is a list of logical values (true/false), one can
@@ -171,12 +162,9 @@ combine this in intuitive ways with other queries.  For instance, one can
 query for the names of all fish that are both nocturnal and not reef associated,
 
 
-
 ```r
 nocturnal_nonreef_orders <- fish_names(fish.data[nocturnal & !reef], "Class")
 ```
-
-
 
 
 Note that in this example, it is also specified that the user wants the
@@ -188,17 +176,13 @@ information.  For instance, the function `getSize` returns the length
 (default), weight, or age of the fish in the query:
 
 
-
 ```r
 age <- getSize(fish.data, "age")
 ```
 
 
-
-
 `rfishbase` can also extract a table of quantitative traits from the morphology 
 field, describing the number of vertebrate, dorsal and anal fin spines and rays,
-
 
 
 ```r
@@ -206,10 +190,7 @@ morphology_numbers <- getQuantTraits(fish.data)
 ```
 
 
-
-
 and extract the depth range (extremes and usual range) from the habitat field,
-
 
 
 ```r
@@ -218,41 +199,43 @@ depths <- getDepth(fish.data)
 
 
 
-
-
 A list of all the functions provided by `rfishbase` can be found in Table 1.  
 The `rfishbase` manual provided with the package provides more detail about
 each of these functions, together with examples for their use.  
 
-<!-- html table generated in R 2.15.1 by xtable 1.7-0 package -->
-<!-- Fri Jun 29 16:57:08 2012 -->
-<TABLE border=1>
-<CAPTION ALIGN="bottom"> A list of each of the functions and data objects provided by rfishbase </CAPTION>
-<TR> <TH> function.name </TH> <TH> description </TH>  </TR>
-  <TR> <TD> familySearch </TD> <TD> A function to find all fish that are members of </TD> </TR>
-  <TR> <TD>  </TD> <TD> a scientific Family </TD> </TR>
-  <TR> <TD> findSpecies </TD> <TD> Returns the matching indices in the data given </TD> </TR>
-  <TR> <TD>  </TD> <TD> a list of species names </TD> </TR>
-  <TR> <TD> fish.data </TD> <TD> A cached copy of extracted FishBase data, </TD> </TR>
-  <TR> <TD>  </TD> <TD> 03/2012. </TD> </TR>
-  <TR> <TD> fish_names </TD> <TD> Return the scientific names, families, classes, </TD> </TR>
-  <TR> <TD>  </TD> <TD> or orders of the input data </TD> </TR>
-  <TR> <TD> getDepth </TD> <TD> Returns available depth range data </TD> </TR>
-  <TR> <TD> getQuantTraits </TD> <TD> Returns all quantitative trait values found in </TD> </TR>
-  <TR> <TD>  </TD> <TD> the morphology data </TD> </TR>
-  <TR> <TD> getRefs </TD> <TD> Returns the FishBase reference id numbers </TD> </TR>
-  <TR> <TD>  </TD> <TD> matching a query. </TD> </TR>
-  <TR> <TD> getSize </TD> <TD> Returns available size data of specified type </TD> </TR>
-  <TR> <TD>  </TD> <TD> (length, weight, or age) </TD> </TR>
-  <TR> <TD> habitatSearch </TD> <TD> A function to search for the occurances of any </TD> </TR>
-  <TR> <TD>  </TD> <TD> keyword in habitat description </TD> </TR>
-  <TR> <TD> labridtree </TD> <TD> An example phylogeny of labrid fish </TD> </TR>
-  <TR> <TD> loadCache </TD> <TD> Load an updated cache </TD> </TR>
-  <TR> <TD> updateCache </TD> <TD> Update the cached copy of fishbase data </TD> </TR>
-  <TR> <TD> which_fish </TD> <TD> which_fish is the the generic search function </TD> </TR>
-  <TR> <TD>  </TD> <TD> for fishbase a variety of description types </TD> </TR>
-   </TABLE>
-
+\begin{table}[ht]
+\begin{center}
+\begin{tabular}{ll}
+  \hline
+function.name & description \\ 
+  \hline
+familySearch & A function to find all fish that are members of \\ 
+   & a scientific Family \\ 
+  findSpecies & Returns the matching indices in the data given \\ 
+   & a list of species names \\ 
+  fish.data & A cached copy of extracted FishBase data, \\ 
+   & 03/2012. \\ 
+  fish\_names & Return the scientific names, families, classes, \\ 
+   & or orders of the input data \\ 
+  getDepth & Returns available depth range data \\ 
+  getQuantTraits & Returns all quantitative trait values found in \\ 
+   & the morphology data \\ 
+  getRefs & Returns the FishBase reference id numbers \\ 
+   & matching a query. \\ 
+  getSize & Returns available size data of specified type \\ 
+   & (length, weight, or age) \\ 
+  habitatSearch & A function to search for the occurances of any \\ 
+   & keyword in habitat description \\ 
+  labridtree & An example phylogeny of labrid fish \\ 
+  loadCache & Load an updated cache \\ 
+  updateCache & Update the cached copy of fishbase data \\ 
+  which\_fish & which\_fish is the the generic search function \\ 
+   & for fishbase a variety of description types \\ 
+   \hline
+\end{tabular}
+\caption{A list of each of the functions and data objects provided by rfishbase}
+\end{center}
+\end{table}
 
 
 The real power of programmatic access is the ease with which one can combine,
@@ -264,7 +247,6 @@ column represents a variable.
 
 
 
-
 ```r
 marine <- which_fish("marine", "habitat", fish.data)
 africa <- which_fish("Africa:", "distribution", fish.data)
@@ -272,8 +254,6 @@ length <- getSize(fish.data, "length")
 order <- fish_names(fish.data, "Order")
 dat <- data.frame(reef, nocturnal,  age, marine, africa, length, order)
 ```
-
-
 
 
 This data frame contains categorical data (*e.g.* is the fish a
@@ -292,14 +272,10 @@ marine.
 
 
 
-
 ```r
 biggest <- names(head(sort(table(order),decr=T), 8))
 primary_orders <- subset(dat, order %in% biggest)
 ```
-
-
-
 
 
 
@@ -314,7 +290,7 @@ ggplot(primary_orders, aes(order, fill=marine)) + geom_bar() +
   xlab("") + ylab("Number of species")
 ```
 
-![Fraction of marine species in the eight largest orders of teleost fishes](http://farm8.staticflickr.com/7120/7469598298_570490b787_o.png) 
+![Fraction of marine species in the eight largest orders of teleost fishes](figure/Figure1.pdf) 
 
 
 FishBase data excels for comparative studies across many species, but searching 
@@ -328,7 +304,6 @@ provides a particularly powerful and flexible language for visual exploration
 of such patterns.
 
 
-
 ```r
 ggplot(dat,aes(age, length, shape=marine)) +
   geom_point(position='jitter', size=1) +
@@ -339,14 +314,13 @@ ggplot(dat,aes(age, length, shape=marine)) +
   opts(legend.key = theme_blank())
 ```
 
-![Scatterplot maximum age with length observed in each species. Color indicates marine or freshwater species.](http://farm9.staticflickr.com/8005/7469598786_4ef285a467_o.png) 
+![Scatterplot maximum age with length observed in each species. Color indicates marine or freshwater species.](figure/Figure2.pdf) 
 
 
 A wide array of visual displays are available for different kinds of data. 
 A box-plot is a natural way to compare the distributions of categorical 
 variables, such as asking "Are reef species longer lived than non-reef species
 in the marine environment?"
-
 
 
 ```r
@@ -357,7 +331,7 @@ ggplot(subset(dat, marine)) +
   opts(axis.text.x = theme_text(size = 8))
 ```
 
-![Distribution of maximum age for reef-associated and non-reef associated fish](http://farm9.staticflickr.com/8156/7469599084_4e01eedd35_o.png) 
+![Distribution of maximum age for reef-associated and non-reef associated fish](figure/Figure3.pdf) 
 
 
 
@@ -366,13 +340,10 @@ Executing the linear model testing the correlation of length with maximum size t
 single line, 
 
 
-
 ```r
 library(MASS)
 corr.model <- summary(rlm(data=dat,  length ~ age))
 ```
-
-
 
 
 which shows a significant correlation between maximum age and standard length (P = 0.001). 
@@ -394,16 +365,12 @@ all the species in fishbase from *Labridae* (wrasses), *Scaridae*
 (parrotfishes) and *Odacidae* (weed-whitings):
 
 
-
 ```r
 labrid <- which_fish("(Labridae|Scaridae|Odacidae)", "Family", fish.data)
 ```
 
 
-
-
 and get all the species of gobies
-
 
 
 ```r
@@ -411,10 +378,7 @@ goby <- which_fish("Gobiidae", "Family", fish.data)
 ```
 
 
-
-
 Identify how many labrids are found on reefs
-
 
 
 ```r
@@ -423,17 +387,12 @@ labrids.on.reefs <- table(labrid.reef)
 ```
 
 
-
-
 and how many gobies are found on reefs:
-
 
 
 ```r
 gobies.on.reefs <- table(which_fish("reef", "habitat", fish.data[goby]) )
 ```
-
-
 
 
 Note that summing the list of true/false values returned gives the total
@@ -463,7 +422,6 @@ data for a phylogenetic tree of labrid fish (provided in the package),
 and the phylogenetics packages `ape` [@ape] and `geiger` [@geiger].
 
 
-
 ```r
 data(labridtree)
 library(ape)
@@ -471,10 +429,7 @@ library(geiger)
 ```
 
 
-
-
 Find the species represented on this tree in FishBase 
-
 
 
 ```r
@@ -482,10 +437,7 @@ myfish <- findSpecies(labridtree$tip.label, fish.data)
 ```
 
 
-
-
 Get the maximum depth of each species and sizes of each species: 
-
 
 
 ```r
@@ -494,10 +446,7 @@ size <- getSize(fish.data[myfish], "length")
 ```
 
 
-
-
 Drop missing data, and then drop tips from the phylogeny for which data was not available: 
-
 
 
 ```r
@@ -519,11 +468,8 @@ Dropped tips from the tree because there were no matching names in the data:
 
 
 
-
-
 Use phylogenetically independent contrasts [@felsenstein1985] to 
 determine if depth correlates with size after correcting for phylogeny:
-
 
 
 ```r
@@ -533,10 +479,7 @@ corr.summary <- summary(lm(corr.depth ~ corr.size - 1))
 ```
 
 
-
-
 which returns a non-significant correlation (p = 0.47). 
-
 
 
 ```r
@@ -546,20 +489,17 @@ ggplot(data.frame(corr.size,corr.depth), aes(corr.size,corr.depth)) +
  ylab("Contrast maximum depth (m)") + opts(title="Phylogenetically standardized contrasts")
 ```
 
-![Correcting for phylogeny, size is not correlated with maximum depth observed in  labrids](http://farm8.staticflickr.com/7130/7469599798_7173b8416e_o.png) 
+![Correcting for phylogeny, size is not correlated with maximum depth observed in  labrids](figure/Figure4.pdf) 
 
 
 One can also estimate different evolutionary models for these traits 
 to decide which best describes the data,
 
 
-
 ```r
 bm <- fitContinuous(pruned$phy, pruned$data[["depths"]], model="BM")[[1]]
 ou <- fitContinuous(pruned$phy, pruned$data[["depths"]], model="OU")[[1]]
 ```
-
-
 
 
 where the Brownian motion model has an AIC score of 1,185 while
