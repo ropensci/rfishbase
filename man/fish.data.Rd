@@ -1,9 +1,10 @@
 \docType{data}
 \name{fish.data}
 \alias{fish.data}
-\title{A cached copy of extracted FishBase data, 03/2012.}
+\title{A cached copy of extracted FishBase data, 14 Febuary 2013.}
 \description{
-  A cached copy of extracted FishBase data, 03/2012.
+  A cached copy of extracted FishBase data, 14 Febuary
+  2013.
 }
 \references{
   Froese, R. and D. Pauly. Editors. 2011.FishBase.  World

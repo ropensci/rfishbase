@@ -1,9 +1,11 @@
+\docType{data}
 \name{fishbase}
 \alias{fishbase}
 \title{Query the XML page of fishbase given a fishbase id
 and return the XML R object}
+\format{<environment: 0x35ed8e0>}
 \usage{
-  fishbase(fish.id, curl = getCurlHandle(), server = 2)
+  fishbase
 }
 \arguments{
   \item{fish.id}{the id number used by fishbase, ranges
@@ -35,5 +37,6 @@ and return the XML R object}
 \seealso{
   \code{\link{getData}} and \code{\link{updateCache}}.
 }
+\keyword{datasets}
 \keyword{internal}
 

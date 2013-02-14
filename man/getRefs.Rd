@@ -18,6 +18,7 @@
   query.
 }
 \examples{
+data(fishbase)
 a <- which_fish("invertebrates", "trophic")
 refs <- getRefs("trophic", fish.data[a])
 toprefs <- sort(table(unlist(refs)), decreasing=TRUE)
