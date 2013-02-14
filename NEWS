@@ -1,3 +1,10 @@
+rfishbase 0.2-1
+===============
+
+* Avoid call to data and unassigned global variable fish.data (Fixes check NOTE)
+* Updated data cache
+* Updated documentation
+
 rfishbase 0.2-0
 ===============
 

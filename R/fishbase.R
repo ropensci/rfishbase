@@ -5,7 +5,7 @@
 
 
 
-#' A cached copy of extracted FishBase data, 03/2012.  
+#' A cached copy of extracted FishBase data, 14 Febuary 2013.  
 #' @name fish.data
 #' @docType data
 #' @references Froese, R. and D. Pauly. Editors. 2011.FishBase.

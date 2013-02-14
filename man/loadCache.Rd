@@ -2,7 +2,7 @@
 \alias{loadCache}
 \title{Load an updated cache}
 \usage{
-  loadCache(path = NULL)
+  loadCache(path)
 }
 \arguments{
   \item{path}{location where cache is located}
