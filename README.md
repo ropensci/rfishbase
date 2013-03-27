@@ -5,7 +5,7 @@ rfishbase
  
 `rfishbase` is a package for interfacing with the [fishbase.org](http://fishbase.org) database. It provides code to download and parse a local copy of fishbase, which can be used for rapid access for a variety of analysis functions. 
 
-
+- [Published copy in Journal of Fish Biology](http://dx.doi.org/10.1111/j.1095-8649.2012.03464.x)
 - [Development version source code on github](https://github.com/ropensci/rfishbase)
 - [HTML package documentation](http://ropensci.github.com/rfishbase/)
 - [Report issues, bugs or feature requests](https://github.com/ropensci/rfishbase/issues)
@@ -34,7 +34,5 @@ A [preprint](https://github.com/ropensci/rfishbase/blob/master/inst/doc/rfishbas
 References
 ----------
 
-Froese, R. and D. Pauly. Editors. 2011. FishBase.
-World Wide Web electronic publication.
-www.fishbase.org, version (08/2011).
-
+* Froese, R. and D. Pauly. Editors. 2011. FishBase. World Wide Web electronic publication. www.fishbase.org, version (08/2011).
+* Carl Boettiger, Duncan Temple Lang, Peter Wainwright (2012). rfishbase: exploring, manipulating and visualizing FishBase data from R, 2030–2039. Journal of Fish Biology. 81 (6). doi:10.1111/j.1095-8649.2012.03464.x 
