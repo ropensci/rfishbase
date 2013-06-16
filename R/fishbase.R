@@ -49,7 +49,7 @@ fishbase <- function(fish.id, curl=getCurlHandle(), server=2){
   servers <- c("http://fishbase.sinica.edu.tw/", "http://www.fishbase.us/")
   
   # Grab and parse page matching id
-  url <- paste(servers[2],
+  url <- paste(servers[server],
                "maintenance/FB/showXML.php?identifier=FB-",
               fish.id, "&ProviderDbase=03", sep="")
   tt <- getURLContent(url, followlocation=TRUE, curl=curl)
