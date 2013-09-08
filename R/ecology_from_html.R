@@ -16,7 +16,7 @@ getSummary <- function(id){
   summaryPage <- htmlParse(url) 
 }
 
-getEcology <- function(summmaryPage){
+getEcology <- function(summaryPage){
   link <- xpathApply(summaryPage, "//*[contains(@href, '/Ecology/FishEcologySummary.php')][1]", xmlAttrs)[[1]][["href"]]
   ecologyPage <- htmlParse(paste0("http://www.fishbase.org/", gsub("\\.\\./", "", link)))
 }
@@ -42,9 +42,9 @@ parseTrophicLevel <- function(tab,
     if(justSE)
       adj <- 1
     if(from == "diet composition")
-      out <- tab[2,col+adj]
+      out <- as.numeric(as.character(tab[2,col+adj]))
     else if(from == "individual food items")
-      out <- tab[4,col+adj]
+      out <- as.numeric(as.character(tab[4,col+adj]))
   }
   out 
 }
