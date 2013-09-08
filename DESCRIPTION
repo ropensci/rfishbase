@@ -20,3 +20,4 @@ Collate:
     'fishbase.R'
     'clean_data.R'
     'zzz.R'
+    'ecology_from_html.R'
