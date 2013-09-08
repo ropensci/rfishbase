@@ -51,20 +51,25 @@ parseTrophicLevel <- function(tab,
 
 
 #' @export
-getTrophicLevel <- function(id,
+getTrophicLevel <- function(fish.data = NULL,
+                            path = NULL,
                             as_table=FALSE, 
                             from = c("diet composition", "individual food items"), 
                             unfished = FALSE,
                             justSE = FALSE,
                             justReference = FALSE){
-  summaryPage <- getSummary(id)
-  ecologyPage <- getEcology(summaryPage)
-  tab <- readTrophicLevel(ecologyPage)
-  if(as_table)
-    tab
-  else
-    parseTrophicLevel(tab, from=from, unfished=unfished,justSE=justSE, justReference=justReference)
 
+  ids <- getIds(fish.data = fish.data, path=path)
+  out <- sapply(ids, function(id){
+    summaryPage <- getSummary(id)
+    ecologyPage <- getEcology(summaryPage)
+    tab <- readTrophicLevel(ecologyPage)
+    if(as_table)
+      tab
+    else
+      parseTrophicLevel(tab, from=from, unfished=unfished,justSE=justSE, justReference=justReference)
+    })
+  out
 }
 
 

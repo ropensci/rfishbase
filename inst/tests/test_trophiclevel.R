@@ -2,6 +2,5 @@
 require(rfishbase)
 data(fishbase)
 
-ids <- getIds(fish.data[1:10])
 
-sapply(ids, getTrophicLevel)
+getTrophicLevel(fish.data[1:10])
