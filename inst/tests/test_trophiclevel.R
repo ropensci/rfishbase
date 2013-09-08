@@ -1,5 +1,5 @@
 
-require(fishbase)
+require(rfishbase)
 data(fishbase)
 
 ids <- getIds(fish.data[1:10])

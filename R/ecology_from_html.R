@@ -33,19 +33,20 @@ parseTrophicLevel <- function(tab,
                               justReference = FALSE){
   from <- match.arg(from)
   if(justReference)
-    as.character(tab[3,2])
+    out <- as.character(tab[3,2])
   else{
     col <- 2
     adj <- 0
-    if("unfished")
+    if(unfished)
       col <- 4
     if(justSE)
       adj <- 1
     if(from == "diet composition")
-      tab[2,col+adj]
-    if(from == "individual food items")
-      tab[4,col+adj]
+      out <- tab[2,col+adj]
+    else if(from == "individual food items")
+      out <- tab[4,col+adj]
   }
+  out 
 }
 
 
