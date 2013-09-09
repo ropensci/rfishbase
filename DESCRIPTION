@@ -14,6 +14,8 @@ Depends:
 Imports:
     XML,
     RCurl (>= 1.6)
+Suggests:
+    testthat
 Collate:
     'analysis.R'
     'cacheFB.R'
@@ -22,3 +24,4 @@ Collate:
     'zzz.R'
     'ecology_from_html.R'
     'pictures.R'
+    'length-weight-table.R'

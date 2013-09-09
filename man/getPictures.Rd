@@ -2,21 +2,20 @@
 \alias{getPictures}
 \title{getPictures from the fishbase database}
 \usage{
-  getPictures(genus, species,
+  getPictures(scientific_name,
     type = c("adult", "juvenile", "larvae", "stamps"),
-    what = c("image", "thumbnail", "author"),
+    what = c("actual", "thumbnail", "author"),
     download = FALSE, ...)
 }
 \arguments{
-  \item{genus}{the genus name}
-
-  \item{species}{the species name}
+  \item{scientific}{name the space-separated genus and
+  species names}
 
   \item{type}{the kind of photo requested: adult, juvenile,
   larvae, or stamps.}
 
-  \item{what}{character specifying what to return: image
-  url, thumbnail, or author name?}
+  \item{what}{character specifying what to return: actual
+  image, thumbnail, or author name?}
 
   \item{download}{logical, download to working directory?}
 

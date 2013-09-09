@@ -4,9 +4,9 @@ rfishbase 0.2-2
 ===============
 
 * EDITS IN PROGRESS, Documentation and Checks not fished
-* Added `getTrophicLevel()` function which scrapes from the HTML, see Issue [#12](https://github.com/ropensci/rfishbase/issues/12)
-* Added a crude unit test file for the new function
-
+* Added `getTrophicLevel()` function and unit test, see Issue [#12](https://github.com/ropensci/rfishbase/issues/12)
+* Added `getLengthWeight()` and unit test, see Issue [#4](https://github.com/ropensci/rfishbase/issues/4)
+* Added `getPictures()` and unit test, see Issue [#11](https://github.com/ropensci/rfishbase/issues/11)
 
 rfishbase 0.2-1
 ===============
