@@ -1,6 +1,14 @@
+context("trophic level from HTML scraping")
 
-require(rfishbase)
-data(fishbase)
+  require(rfishbase)
+  data(fishbase)
 
+# Requires internet connection
 
-getTrophicLevel(fish.data[1:10])
+test_that("we can execute getTrophicLevel", {
+  response <- getTrophicLevel(fish.data[1:2])
+  expect_equals(response[[1]], 2) 
+})
+
+## Should test that all the optional arguments to getTrophicLevel work as expected too...
+

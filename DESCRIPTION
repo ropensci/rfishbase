@@ -21,3 +21,4 @@ Collate:
     'clean_data.R'
     'zzz.R'
     'ecology_from_html.R'
+    'pictures.R'
