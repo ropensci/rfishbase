@@ -1,6 +1,7 @@
 export(findSpecies)
 export(fish_names)
 export(getDepth)
+export(getEnviroClimateRange)
 export(getIds)
 export(getLengthWeight)
 export(getPictures)
