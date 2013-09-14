@@ -56,11 +56,15 @@ familySearch <- function(family, fish.data=NULL){
 which_fish <- function(keyword, using=c("trophic", "habitat", "lifecycle", 
                        "morphology","diagnostic", "distribution",
                        "ScientificName", "Genus", "Family",
-                       "Class", "Order", "size"), fish.data=NULL, path=NULL){
+                       "Class", "Order", "size", "all"), fish.data=NULL, path=NULL){
   if(is.null(fish.data))
     fish.data <- loadCache(path=path)
   using <- match.arg(using)
-  sapply(fish.data, function(x) length(grep(keyword, x[[using]]))>0)
+  if(using != "all")
+    out <- sapply(fish.data, function(x) length(grep(keyword, x[[using]]))>0)
+  else if(using == "all")
+    out <- sapply(fish.data, function(x) length(grep(keyword, x))>0)
+  out
 }
 
 
