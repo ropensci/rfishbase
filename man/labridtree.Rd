@@ -2,6 +2,7 @@
 \name{labridtree}
 \alias{labridtree}
 \title{An example phylogeny of labrid fish}
+\format{NULL}
 \description{
   An example phylogeny of labrid fish
 }

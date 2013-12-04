@@ -3,7 +3,7 @@
 \title{Query the XML page of fishbase given a fishbase id
 and return the XML R object}
 \usage{
-  fishbase(fish.id, curl = getCurlHandle(), server = 2)
+fishbase(fish.id, curl = getCurlHandle(), server = 2)
 }
 \arguments{
   \item{fish.id}{the id number used by fishbase, ranges

@@ -2,7 +2,7 @@
 \alias{getDepth}
 \title{Returns available depth range data}
 \usage{
-  getDepth(fish.data = NULL, path = NULL)
+getDepth(fish.data = NULL, path = NULL)
 }
 \arguments{
   \item{fish.data}{the fishbase database or a subset}

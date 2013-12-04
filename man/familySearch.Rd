@@ -2,7 +2,7 @@
 \alias{familySearch}
 \title{A function to find all fish that are members of a scientific Family}
 \usage{
-  familySearch(family, fish.data = NULL)
+familySearch(family, fish.data = NULL)
 }
 \arguments{
   \item{family}{The scientific family name.  Can include

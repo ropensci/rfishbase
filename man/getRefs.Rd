@@ -2,8 +2,9 @@
 \alias{getRefs}
 \title{Returns the FishBase reference id numbers matching a query.}
 \usage{
-  getRefs(using = c("trophic", "habitat", "lifecycle", "morphology", "diagnostic", "distribution", "ScientificName", "Genus", "Family", "Class", "Order", "size"),
-    fish.data = NULL, path = NULL)
+getRefs(using = c("trophic", "habitat", "lifecycle", "morphology",
+  "diagnostic", "distribution", "ScientificName", "Genus", "Family", "Class",
+  "Order", "size"), fish.data = NULL, path = NULL)
 }
 \arguments{
   \item{using}{which entry type for the search}

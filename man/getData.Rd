@@ -3,7 +3,7 @@
 \title{Description: a general function to loop over all fish ids to get data
   also drops the missing entries}
 \usage{
-  getData(fish.ids, silent = TRUE)
+getData(fish.ids, silent = TRUE)
 }
 \arguments{
   \item{fish.ids}{used by fishbase. An integer between

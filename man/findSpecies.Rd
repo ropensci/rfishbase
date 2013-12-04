@@ -2,7 +2,7 @@
 \alias{findSpecies}
 \title{Returns the matching indices in the data given a list of species names}
 \usage{
-  findSpecies(species, fish.data = NULL, path = NULL)
+findSpecies(species, fish.data = NULL, path = NULL)
 }
 \arguments{
   \item{species}{a list of species names as "Genus_species"

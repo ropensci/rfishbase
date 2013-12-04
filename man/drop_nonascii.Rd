@@ -2,7 +2,7 @@
 \alias{drop_nonascii}
 \title{remove non-ASCII characters}
 \usage{
-  drop_nonascii(string)
+drop_nonascii(string)
 }
 \arguments{
   \item{string}{any character string}

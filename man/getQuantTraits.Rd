@@ -2,7 +2,7 @@
 \alias{getQuantTraits}
 \title{Returns all quantitative trait values found in the morphology data}
 \usage{
-  getQuantTraits(fish.data = NULL, path = NULL)
+getQuantTraits(fish.data = NULL, path = NULL)
 }
 \arguments{
   \item{fish.data}{the fishbase database or a subset}

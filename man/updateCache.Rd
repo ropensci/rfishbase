@@ -2,7 +2,7 @@
 \alias{updateCache}
 \title{Update the cached copy of fishbase data}
 \usage{
-  updateCache(path = ".")
+updateCache(path = ".")
 }
 \arguments{
   \item{path}{where cache should be stored. (default to

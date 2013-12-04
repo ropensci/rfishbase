@@ -2,10 +2,9 @@
 \alias{getPictures}
 \title{getPictures from the fishbase database}
 \usage{
-  getPictures(scientific_name,
-    type = c("adult", "juvenile", "larvae", "stamps"),
-    what = c("actual", "thumbnail", "author"),
-    download = FALSE, ...)
+getPictures(scientific_name, type = c("adult", "juvenile", "larvae",
+  "stamps"), what = c("actual", "thumbnail", "author"), download = FALSE,
+  ...)
 }
 \arguments{
   \item{scientific}{name the space-separated genus and

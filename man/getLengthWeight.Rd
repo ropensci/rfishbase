@@ -2,7 +2,7 @@
 \alias{getLengthWeight}
 \title{get length_weight_table}
 \usage{
-  getLengthWeight(fish.data = NULL, path = NULL)
+getLengthWeight(fish.data = NULL, path = NULL)
 }
 \arguments{
   \item{fish.data}{the fishbase database fish.data or a

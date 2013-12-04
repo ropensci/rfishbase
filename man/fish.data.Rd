@@ -2,6 +2,7 @@
 \name{fish.data}
 \alias{fish.data}
 \title{A cached copy of extracted FishBase data, 14 Febuary 2013.}
+\format{NULL}
 \description{
   A cached copy of extracted FishBase data, 14 Febuary
   2013.

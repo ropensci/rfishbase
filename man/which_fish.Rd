@@ -3,9 +3,9 @@
 \title{which_fish is the the generic search function for fishbase
  a variety of description types}
 \usage{
-  which_fish(keyword,
-    using = c("trophic", "habitat", "lifecycle", "morphology", "diagnostic", "distribution", "ScientificName", "Genus", "Family", "Class", "Order", "size"),
-    fish.data = NULL, path = NULL)
+which_fish(keyword, using = c("trophic", "habitat", "lifecycle", "morphology",
+  "diagnostic", "distribution", "ScientificName", "Genus", "Family", "Class",
+  "Order", "size", "all"), fish.data = NULL, path = NULL)
 }
 \arguments{
   \item{keyword}{pattern to be used by grep}

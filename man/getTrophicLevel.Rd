@@ -2,11 +2,9 @@
 \alias{getTrophicLevel}
 \title{get trophic level}
 \usage{
-  getTrophicLevel(fish.data = NULL, path = NULL,
-    as_table = FALSE,
-    from = c("diet composition", "individual food items"),
-    unfished = FALSE, justSE = FALSE,
-    justReference = FALSE)
+getTrophicLevel(fish.data = NULL, path = NULL, as_table = FALSE,
+  from = c("diet composition", "individual food items"), unfished = FALSE,
+  justSE = FALSE, justReference = FALSE)
 }
 \arguments{
   \item{fish.data}{the fishbase database fish.data or a

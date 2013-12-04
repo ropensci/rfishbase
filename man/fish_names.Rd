@@ -2,9 +2,8 @@
 \alias{fish_names}
 \title{Return the scientific names, families, classes, or orders of the input data}
 \usage{
-  fish_names(fish.data = NULL,
-    name = c("ScientificName", "Family", "Class", "Order"),
-    path = NULL)
+fish_names(fish.data = NULL, name = c("ScientificName", "Family", "Class",
+  "Order"), path = NULL)
 }
 \arguments{
   \item{name}{return the Scientific Name or Family, Class,

@@ -2,8 +2,8 @@
 \alias{getSize}
 \title{Returns available size data of specified type (length, weight, or age)}
 \usage{
-  getSize(fish.data = NULL,
-    value = c("length", "weight", "age"), path = NULL)
+getSize(fish.data = NULL, value = c("length", "weight", "age"),
+  path = NULL)
 }
 \arguments{
   \item{fish.data}{the fishbase database or a subset}

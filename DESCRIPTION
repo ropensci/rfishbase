@@ -16,13 +16,3 @@ Imports:
     RCurl (>= 1.6)
 Suggests:
     testthat
-Collate:
-    'analysis.R'
-    'cacheFB.R'
-    'fishbase.R'
-    'clean_data.R'
-    'zzz.R'
-    'ecology_from_html.R'
-    'pictures.R'
-    'length-weight-table.R'
-    'enviro-climate-range.R'
