@@ -73,7 +73,7 @@ to support direct access to application programming interfaces (APIs). A
 cached copy is included in the package and can be loaded in to R using
 the command:
 
-~~~~ {.r}
+~~~~ {.coffee}
 data(fishbase) 
 ~~~~
 
@@ -89,7 +89,7 @@ be loaded with the `loadCache()` function.\
 If no cached set is found, `rfishbase` will load the copy originally
 included in the package.
 
-~~~~ {.r}
+~~~~ {.coffee}
 updateCache(".")
 loadCache(".")
 ~~~~
@@ -139,7 +139,7 @@ Here is a query for reef-associated fish (mention of “reef” in the
 habitat description), and second query for fish that have “nocturnal” in
 their trophic description:
 
-~~~~ {.r}
+~~~~ {.coffee}
 reef <- which_fish("reef", "habitat", fish.data)
 nocturnal <- which_fish("nocturnal", "trophic", fish.data)
 ~~~~
@@ -152,7 +152,7 @@ these reef fish, one can use the `fish_names` function. Like the
 as input. In this example, just the subset that are reef affiliated are
 passed to the function,
 
-~~~~ {.r}
+~~~~ {.coffee}
 reef_species <- fish_names(fish.data[reef])
 ~~~~
 
@@ -161,7 +161,7 @@ can combine this in intuitive ways with other queries. For instance, one
 can query for the names of all fish that are both nocturnal and not reef
 associated,
 
-~~~~ {.r}
+~~~~ {.coffee}
 nocturnal_nonreef_orders <- fish_names(fish.data[nocturnal & !reef], "Class")
 ~~~~
 
@@ -173,7 +173,7 @@ for it to return. Quantitative trait queries work in a similar manner to
 information. For instance, the function `getSize` returns the length
 (default), weight, or age of the fish in the query:
 
-~~~~ {.r}
+~~~~ {.coffee}
 age <- getSize(fish.data, "age")
 ~~~~
 
@@ -181,14 +181,14 @@ age <- getSize(fish.data, "age")
 morphology field, describing the number of vertebrate, dorsal and anal
 fin spines and rays,
 
-~~~~ {.r}
+~~~~ {.coffee}
 morphology_numbers <- getQuantTraits(fish.data)
 ~~~~
 
 and extract the depth range (extremes and usual range) from the habitat
 field,
 
-~~~~ {.r}
+~~~~ {.coffee}
 depths <- getDepth(fish.data)
 ~~~~
 
@@ -310,7 +310,7 @@ data frame. The next set of commands combines the queries made above and
 a few additional queries into a data frame in which each row represents
 a species and each column represents a variable.
 
-~~~~ {.r}
+~~~~ {.coffee}
 marine <- which_fish("marine", "habitat", fish.data)
 africa <- which_fish("Africa:", "distribution", fish.data)
 length <- getSize(fish.data, "length")
@@ -328,12 +328,12 @@ For instance, one can identify which orders contain the greatest number
 of species, and for each of them, plot the fraction in which the species
 are marine.
 
-~~~~ {.r}
+~~~~ {.coffee}
 biggest <- names(head(sort(table(order),decr=T), 8))
 primary_orders <- subset(dat, order %in% biggest)
 ~~~~
 
-~~~~ {.r}
+~~~~ {.coffee}
 ggplot(primary_orders, aes(order, fill=marine)) + geom_bar() + 
 # a few commands to customize appearance 
   geom_bar(colour="black",show_guide=FALSE) +  
@@ -357,7 +357,7 @@ marine-associated. The `ggplot2` package (Wickham 2009) provides a
 particularly powerful and flexible language for visual exploration of
 such patterns.
 
-~~~~ {.r}
+~~~~ {.coffee}
 ggplot(dat,aes(age, length, shape=marine)) +
   geom_point(position='jitter', size=1) +
   scale_y_log10() + scale_x_log10(breaks=c(50,100,200)) +
@@ -376,7 +376,7 @@ data. A box-plot is a natural way to compare the distributions of
 categorical variables, such as asking “Are reef species longer lived
 than non-reef species in the marine environment?”
 
-~~~~ {.r}
+~~~~ {.coffee}
 ggplot(subset(dat, marine)) + 
   geom_boxplot(aes(reef, age)) + 
   scale_y_log10() + xlab("") +
@@ -393,7 +393,7 @@ of statistical analysis methods.\
 Executing the linear model testing the correlation of length with
 maximum size takes a single line,
 
-~~~~ {.r}
+~~~~ {.coffee}
 library(MASS)
 corr.model <- summary(rlm(data=dat,  length ~ age))
 ~~~~
@@ -420,26 +420,26 @@ are listed as separate families in fishbase. We get all the species in
 fishbase from *Labridae* (wrasses), *Scaridae* (parrotfishes) and
 *Odacidae* (weed-whitings):
 
-~~~~ {.r}
+~~~~ {.coffee}
 labrid <- which_fish("(Labridae|Scaridae|Odacidae)", "Family", fish.data)
 ~~~~
 
 and get all the species of gobies
 
-~~~~ {.r}
+~~~~ {.coffee}
 goby <- which_fish("Gobiidae", "Family", fish.data)
 ~~~~
 
 Identify how many labrids are found on reefs
 
-~~~~ {.r}
+~~~~ {.coffee}
 labrid.reef <- which_fish("reef", "habitat", fish.data[labrid])
 labrids.on.reefs <- table(labrid.reef)
 ~~~~
 
 and how many gobies are found on reefs:
 
-~~~~ {.r}
+~~~~ {.coffee}
 gobies.on.reefs <- table(which_fish("reef", "habitat", fish.data[goby]) )
 ~~~~
 
@@ -470,7 +470,7 @@ the data for a phylogenetic tree of labrid fish (provided in the
 package), and the phylogenetics packages `ape` (Paradis, Claude, and
 Strimmer 2004) and `geiger` (Harmon et al. 2009).
 
-~~~~ {.r}
+~~~~ {.coffee}
 data(labridtree)
 library(ape)
 library(geiger) 
@@ -478,13 +478,13 @@ library(geiger)
 
 Find the species represented on this tree in FishBase
 
-~~~~ {.r}
+~~~~ {.coffee}
 myfish <- findSpecies(labridtree$tip.label, fish.data)
 ~~~~
 
 Get the maximum depth of each species and sizes of each species:
 
-~~~~ {.r}
+~~~~ {.coffee}
 depths <- getDepth(fish.data[myfish])[,"deep"]
 size <- getSize(fish.data[myfish], "length")
 ~~~~
@@ -492,7 +492,7 @@ size <- getSize(fish.data[myfish], "length")
 Drop missing data, and then drop tips from the phylogeny for which data
 was not available:
 
-~~~~ {.r}
+~~~~ {.coffee}
 data <- na.omit(data.frame(size,depths))
 pruned <- treedata(labridtree, data)
 ~~~~
@@ -509,7 +509,7 @@ pruned <- treedata(labridtree, data)
 Use phylogenetically independent contrasts (Felsenstein 1985) to
 determine if depth correlates with size after correcting for phylogeny:
 
-~~~~ {.r}
+~~~~ {.coffee}
 corr.size <- pic(pruned$data[["size"]],pruned$phy)
 corr.depth <- pic(pruned$data[["depths"]],pruned$phy)
 corr.summary <- summary(lm(corr.depth ~ corr.size - 1))
@@ -517,7 +517,7 @@ corr.summary <- summary(lm(corr.depth ~ corr.size - 1))
 
 which returns a non-significant correlation (p = 0.47).
 
-~~~~ {.r}
+~~~~ {.coffee}
 ggplot(data.frame(corr.size,corr.depth), aes(corr.size,corr.depth)) +
  geom_point() + stat_smooth(method=lm, col=1) + 
  xlab("Contrast of standard length (cm)") +
@@ -531,7 +531,7 @@ labrids](http://farm8.staticflickr.com/7130/7469599798_7173b8416e_o.png)
 One can also estimate different evolutionary models for these traits to
 decide which best describes the data,
 
-~~~~ {.r}
+~~~~ {.coffee}
 bm <- fitContinuous(pruned$phy, pruned$data[["depths"]], model="BM")[[1]]
 ou <- fitContinuous(pruned$phy, pruned$data[["depths"]], model="OU")[[1]]
 ~~~~
