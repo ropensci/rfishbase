@@ -1,7 +1,7 @@
 #' getPictures from the fishbase database
 #' 
 #' get urls of fishbase images given a genus and species
-#' @param scientific name the space-separated genus and species names
+#' @param scientific_name the space-separated genus and species names
 #' @param type the kind of photo requested: adult, juvenile, larvae, or stamps.  
 #' @param what character specifying what to return: actual image, thumbnail, or author name? 
 #' @param download logical, download to working directory?

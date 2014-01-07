@@ -1,7 +1,7 @@
 
-#' get length_weight_table
+#' get the length weight table
 #' 
-#' Gets the length_weight table into R.  (e.g. this table: http://www.fishbase.org/PopDyn/LWRelationshipList.php?ID=2&GenusName=Oreochromis&SpeciesName=niloticus&fc=349). 
+#' Gets the length weight table into R.  (e.g. this table: http://www.fishbase.org/PopDyn/LWRelationshipList.php?ID=2&GenusName=Oreochromis&SpeciesName=niloticus&fc=349). 
 #' @param fish.data the fishbase database fish.data or a subset,
 #' @param path to cached copy of fishbase (optional, defaults to copy in package).
 #' @return a list of tables for each species given.  

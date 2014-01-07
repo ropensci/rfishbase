@@ -1,6 +1,6 @@
 \name{getLengthWeight}
 \alias{getLengthWeight}
-\title{get length_weight_table}
+\title{get the length weight table}
 \usage{
 getLengthWeight(fish.data = NULL, path = NULL)
 }
@@ -15,7 +15,7 @@ getLengthWeight(fish.data = NULL, path = NULL)
   a list of tables for each species given.
 }
 \description{
-  Gets the length_weight table into R.  (e.g. this table:
+  Gets the length weight table into R.  (e.g. this table:
   http://www.fishbase.org/PopDyn/LWRelationshipList.php?ID=2&GenusName=Oreochromis&SpeciesName=niloticus&fc=349).
 }
 

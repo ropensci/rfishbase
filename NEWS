@@ -3,12 +3,12 @@
 rfishbase 0.2-2
 ===============
 
-* EDITS IN PROGRESS, Documentation and Checks not fished
+* Added `getMetabolism` to get data from oxygen/metabolism table. see Issue [#14](https://github.com/ropensci/rfishbase/issues/14)
 * Added `getTrophicLevel()` function and unit test, see Issue [#12](https://github.com/ropensci/rfishbase/issues/12)
 * Added `getLengthWeight()` and unit test, see Issue [#4](https://github.com/ropensci/rfishbase/issues/4)
 * Added `getPictures()` and unit test, see Issue [#11](https://github.com/ropensci/rfishbase/issues/11)
 * Added `getEnviroClimateRange()` and unit test, see Issue [#13](https://github.com/ropensci/rfishbase/issues/13)
-*  Added `using = 'all'` to `which_fish()` options, see Issue [#13](https://github.com/ropensci/rfishbase/issues/13)
+* Added `using = 'all'` to `which_fish()` options, see Issue [#13](https://github.com/ropensci/rfishbase/issues/13)
 
 
 rfishbase 0.2-1

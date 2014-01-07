@@ -4,7 +4,7 @@
 #' get a quantitative estimate of the trophic level for the species requested. See the "Ecology" page on Fishbase for the speices.  
 #' @param fish.data the fishbase database fish.data or a subset,
 #' @param path to cached copy of fishbase (optional, defaults to copy in package).
-#' @param as_table: logical. if True, returns the whole table.  Otherwise (default), returns the element from the table that is specified by the other options.  
+#' @param as_table logical. if True, returns the whole table.  Otherwise (default), returns the element from the table that is specified by the other options.  
 #' @param from use the diet composition or the individual food items?  See fishbase.org for details on these differences.  Both may or may not be available.  
 #' @param unfished return the estimate for unfished population (default FALSE).  See fishbase.org for details.  
 #' @param justSE return the standard deviation to the estimated trophic level.  If FALSE, returns the estimated value, so you must use two calls, or use as_table=TRUE, to get both values.  
@@ -32,8 +32,12 @@ getTrophicLevel <- function(fish.data = NULL,
   out
 }
 
-
-
+#' get fishbase id numbers
+#'
+#' get fishbase id numbers
+#' @param fish.data the fishbase database fish.data or a subset,
+#' @param path to cached copy of fishbase (optional, defaults to copy in package).
+#' @return the ids numbers corresponding to positions along fish.data object in use
 #' @export
 getIds <- function(fish.data=NULL, path=NULL){
   if(is.null(fish.data))

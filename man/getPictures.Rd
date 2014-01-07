@@ -7,7 +7,7 @@ getPictures(scientific_name, type = c("adult", "juvenile", "larvae",
   ...)
 }
 \arguments{
-  \item{scientific}{name the space-separated genus and
+  \item{scientific_name}{the space-separated genus and
   species names}
 
   \item{type}{the kind of photo requested: adult, juvenile,

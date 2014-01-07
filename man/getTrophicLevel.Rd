@@ -13,7 +13,7 @@ getTrophicLevel(fish.data = NULL, path = NULL, as_table = FALSE,
   \item{path}{to cached copy of fishbase (optional,
   defaults to copy in package).}
 
-  \item{as_table:}{logical. if True, returns the whole
+  \item{as_table}{logical. if True, returns the whole
   table.  Otherwise (default), returns the element from the
   table that is specified by the other options.}
 
