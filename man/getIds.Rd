@@ -1,0 +1,21 @@
+\name{getIds}
+\alias{getIds}
+\title{get fishbase id numbers}
+\usage{
+getIds(fish.data = NULL, path = NULL)
+}
+\arguments{
+  \item{fish.data}{the fishbase database fish.data or a
+  subset,}
+
+  \item{path}{to cached copy of fishbase (optional,
+  defaults to copy in package).}
+}
+\value{
+  the ids numbers corresponding to positions along
+  fish.data object in use
+}
+\description{
+  get fishbase id numbers
+}
+
