@@ -1,6 +1,6 @@
-#' get metabolism table (oxygen consumption).  
+#' get diet (food items table)
 #'
-#' See the "Metabolism" page on Fishbase for the speices for details.  
+#' See the "Food Items" page on Fishbase for the species for details.  
 #' @param fish.data the fishbase database fish.data or a subset,
 #' @param path to cached copy of fishbase (optional, defaults to copy in package).
 #' @return A list of tables with an entry for each fish in fish.data.  
@@ -8,32 +8,32 @@
 #' @export
 #' @examples  \dontrun{
 #' data(fishbase)
-#' getMetabolism(fish.data[1])
+#' getFoodItems(fish.data[1])
 #' }
 
-getMetabolism <- function(fish.data = NULL,
+getFoodItems <- function(fish.data = NULL,
                           path = NULL){
 
   ids <- getIds(fish.data = fish.data, path=path)
   out <- lapply(ids, function(id){
     summaryPage <- getSummary(id)
-    metabolismPage <- getMetabolismPage(summaryPage)
-    getMetabolismTable(metabolismPage)
+    foodItemsPage <- getFoodItemsPage(summaryPage)
+    getFoodItemsTable(foodItemsPage)
     })
   species <- fish_names(fish.data, path)
   names(out) <- species
-  out
+  return(out)
 }
 
-getMetabolismPage <- function(summaryPage){
-  link <- xpathApply(summaryPage, "//*[contains(@href, '/physiology/OxygenDataList.php')][1]", xmlAttrs)[[1]][["href"]]
+getFoodItemsPage <- function(summaryPage){
+  link <- xpathApply(summaryPage, "//*[contains(@href, '/TrophicEco/FoodItemsList.php')][1]", xmlAttrs)[[1]][["href"]]
   htmlParse(paste0("http://www.fishbase.org/", gsub("\\.\\./", "", link)))
 }
 
 
-getMetabolismTable <- function(page){
+getFoodItemsTable <- function(page){
   tab <- readHTMLTable(page)[[1]]
-  names(tab) <- c("Oxygen consumption mg/kg/h",  "Oxygen consumption at 20 C", 
-                  "Weight (g)", "Temperature C", "Salinity", "Activity",  "Applied stress")
-  tab
+  names(tab) <- c("Food I",  "Food II", "Food III", 
+                  "Food name", "Country", "Predator Stage")
+  return(tab)
 }
