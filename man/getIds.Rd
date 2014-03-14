@@ -12,10 +12,10 @@ getIds(fish.data = NULL, path = NULL)
   defaults to copy in package).}
 }
 \value{
-  the ids numbers corresponding to positions along
-  fish.data object in use
+the ids numbers corresponding to positions along fish.data
+object in use
 }
 \description{
-  get fishbase id numbers
+get fishbase id numbers
 }
 

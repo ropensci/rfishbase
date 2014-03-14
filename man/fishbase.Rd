@@ -16,16 +16,16 @@ fishbase(fish.id, curl = getCurlHandle(), server = 2)
   sinica (Tiawan), 2 is US.}
 }
 \value{
-  a list object with the contents of the major datatypes in
-  the the fishbase database.
+a list object with the contents of the major datatypes in
+the the fishbase database.
 }
 \description{
-  Query the XML page of fishbase given a fishbase id and
-  return the XML R object
+Query the XML page of fishbase given a fishbase id and
+return the XML R object
 }
 \details{
-  Typically this function will only be called internally by
-  the caching function.
+Typically this function will only be called internally by
+the caching function.
 }
 \examples{
 \dontrun{
@@ -33,7 +33,7 @@ fishbase(fish.id, curl = getCurlHandle(), server = 2)
 }
 }
 \seealso{
-  \code{\link{getData}} and \code{\link{updateCache}}.
+\code{\link{getData}} and \code{\link{updateCache}}.
 }
 \keyword{internal}
 

@@ -15,11 +15,11 @@ fish_names(fish.data = NULL, name = c("ScientificName", "Family", "Class",
   \item{path}{to updated copy of the cache; optional.}
 }
 \value{
-  the names of the matching fish.
+the names of the matching fish.
 }
 \description{
-  Return the scientific names, families, classes, or orders
-  of the input data
+Return the scientific names, families, classes, or orders
+of the input data
 }
 \examples{
 data(fishbase)

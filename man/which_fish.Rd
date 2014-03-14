@@ -22,12 +22,12 @@ which_fish(keyword, using = c("trophic", "habitat", "lifecycle", "morphology",
   defaults to copy in package).}
 }
 \value{
-  a logical vector of length(fish.data) indicating the
-  matches.
+a logical vector of length(fish.data) indicating the
+matches.
 }
 \description{
-  which_fish is the the generic search function for
-  fishbase a variety of description types
+which_fish is the the generic search function for fishbase
+a variety of description types
 }
 \examples{
 data(fishbase)
@@ -43,7 +43,7 @@ bluefish  <- which_fish(" blue ", "diagnostic", fish.data)
 sum(redfish) > sum(bluefish)
 }
 \seealso{
-  fish_names
+fish_names
 }
 \keyword{utilities}
 

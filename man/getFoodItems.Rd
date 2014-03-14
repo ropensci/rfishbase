@@ -1,8 +1,8 @@
-\name{getMetabolism}
-\alias{getMetabolism}
-\title{get metabolism table (oxygen consumption).}
+\name{getFoodItems}
+\alias{getFoodItems}
+\title{get diet (food items table)}
 \usage{
-getMetabolism(fish.data = NULL, path = NULL)
+getFoodItems(fish.data = NULL, path = NULL)
 }
 \arguments{
   \item{fish.data}{the fishbase database fish.data or a
@@ -15,7 +15,7 @@ getMetabolism(fish.data = NULL, path = NULL)
 A list of tables with an entry for each fish in fish.data.
 }
 \description{
-See the "Metabolism" page on Fishbase for the speices for
+See the "Food Items" page on Fishbase for the species for
 details.
 }
 \details{
@@ -25,7 +25,7 @@ http://www.fishbase.org/physiology/OxygenDataList.php?ID=2&GenusName=Oreochromis
 \examples{
 \dontrun{
 data(fishbase)
-getMetabolism(fish.data[1])
+getFoodItems(fish.data[1])
 }
 }
 

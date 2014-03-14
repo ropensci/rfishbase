@@ -21,10 +21,10 @@ getPictures(scientific_name, type = c("adult", "juvenile", "larvae",
   \item{...}{additional options to download.file}
 }
 \value{
-  list of image urls.  If download=TRUE, will also dowload
-  images to working directory.
+list of image urls.  If download=TRUE, will also dowload
+images to working directory.
 }
 \description{
-  get urls of fishbase images given a genus and species
+get urls of fishbase images given a genus and species
 }
 

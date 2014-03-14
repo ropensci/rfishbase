@@ -9,15 +9,15 @@ updateCache(path = ".")
   working directory)}
 }
 \value{
-  a date-fishdata.Rdat file.
+a date-fishdata.Rdat file.
 }
 \description{
-  Update the cached copy of fishbase data
+Update the cached copy of fishbase data
 }
 \details{
-  the update is slow, avoiding straining the server or
-  client.  please allow this call to run overnight for a
-  complete upgrade.
+the update is slow, avoiding straining the server or
+client.  please allow this call to run overnight for a
+complete upgrade.
 }
 \examples{
 \dontrun{
@@ -26,7 +26,7 @@ updateCache(path = ".")
 }
 }
 \seealso{
-  \code{\link{loadCache}}
+\code{\link{loadCache}}
 }
 \keyword{cache}
 

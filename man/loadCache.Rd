@@ -8,10 +8,10 @@ loadCache(path = NULL)
   \item{path}{location where cache is located}
 }
 \value{
-  loads the object fish.data into the working space.
+loads the object fish.data into the working space.
 }
 \description{
-  Load an updated cache
+Load an updated cache
 }
 \examples{
 \dontrun{
@@ -20,7 +20,7 @@ loadCache(path = NULL)
 }
 }
 \seealso{
-  \code{\link{updateCache}}
+\code{\link{updateCache}}
 }
 \keyword{cache}
 

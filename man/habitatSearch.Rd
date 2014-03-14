@@ -11,16 +11,15 @@ habitatSearch(keyword, fish.data = NULL)
   subset,}
 }
 \value{
-  a logical vector of length(fish.data) indicating the
-  matches, that can be used to subset the full database in
-  calls to other functions.
+a logical vector of length(fish.data) indicating the
+matches, that can be used to subset the full database in
+calls to other functions.
 }
 \description{
-  deprecrated, see \code{which_fish}
+deprecrated, see \code{which_fish}
 }
 \details{
-  Depricated.  This functionality is provided by
-  which_fish.
+Depricated.  This functionality is provided by which_fish.
 }
 \keyword{utilities}
 

@@ -11,11 +11,11 @@ getDepth(fish.data = NULL, path = NULL)
   defaults to copy in package).}
 }
 \value{
-  a matrix of traits by fish.  Returns min-max depth,
-  min-max usual depth
+a matrix of traits by fish.  Returns min-max depth, min-max
+usual depth
 }
 \description{
-  Returns available depth range data
+Returns available depth range data
 }
 \examples{
 ## The distribution of maximum depth in Arctic fishes

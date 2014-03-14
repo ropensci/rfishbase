@@ -15,12 +15,12 @@ getSize(fish.data = NULL, value = c("length", "weight", "age"),
   \item{path}{to updated copy of the cache; optional.}
 }
 \value{
-  a numeric vector of length(fish.data) with the values
-  requested
+a numeric vector of length(fish.data) with the values
+requested
 }
 \description{
-  Returns available size data of specified type (length,
-  weight, or age)
+Returns available size data of specified type (length,
+weight, or age)
 }
 \examples{
 data(fishbase)
