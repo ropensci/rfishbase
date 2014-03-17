@@ -13,12 +13,10 @@ getLengthWeight <- function(fish.data=NULL, path=NULL){
     link <- xpathApply(summaryPage, "//*[contains(@href, '/PopDyn/LWRelationshipList.php')][1]", xmlAttrs)[[1]][["href"]]
     lengthWeightPage <- htmlParse(paste0("http://www.fishbase.org/", gsub("\\.\\./", "", link)))
     tab <- readHTMLTable(lengthWeightPage)[[3]]
-    names(tab) <- gsub("\t", "", as.character(unlist(c(tab[1,]))))
-    tab <- tab[-1,]
+    names(tab) <- gsub("\t", "", as.character(unlist(c(names(tab)))))
     tab$r2 <- as.numeric(gsub("&nbsp", "", tab$r2))
     tab$Score <- NA #need to submit via RHTMLForms for this to evaluate..
     tab
     })
   out
-
 }
