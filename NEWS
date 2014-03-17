@@ -1,5 +1,12 @@
 
 
+rfishbase 0.2-3
+===============
+
+* Added `getFoodItems` to get data for Food Items from the
+  trophic ecology table; see Pull request [#17](https://github.com/ropensci/rfishbase/pull/17)
+
+
 rfishbase 0.2-2
 ===============
 
