@@ -12,11 +12,11 @@ getEnviroClimateRange(fish.data = NULL, path = NULL)
   defaults to copy in package).}
 }
 \value{
-  a list of the values in the Enviroment / Climate / Range
-  data. See https://github.com/ropensci/rfishbase/issues/13
+a list of the values in the Enviroment / Climate / Range
+data. See https://github.com/ropensci/rfishbase/issues/13
 }
 \description{
-  get the Environment, Climate, and Range of a species.
+get the Environment, Climate, and Range of a species.
 }
 \examples{
 \dontrun{

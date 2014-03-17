@@ -8,10 +8,10 @@ drop_nonascii(string)
   \item{string}{any character string}
 }
 \value{
-  the string after dropping all html tags to spaces
+the string after dropping all html tags to spaces
 }
 \description{
-  remove non-ASCII characters
+remove non-ASCII characters
 }
 \keyword{internal}
 

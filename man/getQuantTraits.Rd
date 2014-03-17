@@ -11,13 +11,13 @@ getQuantTraits(fish.data = NULL, path = NULL)
   defaults to copy in package).}
 }
 \value{
-  a matrix of traits by fish. Returns min-max numbers
-  recorded for vertebrae, spines (anal and dorsal), and
-  rays (anal and dorsal).
+a matrix of traits by fish. Returns min-max numbers
+recorded for vertebrae, spines (anal and dorsal), and rays
+(anal and dorsal).
 }
 \description{
-  Returns all quantitative trait values found in the
-  morphology data
+Returns all quantitative trait values found in the
+morphology data
 }
 \examples{
 data(fishbase)

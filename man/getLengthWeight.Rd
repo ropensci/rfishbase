@@ -12,10 +12,10 @@ getLengthWeight(fish.data = NULL, path = NULL)
   defaults to copy in package).}
 }
 \value{
-  a list of tables for each species given.
+a list of tables for each species given.
 }
 \description{
-  Gets the length weight table into R.  (e.g. this table:
-  http://www.fishbase.org/PopDyn/LWRelationshipList.php?ID=2&GenusName=Oreochromis&SpeciesName=niloticus&fc=349).
+Gets the length weight table into R.  (e.g. this table:
+http://www.fishbase.org/PopDyn/LWRelationshipList.php?ID=2&GenusName=Oreochromis&SpeciesName=niloticus&fc=349).
 }
 

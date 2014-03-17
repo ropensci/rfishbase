@@ -15,8 +15,7 @@ getRefs(using = c("trophic", "habitat", "lifecycle", "morphology",
   defaults to copy in package).}
 }
 \description{
-  Returns the FishBase reference id numbers matching a
-  query.
+Returns the FishBase reference id numbers matching a query.
 }
 \examples{
 data(fishbase)

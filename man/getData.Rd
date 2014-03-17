@@ -13,16 +13,16 @@ getData(fish.ids, silent = TRUE)
   default is TRUE}
 }
 \value{
-  a list object with the information for those fish, if
-  avaialble.
+a list object with the information for those fish, if
+avaialble.
 }
 \description{
-  Description: a general function to loop over all fish ids
-  to get data also drops the missing entries
+Description: a general function to loop over all fish ids
+to get data also drops the missing entries
 }
 \details{
-  Typically this function will only be called internally by
-  the caching function.
+Typically this function will only be called internally by
+the caching function.
 }
 \examples{
 \dontrun{
@@ -30,7 +30,7 @@ getData(fish.ids, silent = TRUE)
 }
 }
 \seealso{
-  \code{\link{getData}} and \code{\link{updateCache}}.
+\code{\link{getData}} and \code{\link{updateCache}}.
 }
 \keyword{internal}
 

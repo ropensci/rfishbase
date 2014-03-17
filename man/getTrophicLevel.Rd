@@ -34,13 +34,13 @@ getTrophicLevel(fish.data = NULL, path = NULL, as_table = FALSE,
   for estimation (without other data).}
 }
 \value{
-  depends on the arguments given above.  Default is to
-  return the (fished) diet composition estimate (often used
-  as the default in fishbase.org).
+depends on the arguments given above.  Default is to return
+the (fished) diet composition estimate (often used as the
+default in fishbase.org).
 }
 \description{
-  get a quantitative estimate of the trophic level for the
-  species requested. See the "Ecology" page on Fishbase for
-  the speices.
+get a quantitative estimate of the trophic level for the
+species requested. See the "Ecology" page on Fishbase for
+the speices.
 }
 

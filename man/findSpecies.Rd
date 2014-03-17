@@ -14,17 +14,17 @@ findSpecies(species, fish.data = NULL, path = NULL)
   defaults to copy in package).}
 }
 \value{
-  a logical vector of length(fish.data) indicating the
-  matches, that can be used to subset the full database in
-  calls to other functions.
+a logical vector of length(fish.data) indicating the
+matches, that can be used to subset the full database in
+calls to other functions.
 }
 \description{
-  Returns the matching indices in the data given a list of
-  species names
+Returns the matching indices in the data given a list of
+species names
 }
 \details{
-  underscores are removed automatically.  Later versions
-  may check names
+underscores are removed automatically.  Later versions may
+check names
 }
 \examples{
 ## The distribution of maximum depth in Arctic fishes
