@@ -15,5 +15,5 @@ getEnviroClimateRange <- function(fish.data=NULL, path=NULL){
     summaryPage <- getSummary(id)
     xpathSApply(summaryPage, "//h1[ contains(., 'Environment / Climate / Range')]/following::node()[2]/span", xmlValue)
   })
-  out
+  gsub("\t*\n*\r*", "", out)
 }
