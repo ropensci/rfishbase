@@ -9,6 +9,11 @@
 #' or the server response type is something other than 200 (response okay).
 #' @import httr
 #' @import XML
+#' @examples
+#' \dontrun{
+#' dat <- fb2_species_table("acanthodes")
+#' dat$Fresh
+#' }
 fb2_species_table <- function(species, as = c("list", "xml"), ..., debug = FALSE){
   # FIXME Add a nice function to handle incorrect spellings of names, common names, etc
 
@@ -32,4 +37,6 @@ fb2_species_table <- function(species, as = c("list", "xml"), ..., debug = FALSE
   }
     
 
-## wrap this with some helper function to parse the results into more useful things.  
+## wrap this with some helper function to parse the results into more useful things. 
+## Wrapper should also map codes to more useful things, e.g. dat$Saltwater in
+## the examples should return TRUE, not "-1"
