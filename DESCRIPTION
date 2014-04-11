@@ -6,7 +6,7 @@ License: CC0
 Date: 2012
 Authors@R: c(person("Carl", "Boettiger", role = c("aut", "cre"), email =
     "cboettig@gmail.com"), person("Duncan", "Temple Lang", role = "aut"),
-    person(c("Tim", "Poisot", role="ctb"),
+    person(c("Tim", "Poisot"), role="ctb"),
     person(c("Peter", "C."), "Wainwright", role = "aut"))
 URL: https://github.com/ropensci/rfishbase
 BugReports: https://github.com/ropensci/rfishbase/issues
