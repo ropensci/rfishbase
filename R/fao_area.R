@@ -20,7 +20,10 @@ getFaoArea <- function(fish.data = NULL,
   out <- lapply(ids, function(id){
     summaryPage <- getSummary(id)
     p <- getFao(summaryPage)
-    readHTMLTable(p)[[1]]
+    if(!is.null(p))
+      readHTMLTable(p)[[1]]
+    else 
+      NULL
     })
   out
 }
@@ -28,8 +31,11 @@ getFaoArea <- function(fish.data = NULL,
 
 
 getFao <- function(summaryPage){
-  link <- xpathApply(summaryPage, "//*[contains(@href, '/Country/FaoAreaList.php')][1]", xmlAttrs)[[1]][["href"]]
-  ecologyPage <- htmlParse(paste0("http://www.fishbase.org/", gsub("\\.\\./", "", link)))
+  link <- try(xpathApply(summaryPage, "//*[contains(@href, '/Country/FaoAreaList.php')][1]", xmlAttrs)[[1]][["href"]])
+  if(!is(link, "try-error"))
+    ecologyPage <- htmlParse(paste0("http://www.fishbase.org/", gsub("\\.\\./", "", link)))
+  else
+    NULL
 }
 
 
