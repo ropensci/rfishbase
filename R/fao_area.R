@@ -20,9 +20,22 @@ getFaoArea <- function(fish.data = NULL,
   out <- lapply(ids, function(id){
     summaryPage <- getSummary(id)
     p <- getFao(summaryPage)
-    if(!is.null(p))
-      readHTMLTable(p)[[1]]
-    else 
+    if(!is.null(p)){
+      tables <- readHTMLTable(p)
+
+      # try again 
+      if(length(tables) < 1){
+        Sys.sleep(1)
+        p <- getFao(summaryPage)
+        tables <- readHTMLTable(p)
+      }
+
+      if(length(tables) == 1)
+        tables[[1]]
+      else 
+        NULL
+
+    } else 
       NULL
     })
   out
