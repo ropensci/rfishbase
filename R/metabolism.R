@@ -5,6 +5,7 @@
 #' @param path to cached copy of fishbase (optional, defaults to copy in package).
 #' @return A list of tables with an entry for each fish in fish.data.  
 #' @details See example online table for details: http://www.fishbase.org/physiology/OxygenDataList.php?ID=2&GenusName=Oreochromis&SpeciesName=niloticus&fc=349&StockCode=1  
+#' @import httr
 #' @export
 #' @examples  \dontrun{
 #' data(fishbase)
@@ -27,7 +28,7 @@ getMetabolism <- function(fish.data = NULL,
 
 getMetabolismPage <- function(summaryPage){
   link <- xpathApply(summaryPage, "//*[contains(@href, '/physiology/OxygenDataList.php')][1]", xmlAttrs)[[1]][["href"]]
-  htmlParse(paste0("http://www.fishbase.org/", gsub("\\.\\./", "", link)))
+  htmlParse(GET(paste0("http://www.fishbase.org/", gsub("\\.\\./", "", link))))
 }
 
 

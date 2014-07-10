@@ -27,7 +27,7 @@ getFoodItems <- function(fish.data = NULL,
 
 getFoodItemsPage <- function(summaryPage){
   link <- xpathApply(summaryPage, "//*[contains(@href, '/TrophicEco/FoodItemsList.php')][1]", xmlAttrs)[[1]][["href"]]
-  htmlParse(paste0("http://www.fishbase.org/", gsub("\\.\\./", "", link)))
+  htmlParse(GET(paste0("http://www.fishbase.org/", gsub("\\.\\./", "", link))))
 }
 
 

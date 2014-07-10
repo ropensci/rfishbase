@@ -4,14 +4,15 @@
 #' Gets the length weight table into R.  (e.g. this table: http://www.fishbase.org/PopDyn/LWRelationshipList.php?ID=2&GenusName=Oreochromis&SpeciesName=niloticus&fc=349). 
 #' @param fish.data the fishbase database fish.data or a subset,
 #' @param path to cached copy of fishbase (optional, defaults to copy in package).
-#' @return a list of tables for each species given.  
+#' @return a list of tables for each species given. 
+#' @import httr
 #' @export
 getLengthWeight <- function(fish.data=NULL, path=NULL){
   ids <- getIds(fish.data = fish.data, path=path)
   out <- lapply(ids, function(id){
     summaryPage <- getSummary(id)
     link <- xpathApply(summaryPage, "//*[contains(@href, '/PopDyn/LWRelationshipList.php')][1]", xmlAttrs)[[1]][["href"]]
-    lengthWeightPage <- htmlParse(paste0("http://www.fishbase.org/", gsub("\\.\\./", "", link)))
+    lengthWeightPage <- htmlParse(GET(paste0("http://www.fishbase.org/", gsub("\\.\\./", "", link))))
     tab <- readHTMLTable(lengthWeightPage)[[3]]
     names(tab) <- gsub("\t", "", as.character(unlist(c(names(tab)))))
     tab$r2 <- as.numeric(gsub("&nbsp", "", tab$r2))

@@ -38,6 +38,7 @@ getTrophicLevel <- function(fish.data = NULL,
 #' @param fish.data the fishbase database fish.data or a subset,
 #' @param path to cached copy of fishbase (optional, defaults to copy in package).
 #' @return the ids numbers corresponding to positions along fish.data object in use
+#' @import httr
 #' @export
 getIds <- function(fish.data=NULL, path=NULL){
   if(is.null(fish.data))
@@ -53,12 +54,14 @@ getIds <- function(fish.data=NULL, path=NULL){
 getSummary <- function(id){ 
   # Grab and parse page matching id
   url <- paste0("http://www.fishbase.org/summary/speciessummary.php?id=", id)
-  summaryPage <- htmlParse(url) 
+  html <- GET(url)
+  summaryPage <- htmlParse(html) 
 }
 
 getEcology <- function(summaryPage){
   link <- xpathApply(summaryPage, "//*[contains(@href, '/Ecology/FishEcologySummary.php')][1]", xmlAttrs)[[1]][["href"]]
-  ecologyPage <- htmlParse(paste0("http://www.fishbase.org/", gsub("\\.\\./", "", link)))
+  html <- GET(paste0("http://www.fishbase.org/", gsub("\\.\\./", "", link)))
+  ecologyPage <- htmlParse(html)
 }
 
 
