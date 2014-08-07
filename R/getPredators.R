@@ -9,8 +9,7 @@
 #' @examples
 
 getPredators <- function(fish.data = NULL,
-                         path = NULL,
-                         functl.grp = NULL){
+                         path = NULL){
   ids <- getIds(fish.data = fish.data, path=path)
   out <- lapply(ids, function(id){
   summaryPage <- getSummary(id)
@@ -28,6 +27,7 @@ getPredators <- function(fish.data = NULL,
     if(length(tables) == 1){
       table <- tables[[1]]
       names(table) <- c("Country", "Functional_Grp_General", "Functional_Grp_Specific", "Family", "Species")
+      return(table)
     }
     else
       NULL
