@@ -7,10 +7,14 @@
 #' @import httr
 #' @export
 #' @examples
-
+#' data(fishbase)
+#' out <- getPredators(fish.data[1:3])
+#' 
+#' # or using species names:
+#' ids <- findSpecies(c("Coris_pictoides", "Labropsis_australis"))
+#' out <- getPredators(fish.data[ids])
 getPredators <- function(fish.data = NULL,
-                         path = NULL,
-                         functl.grp = NULL){
+                         path = NULL){
   ids <- getIds(fish.data = fish.data, path=path)
   out <- lapply(ids, function(id){
   summaryPage <- getSummary(id)
@@ -28,6 +32,7 @@ getPredators <- function(fish.data = NULL,
     if(length(tables) == 1){
       table <- tables[[1]]
       names(table) <- c("Country", "Functional_Grp_General", "Functional_Grp_Specific", "Family", "Species")
+      return(table)
     }
     else
       NULL
@@ -42,7 +47,7 @@ getPredators <- function(fish.data = NULL,
 getPredatorURL <- function(summaryPage){
   link <- try(xpathApply(summaryPage, "//*[contains(@href, '/TrophicEco/PredatorList.php')][1]", xmlAttrs)[[1]][["href"]])
   if(!is(link, "try-error")){
-    html <- GET(paste0("http://www.fishbase.org/", gsub("\.\./", "", link)))
+    html <- GET(paste0("http://www.fishbase.org/", gsub("\\.\\./", "", link)))
     predatorPage <- htmlParse(html)
   } else
   NULL
