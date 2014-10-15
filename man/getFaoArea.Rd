@@ -17,11 +17,13 @@ A list of data frames, one per species.
 return the FAO data for the required species
 }
 \examples{
+\dontrun{
 data(fishbase)
 out <- getFaoArea(fish.data[1:3])
 
 # or using species names:
 ids <- findSpecies(c("Coris_pictoides", "Labropsis_australis"))
 out <- getFaoArea(fish.data[ids])
+}
 }
 
