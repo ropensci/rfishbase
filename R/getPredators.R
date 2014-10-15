@@ -6,8 +6,14 @@
 #' @return A list of data frames, one per species.
 #' @import httr
 #' @export
-#' @examples
-
+#' @examples \dontrun{
+#' data(fishbase)
+#' out <- getPredators(fish.data[1:3])
+#' 
+#' # or using species names:
+#' ids <- findSpecies(c("Coris_pictoides", "Labropsis_australis"))
+#' out <- getPredators(fish.data[ids])
+#' }
 getPredators <- function(fish.data = NULL,
                          path = NULL){
   ids <- getIds(fish.data = fish.data, path=path)
@@ -42,7 +48,7 @@ getPredators <- function(fish.data = NULL,
 getPredatorURL <- function(summaryPage){
   link <- try(xpathApply(summaryPage, "//*[contains(@href, '/TrophicEco/PredatorList.php')][1]", xmlAttrs)[[1]][["href"]])
   if(!is(link, "try-error")){
-    html <- GET(paste0("http://www.fishbase.org/", gsub("\.\./", "", link)))
+    html <- GET(paste0("http://www.fishbase.org/", gsub("\\.\\./", "", link)))
     predatorPage <- htmlParse(html)
   } else
   NULL
