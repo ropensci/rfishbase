@@ -1,8 +1,8 @@
 rfishbase
 =========
 
-[![Build Status](https://travis-ci.org/ropensci/rfishbase.svg)](https://travis-ci.org/ropensci/rfishbase)
-[![Build status](https://ci.appveyor.com/api/projects/status/0n372o1a97mn0p3v/branch/master)](https://ci.appveyor.com/project/sckott/rfishbase/branch/master)
+[![Build Status](https://travis-ci.org/ropensci/rfishbase.svg?branch=master)](https://travis-ci.org/ropensci/rfishbase)
+[![Appveyor Status](https://ci.appveyor.com/api/projects/status/0n372o1a97mn0p3v/branch/master)](https://ci.appveyor.com/project/sckott/rfishbase/branch/master)
 
  _Accessing data from FishBase using R_
 
