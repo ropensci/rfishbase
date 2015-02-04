@@ -1,1 +1,3 @@
 inst/api
+^.*\.Rproj$
+^\.Rproj\.user$
