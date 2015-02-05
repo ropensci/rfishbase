@@ -1,15 +1,9 @@
 SERVER = "http://server.carlboettiger.info:4567"
 
-# Use a separate function to query by higher taxonomy, including by genus
-
-# FIXME: 
-#  - what should this function be called?
-#  - handle species lists?
-#  - should you be able to filter?
-#  
+  
 #' @import httr stringr
 #' @export
-summary <- function(species = NULL, server = SERVER, verbose = TRUE, limit = 10){
+per_species <- function(species, server = SERVER, verbose = TRUE, limit = 10){
   
   ## parse scientific name (FIXME function should also do checks.)
   s <- parse_name(species)
@@ -31,13 +25,25 @@ summary <- function(species = NULL, server = SERVER, verbose = TRUE, limit = 10)
   tidy_species_table(out$data)
 }
 
-## FIXME provide wrapper to work with species lists.
+## Provide wrapper to work with species lists.
+#' @param species_list Takes a vector of scientific names (each element as "genus species").
+#'   if only one name is given in an element (no space), assumes it is the genus and returns all species matching that genus
+#' @examples
+#' \donttest{
+#' # There are 5 species in this genus, so returns 5 rows:
+#' species_table("Labroides") 
+#' }
+species_table <- function(species_list, server = SERVER, verbose = TRUE, limit = 10){
+  do.call("rbind", lapply(species_list, per_species, server = server, verbose = verbose, limit = limit))
+}
 
 
 
-## FIXME provide wrapper to work with genus, subFamily query (b.c. it's 1 API call).
-## Family query is 2 api calls, one to look up FamCode.
+## Family query is 2 api calls, one to look up FamCode. 1 call for subFamily
 ## Higher taxonomy: less relevant?
+
+
+
 
 error_checks <- function(resp, verbose = TRUE){
   ## check for errors in the API query
@@ -52,11 +58,30 @@ error_checks <- function(resp, verbose = TRUE){
 }
 
 
+## Metadata used by tidy_species_table
+#meta <- system.file("metadata", "species.csv", package="rfishbase")
+meta <- 'inst/metadata/species.csv'
+species_meta <- read.csv(meta)
+row.names(species_meta) <- species_meta$field
 
+
+#' @import tidyr
 tidy_species_table <- function(data) {
   L <- lapply(data, null_to_NA)
   df <- do.call(rbind.data.frame, L)
   # Convert columns to the appropriate class
+  for(n in names(df)){
+    class <- as.character(species_meta[[n, "class"]])
+    if(class=="Date")
+      df[,n] <- as.Date(as.character(df[,n]))
+    else
+      df[,n] <- as(as.character(df[,n]), class)
+  }
+  ## Drop useless columns
+  df <- df[,species_meta$keep]
+  ## Rename columns (pick names to indicate units on numeric values?)
+  
+  ## Arrange columns
   
   df
 }
@@ -77,8 +102,10 @@ null_to_NA <- function(x) {
 
 # parse scientific name.   FIXME stupid function, should do more check & error handling
 parse_name <- function(x){
-  x <- str_split(species, " ")[[1]]
-  list(genus = x[1], species = x[2])
+  x <- str_split(x, " ")[[1]]
+  switch(length(x), 
+         list(genus = x[1]),
+         list(genus = x[1], species = x[2]))
 }
 
 
