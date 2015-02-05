@@ -4,12 +4,14 @@ Title: R Interface to FishBASE
 Version: 2.0.0
 License: CC0
 Authors@R: c(person("Carl", "Boettiger", role = c("aut"), email = "cboettig@ropensci.org"),
-             person("Scott", "Chamberlain", role = c("cre", "aut")), email = "scott@ropensci.org")
+             person("Scott", "Chamberlain", role = c("cre", "aut"), email = "scott@ropensci.org"))
 URL: https://github.com/ropensci/rfishbase
 BugReports: https://github.com/ropensci/rfishbase/issues
 Depends:
     R (>= 3.0)
 Imports:
-    httr
+    httr,
+    tidyr,
+    stringr
 Suggests:
     testthat
