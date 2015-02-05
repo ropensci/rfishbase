@@ -1,9 +1,31 @@
 SERVER = "http://server.carlboettiger.info:4567"
 
-  
-#' @import httr stringr
+## Provide wrapper to work with species lists.
+#' @param species_list Takes a vector of scientific names (each element as "genus species").
+#'   if only one name is given in an element (no space), assumes it is the genus and returns
+#'   all species matching that genus.
+#' @param verbose should the function give warnings?
+#' @return a data.frame with rows for species and columns for the fields returned by the query (FishBase 'species' table)
+#' @examples
+#' \donttest{
+#' 
+#' species_table(c("Oreochromis niloticus", "Bolbometopon muricatum")) 
+#' # There are 5 species in this genus, so returns 5 rows:
+#' species_table("Labroides") 
+#' }
 #' @export
-per_species <- function(species, server = SERVER, verbose = TRUE, limit = 10){
+species_table <- function(species_list, verbose = TRUE, .limit = 50, .server = SERVER){
+  # Just wraps an lapply around the "per_species" function and combines the resulting data.frames.
+  # .limit limits the number of returns in a single API call.  As we are usually matching species, we expect
+  # only one hit per call anyway so limit may as well be 1.  If we are matching genus only, we can hit
+  # several species and limit should justifiably be higher. 
+  do.call("rbind", lapply(species_list, per_species, verbose = verbose, limit = .limit, server = .server))
+}
+
+
+
+#' @import httr stringr
+per_species <- function(species, verbose = TRUE, limit = 10, server = SERVER){
   
   ## parse scientific name (FIXME function should also do checks.)
   s <- parse_name(species)
@@ -25,17 +47,6 @@ per_species <- function(species, server = SERVER, verbose = TRUE, limit = 10){
   tidy_species_table(out$data)
 }
 
-## Provide wrapper to work with species lists.
-#' @param species_list Takes a vector of scientific names (each element as "genus species").
-#'   if only one name is given in an element (no space), assumes it is the genus and returns all species matching that genus
-#' @examples
-#' \donttest{
-#' # There are 5 species in this genus, so returns 5 rows:
-#' species_table("Labroides") 
-#' }
-species_table <- function(species_list, server = SERVER, verbose = TRUE, limit = 10){
-  do.call("rbind", lapply(species_list, per_species, server = server, verbose = verbose, limit = limit))
-}
 
 
 
@@ -74,10 +85,12 @@ tidy_species_table <- function(data) {
     class <- as.character(species_meta[[n, "class"]])
     if(class=="Date")
       df[,n] <- as.Date(as.character(df[,n]))
-    else
+    else if(class=="logical")
+      df[,n] <- as(as.numeric(df[,n]), class)
+    else 
       df[,n] <- as(as.character(df[,n]), class)
   }
-  ## Drop useless columns
+  ## Drop useless columns. Once reference table implemented, we may want to return those numbers. Same for expert ids.
   df <- df[,species_meta$keep]
   ## Rename columns (pick names to indicate units on numeric values?)
   
