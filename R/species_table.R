@@ -28,26 +28,39 @@ SERVER = "http://server.carlboettiger.info:4567"
 #' }
 #' @import httr stringr tidyr
 #' @export
-species_table <- function(species_list, verbose = TRUE, limit = 50, server = SERVER){
+species_table <- function(species_list, verbose = TRUE, limit = 50, server = SERVER, fields=NULL){
   # Just wraps an lapply around the "per_species" function and combines the resulting data.frames.
   # .limit limits the number of returns in a single API call.  As we are usually matching species, we expect
   # only one hit per call anyway so limit may as well be 1.  If we are matching genus only, we can hit
   # several species and limit should justifiably be higher. 
-  do.call("rbind", lapply(species_list, per_species, verbose = verbose, limit = limit, server = server))
+  do.call("rbind", lapply(species_list, per_species, verbose = verbose, limit = limit, server = server, fields=fields))
 }
 
 
 
-per_species <- function(species, verbose = TRUE, limit = 10, server = SERVER){
+per_species <- function(species, verbose = TRUE, limit = 10, server = SERVER, fields=NULL){
   
   ## parse scientific name (FIXME function should also do checks.)
   s <- parse_name(species)
   
   ## Make the API call for the species requested
-  args <- list(species = s$species, genus = s$genus, limit = limit)
+  args <- list(species = s$species, genus = s$genus, 
+               limit = limit, fields = paste(fields, collapse=","))
   resp <- GET(paste0(server, "/species"), query = args)
   
-  ## check response for http errors
+  data <- check_and_parse(resp, verbose = verbose)
+  
+  if(is.null(fields))
+    ## Combine into data.frame and tidy
+    df <- tidy_species_table(data)
+  else
+    ## if filtering by fields, skip tidy
+    df <- data
+  df
+}
+
+
+check_and_parse <- function(resp, verbose = TRUE){
   stop_for_status(resp)
   
   ## Parse the http response
@@ -56,12 +69,8 @@ per_species <- function(species, verbose = TRUE, limit = 10, server = SERVER){
   ## Check for errors or other issues
   error_checks(parsed, verbose = verbose)
   
-  ## Combine into data.frame and tidy
-  tidy_species_table(parsed$data)
+  to_data.frame(parsed$data)
 }
-
-
-
 
 ## Family query is 2 api calls, one to look up FamCode. 1 call for subFamily
 ## Higher taxonomy: less relevant?
@@ -87,11 +96,13 @@ meta <- system.file("metadata", "species.csv", package="rfishbase")
 species_meta <- read.csv(meta)
 row.names(species_meta) <- species_meta$field
 
+to_data.frame <- function(data){
+  L <- lapply(data, null_to_NA)
+  df <- do.call(rbind.data.frame, L)  
+}
 
 ## helper routine for tidying species data
-tidy_species_table <- function(data) {
-  L <- lapply(data, null_to_NA)
-  df <- do.call(rbind.data.frame, L)
+tidy_species_table <- function(df) {
   # Convert columns to the appropriate class
   for(n in names(df)){
     class <- as.character(species_meta[[n, "class"]])

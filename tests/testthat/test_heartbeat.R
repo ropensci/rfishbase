@@ -1,8 +1,13 @@
 # test_heartbeat
-test_that("API has heartbeat",
+test_that("API is responding",
           {
           resp <- rfishbase:::heartbeat()
           expect_equal(resp$status_code, 200)
           })
 
 # test_sql
+test_that("MySQL server is responding",
+{
+  resp <- GET(paste0(server, "/species/2"))
+  expect_equal(resp$status_code, 200)
+})
