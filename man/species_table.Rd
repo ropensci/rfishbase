@@ -4,7 +4,8 @@
 \alias{species_table}
 \title{species_table}
 \usage{
-species_table(species_list, verbose = TRUE, limit = 50, server = SERVER)
+species_table(species_list, verbose = TRUE, limit = 50, server = SERVER,
+  fields = NULL)
 }
 \arguments{
 \item{species_list}{Takes a vector of scientific names (each element as "genus species").
