@@ -27,6 +27,8 @@ common_to_sci <- function(x, Language = NULL, verbose = TRUE, limit = 10, server
 
 
 
+## Note that there are many common names for a given sci name, so sci_to_common doesn't make sense
+## FIXME consider if there are additional fields we want to add here.
 find_commonnames <- function(species_list, verbose = TRUE, limit = 100, server = SERVER){
   codes <- species_table(species_list, fields="SpecCode")$SpecCode
   

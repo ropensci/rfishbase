@@ -1,10 +1,15 @@
-
-#' Get scientific names for the queried group
+#' sci_names
+#' 
+#' Get scientific names by taxonomic group
+#' 
 #' @import dplyr lazyeval
 #' @examples
 #' sci_names(list(Family = 'Scaridae'))
 #' sci_names(list(Genus = 'Labroides'))
+#' @export
+#' FIXME consider altering query such that taxonomic levels are explicit arguments intead
 sci_names <- function(query, all_taxa = load_taxa()){
+  ## Just a few dplyr & dlpyr wrappers
   df <- taxa(query, all_taxa = all_taxa)
   df <- select_(df, "Genus", "Species")
   df <- unite_(df, "sci_name", c("Genus", "Species"), sep = " ") 
@@ -12,12 +17,15 @@ sci_names <- function(query, all_taxa = load_taxa()){
 }
 
 
-# speccode(list(Genus = 'Labroides'))
-speccode <- function(query, all_taxa = load_taxa()){
-  df <- taxa(query, all_taxa = all_taxa)
-  select_(df, "SpecCode")[[1]] 
-}
 
+
+
+# Returns SpecCodes given a list of species, e.g. from sci_names. 
+# Primarily for internal use
+#
+# @examples
+# who <- sci_names(list(Family='Scaridae'))
+# speccodes_for_species(who)
 speccodes_for_species <- function(species_list){ 
   sapply(species_list, 
          function(x){ 
@@ -26,6 +34,11 @@ speccodes_for_species <- function(species_list){
         })
 }
 
+# Helper routine for speccodes. 
+speccode <- function(query, all_taxa = load_taxa()){
+  df <- taxa(query, all_taxa = all_taxa)
+  select_(df, "SpecCode")[[1]] 
+}
 
 taxa <- function(query, all_taxa = load_taxa()){
   
