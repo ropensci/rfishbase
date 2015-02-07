@@ -1,20 +1,23 @@
 
-## FIXME still writing these functions
-
+#' @param species_list
+#' @import dplyr
+#' @export
 locations <- function(species_list, server = SERVER, verbose = TRUE, limit = 100){
   codes <- speccodes_for_species(species_list)
-  do.call("rbind", lapply(codes, faoareas))
+  bind_rows(lapply(codes, faoareas))
 }
 
 
 
 faoareas <- function(code, server = SERVER, verbose = TRUE, limit = 100){
-  resp <- GET(paste0(server, "/faoareas"), query = list(SpecCode = code, limit = limit))  
-  data <- check_and_parse(resp, verbose = verbose)
+  resp <- GET(paste0(server, "/faoareas"), 
+              query = list(SpecCode = code, limit = limit,
+                           fields='AreaCode,SpecCode,Status'))  
+  table1 <- check_and_parse(resp, verbose = verbose)
   
   ## Look up area codes
-  do.call("rbind", lapply(data$AreaCode, faoarrefs))
-  
+  table2 <- bind_rows(lapply(table1$AreaCode, faoarrefs))
+  left_join(table1, table2,by='AreaCode')
   ## cbind
   
   
@@ -22,6 +25,8 @@ faoareas <- function(code, server = SERVER, verbose = TRUE, limit = 100){
 
 faoarrefs <- function(area_code, server = SERVER, verbose = TRUE, limit = 100){
   ## add in a fields list to filter returned values
-  resp <- GET(paste0(server, "/faoarrefs/", area_code), query = list(limit = limit))
+  resp <- GET(paste0(server, "/faoarrefs/", area_code), 
+              query = list(limit = limit,
+                           fields='AreaCode,FAO'))
   data <- check_and_parse(resp)
 }

@@ -1,7 +1,7 @@
 #' sci_names
 #' 
 #' Get scientific names by taxonomic group
-#' 
+#' @details The first time the function is called it will download and cache the complete
 #' @import dplyr lazyeval
 #' @examples
 #' sci_names(list(Family = 'Scaridae'))

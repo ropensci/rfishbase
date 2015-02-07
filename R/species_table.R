@@ -33,7 +33,7 @@ species_table <- function(species_list, verbose = TRUE, limit = 50, server = SER
   # .limit limits the number of returns in a single API call.  As we are usually matching species, we expect
   # only one hit per call anyway so limit may as well be 1.  If we are matching genus only, we can hit
   # several species and limit should justifiably be higher. 
-  do.call("rbind", lapply(species_list, per_species, verbose = verbose, limit = limit, server = server, fields=fields))
+  bind_rows(lapply(species_list, per_species, verbose = verbose, limit = limit, server = server, fields=fields))
 }
 
 
@@ -69,11 +69,17 @@ check_and_parse <- function(resp, verbose = TRUE){
   ## Check for errors or other issues
   proceed <- error_checks(parsed, verbose = verbose)
   
-  if(proceed)
+  if(proceed) {
     ## Collapse to data.frame
-    to_data.frame(parsed$data)
-  else
+    options(stringsAsFactors = FALSE)
+    do.call(rbind.data.frame, lapply(parsed$data, null_to_NA))  
+  
+  ## It's a great pity that we use do.call here but combine and bind_rows both fail
+  # combine(parsed$data)  
+  # bind_rows(lapply(parsed$data, null_to_NA))  
+  } else {
     NULL
+  }
 }
 
 ## Family query is 2 api calls, one to look up FamCode. 1 call for subFamily
@@ -114,10 +120,6 @@ meta <- system.file("metadata", "species.csv", package="rfishbase")
 species_meta <- read.csv(meta)
 row.names(species_meta) <- species_meta$field
 
-to_data.frame <- function(data){
-  L <- lapply(data, null_to_NA)
-  do.call(rbind.data.frame, L)  
-}
 
 ## helper routine for tidying species data
 tidy_species_table <- function(df) {
