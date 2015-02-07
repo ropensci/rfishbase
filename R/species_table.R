@@ -52,11 +52,11 @@ per_species <- function(species, verbose = TRUE, limit = 10, server = SERVER, fi
   
   if(is.null(fields))
     ## Combine into data.frame and tidy
-    df <- tidy_species_table(data)
+    tidy_species_table(data)
   else
     ## if filtering by fields, skip tidy
-    df <- data
-  df
+    data
+
 }
 
 
@@ -67,9 +67,13 @@ check_and_parse <- function(resp, verbose = TRUE){
   parsed <- content(resp)
   
   ## Check for errors or other issues
-  error_checks(parsed, verbose = verbose)
+  proceed <- error_checks(parsed, verbose = verbose)
   
-  to_data.frame(parsed$data)
+  if(proceed)
+    ## Collapse to data.frame
+    to_data.frame(parsed$data)
+  else
+    NULL
 }
 
 ## Family query is 2 api calls, one to look up FamCode. 1 call for subFamily
@@ -79,15 +83,29 @@ check_and_parse <- function(resp, verbose = TRUE){
 
 
 error_checks <- function(parsed, verbose = TRUE){
+  
+  proceed <- TRUE
+  
   ## check for errors in the API query
-  if(!is.null(parsed$error) && verbose) 
-    stop(parsed$error)
+  if(!is.null(parsed$error)) {
+    if(verbose) stop(parsed$error)
+    proceed <- FALSE
+  }
   
   ## Comment if returns are incomplete.
-  if(verbose && parsed$count > parsed$returned)
-    warning(paste("Retruning first", parsed$returned, "matches parsed of", parsed$count, "matches.",
-                  "\n Increase limit or refine query for more results"))
+  if(parsed$count > parsed$returned){
+    if(verbose) warning(paste("Retruning first", parsed$returned, 
+                    "matches parsed of", parsed$count, "matches.",
+                    "\n Increase limit or refine query"))
+    proceed <- TRUE
+  }
   
+  if(parsed$count == 0){
+    warning("No matches to query found")
+    proceed <- FALSE
+  }
+  
+  proceed
 }
 
 
@@ -98,7 +116,7 @@ row.names(species_meta) <- species_meta$field
 
 to_data.frame <- function(data){
   L <- lapply(data, null_to_NA)
-  df <- do.call(rbind.data.frame, L)  
+  do.call(rbind.data.frame, L)  
 }
 
 ## helper routine for tidying species data
