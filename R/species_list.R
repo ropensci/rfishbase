@@ -1,6 +1,18 @@
 #' species_list
 #' 
-#' Get a list of scientific names for all species in the given taxonomic group
+#' Return the a species list given a taxonomic group
+#' @param Class Request all species in this taxonomic Class
+#' @param Order Request all species in this taxonomic Order
+#' @param Family Request all species in this taxonomic Family
+#' @param SubFamily Request all species in this taxonomic SubFamily
+#' @param Genus Request all species in this taxonomic Genus
+#' @param Species Request all species in this taxonomic Species
+#' @param SpecCode Request species name of species matching this SpecCode
+#' @param SpeciesRefNo Request species name of all species matching this SpeciesRefNo
+#' @param all_taxa The data.frame of all taxa used for the lookup. By default will be loaded
+#'  from cache if available, otherwise must be downloaded from the server; about 13 MB, may be 
+#'  slow.
+#' 
 #' @details The first time the function is called it will download and cache the complete
 #' @import dplyr lazyeval
 #' @examples
@@ -39,12 +51,14 @@ species_list <- function(Class = NULL,
 # @examples
 # who <- species_list(Family='Scaridae')
 # speccodes_for_species(who)
-speccodes_for_species <- function(species_list){ 
-  sapply(species_list, 
-         function(x){ 
-          s <- parse_name(x)
-          speccode( list(Species=s$species, Genus=s$genus))
-        })
+
+# NOTE: Faster to call API if no taxa have been loaded and species_list is short
+# codes <- species_info(species_list, fields="SpecCode")$SpecCode
+speccodes_for_species <- function(species_list, all_taxa = load_taxa()){ 
+  sapply(species_list, function(x){ 
+    s <- parse_name(x)
+    speccode(list(Species=s$species, Genus=s$genus), all_taxa = all_taxa)
+  })
 }
 
 # Helper routine for speccodes. 
