@@ -5,3 +5,5 @@ heartbeat <- function(server = SERVER)
 
 ping <- function(server = SERVER)
   GET(paste0(server, "/mysqlping"))
+
+

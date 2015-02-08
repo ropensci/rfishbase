@@ -1,5 +1,8 @@
-
-#' @param species_list
+#' locations
+#' 
+#' return a table of species locations as reported in FishBASE.org FAO location data
+#' 
+#' @param species_list 
 #' @import dplyr
 #' @export
 locations <- function(species_list, server = SERVER, verbose = TRUE, limit = 100){

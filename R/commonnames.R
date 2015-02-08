@@ -19,7 +19,7 @@ common_to_sci <- function(x, Language = NULL, verbose = TRUE, limit = 10, server
     ## Grab the first code
     code <- data[[1]][[1]]
     # Turn SpecCode into scientific name. Use local taxa table for speed
-    sci_names(list(SpecCode=code))
+    species_list(SpecCode = code)
   })
   
 }

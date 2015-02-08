@@ -1,14 +1,31 @@
-#' sci_names
+#' species_list
 #' 
-#' Get scientific names by taxonomic group
+#' Get a list of scientific names for all species in the given taxonomic group
 #' @details The first time the function is called it will download and cache the complete
 #' @import dplyr lazyeval
 #' @examples
-#' sci_names(list(Family = 'Scaridae'))
-#' sci_names(list(Genus = 'Labroides'))
+#' \donttest{
+#' ## All species in the Family Scaridae
+#'   species_list(Family = 'Scaridae')
+#' ## All species in the Genus 
+#'   species_list(Genus = 'Labroides')
+#' }
 #' @export
-#' FIXME consider altering query such that taxonomic levels are explicit arguments intead
-sci_names <- function(query, all_taxa = load_taxa()){
+species_list <- function(Class = NULL,
+                         Order = NULL,
+                         Family = NULL,
+                         SubFamily = NULL,
+                         Genus = NULL,
+                         Species = NULL,
+                         SpecCode = NULL,
+                         SpeciesRefNo = NULL,
+                         all_taxa = load_taxa()){
+  
+  query <- list(Class = Class, Order = Order,
+                Family = Family, SubFamily = SubFamily,
+                Genus = Genus, Species = Species,
+                SpecCode = SpecCode, SpeciesRefNo = SpeciesRefNo)
+  
   ## Just a few dplyr & dlpyr wrappers
   df <- taxa(query, all_taxa = all_taxa)
   df <- select_(df, "Genus", "Species")
@@ -16,15 +33,11 @@ sci_names <- function(query, all_taxa = load_taxa()){
   df[[1]]
 }
 
-
-
-
-
 # Returns SpecCodes given a list of species, e.g. from sci_names. 
 # Primarily for internal use
 #
 # @examples
-# who <- sci_names(list(Family='Scaridae'))
+# who <- species_list(Family='Scaridae')
 # speccodes_for_species(who)
 speccodes_for_species <- function(species_list){ 
   sapply(species_list, 
@@ -40,8 +53,9 @@ speccode <- function(query, all_taxa = load_taxa()){
   select_(df, "SpecCode")[[1]] 
 }
 
-taxa <- function(query, all_taxa = load_taxa()){
-  
+
+# Fast queries of the constructed taxa table using local caching and dplyr
+taxa <- function(query, all_taxa = load_taxa()){  
   # Do some dplyr without NSE.  aka:
   # all_taxa %>% filter(Family == 'Scaridae') 
   dots <- lapply(names(query), function(level){
@@ -55,14 +69,10 @@ taxa <- function(query, all_taxa = load_taxa()){
 }
 
 
-
-
-
-
 ## Create an environment to cache the full speices table
 rfishbase <- new.env(hash = TRUE)
 
-#
+# Contruct and cache the the taxa table from the server
 load_taxa <- function(server = SERVER, verbose = TRUE, cache = TRUE){
   all_taxa <- mget('all_taxa', 
                    envir = rfishbase, 
@@ -77,11 +87,10 @@ load_taxa <- function(server = SERVER, verbose = TRUE, cache = TRUE){
 # Converts into about 12.5 MB data.frame
 # By default, caches this table in a local environment for later use.
 complete_taxa_table <- function(server = SERVER, verbose = TRUE, cache = TRUE){
+  
   resp <- GET(paste0(server, "/taxa"), query = list(family='', limit=35000))
   all_taxa <- check_and_parse(resp, verbose = verbose)
-  
   if(cache) assign("all_taxa", all_taxa, envir=rfishbase)
-  
   all_taxa
 }
 
