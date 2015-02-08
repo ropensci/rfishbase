@@ -8,8 +8,29 @@ species_list(Class = NULL, Order = NULL, Family = NULL,
   SubFamily = NULL, Genus = NULL, Species = NULL, SpecCode = NULL,
   SpeciesRefNo = NULL, all_taxa = load_taxa())
 }
+\arguments{
+\item{Class}{Request all species in this taxonomic Class}
+
+\item{Order}{Request all species in this taxonomic Order}
+
+\item{Family}{Request all species in this taxonomic Family}
+
+\item{SubFamily}{Request all species in this taxonomic SubFamily}
+
+\item{Genus}{Request all species in this taxonomic Genus}
+
+\item{Species}{Request all species in this taxonomic Species}
+
+\item{SpecCode}{Request species name of species matching this SpecCode}
+
+\item{SpeciesRefNo}{Request species name of all species matching this SpeciesRefNo}
+
+\item{all_taxa}{The data.frame of all taxa used for the lookup. By default will be loaded
+ from cache if available, otherwise must be downloaded from the server; about 13 MB, may be
+ slow.}
+}
 \description{
-Get a list of scientific names for all species in the given taxonomic group
+Return the a species list given a taxonomic group
 }
 \details{
 The first time the function is called it will download and cache the complete

@@ -45,26 +45,25 @@ species_list <- function(Class = NULL,
   df[[1]]
 }
 
-# Returns SpecCodes given a list of species, e.g. from sci_names. 
-# Primarily for internal use
+# Returns SpecCodes given a list of species. Primarily for internal use
 #
 # @examples
 # who <- species_list(Family='Scaridae')
 # speccodes_for_species(who)
-
-# NOTE: Faster to call API if no taxa have been loaded and species_list is short
-# codes <- species_info(species_list, fields="SpecCode")$SpecCode
 speccodes_for_species <- function(species_list, all_taxa = load_taxa()){ 
-  sapply(species_list, function(x){ 
-    s <- parse_name(x)
-    speccode(list(Species=s$species, Genus=s$genus), all_taxa = all_taxa)
-  })
-}
-
-# Helper routine for speccodes. 
-speccode <- function(query, all_taxa = load_taxa()){
-  df <- taxa(query, all_taxa = all_taxa)
-  select_(df, "SpecCode")[[1]] 
+  
+  ## Attempts to be clever.  Be sure to load_taxa() 
+  # If cache doesn't exist, just query instead.
+  all_taxa <- mget('all_taxa', envir = rfishbase, ifnotfound = list(NULL))$all_taxa
+  if(is.null(all_taxa)){
+    species_info(species_list, fields="SpecCode")$SpecCode
+  } else {
+    sapply(species_list, function(x){ 
+      s <- parse_name(x)
+      df <- taxa(list(Species=s$species, Genus=s$genus), all_taxa = all_taxa)
+      select_(df, "SpecCode")[[1]] 
+    })
+  }
 }
 
 
@@ -88,23 +87,18 @@ rfishbase <- new.env(hash = TRUE)
 
 # Contruct and cache the the taxa table from the server
 load_taxa <- function(server = SERVER, verbose = TRUE, cache = TRUE){
+  
   all_taxa <- mget('all_taxa', 
                    envir = rfishbase, 
                    ifnotfound = list(NULL))$all_taxa
-  if(is.null(all_taxa))
-    all_taxa <- complete_taxa_table(server = server, verbose = verbose, cache = cache)
-  all_taxa
-}
-
-# Download the complete taxa table from the API. 
-# A row for each species name, column for each taxonomic level or identifier
-# Converts into about 12.5 MB data.frame
-# By default, caches this table in a local environment for later use.
-complete_taxa_table <- function(server = SERVER, verbose = TRUE, cache = TRUE){
   
-  resp <- GET(paste0(server, "/taxa"), query = list(family='', limit=35000))
-  all_taxa <- check_and_parse(resp, verbose = verbose)
-  if(cache) assign("all_taxa", all_taxa, envir=rfishbase)
+  if(is.null(all_taxa)){
+    resp <- GET(paste0(server, "/taxa"), query = list(family='', limit=35000))
+    all_taxa <- check_and_parse(resp, verbose = verbose)
+    
+    if(cache) 
+      assign("all_taxa", all_taxa, envir=rfishbase)  
+  }
+  
   all_taxa
 }
-
