@@ -3,7 +3,8 @@ SERVER = "http://server.carlboettiger.info:4567"
 #' species_info
 #' 
 #' Provide wrapper to work with species lists. 
-#' @param species_list A vector of scientific names (each element as "genus species").
+#' @param species_list A vector of scientific names (each element as "genus species"). 
+#'   (FishBase SpecCodes can be given as numeric values in place of a scientific name.)
 #' @param verbose logical. Should the function give warnings? (default TRUE)
 #' @param limit The maximum number of matches from a single API call (e.g. per species).  When verbose=TRUE, function
 #'   will warn if this needs to be increased, otherwise can be left as is. 
@@ -28,13 +29,12 @@ SERVER = "http://server.carlboettiger.info:4567"
 #' @import httr stringr tidyr dplyr
 #' @export
 species_info <- function(species_list, verbose = TRUE, limit = 50, server = SERVER, fields = NULL){ 
-  bind_rows(lapply(species_list, function(species){
-  
+  bind_rows(lapply(species_list, function(species){  
     ## parse scientific name (FIXME function should also do checks.)
     s <- parse_name(species)
 
     ## Make the API call for the species requested
-    args <- list(species = s$species, genus = s$genus, 
+    args <- list(species = s$species, genus = s$genus, SpecCode = s$speccode,
                  limit = limit, fields = paste(fields, collapse=","))
     resp <- GET(paste0(server, "/species"), query = args)
     data <- check_and_parse(resp, verbose = verbose)

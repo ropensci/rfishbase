@@ -3,6 +3,7 @@
 export(locations)
 export(species_info)
 export(species_list)
+export(synonyms)
 import(dplyr)
 import(httr)
 import(lazyeval)

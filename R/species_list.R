@@ -25,7 +25,7 @@ species_list <- function(Class = NULL,
                 Family = Family, SubFamily = SubFamily,
                 Genus = Genus, Species = Species,
                 SpecCode = SpecCode, SpeciesRefNo = SpeciesRefNo)
-  
+  query <- query[!sapply(query, is.null)]
   ## Just a few dplyr & dlpyr wrappers
   df <- taxa(query, all_taxa = all_taxa)
   df <- select_(df, "Genus", "Species")
