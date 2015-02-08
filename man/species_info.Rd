@@ -8,7 +8,8 @@ species_info(species_list, verbose = TRUE, limit = 50, server = SERVER,
   fields = NULL)
 }
 \arguments{
-\item{species_list}{A vector of scientific names (each element as "genus species").}
+\item{species_list}{A vector of scientific names (each element as "genus species").
+(FishBase SpecCodes can be given as numeric values in place of a scientific name.)}
 
 \item{verbose}{logical. Should the function give warnings? (default TRUE)}
 

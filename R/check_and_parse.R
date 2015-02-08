@@ -67,10 +67,29 @@ null_to_NA <- function(x) {
 
 
 # parse scientific name.   
-# FIXME largely a stupid placeholder function for now, should do more check, warning, & error handling
-parse_name <- function(x){
-  x <- str_split(x, " ")[[1]]
-  list(genus = x[1], species = x[2]))
+# Assume value is a speccode if it is either a numeric or a scientific na
+parse_name <- function(input){
+  
+  if(is.character(input)){
+    x <- str_split(input, " ")[[1]]
+    
+    if(length(x) == 1 && !is.na(as.numeric(x))){
+      list(speccode = as.integer(x))
+    } else if(length(x) >= 2) {
+      list(genus = x[1], species = x[2])
+    } else { 
+      warning(paste("Species ", input, "could not be parsed"))
+      list(NULL)
+    }
+    
+  } else if(is.numeric(input)) {
+    list(speccode=as.integer(input))
+    
+  } else { 
+    warning(paste("Species ", input, "could not be parsed"))
+    list(NULL)
+  }
+  
 }
 
 
