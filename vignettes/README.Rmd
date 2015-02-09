@@ -1,0 +1,37 @@
+---
+title: "rfishbase2.0"
+author: "Carl Boettiger"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{rfishbase2.0}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
+---
+
+Welcome to rfishbase 2.0.  
+
+This branch represents a work in progress and will not be functional until the FishBase API is released.
+At this time endpoints are still being added to the API and implemented in the package.
+
+## Quickstart 
+
+
+
+## Package Overview
+
+Design principles:
+
+Most functions are designed to take a character vector of species names as input and return a `data.frame`
+as output; usually with species as rows and columns as variables measured on the species.
+
+
+Species names must be valid scientific names as recognized by FishBase.
+
+Getting good species names:
+
+- `species_list()` Is probably the most common entry point for generating a list of species by specifying a higher taxonomic group of interest.  
+- `common_to_sci()`
+- `synonyms()` Scientific names change frequently
+
+

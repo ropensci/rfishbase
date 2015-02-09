@@ -7,14 +7,16 @@ Authors@R: c(person("Carl", "Boettiger", role = c("aut"), email = "cboettig@rope
              person("Scott", "Chamberlain", role = c("cre", "aut"), email = "scott@ropensci.org"))
 URL: https://github.com/ropensci/rfishbase
 BugReports: https://github.com/ropensci/rfishbase/issues
-Depends:
+Depends: 
     R (>= 3.0)
-Imports:
+Imports: 
     dplyr,
     lazyeval,
     httr,
     tidyr,
     stringr
-Suggests:
+Suggests: 
     testthat,
-    rmarkdown
+    rmarkdown,
+    knitr
+VignetteBuilder: knitr
