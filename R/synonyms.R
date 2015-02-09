@@ -25,20 +25,26 @@
 #'  }
 #'  @import httr
 #'  @export
-synonyms <- function(species, verbose = TRUE, limit = 50, server = SERVER, 
-                     fields = c("SynSpecies", "SynGenus", "Valid", "Misspelling", 
-                                "ColStatus", "Synonymy", "Combination", "SpecCode", "SynCode")){
-  s <- parse_name(species)
-  resp <- GET(paste0(server, "/synonyms"), 
-              query = list(SynSpecies = s$species, 
-                           SynGenus = s$genus, 
-                           SpecCode = s$speccode,
-                           limit = limit,
-                           fields = paste(fields, collapse=",")))
-  df <- check_and_parse(resp, verbose = verbose)
-  df <- reclass(df, "Valid", "logical")
-  df <- reclass(df, "Misspelling", "logical")
-  df
+synonyms <- function(species_list, verbose = TRUE, limit = 50, server = SERVER, 
+                     fields = c("SynGenus", "SynSpecies", "Valid", "Misspelling", 
+                                "ColStatus", "Synonymy", "Combination", "SpecCode",
+                                "SynCode", "CoL_ID", "TSN", "WoRMS_ID")){
+  
+  
+  bind_rows(lapply(species_list, function(species){
+    s <- parse_name(species)
+    resp <- GET(paste0(server, "/synonyms"), 
+                query = list(SynSpecies = s$species, 
+                             SynGenus = s$genus, 
+                             SpecCode = s$speccode,
+                             limit = limit,
+                             fields = paste(fields, collapse=",")))
+    df <- check_and_parse(resp, verbose = verbose)
+    df <- reclass(df, "Valid", "logical")
+    df <- reclass(df, "Misspelling", "logical")
+    df
+  }))
+  
 }
 
 
