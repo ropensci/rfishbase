@@ -6,7 +6,7 @@
 #' @import dplyr
 #' @export
 locations <- function(species_list, server = SERVER, verbose = TRUE, limit = 100){
-  codes <- speccodes_for_species(species_list)
+  codes <- speccodes(species_list)
   bind_rows(lapply(codes, faoareas))
 }
 

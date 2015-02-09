@@ -17,7 +17,7 @@
 #' @import dplyr lazyeval
 #' @examples
 #' \donttest{
-#' ## All species in the Family Scaridae
+#' ## All species in the Family 
 #'   species_list(Family = 'Scaridae')
 #' ## All species in the Genus 
 #'   species_list(Genus = 'Labroides')
@@ -45,15 +45,17 @@ species_list <- function(Class = NULL,
   df[[1]]
 }
 
+
+
 # Returns SpecCodes given a list of species. Primarily for internal use
 #
 # @examples
 # who <- species_list(Family='Scaridae')
-# speccodes_for_species(who)
-speccodes_for_species <- function(species_list, all_taxa = load_taxa()){ 
-  
+# speccodes(who)
+speccodes <- function(species_list, all_taxa = load_taxa()){ 
   ## Attempts to be clever.  Be sure to load_taxa() 
   # If cache doesn't exist, just query instead.
+  
   all_taxa <- mget('all_taxa', envir = rfishbase, ifnotfound = list(NULL))$all_taxa
   if(is.null(all_taxa)){
     species_info(species_list, fields="SpecCode")$SpecCode
@@ -77,14 +79,16 @@ taxa <- function(query, all_taxa = load_taxa()){
                 .values = list(y = as.name(level), x = value))
   })
   
-  taxa <- filter_(all_taxa, 
-                  .dots = dots) 
+  filter_(all_taxa, 
+          .dots = dots) 
 }
 
 
 ## Create an environment to cache the full speices table
 rfishbase <- new.env(hash = TRUE)
 
+
+## FIXME consider exporting this.  
 # Contruct and cache the the taxa table from the server
 load_taxa <- function(server = SERVER, verbose = TRUE, cache = TRUE){
   
