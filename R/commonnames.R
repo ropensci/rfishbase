@@ -1,7 +1,19 @@
+#' common_to_sci
 #' 
+#' Return a list of scientific names corresponding to given the common name(s).
+#' 
+#' @inheritParams species_info
+#' @return a character vector of scientific names
+#' @details If more than one scientific name matches the common name (e.g. "trout"), the function
+#' will simply return a list of all matching scientific names.  If given more than one common name,
+#' the resulting strings of matching scientific names are simply concatenated. 
+#' 
+#' Setting the language used explicitly will decrease the data transferred and speed up the function. 
+#' The limit default is quite high in this call, as it corresponds to the number of common names that
+#' match a given species, including different languages and countries. 
 #' @examples
 #' \donttest{
-#' common_to_sci(c("Bicolor cleaner wrasse", "humphead parrotfish"))
+#' common_to_sci(c("Bicolor cleaner wrasse", "humphead parrotfish"), Language="English")
 #' common_to_sci("trout")
 #' common_to_sci(c("trout", "Coho Salmon"))
 #' }

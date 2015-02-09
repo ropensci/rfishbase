@@ -37,7 +37,7 @@ The first time the function is called it will download and cache the complete
 }
 \examples{
 \donttest{
-## All species in the Family Scaridae
+## All species in the Family
   species_list(Family = 'Scaridae')
 ## All species in the Genus
   species_list(Genus = 'Labroides')

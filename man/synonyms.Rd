@@ -4,12 +4,14 @@
 \alias{synonyms}
 \title{synonyms}
 \usage{
-synonyms(species, verbose = TRUE, limit = 50, server = SERVER,
-  fields = c("SynSpecies", "SynGenus", "Valid", "Misspelling", "ColStatus",
-  "Synonymy", "Combination", "SpecCode", "SynCode"))
+synonyms(species_list, verbose = TRUE, limit = 50, server = SERVER,
+  fields = c("SynGenus", "SynSpecies", "Valid", "Misspelling", "ColStatus",
+  "Synonymy", "Combination", "SpecCode", "SynCode", "CoL_ID", "TSN",
+  "WoRMS_ID"))
 }
 \arguments{
-\item{species}{Can be either a scientific name ("genus species") or FishBASE SpecCode}
+\item{species_list}{A vector of scientific names (each element as "genus species").
+(FishBase SpecCodes can be given as numeric values in place of a scientific name.)}
 
 \item{verbose}{logical. Should the function give warnings? (default TRUE)}
 
@@ -21,6 +23,8 @@ will warn if this needs to be increased, otherwise can be left as is.}
 \item{fields}{a character vector specifying which fields (columns) should be returned. By default,
 all available columns recognized by the parser are returned. This option can be used to the amount
 of data transfered over the network if only certain columns are needed.}
+
+\item{species}{Can be either a scientific name ("genus species") or FishBASE SpecCode}
 }
 \value{
 A table with information about the synonym. Will generally be only a single
