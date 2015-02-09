@@ -1,4 +1,5 @@
-SERVER = "http://server.carlboettiger.info:4567"
+#SERVER = "http://server.carlboettiger.info:4567"
+SERVER = "http://172.17.42.1:4567"
 
 #' species_info
 #' 
@@ -38,19 +39,12 @@ species_info <- function(species_list, verbose = TRUE, limit = 50, server = SERV
                  limit = limit, fields = paste(fields, collapse=","))
     resp <- GET(paste0(server, "/species"), query = args)
     data <- check_and_parse(resp, verbose = verbose)
-  
     
     tidy_species_table(data)  ## FIXME Tidy should work even if we are filtering
     
   })) 
 }
 
-
-
-## Metadata used by tidy_species_table
-meta <- system.file("metadata", "species.csv", package="rfishbase")
-species_meta <- read.csv(meta)
-row.names(species_meta) <- species_meta$field
 
 
 ## helper routine for tidying species data
@@ -67,14 +61,40 @@ tidy_species_table <- function(df) {
     }
   }
   ## Drop useless columns. 
-  ## Once reference table implemented, we may want to return those numbers. Same for expert ids.
-  keep <- species_meta$field[species_meta$keep]
-  keep_id <- match(keep, names(df))
-  keep_id <- keep_id[!is.na(keep_id)]
-  df <- df[,keep_id]
+  # keep <- species_meta$field[species_meta$keep]
+  # keep_id <- match(keep, names(df))
+  # keep_id <- keep_id[!is.na(keep_id)]
+  # df <- df[,keep_id]
+  
   ## Rename columns (pick names to indicate units on numeric values?)
   
   ## Arrange columns
   
   df
 }
+
+
+
+## field groupings:
+id_fields = c("SpecCode", "Genus", "Species", "FBname" )
+habitat_fields = c("Fresh", "Brack", "Saltwater", "DemersPelag", "AnaCat")
+life_fields = c("LongevityWild","LongevityCaptive", "Vulnerability")
+morph_fields = c("Length", "LTypeMaxM", "LengthFemale", "LTypeMaxF", "CommonLength", 
+                "LTypeComM", "CommonLengthF", "LTypeComF", "Weight", "WeightFemale")
+fishing_fields = c("Importance", "PriceCateg", "PriceReliability", "LandingStatistics",
+                   "Landings", "MainCatchingMethod", "MSeines", "MGillnets", "MCastnets", "MTraps",
+                   "MSpears", "MTrawls", "MDredges", "MLiftnets", "MHooksLines", "MOther",
+                   "UsedforAquaculture", "LifeCycle", "UsedasBait", "Aquarium", "GameFish", "Dangerous")
+misc_fields = c("Dangerous", "Electrogenic")
+curation_fields = c("DateEntered", "DateModified", "DateChecked", "Complete", "Entered", "Modified", "Expert")
+ref_fields = c("DepthRangeRef", "LongevityWildRef", "LongevityCapRef", "MaxLengthRef", "CommonLengthRef",
+               "MaxWeightRef", "ImportanceRef", "AquacultureRef", "BaitRef",  "AquariumRef",
+               "GameRef", "DangerousRef", "Electrogenic", "ElectroRef")
+
+
+## Metadata used by tidy_species_table
+meta <- system.file("metadata", "species.csv", package="rfishbase")
+species_meta <- read.csv(meta)
+row.names(species_meta) <- species_meta$field
+
+
