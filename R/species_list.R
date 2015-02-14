@@ -53,19 +53,11 @@ species_list <- function(Class = NULL,
 # who <- species_list(Family='Scaridae')
 # speccodes(who)
 speccodes <- function(species_list, all_taxa = load_taxa()){ 
-  ## Attempts to be clever.  Be sure to load_taxa() 
-  # If cache doesn't exist, just query instead.
-  
-  all_taxa <- mget('all_taxa', envir = rfishbase, ifnotfound = list(NULL))$all_taxa
-  if(is.null(all_taxa)){
-    species_info(species_list, fields="SpecCode")$SpecCode
-  } else {
     sapply(species_list, function(x){ 
       s <- parse_name(x)
       df <- taxa(list(Species=s$species, Genus=s$genus), all_taxa = all_taxa)
       select_(df, "SpecCode")[[1]] 
     })
-  }
 }
 
 

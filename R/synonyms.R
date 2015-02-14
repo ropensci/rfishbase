@@ -1,7 +1,6 @@
 #' synonyms
 #' 
 #' Check for alternate versions of a scientific name
-#' @param species Can be either a scientific name ("genus species") or FishBASE SpecCode
 #' @inheritParams species_info
 #' @return A table with information about the synonym. Will generally be only a single
 #' row if a species name is given.  If a FishBase SpecCode is given, all synonyms matching

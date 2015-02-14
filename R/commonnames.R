@@ -2,6 +2,8 @@
 #' 
 #' Return a list of scientific names corresponding to given the common name(s).
 #' 
+#' @param x a common name or list of common names
+#' @param Language a string specifying the language for the common name, e.g. "English"
 #' @inheritParams species_info
 #' @return a character vector of scientific names
 #' @details If more than one scientific name matches the common name (e.g. "trout"), the function

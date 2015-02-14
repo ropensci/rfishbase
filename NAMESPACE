@@ -2,6 +2,7 @@
 
 export(common_to_sci)
 export(heartbeat)
+export(load_taxa)
 export(locations)
 export(ping)
 export(species_info)
