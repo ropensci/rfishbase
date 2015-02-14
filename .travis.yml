@@ -9,11 +9,15 @@ before_install:
 
 install:
   - ./travis-tool.sh install_deps
+  - ./travis-tool.sh github_package jimhester/covr
 
 script: ./travis-tool.sh run_tests
 
 after_failure:
   - ./travis-tool.sh dump_logs
+
+after_success:
+    - Rscript -e 'library(covr);coveralls()'
 
 env:
   global:

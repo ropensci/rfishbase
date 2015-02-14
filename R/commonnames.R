@@ -38,7 +38,7 @@ common_to_sci <- function(x, Language = NULL, verbose = TRUE, limit = 1000, serv
   })
   
   # If multiple matches are found, we want to collapse
-  unname(unlist(out))
+  as.character(unname(unlist(out)))
 }
 
 #' commonnames
@@ -58,8 +58,8 @@ common_to_sci <- function(x, Language = NULL, verbose = TRUE, limit = 1000, serv
 #' library(dplyr)
 #' fish %>% filter(Language=="English") 
 #' }
-#
-## FIXME C_Code should be mapped to a country name using the table 'country' 
+#'
+#' @export
 commonnames <- function(species_list, 
                         verbose = TRUE, 
                         limit = 100, 
@@ -79,6 +79,6 @@ commonnames <- function(species_list,
     id_df <- select_(taxa(query = list(SpecCode = code)), "Genus", "Species", "SpecCode")
     df <- left_join(df, id_df)
     
-    # Replace C_Code with Country
+    # FIXME Replace C_Code with Country
   }))
 }
