@@ -2,7 +2,7 @@
 % Please edit documentation in R/commonnames.R
 \name{commonnames}
 \alias{commonnames}
-\title{Return a table of common names}
+\title{commonnames}
 \usage{
 commonnames(species_list, verbose = TRUE, limit = 100, server = SERVER,
   fields = c("ComName", "Language", "C_Code", "SpecCode"))
@@ -21,6 +21,10 @@ will warn if this needs to be increased, otherwise can be left as is.}
 \item{fields}{a character vector specifying which fields (columns) should be returned. By default,
 all available columns recognized by the parser are returned. This option can be used to the amount
 of data transfered over the network if only certain columns are needed.}
+}
+\value{
+a data.frame of common names by species queried. If multiple species are queried,
+The resulting data.frames are concatenated.
 }
 \description{
 Return a table of common names

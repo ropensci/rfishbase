@@ -1,5 +1,5 @@
-#SERVER = "http://server.carlboettiger.info:4567"
-SERVER = "http://172.17.42.1:4567"
+SERVER = "http://server.carlboettiger.info"
+#SERVER = "http://172.17.42.1:4567"
 
 #' species_info
 #' 
@@ -24,7 +24,7 @@ SERVER = "http://172.17.42.1:4567"
 #' @examples
 #' \donttest{
 #' 
-#' species_info(c("Oreochromis niloticus", "Bolbometopon muricatum")) 
+#' species_info(c("Labroides bicolor", "Bolbometopon muricatum")) 
 #' 
 #' }
 #' @import httr stringr tidyr dplyr

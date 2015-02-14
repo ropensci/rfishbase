@@ -83,26 +83,3 @@ taxa <- function(query, all_taxa = load_taxa()){
           .dots = dots) 
 }
 
-
-## Create an environment to cache the full speices table
-rfishbase <- new.env(hash = TRUE)
-
-
-## FIXME consider exporting this.  
-# Contruct and cache the the taxa table from the server
-load_taxa <- function(server = SERVER, verbose = TRUE, cache = TRUE){
-  
-  all_taxa <- mget('all_taxa', 
-                   envir = rfishbase, 
-                   ifnotfound = list(NULL))$all_taxa
-  
-  if(is.null(all_taxa)){
-    resp <- GET(paste0(server, "/taxa"), query = list(family='', limit=35000))
-    all_taxa <- check_and_parse(resp, verbose = verbose)
-    
-    if(cache) 
-      assign("all_taxa", all_taxa, envir=rfishbase)  
-  }
-  
-  all_taxa
-}

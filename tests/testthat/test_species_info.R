@@ -1,3 +1,5 @@
+context("species info")
+
 test_that("We can extract generic information from the species table", {
   
   df <- species_info(c("Oreochromis niloticus", "Bolbometopon muricatum")) 
@@ -47,4 +49,4 @@ test_that("We can filter on preset fields",{
 ## Test wrong species name?
 
 ## Test wrong server?
-test_that()
+#test_that()

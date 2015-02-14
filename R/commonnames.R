@@ -18,6 +18,7 @@
 #' common_to_sci(c("trout", "Coho Salmon"))
 #' }
 #' @seealso \code{\link{commonnames}}, \code{\link{species_list}}, \code{\link{synonyms}}
+#' @export
 common_to_sci <- function(x, Language = NULL, verbose = TRUE, limit = 1000, server = SERVER){
   
   out <- sapply(x, function(x){
@@ -38,9 +39,12 @@ common_to_sci <- function(x, Language = NULL, verbose = TRUE, limit = 1000, serv
   unname(unlist(out))
 }
 
-
+#' commonnames
+#' 
 #' Return a table of common names
 #' @inheritParams species_info
+#' @return a data.frame of common names by species queried. If multiple species are queried,
+#' The resulting data.frames are concatenated. 
 #' @details Note that there are many common names for a given sci name, so sci_to_common doesn't make sense
 #' 
 #' @examples

@@ -38,7 +38,7 @@ Species scientific names are defined according to fishbase taxonomy and nomencla
 \examples{
 \donttest{
 
-species_info(c("Oreochromis niloticus", "Bolbometopon muricatum"))
+species_info(c("Labroides bicolor", "Bolbometopon muricatum"))
 
 }
 }

@@ -1,4 +1,4 @@
-
+context("heartbeat")
 library("rfishbase")
 library("testthat")
 # test_heartbeat

@@ -1,12 +1,19 @@
 ## Internal routine, used by most API calls
 
 # @param resp an httr resp object
-# @param verbose logical, indates if we give explicit warnings
+# @param verbose logical, indates if we give explicit warnings. Will read
+# from the option "verbose" if no value is given, and default to TRUE if that
+# is not defined
+# @param debug should we return the httr response object for debugging
+# if a call fails, or just NULL, (so that one a failed call does not break
+# the execution of a long loop).
 # @return the parsed data.frame, or NULL if checks fail to proceed
-check_and_parse <- function(resp, verbose = TRUE){
+check_and_parse <- function(resp, 
+                            verbose = getOption("verbose", TRUE), 
+                            debug = getOption("debug", FALSE)){
   
   
-  stop_for_status(resp)
+  warn_for_status(resp)
   
   ## Parse the http response
   parsed <- content(resp)
@@ -25,8 +32,10 @@ check_and_parse <- function(resp, verbose = TRUE){
     # bind_rows(lapply(parsed$data, null_to_NA))  # FAIL!!
   } else {
     
-    NULL
-    
+    if(debug)
+      resp
+    else
+      NULL
   }
 }
 
@@ -37,21 +46,31 @@ check_and_parse <- function(resp, verbose = TRUE){
 # @return logical, TRUE if all tests pass, FALSE otherwise
 error_checks <- function(parsed, verbose = TRUE){
   proceed <- TRUE  
-  ## check for errors in the API query
-  if(!is.null(parsed$error)) {
-    if(verbose) stop(parsed$error)
+  
+  # If API fails completely, parsed is just a character stream error:
+  if(is.character(parsed)){ 
+    warning(parsed)
     proceed <- FALSE
-  }
-  ## Comment if returns are incomplete.
-  if(parsed$count > parsed$returned){
-    if(verbose) warning(paste("Retruning first", parsed$returned, 
-                              "matches parsed of", parsed$count, "matches.",
-                              "\n Increase limit or refine query"))
-    proceed <- TRUE
-  }
-  if(parsed$count == 0){
-    warning("No matches to query found")
-    proceed <- FALSE
+  
+  } else {  
+    ## check for errors in the API query
+    if(!is.null(parsed$error)) {
+      if(verbose) 
+        warning(paste(parsed$error))
+      proceed <- FALSE
+    }
+    ## Comment if returns are incomplete.
+    if(parsed$count > parsed$returned){
+      if(verbose) warning(paste("Retruning first", parsed$returned, 
+                                "matches parsed of", parsed$count, "matches.",
+                                "\n Increase limit or refine query"))
+      proceed <- TRUE
+    }
+  
+    if(parsed$count == 0){
+      warning("No matches to query found")
+      proceed <- FALSE
+    }
   }
   proceed
 }
