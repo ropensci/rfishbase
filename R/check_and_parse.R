@@ -18,7 +18,7 @@ check_and_parse <- function(resp,
   ## Parse the http response
   parsed <- content(resp)
   ## Check for errors or other issues
-  proceed <- error_checks(parsed, verbose = verbose)
+  proceed <- error_checks(parsed)
   
   if(proceed) {
     ## Collapse to data.frame. ARG!! CANNOT ESCAPE THE do.call :`-( 
@@ -44,32 +44,29 @@ check_and_parse <- function(resp,
 # check for parsing errors
 # @param parsed the parsed JSON as a list
 # @return logical, TRUE if all tests pass, FALSE otherwise
-error_checks <- function(parsed, verbose = TRUE){
+error_checks <- function(parsed){
   proceed <- TRUE  
   
   # If API fails completely, parsed is just a character stream error:
   if(is.character(parsed)){ 
     warning(parsed)
     proceed <- FALSE
-  
-  } else {  
+  } else if(!is.list(parsed) && length(parsed) > 0){
+    proceed <- FALSE
+  } else {
     ## check for errors in the API query
     if(!is.null(parsed$error)) {
-      if(verbose) 
         warning(paste(parsed$error))
       proceed <- FALSE
-    }
-    ## Comment if returns are incomplete.
-    if(parsed$count > parsed$returned){
-      if(verbose) warning(paste("Retruning first", parsed$returned, 
-                                "matches parsed of", parsed$count, "matches.",
-                                "\n Increase limit or refine query"))
-      proceed <- TRUE
-    }
-  
-    if(parsed$count == 0){
+    } else if(parsed$count == 0){
       warning("No matches to query found")
       proceed <- FALSE
+    } else if(parsed$count > parsed$returned){
+      ## Comment if returns are incomplete.
+      warning(paste("Returning first", parsed$returned, 
+                    "matches parsed of", parsed$count, "matches.",
+                    "\n Increase limit or refine query"))
+      proceed <- TRUE
     }
   }
   proceed
