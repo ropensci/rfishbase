@@ -23,6 +23,7 @@ env:
   global:
     - WARNINGS_ARE_ERRORS=1
     - R_BUILD_ARGS="--no-manual"
+    - BOOTSTRAP_PANDOC=1
 
 notifications:
   email:
