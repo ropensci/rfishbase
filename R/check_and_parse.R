@@ -48,6 +48,7 @@ error_checks <- function(parsed, resp = structure(list(url="error, no httr respo
     warning(paste(parsed, "for query", resp$url))
     proceed <- FALSE
   } else if(!is.list(parsed) || length(parsed) == 0){
+    warning(paste("Failed to parse or empty query results for", resp$url))
     proceed <- FALSE
   } else {
     ## check for errors in the API query

@@ -4,7 +4,7 @@ context("error checks")
 
 test_that("Waning message and no proceed if parsing fails", {
   parsed <- "parsed is a character error message"
-  expect_warning(proceed <- error_checks())
+  expect_warning(proceed <- error_checks(parsed))
   expect_false(proceed)  
 })
 
