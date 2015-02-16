@@ -4,16 +4,14 @@
 \alias{commonnames}
 \title{commonnames}
 \usage{
-commonnames(species_list, verbose = TRUE, limit = 100, server = SERVER,
+commonnames(species_list, limit = 100, server = SERVER,
   fields = c("ComName", "Language", "C_Code", "SpecCode"))
 }
 \arguments{
 \item{species_list}{A vector of scientific names (each element as "genus species").
 (FishBase SpecCodes can be given as numeric values in place of a scientific name.)}
 
-\item{verbose}{logical. Should the function give warnings? (default TRUE)}
-
-\item{limit}{The maximum number of matches from a single API call (e.g. per species).  When verbose=TRUE, function
+\item{limit}{The maximum number of matches from a single API call (e.g. per species). Function
 will warn if this needs to be increased, otherwise can be left as is.}
 
 \item{server}{base URL to the FishBase API, should leave as default.}

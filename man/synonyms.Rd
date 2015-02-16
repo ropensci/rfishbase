@@ -4,18 +4,15 @@
 \alias{synonyms}
 \title{synonyms}
 \usage{
-synonyms(species_list, verbose = TRUE, limit = 50, server = SERVER,
-  fields = c("SynGenus", "SynSpecies", "Valid", "Misspelling", "ColStatus",
-  "Synonymy", "Combination", "SpecCode", "SynCode", "CoL_ID", "TSN",
-  "WoRMS_ID"))
+synonyms(species_list, limit = 50, server = SERVER, fields = c("SynGenus",
+  "SynSpecies", "Valid", "Misspelling", "ColStatus", "Synonymy", "Combination",
+  "SpecCode", "SynCode", "CoL_ID", "TSN", "WoRMS_ID"))
 }
 \arguments{
 \item{species_list}{A vector of scientific names (each element as "genus species").
 (FishBase SpecCodes can be given as numeric values in place of a scientific name.)}
 
-\item{verbose}{logical. Should the function give warnings? (default TRUE)}
-
-\item{limit}{The maximum number of matches from a single API call (e.g. per species).  When verbose=TRUE, function
+\item{limit}{The maximum number of matches from a single API call (e.g. per species). Function
 will warn if this needs to be increased, otherwise can be left as is.}
 
 \item{server}{base URL to the FishBase API, should leave as default.}

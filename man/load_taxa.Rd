@@ -4,7 +4,7 @@
 \alias{load_taxa}
 \title{load_taxa}
 \usage{
-load_taxa(update = FALSE, cache = TRUE, server = SERVER, verbose = TRUE)
+load_taxa(update = FALSE, cache = TRUE, server = SERVER)
 }
 \arguments{
 \item{update}{logical, should we query the API to update the available list?}
@@ -13,8 +13,6 @@ load_taxa(update = FALSE, cache = TRUE, server = SERVER, verbose = TRUE)
 (default TRUE, leave as is)}
 
 \item{server}{base URL to the FishBase API, should leave as default.}
-
-\item{verbose}{logical. Should the function give warnings? (default TRUE)}
 }
 \value{
 the taxa list

@@ -4,17 +4,14 @@
 \alias{common_to_sci}
 \title{common_to_sci}
 \usage{
-common_to_sci(x, Language = NULL, verbose = TRUE, limit = 1000,
-  server = SERVER)
+common_to_sci(x, Language = NULL, limit = 1000, server = SERVER)
 }
 \arguments{
 \item{x}{a common name or list of common names}
 
 \item{Language}{a string specifying the language for the common name, e.g. "English"}
 
-\item{verbose}{logical. Should the function give warnings? (default TRUE)}
-
-\item{limit}{The maximum number of matches from a single API call (e.g. per species).  When verbose=TRUE, function
+\item{limit}{The maximum number of matches from a single API call (e.g. per species). Function
 will warn if this needs to be increased, otherwise can be left as is.}
 
 \item{server}{base URL to the FishBase API, should leave as default.}

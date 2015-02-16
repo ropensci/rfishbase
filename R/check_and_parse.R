@@ -14,7 +14,7 @@ check_and_parse <- function(resp,
   ## Parse the http response
   parsed <- content(resp)
   ## Check for errors or other issues
-  proceed <- error_checks(parsed)
+  proceed <- error_checks(parsed, resp = resp)
   
   if(proceed) {
     ## Collapse to data.frame. ARG!! CANNOT ESCAPE THE do.call :`-( 
@@ -40,22 +40,22 @@ check_and_parse <- function(resp,
 # check for parsing errors
 # @param parsed the parsed JSON as a list
 # @return logical, TRUE if all tests pass, FALSE otherwise
-error_checks <- function(parsed){
+error_checks <- function(parsed, resp = structure(list(url="error, no httr response"), class="response")){
   proceed <- TRUE  
   
   # If API fails completely, parsed is just a character stream error:
   if(is.character(parsed)){ 
-    warning(parsed)
+    warning(paste(parsed, "for query", resp$url))
     proceed <- FALSE
-  } else if(!is.list(parsed) && length(parsed) > 0){
+  } else if(!is.list(parsed) || length(parsed) == 0){
     proceed <- FALSE
   } else {
     ## check for errors in the API query
     if(!is.null(parsed$error)) {
-        warning(paste(parsed$error))
+        warning(paste(parsed$error, "for query", resp$url))
       proceed <- FALSE
     } else if(parsed$count == 0){
-      warning("No matches to query found")
+      warning(paste("No matches to query found","for query", resp$url))
       proceed <- FALSE
     } else if(parsed$count > parsed$returned){
       ## Comment if returns are incomplete.
