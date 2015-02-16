@@ -1,15 +1,11 @@
 ## Internal routine, used by most API calls
 
 # @param resp an httr resp object
-# @param verbose logical, indates if we give explicit warnings. Will read
-# from the option "verbose" if no value is given, and default to TRUE if that
-# is not defined
 # @param debug should we return the httr response object for debugging
 # if a call fails, or just NULL, (so that one a failed call does not break
 # the execution of a long loop).
 # @return the parsed data.frame, or NULL if checks fail to proceed
 check_and_parse <- function(resp, 
-                            verbose = getOption("verbose", TRUE), 
                             debug = getOption("debug", FALSE)){
   
   

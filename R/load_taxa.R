@@ -13,7 +13,7 @@ rfishbase <- new.env(hash = TRUE)
 #' @inheritParams species_info
 #' @return the taxa list
 #' @export
-load_taxa <- function(update = FALSE, cache = TRUE, server = SERVER, verbose = TRUE){
+load_taxa <- function(update = FALSE, cache = TRUE, server = SERVER){
   
   # First, try to load from cache
   all_taxa <- mget('all_taxa', 
@@ -23,7 +23,7 @@ load_taxa <- function(update = FALSE, cache = TRUE, server = SERVER, verbose = T
   if(is.null(all_taxa)){
     if(update){
       resp <- GET(paste0(server, "/taxa"), query = list(family='', limit=35000))
-      all_taxa <- check_and_parse(resp, verbose = verbose)
+      all_taxa <- check_and_parse(resp)
       drop <- match(c("Author", "Remark"), names(all_taxa))
       all_taxa <- all_taxa[-drop]
       if(cache) 

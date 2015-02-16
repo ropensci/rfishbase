@@ -21,7 +21,7 @@
 #' }
 #' @seealso \code{\link{commonnames}}, \code{\link{species_list}}, \code{\link{synonyms}}
 #' @export
-common_to_sci <- function(x, Language = NULL, verbose = TRUE, limit = 1000, server = SERVER){
+common_to_sci <- function(x, Language = NULL, limit = 1000, server = SERVER){
   
   out <- sapply(x, function(x){
     # Look up SpecCode for the common names
@@ -30,7 +30,7 @@ common_to_sci <- function(x, Language = NULL, verbose = TRUE, limit = 1000, serv
                              Language = Language,
                              limit = limit,  # SpecCode same for all matches
                              fields = 'SpecCode'))
-    data <- check_and_parse(resp, verbose = verbose)
+    data <- check_and_parse(resp)
     matches <- unique(data[[1]])
     
     sci_names <- species_info(matches, fields = c("Genus", "Species"))
@@ -61,7 +61,6 @@ common_to_sci <- function(x, Language = NULL, verbose = TRUE, limit = 1000, serv
 #'
 #' @export
 commonnames <- function(species_list, 
-                        verbose = TRUE, 
                         limit = 100, 
                         server = SERVER, 
                         fields = c('ComName', 'Language','C_Code', 'SpecCode')){
@@ -73,7 +72,7 @@ commonnames <- function(species_list,
                 query = list(SpecCode = code, 
                              limit = limit, 
                              fields = paste(fields, collapse=",")))
-    df <- check_and_parse(resp, verbose = verbose)
+    df <- check_and_parse(resp)
     
     # Replace / Join SpecCode with Genus and Species columns
     id_df <- select_(taxa(query = list(SpecCode = code)), "Genus", "Species", "SpecCode")

@@ -6,8 +6,7 @@ SERVER = "http://server.carlboettiger.info"
 #' Provide wrapper to work with species lists. 
 #' @param species_list A vector of scientific names (each element as "genus species"). 
 #'   (FishBase SpecCodes can be given as numeric values in place of a scientific name.)
-#' @param verbose logical. Should the function give warnings? (default TRUE)
-#' @param limit The maximum number of matches from a single API call (e.g. per species).  When verbose=TRUE, function
+#' @param limit The maximum number of matches from a single API call (e.g. per species). Function
 #'   will warn if this needs to be increased, otherwise can be left as is. 
 #' @param server base URL to the FishBase API, should leave as default.
 #' @param fields a character vector specifying which fields (columns) should be returned. By default,
@@ -29,7 +28,7 @@ SERVER = "http://server.carlboettiger.info"
 #' }
 #' @import httr stringr tidyr dplyr
 #' @export
-species_info <- function(species_list, verbose = TRUE, limit = 50, server = SERVER, fields = NULL){ 
+species_info <- function(species_list, limit = 50, server = SERVER, fields = NULL){ 
   bind_rows(lapply(species_list, function(species){  
     ## parse scientific name (FIXME function should also do checks.)
     s <- parse_name(species)
@@ -38,7 +37,7 @@ species_info <- function(species_list, verbose = TRUE, limit = 50, server = SERV
     args <- list(species = s$species, genus = s$genus, SpecCode = s$speccode,
                  limit = limit, fields = paste(fields, collapse=","))
     resp <- GET(paste0(server, "/species"), query = args)
-    data <- check_and_parse(resp, verbose = verbose)
+    data <- check_and_parse(resp)
     
     tidy_species_table(data)  ## FIXME Tidy should work even if we are filtering
     

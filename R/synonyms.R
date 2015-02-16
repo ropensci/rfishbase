@@ -24,7 +24,7 @@
 #'  }
 #'  @import httr
 #'  @export
-synonyms <- function(species_list, verbose = TRUE, limit = 50, server = SERVER, 
+synonyms <- function(species_list, limit = 50, server = SERVER, 
                      fields = c("SynGenus", "SynSpecies", "Valid", "Misspelling", 
                                 "ColStatus", "Synonymy", "Combination", "SpecCode",
                                 "SynCode", "CoL_ID", "TSN", "WoRMS_ID")){
@@ -38,7 +38,7 @@ synonyms <- function(species_list, verbose = TRUE, limit = 50, server = SERVER,
                              SpecCode = s$speccode,
                              limit = limit,
                              fields = paste(fields, collapse=",")))
-    df <- check_and_parse(resp, verbose = verbose)
+    df <- check_and_parse(resp)
     df <- reclass(df, "Valid", "logical")
     df <- reclass(df, "Misspelling", "logical")
     df

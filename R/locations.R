@@ -7,7 +7,7 @@
 #' @export
 #' @examples
 #' locations(species_list(Genus='Labroides'))
-locations <- function(species_list, server = SERVER, verbose = TRUE, limit = 100){
+locations <- function(species_list, server = SERVER, limit = 100){
   codes <- speccodes(species_list)
   bind_rows(lapply(codes, faoareas))
 }
