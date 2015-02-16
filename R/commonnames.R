@@ -79,6 +79,6 @@ commonnames <- function(species_list,
     id_df <- select_(taxa(query = list(SpecCode = code)), "Genus", "Species", "SpecCode")
     df <- left_join(df, id_df)
     
-    # FIXME Replace C_Code with Country
+    # FIXME Replace C_Code with Country usiong countref table: "SELECT PAESE FROM countref WHERE C_Code=x"
   }))
 }
