@@ -8,9 +8,11 @@ test_that("We can load taxa from the package database", {
 
 test_that("We can refresh the taxa list and use it in future calls", {
   
-  needs_api()
-  
+  skip() # the join too demanding on server
+
+  needs_api()  
   df <- load_taxa(update = TRUE, cache = TRUE)
   expect_is(df, "data.frame")
+
 })
 
