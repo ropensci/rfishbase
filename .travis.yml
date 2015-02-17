@@ -3,10 +3,9 @@
 language: c
 
 before_install:
-  - curl -OL http://raw.github.com/craigcitro/r-travis/pandoc_update/scripts/travis-tool.sh
+  - curl -OL http://raw.github.com/craigcitro/r-travis/master/scripts/travis-tool.sh
   - chmod 755 ./travis-tool.sh
   - ./travis-tool.sh bootstrap
-    #  - mkdir -p ~/.pandoc/ && git clone https://github.com/jgm/pandoc-templates ~/.pandoc/templates
 
 install:
   - ./travis-tool.sh install_deps
