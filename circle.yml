@@ -1,3 +1,6 @@
+branches:
+      only: rfishbase2.0
+
 machine:
   services:
     - docker
