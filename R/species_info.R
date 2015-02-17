@@ -1,6 +1,3 @@
-SERVER = "http://server.carlboettiger.info"
-#SERVER = "http://172.17.42.1:4567"
-
 #' species_info
 #' 
 #' Provide wrapper to work with species lists. 

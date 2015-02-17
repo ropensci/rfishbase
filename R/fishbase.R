@@ -7,3 +7,7 @@
 #' @keywords package
 NULL
 
+
+SERVER = "http://fishbaseapi.info"
+
+
