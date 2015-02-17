@@ -30,7 +30,7 @@ faoareas <- function(code, server = SERVER, limit = 100){
 
 faoarrefs <- function(area_code, server = SERVER, limit = 100){
   ## add in a fields list to filter returned values
-  resp <- GET(paste0(server, "/faoarrefs/", area_code), 
+  resp <- GET(paste0(server, "/faoarref/", area_code), 
               query = list(limit = limit,
                            fields='AreaCode,FAO'))
   data <- check_and_parse(resp)
