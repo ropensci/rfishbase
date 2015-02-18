@@ -5,3 +5,4 @@ inst/api
 ^\.Rproj\.user$
 ^\.travis\.yml$
 ^\.httr-oauth$
+circle.yml
