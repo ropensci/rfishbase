@@ -22,7 +22,7 @@ load_taxa <- function(update = FALSE, cache = TRUE, server = SERVER){
   
   if(is.null(all_taxa)){
     if(update){
-      resp <- GET(paste0(server, "/taxa"), query = list(family='', limit=35000))
+      resp <- GET(paste0(server, "/taxa"), query = list(family='', limit=40000))
       all_taxa <- check_and_parse(resp)
       drop <- match(c("Author", "Remark"), names(all_taxa))
       all_taxa <- all_taxa[-drop]
