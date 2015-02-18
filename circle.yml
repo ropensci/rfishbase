@@ -8,7 +8,5 @@ machine:
 
 test:
   override:
-    - docker run -ti -v $(pwd):/data -w /data rocker/ropensci:dev r -e "devtools::check()"
-    - docker run -ti -v $(pwd):/data -w /data rocker/ropensci:dev r -e "covr::coveralls(service_name = 'circleci', service_job_id = Sys.getenv('CIRCLE_NODE_INDEX'))"
-
+    - docker run -ti -v $(pwd):/data -w /data rocker/ropensci:dev make test
 
