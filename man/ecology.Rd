@@ -7,8 +7,7 @@
 ecology(species_list, server = SERVER, limit = 100, fields = NULL)
 }
 \arguments{
-\item{species_list}{A vector of scientific names (each element as "genus species").
-(FishBase SpecCodes can be given as numeric values in place of a scientific name.)}
+\item{species_list}{A vector of scientific names (each element as "genus species").}
 
 \item{server}{base URL to the FishBase API, should leave as default.}
 

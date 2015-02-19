@@ -2,7 +2,6 @@
 #' 
 #' Provide wrapper to work with species lists. 
 #' @param species_list A vector of scientific names (each element as "genus species"). 
-#'   (FishBase SpecCodes can be given as numeric values in place of a scientific name.)
 #' @param limit The maximum number of matches from a single API call (e.g. per species). Function
 #'   will warn if this needs to be increased, otherwise can be left as is. 
 #' @param server base URL to the FishBase API, should leave as default.

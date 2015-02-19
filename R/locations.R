@@ -1,3 +1,5 @@
+## Consider information from: Countries | FAO areas | Ecosystems | Occurrences | Point map | Introductions | Faunaf
+
 #' locations
 #' 
 #' return a table of species locations as reported in FishBASE.org FAO location data
@@ -7,6 +9,8 @@
 #' @export
 #' @examples
 #' locations(species_list(Genus='Labroides'))
+#' @details currently this is ~ FAO areas table (minus "note" field)
+#' e.g. http://www.fishbase.us/Country/FaoAreaList.php?ID=5537
 locations <- function(species_list, server = SERVER, limit = 100){
   codes <- speccodes(species_list)
   bind_rows(lapply(codes, faoareas))
@@ -36,3 +40,8 @@ faoarrefs <- function(area_code, server = SERVER, limit = 100){
   data <- check_and_parse(resp)
 }
 
+
+
+## FIXME: Reproduce the ECOSYSTEMS table: 
+# see `ecosystems` sql-table
+# http://www.fishbase.us/trophiceco/EcosysList.php?ID=5537

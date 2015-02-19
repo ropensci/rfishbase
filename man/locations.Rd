@@ -7,8 +7,7 @@
 locations(species_list, server = SERVER, limit = 100)
 }
 \arguments{
-\item{species_list}{A vector of scientific names (each element as "genus species").
-(FishBase SpecCodes can be given as numeric values in place of a scientific name.)}
+\item{species_list}{A vector of scientific names (each element as "genus species").}
 
 \item{server}{base URL to the FishBase API, should leave as default.}
 
@@ -17,6 +16,10 @@ will warn if this needs to be increased, otherwise can be left as is.}
 }
 \description{
 return a table of species locations as reported in FishBASE.org FAO location data
+}
+\details{
+currently this is ~ FAO areas table (minus "note" field)
+e.g. http://www.fishbase.us/Country/FaoAreaList.php?ID=5537
 }
 \examples{
 locations(species_list(Genus='Labroides'))
