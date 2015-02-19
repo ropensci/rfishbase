@@ -27,7 +27,7 @@
 #' @export
 species_info <- function(species_list, limit = 50, server = SERVER, fields = NULL){ 
   bind_rows(lapply(species_list, function(species){  
-    ## parse scientific name (FIXME function should also do checks.)
+    ## parse scientific name
     s <- parse_name(species)
 
     ## Make the API call for the species requested
