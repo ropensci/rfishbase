@@ -1,5 +1,5 @@
 all:
 
 test: 
-	r -e "library('devtools'); install(); build_vignettes(); test();"
+	r -e "devtools::check();"
 	r -e "covr::coveralls()"
