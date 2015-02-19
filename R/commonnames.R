@@ -32,9 +32,7 @@ common_to_sci <- function(x, Language = NULL, limit = 1000, server = SERVER){
                              fields = 'SpecCode'))
     data <- check_and_parse(resp)
     matches <- unique(data[[1]])
-    
-    sci_names <- species_info(matches, fields = c("Genus", "Species"))
-    unite_(sci_names, "sci_name", c("Genus", "Species"), sep = " ")$sci_name
+    speciesnames(matches)
   })
   
   # If multiple matches are found, we want to collapse

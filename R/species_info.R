@@ -25,21 +25,7 @@
 #' }
 #' @import httr stringr tidyr dplyr
 #' @export
-species_info <- function(species_list, limit = 50, server = SERVER, fields = NULL){ 
-  bind_rows(lapply(species_list, function(species){  
-    ## parse scientific name
-    s <- parse_name(species)
-
-    ## Make the API call for the species requested
-    args <- list(species = s$species, genus = s$genus, SpecCode = s$speccode,
-                 limit = limit, fields = paste(fields, collapse=","))
-    resp <- GET(paste0(server, "/species"), query = args)
-    data <- check_and_parse(resp)
-    
-    tidy_species_table(data)  ## FIXME Tidy should work even if we are filtering
-    
-  })) 
-}
+species_info <- endpoint("species", tidy_table = tidy_species_table)
 
 
 
