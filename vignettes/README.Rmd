@@ -30,8 +30,7 @@ Assemble a list of species:
 ```{r}
 library(rfishbase)
 my_species <- c(common_to_sci("trout"), 
-                species_list(Genus = "Labriodes"), 
-                species_list(Family = "Scaridae"))
+                species_list(Genus = "Labriodes"))
 
 ```
 

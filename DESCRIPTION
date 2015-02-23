@@ -10,7 +10,7 @@ BugReports: https://github.com/ropensci/rfishbase/issues
 Depends: 
     R (>= 3.0)
 Imports: 
-    dplyr,
+    dplyr (>= 0.4.0),
     lazyeval,
     httr,
     tidyr,
