@@ -85,11 +85,12 @@ parse_name <- function(input){
   
   if(is.character(input)){
     x <- str_split(input, " ")[[1]]
+    n <- length(x)
     
-    if(length(x) == 1 && !is.na(as.numeric(x))){
+    if(n == 1 && !is.na(as.numeric(x))){
       list(speccode = as.integer(x))
-    } else if(length(x) >= 2) {
-      list(genus = x[1], species = x[2])
+    } else if(n >= 2) {
+      list(genus = x[1], species = paste(x[2:n], collapse=" "))
     } else { 
       warning(paste("Species ", input, "could not be parsed"))
       list(NULL)

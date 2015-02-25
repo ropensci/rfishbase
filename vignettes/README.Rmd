@@ -28,9 +28,11 @@ Install:
 Assemble a list of species:
 
 ```{r}
-library(rfishbase)
+library("rfishbase")
 my_species <- c(common_to_sci("trout"), 
-                species_list(Genus = "Labriodes"))
+                species_list(Genus = "Labriodes"),
+                species_list(Family = "Scaridae"))
+length(my_species)
 
 ```
 
@@ -38,8 +40,16 @@ my_species <- c(common_to_sci("trout"),
 Extract data tables for the listed species:
 
 ```{r}
-species_info(my_species)
+df_species <- species_info(my_species)
+dim(df_species)
 ```
+
+
+```{r}
+df_eco <- ecology(my_species)
+```
+
+
 
 
 ## Package Overview
