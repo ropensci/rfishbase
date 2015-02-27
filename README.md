@@ -18,55 +18,22 @@ Install:
 
 Assemble a list of species:
 
-    library(rfishbase)
+    library("rfishbase")
     my_species <- c(common_to_sci("trout"), 
-                    species_list(Genus = "Labriodes"))
+                    species_list(Genus = "Labriodes"),
+                    species_list(Family = "Scaridae"))
+    length(my_species)
+
+    [1] 109
 
 Extract data tables for the listed species:
 
-    species_info(my_species)
+    df_species <- species_info(my_species)
+    dim(df_species)
 
-    ## Warning in check_and_parse(resp): client error: (404) Not Found
+    [1] 109  97
 
-    ## Warning in error_checks(parsed, resp = resp): route not found for query
-    ## http://fishbaseapi.info/species?SpecCode=integer%280%29&limit=100&fields=
-
-    ## Source: local data frame [8 x 97]
-    ## 
-    ##   SpecCode        Genus      Species SpeciesRefNo           Author
-    ## 1      238        Salmo       trutta         4779   Linnaeus, 1758
-    ## 2      239 Oncorhynchus       mykiss         4706  (Walbaum, 1792)
-    ## 3      246   Salvelinus   fontinalis         5723 (Mitchill, 1814)
-    ## 4     1858    Lethrinus     miniatus         2295  (Forster, 1801)
-    ## 5     2691   Salvelinus        malma         5723  (Walbaum, 1792)
-    ## 6     4826 Plectropomus    leopardus         5222 (Lacepède, 1802)
-    ## 7     8705 Schizothorax richardsonii         4832     (Gray, 1832)
-    ## 8    14606      Arripis    truttacea         9701   (Cuvier, 1829)
-    ## Variables not shown: FBname (chr), PicPreferredName (chr),
-    ##   PicPreferredNameM (chr), PicPreferredNameF (chr), PicPreferredNameJ
-    ##   (chr), FamCode (int), Subfamily (chr), GenCode (int), SubGenCode (int),
-    ##   BodyShapeI (chr), Source (chr), Remark (chr), TaxIssue (chr), Fresh
-    ##   (lgl), Brack (lgl), Saltwater (lgl), DemersPelag (chr), AnaCat (chr),
-    ##   MigratRef (chr), DepthRangeShallow (dbl), DepthRangeDeep (dbl),
-    ##   DepthRangeRef (int), DepthRangeComShallow (dbl), DepthRangeComDeep
-    ##   (dbl), DepthComRef (int), LongevityWild (dbl), LongevityWildRef (int),
-    ##   LongevityCaptive (dbl), LongevityCapRef (int), Vulnerability (dbl),
-    ##   Length (dbl), LTypeMaxM (chr), LengthFemale (dbl), LTypeMaxF (chr),
-    ##   MaxLengthRef (int), CommonLength (chr), LTypeComM (chr), CommonLengthF
-    ##   (chr), LTypeComF (chr), CommonLengthRef (int), Weight (dbl),
-    ##   WeightFemale (chr), MaxWeightRef (int), Pic (chr), PictureFemale (chr),
-    ##   LarvaPic (chr), EggPic (chr), ImportanceRef (chr), Importance (chr),
-    ##   PriceCateg (chr), PriceReliability (chr), Remarks7 (chr),
-    ##   LandingStatistics (chr), Landings (chr), MainCatchingMethod (chr), II
-    ##   (chr), MSeines (lgl), MGillnets (lgl), MCastnets (lgl), MTraps (lgl),
-    ##   MSpears (lgl), MTrawls (lgl), MDredges (lgl), MLiftnets (lgl),
-    ##   MHooksLines (lgl), MOther (lgl), UsedforAquaculture (chr), LifeCycle
-    ##   (chr), AquacultureRef (chr), UsedasBait (chr), BaitRef (chr), Aquarium
-    ##   (chr), AquariumFishII (chr), AquariumRef (chr), GameFish (lgl), GameRef
-    ##   (int), Dangerous (chr), DangerousRef (int), Electrogenic (chr),
-    ##   ElectroRef (int), Complete (chr), GoogleImage (lgl), Comments (chr),
-    ##   Profile (chr), PD50 (chr), Entered (int), DateEntered (date), Modified
-    ##   (int), DateModified (date), Expert (int), DateChecked (date), TS (chr)
+    df_eco <- ecology(my_species)
 
 Package Overview
 ----------------

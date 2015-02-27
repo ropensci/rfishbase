@@ -16,6 +16,10 @@ Welcome to `rfishbase 2.0`.
 This branch represents a work in progress and will not be functional until the FishBase API is released.
 At this time endpoints are still being added to the API and implemented in the package.
 
+```{r include=FALSE}
+knitr::opts_chunk$set(warning=FALSE, comment="# output:" )
+```
+
 
 ## Quickstart 
 
