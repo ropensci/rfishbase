@@ -1,3 +1,4 @@
+Makefile
 .git
 .gitignore
 inst/api
@@ -5,3 +6,4 @@ inst/api
 ^\.Rproj\.user$
 ^\.travis\.yml$
 ^\.httr-oauth$
+circle.yml
