@@ -7,3 +7,4 @@ inst/api
 ^\.travis\.yml$
 ^\.httr-oauth$
 circle.yml
+^data-raw$
