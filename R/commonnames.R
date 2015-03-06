@@ -43,6 +43,7 @@ common_to_sci <- function(x, Language = NULL, limit = 1000, server = SERVER){
 #' 
 #' Return a table of common names
 #' @inheritParams species_info
+#' @param Language a string specifying the language for the common name, e.g. "English"
 #' @return a data.frame of common names by species queried. If multiple species are queried,
 #' The resulting data.frames are concatenated. 
 #' @details Note that there are many common names for a given sci name, so sci_to_common doesn't make sense
@@ -91,6 +92,7 @@ commonnames <- function(species_list,
 #' 
 #' Return the best-matching common name given a scientific name (or speccode)
 #' @return The most frequently used common name from the common-names table; see details
+#' @inheritParams species_info
 #' @inheritParams common_to_sci
 #' @details This function will return the common name most frequently used for the species queried (in the
 #' specified language, which defaults to English).  PLEASE NOTE: there is no guarantee that this most frequent

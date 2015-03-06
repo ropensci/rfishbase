@@ -22,7 +22,7 @@
 #' species_info(c("Labroides bicolor", "Bolbometopon muricatum")) 
 #' 
 #' }
-#' @import httr stringr tidyr dplyr
+#' @import httr tidyr dplyr
 #' @export
 species_info <- endpoint("species", tidy_table = tidy_species_table)
 
@@ -57,20 +57,76 @@ tidy_species_table <- function(df) {
 
 
 ## field groupings:
-id_fields = c("SpecCode", "Genus", "Species", "FBname" )
-habitat_fields = c("Fresh", "Brack", "Saltwater", "DemersPelag", "AnaCat")
-life_fields = c("LongevityWild","LongevityCaptive", "Vulnerability")
-morph_fields = c("Length", "LTypeMaxM", "LengthFemale", "LTypeMaxF", "CommonLength", 
-                "LTypeComM", "CommonLengthF", "LTypeComF", "Weight", "WeightFemale")
-fishing_fields = c("Importance", "PriceCateg", "PriceReliability", "LandingStatistics",
-                   "Landings", "MainCatchingMethod", "MSeines", "MGillnets", "MCastnets", "MTraps",
-                   "MSpears", "MTrawls", "MDredges", "MLiftnets", "MHooksLines", "MOther",
-                   "UsedforAquaculture", "LifeCycle", "UsedasBait", "Aquarium", "GameFish", "Dangerous")
-misc_fields = c("Dangerous", "Electrogenic")
-curation_fields = c("DateEntered", "DateModified", "DateChecked", "Complete", "Entered", "Modified", "Expert")
-ref_fields = c("DepthRangeRef", "LongevityWildRef", "LongevityCapRef", "MaxLengthRef", "CommonLengthRef",
-               "MaxWeightRef", "ImportanceRef", "AquacultureRef", "BaitRef",  "AquariumRef",
-               "GameRef", "DangerousRef", "Electrogenic", "ElectroRef")
+species_fields <- list(
+id      = c("SpecCode",
+            "Genus",
+            "Species",
+            "FBname"),
+habitat = c("Fresh",
+            "Brack",
+            "Saltwater",
+            "DemersPelag",
+            "AnaCat"),
+life    = c("LongevityWild",
+            "LongevityCaptive",
+            "Vulnerability"),
+depth   = c("DepthRangeShallow",
+            "DepthRangeDeep",
+            "DepthRangeComShallow",
+            "DepthRangeComDeep"),
+morph   = c("Length",
+            "LTypeMaxM",
+            "LengthFemale",
+            "LTypeMaxF",
+            "CommonLength",
+            "LTypeComM",
+            "CommonLengthF",
+            "LTypeComF",
+            "Weight",
+            "WeightFemale"),
+fishing = c("Importance",
+            "PriceCateg",
+            "PriceReliability",
+            "LandingStatistics",
+            "Landings",
+            "MainCatchingMethod",
+            "MSeines",
+            "MGillnets",
+            "MCastnets",
+            "MTraps",
+            "MSpears",
+            "MTrawls",
+            "MDredges",
+            "MLiftnets",
+            "MHooksLines",
+            "MOther",
+            "UsedforAquaculture",
+            "LifeCycle",
+            "UsedasBait",
+            "Aquarium",
+            "GameFish"),
+misc    = c("Dangerous",
+            "Electrogenic"),
+curation= c("DateEntered",
+            "DateModified",
+            "DateChecked",
+            "Complete",
+            "Entered",
+            "Modified",
+            "Expert"),
+refs    = c("DepthRangeRef",
+            "LongevityWildRef",
+            "LongevityCapRef",
+            "MaxLengthRef",
+            "CommonLengthRef",
+            "MaxWeightRef",
+            "ImportanceRef",
+            "AquacultureRef",
+            "BaitRef",
+            "AquariumRef",
+            "GameRef",
+            "DangerousRef",
+            "ElectroRef"))
 
 
 ## Metadata used by tidy_species_table

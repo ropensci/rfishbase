@@ -84,7 +84,7 @@ null_to_NA <- function(x) {
 parse_name <- function(input){
   
   if(is.character(input)){
-    x <- str_split(input, " ")[[1]]
+    x <- strsplit(input, " ")[[1]]
     n <- length(x)
     
     if(n == 1 && !is.na(as.numeric(x))){
