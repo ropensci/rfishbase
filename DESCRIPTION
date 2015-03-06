@@ -3,8 +3,10 @@ Description: A programmatic interface to fishbase.org, re-written based on an ac
 Title: R Interface to FishBASE
 Version: 2.0.0
 License: CC0
-Authors@R: c(person("Carl", "Boettiger", role = c("aut"), email = "cboettig@ropensci.org"),
-             person("Scott", "Chamberlain", role = c("cre", "aut"), email = "scott@ropensci.org"))
+Authors@R: c(person("Carl", "Boettiger", role = c("cre", "aut"), email = "cboettig@ropensci.org"),
+             person("Scott", "Chamberlain", role = "aut", email = "scott@ropensci.org"),
+             person("Duncan", "Temple Lang", role="aut"), 
+             person("Peter", "Wainwright", role="aut"))
 URL: https://github.com/ropensci/rfishbase
 BugReports: https://github.com/ropensci/rfishbase/issues
 LazyData: true
