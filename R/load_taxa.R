@@ -21,18 +21,23 @@ load_taxa <- function(update = FALSE, cache = TRUE, server = SERVER){
                    ifnotfound = list(NULL))$all_taxa
   
   if(is.null(all_taxa)){
+    
     if(update){
       resp <- GET(paste0(server, "/taxa"), query = list(family='', limit=40000))
       all_taxa <- check_and_parse(resp)
       drop <- match(c("Author", "Remark"), names(all_taxa))
       all_taxa <- all_taxa[-drop]
+      
       if(cache) 
         assign("all_taxa", all_taxa, envir=rfishbase)  
+      
     } else {
+      
       data("all_taxa", package="rfishbase", envir = environment())
+      
     }
   }
-    # otherwise will use the all_taxa from R/sysdata.rda
+    
   all_taxa
 }
 
@@ -47,4 +52,7 @@ load_taxa <- function(update = FALSE, cache = TRUE, server = SERVER){
 #' @keywords data
 NULL
 
+## Code to update the package cache:
+# all_taxa <- load_taxa(update = TRUE)
+# save("all_taxa", file = "data/all_taxa.rda", compress = "xz")
 

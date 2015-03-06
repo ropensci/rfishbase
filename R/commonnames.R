@@ -98,6 +98,7 @@ commonnames <- function(species_list,
 #' specified language, which defaults to English).  PLEASE NOTE: there is no guarantee that this most frequent
 #' name is indeed the best common name.  Some species have many common names in the same language, reflecting
 #' regional differences (e.g. see \code{commonnames("Salmo Trutta")})
+#' @export
 sci_to_common <- function(species_list,
                           Language = "English",
                           limit = 1000,
