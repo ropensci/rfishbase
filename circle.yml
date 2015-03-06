@@ -1,0 +1,12 @@
+branches:
+      only: 
+        - rfishbase2.0
+
+machine:
+  services:
+    - docker
+
+test:
+  override:
+    - docker run -ti -v $(pwd):/data -w /data rocker/ropensci:dev make test
+

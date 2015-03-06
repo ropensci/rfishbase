@@ -1,0 +1,21 @@
+Package: rfishbase
+Description: A programmatic interface to fishbase.org, re-written based on an accompanying RESTful API.
+Title: R Interface to FishBASE
+Version: 2.0.0
+License: CC0
+Authors@R: c(person("Carl", "Boettiger", role = c("aut"), email = "cboettig@ropensci.org"),
+             person("Scott", "Chamberlain", role = c("cre", "aut"), email = "scott@ropensci.org"))
+URL: https://github.com/ropensci/rfishbase
+BugReports: https://github.com/ropensci/rfishbase/issues
+Depends: 
+    R (>= 3.0)
+Imports: 
+    dplyr (>= 0.4.0),
+    lazyeval,
+    httr,
+    tidyr
+Suggests: 
+    testthat,
+    rmarkdown,
+    knitr
+VignetteBuilder: knitr

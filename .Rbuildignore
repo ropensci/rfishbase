@@ -1,0 +1,9 @@
+Makefile
+.git
+.gitignore
+inst/api
+^.*\.Rproj$
+^\.Rproj\.user$
+^\.travis\.yml$
+^\.httr-oauth$
+circle.yml
