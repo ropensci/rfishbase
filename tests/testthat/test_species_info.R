@@ -36,7 +36,7 @@ test_that("We can filter on certain fields",{
 
 test_that("We can filter on preset fields",{
   needs_api()  
-  df <- species_info(c("Oreochromis niloticus", "Bolbometopon muricatum"), fields=c(rfishbase:::species_fields$id, rfishbase:::species_fields$habitat))
+  df <- species_info(c("Oreochromis niloticus", "Bolbometopon muricatum"), fields=c(species_fields$id, species_fields$habitat))
   expect_is(df, "data.frame")
 })
 ## Test wrong filters?

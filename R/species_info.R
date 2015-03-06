@@ -20,6 +20,7 @@
 #' \donttest{
 #' 
 #' species_info(c("Labroides bicolor", "Bolbometopon muricatum")) 
+#' species_info(c("Labroides bicolor", "Bolbometopon muricatum"), fields = species_fields$habitat) 
 #' 
 #' }
 #' @import httr tidyr dplyr
@@ -53,85 +54,21 @@ tidy_species_table <- function(df) {
   
   df
 }
-
-
-
-## field groupings:
-species_fields <- list(
-id      = c("SpecCode",
-            "Genus",
-            "Species",
-            "FBname"),
-habitat = c("Fresh",
-            "Brack",
-            "Saltwater",
-            "DemersPelag",
-            "AnaCat"),
-life    = c("LongevityWild",
-            "LongevityCaptive",
-            "Vulnerability"),
-depth   = c("DepthRangeShallow",
-            "DepthRangeDeep",
-            "DepthRangeComShallow",
-            "DepthRangeComDeep"),
-morph   = c("Length",
-            "LTypeMaxM",
-            "LengthFemale",
-            "LTypeMaxF",
-            "CommonLength",
-            "LTypeComM",
-            "CommonLengthF",
-            "LTypeComF",
-            "Weight",
-            "WeightFemale"),
-fishing = c("Importance",
-            "PriceCateg",
-            "PriceReliability",
-            "LandingStatistics",
-            "Landings",
-            "MainCatchingMethod",
-            "MSeines",
-            "MGillnets",
-            "MCastnets",
-            "MTraps",
-            "MSpears",
-            "MTrawls",
-            "MDredges",
-            "MLiftnets",
-            "MHooksLines",
-            "MOther",
-            "UsedforAquaculture",
-            "LifeCycle",
-            "UsedasBait",
-            "Aquarium",
-            "GameFish"),
-misc    = c("Dangerous",
-            "Electrogenic"),
-curation= c("DateEntered",
-            "DateModified",
-            "DateChecked",
-            "Complete",
-            "Entered",
-            "Modified",
-            "Expert"),
-refs    = c("DepthRangeRef",
-            "LongevityWildRef",
-            "LongevityCapRef",
-            "MaxLengthRef",
-            "CommonLengthRef",
-            "MaxWeightRef",
-            "ImportanceRef",
-            "AquacultureRef",
-            "BaitRef",
-            "AquariumRef",
-            "GameRef",
-            "DangerousRef",
-            "ElectroRef"))
-
-
 ## Metadata used by tidy_species_table
 meta <- system.file("metadata", "species.csv", package="rfishbase")
 species_meta <- read.csv(meta)
 row.names(species_meta) <- species_meta$field
+
+
+
+#' A list of the species_fields available
+#'
+#' @name species_fields
+#' @docType data
+#' @author Carl Boettiger \email{carl@@ropensci.org}
+#' @references \url{FishBase.org}
+#' @keywords data
+NULL
+
 
 
