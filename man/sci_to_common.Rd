@@ -4,29 +4,36 @@
 \alias{sci_to_common}
 \title{sci_to_common}
 \usage{
-sci_to_common(species_list, Language = "English", limit = 1000,
+sci_to_common(species_list, Language = NULL, limit = 1000,
   server = SERVER)
 }
 \arguments{
 \item{species_list}{A vector of scientific names (each element as "genus species").}
 
-\item{Language}{a string specifying the language for the common name, e.g. "English"}
-
 \item{limit}{The maximum number of matches from a single API call (e.g. per species). Function
 will warn if this needs to be increased, otherwise can be left as is.}
 
 \item{server}{base URL to the FishBase API, should leave as default.}
+
+\item{Langauge}{the language for the common name, see details.}
 }
 \value{
-The most frequently used common name from the common-names table; see details
+The common name, if it exists
 }
 \description{
-Return the best-matching common name given a scientific name (or speccode)
+Return the preferred FishBase common name given a scientific name (or speccode)
 }
 \details{
-This function will return the common name most frequently used for the species queried (in the
-specified language, which defaults to English).  PLEASE NOTE: there is no guarantee that this most frequent
-name is indeed the best common name.  Some species have many common names in the same language, reflecting
-regional differences (e.g. see \code{commonnames("Salmo Trutta")})
+If Language is NULL, the common name is
+the preferred FishBase common name (in English).  Otherwise it
+is the most frequently used common name (which may not be the same
+as the FishBase common name even with English as the requested Language)
+}
+\examples{
+\donttest{
+sci_to_common("Salmo trutta")
+sci_to_common("Salmo trutta", Language="English")
+sci_to_common("Salmo trutta", Language="French")
+}
 }
 

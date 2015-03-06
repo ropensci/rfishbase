@@ -63,9 +63,11 @@ validate_names <- function(species_list, limit = 50, server = SERVER){
   out <- sapply(species_list, function(x) {
     syn_table <- synonyms(x, limit = limit, server = server)
     code <- unique(syn_table$SpecCode)
-    if(length(code) > 1){
-      warning("multiple SpecCode matches found")
-    }
+    
+#    if(length(code) > 1){
+#      warning("multiple SpecCode matches found")
+#    }
+    
     ## Return the name listed as valid
     # syn_table <- synonyms(code, limit = limit, server = server)
     # who <- syn_table$Valid

@@ -90,26 +90,38 @@ commonnames <- function(species_list,
 
 #' sci_to_common
 #' 
-#' Return the best-matching common name given a scientific name (or speccode)
-#' @return The most frequently used common name from the common-names table; see details
+#' Return the preferred FishBase common name given a scientific name (or speccode)
+#' @return The common name, if it exists
 #' @inheritParams species_info
-#' @inheritParams common_to_sci
-#' @details This function will return the common name most frequently used for the species queried (in the
-#' specified language, which defaults to English).  PLEASE NOTE: there is no guarantee that this most frequent
-#' name is indeed the best common name.  Some species have many common names in the same language, reflecting
-#' regional differences (e.g. see \code{commonnames("Salmo Trutta")})
+#' @param Langauge the language for the common name, see details.
+#' @details If Language is NULL, the common name is 
+#' the preferred FishBase common name (in English).  Otherwise it 
+#' is the most frequently used common name (which may not be the same
+#' as the FishBase common name even with English as the requested Language)
+#' @examples \donttest{
+#' sci_to_common("Salmo trutta")
+#' sci_to_common("Salmo trutta", Language="English")
+#' sci_to_common("Salmo trutta", Language="French")
+#' }
 #' @export
 sci_to_common <- function(species_list,
-                          Language = "English",
+                          Language = NULL,
                           limit = 1000,
                           server = SERVER){
   
-  ## FIXME This would be both faster and potentially more accurate if it used the FBName from the species_info table,
-  ## The FBName name should be added to the taxa table for faster retrevial
-  sapply(species_list, function(s){
-    df <- commonnames(s, Language = Language, limit = limit)
-    names(which.max(table(df$ComName)))
-  })
+  if(is.null(Language)){
+    out <- sapply(species_list, function(s){
+      code <- speccodes(s)
+      df <- taxa(list(SpecCode = code))
+      sci_names <- select_(df, "FBname")
+      sci_names[["FBname"]]
+    })  
+  } else {
+    ## based on most freq name in commonnames table
+    out <- sapply(species_list, function(s){
+      df <- commonnames(s, Language = Language, limit = limit)
+      names(which.max(table(df$ComName)))
+    })
+  }
+  unname(out)
 }
-
-

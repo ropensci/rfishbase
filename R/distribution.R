@@ -96,3 +96,4 @@ introductions <- endpoint("intrcase")
 ## Not indexed by speccode, needs new method
 # country <- endpoint("country")
 # countryref <- 
+
