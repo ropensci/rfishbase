@@ -1,6 +1,6 @@
 ## Consider information from: Countries | FAO areas | Ecosystems | Occurrences | Point map | Introductions | Faunaf
 
-#' locations
+#' distribution
 #' 
 #' return a table of species locations as reported in FishBASE.org FAO location data
 #' 
@@ -8,16 +8,13 @@
 #' @import dplyr
 #' @export
 #' @examples \donttest{
-#' locations(species_list(Genus='Labroides'))
+#' distribution(species_list(Genus='Labroides'))
 #' }
 #' @details currently this is ~ FAO areas table (minus "note" field)
 #' e.g. http://www.fishbase.us/Country/FaoAreaList.php?ID=5537
-locations <- function(species_list, server = SERVER, limit = 500){
+distribution <- function(species_list, server = SERVER, limit = 500){
   faoareas(species_list, server = server, limit = limit)
 }
-
-## FIXME rename or alias locations() as distribution(), to better match the fishbase.org section?
-
 
 
 #' faoareas
@@ -53,8 +50,6 @@ faoareas <- function(species_list, server = SERVER, limit = 500){
 }
 
 
-
-
 faoarrefs <- function(area_code, server = SERVER, limit = 100){
   ## add in a fields list to filter returned values
   resp <- GET(paste0(server, "/faoarref/", area_code), 
@@ -64,7 +59,40 @@ faoarrefs <- function(area_code, server = SERVER, limit = 100){
 }
 
 
-
 ## FIXME: Reproduce the ECOSYSTEMS table: 
 # see `ecosystems` sql-table
 # http://www.fishbase.us/trophiceco/EcosysList.php?ID=5537
+
+#' ecosystems
+#' 
+#' @return a table of species ecosystems data
+#' @inheritParams species_info
+#' @export
+#' @examples \donttest{
+#' ecosystems("Oreochromis niloticus")
+#' }
+ecosystems <- endpoint("ecosystems")
+
+#' occurrence
+#' 
+#' @return a table of species occurrence data
+#' @inheritParams species_info
+#' @export
+#' @examples \donttest{
+#' occurrence("Oreochromis niloticus")
+#' }
+occurrence <- endpoint("occurrence")
+
+#' introductions
+#' 
+#' @return a table of species introductions data
+#' @inheritParams species_info
+#' @export
+#' @examples \donttest{
+#' introductions("Oreochromis niloticus")
+#' }
+introductions <- endpoint("intrcase")
+
+## Not indexed by speccode, needs new method
+# country <- endpoint("country")
+# countryref <- 

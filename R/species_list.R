@@ -47,8 +47,10 @@ species_list <- function(Class = NULL,
 
 
 
-# Returns SpecCodes given a list of species. Primarily for internal use
+# speccodes
 #
+# Returns SpecCodes given a list of species. Primarily for internal use
+# 
 # @examples
 # who <- species_list(Family='Scaridae')
 # speccodes(who)
@@ -60,13 +62,6 @@ speccodes <- function(species_list, all_taxa = load_taxa()){
     })
 }
 
-speciesnames <- function(codes, all_taxa = load_taxa()){
-  sapply(codes, function(x){ 
-    df <- taxa(list(SpecCode = x), all_taxa = all_taxa)
-    sci_names <- select_(df, "Genus", "Species")
-    unite_(sci_names, "sci", c("Genus", "Species"), sep = " ")$sci
-  })
-}
 
 # Fast queries of the constructed taxa table using local caching and dplyr
 taxa <- function(query, all_taxa = load_taxa()){  
