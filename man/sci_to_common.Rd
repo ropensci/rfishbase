@@ -10,12 +10,12 @@ sci_to_common(species_list, Language = NULL, limit = 1000,
 \arguments{
 \item{species_list}{A vector of scientific names (each element as "genus species").}
 
+\item{Language}{the language for the common name, see details.}
+
 \item{limit}{The maximum number of matches from a single API call (e.g. per species). Function
 will warn if this needs to be increased, otherwise can be left as is.}
 
 \item{server}{base URL to the FishBase API, should leave as default.}
-
-\item{Langauge}{the language for the common name, see details.}
 }
 \value{
 The common name, if it exists

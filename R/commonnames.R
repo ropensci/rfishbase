@@ -93,7 +93,7 @@ commonnames <- function(species_list,
 #' Return the preferred FishBase common name given a scientific name (or speccode)
 #' @return The common name, if it exists
 #' @inheritParams species_info
-#' @param Langauge the language for the common name, see details.
+#' @param Language the language for the common name, see details.
 #' @details If Language is NULL, the common name is 
 #' the preferred FishBase common name (in English).  Otherwise it 
 #' is the most frequently used common name (which may not be the same
