@@ -11,14 +11,31 @@
 #' locations(species_list(Genus='Labroides'))
 #' @details currently this is ~ FAO areas table (minus "note" field)
 #' e.g. http://www.fishbase.us/Country/FaoAreaList.php?ID=5537
-locations <- function(species_list, server = SERVER, limit = 100){
-  codes <- speccodes(species_list)
-  bind_rows(lapply(codes, faoareas))
+locations <- function(species_list, server = SERVER, limit = 500){
+  faoareas(species_list, server = server, limit = limit)
 }
 
+## FIXME rename or alias locations() as distribution(), to better match the fishbase.org section?
 
 
-faoareas <- function(code, server = SERVER, limit = 100){
+
+#' faoareas
+#' 
+#' return a table of species locations as reported in FishBASE.org FAO location data
+#' 
+#' @inheritParams species_info
+#' @import dplyr
+#' @export
+#' @examples 
+#' \donttest{
+#'   faoareas(species_list(Genus='Labroides'))
+#' }
+#' @details currently this is ~ FAO areas table (minus "note" field)
+#' e.g. http://www.fishbase.us/Country/FaoAreaList.php?ID=5537
+faoareas <- function(species_list, server = SERVER, limit = 500){
+  codes <- speccodes(species_list)
+  out <- bind_rows(lapply(codes, function(code){
+  
   resp <- GET(paste0(server, "/faoareas"), 
               query = list(SpecCode = code, limit = limit,
                            fields='AreaCode,SpecCode,Status'))  
@@ -29,8 +46,13 @@ faoareas <- function(code, server = SERVER, limit = 100){
   left_join(table1, table2,by='AreaCode')
   ## cbind
   
+  }))
   
+  out
 }
+
+
+
 
 faoarrefs <- function(area_code, server = SERVER, limit = 100){
   ## add in a fields list to filter returned values

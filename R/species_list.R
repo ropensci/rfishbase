@@ -55,7 +55,7 @@ species_list <- function(Class = NULL,
 speccodes <- function(species_list, all_taxa = load_taxa()){ 
     sapply(species_list, function(x){ 
       s <- parse_name(x)
-      df <- taxa(list(Species=s$species, Genus=s$genus), all_taxa = all_taxa)
+      df <- taxa(list(Species=s$species, Genus=s$genus, SpecCode=s$speccode), all_taxa = all_taxa)
       select_(df, "SpecCode")[[1]] 
     })
 }
@@ -72,6 +72,8 @@ speciesnames <- function(codes, all_taxa = load_taxa()){
 taxa <- function(query, all_taxa = load_taxa()){  
   # Do some dplyr without NSE.  aka:
   # all_taxa %>% filter(Family == 'Scaridae') 
+  
+  query <- query[!sapply(query, is.null)]
   dots <- lapply(names(query), function(level){
     value <- query[[level]]
     interp(~y == x, 

@@ -4,7 +4,7 @@
 \alias{commonnames}
 \title{commonnames}
 \usage{
-commonnames(species_list, limit = 100, server = SERVER,
+commonnames(species_list, limit = 1000, server = SERVER, Language = NULL,
   fields = c("ComName", "Language", "C_Code", "SpecCode"))
 }
 \arguments{

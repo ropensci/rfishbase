@@ -4,7 +4,8 @@
 \alias{species_info}
 \title{species_info}
 \usage{
-species_info(species_list, server = SERVER, limit = 100, fields = NULL)
+species_info(species_list, server = SERVER, limit = limit,
+  fields = fields)
 }
 \arguments{
 \item{species_list}{A vector of scientific names (each element as "genus species").}

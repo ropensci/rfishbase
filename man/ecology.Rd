@@ -4,7 +4,7 @@
 \alias{ecology}
 \title{ecology}
 \usage{
-ecology(species_list, server = SERVER, limit = 100, fields = NULL)
+ecology(species_list, server = SERVER, limit = limit, fields = fields)
 }
 \arguments{
 \item{species_list}{A vector of scientific names (each element as "genus species").}
@@ -19,11 +19,15 @@ all available columns recognized by the parser are returned. This option can be 
 of data transfered over the network if only certain columns are needed.}
 }
 \description{
-return a table of species ecology as reported in FishBASE.org FAO location data
+return a table of species ecology
 }
 \examples{
 \dontrun{
-#' ecology("Oreochromis niloticus")
+ecology("Oreochromis niloticus")
+
+## trophic levels and standard errors for a list of species
+ecology(c("Oreochromis niloticus", "Salmo trutta"),
+        fields=c("SpecCode", "FoodTroph", "FoodSeTroph", "DietTroph", "DietSeTroph"))
 }
 }
 

@@ -46,12 +46,35 @@ synonyms <- function(species_list, limit = 50, server = SERVER,
   
 }
 
-
-
 reclass <- function(df, col_name, new_class){
   if(col_name %in% names(df))
     df[[col_name]] <- as(df[[col_name]], new_class)
   df
 }
 
+
+
+#' validate_names
+#' 
+#' Check for alternate versions of a scientific name and return the names FishBase recognizes as valid
+#' @inheritParams species_info
+#' @return a string of the validated names
+validate_names <- function(species_list, limit = 50, server = SERVER){
+  out <- sapply(species_list, function(x) {
+    syn_table <- synonyms(x, limit = limit, server = server)
+    code <- unique(syn_table$SpecCode)
+    if(length(code) > 1){
+      warning("multiple SpecCode matches found")
+    }
+    ## Return the name listed as valid
+    # syn_table <- synonyms(code, limit = limit, server = server)
+    # who <- syn_table$Valid
+    # c(syn_table$SynGenus[who], syn_table$SynSpecies[who])
+    
+    ## Faster to just return the name associated with the speccode:
+    speciesnames(code)
+    
+    })
+  unname(out)
+}
 

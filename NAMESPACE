@@ -3,6 +3,7 @@
 export(common_to_sci)
 export(commonnames)
 export(ecology)
+export(faoareas)
 export(heartbeat)
 export(load_taxa)
 export(locations)

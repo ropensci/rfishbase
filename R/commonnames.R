@@ -56,11 +56,13 @@ common_to_sci <- function(x, Language = NULL, limit = 1000, server = SERVER){
 #' library(dplyr)
 #' fish %>% filter(Language=="English") 
 #' }
-#'
+#' @import lazyeval
+#' @import dplyr
 #' @export
 commonnames <- function(species_list, 
-                        limit = 100, 
+                        limit = 1000, 
                         server = SERVER, 
+                        Language = NULL,
                         fields = c('ComName', 'Language','C_Code', 'SpecCode')){
   
   codes <- speccodes(species_list)
@@ -74,8 +76,37 @@ commonnames <- function(species_list,
     
     # Replace / Join SpecCode with Genus and Species columns
     id_df <- select_(taxa(query = list(SpecCode = code)), "Genus", "Species", "SpecCode")
-    df <- left_join(df, id_df, by="SpecCode")
+    df <- left_join(df, id_df, by = "SpecCode")
     
+   if(!is.null(Language) && "Language" %in% names(df)){
+      .dots <- list(interp(~Language == x, .values = list(x = Language)))
+      df <- filter_(df, .dots=.dots)
+  }
+  df
     # FIXME Replace C_Code with Country usiong countref table: "SELECT PAESE FROM countref WHERE C_Code=x"
   }))
 }
+
+#' sci_to_common
+#' 
+#' Return the best-matching common name given a scientific name (or speccode)
+#' @return The most frequently used common name from the common-names table; see details
+#' @inheritParams common_to_sci
+#' @details This function will return the common name most frequently used for the species queried (in the
+#' specified language, which defaults to English).  PLEASE NOTE: there is no guarantee that this most frequent
+#' name is indeed the best common name.  Some species have many common names in the same language, reflecting
+#' regional differences (e.g. see \code{commonnames("Salmo Trutta")})
+sci_to_common <- function(species_list,
+                          Language = "English",
+                          limit = 1000,
+                          server = SERVER){
+  
+  ## FIXME This would be both faster and potentially more accurate if it used the FBName from the species_info table,
+  ## The FBName name should be added to the taxa table for faster retrevial
+  sapply(species_list, function(s){
+    df <- commonnames(s, Language = Language, limit = limit)
+    names(which.max(table(df$ComName)))
+  })
+}
+
+
