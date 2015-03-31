@@ -2,12 +2,13 @@
 title: "rfishbase 2.0"
 author: "Carl Boettiger"
 date: "`r Sys.Date()`"
-output: rmarkdown::html_vignette
-vignette: >
-  %\VignetteIndexEntry{rfishbase 2.0}
-  %\VignetteEngine{knitr::rmarkdown}
-  \usepackage[utf8]{inputenc}
+output:
+  md_document:
+    variant: markdown_github
 ---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
 
 [![Build Status](https://travis-ci.org/ropensci/rfishbase.svg?branch=rfishbase2.0)](https://travis-ci.org/ropensci/rfishbase)  [![Coverage Status](https://coveralls.io/repos/ropensci/rfishbase/badge.svg?branch=rfishbase2.0)](https://coveralls.io/r/ropensci/rfishbase?branch=rfishbase2.0)
 
@@ -23,10 +24,12 @@ knitr::opts_chunk$set(warning=FALSE, comment="# output:" )
 
 ## Quickstart 
 
-Install: 
+First, install `devtools` if you do not yet have it: `install.packages("devtools")`.
 
-```r
-  devtools::install_github("ropensci/rfishbase@rfishbase2.0")
+Then you can install `rfishbase` using the command:: 
+
+```{r}
+devtools::install_github("ropensci/rfishbase")
 ```
 
 Assemble a list of species:

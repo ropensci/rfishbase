@@ -8,3 +8,5 @@ inst/api
 ^\.httr-oauth$
 circle.yml
 ^data-raw$
+^README\.Rmd$
+^README-*\.png$

@@ -59,6 +59,7 @@ reclass <- function(df, col_name, new_class){
 #' Check for alternate versions of a scientific name and return the names FishBase recognizes as valid
 #' @inheritParams species_info
 #' @return a string of the validated names
+#' @export
 validate_names <- function(species_list, limit = 50, server = SERVER){
   out <- sapply(species_list, function(x) {
     syn_table <- synonyms(x, limit = limit, server = server)
