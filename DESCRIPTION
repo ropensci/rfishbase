@@ -17,7 +17,8 @@ Imports:
     lazyeval,
     httr,
     tidyr
-Suggests: 
+Suggests:
+    devtools,
     testthat,
     rmarkdown,
     knitr
