@@ -8,6 +8,6 @@
 NULL
 
 
-SERVER = "http://fishbaseapi.info"
+SERVER = "http://fishbase.ropensci.org"
 
 
