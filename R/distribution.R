@@ -93,6 +93,17 @@ occurrence <- endpoint("occurrence")
 #' }
 introductions <- endpoint("intrcase")
 
+#' stocks
+#' 
+#' @return a table of species stocks data
+#' @inheritParams species_info
+#' @export
+#' @examples \donttest{
+#' stocks("Oreochromis niloticus")
+#' }
+stocks <- endpoint("stocks")
+
+
 ## Not indexed by speccode, needs new method
 # country <- endpoint("country")
 # countryref <- 
