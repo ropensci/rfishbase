@@ -63,18 +63,23 @@ reclass <- function(df, col_name, new_class){
 validate_names <- function(species_list, limit = 50, server = SERVER){
   out <- sapply(species_list, function(x) {
     syn_table <- synonyms(x, limit = limit, server = server)
+    if(length(unique(syn_table$SpecCode)) > 1){
+      warning(paste0("FishBase says that '", x, 
+                    "' can also be missapplied to other species
+                    but is returning only the best match.  
+                    See synonyms('", x, "') for details"), call. = FALSE)
+      syn_table <- dplyr::filter_(syn_table, .dots = list(~Synonymy != "misapplied name"))
+    }
     code <- unique(syn_table$SpecCode)
-    
-#    if(length(code) > 1){
-#      warning("multiple SpecCode matches found")
-#    }
-    
-    ## Return the name listed as valid
+   
+    ## Return the name listed as valid. 
+    ## Nope; doesn't work.  eg.  because the valid name for "Auxis rochei" is "Auxis rochei rochei",
+    ## but a syn_table doesn't return any valid name, only the spec code.   
     # syn_table <- synonyms(code, limit = limit, server = server)
     # who <- syn_table$Valid
     # c(syn_table$SynGenus[who], syn_table$SynSpecies[who])
     
-    ## Faster to just return the name associated with the speccode:
+    ## Faster and more accurate to just return the name associated with the speccode:
     speciesnames(code)
     
     })
