@@ -65,7 +65,7 @@ validate_names <- function(species_list, limit = 50, server = SERVER){
     syn_table <- synonyms(x, limit = limit, server = server)
     if(length(unique(syn_table$SpecCode)) > 1){
       warning(paste0("FishBase says that '", x, 
-                    "' can also be missapplied to other species
+                    "' can also be misapplied to other species
                     but is returning only the best match.  
                     See synonyms('", x, "') for details"), call. = FALSE)
       syn_table <- dplyr::filter_(syn_table, .dots = list(~Synonymy != "misapplied name"))
