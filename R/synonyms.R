@@ -73,7 +73,7 @@ validate_names <- function(species_list, limit = 50, server = SERVER){
     code <- unique(syn_table$SpecCode)
   
     if(is.null(code))
-      warning(paste0("No match found for species '", x, "'"))
+      warning(paste0("No match found for species '", x, "'"), call. = FALSE)
 
     ## Return the name listed as valid. 
     ## Nope; doesn't work.  eg.  because the valid name for "Auxis rochei" is "Auxis rochei rochei",
