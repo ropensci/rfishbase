@@ -71,7 +71,10 @@ validate_names <- function(species_list, limit = 50, server = SERVER){
       syn_table <- dplyr::filter_(syn_table, .dots = list(~Synonymy != "misapplied name"))
     }
     code <- unique(syn_table$SpecCode)
-   
+  
+    if(is.null(code))
+      warning(paste0("No match found for species '", x, "'"))
+
     ## Return the name listed as valid. 
     ## Nope; doesn't work.  eg.  because the valid name for "Auxis rochei" is "Auxis rochei rochei",
     ## but a syn_table doesn't return any valid name, only the spec code.   
@@ -83,6 +86,7 @@ validate_names <- function(species_list, limit = 50, server = SERVER){
     speciesnames(code)
     
     })
-  unname(out)
+  ## sapply will still return nested lists if a value is missing
+  unname(unlist(out))
 }
 
