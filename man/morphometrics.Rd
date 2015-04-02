@@ -4,7 +4,7 @@
 \alias{morphometrics}
 \title{morphometrics}
 \usage{
-morphometrics(species_list, fields = NULL, limit = 100, server = SERVER)
+morphometrics(species_list, fields = NULL, limit = 200, server = SERVER)
 }
 \arguments{
 \item{species_list}{A vector of scientific names (each element as "genus species").}

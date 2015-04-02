@@ -36,7 +36,8 @@ faoareas <- function(species_list, server = SERVER, limit = 500){
   
   resp <- GET(paste0(server, "/faoareas"), 
               query = list(SpecCode = code, limit = limit,
-                           fields='AreaCode,SpecCode,Status'))  
+                           fields='AreaCode,SpecCode,Status'),
+              user_agent(make_ua()))  
   table1 <- check_and_parse(resp)
   
   ## Look up area codes
@@ -54,7 +55,8 @@ faoarrefs <- function(area_code, server = SERVER, limit = 100){
   ## add in a fields list to filter returned values
   resp <- GET(paste0(server, "/faoarref/", area_code), 
               query = list(limit = limit,
-                           fields='AreaCode,FAO'))
+                           fields='AreaCode,FAO'),
+              user_agent(make_ua()))
   data <- check_and_parse(resp)
 }
 

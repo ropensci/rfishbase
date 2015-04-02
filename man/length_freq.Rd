@@ -4,7 +4,7 @@
 \alias{length_freq}
 \title{length_freq}
 \usage{
-length_freq(species_list, fields = NULL, limit = 100, server = SERVER)
+length_freq(species_list, fields = NULL, limit = 200, server = SERVER)
 }
 \arguments{
 \item{species_list}{A vector of scientific names (each element as "genus species").}

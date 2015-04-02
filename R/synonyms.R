@@ -37,7 +37,8 @@ synonyms <- function(species_list, limit = 50, server = SERVER,
                              SynGenus = s$genus, 
                              SpecCode = s$speccode,
                              limit = limit,
-                             fields = paste(fields, collapse=",")))
+                             fields = paste(fields, collapse=",")),
+                user_agent(make_ua()))
     df <- check_and_parse(resp)
     df <- reclass(df, "Valid", "logical")
     df <- reclass(df, "Misspelling", "logical")

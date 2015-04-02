@@ -17,7 +17,7 @@
 #' @import httr
 #' @export
 heartbeat <- function(server = SERVER)
-  GET(paste0(server, "/heartbeat"))
+  GET(paste0(server, "/heartbeat"), user_agent(make_ua()))
 
 #' ping
 #' 
@@ -35,6 +35,6 @@ heartbeat <- function(server = SERVER)
 #' @import httr
 #' @export
 ping <- function(server = SERVER)
-  GET(paste0(server, "/mysqlping"))
+  GET(paste0(server, "/mysqlping"), user_agent(make_ua()))
 
 

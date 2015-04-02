@@ -29,7 +29,8 @@ common_to_sci <- function(x, Language = NULL, limit = 1000, server = SERVER){
                 query = list(ComName = x,
                              Language = Language,
                              limit = limit,  # SpecCode same for all matches
-                             fields = 'SpecCode'))
+                             fields = 'SpecCode'),
+                user_agent(make_ua()))
     data <- check_and_parse(resp)
     matches <- unique(data[[1]])
     speciesnames(matches)
@@ -72,7 +73,8 @@ commonnames <- function(species_list,
     resp <- GET(paste0(server, "/comnames"), 
                 query = list(SpecCode = code, 
                              limit = limit, 
-                             fields = paste(fields, collapse=",")))
+                             fields = paste(fields, collapse=",")),
+                user_agent(make_ua()))
     df <- check_and_parse(resp)
     
     # Replace / Join SpecCode with Genus and Species columns

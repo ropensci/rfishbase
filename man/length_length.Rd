@@ -4,7 +4,7 @@
 \alias{length_length}
 \title{length_length}
 \usage{
-length_length(species_list, fields = NULL, limit = 100, server = SERVER)
+length_length(species_list, fields = NULL, limit = 200, server = SERVER)
 }
 \arguments{
 \item{species_list}{A vector of scientific names (each element as "genus species").}
