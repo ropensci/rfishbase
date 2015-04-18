@@ -8,6 +8,7 @@
 #' @param fields a character vector specifying which fields (columns) should be returned. By default,
 #'  all available columns recognized by the parser are returned. This option can be used to the amount
 #'  of data transfered over the network if only certain columns are needed.  
+#' @param ... additional arguments to httr::GET
 #' @return a data.frame with rows for species and columns for the fields returned by the query (FishBase 'species' table)
 #' @details 
 #' The Species table is the heart of FishBase. This function provides a convenient way to 
