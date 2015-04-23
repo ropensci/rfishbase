@@ -12,6 +12,20 @@ output:
 
 [![Build Status](https://travis-ci.org/ropensci/rfishbase.svg?branch=rfishbase2.0)](https://travis-ci.org/ropensci/rfishbase)  [![Coverage Status](https://coveralls.io/repos/ropensci/rfishbase/badge.svg?branch=rfishbase2.0)](https://coveralls.io/r/ropensci/rfishbase?branch=rfishbase2.0)
 
+
+```{r include=FALSE}
+
+downloads <- function(package=read.dcf("DESCRIPTION")[1,][["Package"]], from="2012-01-01", to=Sys.Date()){
+  data <- httr::content(httr::GET(paste0("http://cranlogs.r-pkg.org/downloads/total/", from, ":", to, "/", package)))
+  print(paste0("![](http://shields.io/badge/downloads-",data[[1]]$downloads,"-blue.svg"))
+}
+
+downloads()
+
+```
+
+
+
 Welcome to `rfishbase 2.0`. 
 
 This branch represents a work in progress and will not be functional until the FishBase API is released.

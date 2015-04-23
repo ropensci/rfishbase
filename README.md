@@ -19,7 +19,7 @@ devtools::install_github("ropensci/rfishbase")
     # output: Downloading github repo ropensci/rfishbase@master
     # output: Installing rfishbase
     # output: '/usr/lib/R/bin/R' --vanilla CMD INSTALL  \
-    # output:   '/tmp/RtmpmywTOI/devtools151dc3fc2/ropensci-rfishbase-9f59e60'  \
+    # output:   '/tmp/Rtmpbq4PHN/devtools16a2e7cc1/ropensci-rfishbase-503f476'  \
     # output:   --library='/usr/local/lib/R/site-library' --install-tests
 
 Assemble a list of species:
