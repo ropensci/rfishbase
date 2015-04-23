@@ -1,12 +1,13 @@
 library("rfishbase")
 
+
+## See: https://t.co/DZP2GQ6f83 for a better alternative
 ## Function to strip ascii characters
 find_non_ascii <- function(string){
   grep("I_WAS_NOT_ASCII", 
        iconv(string, "latin1", "ASCII", sub="I_WAS_NOT_ASCII"))
 
 }
-
 replace_non_ascii <-function(string){
     i <- find_non_ascii(string)
     non_ascii <- "áéíóúÁÉÍÓÚñÑüÜ’åôö"

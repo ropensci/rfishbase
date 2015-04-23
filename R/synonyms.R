@@ -71,6 +71,7 @@ validate_names <- function(species_list, limit = 50, server = SERVER){
                     See synonyms('", x, "') for details"), call. = FALSE)
       syn_table <- dplyr::filter_(syn_table, .dots = list(~Synonymy != "misapplied name"))
     }
+    ## FIXME consider dplyr::distinct instead of `unique` here.
     code <- unique(syn_table$SpecCode)
   
     if(is.null(code))

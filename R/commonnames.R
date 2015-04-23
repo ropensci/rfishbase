@@ -32,6 +32,7 @@ common_to_sci <- function(x, Language = NULL, limit = 1000, server = SERVER){
                              fields = 'SpecCode'),
                 user_agent(make_ua()))
     data <- check_and_parse(resp)
+    ## FIXME consider dplyr::distinct instead of `unique` here.
     matches <- unique(data[[1]])
     speciesnames(matches)
   })
