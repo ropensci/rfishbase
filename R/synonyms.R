@@ -1,7 +1,7 @@
 #' synonyms
 #' 
 #' Check for alternate versions of a scientific name
-#' @inheritParams species_info
+#' @inheritParams species
 #' @return A table with information about the synonym. Will generally be only a single
 #' row if a species name is given.  If a FishBase SpecCode is given, all synonyms matching
 #' that SpecCode are shown, and the table indicates which one is Valid for FishBase. This may
@@ -58,7 +58,7 @@ reclass <- function(df, col_name, new_class){
 #' validate_names
 #' 
 #' Check for alternate versions of a scientific name and return the names FishBase recognizes as valid
-#' @inheritParams species_info
+#' @inheritParams species
 #' @return a string of the validated names
 #' @export
 validate_names <- function(species_list, limit = 50, server = SERVER){

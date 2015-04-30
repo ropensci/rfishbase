@@ -10,7 +10,7 @@ rfishbase <- new.env(hash = TRUE)
 #' @param update logical, should we query the API to update the available list? 
 #' @param cache should we cache the updated version throughout this session? 
 #' (default TRUE, leave as is)
-#' @inheritParams species_info
+#' @inheritParams species
 #' @return the taxa list
 #' @export
 load_taxa <- function(update = FALSE, cache = TRUE, server = SERVER){

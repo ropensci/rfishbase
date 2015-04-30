@@ -10,7 +10,7 @@
 #' Wmax and tmax values or various combinations thereof refer to the
 #' same individual fish.
 #' @references http://www.fishbase.org/manual/english/fishbasethe_popchar_table.htm
-#' @inheritParams species_info
+#' @inheritParams species
 #' @export
 #' @examples \donttest{
 #' popchar("Oreochromis niloticus")
@@ -29,7 +29,7 @@ popchar <- endpoint("popchar")
 #' that is useful both for stock assessment and for increasing understanding
 #' of the evolution of life-history strategies
 #' 
-#' @inheritParams species_info
+#' @inheritParams species
 #' @return a table of population growth information by species; see details
 #' @export
 #' @references http://www.fishbase.org/manual/english/fishbasethe_popgrowth_table.htm
@@ -44,7 +44,7 @@ popgrowth <- endpoint("popgrowth")
 #' 
 #' return a table of species fooditems
 #' @references http://www.fishbase.org/manual/english/lengthfrequency.htm
-#' @inheritParams species_info
+#' @inheritParams species
 #' @export
 #' @return a table of length_freq information by species; see details
 #' @examples \donttest{
@@ -77,7 +77,7 @@ length_freq <- endpoint("poplf")
 #' as the ratio in (2) will usually be estimated from a single specimen, or a few fish covering a narrow
 #' range of lengths. 
 #' @references http://www.fishbase.org/manual/english/PDF/FB_Book_CBinohlan_Length-Length_RF_JG.pdf
-#' @inheritParams species_info
+#' @inheritParams species
 #' @return a table of lengths
 #' @export
 #' @examples \donttest{
@@ -118,7 +118,7 @@ length_length <- endpoint("popll")
 #'  
 #' @references http://www.fishbase.org/manual/english/fishbasethe_length_weight_table.htm
 #' @return a table of length_weight information by species; see details
-#' @inheritParams species_info
+#' @inheritParams species
 #' @export
 #' @examples \donttest{
 #' length_weight("Oreochromis niloticus")

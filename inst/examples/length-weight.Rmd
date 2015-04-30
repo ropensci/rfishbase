@@ -1,0 +1,49 @@
+---
+
+---
+
+
+```{r}
+library("rfishbase")
+```
+
+For several species simultaneously, yes this is possible.  Just give a string with multiple species scientific names to the function, e.g.:
+
+```{r}
+     df <- length_weight(c("Oreochromis niloticus", "Salmo trutta"))
+```
+
+Very long lists of species can take quite a while to run.  rfishbase can help you build a long list of species names; for instance, if you want every species in the genus Labroides: 
+
+```{r}
+     fish <- species_list(Genus = "Labroides") 
+     df <- length_weight(fish)
+```
+
+
+Note that the scientific name must be the one recognized by fishbase; see the help page ?synonyms for a function to help get the right scientific name.  
+
+If you are interested in only certain columns of the table, just give those columns in the `fields` argument; for example:
+
+```{r}
+    lw <- length_weight(c("Oreochromis niloticus", "Salmo trutta"), 
+                           fields = c("SpecCode", "a", "b"))
+```
+
+(Almost all functions work the same way, taking a list of species and optionally a list of the desired columns).  Note that the species identity is in SpecCode, and we have many different values of a and b taken from different specimens of the same species. We can use the function `speciesnames` to replace the SpecCode with the actual species name, e.g. 
+
+```{r}
+    lw$SpecCode = speciesnames(lw$SpecCode)  
+```
+
+Trophic position data is available from the ecology table I believe, so you could do:
+
+```{r}
+    troph <- ecology(c("Oreochromis niloticus", "Salmo trutta"),   
+                       fields = c("SpecCode", "FoodTroph", 
+                                  "FoodSeTroph", "DietTroph", "DietSeTroph"))
+```
+
+You may want to use `merge` to combine these tables.  Note that the ecology table has only one row per species (SpecCode), while the length_weight table has many rows.  
+
+So, what about the Bayesian method?  Right now, you'd have to that manually.  I can look into adding a feature based on the R code they provide, but there are many challenges to doing this responsibly.  I'm not an expert in this area, but there are many ways to go from the sample of "a" and "b" values to a single "best estimate" for the species.  Right now rfishbase is aiming at providing the raw data to better enable researchers to use their own analysis methods and compare different analysis methods, rather than provide button click defaults. (sorry, didn't mean to lecture).

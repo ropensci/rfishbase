@@ -11,18 +11,7 @@ output:
 
 
 [![Build Status](https://travis-ci.org/ropensci/rfishbase.svg?branch=rfishbase2.0)](https://travis-ci.org/ropensci/rfishbase)  [![Coverage Status](https://coveralls.io/repos/ropensci/rfishbase/badge.svg?branch=rfishbase2.0)](https://coveralls.io/r/ropensci/rfishbase?branch=rfishbase2.0)
-
-
-```{r include=FALSE}
-
-downloads <- function(package=read.dcf("DESCRIPTION")[1,][["Package"]], from="2012-01-01", to=Sys.Date()){
-  data <- httr::content(httr::GET(paste0("http://cranlogs.r-pkg.org/downloads/total/", from, ":", to, "/", package)))
-  print(paste0("![](http://shields.io/badge/downloads-",data[[1]]$downloads,"-blue.svg"))
-}
-
-downloads()
-
-```
+[![Downloads](http://cranlogs-dev.r-pkg.org/badges/rfishbase)](https://github.com/metacran/cranlogs.app)
 
 
 
@@ -36,57 +25,85 @@ knitr::opts_chunk$set(warning=FALSE, comment="# output:" )
 ```
 
 
-## Quickstart 
+## Installation
 
-First, install `devtools` if you do not yet have it: `install.packages("devtools")`.
-
-Then you can install `rfishbase` using the command:: 
-
-```{r}
-devtools::install_github("ropensci/rfishbase")
+```{r eval=FALSE}
+install.packages("rfishbase", 
+                 repos = c("http://carlboettiger.info/drat", "http://cran.rstudio.com"), 
+                 type="source")
 ```
 
-Assemble a list of species:
 
 ```{r}
 library("rfishbase")
-my_species <- c(common_to_sci("trout"), 
-                species_list(Genus = "Labriodes"),
-                species_list(Family = "Scaridae"))
-length(my_species)
-
 ```
 
+## Getting started
 
-Extract data tables for the listed species:
+
+[FishBase](http://fishbase.org) makes it relatively easy to look up a lot of information on most known species of fish.  However, looking up a single bit of data, such as the estimated trophic level, for many different species becomes tedious very soon. This is a common reason for using `rfishbase`.  As such, our first step is to assemble a good list of species we are interested in.
+
+### Building a species list
+
+Almost all functions in `rfishbase` take a list (character vector) of species scientific names, for example:
 
 ```{r}
-df_species <- species_info(my_species)
-dim(df_species)
+fish <- c("Oreochromis niloticus", "Salmo trutta")
 ```
+
+You can also read in a list of names from any existing data you are working with.  When providing your own species list, you should always begin by validating the names.  Taxonomy is a moving target, and this well help align the scientific names you are using with the names used by FishBase, and alert you to any potential issues:
+
+```{r}
+fish <- validate_names(c("Oreochromis niloticus", "Salmo trutta"))
+```
+
+Another typical use case is in wanting to collect information about all species in a particular taxonomic group, such as a Genus, Family or Order.  The function `species_list` recognizes six taxonomic levels, and can help you generate a list of names of all species in a given group:
 
 
 ```{r}
-df_eco <- ecology(my_species)
+fish <- species_list(Genus = "Labriodes")
+fish
 ```
 
+`rfishbase` also recognizes common names. When a common name refers to multiple species, all matching species are returned:
+
+```{r}
+fish <- common_to_sci("trout")
+fish
+```
+
+Note that there is no need to validate names coming from `common_to_sci` or `species_list`, as these will always return valid names.
+
+### Getting data
+
+With a species list in place, we are ready to query fishbase for data. Note that if you have a very long list of species, it is always a good idea to try out your intended functions with a subset of that list first to make sure everything is working. 
+
+The `species()` function returns a table containing much (but not all) of the information found on the summary or homepage for a species on [fishbase.org](http://fishbase.org). `rfishbase` functions always return [tidy](http://www.jstatsoft.org/v59/i10/paper) data tables: rows are observations (e.g. a species, individual samples from a species) and columns are variables (fields).
+
+```{r}
+species(fish[1:2])
+```
+
+Most tables contain many fields. To avoid overly cluttering the screen, `rfishbase` displays tables as `data_frame` objects from the `dplyr` package.  These act just like the familiar `data.frames` of base R except that they print to the screen in a more tidy fashion.  Note that columns that cannot fit easily in the display are summarized below the table.  This gives us an easy way to see what fields are available in a given table. For instance, from this table we may only be interested in the `PriceCateg` (Price category) and the `Vulnerability` of the species. We can repeat the query for our full species list, asking for only these fields to be returned:
+
+```{r}
+species(fish, fields=c("SpecCode", "PriceCateg", "Vulnerability"))
+```
+
+Note that we also request `SpecCode`, the species code which uniquely identifies the species.  Almost all tables include a field for `SpecCode`, which can be useful for joining these results with other tables later.  The `SpecCode`s can always be converted into species names using the `speciesnames()` function.  Here we add a column with the corresponding species name:
+
+```{r}
+data <- species(fish, fields=c("SpecCode", "PriceCateg", "Vulnerability"))
+data <- cbind(species = speciesnames(data$SpecCode), data)
+```
+
+Unfortunately identifying what fields come from which tables is often a challenge.  Each summary page on fishbase.org includes a list of additional tables with more information about species ecology, diet, occurrences, and many other things.  `rfishbase` provides functions that correspond to most of these tables.  Because `rfishbase` accesses the back end database, it does not always line up with the web display. Frequently `rfishbase` functions will return more information than is available on the web versions of the these tables. Some information found in on the summary homepage for a species is not available from the `summary` function, but must be extracted from a different table, such as the species `Resilience`, which appears on the `stocks` table.  Working in R, it is easy to query this additional table and combine the results with the data we have collected so far:
 
 
+```{r}
+resil <- stocks(fish, fields="Resilience")
+merge(data, resil)
+```
 
-## Package Overview
-
-Design principles:
-
-Most functions are designed to take a character vector of species names as input and return a `data.frame`
-as output; usually with species as rows and columns as variables measured on the species.
-
-
-Species names must be valid scientific names as recognized by FishBase.
-
-Getting good species names:
-
-- `species_list()` Is probably the most common entry point for generating a list of species by specifying a higher taxonomic group of interest.  
-- `common_to_sci()` Gives  a list of scientific names matching the queried common name(s).
-- `synonyms()` Scientific names change frequently and thus taxonomy differs across databases.  Consequently, FishBase may not use the same scientific name you are familiar with.  This function will return a table of species names that FishBase recognizes as synonyms of the query, with a column, `Valid` indicating if it is the accepted species name used in the FishBase database or not.  For any of the other queries to work that rely on scientific names, be sure to use this accepted synonym.  
 
 

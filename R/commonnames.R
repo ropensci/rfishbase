@@ -4,7 +4,7 @@
 #' 
 #' @param x a common name or list of common names
 #' @param Language a string specifying the language for the common name, e.g. "English"
-#' @inheritParams species_info
+#' @inheritParams species
 #' @return a character vector of scientific names
 #' @details If more than one scientific name matches the common name (e.g. "trout"), the function
 #' will simply return a list of all matching scientific names.  If given more than one common name,
@@ -44,7 +44,7 @@ common_to_sci <- function(x, Language = NULL, limit = 1000, server = SERVER){
 #' commonnames
 #' 
 #' Return a table of common names
-#' @inheritParams species_info
+#' @inheritParams species
 #' @param Language a string specifying the language for the common name, e.g. "English"
 #' @return a data.frame of common names by species queried. If multiple species are queried,
 #' The resulting data.frames are concatenated. 
@@ -95,7 +95,7 @@ commonnames <- function(species_list,
 #' 
 #' Return the preferred FishBase common name given a scientific name (or speccode)
 #' @return The common name, if it exists
-#' @inheritParams species_info
+#' @inheritParams species
 #' @param Language the language for the common name, see details.
 #' @details If Language is NULL, the common name is 
 #' the preferred FishBase common name (in English).  Otherwise it 

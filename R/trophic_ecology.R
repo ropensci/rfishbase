@@ -4,7 +4,7 @@
 #' @details By default, will only return one entry (row) per species.  Increase limit to
 #' get multiple returns for different stocks of the same species, though often data is either
 #' identical to the first or simply missing in the additional stocks. 
-#' @inheritParams species_info
+#' @inheritParams species
 #' @import dplyr
 #' @export
 #' @references http://www.fishbase.org/manual/english/fishbasethe_ecology_table.htm
@@ -33,7 +33,7 @@ ecology_endpoint <- endpoint("ecology")
 #' fooditems
 #' 
 #' @return a table of species fooditems
-#' @inheritParams species_info
+#' @inheritParams species
 #' @export
 #' @references http://www.fishbase.org/manual/english/fishbasethe_food_items_table.htm
 #' @examples \donttest{
@@ -45,7 +45,7 @@ fooditems <- endpoint("fooditems")
 #' predators
 #'  
 #' @return a table of predators
-#' @inheritParams species_info
+#' @inheritParams species
 #' @export
 #' @references http://www.fishbase.org/manual/english/fishbasethe_predators_table.htm
 #' @examples \donttest{
@@ -58,7 +58,7 @@ predators <- endpoint("predats")
 #' diet
 #'  
 #' @return a table of species diet
-#' @inheritParams species_info
+#' @inheritParams species
 #' @export
 #' @references http://www.fishbase.org/manual/english/fishbasethe_diet_table.htm
 #' @examples \donttest{
@@ -70,7 +70,7 @@ diet <- endpoint("diet")
 #' popqb
 #'  
 #' @return a table of species popqb
-#' @inheritParams species_info
+#' @inheritParams species
 #' @export
 #' @references http://www.fishbase.org/manual/english/fishbasethe_popqb_table.htm
 #' @examples \donttest{
@@ -82,7 +82,7 @@ popqb <- endpoint("popqb")
 #' ration
 #'  
 #' @return a table of species ration
-#' @inheritParams species_info
+#' @inheritParams species
 #' @export
 #' @references http://www.fishbase.org/manual/english/fishbasethe_ration_table.htm
 #' @examples \donttest{

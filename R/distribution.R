@@ -4,7 +4,7 @@
 #' 
 #' return a table of species locations as reported in FishBASE.org FAO location data
 #' 
-#' @inheritParams species_info
+#' @inheritParams species
 #' @import dplyr
 #' @export
 #' @examples \donttest{
@@ -21,7 +21,7 @@ distribution <- function(species_list, server = SERVER, limit = 500){
 #' 
 #' return a table of species locations as reported in FishBASE.org FAO location data
 #' 
-#' @inheritParams species_info
+#' @inheritParams species
 #' @import dplyr
 #' @export
 #' @examples 
@@ -68,7 +68,7 @@ faoarrefs <- function(area_code, server = SERVER, limit = 100){
 #' ecosystems
 #' 
 #' @return a table of species ecosystems data
-#' @inheritParams species_info
+#' @inheritParams species
 #' @export
 #' @examples \donttest{
 #' ecosystems("Oreochromis niloticus")
@@ -78,7 +78,7 @@ ecosystems <- endpoint("ecosystems")
 #' occurrence
 #' 
 #' @return a table of species occurrence data
-#' @inheritParams species_info
+#' @inheritParams species
 #' @export
 #' @examples \donttest{
 #' occurrence("Oreochromis niloticus")
@@ -88,7 +88,7 @@ occurrence <- endpoint("occurrence")
 #' introductions
 #' 
 #' @return a table of species introductions data
-#' @inheritParams species_info
+#' @inheritParams species
 #' @export
 #' @examples \donttest{
 #' introductions("Oreochromis niloticus")
@@ -98,7 +98,7 @@ introductions <- endpoint("intrcase")
 #' stocks
 #' 
 #' @return a table of species stocks data
-#' @inheritParams species_info
+#' @inheritParams species
 #' @export
 #' @examples \donttest{
 #' stocks("Oreochromis niloticus")

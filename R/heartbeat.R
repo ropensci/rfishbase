@@ -1,7 +1,7 @@
 #' heartbeat
 #' 
 #' Check that the FishBase API server is responding
-#' @inheritParams species_info
+#' @inheritParams species
 #' @return An httr 'response' object.
 #' @examples
 #' \dontrun{
@@ -22,7 +22,7 @@ heartbeat <- function(server = SERVER)
 #' ping
 #' 
 #' Check that the FishBase MySQL backend to the API is alos responding
-#' @inheritParams species_info
+#' @inheritParams species
 #' @return An httr 'response' object.
 #' @examples
 #' \dontrun{

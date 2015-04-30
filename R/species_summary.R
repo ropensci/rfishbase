@@ -17,6 +17,7 @@
 #' 
 #' Species scientific names are defined according to fishbase taxonomy and nomenclature.
 #' 
+#' @aliases species species_info
 #' @examples
 #' \donttest{
 #' 
@@ -25,9 +26,10 @@
 #' 
 #' }
 #' @import httr tidyr dplyr
-#' @export
-species_info <- endpoint("species", tidy_table = tidy_species_table)
+#' @export species species_info
+species <- endpoint("species", tidy_table = tidy_species_table)
 
+species_info <- species
 
 
 ## helper routine for tidying species data
