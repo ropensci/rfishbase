@@ -11,7 +11,7 @@ output:
 
 
 [![Build Status](https://travis-ci.org/ropensci/rfishbase.svg?branch=rfishbase2.0)](https://travis-ci.org/ropensci/rfishbase)  [![Coverage Status](https://coveralls.io/repos/ropensci/rfishbase/badge.svg?branch=rfishbase2.0)](https://coveralls.io/r/ropensci/rfishbase?branch=rfishbase2.0)
-[![Downloads](http://cranlogs-dev.r-pkg.org/badges/rfishbase)](https://github.com/metacran/cranlogs.app)
+[![Downloads](http://cranlogs.r-pkg.org/badges/rfishbase)](https://github.com/metacran/cranlogs.app)
 
 
 
