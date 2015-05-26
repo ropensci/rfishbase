@@ -425,3 +425,6 @@ merge(data, resil)
     # output: 142     Medium
     # output: 143     Medium
     # output: 144     Medium
+
+
+[![ropensci_footer](http://ropensci.org/public_images/github_footer.png)](http://ropensci.org)
