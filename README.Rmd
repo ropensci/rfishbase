@@ -11,7 +11,7 @@ output:
 
 
 [![Build Status](https://travis-ci.org/ropensci/rfishbase.svg?branch=rfishbase2.0)](https://travis-ci.org/ropensci/rfishbase)  [![Coverage Status](https://coveralls.io/repos/ropensci/rfishbase/badge.svg?branch=rfishbase2.0)](https://coveralls.io/r/ropensci/rfishbase?branch=rfishbase2.0)
-[![Downloads](http://cranlogs-dev.r-pkg.org/badges/rfishbase)](https://github.com/metacran/cranlogs.app)
+[![Downloads](http://cranlogs.r-pkg.org/badges/rfishbase)](https://github.com/metacran/cranlogs.app)
 
 
 
@@ -61,7 +61,7 @@ Another typical use case is in wanting to collect information about all species 
 
 
 ```{r}
-fish <- species_list(Genus = "Labriodes")
+fish <- species_list(Genus = "Labroides")
 fish
 ```
 
@@ -97,7 +97,7 @@ data <- species(fish, fields=c("SpecCode", "PriceCateg", "Vulnerability"))
 data <- cbind(species = speciesnames(data$SpecCode), data)
 ```
 
-Unfortunately identifying what fields come from which tables is often a challenge.  Each summary page on fishbase.org includes a list of additional tables with more information about species ecology, diet, occurrences, and many other things.  `rfishbase` provides functions that correspond to most of these tables.  Because `rfishbase` accesses the back end database, it does not always line up with the web display. Frequently `rfishbase` functions will return more information than is available on the web versions of the these tables. Some information found in on the summary homepage for a species is not available from the `summary` function, but must be extracted from a different table, such as the species `Resilience`, which appears on the `stocks` table.  Working in R, it is easy to query this additional table and combine the results with the data we have collected so far:
+Unfortunately identifying what fields come from which tables is often a challenge.  Each summary page on fishbase.org includes a list of additional tables with more information about species ecology, diet, occurrences, and many other things.  `rfishbase` provides functions that correspond to most of these tables.  Because `rfishbase` accesses the back end database, it does not always line up with the web display. Frequently `rfishbase` functions will return more information than is available on the web versions of the these tables. Some information found on the summary homepage for a species is not available from the `summary` function, but must be extracted from a different table, such as the species `Resilience`, which appears on the `stocks` table.  Working in R, it is easy to query this additional table and combine the results with the data we have collected so far:
 
 
 ```{r}
@@ -105,5 +105,7 @@ resil <- stocks(fish, fields="Resilience")
 merge(data, resil)
 ```
 
+
+[![ropensci_footer](http://ropensci.org/public_images/github_footer.png)](http://ropensci.org)
 
 
