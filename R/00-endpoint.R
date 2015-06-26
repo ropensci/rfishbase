@@ -1,10 +1,13 @@
 
 ## Allows us to define functions for each endpoint using closures
-endpoint <- function(endpt, tidy_table = identity){
+endpoint <- function(endpt, tidy_table = default_tidy){
   
   function(species_list, fields = NULL, limit = 200, server = SERVER, ...){
     codes <- speccodes(species_list)
-    dplyr::bind_rows(lapply(codes, function(code){ 
+    dplyr::bind_rows(lapply(codes, function(code){
+      
+      if(!is.null(fields)) 
+        fields <- c("SpecCode", fields)
       args <- list(SpecCode = code,
                    limit = limit, 
                    fields = paste(fields, collapse=","))
@@ -16,6 +19,15 @@ endpoint <- function(endpt, tidy_table = identity){
     }))
   }
 }
+
+default_tidy <- function(x){
+  code <- x$SpecCode
+  x$SpecCode <- speciesnames(code)
+  names(x)[names(x) == "SpecCode"] <- "sciname"
+  cbind(x, SpecCode = code)
+#  x %>% mutate_(species = speciesnames(SpecCode))
+  x
+  }
 
 
 ## Function to create the user-agent string
