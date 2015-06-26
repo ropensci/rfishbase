@@ -22,7 +22,7 @@
 #'  species_info("Bolbometopon muricatum", fields="SpecCode")[[1]]
 #'  synonyms(5537)
 #'  }
-#'  @import httr
+#'  @import httr dplyr
 #'  @export
 synonyms <- function(species_list, limit = 50, server = SERVER, 
                      fields = c("SynGenus", "SynSpecies", "Valid", "Misspelling", 
@@ -30,7 +30,7 @@ synonyms <- function(species_list, limit = 50, server = SERVER,
                                 "SynCode", "CoL_ID", "TSN", "WoRMS_ID")){
   
   
-  bind_rows(lapply(species_list, function(species){
+  dplyr::bind_rows(lapply(species_list, function(species){
     s <- parse_name(species)
     resp <- GET(paste0(server, "/synonyms"), 
                 query = list(SynSpecies = s$species, 

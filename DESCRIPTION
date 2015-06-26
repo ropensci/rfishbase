@@ -16,8 +16,7 @@ Imports:
     dplyr (>= 0.4.0),
     lazyeval,
     httr,
-    tidyr,
-    RCurl
+    tidyr
 Suggests: 
     devtools,
     testthat,

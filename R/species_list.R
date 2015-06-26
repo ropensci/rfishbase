@@ -15,6 +15,7 @@
 #' 
 #' @details The first time the function is called it will download and cache the complete
 #' @import dplyr lazyeval
+#' @importFrom tidyr unite_
 #' @examples
 #' \donttest{
 #' ## All species in the Family 
@@ -40,8 +41,8 @@ species_list <- function(Class = NULL,
   query <- query[!sapply(query, is.null)]
   ## Just a few dplyr & dlpyr wrappers
   df <- taxa(query, all_taxa = all_taxa)
-  df <- select_(df, "Genus", "Species")
-  df <- unite_(df, "sci_name", c("Genus", "Species"), sep = " ") 
+  df <- dplyr::select_(df, "Genus", "Species")
+  df <- tidyr::unite_(df, "sci_name", c("Genus", "Species"), sep = " ") 
   df[[1]]
 }
 

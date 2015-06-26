@@ -26,7 +26,7 @@ test_that("We can get synonyms with SpecCode", {
   df <- synonyms(5537)
   expect_is(df, "data.frame")
 
-  code <- species_info("Bolbometopon muricatum", fields="SpecCode")[[1]]
+  code <- species("Bolbometopon muricatum", fields="SpecCode")[[1]]
   
   expect_equal(code, 5537)
   df <- synonyms(code)

@@ -62,18 +62,18 @@ faoarrefs <- function(area_code, server = SERVER, limit = 100){
 
 
 ## FIXME: Reproduce the ECOSYSTEMS table: 
-# see `ecosystems` sql-table
+# see `ecosystem` sql-table
 # http://www.fishbase.us/trophiceco/EcosysList.php?ID=5537
 
-#' ecosystems
+#' ecosystem
 #' 
 #' @return a table of species ecosystems data
 #' @inheritParams species
 #' @export
 #' @examples \donttest{
-#' ecosystems("Oreochromis niloticus")
+#' ecosystem("Oreochromis niloticus")
 #' }
-ecosystems <- endpoint("ecosystems")
+ecosystem <- endpoint("ecosystem")
 
 #' occurrence
 #' 

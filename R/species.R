@@ -1,4 +1,4 @@
-#' species_info
+#' species
 #' 
 #' Provide wrapper to work with species lists. 
 #' @param species_list A vector of scientific names (each element as "genus species"). 
@@ -21,28 +21,28 @@
 #' @examples
 #' \donttest{
 #' 
-#' species_info(c("Labroides bicolor", "Bolbometopon muricatum")) 
-#' species_info(c("Labroides bicolor", "Bolbometopon muricatum"), fields = species_fields$habitat) 
+#' species(c("Labroides bicolor", "Bolbometopon muricatum")) 
+#' species(c("Labroides bicolor", "Bolbometopon muricatum"), fields = species_fields$habitat) 
 #' 
 #' }
-#' @import httr tidyr dplyr
-#' @export species species_info
-species <- endpoint("species", tidy_table = tidy_species_table)
+#' @import httr dplyr
+#' @export species
+species <- endpoint("species")
 
-species_info <- species
+#species <- endpoint("species", tidy_table = tidy_species_table)
 
 
 ## helper routine for tidying species data
 tidy_species_table <- function(df) {
   # Convert columns to the appropriate class
-  for(n in names(df)){
-    class <- as.character(species_meta[[n, "class"]])
+  for(i in names(df)){
+    class <- as.character(species_meta[[i, "class"]])
     if(class=="Date"){
-      df[[n]] <- as.Date(df[[n]])
+      df[[i]] <- as.Date(df[[i]])
     } else if(class=="logical"){
-      df[[n]] <- as(as.numeric(as.character(df[[n]])), class)
+      df[[i]] <- as(as.numeric(as.character(df[[i]])), class)
     } else {
-      df[[n]] <- as(as.character(df[[n]]), class) # Will warn when class=integer & value is NA
+      df[[i]] <- as(as.character(df[[i]]), class) # Will warn when class=integer & value is NA
     }
   }
   ## Drop useless columns. 
