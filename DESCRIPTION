@@ -15,7 +15,7 @@ Depends:
 Imports: 
     dplyr (>= 0.4.0),
     lazyeval,
-    httr,
+    httr (>= 1.0.0),
     tidyr
 Suggests: 
     devtools,
