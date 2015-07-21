@@ -90,13 +90,6 @@ Most tables contain many fields. To avoid overly cluttering the screen, `rfishba
 species(fish, fields=c("SpecCode", "PriceCateg", "Vulnerability"))
 ```
 
-Note that we also request `SpecCode`, the species code which uniquely identifies the species.  Almost all tables include a field for `SpecCode`, which can be useful for joining these results with other tables later.  The `SpecCode`s can always be converted into species names using the `speciesnames()` function.  Here we add a column with the corresponding species name:
-
-```{r}
-data <- species(fish, fields=c("SpecCode", "PriceCateg", "Vulnerability"))
-data <- cbind(species = speciesnames(data$SpecCode), data)
-```
-
 Unfortunately identifying what fields come from which tables is often a challenge.  Each summary page on fishbase.org includes a list of additional tables with more information about species ecology, diet, occurrences, and many other things.  `rfishbase` provides functions that correspond to most of these tables.  Because `rfishbase` accesses the back end database, it does not always line up with the web display. Frequently `rfishbase` functions will return more information than is available on the web versions of the these tables. Some information found on the summary homepage for a species is not available from the `summary` function, but must be extracted from a different table, such as the species `Resilience`, which appears on the `stocks` table.  Working in R, it is easy to query this additional table and combine the results with the data we have collected so far:
 
 
@@ -104,6 +97,11 @@ Unfortunately identifying what fields come from which tables is often a challeng
 resil <- stocks(fish, fields="Resilience")
 merge(data, resil)
 ```
+
+
+-----------
+
+Please note that this project is released with a [Contributor Code of Conduct](CONDUCT.md). By participating in this project you agree to abide by its terms.
 
 
 [![ropensci_footer](http://ropensci.org/public_images/github_footer.png)](http://ropensci.org)
