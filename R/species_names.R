@@ -8,10 +8,16 @@
 #' @import dplyr
 #' @importFrom tidyr unite_
 #' @export 
-speciesnames <- function(codes, all_taxa = load_taxa()){
+#' @aliases speciesnames species_names
+species_names <- function(codes, all_taxa = load_taxa()){
   sapply(codes, function(x){ 
     df <- taxa(list(SpecCode = x), all_taxa = all_taxa)
     sci_names <- select_(df, "Genus", "Species")
     tidyr::unite_(sci_names, "sci", c("Genus", "Species"), sep = " ")$sci
   })
+}
+
+speciesnames <- function(codes, all_taxa = load_taxa()) {
+  warning("speciesnames() is deprecated, please use species_names()")
+  species_names(codes, all_taxa)
 }

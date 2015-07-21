@@ -1,4 +1,4 @@
-context("species info")
+context("species")
 
 test_that("We can extract generic information from the species table", {
   needs_api()  
@@ -31,7 +31,7 @@ test_that("We can filter on certain fields",{
   needs_api()  
   df <- species(c("Oreochromis niloticus", "Bolbometopon muricatum"), fields='Genus')
   expect_is(df, "data.frame")
-  expect_equal(dim(df), c(2,1))
+  expect_equal(dim(df), c(2,3))
 })
 
 test_that("We can filter on preset fields",{

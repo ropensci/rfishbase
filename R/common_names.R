@@ -34,7 +34,7 @@ common_to_sci <- function(x, Language = NULL, limit = 1000, server = SERVER){
     data <- check_and_parse(resp)
     ## FIXME consider dplyr::distinct instead of `unique` here.
     matches <- unique(data[[1]])
-    speciesnames(matches)
+    species_names(matches)
   })
   
   # If multiple matches are found, we want to collapse
@@ -62,7 +62,8 @@ common_to_sci <- function(x, Language = NULL, limit = 1000, server = SERVER){
 #' @import lazyeval
 #' @import dplyr
 #' @export
-commonnames <- function(species_list, 
+#' @aliases common_names commonnames
+common_names <- function(species_list, 
                         limit = 1000, 
                         server = SERVER, 
                         Language = NULL,
@@ -90,6 +91,16 @@ commonnames <- function(species_list,
     # FIXME Replace C_Code with Country usiong countref table: "SELECT PAESE FROM countref WHERE C_Code=x"
   }))
 }
+
+commonnames <- function(species_list, 
+                        limit = 1000, 
+                        server = SERVER, 
+                        Language = NULL,
+                        fields = c('ComName', 'Language','C_Code', 'SpecCode')){
+  warning("commonnames() is deprecated, please use the function: common_names() instead")
+  common_names(species_list, limit, server, Language, fields)
+}
+
 
 #' sci_to_common
 #' 

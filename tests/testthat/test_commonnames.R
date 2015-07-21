@@ -21,7 +21,7 @@ test_that("test common to sci name", {
 test_that("test sci to common names", { 
   
   needs_api()
-  df <- commonnames(c("Labroides bicolor",  "Bolbometopon muricatum"))
+  df <- common_names(c("Labroides bicolor",  "Bolbometopon muricatum"))
   expect_is(df, "data.frame")
 })
 

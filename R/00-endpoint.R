@@ -20,14 +20,21 @@ endpoint <- function(endpt, tidy_table = default_tidy){
   }
 }
 
+
 default_tidy <- function(x){
-  code <- x$SpecCode
-  x$SpecCode <- speciesnames(code)
-  names(x)[names(x) == "SpecCode"] <- "sciname"
-  cbind(x, SpecCode = code)
-#  x %>% mutate_(species = speciesnames(SpecCode))
-  x
+  if("SpecCode" %in% names(x)){
+    code <- x$SpecCode
+    x$SpecCode <- species_names(code)
+    names(x)[names(x) == "SpecCode"] <- "sciname"
+    x <- cbind(x, SpecCode = code)
   }
+  x
+
+}
+
+
+
+
 
 
 ## Function to create the user-agent string

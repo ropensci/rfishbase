@@ -85,7 +85,7 @@ validate_names <- function(species_list, limit = 50, server = SERVER){
     # c(syn_table$SynGenus[who], syn_table$SynSpecies[who])
     
     ## Faster and more accurate to just return the name associated with the speccode:
-    speciesnames(code)
+    species_names(code)
     
     })
   ## sapply will still return nested lists if a value is missing
