@@ -21,13 +21,13 @@ This branch represents a work in progress and will not be functional until the F
 At this time endpoints are still being added to the API and implemented in the package.
 
 ```{r include=FALSE}
-knitr::opts_chunk$set(warning=FALSE, comment="# output:" )
+knitr::opts_chunk$set(warning=FALSE, comment=NA)
 ```
 
 
 ## Installation
 
-```{r eval=FALSE}
+```{r }
 install.packages("rfishbase", 
                  repos = c("http://carlboettiger.info/drat", "http://cran.rstudio.com"), 
                  type="source")
@@ -87,7 +87,8 @@ species(fish[1:2])
 Most tables contain many fields. To avoid overly cluttering the screen, `rfishbase` displays tables as `data_frame` objects from the `dplyr` package.  These act just like the familiar `data.frames` of base R except that they print to the screen in a more tidy fashion.  Note that columns that cannot fit easily in the display are summarized below the table.  This gives us an easy way to see what fields are available in a given table. For instance, from this table we may only be interested in the `PriceCateg` (Price category) and the `Vulnerability` of the species. We can repeat the query for our full species list, asking for only these fields to be returned:
 
 ```{r}
-species(fish, fields=c("SpecCode", "PriceCateg", "Vulnerability"))
+dat <- species(fish, fields=c("SpecCode", "PriceCateg", "Vulnerability"))
+dat
 ```
 
 Unfortunately identifying what fields come from which tables is often a challenge.  Each summary page on fishbase.org includes a list of additional tables with more information about species ecology, diet, occurrences, and many other things.  `rfishbase` provides functions that correspond to most of these tables.  Because `rfishbase` accesses the back end database, it does not always line up with the web display. Frequently `rfishbase` functions will return more information than is available on the web versions of the these tables. Some information found on the summary homepage for a species is not available from the `summary` function, but must be extracted from a different table, such as the species `Resilience`, which appears on the `stocks` table.  Working in R, it is easy to query this additional table and combine the results with the data we have collected so far:
@@ -95,7 +96,7 @@ Unfortunately identifying what fields come from which tables is often a challeng
 
 ```{r}
 resil <- stocks(fish, fields="Resilience")
-merge(data, resil)
+merge(dat, resil)
 ```
 
 

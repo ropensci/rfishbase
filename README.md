@@ -14,6 +14,13 @@ install.packages("rfishbase",
                  type="source")
 ```
 
+    Installing package into '/usr/local/lib/R/site-library'
+    (as 'lib' is unspecified)
+
+
+    The downloaded source packages are in
+        '/tmp/Rtmpn091ky/downloaded_packages'
+
 ``` r
 library("rfishbase")
 ```
@@ -44,9 +51,9 @@ fish <- species_list(Genus = "Labroides")
 fish
 ```
 
-    # output: [1] "Labroides bicolor"       "Labroides dimidiatus"   
-    # output: [3] "Labroides pectoralis"    "Labroides phthirophagus"
-    # output: [5] "Labroides rubrolabiatus"
+    [1] "Labroides bicolor"       "Labroides dimidiatus"   
+    [3] "Labroides pectoralis"    "Labroides phthirophagus"
+    [5] "Labroides rubrolabiatus"
 
 `rfishbase` also recognizes common names. When a common name refers to multiple species, all matching species are returned:
 
@@ -55,11 +62,11 @@ fish <- common_to_sci("trout")
 fish
 ```
 
-    # output: [1] "Salmo trutta"               "Oncorhynchus mykiss"       
-    # output: [3] "Salvelinus fontinalis"      "Salvelinus alpinus alpinus"
-    # output: [5] "Lethrinus miniatus"         "Salvelinus malma"          
-    # output: [7] "Plectropomus leopardus"     "Schizothorax richardsonii" 
-    # output: [9] "Arripis truttacea"
+    [1] "Salmo trutta"               "Oncorhynchus mykiss"       
+    [3] "Salvelinus fontinalis"      "Salvelinus alpinus alpinus"
+    [5] "Lethrinus miniatus"         "Salvelinus malma"          
+    [7] "Plectropomus leopardus"     "Schizothorax richardsonii" 
+    [9] "Arripis truttacea"         
 
 Note that there is no need to validate names coming from `common_to_sci` or `species_list`, as these will always return valid names.
 
@@ -73,81 +80,82 @@ The `species()` function returns a table containing much (but not all) of the in
 species(fish[1:2])
 ```
 
-    # output: Source: local data frame [2 x 99]
-    # output: 
-    # output:               sciname        Genus Species SpeciesRefNo          Author
-    # output: 1        Salmo trutta        Salmo  trutta         4779  Linnaeus, 1758
-    # output: 2 Oncorhynchus mykiss Oncorhynchus  mykiss         4706 (Walbaum, 1792)
-    # output: Variables not shown: FBname (chr), PicPreferredName (chr),
-    # output:   PicPreferredNameM (lgl), PicPreferredNameF (lgl), PicPreferredNameJ
-    # output:   (chr), FamCode (int), Subfamily (chr), GenCode (int), SubGenCode (lgl),
-    # output:   BodyShapeI (chr), Source (chr), AuthorRef (lgl), Remark (lgl), TaxIssue
-    # output:   (int), Fresh (int), Brack (int), Saltwater (int), DemersPelag (chr),
-    # output:   AnaCat (chr), MigratRef (int), DepthRangeShallow (int), DepthRangeDeep
-    # output:   (int), DepthRangeRef (int), DepthRangeComShallow (lgl),
-    # output:   DepthRangeComDeep (int), DepthComRef (lgl), LongevityWild (dbl),
-    # output:   LongevityWildRef (int), LongevityCaptive (dbl), LongevityCapRef (int),
-    # output:   Vulnerability (dbl), Length (dbl), LTypeMaxM (chr), LengthFemale (lgl),
-    # output:   LTypeMaxF (lgl), MaxLengthRef (int), CommonLength (dbl), LTypeComM
-    # output:   (chr), CommonLengthF (lgl), LTypeComF (lgl), CommonLengthRef (int),
-    # output:   Weight (dbl), WeightFemale (lgl), MaxWeightRef (int), Pic (chr),
-    # output:   PictureFemale (lgl), LarvaPic (lgl), EggPic (lgl), ImportanceRef (int),
-    # output:   Importance (chr), PriceCateg (chr), PriceReliability (chr), Remarks7
-    # output:   (chr), LandingStatistics (chr), Landings (chr), MainCatchingMethod
-    # output:   (chr), II (chr), MSeines (int), MGillnets (int), MCastnets (int), MTraps
-    # output:   (int), MSpears (int), MTrawls (int), MDredges (int), MLiftnets (int),
-    # output:   MHooksLines (int), MOther (int), UsedforAquaculture (chr), LifeCycle
-    # output:   (chr), AquacultureRef (int), UsedasBait (chr), BaitRef (lgl), Aquarium
-    # output:   (chr), AquariumFishII (chr), AquariumRef (int), GameFish (int), GameRef
-    # output:   (int), Dangerous (chr), DangerousRef (lgl), Electrogenic (chr),
-    # output:   ElectroRef (lgl), Complete (lgl), GoogleImage (int), Comments (chr),
-    # output:   Profile (lgl), PD50 (dbl), Emblematic (int), Entered (int), DateEntered
-    # output:   (chr), Modified (int), DateModified (chr), Expert (int), DateChecked
-    # output:   (chr), TS (lgl)
+    Source: local data frame [2 x 99]
+
+                  sciname        Genus Species SpeciesRefNo          Author
+    1        Salmo trutta        Salmo  trutta         4779  Linnaeus, 1758
+    2 Oncorhynchus mykiss Oncorhynchus  mykiss         4706 (Walbaum, 1792)
+    Variables not shown: FBname (chr), PicPreferredName (chr),
+      PicPreferredNameM (lgl), PicPreferredNameF (lgl), PicPreferredNameJ
+      (chr), FamCode (int), Subfamily (chr), GenCode (int), SubGenCode (lgl),
+      BodyShapeI (chr), Source (chr), AuthorRef (lgl), Remark (lgl), TaxIssue
+      (int), Fresh (int), Brack (int), Saltwater (int), DemersPelag (chr),
+      AnaCat (chr), MigratRef (int), DepthRangeShallow (int), DepthRangeDeep
+      (int), DepthRangeRef (int), DepthRangeComShallow (lgl),
+      DepthRangeComDeep (int), DepthComRef (lgl), LongevityWild (dbl),
+      LongevityWildRef (int), LongevityCaptive (dbl), LongevityCapRef (int),
+      Vulnerability (dbl), Length (dbl), LTypeMaxM (chr), LengthFemale (lgl),
+      LTypeMaxF (lgl), MaxLengthRef (int), CommonLength (dbl), LTypeComM
+      (chr), CommonLengthF (lgl), LTypeComF (lgl), CommonLengthRef (int),
+      Weight (dbl), WeightFemale (lgl), MaxWeightRef (int), Pic (chr),
+      PictureFemale (lgl), LarvaPic (lgl), EggPic (lgl), ImportanceRef (int),
+      Importance (chr), PriceCateg (chr), PriceReliability (chr), Remarks7
+      (chr), LandingStatistics (chr), Landings (chr), MainCatchingMethod
+      (chr), II (chr), MSeines (int), MGillnets (int), MCastnets (int), MTraps
+      (int), MSpears (int), MTrawls (int), MDredges (int), MLiftnets (int),
+      MHooksLines (int), MOther (int), UsedforAquaculture (chr), LifeCycle
+      (chr), AquacultureRef (int), UsedasBait (chr), BaitRef (lgl), Aquarium
+      (chr), AquariumFishII (chr), AquariumRef (int), GameFish (int), GameRef
+      (int), Dangerous (chr), DangerousRef (lgl), Electrogenic (chr),
+      ElectroRef (lgl), Complete (lgl), GoogleImage (int), Comments (chr),
+      Profile (lgl), PD50 (dbl), Emblematic (int), Entered (int), DateEntered
+      (chr), Modified (int), DateModified (chr), Expert (int), DateChecked
+      (chr), TS (lgl)
 
 Most tables contain many fields. To avoid overly cluttering the screen, `rfishbase` displays tables as `data_frame` objects from the `dplyr` package. These act just like the familiar `data.frames` of base R except that they print to the screen in a more tidy fashion. Note that columns that cannot fit easily in the display are summarized below the table. This gives us an easy way to see what fields are available in a given table. For instance, from this table we may only be interested in the `PriceCateg` (Price category) and the `Vulnerability` of the species. We can repeat the query for our full species list, asking for only these fields to be returned:
 
 ``` r
-species(fish, fields=c("SpecCode", "PriceCateg", "Vulnerability"))
+dat <- species(fish, fields=c("SpecCode", "PriceCateg", "Vulnerability"))
+dat
 ```
 
-    # output: Source: local data frame [9 x 3]
-    # output: 
-    # output:                      sciname PriceCateg Vulnerability
-    # output: 1               Salmo trutta  very high         59.96
-    # output: 2        Oncorhynchus mykiss        low         36.29
-    # output: 3      Salvelinus fontinalis  very high         43.37
-    # output: 4 Salvelinus alpinus alpinus  very high         74.33
-    # output: 5         Lethrinus miniatus  very high         52.78
-    # output: 6           Salvelinus malma  very high         69.97
-    # output: 7     Plectropomus leopardus  very high         51.04
-    # output: 8  Schizothorax richardsonii    unknown         34.78
-    # output: 9          Arripis truttacea    unknown         47.96
+    Source: local data frame [9 x 3]
+
+                         sciname PriceCateg Vulnerability
+    1               Salmo trutta  very high         59.96
+    2        Oncorhynchus mykiss        low         36.29
+    3      Salvelinus fontinalis  very high         43.37
+    4 Salvelinus alpinus alpinus  very high         74.33
+    5         Lethrinus miniatus  very high         52.78
+    6           Salvelinus malma  very high         69.97
+    7     Plectropomus leopardus  very high         51.04
+    8  Schizothorax richardsonii    unknown         34.78
+    9          Arripis truttacea    unknown         47.96
 
 Unfortunately identifying what fields come from which tables is often a challenge. Each summary page on fishbase.org includes a list of additional tables with more information about species ecology, diet, occurrences, and many other things. `rfishbase` provides functions that correspond to most of these tables. Because `rfishbase` accesses the back end database, it does not always line up with the web display. Frequently `rfishbase` functions will return more information than is available on the web versions of the these tables. Some information found on the summary homepage for a species is not available from the `summary` function, but must be extracted from a different table, such as the species `Resilience`, which appears on the `stocks` table. Working in R, it is easy to query this additional table and combine the results with the data we have collected so far:
 
 ``` r
 resil <- stocks(fish, fields="Resilience")
-merge(data, resil)
+merge(dat, resil)
 ```
 
-    # output:                       sciname PriceCateg Vulnerability Resilience
-    # output: 1           Arripis truttacea    unknown         47.96     Medium
-    # output: 2          Lethrinus miniatus  very high         52.78     Medium
-    # output: 3         Oncorhynchus mykiss        low         36.29     Medium
-    # output: 4      Plectropomus leopardus  very high         51.04     Medium
-    # output: 5                Salmo trutta  very high         59.96       High
-    # output: 6                Salmo trutta  very high         59.96       <NA>
-    # output: 7                Salmo trutta  very high         59.96     Medium
-    # output: 8                Salmo trutta  very high         59.96        Low
-    # output: 9                Salmo trutta  very high         59.96       <NA>
-    # output: 10               Salmo trutta  very high         59.96       <NA>
-    # output: 11               Salmo trutta  very high         59.96       <NA>
-    # output: 12 Salvelinus alpinus alpinus  very high         74.33        Low
-    # output: 13      Salvelinus fontinalis  very high         43.37     Medium
-    # output: 14           Salvelinus malma  very high         69.97        Low
-    # output: 15           Salvelinus malma  very high         69.97       <NA>
-    # output: 16  Schizothorax richardsonii    unknown         34.78     Medium
+                          sciname PriceCateg Vulnerability Resilience
+    1           Arripis truttacea    unknown         47.96     Medium
+    2          Lethrinus miniatus  very high         52.78     Medium
+    3         Oncorhynchus mykiss        low         36.29     Medium
+    4      Plectropomus leopardus  very high         51.04     Medium
+    5                Salmo trutta  very high         59.96       High
+    6                Salmo trutta  very high         59.96       <NA>
+    7                Salmo trutta  very high         59.96     Medium
+    8                Salmo trutta  very high         59.96        Low
+    9                Salmo trutta  very high         59.96       <NA>
+    10               Salmo trutta  very high         59.96       <NA>
+    11               Salmo trutta  very high         59.96       <NA>
+    12 Salvelinus alpinus alpinus  very high         74.33        Low
+    13      Salvelinus fontinalis  very high         43.37     Medium
+    14           Salvelinus malma  very high         69.97        Low
+    15           Salvelinus malma  very high         69.97       <NA>
+    16  Schizothorax richardsonii    unknown         34.78     Medium
 
 ------------------------------------------------------------------------
 
