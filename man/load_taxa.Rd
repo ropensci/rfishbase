@@ -12,7 +12,7 @@ load_taxa(update = FALSE, cache = TRUE, server = SERVER)
 \item{cache}{should we cache the updated version throughout this session?
 (default TRUE, leave as is)}
 
-\item{server}{base URL to the FishBase API, should leave as default.}
+\item{server}{base URL to the FishBase API (by default). For SeaLifeBase, use http://fishbase.ropensci.org/sealifebase}
 }
 \value{
 the taxa list

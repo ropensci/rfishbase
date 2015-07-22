@@ -61,7 +61,7 @@ common_to_sci <- function(x, Language = NULL, limit = 1000, server = SERVER){
 #' }
 #' @import lazyeval
 #' @import dplyr
-#' @export
+#' @export common_names commonnames
 #' @aliases common_names commonnames
 common_names <- function(species_list, 
                         limit = 1000, 

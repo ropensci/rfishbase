@@ -7,7 +7,7 @@
 #' @return A character vector of species names for the SpecCodes
 #' @import dplyr
 #' @importFrom tidyr unite_
-#' @export 
+#' @export speciesnames species_names
 #' @aliases speciesnames species_names
 species_names <- function(codes, all_taxa = load_taxa()){
   sapply(codes, function(x){ 

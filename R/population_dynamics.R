@@ -45,14 +45,15 @@ popgrowth <- endpoint("popgrowth")
 #' return a table of species fooditems
 #' @references http://www.fishbase.org/manual/english/lengthfrequency.htm
 #' @inheritParams species
-#' @export
+#' @export length_freq poplf
+#' @aliases length_freq poplf
 #' @return a table of length_freq information by species; see details
 #' @examples \donttest{
 #' length_freq("Oreochromis niloticus")
 #' }
 length_freq <- endpoint("poplf")
 
-
+poplf <- length_freq
 
 #' length_length
 #' 
@@ -79,12 +80,14 @@ length_freq <- endpoint("poplf")
 #' @references http://www.fishbase.org/manual/english/PDF/FB_Book_CBinohlan_Length-Length_RF_JG.pdf
 #' @inheritParams species
 #' @return a table of lengths
-#' @export
+#' @export popll length_length
+#' @aliases popll length_length
 #' @examples \donttest{
 #' length_length("Oreochromis niloticus")
 #' }
 length_length <- endpoint("popll")
 
+popll <- length_length
 
 
 #' length_weight
@@ -119,8 +122,11 @@ length_length <- endpoint("popll")
 #' @references http://www.fishbase.org/manual/english/fishbasethe_length_weight_table.htm
 #' @return a table of length_weight information by species; see details
 #' @inheritParams species
-#' @export
+#' @export length_weight poplw
+#' @aliases length_weight poplw
 #' @examples \donttest{
 #' length_weight("Oreochromis niloticus")
 #' }
 length_weight <- endpoint("poplw")
+
+poplw <- length_weight

@@ -7,7 +7,7 @@
 ping(server = SERVER)
 }
 \arguments{
-\item{server}{base URL to the FishBase API, should leave as default.}
+\item{server}{base URL to the FishBase API (by default). For SeaLifeBase, use http://fishbase.ropensci.org/sealifebase}
 }
 \value{
 An httr 'response' object.
