@@ -10,16 +10,9 @@ Installation
 
 ``` r
 install.packages("rfishbase", 
-                 repos = c("http://carlboettiger.info/drat", "http://cran.rstudio.com"), 
+                 repos = c("http://packages.ropensci.org", "http://cran.rstudio.com"), 
                  type="source")
 ```
-
-    Installing package into '/usr/local/lib/R/site-library'
-    (as 'lib' is unspecified)
-
-
-    The downloaded source packages are in
-        '/tmp/Rtmpn091ky/downloaded_packages'
 
 ``` r
 library("rfishbase")
@@ -80,7 +73,7 @@ The `species()` function returns a table containing much (but not all) of the in
 species(fish[1:2])
 ```
 
-    Source: local data frame [2 x 99]
+    Source: local data frame [2 x 100]
 
                   sciname        Genus Species SpeciesRefNo          Author
     1        Salmo trutta        Salmo  trutta         4779  Linnaeus, 1758
@@ -110,7 +103,7 @@ species(fish[1:2])
       ElectroRef (lgl), Complete (lgl), GoogleImage (int), Comments (chr),
       Profile (lgl), PD50 (dbl), Emblematic (int), Entered (int), DateEntered
       (chr), Modified (int), DateModified (chr), Expert (int), DateChecked
-      (chr), TS (lgl)
+      (chr), TS (lgl), SpecCode (int)
 
 Most tables contain many fields. To avoid overly cluttering the screen, `rfishbase` displays tables as `data_frame` objects from the `dplyr` package. These act just like the familiar `data.frames` of base R except that they print to the screen in a more tidy fashion. Note that columns that cannot fit easily in the display are summarized below the table. This gives us an easy way to see what fields are available in a given table. For instance, from this table we may only be interested in the `PriceCateg` (Price category) and the `Vulnerability` of the species. We can repeat the query for our full species list, asking for only these fields to be returned:
 
@@ -119,18 +112,18 @@ dat <- species(fish, fields=c("SpecCode", "PriceCateg", "Vulnerability"))
 dat
 ```
 
-    Source: local data frame [9 x 3]
+    Source: local data frame [9 x 4]
 
-                         sciname PriceCateg Vulnerability
-    1               Salmo trutta  very high         59.96
-    2        Oncorhynchus mykiss        low         36.29
-    3      Salvelinus fontinalis  very high         43.37
-    4 Salvelinus alpinus alpinus  very high         74.33
-    5         Lethrinus miniatus  very high         52.78
-    6           Salvelinus malma  very high         69.97
-    7     Plectropomus leopardus  very high         51.04
-    8  Schizothorax richardsonii    unknown         34.78
-    9          Arripis truttacea    unknown         47.96
+                         sciname PriceCateg Vulnerability SpecCode
+    1               Salmo trutta  very high         59.96      238
+    2        Oncorhynchus mykiss        low         36.29      239
+    3      Salvelinus fontinalis  very high         43.37      246
+    4 Salvelinus alpinus alpinus  very high         74.33      247
+    5         Lethrinus miniatus  very high         52.78     1858
+    6           Salvelinus malma  very high         69.97     2691
+    7     Plectropomus leopardus  very high         51.04     4826
+    8  Schizothorax richardsonii    unknown         34.78     8705
+    9          Arripis truttacea    unknown         47.96    14606
 
 Unfortunately identifying what fields come from which tables is often a challenge. Each summary page on fishbase.org includes a list of additional tables with more information about species ecology, diet, occurrences, and many other things. `rfishbase` provides functions that correspond to most of these tables. Because `rfishbase` accesses the back end database, it does not always line up with the web display. Frequently `rfishbase` functions will return more information than is available on the web versions of the these tables. Some information found on the summary homepage for a species is not available from the `summary` function, but must be extracted from a different table, such as the species `Resilience`, which appears on the `stocks` table. Working in R, it is easy to query this additional table and combine the results with the data we have collected so far:
 
@@ -139,23 +132,23 @@ resil <- stocks(fish, fields="Resilience")
 merge(dat, resil)
 ```
 
-                          sciname PriceCateg Vulnerability Resilience
-    1           Arripis truttacea    unknown         47.96     Medium
-    2          Lethrinus miniatus  very high         52.78     Medium
-    3         Oncorhynchus mykiss        low         36.29     Medium
-    4      Plectropomus leopardus  very high         51.04     Medium
-    5                Salmo trutta  very high         59.96       High
-    6                Salmo trutta  very high         59.96       <NA>
-    7                Salmo trutta  very high         59.96     Medium
-    8                Salmo trutta  very high         59.96        Low
-    9                Salmo trutta  very high         59.96       <NA>
-    10               Salmo trutta  very high         59.96       <NA>
-    11               Salmo trutta  very high         59.96       <NA>
-    12 Salvelinus alpinus alpinus  very high         74.33        Low
-    13      Salvelinus fontinalis  very high         43.37     Medium
-    14           Salvelinus malma  very high         69.97        Low
-    15           Salvelinus malma  very high         69.97       <NA>
-    16  Schizothorax richardsonii    unknown         34.78     Medium
+                          sciname SpecCode PriceCateg Vulnerability Resilience
+    1           Arripis truttacea    14606    unknown         47.96     Medium
+    2          Lethrinus miniatus     1858  very high         52.78     Medium
+    3         Oncorhynchus mykiss      239        low         36.29     Medium
+    4      Plectropomus leopardus     4826  very high         51.04     Medium
+    5                Salmo trutta      238  very high         59.96       High
+    6                Salmo trutta      238  very high         59.96       <NA>
+    7                Salmo trutta      238  very high         59.96     Medium
+    8                Salmo trutta      238  very high         59.96        Low
+    9                Salmo trutta      238  very high         59.96       <NA>
+    10               Salmo trutta      238  very high         59.96       <NA>
+    11               Salmo trutta      238  very high         59.96       <NA>
+    12 Salvelinus alpinus alpinus      247  very high         74.33        Low
+    13      Salvelinus fontinalis      246  very high         43.37     Medium
+    14           Salvelinus malma     2691  very high         69.97        Low
+    15           Salvelinus malma     2691  very high         69.97       <NA>
+    16  Schizothorax richardsonii     8705    unknown         34.78     Medium
 
 ------------------------------------------------------------------------
 

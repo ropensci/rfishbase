@@ -27,14 +27,14 @@ knitr::opts_chunk$set(warning=FALSE, comment=NA)
 
 ## Installation
 
-```{r }
+```{r message=FALSE, warning=FALSE, results="hide"}
 install.packages("rfishbase", 
-                 repos = c("http://carlboettiger.info/drat", "http://cran.rstudio.com"), 
+                 repos = c("http://packages.ropensci.org", "http://cran.rstudio.com"), 
                  type="source")
 ```
 
 
-```{r}
+```{r message=FALSE, warning=FALSE, results="hide"}
 library("rfishbase")
 ```
 
