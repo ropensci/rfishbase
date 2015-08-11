@@ -12,7 +12,8 @@
 #' \dontrun{
 #' list_fields("Temp")
 #' }
-list_fields <- function(fields,  server = SERVER, implemented_only = TRUE){
+#' @export
+list_fields <- function(fields,  server = getOption("FISHBASE_API", FISHBASE_API), implemented_only = TRUE){
   args <- list(fields = fields)
   resp <- httr::GET(paste0(server, "/listfields"), query = args)
   data <- check_and_parse(resp)

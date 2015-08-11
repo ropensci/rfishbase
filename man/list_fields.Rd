@@ -4,7 +4,8 @@
 \alias{list_fields}
 \title{list_fields}
 \usage{
-list_fields(fields, server = SERVER, implemented_only = TRUE)
+list_fields(fields, server = getOption("FISHBASE_API", FISHBASE_API),
+  implemented_only = TRUE)
 }
 \arguments{
 \item{fields}{field (column name) to search for}

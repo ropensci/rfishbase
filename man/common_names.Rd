@@ -5,8 +5,9 @@
 \alias{commonnames}
 \title{commonnames}
 \usage{
-common_names(species_list, limit = 1000, server = SERVER, Language = NULL,
-  fields = c("ComName", "Language", "C_Code", "SpecCode"))
+common_names(species_list, limit = 1000, server = getOption("FISHBASE_API",
+  FISHBASE_API), Language = NULL, fields = c("ComName", "Language",
+  "C_Code", "SpecCode"))
 }
 \arguments{
 \item{species_list}{A vector of scientific names (each element as "genus species").}

@@ -12,7 +12,7 @@
 #' }
 #' @details currently this is ~ FAO areas table (minus "note" field)
 #' e.g. http://www.fishbase.us/Country/FaoAreaList.php?ID=5537
-distribution <- function(species_list, server = SERVER, limit = 500){
+distribution <- function(species_list, server = getOption("FISHBASE_API", FISHBASE_API), limit = 500){
   faoareas(species_list, server = server, limit = limit)
 }
 
@@ -30,7 +30,7 @@ distribution <- function(species_list, server = SERVER, limit = 500){
 #' }
 #' @details currently this is ~ FAO areas table (minus "note" field)
 #' e.g. http://www.fishbase.us/Country/FaoAreaList.php?ID=5537
-faoareas <- function(species_list, server = SERVER, limit = 500){
+faoareas <- function(species_list, server = getOption("FISHBASE_API", FISHBASE_API), limit = 500){
   codes <- speccodes(species_list)
   out <- bind_rows(lapply(codes, function(code){
   
@@ -51,7 +51,7 @@ faoareas <- function(species_list, server = SERVER, limit = 500){
 }
 
 
-faoarrefs <- function(area_code, server = SERVER, limit = 100){
+faoarrefs <- function(area_code, server = getOption("FISHBASE_API", FISHBASE_API), limit = 100){
   ## add in a fields list to filter returned values
   resp <- GET(paste0(server, "/faoarref/", area_code), 
               query = list(limit = limit,

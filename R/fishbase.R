@@ -8,6 +8,3 @@
 NULL
 
 
-SERVER = "http://fishbase.ropensci.org"
-
-

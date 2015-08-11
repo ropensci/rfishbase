@@ -4,7 +4,8 @@
 \alias{validate_names}
 \title{validate_names}
 \usage{
-validate_names(species_list, limit = 50, server = SERVER)
+validate_names(species_list, limit = 50, server = getOption("FISHBASE_API",
+  FISHBASE_API))
 }
 \arguments{
 \item{species_list}{A vector of scientific names (each element as "genus species").}

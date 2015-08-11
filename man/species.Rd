@@ -5,7 +5,8 @@
 \alias{species_info}
 \title{species}
 \usage{
-species(species_list, fields = NULL, limit = 200, server = SERVER, ...)
+species(species_list, fields = NULL, limit = 200,
+  server = getOption("FISHBASE_API", FISHBASE_API), ...)
 }
 \arguments{
 \item{species_list}{A vector of scientific names (each element as "genus species").}

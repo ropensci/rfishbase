@@ -4,7 +4,8 @@
 \alias{distribution}
 \title{distribution}
 \usage{
-distribution(species_list, server = SERVER, limit = 500)
+distribution(species_list, server = getOption("FISHBASE_API", FISHBASE_API),
+  limit = 500)
 }
 \arguments{
 \item{species_list}{A vector of scientific names (each element as "genus species").}

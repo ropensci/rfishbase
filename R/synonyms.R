@@ -24,7 +24,7 @@
 #'  }
 #'  @import httr dplyr
 #'  @export
-synonyms <- function(species_list, limit = 50, server = SERVER, 
+synonyms <- function(species_list, limit = 50, server = getOption("FISHBASE_API", FISHBASE_API), 
                      fields = c("SynGenus", "SynSpecies", "Valid", "Misspelling", 
                                 "ColStatus", "Synonymy", "Combination", "SpecCode",
                                 "SynCode", "CoL_ID", "TSN", "WoRMS_ID")){
@@ -61,7 +61,7 @@ reclass <- function(df, col_name, new_class){
 #' @inheritParams species
 #' @return a string of the validated names
 #' @export
-validate_names <- function(species_list, limit = 50, server = SERVER){
+validate_names <- function(species_list, limit = 50, server = getOption("FISHBASE_API", FISHBASE_API)){
   out <- sapply(species_list, function(x) {
     syn_table <- synonyms(x, limit = limit, server = server)
     if(length(unique(syn_table$SpecCode)) > 1){

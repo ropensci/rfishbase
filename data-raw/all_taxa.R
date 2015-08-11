@@ -19,8 +19,11 @@ replace_non_ascii <-function(string){
 }
 
 
-all_taxa <- load_taxa(update = TRUE)
-all_taxa$FBname <- replace_non_ascii(all_taxa$FBname)
+fishbase <- load_taxa(update = TRUE)
+fishbase$FBname <- replace_non_ascii(fishbase$FBname)
+save("fishbase", file = "data/fishbase.rda", compress = "xz")
 
-save("all_taxa", file = "data/all_taxa.rda", compress = "xz")
+sealifebase <- load_taxa(update = TRUE, server = "http://fishbase.ropensci.org/sealifebase", limit=200000L)
+sealifebase$FBname <- replace_non_ascii(sealifebase$FBname)
+save("sealifebase", file = "data/sealifebase.rda", compress = "xz")
 

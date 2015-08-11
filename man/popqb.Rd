@@ -4,7 +4,8 @@
 \alias{popqb}
 \title{popqb}
 \usage{
-popqb(species_list, fields = NULL, limit = 200, server = SERVER, ...)
+popqb(species_list, fields = NULL, limit = 200,
+  server = getOption("FISHBASE_API", FISHBASE_API), ...)
 }
 \arguments{
 \item{species_list}{A vector of scientific names (each element as "genus species").}

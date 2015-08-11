@@ -4,7 +4,7 @@
 \alias{ping}
 \title{ping}
 \usage{
-ping(server = SERVER)
+ping(server = getOption("FISHBASE_API", FISHBASE_API))
 }
 \arguments{
 \item{server}{base URL to the FishBase API (by default). For SeaLifeBase, use http://fishbase.ropensci.org/sealifebase}

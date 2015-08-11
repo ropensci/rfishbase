@@ -16,7 +16,7 @@
 #' }
 #' @import httr
 #' @export
-heartbeat <- function(server = SERVER)
+heartbeat <- function(server = getOption("FISHBASE_API", FISHBASE_API))
   GET(paste0(server, "/heartbeat"), user_agent(make_ua()))
 
 #' ping
@@ -34,7 +34,7 @@ heartbeat <- function(server = SERVER)
 #' }
 #' @import httr
 #' @export
-ping <- function(server = SERVER)
+ping <- function(server = getOption("FISHBASE_API", FISHBASE_API))
   GET(paste0(server, "/mysqlping"), user_agent(make_ua()))
 
 

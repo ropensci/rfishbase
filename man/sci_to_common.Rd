@@ -5,7 +5,7 @@
 \title{sci_to_common}
 \usage{
 sci_to_common(species_list, Language = NULL, limit = 1000,
-  server = SERVER)
+  server = getOption("FISHBASE_API", FISHBASE_API))
 }
 \arguments{
 \item{species_list}{A vector of scientific names (each element as "genus species").}

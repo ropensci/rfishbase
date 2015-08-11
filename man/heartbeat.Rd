@@ -4,7 +4,7 @@
 \alias{heartbeat}
 \title{heartbeat}
 \usage{
-heartbeat(server = SERVER)
+heartbeat(server = getOption("FISHBASE_API", FISHBASE_API))
 }
 \arguments{
 \item{server}{base URL to the FishBase API (by default). For SeaLifeBase, use http://fishbase.ropensci.org/sealifebase}

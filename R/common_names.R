@@ -21,7 +21,7 @@
 #' }
 #' @seealso \code{\link{commonnames}}, \code{\link{species_list}}, \code{\link{synonyms}}
 #' @export
-common_to_sci <- function(x, Language = NULL, limit = 1000, server = SERVER){
+common_to_sci <- function(x, Language = NULL, limit = 1000, server = getOption("FISHBASE_API", FISHBASE_API)){
   
   out <- sapply(x, function(x){
     # Look up SpecCode for the common names
@@ -65,7 +65,7 @@ common_to_sci <- function(x, Language = NULL, limit = 1000, server = SERVER){
 #' @aliases common_names commonnames
 common_names <- function(species_list, 
                         limit = 1000, 
-                        server = SERVER, 
+                        server = getOption("FISHBASE_API", FISHBASE_API), 
                         Language = NULL,
                         fields = c('ComName', 'Language','C_Code', 'SpecCode')){
   
@@ -94,7 +94,7 @@ common_names <- function(species_list,
 
 commonnames <- function(species_list, 
                         limit = 1000, 
-                        server = SERVER, 
+                        server = getOption("FISHBASE_API", FISHBASE_API), 
                         Language = NULL,
                         fields = c('ComName', 'Language','C_Code', 'SpecCode')){
   warning("commonnames() is deprecated, please use the function: common_names() instead")
@@ -121,7 +121,7 @@ commonnames <- function(species_list,
 sci_to_common <- function(species_list,
                           Language = NULL,
                           limit = 1000,
-                          server = SERVER){
+                          server = getOption("FISHBASE_API", FISHBASE_API)){
   
   if(is.null(Language)){
     out <- sapply(species_list, function(s){

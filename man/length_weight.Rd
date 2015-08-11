@@ -5,8 +5,8 @@
 \alias{poplw}
 \title{length_weight}
 \usage{
-length_weight(species_list, fields = NULL, limit = 200, server = SERVER,
-  ...)
+length_weight(species_list, fields = NULL, limit = 200,
+  server = getOption("FISHBASE_API", FISHBASE_API), ...)
 }
 \arguments{
 \item{species_list}{A vector of scientific names (each element as "genus species").}

@@ -2,7 +2,7 @@
 ## Allows us to define functions for each endpoint using closures
 endpoint <- function(endpt, tidy_table = default_tidy){
   
-  function(species_list, fields = NULL, limit = 200, server = SERVER, ...){
+  function(species_list, fields = NULL, limit = 200, server = getOption("FISHBASE_API", FISHBASE_API), ...){
     codes <- speccodes(species_list)
     dplyr::bind_rows(lapply(codes, function(code){
       
@@ -15,16 +15,16 @@ endpoint <- function(endpt, tidy_table = default_tidy){
       resp <- httr::GET(paste0(server, "/", endpt), query = args, ..., httr::user_agent(make_ua()))
       data <- check_and_parse(resp)
       
-      tidy_table(data)
+      tidy_table(data, server = server)
     }))
   }
 }
 
 
-default_tidy <- function(x){
+default_tidy <- function(x, server = getOption("FISHBASE_API", FISHBASE_API)){
   if("SpecCode" %in% names(x)){
     code <- x$SpecCode
-    x$SpecCode <- species_names(code)
+    x$SpecCode <- species_names(code, server = server)
     names(x)[names(x) == "SpecCode"] <- "sciname"
     x <- cbind(x, SpecCode = code)
   }
