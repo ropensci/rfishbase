@@ -125,7 +125,23 @@ dat
     8  Schizothorax richardsonii    unknown         34.78     8705
     9          Arripis truttacea    unknown         47.96    14606
 
-Unfortunately identifying what fields come from which tables is often a challenge. Each summary page on fishbase.org includes a list of additional tables with more information about species ecology, diet, occurrences, and many other things. `rfishbase` provides functions that correspond to most of these tables. Because `rfishbase` accesses the back end database, it does not always line up with the web display. Frequently `rfishbase` functions will return more information than is available on the web versions of the these tables. Some information found on the summary homepage for a species is not available from the `summary` function, but must be extracted from a different table, such as the species `Resilience`, which appears on the `stocks` table. Working in R, it is easy to query this additional table and combine the results with the data we have collected so far:
+### FishBase Docs: Discovering data
+
+Unfortunately identifying what fields come from which tables is often a challenge. Each summary page on fishbase.org includes a list of additional tables with more information about species ecology, diet, occurrences, and many other things. `rfishbase` provides functions that correspond to most of these tables.
+
+Because `rfishbase` accesses the back end database, it does not always line up with the web display. Frequently `rfishbase` functions will return more information than is available on the web versions of the these tables. Some information found on the summary homepage for a species is not available from the `species` summary function, but must be extracted from a different table. For instance, the species `Resilience` information is not one of the fields in the `species` summary table, despite appearing on the species homepage of fishbase.org. To discover which table this information is in, we can use the special `rfishbase` function `list_fields`, which will list all tables with a field matching the query string:
+
+``` r
+list_fields("Resilience")
+```
+
+    Source: local data frame [2 x 2]
+
+      TABLE_NAME      COLUMN_NAME
+    1     stocks       Resilience
+    2     stocks ResilienceRemark
+
+This shows us that this information appears on the `stocks` table. Working in R, it is easy to query this additional table and combine the results with the data we have collected so far:
 
 ``` r
 resil <- stocks(fish, fields="Resilience")
@@ -149,6 +165,24 @@ merge(dat, resil)
     14           Salvelinus malma     2691  very high         69.97        Low
     15           Salvelinus malma     2691  very high         69.97       <NA>
     16  Schizothorax richardsonii     8705    unknown         34.78     Medium
+
+Sometimes it is more useful to search for a broad description of the tables.
+
+SeaLifeBase
+-----------
+
+The FishBase team has also created the SeaLifeBase project, which seeks to provide much the same data and layout as fishbase.org and the fishbase schema, but covering all sea life apart from the finfish covered in FishBase. The rOpenSci team has created a pilot API for SeaLifeBase as well. Most of the functions in `rfishbase` can be used directly to query SeaLifeBase data by explicitly specifying the `server` argument to use the SeaLifeBase API at `http://fishbase.ropensci.org/sealifebase`, like so:
+
+``` r
+options(FISHBASE_API = "http://fishbase.ropensci.org/sealifebase")
+kingcrab <- common_to_sci("king crab")
+kingcrab
+```
+
+``` r
+species(kingcrab)
+ecology(kingcrab)
+```
 
 ------------------------------------------------------------------------
 
