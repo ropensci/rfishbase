@@ -19,11 +19,21 @@ replace_non_ascii <-function(string){
 }
 
 
+## This is much more comprehensive and offers improved mapping, but is _very slow_
+#devtools::install_github('rich-iannone/UnidecodeR')
+library("UnidecodeR")
+use_ascii <- function(df){
+  for(i in 1:length(df)){
+    df[[i]] <- unidecode(df[[i]], "all")
+  }
+}
+
+
 fishbase <- load_taxa(update = TRUE)
 fishbase$FBname <- replace_non_ascii(fishbase$FBname)
 save("fishbase", file = "data/fishbase.rda", compress = "xz")
 
 sealifebase <- load_taxa(update = TRUE, server = "http://fishbase.ropensci.org/sealifebase", limit=200000L)
-sealifebase$FBname <- replace_non_ascii(sealifebase$FBname)
+sealifebase <- use_ascii(sealifebase)
 save("sealifebase", file = "data/sealifebase.rda", compress = "xz")
-
+  
