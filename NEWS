@@ -1,0 +1,37 @@
+NEWS
+====
+
+For more fine-grained list of changes or to report a bug, consult 
+
+* [The issues log](https://github.com/ropensci/rfishbase/issues)
+* [The commit log](https://github.com/ropensci/rfishbase/commits/master)
+
+Versioning
+----------
+
+Releases will be numbered with the following semantic versioning format:
+
+<major>.<minor>.<patch>
+
+And constructed with the following guidelines:
+
+* Breaking backward compatibility bumps the major (and resets the minor 
+  and patch)
+* New additions without breaking backward compatibility bumps the minor 
+  (and resets the patch)
+* Bug fixes and misc changes bumps the patch
+* Following the RStudio convention, a .99 is appended after the patch
+  number to indicate the development version on Github.  Any version
+  Coming from Github will now use the .99 extension, which will never
+  appear in a version number for the package on CRAN. 
+
+For more information on SemVer, please visit http://semver.org/.
+
+v2.0.1
+------
+
+First official release of the new rfishbase package, a non-backwards
+compatible replacement to all earlier versions of FishBase. See the
+package vignette for a more detailed overview and introduction.
+
+

@@ -21,10 +21,13 @@ replace_non_ascii <-function(string){
 
 ## This is much more comprehensive and offers improved mapping, but is _very slow_
 #devtools::install_github('rich-iannone/UnidecodeR')
-library("UnidecodeR")
+#library("UnidecodeR")
+
+
 use_ascii <- function(df){
   for(i in 1:length(df)){
-    df[[i]] <- unidecode(df[[i]], "all")
+    df[[i]] <- replace_non_ascii(df[[i]])
+    #df[[i]] <- unidecode(df[[i]], "all")
   }
 }
 

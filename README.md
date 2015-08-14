@@ -1,9 +1,13 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 [![Build Status](https://travis-ci.org/ropensci/rfishbase.svg?branch=rfishbase2.0)](https://travis-ci.org/ropensci/rfishbase) [![Coverage Status](https://coveralls.io/repos/ropensci/rfishbase/badge.svg?branch=rfishbase2.0)](https://coveralls.io/r/ropensci/rfishbase?branch=rfishbase2.0) [![Downloads](http://cranlogs.r-pkg.org/badges/rfishbase)](https://github.com/metacran/cranlogs.app)
 
-Welcome to `rfishbase 2.0`.
+Welcome to `rfishbase 2.0`. This package is a ground-up rewrite of the original `rfishbase` package described in [Boettiger et al. (2012)](http://www.carlboettiger.info/assets/files/pubs/10.1111/j.1095-8649.2012.03464.x.pdf), and is not backwards compatible with the original. The first version of `rfishbase` relied on the XML summary pages provided by FishBase, which contained relatively incomplete data and have since been deprecated. The package later added functions that relied on HTML scraping of fishbase.org, which was always slow, subject to server instabilities, and carried a greater risk of errors. To address all of these issues, we have now created a stand-alone FishBase API with the blessing of the FishBase.org team, who have kindly provided copies of the backend SQL database to our team for this purpose. At this time the API does not cover all tables provided by the SQL backend, but does access the largest and most commonly used. A list of all tables available from the API (and from rfishbase) can be seen using the `heartbeat()` function.
 
-This branch represents a work in progress and will not be functional until the FishBase API is released. At this time endpoints are still being added to the API and implemented in the package.
+The new `rfishbase` package queries this API directly rather than the FishBase.org website. This reduces load on the FishBase web servers and increases both the performance and the breadth of data avaialble. `rfishbase` functions are primarily aimed at facilitating queries for specific data across a given list of many species. This is a task that is common to much scientific research and tedious to perform on the FishBase.org website, which requires a user to visit a separate page for each species. Aimed at scientific use, the `rfishbase` package returns all data as `data.frames`, usually organized in "tidy data" style with individual species as rows and observations of species traits as columns (also referred to as fields). Users will frequently have to subset the resulting data frames, or join them with other data frames provided by the package, to obtain the data they need. We recommend the `dplyr` package to facilitate these tasks, which `rfishbase` also uses internally.
+
+In having access to much more data, the new `rfishbase` can be difficult to navigate. We have provided several helper functions for users to discover which tables they need, as illustrated below. Unfortunately, FishBase.org lacks detailed documentation of all of the tables and fields contained in it's database. For the most part, table and column names are self-documenting, but details are often missing which can create a puzzle for researchers trying to figure out precisely what data is provided in a given column. To address this challenge, we have created a crowd-sourced collection of documentation that can be queried from the API to provide more detailed descriptions.
+
+We welcome any feedback, issues or questions that users may encounter through our issues tracker on GitHub: [<https://github.com/ropensci/rfishbase/issues>].
 
 Installation
 ------------
@@ -182,6 +186,12 @@ kingcrab
 ``` r
 species(kingcrab)
 ecology(kingcrab)
+```
+
+Set the API back to `fishbase` for finfish data:
+
+``` r
+options(FISHBASE_API = "http://fishbase.ropensci.org")
 ```
 
 ------------------------------------------------------------------------
