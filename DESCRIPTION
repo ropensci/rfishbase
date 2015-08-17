@@ -19,7 +19,9 @@ Imports:
     dplyr (>= 0.4.0),
     lazyeval,
     httr (>= 1.0.0),
-    tidyr
+    tidyr,
+    methods,
+    utils
 Suggests: 
     devtools,
     testthat,

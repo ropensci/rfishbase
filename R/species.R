@@ -26,6 +26,8 @@
 #' 
 #' }
 #' @import httr dplyr
+#' @importFrom methods as is
+#' @importFrom utils data lsf.str packageVersion
 #' @export species
 species <- endpoint("species")
 
