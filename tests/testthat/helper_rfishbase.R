@@ -2,6 +2,8 @@
 # Tests that contain this function will not be run if any of these conditions fail:
 needs_api <- function(){
 
+ skip_on_cran()  
+  
 if(status_code(GET("http://google.com")) != 200) 
   skip("No response from internet, skipping test")
   
