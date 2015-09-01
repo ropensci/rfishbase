@@ -27,6 +27,11 @@ And constructed with the following guidelines:
 
 For more information on SemVer, please visit http://semver.org/.
 
+v2.0.2
+------
+
+* bugfix for package unit tests on some platforms
+
 v2.0.1
 ------
 
