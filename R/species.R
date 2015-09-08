@@ -19,7 +19,7 @@
 #' 
 #' @aliases species species_info
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' 
 #' species(c("Labroides bicolor", "Bolbometopon muricatum")) 
 #' species(c("Labroides bicolor", "Bolbometopon muricatum"), fields = species_fields$habitat) 

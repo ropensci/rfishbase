@@ -14,7 +14,7 @@
 #' The limit default is quite high in this call, as it corresponds to the number of common names that
 #' match a given species, including different languages and countries. 
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' common_to_sci(c("Bicolor cleaner wrasse", "humphead parrotfish"), Language="English")
 #' common_to_sci("trout")
 #' common_to_sci(c("trout", "Coho Salmon"))
@@ -51,7 +51,7 @@ common_to_sci <- function(x, Language = NULL, limit = 1000, server = getOption("
 #' @details Note that there are many common names for a given sci name, so sci_to_common doesn't make sense
 #' 
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' commonnames(c("Labroides bicolor",  "Bolbometopon muricatum"))
 #' 
 #' # subset by English language names
@@ -112,7 +112,7 @@ commonnames <- function(species_list,
 #' the preferred FishBase common name (in English).  Otherwise it 
 #' is the most frequently used common name (which may not be the same
 #' as the FishBase common name even with English as the requested Language)
-#' @examples \donttest{
+#' @examples \dontrun{
 #' sci_to_common("Salmo trutta")
 #' sci_to_common("Salmo trutta", Language="English")
 #' sci_to_common("Salmo trutta", Language="French")

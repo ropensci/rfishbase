@@ -10,7 +10,7 @@
 #' For further information on fields returned, see:
 #' http://www.fishbase.org/manual/english/fishbasethe_synonyms_table.htm
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' # Query using a synonym:
 #' synonyms("Callyodon muricatus")
 #'  
