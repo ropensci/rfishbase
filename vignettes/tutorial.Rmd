@@ -101,7 +101,7 @@ Unfortunately identifying what fields come from which tables is often a challeng
 
 Because `rfishbase` accesses the back end database, it does not always line up with the web display. Frequently `rfishbase` functions will return more information than is available on the web versions of the these tables. Some information found on the summary homepage for a species is not available from the `species` summary function, but must be extracted from a different table. For instance, the species `Resilience` information is not one of the fields in the `species` summary table, despite appearing on the species homepage of fishbase.org.  To discover which table this information is in, we can use the special `rfishbase` function `list_fields`, which will list all tables with a field matching the query string:
 
-```{r}
+```{r eval=FALSE}
 list_fields("Resilience")
 ```
 
