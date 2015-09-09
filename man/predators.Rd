@@ -28,7 +28,7 @@ a table of predators
 predators
 }
 \examples{
-\donttest{
+\dontrun{
 predators("Oreochromis niloticus")
 }
 }

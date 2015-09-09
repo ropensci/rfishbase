@@ -34,7 +34,7 @@ that is useful both for stock assessment and for increasing understanding
 of the evolution of life-history strategies
 }
 \examples{
-\donttest{
+\dontrun{
 popgrowth("Oreochromis niloticus")
 }
 }

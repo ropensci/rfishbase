@@ -28,7 +28,7 @@ a table of species swimming data
 swimming
 }
 \examples{
-\donttest{
+\dontrun{
 swimming("Oreochromis niloticus")
 }
 }

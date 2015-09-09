@@ -27,7 +27,7 @@ table here: https://github.com/ropensci/fishbaseapi/tree/master/docs/docs-source
 documentation of tables and fields
 }
 \examples{
-\donttest{
+\dontrun{
 tables <- docs()
 # Describe the diet table
 dplyr::filter(tables, table == "diet")$description

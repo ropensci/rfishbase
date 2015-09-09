@@ -23,7 +23,7 @@ currently this is ~ FAO areas table (minus "note" field)
 e.g. http://www.fishbase.us/Country/FaoAreaList.php?ID=5537
 }
 \examples{
-\donttest{
+\dontrun{
   faoareas(species_list(Genus='Labroides'))
 }
 }

@@ -49,7 +49,7 @@ as the ratio in (2) will usually be estimated from a single specimen, or a few f
 range of lengths.
 }
 \examples{
-\donttest{
+\dontrun{
 length_length("Oreochromis niloticus")
 }
 }

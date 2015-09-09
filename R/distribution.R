@@ -7,7 +7,7 @@
 #' @inheritParams species
 #' @import dplyr
 #' @export
-#' @examples \donttest{
+#' @examples \dontrun{
 #' distribution(species_list(Genus='Labroides'))
 #' }
 #' @details currently this is ~ FAO areas table (minus "note" field)
@@ -25,7 +25,7 @@ distribution <- function(species_list, server = getOption("FISHBASE_API", FISHBA
 #' @import dplyr
 #' @export
 #' @examples 
-#' \donttest{
+#' \dontrun{
 #'   faoareas(species_list(Genus='Labroides'))
 #' }
 #' @details currently this is ~ FAO areas table (minus "note" field)
@@ -70,7 +70,7 @@ faoarrefs <- function(area_code, server = getOption("FISHBASE_API", FISHBASE_API
 #' @return a table of species ecosystems data
 #' @inheritParams species
 #' @export
-#' @examples \donttest{
+#' @examples \dontrun{
 #' ecosystem("Oreochromis niloticus")
 #' }
 ecosystem <- endpoint("ecosystem")
@@ -80,7 +80,7 @@ ecosystem <- endpoint("ecosystem")
 #' @return a table of species occurrence data
 #' @inheritParams species
 #' @export
-#' @examples \donttest{
+#' @examples \dontrun{
 #' occurrence("Oreochromis niloticus")
 #' }
 occurrence <- endpoint("occurrence")
@@ -90,7 +90,7 @@ occurrence <- endpoint("occurrence")
 #' @return a table of species introductions data
 #' @inheritParams species
 #' @export
-#' @examples \donttest{
+#' @examples \dontrun{
 #' introductions("Oreochromis niloticus")
 #' }
 introductions <- endpoint("intrcase")
@@ -100,7 +100,7 @@ introductions <- endpoint("intrcase")
 #' @return a table of species stocks data
 #' @inheritParams species
 #' @export
-#' @examples \donttest{
+#' @examples \dontrun{
 #' stocks("Oreochromis niloticus")
 #' }
 stocks <- endpoint("stocks")

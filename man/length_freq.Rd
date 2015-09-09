@@ -29,7 +29,7 @@ a table of length_freq information by species; see details
 return a table of species fooditems
 }
 \examples{
-\donttest{
+\dontrun{
 length_freq("Oreochromis niloticus")
 }
 }

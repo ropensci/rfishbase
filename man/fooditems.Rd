@@ -28,7 +28,7 @@ a table of species fooditems
 fooditems
 }
 \examples{
-\donttest{
+\dontrun{
 fooditems("Oreochromis niloticus")
 }
 }

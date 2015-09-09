@@ -28,7 +28,7 @@ a table of species oxygen data
 oxygen
 }
 \examples{
-\donttest{
+\dontrun{
 oxygen("Oreochromis niloticus")
 }
 }

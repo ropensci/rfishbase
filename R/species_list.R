@@ -17,7 +17,7 @@
 #' @import dplyr lazyeval
 #' @importFrom tidyr unite_
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' ## All species in the Family 
 #'   species_list(Family = 'Scaridae')
 #' ## All species in the Genus 

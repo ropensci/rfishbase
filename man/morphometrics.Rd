@@ -28,7 +28,7 @@ a table of species morphometrics data
 morphometrics
 }
 \examples{
-\donttest{
+\dontrun{
 morphometrics("Oreochromis niloticus")
 }
 }

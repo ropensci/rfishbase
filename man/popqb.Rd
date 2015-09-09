@@ -28,7 +28,7 @@ a table of species popqb
 popqb
 }
 \examples{
-\donttest{
+\dontrun{
 popqb("Oreochromis niloticus")
 }
 }

@@ -31,7 +31,7 @@ get multiple returns for different stocks of the same species, though often data
 identical to the first or simply missing in the additional stocks.
 }
 \examples{
-\donttest{
+\dontrun{
 ecology("Oreochromis niloticus")
 
 ## trophic levels and standard errors for a list of species

@@ -28,7 +28,7 @@ a table of species speed data
 speed
 }
 \examples{
-\donttest{
+\dontrun{
 speed("Oreochromis niloticus")
 }
 }

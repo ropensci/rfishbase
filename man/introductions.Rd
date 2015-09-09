@@ -28,7 +28,7 @@ a table of species introductions data
 introductions
 }
 \examples{
-\donttest{
+\dontrun{
 introductions("Oreochromis niloticus")
 }
 }

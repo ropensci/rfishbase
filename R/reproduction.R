@@ -4,7 +4,7 @@
 #' @return a table of species reproduction
 #' @inheritParams species
 #' @export
-#' @examples \donttest{
+#' @examples \dontrun{
 #' reproduction("Oreochromis niloticus")
 #' }
 reproduction <- endpoint("reproduc")
@@ -15,7 +15,7 @@ reproduction <- endpoint("reproduc")
 #' @return a table of species fecundity
 #' @inheritParams species
 #' @export
-#' @examples \donttest{
+#' @examples \dontrun{
 #' fecundity("Oreochromis niloticus")
 #' }
 fecundity <- endpoint("fecundity")
@@ -26,7 +26,7 @@ fecundity <- endpoint("fecundity")
 #' @return a table of species maturity
 #' @inheritParams species
 #' @export
-#' @examples \donttest{
+#' @examples \dontrun{
 #' maturity("Oreochromis niloticus")
 #' }
 maturity <- endpoint("maturity")
@@ -37,7 +37,7 @@ maturity <- endpoint("maturity")
 #' @return a table of species spawning
 #' @inheritParams species
 #' @export
-#' @examples \donttest{
+#' @examples \dontrun{
 #' spawning("Oreochromis niloticus")
 #' }
 spawning <- endpoint("spawning")

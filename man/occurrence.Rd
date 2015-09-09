@@ -28,7 +28,7 @@ a table of species occurrence data
 occurrence
 }
 \examples{
-\donttest{
+\dontrun{
 occurrence("Oreochromis niloticus")
 }
 }

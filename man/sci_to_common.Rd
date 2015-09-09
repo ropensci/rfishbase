@@ -30,7 +30,7 @@ is the most frequently used common name (which may not be the same
 as the FishBase common name even with English as the requested Language)
 }
 \examples{
-\donttest{
+\dontrun{
 sci_to_common("Salmo trutta")
 sci_to_common("Salmo trutta", Language="English")
 sci_to_common("Salmo trutta", Language="French")

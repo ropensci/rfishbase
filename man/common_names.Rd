@@ -34,7 +34,7 @@ Return a table of common names
 Note that there are many common names for a given sci name, so sci_to_common doesn't make sense
 }
 \examples{
-\donttest{
+\dontrun{
 commonnames(c("Labroides bicolor",  "Bolbometopon muricatum"))
 
 # subset by English language names

@@ -6,7 +6,7 @@
 #' @return a table of species oxygen data
 #' @inheritParams species
 #' @export
-#' @examples \donttest{
+#' @examples \dontrun{
 #' oxygen("Oreochromis niloticus")
 #' }
 oxygen <- endpoint("oxygen")
@@ -16,7 +16,7 @@ oxygen <- endpoint("oxygen")
 #' @return a table of species morphology data
 #' @inheritParams species
 #' @export
-#' @examples \donttest{
+#' @examples \dontrun{
 #' morphology("Oreochromis niloticus")
 #' }
 morphology <- endpoint("morphdat")
@@ -26,7 +26,7 @@ morphology <- endpoint("morphdat")
 #' @return a table of species morphometrics data
 #' @inheritParams species
 #' @export
-#' @examples \donttest{
+#' @examples \dontrun{
 #' morphometrics("Oreochromis niloticus")
 #' }
 morphometrics <- endpoint("morphmet")
@@ -36,7 +36,7 @@ morphometrics <- endpoint("morphmet")
 #' @return a table of species swimming data
 #' @inheritParams species
 #' @export
-#' @examples \donttest{
+#' @examples \dontrun{
 #' swimming("Oreochromis niloticus")
 #' }
 swimming <- endpoint("swimming")
@@ -46,7 +46,7 @@ swimming <- endpoint("swimming")
 #' @return a table of species speed data
 #' @inheritParams species
 #' @export
-#' @examples \donttest{
+#' @examples \dontrun{
 #' speed("Oreochromis niloticus")
 #' }
 speed <- endpoint("speed")

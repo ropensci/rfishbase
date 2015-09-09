@@ -28,7 +28,7 @@ a table of species ration
 ration
 }
 \examples{
-\donttest{
+\dontrun{
 ration("Oreochromis niloticus")
 }
 }

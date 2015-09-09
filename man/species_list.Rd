@@ -36,7 +36,7 @@ Return the a species list given a taxonomic group
 The first time the function is called it will download and cache the complete
 }
 \examples{
-\donttest{
+\dontrun{
 ## All species in the Family
   species_list(Family = 'Scaridae')
 ## All species in the Genus

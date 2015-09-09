@@ -28,7 +28,7 @@ a table of species ecosystems data
 ecosystem
 }
 \examples{
-\donttest{
+\dontrun{
 ecosystem("Oreochromis niloticus")
 }
 }

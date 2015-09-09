@@ -28,7 +28,7 @@ a table of species stocks data
 stocks
 }
 \examples{
-\donttest{
+\dontrun{
 stocks("Oreochromis niloticus")
 }
 }

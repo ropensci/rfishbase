@@ -28,7 +28,7 @@ a table of species spawning
 spawning
 }
 \examples{
-\donttest{
+\dontrun{
 spawning("Oreochromis niloticus")
 }
 }

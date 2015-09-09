@@ -28,7 +28,7 @@ a table of species maturity
 maturity
 }
 \examples{
-\donttest{
+\dontrun{
 maturity("Oreochromis niloticus")
 }
 }

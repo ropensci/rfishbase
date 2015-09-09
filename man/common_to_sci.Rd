@@ -33,7 +33,7 @@ The limit default is quite high in this call, as it corresponds to the number of
 match a given species, including different languages and countries.
 }
 \examples{
-\donttest{
+\dontrun{
 common_to_sci(c("Bicolor cleaner wrasse", "humphead parrotfish"), Language="English")
 common_to_sci("trout")
 common_to_sci(c("trout", "Coho Salmon"))

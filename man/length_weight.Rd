@@ -55,7 +55,7 @@ to allow identification of gross errors, given knowledge of the body
 form of a species.
 }
 \examples{
-\donttest{
+\dontrun{
 length_weight("Oreochromis niloticus")
 }
 }

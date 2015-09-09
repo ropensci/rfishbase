@@ -34,7 +34,7 @@ Wmax and tmax values or various combinations thereof refer to the
 same individual fish.
 }
 \examples{
-\donttest{
+\dontrun{
 popchar("Oreochromis niloticus")
 }
 }

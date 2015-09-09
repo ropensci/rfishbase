@@ -28,7 +28,7 @@ a table of species reproduction
 reproduction
 }
 \examples{
-\donttest{
+\dontrun{
 reproduction("Oreochromis niloticus")
 }
 }

@@ -28,7 +28,7 @@ a table of species fecundity
 fecundity
 }
 \examples{
-\donttest{
+\dontrun{
 fecundity("Oreochromis niloticus")
 }
 }
