@@ -5,6 +5,8 @@
 # if a call fails, or just NULL, (so that one a failed call does not break
 # the execution of a long loop).
 # @return the parsed data.frame, or NULL if checks fail to proceed
+#' @importFrom httr warn_for_status content
+#' @importFrom dplyr as_data_frame
 check_and_parse <- function(resp, 
                             debug = getOption("debug", FALSE)){
   

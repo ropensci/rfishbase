@@ -7,7 +7,9 @@
 #' @return a data frame listing the table names (matching function names in rfishbase) and the matching column names those tables have implemented.
 #' @details method will use partial matching. Hence "Temp" will match column names such as "TempMin" and "TempMax", but "MinTemp" will not.  Likewise,
 #' neither "Minimum" or "Temperature" will match "TempMin", so begin with the shortest query possible and refine based on search results when necessary.
-#' Note also that there is no guarentee that the same column has the same value or same meaning in different tables.  
+#' Note also that there is no guarentee that the same column has the same value or same meaning in different tables. 
+#' @importFrom dplyr filter_
+#' @importFrom httr GET 
 #' @examples 
 #' \dontrun{
 #' list_fields("Temp")

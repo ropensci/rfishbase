@@ -59,8 +59,9 @@ common_to_sci <- function(x, Language = NULL, limit = 1000, server = getOption("
 #' library(dplyr)
 #' fish %>% filter(Language=="English") 
 #' }
-#' @import lazyeval
-#' @import dplyr
+#' @importFrom lazyeval interp
+#' @importFrom dplyr bind_rows filter_ left_join select_
+#' @importFrom httr GET
 #' @export common_names commonnames
 #' @aliases common_names commonnames
 common_names <- function(species_list, 
@@ -71,8 +72,8 @@ common_names <- function(species_list,
   
   codes <- speccodes(species_list)
   
-  bind_rows(lapply(codes, function(code){
-    resp <- GET(paste0(server, "/comnames"), 
+  dplyr::bind_rows(lapply(codes, function(code){
+    resp <- httr::GET(paste0(server, "/comnames"), 
                 query = list(SpecCode = code, 
                              limit = limit, 
                              fields = paste(fields, collapse=",")),
@@ -80,12 +81,12 @@ common_names <- function(species_list,
     df <- check_and_parse(resp)
     
     # Replace / Join SpecCode with Genus and Species columns
-    id_df <- select_(taxa(query = list(SpecCode = code)), "Genus", "Species", "SpecCode")
-    df <- left_join(df, id_df, by = "SpecCode")
+    id_df <- dplyr::select_(taxa(query = list(SpecCode = code)), "Genus", "Species", "SpecCode")
+    df <- dplyr::left_join(df, id_df, by = "SpecCode")
     
    if(!is.null(Language) && "Language" %in% names(df)){
-      .dots <- list(interp(~Language == x, .values = list(x = Language)))
-      df <- filter_(df, .dots=.dots)
+      .dots <- list(lazyeval::interp(~Language == x, .values = list(x = Language)))
+      df <- dplyr::filter_(df, .dots=.dots)
   }
   df
     # FIXME Replace C_Code with Country usiong countref table: "SELECT PAESE FROM countref WHERE C_Code=x"

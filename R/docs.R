@@ -11,6 +11,7 @@
 #' columns are not made available by FishBase.org and must be manually generated and curated by FishBase.org users. 
 #' At this time, many fields are still missing.  Please take a moment to fill in any fields you use in the source
 #' table here: https://github.com/ropensci/fishbaseapi/tree/master/docs/docs-sources
+#' @importFrom httr user_agent GET
 #' @examples 
 #' \dontrun{
 #' tables <- docs()

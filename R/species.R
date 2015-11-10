@@ -17,8 +17,6 @@
 #' 
 #' Species scientific names are defined according to fishbase taxonomy and nomenclature.
 #' 
-#' @import httr 
-#' @import dplyr
 #' @importFrom methods as is
 #' @importFrom utils data lsf.str packageVersion
 #' @export species

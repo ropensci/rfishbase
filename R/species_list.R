@@ -14,7 +14,8 @@
 #'  slow.
 #' 
 #' @details The first time the function is called it will download and cache the complete
-#' @import dplyr lazyeval
+#' @importFrom dplyr select_ %>%
+#' @importFrom lazyeval interp
 #' @importFrom tidyr unite_
 #' @examples
 #' \dontrun{
@@ -59,7 +60,7 @@ speccodes <- function(species_list, all_taxa = load_taxa()){
     sapply(species_list, function(x){ 
       s <- parse_name(x)
       df <- taxa(list(Species=s$species, Genus=s$genus, SpecCode=s$speccode), all_taxa = all_taxa)
-      select_(df, "SpecCode")[[1]] 
+      dplyr::select_(df, "SpecCode")[[1]] 
     })
 }
 
@@ -72,11 +73,11 @@ taxa <- function(query, all_taxa = load_taxa()){
   query <- query[!sapply(query, is.null)]
   dots <- lapply(names(query), function(level){
     value <- query[[level]]
-    interp(~y == x, 
+    lazyeval::interp(~y == x, 
                 .values = list(y = as.name(level), x = value))
   })
   
-  filter_(all_taxa, 
+  dplyr::filter_(all_taxa, 
           .dots = dots) 
 }
 

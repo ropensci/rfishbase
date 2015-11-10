@@ -14,10 +14,10 @@
 #' content(resp)
 #' 
 #' }
-#' @import httr
+#' @importFrom httr GET user_agent
 #' @export
 heartbeat <- function(server = getOption("FISHBASE_API", FISHBASE_API))
-  GET(paste0(server, "/heartbeat"), user_agent(make_ua()))
+  httr::GET(paste0(server, "/heartbeat"), httr::user_agent(make_ua()))
 
 #' ping
 #' 
@@ -32,7 +32,7 @@ heartbeat <- function(server = getOption("FISHBASE_API", FISHBASE_API))
 #' resp$times
 #' 
 #' }
-#' @import httr
+#' @importFrom httr GET user_agent
 #' @export
 ping <- function(server = getOption("FISHBASE_API", FISHBASE_API))
   GET(paste0(server, "/mysqlping"), user_agent(make_ua()))

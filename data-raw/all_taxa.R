@@ -29,6 +29,7 @@ use_ascii <- function(df){
     df[[i]] <- replace_non_ascii(df[[i]])
     #df[[i]] <- unidecode(df[[i]], "all")
   }
+  df
 }
 
 

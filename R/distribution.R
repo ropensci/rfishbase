@@ -5,7 +5,6 @@
 #' return a table of species locations as reported in FishBASE.org FAO location data
 #' 
 #' @inheritParams species
-#' @import dplyr
 #' @export
 #' @examples \dontrun{
 #' distribution(species_list(Genus='Labroides'))
@@ -22,7 +21,8 @@ distribution <- function(species_list, server = getOption("FISHBASE_API", FISHBA
 #' return a table of species locations as reported in FishBASE.org FAO location data
 #' 
 #' @inheritParams species
-#' @import dplyr
+#' @importFrom dplyr bind_rows left_join
+#' @importFrom httr GET
 #' @export
 #' @examples 
 #' \dontrun{
@@ -32,17 +32,17 @@ distribution <- function(species_list, server = getOption("FISHBASE_API", FISHBA
 #' e.g. http://www.fishbase.us/Country/FaoAreaList.php?ID=5537
 faoareas <- function(species_list, server = getOption("FISHBASE_API", FISHBASE_API), limit = 500){
   codes <- speccodes(species_list)
-  out <- bind_rows(lapply(codes, function(code){
+  out <- dplyr::bind_rows(lapply(codes, function(code){
   
-  resp <- GET(paste0(server, "/faoareas"), 
+  resp <- httr::GET(paste0(server, "/faoareas"), 
               query = list(SpecCode = code, limit = limit,
                            fields='AreaCode,SpecCode,Status'),
               user_agent(make_ua()))  
   table1 <- check_and_parse(resp)
   
   ## Look up area codes
-  table2 <- bind_rows(lapply(table1$AreaCode, faoarrefs))
-  left_join(table1, table2,by='AreaCode')
+  table2 <- dplyr::bind_rows(lapply(table1$AreaCode, faoarrefs))
+  dplyr::left_join(table1, table2,by='AreaCode')
   ## cbind
   
   }))
@@ -53,7 +53,7 @@ faoareas <- function(species_list, server = getOption("FISHBASE_API", FISHBASE_A
 
 faoarrefs <- function(area_code, server = getOption("FISHBASE_API", FISHBASE_API), limit = 100){
   ## add in a fields list to filter returned values
-  resp <- GET(paste0(server, "/faoarref/", area_code), 
+  resp <- httr::GET(paste0(server, "/faoarref/", area_code), 
               query = list(limit = limit,
                            fields='AreaCode,FAO'),
               user_agent(make_ua()))

@@ -5,7 +5,6 @@
 #' get multiple returns for different stocks of the same species, though often data is either
 #' identical to the first or simply missing in the additional stocks. 
 #' @inheritParams species
-#' @import dplyr
 #' @export
 #' @references http://www.fishbase.org/manual/english/fishbasethe_ecology_table.htm
 #' @examples

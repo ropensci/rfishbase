@@ -47,7 +47,5 @@ synonyms("Callyodon muricatus")
  species_info("Bolbometopon muricatum", fields="SpecCode")[[1]]
  synonyms(5537)
  }
- @import httr dplyr
- @export
 }
 
