@@ -26,7 +26,7 @@
 #'  @export
 synonyms <- function(species_list, limit = 50, server = getOption("FISHBASE_API", FISHBASE_API), 
                      fields = c("SynGenus", "SynSpecies", "Valid", "Misspelling", 
-                                "ColStatus", "Synonymy", "Combination", "SpecCode",
+                                "Status", "Synonymy", "Combination", "SpecCode",
                                 "SynCode", "CoL_ID", "TSN", "WoRMS_ID")){
   
   
