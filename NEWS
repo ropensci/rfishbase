@@ -27,6 +27,12 @@ And constructed with the following guidelines:
 
 For more information on SemVer, please visit http://semver.org/.
 
+v2.1.0
+------
+
+* improve sealifebase operations
+* Updates for optimized version of fishbaseapi
+* More stable tests
 
 v2.0.3
 ------
