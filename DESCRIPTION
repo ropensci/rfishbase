@@ -1,9 +1,11 @@
 Package: rfishbase
 Title: R Interface to 'FishBase'
-Description: A programmatic interface to http://www.fishbase.org, re-written based on an accompanying 'RESTful' API.
-             Access tables describing over 30,000 species of fish, their biology, ecology, morphology, and more.
-             This package also supports experimental access to http://www.sealifebase.org data, which contains nearly
-             200,000 species records for all types of aquatic life not covered by 'FishBase.'
+Description: A programmatic interface to http://www.fishbase.org, re-written
+    based on an accompanying 'RESTful' API. Access tables describing over 30,000
+    species of fish, their biology, ecology, morphology, and more. This package also
+    supports experimental access to http://www.sealifebase.org data, which contains
+    nearly 200,000 species records for all types of aquatic life not covered by
+    'FishBase.'
 Version: 2.0.3.99
 License: CC0
 Authors@R: c(person("Carl", "Boettiger", role = c("cre", "aut"), email = "cboettig@ropensci.org"),
@@ -13,18 +15,19 @@ Authors@R: c(person("Carl", "Boettiger", role = c("cre", "aut"), email = "cboett
 URL: https://github.com/ropensci/rfishbase
 BugReports: https://github.com/ropensci/rfishbase/issues
 LazyData: true
-Depends: 
+Depends:
     R (>= 3.0)
-Imports: 
+Imports:
     dplyr (>= 0.4.0),
     lazyeval,
     httr (>= 1.0.0),
     tidyr,
     methods,
     utils
-Suggests: 
+Suggests:
     devtools,
     testthat,
     rmarkdown,
     knitr
 VignetteBuilder: knitr
+RoxygenNote: 5.0.0

@@ -36,6 +36,8 @@ test_that("We can get synonyms with SpecCode", {
 
 
 test_that("We can validate names",{
+
+  needs_api()
   x <- validate_names("Clupea pallasii")
   expect_is(x, "character")
   expect_identical(x, "Clupea pallasii pallasii")
@@ -43,7 +45,9 @@ test_that("We can validate names",{
 
 
 test_that("Validation is the same using the valid column as using speccode",{
-  
+
+  needs_api()
+   
   x <- "Clupea pallasii"
   syn_table <- synonyms(x)
   code <- unique(syn_table$SpecCode)
