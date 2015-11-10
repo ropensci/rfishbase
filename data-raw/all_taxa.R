@@ -33,8 +33,19 @@ use_ascii <- function(df){
 }
 
 
+
+use_utf8 <- function(df){
+  chars <- which(sapply(df, class) %in% "character")
+  for(i in chars){
+    df[[i]] <- enc2utf8(df[[i]])
+  }
+  df
+}
+
+
+
 fishbase <- load_taxa(update = TRUE)
-fishbase$FBname <- replace_non_ascii(fishbase$FBname)
+fishbase <- use_ascii(fishbase)
 save("fishbase", file = "data/fishbase.rda", compress = "xz")
 
 sealifebase <- load_taxa(update = TRUE, server = "http://fishbase.ropensci.org/sealifebase", limit=200000L)
