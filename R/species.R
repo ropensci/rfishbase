@@ -17,6 +17,11 @@
 #' 
 #' Species scientific names are defined according to fishbase taxonomy and nomenclature.
 #' 
+#' @import httr 
+#' @import dplyr
+#' @importFrom methods as is
+#' @importFrom utils data lsf.str packageVersion
+#' @export species
 #' @aliases species species_info
 #' @examples
 #' \dontrun{
@@ -25,10 +30,6 @@
 #' species(c("Labroides bicolor", "Bolbometopon muricatum"), fields = species_fields$habitat) 
 #' 
 #' }
-#' @import httr dplyr
-#' @importFrom methods as is
-#' @importFrom utils data lsf.str packageVersion
-#' @export species
 species <- endpoint("species")
 
 #species <- endpoint("species", tidy_table = tidy_species_table)

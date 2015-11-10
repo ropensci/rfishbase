@@ -6,8 +6,8 @@
 \usage{
 synonyms(species_list, limit = 50, server = getOption("FISHBASE_API",
   FISHBASE_API), fields = c("SynGenus", "SynSpecies", "Valid", "Misspelling",
-  "ColStatus", "Synonymy", "Combination", "SpecCode", "SynCode", "CoL_ID",
-  "TSN", "WoRMS_ID"))
+  "Status", "Synonymy", "Combination", "SpecCode", "SynCode", "CoL_ID", "TSN",
+  "WoRMS_ID"))
 }
 \arguments{
 \item{species_list}{A vector of scientific names (each element as "genus species").}

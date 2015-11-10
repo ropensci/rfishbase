@@ -16,5 +16,5 @@ test_that("We can query trophic level fields only", {
                 fields=c("SpecCode", "FoodTroph", "FoodSeTroph", "DietTroph", "DietSeTroph"))
   expect_is(df, "data.frame")
   
-  expect_equal(dim(df)[2], 6)
+  expect_equal(dim(df)[2], 7)
 })
