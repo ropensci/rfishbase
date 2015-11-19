@@ -22,7 +22,7 @@ list_fields <- function(fields,  server = getOption("FISHBASE_API", FISHBASE_API
   if(is(data, "data.frame") && implemented_only){
     exists <- as.character(lsf.str("package:rfishbase"))
     matches <- unique(data[[1]][data[[1]] %in% exists])
-    data <- dplyr::filter_(data, ~TABLE_NAME %in% matches)
+    data <- dplyr::filter_(data, ~table_name %in% matches)
   }
   data
 }
