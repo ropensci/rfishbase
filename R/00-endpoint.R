@@ -13,13 +13,21 @@ endpoint <- function(endpt, tidy_table = default_tidy){
         args <- c(args, 
                   fields = paste(c("SpecCode", fields), 
                                  collapse=","))
-       
+      
+      # Workaround for inconsistent name in maturity endpoint 
+      if(endpt == "maturity"){
+        names(args)[names(args) == "SpecCode"] = "Speccode"
+      }
       
       resp <- httr::GET(paste0(server, "/", endpt), 
                         query = args, 
                         ..., 
                         httr::user_agent(make_ua()))
       data <- check_and_parse(resp)
+      
+      if(endpt == "maturity"){
+        names(data)[names(data) == "Speccode"] = "SpecCode"
+      }
       
       tidy_table(data, server = server)
     }))
