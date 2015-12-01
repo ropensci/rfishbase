@@ -51,4 +51,9 @@ First official release of the new rfishbase package, a non-backwards
 compatible replacement to all earlier versions of FishBase. See the
 package vignette for a more detailed overview and introduction.
 
+v2.0.1.1
+-----
+
+* bugfix for maturity endpoint: now properly queries by input species list
+
 
