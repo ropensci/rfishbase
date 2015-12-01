@@ -54,6 +54,6 @@ package vignette for a more detailed overview and introduction.
 v2.0.1.1
 -----
 
-* bugfix for maturity endpoint: now properly queries by input species list
+* bugfix for endpoints with inconsistent spelling of SpecCode column (e.g. maturity, diet, ecosystem, morphology, morphometrics, popchar, poplf). Now properly queries by input species list
 
 
