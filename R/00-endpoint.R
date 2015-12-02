@@ -13,13 +13,22 @@ endpoint <- function(endpt, tidy_table = default_tidy){
         args <- c(args, 
                   fields = paste(c("SpecCode", fields), 
                                  collapse=","))
-       
+      
+      # Workaround for inconsistent names in certain endpoints
+      bad_tables = c('diet', 'ecosystem', 'maturity', 'morphdat', 'morphmet', 'popchar', 'poplf')
+      if(endpt %in% bad_tables){
+        names(args)[names(args) == "SpecCode"] = "Speccode"
+      }
       
       resp <- httr::GET(paste0(server, "/", endpt), 
                         query = args, 
                         ..., 
                         httr::user_agent(make_ua()))
       data <- check_and_parse(resp)
+      
+      if(endpt %in% bad_tables){
+        names(data)[names(data) == "Speccode"] = "SpecCode"
+      }
       
       tidy_table(data, server = server)
     }))
