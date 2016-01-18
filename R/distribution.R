@@ -3,7 +3,7 @@
 
 #' country
 #' 
-#' return a table of country as reported in FishBASE.org FAO location data
+#' return a table of country for the requested species, as reported in FishBASE.org 
 #' 
 #' @inheritParams species
 #' @export
@@ -13,6 +13,27 @@
 #' @details 
 #' e.g. http://www.fishbase.us/Country
 country <- endpoint("country")
+
+
+
+#' c_code
+#' 
+#' return a table of country information for the requested c_code, as reported in FishBASE.org 
+#' 
+#' @inheritParams species
+#' @export
+#' @examples \dontrun{
+#' c_code(440)
+#' }
+#' @details 
+#' e.g. http://www.fishbase.us/Country
+c_code <- function(c_code, server = getOption("FISHBASE_API", FISHBASE_API), fields='', limit = 500){
+  resp <- httr::GET(paste0(server, "/faoareas"), 
+                    query = list(C_Code = c_code, limit = limit,
+                                 fields),
+                    httr::user_agent(make_ua()))  
+  check_and_parse(resp)
+}
 
 
 
@@ -53,7 +74,7 @@ faoareas <- function(species_list, server = getOption("FISHBASE_API", FISHBASE_A
   resp <- httr::GET(paste0(server, "/faoareas"), 
               query = list(SpecCode = code, limit = limit,
                            fields='AreaCode,SpecCode,Status'),
-              user_agent(make_ua()))  
+              httr::user_agent(make_ua()))  
   table1 <- check_and_parse(resp)
   
   ## Look up area codes
