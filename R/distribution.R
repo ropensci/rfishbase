@@ -1,5 +1,21 @@
 ## Consider information from: Countries | FAO areas | Ecosystems | Occurrences | Point map | Introductions | Faunaf
 
+
+#' country
+#' 
+#' return a table of country as reported in FishBASE.org FAO location data
+#' 
+#' @inheritParams species
+#' @export
+#' @examples \dontrun{
+#' country(species_list(Genus='Labroides'))
+#' }
+#' @details 
+#' e.g. http://www.fishbase.us/Country
+country <- endpoint("country")
+
+
+
 #' distribution
 #' 
 #' return a table of species locations as reported in FishBASE.org FAO location data

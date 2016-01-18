@@ -3,6 +3,7 @@
 export(common_names)
 export(common_to_sci)
 export(commonnames)
+export(country)
 export(diet)
 export(distribution)
 export(docs)
