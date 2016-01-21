@@ -21,6 +21,7 @@ country <- endpoint("country")
 #' return a table of country information for the requested c_code, as reported in FishBASE.org 
 #' 
 #' @inheritParams species
+#' @param c_code a C_Code or list of C_Codes (FishBase country code)
 #' @export
 #' @examples \dontrun{
 #' c_code(440)
