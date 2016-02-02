@@ -26,7 +26,7 @@ endpoint <- function(endpt, tidy_table = default_tidy){
                         httr::user_agent(make_ua()))
       data <- check_and_parse(resp)
       
-      if(endpt %in% bad_tables){
+      if(endpt %in% bad_tables && !is.null(data)){
         names(data)[names(data) == "Speccode"] = "SpecCode"
       }
       
