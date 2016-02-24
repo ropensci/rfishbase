@@ -5,7 +5,9 @@
 endpoint <- function(endpt, tidy_table = default_tidy){
   
   function(species_list, fields = NULL, limit = 200, server = getOption("FISHBASE_API", FISHBASE_API), ...){
-    codes <- unique(speccodes(species_list))
+    codes <- vapply(
+      Filter(function(z) length(z) > 0, unique(speccodes(species_list))), unique, 1
+    )
     dplyr::bind_rows(lapply(codes, function(code){
       args <- list(SpecCode = code,
                    limit = limit)
