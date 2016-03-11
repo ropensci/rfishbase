@@ -22,7 +22,7 @@
 #'  species_list(SpecCode = x$SpecCode)  # correct: "Labroides dimidiatus"
 #' 
 #'  # See all synonyms using the SpecCode
-#'  species_info("Bolbometopon muricatum", fields="SpecCode")[[1]]
+#'  species("Bolbometopon muricatum", fields="SpecCode")[[1]]
 #'  synonyms(5537)
 #'  }
 synonyms <- function(species_list, limit = 50, server = getOption("FISHBASE_API", FISHBASE_API), 
