@@ -16,7 +16,7 @@ SEALIFEBASE_API <- "http://fishbase.ropensci.org/sealifebase"
 #' @inheritParams species
 #' @return the taxa list
 #' @export
-load_taxa <- function(update = FALSE, cache = TRUE, server = getOption("FISHBASE_API", FISHBASE_API), limit = 400000L){
+load_taxa <- function(update = FALSE, cache = TRUE, server = getOption("FISHBASE_API", FISHBASE_API), limit = 5000L){
   
   ## Load the correct taxa table based on the server setting
   if(server == FISHBASE_API){
@@ -38,6 +38,27 @@ load_taxa <- function(update = FALSE, cache = TRUE, server = getOption("FISHBASE
     
     if(update){
       
+      #limit the limit
+      ifelse(server == SEALIFEBASE_API, 
+             limit = min(limit,120000L), 
+             limit = min(limit,33000L))
+      
+      if(limit>5000){
+        k <- 0
+        all_taxa <- {}
+        while(k<limit){
+          
+          resp <- GET(paste0(server, "/taxa"), 
+                      query = list(limit=as.integer(min(5000,limit-k)), 
+                                   offset=as.integer(k+1)), 
+                      user_agent(make_ua()))
+          k <- k+5000
+          all_taxa_tmp <- check_and_parse(resp)
+          drop <- match(c("Author", "Remark"), names(all_taxa_tmp)) ## Non-ascii fields, not needed
+          all_taxa <- rbind(all_taxa,all_taxa_tmp[-drop])
+        }
+      } else {
+      
       resp <- GET(paste0(server, "/taxa"), 
                   query = list(family='', limit=as.integer(limit)), 
                   user_agent(make_ua()))
@@ -45,6 +66,7 @@ load_taxa <- function(update = FALSE, cache = TRUE, server = getOption("FISHBASE
       drop <- match(c("Author", "Remark"), names(all_taxa)) ## Non-ascii fields, not needed
       all_taxa <- all_taxa[-drop]
       
+      }
       if(cache){ 
         assign(cache_name, all_taxa, envir=rfishbase)  
       }
