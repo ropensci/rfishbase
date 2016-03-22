@@ -5,7 +5,9 @@
 endpoint <- function(endpt, tidy_table = default_tidy){
   
   function(species_list, fields = NULL, limit = 200, server = getOption("FISHBASE_API", FISHBASE_API), ...){
-    codes <- speccodes(species_list)
+    codes <- vapply(
+      Filter(function(z) length(z) > 0, unique(speccodes(species_list))), unique, 1
+    )
     dplyr::bind_rows(lapply(codes, function(code){
       args <- list(SpecCode = code,
                    limit = limit)
@@ -26,7 +28,7 @@ endpoint <- function(endpt, tidy_table = default_tidy){
                         httr::user_agent(make_ua()))
       data <- check_and_parse(resp)
       
-      if(endpt %in% bad_tables){
+      if(endpt %in% bad_tables && !is.null(data)){
         names(data)[names(data) == "Speccode"] = "SpecCode"
       }
       
@@ -39,7 +41,7 @@ endpoint <- function(endpt, tidy_table = default_tidy){
 default_tidy <- function(x, server = getOption("FISHBASE_API", FISHBASE_API)){
   if("SpecCode" %in% names(x)){
     code <- x$SpecCode
-    x$SpecCode <- species_names(code, server = server)
+    x$SpecCode <- unique(species_names(code, server = server))
     names(x)[names(x) == "SpecCode"] <- "sciname"
     x <- cbind(x, SpecCode = code)
   }

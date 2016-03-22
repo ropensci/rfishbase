@@ -4,8 +4,8 @@
 rfishbase <- new.env(hash = TRUE)
 
 
-FISHBASE_API <- "http://fishbase.ropensci.org"
-SEALIFEBASE_API <- "http://fishbase.ropensci.org/sealifebase"
+FISHBASE_API <- "https://fishbase.ropensci.org"
+SEALIFEBASE_API <- "https://fishbase.ropensci.org/sealifebase"
 
 #' load_taxa
 #' 
@@ -24,7 +24,7 @@ load_taxa <- function(update = FALSE, cache = TRUE, server = getOption("FISHBASE
   } else if(server == SEALIFEBASE_API){
     cache_name <- "sealifebase"
   } else {
-    warning("Did not reconize API, assuming it is fishbase`")
+    warning("Did not recognize API, assuming it is fishbase")
     cache_name <- "fishbase"
     
   }

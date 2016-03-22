@@ -11,7 +11,8 @@
 #' resp$times
 #' 
 #' ## Show API endpoints:
-#' content(resp)
+#' library("httr")
+#' httr::content(resp)
 #' 
 #' }
 #' @importFrom httr GET user_agent
