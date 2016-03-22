@@ -4,7 +4,7 @@ test_that("We can pass a species_list based on taxanomic group", {
   
   fish <- species_list(Genus = "Labroides") 
   expect_is(fish, "character")
-  expect_more_than(length(fish), 1)
+  expect_gt(length(fish), 1)
   
 })
 

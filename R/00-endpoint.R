@@ -84,7 +84,7 @@ endpoint <- function(endpt, tidy_table = default_tidy){
 default_tidy <- function(x, server = getOption("FISHBASE_API", FISHBASE_API)){
   if("SpecCode" %in% names(x)){
     code <- x$SpecCode
-    x$SpecCode <- species_names(code, server = server)
+    x$SpecCode <- unique(species_names(code, server = server))
     names(x)[names(x) == "SpecCode"] <- "sciname"
     x <- cbind(x, SpecCode = code)
   }

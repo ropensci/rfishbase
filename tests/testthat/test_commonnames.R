@@ -5,7 +5,7 @@ test_that("test common to sci name", {
   needs_api()
   species <- common_to_sci(c("Bicolor cleaner wrasse", "humphead parrotfish"), Language="English")
   expect_is(species, "character")
-  expect_more_than(length(species), 1)
+  expect_gt(length(species), 1)
   
   species <- common_to_sci("trout")
   expect_is(species, "character")
@@ -13,7 +13,7 @@ test_that("test common to sci name", {
   
   species <- common_to_sci(c("trout", "Coho Salmon"))
   expect_is(species, "character")
-  expect_more_than(length(species), n)
+  expect_gt(length(species), n)
 })
 
 

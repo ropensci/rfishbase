@@ -2,3 +2,5 @@ inst/api
 .Rproj.user
 inst/doc
 .httr-oauth
+.Rhistory
+

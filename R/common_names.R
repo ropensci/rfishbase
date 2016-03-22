@@ -134,7 +134,7 @@ sci_to_common <- function(species_list,
   } else {
     ## based on most freq name in commonnames table
     out <- sapply(species_list, function(s){
-      df <- commonnames(s, Language = Language, limit = limit)
+      df <- common_names(s, Language = Language, limit = limit)
       names(which.max(table(df$ComName)))
     })
   }
