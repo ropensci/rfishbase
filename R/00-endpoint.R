@@ -9,12 +9,14 @@ endpoint <- function(endpt, tidy_table = default_tidy){
     codes <- speccodes(species_list)
     if(is.list(codes) && length(codes)>0) {# partial match
       warning(paste(length(codes[lapply(codes, length)>1]),'of the supplied species names match species in fishbase: \n'),paste(species_list[unlist(lapply(codes, length)>1)], collapse = '\n')) 
-      codes <- codes[lapply(codes, length)==1]
+      codes <- unique(codes[lapply(codes, length)==1])
     } else if(is.matrix(codes)) { # no match
       stop('None of the supplied species names match species in fishbase') 
     } else if (length(codes) == 0) { # return table up to limit
       codes = ''
       warning('No species list supplied: retrieving data up to limit')
+    } else {
+      codes <- unique(codes)
     }
     
     dplyr::bind_rows(lapply(codes, function(code){
