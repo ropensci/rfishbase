@@ -4,9 +4,9 @@
 #' @importFrom dplyr bind_rows
 endpoint <- function(endpt, tidy_table = default_tidy){
   
-  function(species_list=NULL, fields = NULL, limit = 200, server = getOption("FISHBASE_API", FISHBASE_API), ...){
+  function(species_list=NULL, fields = NULL, query = NULL, limit = 200, server = getOption("FISHBASE_API", FISHBASE_API), ...){
     
-    codes <- speccodes(species_list)
+    codes <- speccodes(species_list, all_taxa = load_taxa(server=server))
     if(is.list(codes) && length(codes)>0) {# partial match
       warning(paste(length(codes[lapply(codes, length)>1]),'of the supplied species names match species in fishbase: \n'),paste(species_list[unlist(lapply(codes, length)>1)], collapse = '\n')) 
       codes <- unique(codes[lapply(codes, length)==1])
@@ -35,6 +35,9 @@ endpoint <- function(endpt, tidy_table = default_tidy){
                       fields = paste(c("SpecCode", fields), 
                                      collapse=","))
           
+          if(!is.null(query)) 
+            args <- c(args, query)
+            
           # Workaround for inconsistent names in certain endpoints
           bad_tables = c('diet', 'ecosystem', 'maturity', 'morphdat', 'morphmet', 'popchar', 'poplf')
           if(endpt %in% bad_tables){
@@ -57,6 +60,8 @@ endpoint <- function(endpt, tidy_table = default_tidy){
           args <- c(args, 
                     fields = paste(c("SpecCode", fields), 
                                    collapse=","))
+        if(!is.null(query)) 
+          args <- c(args, query)
         
         # Workaround for inconsistent names in certain endpoints
         bad_tables = c('diet', 'ecosystem', 'maturity', 'morphdat', 'morphmet', 'popchar', 'poplf')
@@ -86,7 +91,7 @@ endpoint <- function(endpt, tidy_table = default_tidy){
 default_tidy <- function(x, server = getOption("FISHBASE_API", FISHBASE_API)){
   if("SpecCode" %in% names(x)){
     code <- x$SpecCode
-    x$SpecCode <- unique(species_names(code, server = server))
+    x$SpecCode <- species_names(code, server = server)
     names(x)[names(x) == "SpecCode"] <- "sciname"
     x <- cbind(x, SpecCode = code)
   }
