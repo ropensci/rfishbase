@@ -11,8 +11,8 @@ test_that("We can refresh the taxa list and use it in future calls", {
   if(TRUE) skip("skip full join, too demanding on server")
 
   needs_api()  
-  df <- load_taxa(update = TRUE, cache = TRUE)
+  df <- load_taxa(update = TRUE, cache = TRUE, limit = 6000)
   expect_is(df, "data.frame")
+  expect_equal(nrow(df), 6000)
 
 })
-
