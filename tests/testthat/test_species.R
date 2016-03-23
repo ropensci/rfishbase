@@ -43,5 +43,51 @@ test_that("We can filter on preset fields",{
 
 ## Test wrong species name?
 
+test_that("Fully unmatched species names throw error",{
+  needs_api()  
+  expect_error(species(c("foo", "bar")))
+})
+
+test_that("Partial species match gives warning for missing matches",{
+  needs_api()  
+  expect_warning(species(c("Oreochromis niloticus", "Bolbometopon muricatum","foo", "bar")), 'supplied species names did not match any species in the database')
+})
+
+test_that("Partial species match gives warning for missing matches",{
+  needs_api()  
+  expect_warning(species(c("Oreochromis niloticus", "Bolbometopon muricatum","foo", "bar")), 'supplied species names did not match any species in the database')
+})
+
+test_that("Duplicate species names in species_list returns unique match",{
+  needs_api()  
+  df_s <- species("Oreochromis niloticus")
+  df_d <- species(c("Oreochromis niloticus", "Oreochromis niloticus"))
+  df_dm <- species(c("Oreochromis niloticus", "Oreochromis niloticus", "foo"))
+  expect_equal(nrow(df_s), nrow(df_d))
+  expect_equal(nrow(df_s), nrow(df_dm))
+})
+
+test_that("Sealifebase species are matched",{
+  needs_api()  
+  df_s <- species("Homarus americanus", 
+                  server = "https://fishbase.ropensci.org/sealifebase")
+  df_d <- species(c("Homarus americanus", "Homarus americanus"), 
+                  server = "https://fishbase.ropensci.org/sealifebase")
+  df_dm <- species(c("Homarus americanus", "Homarus americanus", "foo"),
+                  server = "https://fishbase.ropensci.org/sealifebase")
+  
+  expect_equal(nrow(df_s), nrow(df_d))
+  expect_equal(nrow(df_s), nrow(df_dm))
+})
+
+test_that("no species list returns table up to limit",{
+  needs_api()  
+  df_fb <- species(limit=6000)
+  df_slb <- species(limit=6000, server = "https://fishbase.ropensci.org/sealifebase")
+  
+  expect_equal(nrow(df_fb), 6000)
+  expect_equal(nrow(df_slb), 6000)
+})
+
 ## Test wrong server?
 #test_that()
