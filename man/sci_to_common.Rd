@@ -8,7 +8,7 @@ sci_to_common(species_list, Language = NULL, limit = 1000,
   server = getOption("FISHBASE_API", FISHBASE_API))
 }
 \arguments{
-\item{species_list}{A vector of scientific names (each element as "genus species").}
+\item{species_list}{A vector of scientific names (each element as "genus species"). If empty, the table will be loaded up to the limit. This makes it possible to load an entire table without knowledge of the species in the table, thus avoiding uneccesary API calls.}
 
 \item{Language}{the language for the common name, see details.}
 

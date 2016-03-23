@@ -23,7 +23,8 @@ resp <- heartbeat()
 resp$times
 
 ## Show API endpoints:
-content(resp)
+library("httr")
+httr::content(resp)
 
 }
 }

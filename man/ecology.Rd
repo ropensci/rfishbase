@@ -8,7 +8,7 @@ ecology(species_list, fields = NULL, limit = 1,
   server = getOption("FISHBASE_API", FISHBASE_API))
 }
 \arguments{
-\item{species_list}{A vector of scientific names (each element as "genus species").}
+\item{species_list}{A vector of scientific names (each element as "genus species"). If empty, the table will be loaded up to the limit. This makes it possible to load an entire table without knowledge of the species in the table, thus avoiding uneccesary API calls.}
 
 \item{fields}{a character vector specifying which fields (columns) should be returned. By default,
 all available columns recognized by the parser are returned. This option can be used to the amount
