@@ -5,7 +5,7 @@
 \title{load_taxa}
 \usage{
 load_taxa(update = FALSE, cache = TRUE, server = getOption("FISHBASE_API",
-  FISHBASE_API), limit = 400000L)
+  FISHBASE_API), limit = 5000L)
 }
 \arguments{
 \item{update}{logical, should we query the API to update the available list?}
