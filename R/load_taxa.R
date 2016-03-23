@@ -3,7 +3,6 @@
 ## Create an environment to cache the full speices table
 rfishbase <- new.env(hash = TRUE)
 
-
 FISHBASE_API <- "https://fishbase.ropensci.org"
 SEALIFEBASE_API <- "https://fishbase.ropensci.org/sealifebase"
 
@@ -38,10 +37,10 @@ load_taxa <- function(update = FALSE, cache = TRUE, server = getOption("FISHBASE
     
     if(update){
       
-      #limit the limit
-      ifelse(server == SEALIFEBASE_API, 
-             limit = min(limit,120000L), 
-             limit = min(limit,33000L))
+      #limit the limit to avoid uneccesary (empty) calls
+      limit <- ifelse(server == getOption("FISHBASE_API", FISHBASE_API),  
+                      min(limit,120000L), 
+                      min(limit,33000L))
       
       if(limit>5000){
         k <- 0
