@@ -78,7 +78,7 @@ faoareas <- function(species_list, fields = NULL, server = getOption("FISHBASE_A
   dplyr::bind_rows(lapply(codes, function(code) {
     resp <- httr::GET(paste0(server, "/faoareas"), 
                       query = list(SpecCode = code, limit = limit, fields = faoareas_fl),
-                      httr::user_agent(make_ua()), verbose())
+                      httr::user_agent(make_ua()))
     table1 <- check_and_parse(resp)
     
     ## Look up area codes
@@ -94,7 +94,7 @@ faoareas <- function(species_list, fields = NULL, server = getOption("FISHBASE_A
 faoarrefs <- function(area_code, fields = NULL, server = getOption("FISHBASE_API", FISHBASE_API), limit = 100){
   resp <- httr::GET(paste0(server, "/faoarref/", area_code), 
               query = list(limit = limit, fields = fields),
-              user_agent(make_ua()), verbose())
+              user_agent(make_ua()))
   check_and_parse(resp)
 }
 
