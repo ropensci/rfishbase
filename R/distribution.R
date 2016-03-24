@@ -49,8 +49,8 @@ c_code <- function(c_code, server = getOption("FISHBASE_API", FISHBASE_API), fie
 #' }
 #' @details currently this is ~ FAO areas table (minus "note" field)
 #' e.g. http://www.fishbase.us/Country/FaoAreaList.php?ID=5537
-distribution <- function(species_list, server = getOption("FISHBASE_API", FISHBASE_API), limit = 500){
-  faoareas(species_list, server = server, limit = limit)
+distribution <- function(species_list, fields = NULL, server = getOption("FISHBASE_API", FISHBASE_API), limit = 500){
+  faoareas(species_list, fields = fields, server = server, limit = limit)
 }
 
 
@@ -68,34 +68,34 @@ distribution <- function(species_list, server = getOption("FISHBASE_API", FISHBA
 #' }
 #' @details currently this is ~ FAO areas table (minus "note" field)
 #' e.g. http://www.fishbase.us/Country/FaoAreaList.php?ID=5537
-faoareas <- function(species_list, server = getOption("FISHBASE_API", FISHBASE_API), limit = 500){
+faoareas <- function(species_list, fields = NULL, server = getOption("FISHBASE_API", FISHBASE_API), limit = 500){
   codes <- speccodes(species_list)
-  out <- dplyr::bind_rows(lapply(codes, function(code){
   
-  resp <- httr::GET(paste0(server, "/faoareas"), 
-              query = list(SpecCode = code, limit = limit,
-                           fields='AreaCode,SpecCode,Status'),
-              httr::user_agent(make_ua()))  
-  table1 <- check_and_parse(resp)
+  faoareas_get <- c('AreaCode', 'SpecCode', 'Status')
+  faoarrefs_get <- c('AreaCode', 'FAO')
   
-  ## Look up area codes
-  table2 <- dplyr::bind_rows(lapply(table1$AreaCode, faoarrefs))
-  dplyr::left_join(table1, table2,by='AreaCode')
-  ## cbind
-  
+  faoareas_fl <- paste0(if (!is.null(fields)) c(faoareas_get, fields) else faoareas_get, collapse = ",")
+  dplyr::bind_rows(lapply(codes, function(code) {
+    resp <- httr::GET(paste0(server, "/faoareas"), 
+                      query = list(SpecCode = code, limit = limit, fields = faoareas_fl),
+                      httr::user_agent(make_ua()), verbose())
+    table1 <- check_and_parse(resp)
+    
+    ## Look up area codes
+    table2 <- dplyr::bind_rows(lapply(table1$AreaCode, function(x) {
+      faoarrefs_fl <- paste0(if (!is.null(fields)) c(faoarrefs_get, fields) else faoarrefs_get, collapse = ",")
+      faoarrefs(x, fields = faoarrefs_fl, server = server, limit = limit)
+    }))
+    dplyr::left_join(table1, table2, by = 'AreaCode')
   }))
-  
-  out
 }
 
 
-faoarrefs <- function(area_code, server = getOption("FISHBASE_API", FISHBASE_API), limit = 100){
-  ## add in a fields list to filter returned values
+faoarrefs <- function(area_code, fields = NULL, server = getOption("FISHBASE_API", FISHBASE_API), limit = 100){
   resp <- httr::GET(paste0(server, "/faoarref/", area_code), 
-              query = list(limit = limit,
-                           fields='AreaCode,FAO'),
-              user_agent(make_ua()))
-  data <- check_and_parse(resp)
+              query = list(limit = limit, fields = fields),
+              user_agent(make_ua()), verbose())
+  check_and_parse(resp)
 }
 
 
