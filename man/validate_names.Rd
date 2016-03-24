@@ -8,7 +8,7 @@ validate_names(species_list, limit = 50, server = getOption("FISHBASE_API",
   FISHBASE_API))
 }
 \arguments{
-\item{species_list}{A vector of scientific names (each element as "genus species").}
+\item{species_list}{A vector of scientific names (each element as "genus species"). If empty, the table will be loaded up to the limit. This makes it possible to load an entire table without knowledge of the species in the table, thus avoiding uneccesary API calls.}
 
 \item{limit}{The maximum number of matches from a single API call (e.g. per species). Function
 will warn if this needs to be increased, otherwise can be left as is.}
