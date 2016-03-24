@@ -13,7 +13,7 @@ c_code(c_code, server = getOption("FISHBASE_API", FISHBASE_API),
 \item{server}{base URL to the FishBase API (by default). For SeaLifeBase, use http://fishbase.ropensci.org/sealifebase}
 
 \item{fields}{a character vector specifying which fields (columns) should be returned. By default,
-all available columns recognized by the parser are returned. This option can be used to the amount
+all available columns recognized by the parser are returned. This option can be used to limit the amount
 of data transfered over the network if only certain columns are needed.}
 
 \item{limit}{The maximum number of matches from a single API call (e.g. per species). Function

@@ -20,7 +20,7 @@ will warn if this needs to be increased, otherwise can be left as is.}
 \item{Language}{a string specifying the language for the common name, e.g. "English"}
 
 \item{fields}{a character vector specifying which fields (columns) should be returned. By default,
-all available columns recognized by the parser are returned. This option can be used to the amount
+all available columns recognized by the parser are returned. This option can be used to limit the amount
 of data transfered over the network if only certain columns are needed.}
 }
 \value{

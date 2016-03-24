@@ -6,8 +6,9 @@
 #'   will warn if this needs to be increased, otherwise can be left as is. 
 #' @param server base URL to the FishBase API (by default). For SeaLifeBase, use http://fishbase.ropensci.org/sealifebase
 #' @param fields a character vector specifying which fields (columns) should be returned. By default,
-#'  all available columns recognized by the parser are returned. This option can be used to the amount
-#'  of data transfered over the network if only certain columns are needed.  
+#'  all available columns recognized by the parser are returned. This option can be used to limit the amount
+#'  of data transfered over the network if only certain columns are needed. 
+#' @param query a named list specifying specific subsets of fields.
 #' @param ... additional arguments to httr::GET
 #' @return a data.frame with rows for species and columns for the fields returned by the query (FishBase 'species' table)
 #' @details 
