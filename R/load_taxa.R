@@ -39,8 +39,8 @@ load_taxa <- function(update = FALSE, cache = TRUE, server = getOption("FISHBASE
       
       #limit the limit to avoid uneccesary (empty) calls
       limit <- ifelse(server == getOption("FISHBASE_API", FISHBASE_API),  
-                      min(limit,120000L), 
-                      min(limit,33000L))
+                      min(limit,35000L),
+                      min(limit,120000L))
       
       if(limit>5000){
         k <- 0
