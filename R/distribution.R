@@ -115,13 +115,13 @@ ecosystem <- endpoint("ecosystem")
 
 #' occurrence
 #' 
-#' @return a table of species occurrence data
-#' @inheritParams species
+#' @details THE OCCURRENCE TABLE HAS BEEN DROPPED BY FISHBASE - THIS
+#' FUNCTION NOW RETURNS A STOP MESSAGE.
 #' @export
-#' @examples \dontrun{
-#' occurrence("Oreochromis niloticus")
-#' }
-occurrence <- endpoint("occurrence")
+occurrence <- function() {
+  stop("occurrence is no longer available", call. = FALSE)
+  #endpoint("occurrence")
+}
 
 #' introductions
 #' 
