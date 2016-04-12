@@ -14,6 +14,27 @@
 #' e.g. http://www.fishbase.us/Country
 country <- endpoint("country")
 
+#' countrysub
+#' 
+#' return a table of countrysub for the requested species
+#' 
+#' @inheritParams species
+#' @export
+#' @examples \dontrun{
+#' countrysub(species_list(Genus='Labroides'))
+#' }
+countrysub <- endpoint("countrysub")
+
+#' countrysubref
+#' 
+#' return a table of countrysubref for the requested species
+#' 
+#' @inheritParams species
+#' @export
+#' @examples \dontrun{
+#' countrysubref(species_list(Genus='Labroides'))
+#' }
+countrysubref <- endpoint("countrysubref")
 
 
 #' c_code
