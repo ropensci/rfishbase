@@ -31,7 +31,7 @@ country <- endpoint("country")
 c_code <- function(c_code, server = getOption("FISHBASE_API", FISHBASE_API), fields='', limit = 500){
   resp <- httr::GET(paste0(server, "/faoareas"), 
                     query = list(C_Code = c_code, limit = limit,
-                                 fields),
+                                 fields = fields),
                     httr::user_agent(make_ua()))  
   check_and_parse(resp)
 }
