@@ -1,0 +1,15 @@
+
+citEntry(
+  entry = 'article',
+  title = 'rfishbase: exploring, manipulating and visualizing {FishBase} data from R',
+  author = c(person("Carl", "Boettiger", role = c("cre", "aut"), email = "cboettig@ropensci.org"),
+             person("Duncan", "Temple Lang", role="aut"), 
+             person("Peter", "Wainwright", role="aut")),
+  month = 'nov',
+  year = '2012',
+  publisher = 'Wiley-Blackwell',
+  journal = 'Journal of Fish Biology',
+  url = 'http://dx.doi.org/10.1111/j.1095-8649.2012.03464.x',
+  textVersion = 'C. Boettiger, D. T. Lang and P. C. Wainwright. "rfishbase: exploring, manipulating and visualizing FishBase data from R". In: _Journal of Fish Biology_ 81.6 (Nov. 2012), pp.
+2030-2039. DOI: 10.1111/j.1095-8649.2012.03464.x'
+  )
