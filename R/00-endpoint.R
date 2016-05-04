@@ -72,7 +72,7 @@ endpoint <- function(endpt, tidy_table = default_tidy){
         
         resp <- httr::GET(paste0(server, "/", endpt), 
                           query = args, 
-                          ..., 
+                          #..., 
                           httr::user_agent(make_ua()))
         data <- check_and_parse(resp)
         

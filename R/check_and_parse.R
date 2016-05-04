@@ -47,24 +47,24 @@ error_checks <- function(parsed, resp = structure(list(url="error, no httr respo
   
   # If API fails completely, parsed is just a character stream error:
   if(is.character(parsed)){ 
-    warning(paste(parsed, "for query", resp$url))
+    warning(paste(parsed, "for query", resp$url), call. = FALSE)
     proceed <- FALSE
   } else if(!is.list(parsed) || length(parsed) == 0){
-    warning(paste("Failed to parse or empty query results for", resp$url))
+    warning(paste("Failed to parse or empty query results for", resp$url), call. = FALSE)
     proceed <- FALSE
   } else {
     ## check for errors in the API query
     if(!is.null(parsed$error)) {
-        warning(paste(parsed$error, "for query", resp$url))
+        warning(paste(parsed$error, "for query", resp$url), call. = FALSE)
       proceed <- FALSE
     } else if(parsed$count == 0){
-      warning(paste("No matches to query found","for query", resp$url))
+      warning(paste("No matches to query found","for query", resp$url), call. = FALSE)
       proceed <- FALSE
     } else if(parsed$count > parsed$returned){
       ## Comment if returns are incomplete.
       warning(paste("Returning first", parsed$returned, 
                     "matches parsed of", parsed$count, "matches.",
-                    "\n Increase limit or refine query"))
+                    "\n Increase limit or refine query"), call. = FALSE)
       proceed <- TRUE
     }
   }
