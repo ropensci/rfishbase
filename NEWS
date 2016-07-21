@@ -27,6 +27,15 @@ And constructed with the following guidelines:
 
 For more information on SemVer, please visit http://semver.org/.
 
+v2.1.1
+-------
+
+
+* bugfix for endpoints with inconsistent spelling of SpecCode column 
+(e.g. maturity, diet, ecosystem, morphology, morphometrics, popchar, poplf).
+* Now properly queries by input species list
+* Minor bug fixes for issues #77 #82 #83 #89 #93 #94 #95 #97 #99 #100 (see https://github.com/ropensci/rfishbase/issues)
+
 v2.1.0
 ------
 
@@ -50,12 +59,3 @@ v2.0.1
 First official release of the new rfishbase package, a non-backwards
 compatible replacement to all earlier versions of FishBase. See the
 package vignette for a more detailed overview and introduction.
-
-v2.0.1.1
------
-
-* bugfix for endpoints with inconsistent spelling of SpecCode column 
-(e.g. maturity, diet, ecosystem, morphology, morphometrics, popchar, poplf).
-Now properly queries by input species list
-
-

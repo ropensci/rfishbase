@@ -7,7 +7,7 @@ The new `rfishbase` package queries this API directly rather than the FishBase.o
 
 In having access to much more data, the new `rfishbase` can be difficult to navigate. We have provided several helper functions for users to discover which tables they need, as illustrated below. Unfortunately, FishBase.org lacks detailed documentation of all of the tables and fields contained in it's database. For the most part, table and column names are self-documenting, but details are often missing which can create a puzzle for researchers trying to figure out precisely what data is provided in a given column. To address this challenge, we have created a crowd-sourced collection of documentation that can be queried from the API to provide more detailed descriptions.
 
-We welcome any feedback, issues or questions that users may encounter through our issues tracker on GitHub: [<https://github.com/ropensci/rfishbase/issues>].
+We welcome any feedback, issues or questions that users may encounter through our issues tracker on GitHub: \[<https://github.com/ropensci/rfishbase/issues>\].
 
 Installation
 ------------
@@ -77,37 +77,72 @@ The `species()` function returns a table containing much (but not all) of the in
 species(fish[1:2])
 ```
 
-    Source: local data frame [2 x 100]
-
                   sciname        Genus Species SpeciesRefNo          Author
     1        Salmo trutta        Salmo  trutta         4779  Linnaeus, 1758
     2 Oncorhynchus mykiss Oncorhynchus  mykiss         4706 (Walbaum, 1792)
-    Variables not shown: FBname (chr), PicPreferredName (chr),
-      PicPreferredNameM (lgl), PicPreferredNameF (lgl), PicPreferredNameJ
-      (chr), FamCode (int), Subfamily (chr), GenCode (int), SubGenCode (lgl),
-      BodyShapeI (chr), Source (chr), AuthorRef (lgl), Remark (lgl), TaxIssue
-      (int), Fresh (int), Brack (int), Saltwater (int), DemersPelag (chr),
-      AnaCat (chr), MigratRef (int), DepthRangeShallow (int), DepthRangeDeep
-      (int), DepthRangeRef (int), DepthRangeComShallow (lgl),
-      DepthRangeComDeep (int), DepthComRef (lgl), LongevityWild (dbl),
-      LongevityWildRef (int), LongevityCaptive (dbl), LongevityCapRef (int),
-      Vulnerability (dbl), Length (dbl), LTypeMaxM (chr), LengthFemale (lgl),
-      LTypeMaxF (lgl), MaxLengthRef (int), CommonLength (dbl), LTypeComM
-      (chr), CommonLengthF (lgl), LTypeComF (lgl), CommonLengthRef (int),
-      Weight (dbl), WeightFemale (lgl), MaxWeightRef (int), Pic (chr),
-      PictureFemale (lgl), LarvaPic (lgl), EggPic (lgl), ImportanceRef (int),
-      Importance (chr), PriceCateg (chr), PriceReliability (chr), Remarks7
-      (chr), LandingStatistics (chr), Landings (chr), MainCatchingMethod
-      (chr), II (chr), MSeines (int), MGillnets (int), MCastnets (int), MTraps
-      (int), MSpears (int), MTrawls (int), MDredges (int), MLiftnets (int),
-      MHooksLines (int), MOther (int), UsedforAquaculture (chr), LifeCycle
-      (chr), AquacultureRef (int), UsedasBait (chr), BaitRef (lgl), Aquarium
-      (chr), AquariumFishII (chr), AquariumRef (int), GameFish (int), GameRef
-      (int), Dangerous (chr), DangerousRef (lgl), Electrogenic (chr),
-      ElectroRef (lgl), Complete (lgl), GoogleImage (int), Comments (chr),
-      Profile (lgl), PD50 (dbl), Emblematic (int), Entered (int), DateEntered
-      (chr), Modified (int), DateModified (chr), Expert (int), DateChecked
-      (chr), TS (lgl), SpecCode (int)
+             FBname PicPreferredName PicPreferredNameM PicPreferredNameF
+    1     Sea trout     Satru_u2.jpg                NA                NA
+    2 Rainbow trout     Onmyk_f0.jpg                NA                NA
+      PicPreferredNameJ FamCode  Subfamily GenCode SubGenCode
+    1      Satru_uc.jpg      76 Salmoninae    6009         NA
+    2              <NA>      76 Salmoninae    2445         NA
+             BodyShapeI Source AuthorRef Remark TaxIssue Fresh Brack Saltwater
+    1 fusiform / normal      R        NA     NA        0    -1    -1        -1
+    2 fusiform / normal      R        NA     NA        0    -1    -1        -1
+          DemersPelag     AnaCat MigratRef DepthRangeShallow DepthRangeDeep
+    1 pelagic-neritic anadromous     51243                 0             NA
+    2   benthopelagic anadromous     51243                 0            200
+      DepthRangeRef DepthRangeComShallow DepthRangeComDeep DepthComRef
+    1            NA                   NA                10          NA
+    2         50550                   NA                NA          NA
+      LongevityWild LongevityWildRef LongevityCaptive LongevityCapRef
+    1            38            32682             10.3             274
+    2            11            12193              4.0             273
+      Vulnerability Length LTypeMaxM LengthFemale LTypeMaxF MaxLengthRef
+    1         59.96    140        SL           NA        NA          682
+    2         36.29    122        TL           NA        NA        96339
+      CommonLength LTypeComM CommonLengthF LTypeComF CommonLengthRef Weight
+    1           72        TL            NA        NA            3397  50000
+    2           60        TL            NA        NA            5504  25400
+      WeightFemale MaxWeightRef      Pic PictureFemale LarvaPic EggPic
+    1           NA          682 SATRU_U2            NA       NA     NA
+    2           NA         7251 ONMYK_U2            NA       NA     NA
+      ImportanceRef        Importance PriceCateg
+    1          4931        commercial  very high
+    2          4931 highly commercial        low
+                                         PriceReliability             Remarks7
+    1 Reliable: based on ex-vessel price for this species                 <NA>
+    2 Reliable: based on ex-vessel price for this species Important game fish.
+            LandingStatistics           Landings MainCatchingMethod II MSeines
+    1    from 1,000 to 10,000 Finland in area 27             seines          0
+    2 from 100,000 to 500,000               <NA>    hooks and lines          0
+      MGillnets MCastnets MTraps MSpears MTrawls MDredges MLiftnets
+    1        -1         0     -1       0       0        0         0
+    2        -1         0      0       0       0        0         0
+      MHooksLines MOther UsedforAquaculture
+    1          -1      0         commercial
+    2          -1      0         commercial
+                                    LifeCycle AquacultureRef   UsedasBait
+    1                                                  12228 never/rarely
+    2 life cycle closed in commercial culture          12108 never/rarely
+      BaitRef     Aquarium           AquariumFishII AquariumRef GameFish
+    1      NA never/rarely based mainly on breeding         274       -1
+    2      NA never/rarely  based mainly on capture        9183       -1
+      GameRef      Dangerous DangerousRef       Electrogenic ElectroRef
+    1    4699 potential pest           NA no special ability         NA
+    2    4699 potential pest           NA no special ability         NA
+      Complete GoogleImage
+    1       NA          -1
+    2       NA          -1
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     Comments
+    1 Found in streams, ponds, rivers and lakes (Ref. 5951).  Individuals spend 1 to 5 years in fresh water and 6 months to 5 years in salt water (Ref. 51442).  Juveniles mature in 3-4 years (Ref. 6885).  Lacustrine populations undertake migration to tributaries and lake outlets to spawn, rarely spawning on stone, wave-washed lake shores.  Spawns in rivers and streams with swift current, usually characterized by downward movement of water intro gravel (Ref. 59043).  Spawning takes place normally more than one time (Ref. 51442).  They prefer cold, well-oxygenated upland waters although their tolerance limits are lower than those of rainbow trout and favors large streams in the mountainous areas with adequate cover in the form of submerged rocks, undercut banks, and overhanging vegetation (Ref. 6465).  Life history and spawning behavior is similar to the salmon <i>Salmo salar</i> (Ref. 51442).  Each female produces about 10.000 eggs (Ref. 35388, Ref. 51442).  Mainly diurnal (Ref. 682).  Sea and lake trouts forage in pelagic and littoral habitats, while sea trouts mainly close to coast, not very far from estuary of natal river (Ref. 59043).  Juveniles feed mainly on aquatic and terrestrial insects; adults on mollusks, crustaceans and small fish (Ref. 26523, Ref. 51442).  Marketed fresh and smoked; eaten fried, broiled, boiled, cooked in microwave, and baked (Ref. 9988).
+    2                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                Adults inhabit cold headwaters, creeks, small to large rivers, and lakes.  Anadromous in coastal streams (Ref. 5723).  Stocked in almost all water bodies as lakes, rivers and streams, usually not stocked in water reaching summer temperatures above 25°C or ponds with very low oxygen concentrations.  Feed on a variety of aquatic and terrestrial invertebrates and small fishes. At the sea, they prey on fish and cephalopods.  Mature individuals undertake short spawning migrations.  Anadromous and lake forms may migrate long distances to spawning streams (Ref. 59043). Utilized fresh, smoked, canned, and frozen; eaten steamed, fried, broiled, boiled, microwaved and baked (Ref. 9988).  Cultured in many countries and is often hatched and stocked into rivers and lakes especially to attract recreational fishers (Ref. 9988).
+      Profile PD50 Emblematic Entered              DateEntered Modified
+    1      NA  0.5          0       2 1990-10-17T00:00:00.000Z       10
+    2      NA  0.5          0       2 1990-10-17T00:00:00.000Z     2291
+                  DateModified Expert              DateChecked TS SpecCode
+    1 2013-09-13T00:00:00.000Z     97 2003-01-03T00:00:00.000Z NA      238
+    2 2014-12-16T00:00:00.000Z     97 2003-01-15T00:00:00.000Z NA      239
 
 Most tables contain many fields. To avoid overly cluttering the screen, `rfishbase` displays tables as `data_frame` objects from the `dplyr` package. These act just like the familiar `data.frames` of base R except that they print to the screen in a more tidy fashion. Note that columns that cannot fit easily in the display are summarized below the table. This gives us an easy way to see what fields are available in a given table. For instance, from this table we may only be interested in the `PriceCateg` (Price category) and the `Vulnerability` of the species. We can repeat the query for our full species list, asking for only these fields to be returned:
 
@@ -116,18 +151,16 @@ dat <- species(fish, fields=c("SpecCode", "PriceCateg", "Vulnerability"))
 dat
 ```
 
-    Source: local data frame [9 x 4]
-
-                         sciname PriceCateg Vulnerability SpecCode
-    1               Salmo trutta  very high         59.96      238
-    2        Oncorhynchus mykiss        low         36.29      239
-    3      Salvelinus fontinalis  very high         43.37      246
-    4 Salvelinus alpinus alpinus  very high         74.33      247
-    5         Lethrinus miniatus  very high         52.78     1858
-    6           Salvelinus malma  very high         69.97     2691
-    7     Plectropomus leopardus  very high         51.04     4826
-    8  Schizothorax richardsonii    unknown         34.78     8705
-    9          Arripis truttacea    unknown         47.96    14606
+                         sciname Vulnerability PriceCateg SpecCode
+    1               Salmo trutta         59.96  very high      238
+    2        Oncorhynchus mykiss         36.29        low      239
+    3      Salvelinus fontinalis         43.37  very high      246
+    4 Salvelinus alpinus alpinus         74.33  very high      247
+    5         Lethrinus miniatus         52.78  very high     1858
+    6           Salvelinus malma         69.97  very high     2691
+    7     Plectropomus leopardus         51.04  very high     4826
+    8  Schizothorax richardsonii         34.78    unknown     8705
+    9          Arripis truttacea         47.96    unknown    14606
 
 ### FishBase Docs: Discovering data
 
@@ -139,9 +172,9 @@ Because `rfishbase` accesses the back end database, it does not always line up w
 list_fields("Resilience")
 ```
 
-    Source: local data frame [2 x 2]
-
-      TABLE_NAME      COLUMN_NAME
+    # A tibble: 2 x 2
+      table_name      column_name
+           <chr>            <chr>
     1     stocks       Resilience
     2     stocks ResilienceRemark
 
@@ -152,23 +185,23 @@ resil <- stocks(fish, fields="Resilience")
 merge(dat, resil)
 ```
 
-                          sciname SpecCode PriceCateg Vulnerability Resilience
-    1           Arripis truttacea    14606    unknown         47.96     Medium
-    2          Lethrinus miniatus     1858  very high         52.78     Medium
-    3         Oncorhynchus mykiss      239        low         36.29     Medium
-    4      Plectropomus leopardus     4826  very high         51.04     Medium
-    5                Salmo trutta      238  very high         59.96       High
-    6                Salmo trutta      238  very high         59.96       <NA>
-    7                Salmo trutta      238  very high         59.96     Medium
-    8                Salmo trutta      238  very high         59.96        Low
-    9                Salmo trutta      238  very high         59.96       <NA>
-    10               Salmo trutta      238  very high         59.96       <NA>
-    11               Salmo trutta      238  very high         59.96       <NA>
-    12 Salvelinus alpinus alpinus      247  very high         74.33        Low
-    13      Salvelinus fontinalis      246  very high         43.37     Medium
-    14           Salvelinus malma     2691  very high         69.97        Low
-    15           Salvelinus malma     2691  very high         69.97       <NA>
-    16  Schizothorax richardsonii     8705    unknown         34.78     Medium
+                          sciname SpecCode Vulnerability PriceCateg Resilience
+    1           Arripis truttacea    14606         47.96    unknown     Medium
+    2          Lethrinus miniatus     1858         52.78  very high     Medium
+    3         Oncorhynchus mykiss      239         36.29        low     Medium
+    4      Plectropomus leopardus     4826         51.04  very high     Medium
+    5                Salmo trutta      238         59.96  very high       High
+    6                Salmo trutta      238         59.96  very high       <NA>
+    7                Salmo trutta      238         59.96  very high     Medium
+    8                Salmo trutta      238         59.96  very high        Low
+    9                Salmo trutta      238         59.96  very high       <NA>
+    10               Salmo trutta      238         59.96  very high       <NA>
+    11               Salmo trutta      238         59.96  very high       <NA>
+    12 Salvelinus alpinus alpinus      247         74.33  very high        Low
+    13      Salvelinus fontinalis      246         43.37  very high     Medium
+    14           Salvelinus malma     2691         69.97  very high        Low
+    15           Salvelinus malma     2691         69.97  very high       <NA>
+    16  Schizothorax richardsonii     8705         34.78    unknown     Medium
 
 Sometimes it is more useful to search for a broad description of the tables.
 
