@@ -42,7 +42,12 @@ maturity <- endpoint("maturity")
 #' }
 spawning <- endpoint("spawning")
 
-
-
-
-
+#' larvae
+#' 
+#' @return a table of larval data
+#' @inheritParams species
+#' @export
+#' @examples \dontrun{
+#' larvae("Oreochromis niloticus")
+#' }
+larvae <- endpoint("larvae")
