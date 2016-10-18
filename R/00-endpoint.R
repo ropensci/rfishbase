@@ -4,7 +4,7 @@
 #' @importFrom dplyr bind_rows
 endpoint <- function(endpt, tidy_table = default_tidy){
   
-  function(species_list=NULL, fields = NULL, query = NULL, limit = 200, server = getOption("FISHBASE_API", FISHBASE_API), ...){
+  function(species_list=NULL, fields = NULL, query = NULL, limit = 200, offset = 0, server = getOption("FISHBASE_API", FISHBASE_API), ...){
     
     codes <- speccodes(species_list, all_taxa = load_taxa(server=server))
     
@@ -55,8 +55,7 @@ endpoint <- function(endpt, tidy_table = default_tidy){
         }
       } else {
         
-        args <- list(SpecCode = code,
-                     limit = limit)
+        args <- list(SpecCode = code, limit = limit, offset = offset)
         if(!is.null(fields)) 
           args <- c(args, 
                     fields = paste(c("SpecCode", fields), 
@@ -72,7 +71,7 @@ endpoint <- function(endpt, tidy_table = default_tidy){
         
         resp <- httr::GET(paste0(server, "/", endpt), 
                           query = args, 
-                          #..., 
+                          ..., 
                           httr::user_agent(make_ua()))
         data <- check_and_parse(resp)
         
