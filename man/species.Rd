@@ -6,7 +6,7 @@
 \title{species}
 \usage{
 species(species_list = NULL, fields = NULL, query = NULL, limit = 200,
-  server = getOption("FISHBASE_API", FISHBASE_API), ...)
+  offset = 0, server = getOption("FISHBASE_API", FISHBASE_API), ...)
 }
 \arguments{
 \item{species_list}{A vector of scientific names (each element as "genus species"). If empty, the table will be loaded up to the limit. This makes it possible to load an entire table without knowledge of the species in the table, thus avoiding uneccesary API calls.}
@@ -19,6 +19,9 @@ of data transfered over the network if only certain columns are needed.}
 
 \item{limit}{The maximum number of matches from a single API call (e.g. per species). Function
 will warn if this needs to be increased, otherwise can be left as is.}
+
+\item{offset}{The record to start at. Use in combination with \code{limit}
+parameter when retrieving more than 5000 results. Default: 0}
 
 \item{server}{base URL to the FishBase API (by default). For SeaLifeBase, use http://fishbase.ropensci.org/sealifebase}
 

@@ -89,7 +89,7 @@ parse_name <- function(input){
     x <- strsplit(input, " ")[[1]]
     n <- length(x)
     
-    if(n == 1 && !is.na(as.numeric(x))){
+    if(n == 1 && !is.na(suppressWarnings(as.numeric(x)))){
       list(speccode = as.integer(x))
     } else if(n >= 2) {
       list(genus = x[1], species = paste(x[2:n], collapse=" "))
