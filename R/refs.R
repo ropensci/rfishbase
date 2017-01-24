@@ -8,7 +8,7 @@
 #' returned. This option can be used to limit the amount of data transfered 
 #' over the network if only certain columns are needed. 
 #' @param server base URL to the FishBase API (by default). For SeaLifeBase, 
-#' use http://fishbase.ropensci.org/sealifebase
+#' use https://fishbase.ropensci.org/sealifebase
 #' @param ... additional arguments to \code{\link[httr]{GET}}
 #' @return a tibble (data.frame) of reference data
 #' @examples \dontrun{

@@ -6,7 +6,7 @@ Description: A programmatic interface to <http://www.fishbase.org>, re-written
     supports experimental access to <http://www.sealifebase.org> data, which contains
     nearly 200,000 species records for all types of aquatic life not covered by
     'FishBase.'
-Version: 2.1.1.2
+Version: 2.1.1.3
 License: CC0
 Authors@R: c(person("Carl", "Boettiger", role = c("cre", "aut"), email = "cboettig@ropensci.org"),
              person("Scott", "Chamberlain", role = "aut", email = "scott@ropensci.org"),

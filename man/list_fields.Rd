@@ -10,7 +10,7 @@ list_fields(fields, server = getOption("FISHBASE_API", FISHBASE_API),
 \arguments{
 \item{fields}{field (column name) to search for}
 
-\item{server}{base URL to the FishBase API (by default). For SeaLifeBase, use http://fishbase.ropensci.org/sealifebase}
+\item{server}{base URL to the FishBase API (by default). For SeaLifeBase, use https://fishbase.ropensci.org/sealifebase}
 
 \item{implemented_only}{by default, only return those tables that have been implemented.}
 }

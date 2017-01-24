@@ -10,7 +10,7 @@ c_code(c_code, server = getOption("FISHBASE_API", FISHBASE_API),
 \arguments{
 \item{c_code}{a C_Code or list of C_Codes (FishBase country code)}
 
-\item{server}{base URL to the FishBase API (by default). For SeaLifeBase, use http://fishbase.ropensci.org/sealifebase}
+\item{server}{base URL to the FishBase API (by default). For SeaLifeBase, use https://fishbase.ropensci.org/sealifebase}
 
 \item{fields}{a character vector specifying which fields (columns) should be returned. By default,
 all available columns recognized by the parser are returned. This option can be used to limit the amount

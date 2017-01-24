@@ -13,7 +13,7 @@ load_taxa(update = FALSE, cache = TRUE, server = getOption("FISHBASE_API",
 \item{cache}{should we cache the updated version throughout this session? 
 (default TRUE, leave as is)}
 
-\item{server}{base URL to the FishBase API (by default). For SeaLifeBase, use http://fishbase.ropensci.org/sealifebase}
+\item{server}{base URL to the FishBase API (by default). For SeaLifeBase, use https://fishbase.ropensci.org/sealifebase}
 
 \item{limit}{The maximum number of matches from a single API call (e.g. per species). Function
 will warn if this needs to be increased, otherwise can be left as is.}

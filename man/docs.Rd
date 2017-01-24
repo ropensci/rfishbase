@@ -10,7 +10,7 @@ docs(table = "", server = getOption("FISHBASE_API", FISHBASE_API), ...)
 \item{table}{the table for which the documentation should be displayed.  If no table is given,
 documentation summarizing all available tables is shown.}
 
-\item{server}{base URL to the FishBase API (by default). For SeaLifeBase, use http://fishbase.ropensci.org/sealifebase}
+\item{server}{base URL to the FishBase API (by default). For SeaLifeBase, use https://fishbase.ropensci.org/sealifebase}
 
 \item{...}{additional arguments to httr::GET}
 }

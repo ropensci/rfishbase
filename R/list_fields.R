@@ -2,7 +2,7 @@
 #' 
 #' list fields
 #' @param fields field (column name) to search for
-#' @param  server base URL to the FishBase API (by default). For SeaLifeBase, use http://fishbase.ropensci.org/sealifebase 
+#' @param  server base URL to the FishBase API (by default). For SeaLifeBase, use https://fishbase.ropensci.org/sealifebase 
 #' @param implemented_only by default, only return those tables that have been implemented.  
 #' @return a data frame listing the table names (matching function names in rfishbase) and the matching column names those tables have implemented.
 #' @details method will use partial matching. Hence "Temp" will match column names such as "TempMin" and "TempMax", but "MinTemp" will not.  Likewise,

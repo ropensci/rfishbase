@@ -14,7 +14,7 @@ distribution(species_list, fields = NULL, server = getOption("FISHBASE_API",
 all available columns recognized by the parser are returned. This option can be used to limit the amount
 of data transfered over the network if only certain columns are needed.}
 
-\item{server}{base URL to the FishBase API (by default). For SeaLifeBase, use http://fishbase.ropensci.org/sealifebase}
+\item{server}{base URL to the FishBase API (by default). For SeaLifeBase, use https://fishbase.ropensci.org/sealifebase}
 
 \item{limit}{The maximum number of matches from a single API call (e.g. per species). Function
 will warn if this needs to be increased, otherwise can be left as is.}
