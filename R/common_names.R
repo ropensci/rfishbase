@@ -34,7 +34,7 @@ common_to_sci <- function(x, Language = NULL, limit = 1000, server = getOption("
     data <- check_and_parse(resp)
     ## FIXME consider dplyr::distinct instead of `unique` here.
     matches <- unique(data[[1]])
-    species_names(matches)
+    species_names(matches, server = server)
   })
   
   # If multiple matches are found, we want to collapse
