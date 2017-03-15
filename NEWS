@@ -27,6 +27,12 @@ And constructed with the following guidelines:
 
 For more information on SemVer, please visit http://semver.org/.
 
+v2.1.2
+------
+
+* bugfix avoid spurious warning when using http instead of https API
+
+
 v2.1.1
 -------
 

@@ -90,10 +90,10 @@ species(fish[1:2])
     1 fusiform / normal      R        NA     NA        0    -1    -1        -1
     2 fusiform / normal      R        NA     NA        0    -1    -1        -1
           DemersPelag     AnaCat MigratRef DepthRangeShallow DepthRangeDeep
-    1 pelagic-neritic anadromous     51243                 0             NA
+    1 pelagic-neritic anadromous     51243                 0             28
     2   benthopelagic anadromous     51243                 0            200
       DepthRangeRef DepthRangeComShallow DepthRangeComDeep DepthComRef
-    1            NA                   NA                10          NA
+    1        101587                    1                 2      101587
     2         50550                   NA                NA          NA
       LongevityWild LongevityWildRef LongevityCaptive LongevityCapRef
     1            38            32682             10.3             274
@@ -141,7 +141,7 @@ species(fish[1:2])
     1      NA  0.5          0       2 1990-10-17T00:00:00.000Z       10
     2      NA  0.5          0       2 1990-10-17T00:00:00.000Z     2291
                   DateModified Expert              DateChecked TS SpecCode
-    1 2013-09-13T00:00:00.000Z     97 2003-01-03T00:00:00.000Z NA      238
+    1 2015-05-12T00:00:00.000Z     97 2003-01-03T00:00:00.000Z NA      238
     2 2014-12-16T00:00:00.000Z     97 2003-01-15T00:00:00.000Z NA      239
 
 Most tables contain many fields. To avoid overly cluttering the screen, `rfishbase` displays tables as `data_frame` objects from the `dplyr` package. These act just like the familiar `data.frames` of base R except that they print to the screen in a more tidy fashion. Note that columns that cannot fit easily in the display are summarized below the table. This gives us an easy way to see what fields are available in a given table. For instance, from this table we may only be interested in the `PriceCateg` (Price category) and the `Vulnerability` of the species. We can repeat the query for our full species list, asking for only these fields to be returned:
@@ -172,7 +172,7 @@ Because `rfishbase` accesses the back end database, it does not always line up w
 list_fields("Resilience")
 ```
 
-    # A tibble: 2 x 2
+    # A tibble: 2 × 2
       table_name      column_name
            <chr>            <chr>
     1     stocks       Resilience
@@ -211,10 +211,12 @@ SeaLifeBase
 The FishBase team has also created the SeaLifeBase project, which seeks to provide much the same data and layout as fishbase.org and the fishbase schema, but covering all sea life apart from the finfish covered in FishBase. The rOpenSci team has created a pilot API for SeaLifeBase as well. Most of the functions in `rfishbase` can be used directly to query SeaLifeBase data by explicitly specifying the `server` argument to use the SeaLifeBase API at `http://fishbase.ropensci.org/sealifebase`, like so:
 
 ``` r
-options(FISHBASE_API = "http://fishbase.ropensci.org/sealifebase")
+options(FISHBASE_API = "https://fishbase.ropensci.org/sealifebase")
 kingcrab <- common_to_sci("king crab")
 kingcrab
 ```
+
+    [1] "Glyptocephalus cynoglossus"
 
 ``` r
 species(kingcrab)
@@ -224,8 +226,16 @@ ecology(kingcrab)
 Set the API back to `fishbase` for finfish data:
 
 ``` r
-options(FISHBASE_API = "http://fishbase.ropensci.org")
+options(FISHBASE_API = "https://fishbase.ropensci.org")
 ```
+
+Alternately, all functions can take the explicit argument `server` to indicate which database to use, like so:
+
+``` r
+kingcrab <- common_to_sci("king crab", server = "https://fishbase.ropensci.org/sealifebase")
+```
+
+This supercedes the value set in `options()` and is the preferred method when using both databases in a single script.
 
 ------------------------------------------------------------------------
 

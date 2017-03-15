@@ -123,8 +123,8 @@ Sometimes it is more useful to search for a broad description of the tables.
 
 The FishBase team has also created the SeaLifeBase project, which seeks to provide much the same data and layout as fishbase.org and the fishbase schema, but covering all sea life apart from the finfish covered in FishBase.  The rOpenSci team has created a pilot API for SeaLifeBase as well.  Most of the functions in `rfishbase` can be used directly to query SeaLifeBase data by explicitly specifying the `server` argument to use the SeaLifeBase API at `http://fishbase.ropensci.org/sealifebase`, like so: 
 
-```{r eval=FALSE}
-options(FISHBASE_API = "http://fishbase.ropensci.org/sealifebase")
+```{r}
+options(FISHBASE_API = "https://fishbase.ropensci.org/sealifebase")
 kingcrab <- common_to_sci("king crab")
 kingcrab
 ```
@@ -138,8 +138,17 @@ ecology(kingcrab)
 Set the API back to `fishbase` for finfish data:
 
 ```{r}
-options(FISHBASE_API = "http://fishbase.ropensci.org")
+options(FISHBASE_API = "https://fishbase.ropensci.org")
 ```
+
+Alternately, all functions can take the explicit argument `server` to indicate which database to use, like so:
+
+```{r}
+kingcrab <- common_to_sci("king crab", server = "https://fishbase.ropensci.org/sealifebase")
+```
+
+This supercedes the value set in `options()` and is the preferred method when using both databases in a single script.  
+
 
 -----------
 

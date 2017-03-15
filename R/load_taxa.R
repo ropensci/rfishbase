@@ -18,9 +18,9 @@ SEALIFEBASE_API <- "https://fishbase.ropensci.org/sealifebase"
 load_taxa <- function(update = FALSE, cache = TRUE, server = getOption("FISHBASE_API", FISHBASE_API), limit = 5000L){
   
   ## Load the correct taxa table based on the server setting
-  if(server == FISHBASE_API){
+  if(grepl("https*://fishbase.ropensci.org", server)){
     cache_name <- "fishbase"
-  } else if(server == SEALIFEBASE_API){
+  } else if(grepl("https*://fishbase.ropensci.org/sealifebase", server)){
     cache_name <- "sealifebase"
   } else {
     warning("Did not recognize API, assuming it is fishbase")
