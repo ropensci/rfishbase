@@ -1,6 +1,6 @@
 
 
-## Create an environment to cache the full speices table
+## Create an environment to cache the full species table
 rfishbase <- new.env(hash = TRUE)
 
 FISHBASE_API <- "https://fishbase.ropensci.org"
@@ -59,7 +59,7 @@ load_taxa <- function(update = FALSE, cache = TRUE, server = getOption("FISHBASE
       } else {
       
       resp <- GET(paste0(server, "/taxa"), 
-                  query = list(family='', limit=as.integer(limit)), 
+                  query = list(limit=as.integer(limit)), 
                   user_agent(make_ua()))
       all_taxa <- check_and_parse(resp)
       drop <- match(c("Author", "Remark"), names(all_taxa)) ## Non-ascii fields, not needed
