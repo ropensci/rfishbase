@@ -2,8 +2,8 @@
 
 ## Create an environment to cache the full speices table
 rfishbase <- new.env(hash = TRUE)
-assign("sealifebase", data("sealifebase"), envir=rfishbase)  
-assign("fishbase", data("fishbase"), envir=rfishbase)  
+#assign("sealifebase", data("sealifebase"), envir=rfishbase)  
+#assign("fishbase", data("fishbase"), envir=rfishbase)  
 FISHBASE_API <- "https://fishbase.ropensci.org"
 SEALIFEBASE_API <- "https://fishbase.ropensci.org/sealifebase"
 

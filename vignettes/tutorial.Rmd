@@ -31,6 +31,14 @@ knitr::opts_chunk$set(warning=FALSE, comment=NA)
 
 ## Installation
 
+
+
+```{r message=FALSE, warning=FALSE, results="hide", eval=FALSE}
+remotes::install_github("ropensci/rfishbase")
+```
+
+Or with base `install.packages` function:
+
 ```{r message=FALSE, warning=FALSE, results="hide", eval=FALSE}
 install.packages("rfishbase", 
                  repos = c("http://packages.ropensci.org", "http://cran.rstudio.com"), 
@@ -143,6 +151,7 @@ Alternately, all functions can take the explicit argument `server` to indicate w
 
 ```{r}
 kingcrab <- common_to_sci("king crab", server = "https://fishbase.ropensci.org/sealifebase")
+kingcrab
 ```
 
 This supercedes the value set in `options()` and is the preferred method when using both databases in a single script.  
