@@ -2,7 +2,8 @@
 
 ## Create an environment to cache the full speices table
 rfishbase <- new.env(hash = TRUE)
-
+assign("sealifebase", data("sealifebase"), envir=rfishbase)  
+assign("fishbase", data("fishbase"), envir=rfishbase)  
 FISHBASE_API <- "https://fishbase.ropensci.org"
 SEALIFEBASE_API <- "https://fishbase.ropensci.org/sealifebase"
 
@@ -31,7 +32,7 @@ load_taxa <- function(update = FALSE, cache = TRUE, server = getOption("FISHBASE
   # First, try to load from cache
   all_taxa <- mget(cache_name, 
                    envir = rfishbase, 
-                   ifnotfound = list(NULL))$all_taxa
+                   ifnotfound = list(NULL))[[1]]
   
   if(is.null(all_taxa)){
     
@@ -104,6 +105,7 @@ NULL
 
 
 ## Code to update the package cache:
-# fishbase <- load_taxa(update = TRUE)
+# fishbase <- load_taxa(update = TRUE, limit = 35000)
+# sealifebase <- load_taxa(update=TRUE, server = "https://fishbase.ropensci.org/sealifebase", limit = 120000)
 # save("fishbase", file = "data/fishbase.rda", compress = "xz")
-
+# save("sealifebase", file = "data/sealifebase.rda", compress = "xz")
