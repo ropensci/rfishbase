@@ -24,4 +24,3 @@ the taxa list
 \description{
 Load or update the taxa list
 }
-

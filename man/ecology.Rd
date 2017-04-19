@@ -44,4 +44,3 @@ ecology(c("Oreochromis niloticus", "Salmo trutta"),
 \references{
 http://www.fishbase.org/manual/english/fishbasethe_ecology_table.htm
 }
-

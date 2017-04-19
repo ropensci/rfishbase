@@ -21,4 +21,3 @@ a string of the validated names
 \description{
 Check for alternate versions of a scientific name and return the names FishBase recognizes as valid
 }
-

@@ -33,4 +33,3 @@ tables <- docs()
 dplyr::filter(tables, table == "diet")$description
 }
 }
-

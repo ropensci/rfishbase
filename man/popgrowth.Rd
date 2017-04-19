@@ -43,4 +43,3 @@ popgrowth("Oreochromis niloticus")
 \references{
 http://www.fishbase.org/manual/english/fishbasethe_popgrowth_table.htm
 }
-

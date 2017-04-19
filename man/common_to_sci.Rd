@@ -42,4 +42,3 @@ common_to_sci(c("trout", "Coho Salmon"))
 \seealso{
 \code{\link{commonnames}}, \code{\link{species_list}}, \code{\link{synonyms}}
 }
-

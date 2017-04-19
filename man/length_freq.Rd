@@ -38,4 +38,3 @@ length_freq("Oreochromis niloticus")
 \references{
 http://www.fishbase.org/manual/english/lengthfrequency.htm
 }
-

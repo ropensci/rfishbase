@@ -2,8 +2,8 @@
 % Please edit documentation in R/fishbase.R
 \docType{package}
 \name{rfishbase-package}
-\alias{rfishbase}
 \alias{rfishbase-package}
+\alias{rfishbase}
 \title{The new R interface to Fishbase, v2.0}
 \description{
 A programmatic interface to http://www.fishbase.org, re-written
@@ -19,4 +19,3 @@ Carl Boettiger \email{carl@ropensci.org}
 Scott Chamberlain \email{scott@ropensci.org}
 }
 \keyword{package}
-

@@ -34,4 +34,3 @@ references(codes = 1:6)
 references(codes = 1:6, fields = c('Author', 'Year', 'Title'))
 }
 }
-

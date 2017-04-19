@@ -7,11 +7,10 @@
 \description{
 A list of the species_fields available
 }
-\author{
-Carl Boettiger \email{carl@ropensci.org}
-}
 \references{
 \url{FishBase.org}
 }
+\author{
+Carl Boettiger \email{carl@ropensci.org}
+}
 \keyword{data}
-

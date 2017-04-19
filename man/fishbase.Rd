@@ -11,11 +11,10 @@ A table of all the the species found in FishBase, including taxonomic
 classification and the Species Code (SpecCode) by which the species is
 identified in FishBase.
 }
-\author{
-Carl Boettiger \email{carl@ropensci.org}
-}
 \references{
 \url{FishBase.org}
 }
+\author{
+Carl Boettiger \email{carl@ropensci.org}
+}
 \keyword{data}
-

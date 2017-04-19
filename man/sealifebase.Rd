@@ -11,11 +11,10 @@ A table of all the the species found in SeaLifeBase, including taxonomic
 classification and the Species Code (SpecCode) by which the species is
 identified in SeaLifeBase
 }
-\author{
-Carl Boettiger \email{carl@ropensci.org}
-}
 \references{
 \url{www.sealifebase.org}
 }
+\author{
+Carl Boettiger \email{carl@ropensci.org}
+}
 \keyword{data}
-
