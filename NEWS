@@ -31,6 +31,7 @@ v2.1.2
 ------
 
 * bugfix avoid spurious warning when using http instead of https API
+* bugfix to for taxa table as used on sealifebase
 
 
 v2.1.1
