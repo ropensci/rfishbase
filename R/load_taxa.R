@@ -1,9 +1,5 @@
 
 
-## Create an environment to cache the full speices table
-rfishbase <- new.env(hash = TRUE)
-#assign("sealifebase", data("sealifebase"), envir=rfishbase)  
-#assign("fishbase", data("fishbase"), envir=rfishbase)  
 FISHBASE_API <- "https://fishbase.ropensci.org"
 SEALIFEBASE_API <- "https://fishbase.ropensci.org/sealifebase"
 
@@ -19,7 +15,7 @@ SEALIFEBASE_API <- "https://fishbase.ropensci.org/sealifebase"
 load_taxa <- function(update = FALSE, cache = TRUE, server = getOption("FISHBASE_API", FISHBASE_API), limit = 5000L){
   
   ## Load the correct taxa table based on the server setting
-  if(grepl("https*://fishbase.ropensci.org", server)){
+  if(grepl("https*://fishbase.ropensci.org$", server)){
     cache_name <- "fishbase"
   } else if(grepl("https*://fishbase.ropensci.org/sealifebase", server)){
     cache_name <- "sealifebase"
@@ -29,13 +25,7 @@ load_taxa <- function(update = FALSE, cache = TRUE, server = getOption("FISHBASE
     
   }
   
-  # First, try to load from cache
-  all_taxa <- mget(cache_name, 
-                   envir = rfishbase, 
-                   ifnotfound = list(NULL))[[1]]
   
-  if(is.null(all_taxa)){
-    
     if(update){
       
       #limit the limit to avoid uneccesary (empty) calls
@@ -67,16 +57,13 @@ load_taxa <- function(update = FALSE, cache = TRUE, server = getOption("FISHBASE
       all_taxa <- all_taxa[-drop]
       
       }
-      if(cache){ 
-        assign(cache_name, all_taxa, envir=rfishbase)  
-      }
-    } else {
       
+    } else {
       data(list = cache_name, package="rfishbase", envir = environment())
       all_taxa <- mget(cache_name, envir = environment())[[1]]
     }
     
-  }  
+   
   all_taxa
 }
 
