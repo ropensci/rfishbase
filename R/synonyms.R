@@ -65,7 +65,7 @@ reclass <- function(df, col_name, new_class){
 validate_names <- function(species_list, limit = 50, server = getOption("FISHBASE_API", FISHBASE_API)){
   out <- sapply(species_list, function(x) {
     syn_table <- synonyms(x, limit = limit, server = server)
-    if(length(unique(syn_table$SpecCode)) > 1){
+    if(length(unique(suppressWarnings(syn_table$SpecCode))) > 1){
       warning(paste0("FishBase says that '", x, 
                     "' can also be misapplied to other species
                     but is returning only the best match.  
@@ -73,7 +73,7 @@ validate_names <- function(species_list, limit = 50, server = getOption("FISHBAS
       syn_table <- dplyr::filter_(syn_table, .dots = list(~Synonymy != "misapplied name"))
     }
     ## FIXME consider dplyr::distinct instead of `unique` here.
-    code <- unique(syn_table$SpecCode)
+    code <- unique(suppressWarnings(syn_table$SpecCode))
   
     if(is.null(code))
       warning(paste0("No match found for species '", x, "'"), call. = FALSE)
@@ -86,7 +86,7 @@ validate_names <- function(species_list, limit = 50, server = getOption("FISHBAS
     # c(syn_table$SynGenus[who], syn_table$SynSpecies[who])
     
     ## Faster and more accurate to just return the name associated with the speccode:
-    species_names(code)
+    species_names(code) %||% NA
     
     })
   ## sapply will still return nested lists if a value is missing
