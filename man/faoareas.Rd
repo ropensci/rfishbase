@@ -19,6 +19,9 @@ of data transfered over the network if only certain columns are needed.}
 \item{limit}{The maximum number of matches from a single API call (e.g. per species). Function
 will warn if this needs to be increased, otherwise can be left as is.}
 }
+\value{
+a tibble, empty tibble if no results found
+}
 \description{
 return a table of species locations as reported in FishBASE.org FAO location data
 }

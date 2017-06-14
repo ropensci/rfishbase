@@ -83,6 +83,7 @@ distribution <- function(species_list, fields = NULL, server = getOption("FISHBA
 #' @importFrom dplyr bind_rows left_join
 #' @importFrom httr GET
 #' @export
+#' @return a tibble, empty tibble if no results found
 #' @examples 
 #' \dontrun{
 #'   faoareas(species_list(Genus='Labroides'))
@@ -101,6 +102,7 @@ faoareas <- function(species_list, fields = NULL, server = getOption("FISHBASE_A
                       query = list(SpecCode = code, limit = limit, fields = faoareas_fl),
                       httr::user_agent(make_ua()))
     table1 <- check_and_parse(resp)
+    if (is.null(table1)) return(dplyr::tbl_df(NULL))
     
     ## Look up area codes
     table2 <- dplyr::bind_rows(lapply(table1$AreaCode, function(x) {
