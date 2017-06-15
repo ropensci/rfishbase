@@ -50,3 +50,14 @@ swimming <- endpoint("swimming")
 #' speed("Oreochromis niloticus")
 #' }
 speed <- endpoint("speed")
+
+#' genetics
+#' 
+#' @return a table of species genetics data
+#' @inheritParams species
+#' @export
+#' @examples \dontrun{
+#' genetics("Oreochromis niloticus")
+#' genetics("Labroides dimidiatus")
+#' }
+genetics <- endpoint("genetics")
