@@ -97,6 +97,23 @@ dat <- species(fish, fields=c("SpecCode", "PriceCateg", "Vulnerability"))
 dat
 ```
 
+### Getting taxonomy
+
+To get taxonomic classification data, use the `taxonomy()` function:
+
+```{r}
+taxonomy(genus = "Oreochromis", species = "amphimelas")
+```
+
+To get data for many species, use e.g., 
+
+```{r}
+spp <- c("Oreochromis amphimelas", "Oreochromis mweruensis")
+spl <- function(x) strsplit(x, "\\s")[[1]]
+Map(function(x) { z <- spl(x); taxonomy(z[1], z[2]) }, spp)
+```
+
+
 ### FishBase Docs: Discovering data
 
 Unfortunately identifying what fields come from which tables is often a challenge.  Each summary page on fishbase.org includes a list of additional tables with more information about species ecology, diet, occurrences, and many other things.  `rfishbase` provides functions that correspond to most of these tables.  
