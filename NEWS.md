@@ -27,7 +27,14 @@ And constructed with the following guidelines:
 
 For more information on SemVer, please visit http://semver.org/.
 
-v2.1.2
+v2.2.0 (upcoming release)
+-------
+* bugfix for `validate_names()` ([#121](https://github.com/ropensci/rfishbase/issues/121))
+* bugfix for `faoareas()` ([#123](https://github.com/ropensci/rfishbase/issues/123))
+* add `genetics()` endpoint ([#122](https://github.com/ropensci/rfishbase/issues/122))
+* add `taxonomy()` endpoint ([#126](https://github.com/ropensci/rfishbase/issues/126))
+
+v2.1.2   (2017-04-19)
 ------
 
 * bugfix avoid spurious warning when using http instead of https API
