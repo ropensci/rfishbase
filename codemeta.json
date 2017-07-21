@@ -1,0 +1,202 @@
+{
+  "@context": ["https://doi.org/doi:10.5063/schema/codemeta-2.0", "http://schema.org"],
+  "@type": "SoftwareSourceCode",
+  "identifier": "rfishbase",
+  "description": "A programmatic interface to <http://www.fishbase.org>, re-written\n    based on an accompanying 'RESTful' API. Access tables describing over 30,000\n    species of fish, their biology, ecology, morphology, and more. This package also\n    supports experimental access to <http://www.sealifebase.org> data, which contains\n    nearly 200,000 species records for all types of aquatic life not covered by\n    'FishBase.'",
+  "name": "rfishbase: R Interface to 'FishBase'",
+  "codeRepository": "https://github.com/ropensci/rfishbase",
+  "issueTracker": "https://github.com/ropensci/rfishbase/issues",
+  "license": "https://spdx.org/licenses/CC0-1.0",
+  "version": "2.1.2.3",
+  "programmingLanguage": {
+    "@type": "ComputerLanguage",
+    "name": "R",
+    "version": "3.4.1",
+    "url": "https://r-project.org"
+  },
+  "runtimePlatform": "R version 3.4.1 (2017-06-30)",
+  "provider": {
+    "@id": "https://cran.r-project.org",
+    "@type": "Organization",
+    "name": "Central R Archive Network (CRAN)",
+    "url": "https://cran.r-project.org"
+  },
+  "author": [
+    {
+      "@type": "Person",
+      "givenName": "Carl",
+      "familyName": "Boettiger",
+      "email": "cboettig@ropensci.org"
+    },
+    {
+      "@type": "Person",
+      "givenName": "Scott",
+      "familyName": "Chamberlain",
+      "email": "scott@ropensci.org"
+    },
+    {
+      "@type": "Person",
+      "givenName": "Duncan",
+      "familyName": "Temple Lang"
+    },
+    {
+      "@type": "Person",
+      "givenName": "Peter",
+      "familyName": "Wainwright"
+    }
+  ],
+  "maintainer": {
+    "@type": "Person",
+    "givenName": "Carl",
+    "familyName": "Boettiger",
+    "email": "cboettig@ropensci.org"
+  },
+  "softwareSuggestions": [
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "devtools",
+      "name": "devtools",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Central R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      }
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "testthat",
+      "name": "testthat",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Central R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      }
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "rmarkdown",
+      "name": "rmarkdown",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Central R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      }
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "knitr",
+      "name": "knitr",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Central R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      }
+    }
+  ],
+  "softwareRequirements": [
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "dplyr",
+      "name": "dplyr",
+      "version": "0.4.0",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Central R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      }
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "lazyeval",
+      "name": "lazyeval",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Central R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      }
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "httr",
+      "name": "httr",
+      "version": "1.0.0",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Central R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      }
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "tidyr",
+      "name": "tidyr",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Central R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      }
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "methods",
+      "name": "methods"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "utils",
+      "name": "utils"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "R",
+      "name": "R",
+      "version": "3.0"
+    }
+  ],
+  "contIntegration": "https://travis-ci.org/ropensci/rfishbase",
+  "releaseNotes": "https://github.com/ropensci/rfishbase/blob/master/NEWS.md",
+  "readme": "https://github.com/ropensci/rfishbase/blob/master/README.md",
+  "fileSize": "1341.27KB",
+  "citation": [
+    {
+      "@type": "ScholarlyArticle",
+      "datePublished": "2012",
+      "author": [
+        {
+          "@type": "Person",
+          "givenName": "Carl",
+          "familyName": "Boettiger",
+          "email": "cboettig@ropensci.org"
+        },
+        {
+          "@type": "Person",
+          "givenName": "Duncan",
+          "familyName": "Temple Lang"
+        },
+        {
+          "@type": "Person",
+          "givenName": "Peter",
+          "familyName": "Wainwright"
+        }
+      ],
+      "name": "rfishbase: exploring, manipulating and visualizing {FishBase} data from R",
+      "url": "http://dx.doi.org/10.1111/j.1095-8649.2012.03464.x",
+      "isPartOf": {
+        "@type": "PublicationIssue",
+        "datePublished": "2012",
+        "isPartOf": {
+          "@type": ["PublicationVolume", "Periodical"],
+          "name": "Journal of Fish Biology"
+        }
+      }
+    }
+  ]
+}
