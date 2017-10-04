@@ -13,3 +13,4 @@ circle.yml
 ^README-*\.png$
 ^CONDUCT\.md$
 ^codemeta\.json$
+.github
