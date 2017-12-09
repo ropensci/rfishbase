@@ -52,10 +52,10 @@ common_to_sci <- function(x, Language = NULL, limit = 1000, server = getOption("
 #' 
 #' @examples
 #' \dontrun{
-#' commonnames(c("Labroides bicolor",  "Bolbometopon muricatum"))
+#' common_names(c("Labroides bicolor",  "Bolbometopon muricatum"))
 #' 
 #' # subset by English language names
-#' fish <- commonnames("Bolbometopon muricatum")
+#' fish <- common_names("Bolbometopon muricatum")
 #' library(dplyr)
 #' fish %>% filter(Language=="English") 
 #' }
@@ -79,16 +79,17 @@ common_names <- function(species_list,
                              fields = paste(fields, collapse=",")),
                 user_agent(make_ua()))
     df <- check_and_parse(resp)
+    if (is.null(df)) return(NULL)
     
     # Replace / Join SpecCode with Genus and Species columns
     id_df <- dplyr::select_(taxa(query = list(SpecCode = code)), "Genus", "Species", "SpecCode")
     df <- dplyr::left_join(df, id_df, by = "SpecCode")
     
-   if(!is.null(Language) && "Language" %in% names(df)){
+    if(!is.null(Language) && "Language" %in% names(df)){
       .dots <- list(lazyeval::interp(~Language == x, .values = list(x = Language)))
       df <- dplyr::filter_(df, .dots=.dots)
-  }
-  df
+    }
+    return(df)
     # FIXME Replace C_Code with Country usiong countref table: "SELECT PAESE FROM countref WHERE C_Code=x"
   }))
 }

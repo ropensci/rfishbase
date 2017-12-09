@@ -35,10 +35,10 @@ Note that there are many common names for a given sci name, so sci_to_common doe
 }
 \examples{
 \dontrun{
-commonnames(c("Labroides bicolor",  "Bolbometopon muricatum"))
+common_names(c("Labroides bicolor",  "Bolbometopon muricatum"))
 
 # subset by English language names
-fish <- commonnames("Bolbometopon muricatum")
+fish <- common_names("Bolbometopon muricatum")
 library(dplyr)
 fish \%>\% filter(Language=="English") 
 }
