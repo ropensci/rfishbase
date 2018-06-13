@@ -14,32 +14,38 @@
 #' The limit default is quite high in this call, as it corresponds to the number of common names that
 #' match a given species, including different languages and countries. 
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' common_to_sci(c("Bicolor cleaner wrasse", "humphead parrotfish"), Language="English")
-#' common_to_sci("trout")
-#' common_to_sci(c("trout", "Coho Salmon"))
+#' common_to_sci(c("Coho Salmon", "trout"))
 #' }
 #' @seealso \code{\link{commonnames}}, \code{\link{species_list}}, \code{\link{synonyms}}
 #' @export
-common_to_sci <- function(x, Language = NULL, limit = 1000, server = getOption("FISHBASE_API", FISHBASE_API)){
+#' @importFrom dplyr filter select distinct
+#' @importFrom stringr str_to_lower
+#' @importFrom purrr map_dfr
+common_to_sci <- function(x, Language = NULL, limit = NULL, 
+                          server = getOption("FISHBASE_API", FISHBASE_API)){
   
-  out <- sapply(x, function(x){
-    # Look up SpecCode for the common names
-    resp <- GET(paste0(server, "/comnames"), 
-                query = list(ComName = x,
-                             Language = Language,
-                             limit = limit,  # SpecCode same for all matches
-                             fields = 'SpecCode'),
-                user_agent(make_ua()))
-    data <- check_and_parse(resp)
-    ## FIXME consider dplyr::distinct instead of `unique` here.
-    matches <- unique(data[[1]])
-    species_names(matches, server = server)
-  })
+  ## FIXME switch to SLB if server indicates
+  df <- fb_tbl("comnames")
   
-  # If multiple matches are found, we want to collapse
-  as.character(unname(unlist(out)))
-}
+  comnames <- df %>% 
+    dplyr::select(ComName, Language, SpecCode) %>%  
+    dplyr::filter(Language %in% Language) %>% 
+    dplyr::distinct()
+  
+  
+  subset <- 
+    purrr::map_dfr(x, function(y){
+      y <- stringr::str_to_lower(y)
+      y <- enquo(y) 
+      dplyr::filter(comnames, grepl(!!y, stringr::str_to_lower(ComName)))
+    })
+  output <- dplyr::left_join(subset, fb_species) %>% 
+    select(species, ComName, Langauge, SpecCode)
+  output
+} 
+
 
 #' commonnames
 #' 
