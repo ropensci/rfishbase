@@ -18,16 +18,15 @@ LazyData: true
 Depends:
     R (>= 3.0)
 Imports:
-    dplyr (>= 0.4.0),
-    lazyeval,
-    httr (>= 1.0.0),
-    tidyr,
+    dplyr,
+    purrr,
     methods,
     utils
 Suggests:
     devtools,
     testthat,
     rmarkdown,
-    knitr
+    knitr,
+    tidyr
 VignetteBuilder: knitr
 RoxygenNote: 6.0.1

@@ -66,7 +66,7 @@ speccodes <- function(species_list, db = fb_species()){
       return(dplyr::data_frame(SpecCode = species_list))
     
     left_join(dplyr::data_frame(Species = species_list),
-              db) %>%
+              db, by = "Species") %>%
       select(SpecCode)
   
   

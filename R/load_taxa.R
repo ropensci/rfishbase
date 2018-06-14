@@ -8,6 +8,7 @@ SEALIFEBASE_API <- "https://fishbase.ropensci.org/sealifebase"
 #' @param server API for Fishbase or Sealifebase?
 #' @param ... for compatibility with previous versions
 #' @return the taxa list
+#' @importFrom dplyr arrange
 #' @export
 load_taxa <- memoise::memoise(function(server = getOption("FISHBASE_API", FISHBASE_API), ...){
 
@@ -34,10 +35,10 @@ load_taxa <- memoise::memoise(function(server = getOption("FISHBASE_API", FISHBA
     
   taxa_table <- 
     taxon_hierarchy %>% 
-    select(SpecCode, Species, Genus, Subfamily, Family, 
+    dplyr::select(SpecCode, Species, Genus, Subfamily, Family, 
            Order, Class, SuperClass) %>% 
-    arrange(SpecCode) %>% 
-    mutate(Species = paste(Genus, Species))
+    dplyr::arrange(SpecCode) %>% 
+    dplyr::mutate(Species = paste(Genus, Species))
   
   taxa_table
 })

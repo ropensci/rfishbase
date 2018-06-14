@@ -4,9 +4,21 @@
 endpoint <- function(endpt, tidy_table = default_tidy){
   
   function(species_list = NULL, fields = NULL, server = getOption("FISHBASE_API", FISHBASE_API), ...){
+    full_data <- fb_tbl(endpt)
     
-    out <- dplyr::left_join(speccodes(species_list), fb_tbl(endpt))
-    if(!is.null(fields)) out <- out[fields]
+    ## fix SpecCode inconsistencies
+    if("Speccode" %in% names(full_data)){ 
+      full_data <- rename(full_data, SpecCode = Speccode)
+    }
+    
+    ## Subset by species list. Include species names
+    out <- speccodes(species_list) %>% 
+      dplyr::left_join(fb_species(), by="SpecCode") %>%
+      dplyr::left_join(full_data, by="SpecCode")
+    
+    if(!is.null(fields)){
+      out <- out[fields]
+    }
     
     out
   }
