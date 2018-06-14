@@ -5,7 +5,7 @@
 \title{references}
 \usage{
 references(codes = NULL, fields = NULL, server = getOption("FISHBASE_API",
-  FISHBASE_API))
+  FISHBASE_API), ...)
 }
 \arguments{
 \item{codes}{One or more Fishbase reference numbers, matching the RefNo 
