@@ -16,14 +16,11 @@
 #' references(codes = 1:6)
 #' references(codes = 1:6, fields = c('Author', 'Year', 'Title'))
 #' }
-references <- function(codes=NULL, fields = NULL, server = getOption("FISHBASE_API", FISHBASE_API)){
-  dplyr::bind_rows(lapply(codes, function(z) {
-    resp <- httr::GET(paste0(server, "/refrens"), 
-                      query = list(RefNo = z, 
-                                   fields = paste(fields, collapse = ",")),
-                      user_agent(make_ua()))
-    check_and_parse(resp)
-  }))
+references <- function(codes = NULL, fields = NULL, server = getOption("FISHBASE_API", FISHBASE_API), ...){
+   out <- left_join(data.frame(RefNo = codes), fb_tbl("refrens"))
+   if(!is.null(fields))
+     out <- out[fields]
+   out
 }
 
 # make_citation <- function(x) {

@@ -3,10 +3,12 @@
 #' @importFrom dplyr left_join
 endpoint <- function(endpt, tidy_table = default_tidy){
   
-  function(species_list = NULL, server = getOption("FISHBASE_API", FISHBASE_API), ...){
+  function(species_list = NULL, fields = NULL, server = getOption("FISHBASE_API", FISHBASE_API), ...){
     
-    dplyr::left_join(speccodes(species_list), fb_tbl(endpt))
+    out <- dplyr::left_join(speccodes(species_list), fb_tbl(endpt))
+    if(!is.null(fields)) out <- out[fields]
     
+    out
   }
 }
 

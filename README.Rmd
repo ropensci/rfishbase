@@ -99,18 +99,18 @@ dat
 
 ### Getting taxonomy
 
-To get taxonomic classification data, use the `taxonomy()` function:
+To get taxonomic classification data, use the `load_taxa()` function:
 
 ```{r}
-taxonomy(genus = "Oreochromis", species = "amphimelas")
+library(dplyr)
+load_taxa() %>% filter(Species == "Oreochromis amphimelas")
 ```
 
 To get data for many species, use e.g., 
 
 ```{r}
 spp <- c("Oreochromis amphimelas", "Oreochromis mweruensis")
-spl <- function(x) strsplit(x, "\\s")[[1]]
-Map(function(x) { z <- spl(x); taxonomy(z[1], z[2]) }, spp)
+load_taxa() %>% filter(Species %in% spp)
 ```
 
 
@@ -129,7 +129,6 @@ This shows us that this information appears on the `stocks` table.  Working in R
 
 ```{r}
 resil <- stocks(fish, fields="Resilience")
-merge(dat, resil)
 ```
 
 
