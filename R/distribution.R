@@ -86,39 +86,21 @@ distribution <- function(species_list, fields = NULL, server = getOption("FISHBA
 #' @return a tibble, empty tibble if no results found
 #' @examples 
 #' \dontrun{
-#'   faoareas(species_list(Genus='Labroides'))
+#'   faoareas()
 #' }
 #' @details currently this is ~ FAO areas table (minus "note" field)
 #' e.g. http://www.fishbase.us/Country/FaoAreaList.php?ID=5537
-faoareas <- function(species_list, fields = NULL, server = getOption("FISHBASE_API", FISHBASE_API), limit = 500){
-  codes <- speccodes(species_list)
+faoareas <- function(species_list = NULL, fields = NULL, server = getOption("FISHBASE_API", FISHBASE_API),...){
+
+  out <- left_join(fb_tbl("faoareas")[c('AreaCode', 'SpecCode', 'Status')],
+            faoarrefs()[c('AreaCode', 'FAO')])
   
-  faoareas_get <- c('AreaCode', 'SpecCode', 'Status')
-  faoarrefs_get <- c('AreaCode', 'FAO')
-  
-  faoareas_fl <- paste0(if (!is.null(fields)) c(faoareas_get, fields) else faoareas_get, collapse = ",")
-  dplyr::bind_rows(lapply(codes, function(code) {
-    resp <- httr::GET(paste0(server, "/faoareas"), 
-                      query = list(SpecCode = code, limit = limit, fields = faoareas_fl),
-                      httr::user_agent(make_ua()))
-    table1 <- check_and_parse(resp)
-    if (is.null(table1)) return(dplyr::tbl_df(NULL))
-    
-    ## Look up area codes
-    table2 <- dplyr::bind_rows(lapply(table1$AreaCode, function(x) {
-      faoarrefs_fl <- paste0(if (!is.null(fields)) c(faoarrefs_get, fields) else faoarrefs_get, collapse = ",")
-      faoarrefs(x, fields = faoarrefs_fl, server = server, limit = limit)
-    }))
-    dplyr::left_join(table1, table2, by = 'AreaCode')
-  }))
+  subset_species(species_list, out)
 }
 
 
-faoarrefs <- function(area_code, fields = NULL, server = getOption("FISHBASE_API", FISHBASE_API), limit = 100){
-  resp <- httr::GET(paste0(server, "/faoarref/", area_code), 
-              query = list(limit = limit, fields = fields),
-              user_agent(make_ua()))
-  check_and_parse(resp)
+faoarrefs <- function(){
+  fb_tbl("faoarref")
 }
 
 

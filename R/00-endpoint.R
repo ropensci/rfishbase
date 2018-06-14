@@ -6,17 +6,8 @@ endpoint <- function(endpt, tidy_table = default_tidy){
   function(species_list = NULL, fields = NULL, server = getOption("FISHBASE_API", FISHBASE_API), ...){
     full_data <- fb_tbl(endpt)
     
-    ## fix SpecCode inconsistencies
-    if("Speccode" %in% names(full_data)){ 
-      full_data <- dplyr::rename(full_data, SpecCode = Speccode)
-    }
-    
-    ## Subset by species list. Include species names
-    suppressMessages({
-    out <- speccodes(species_list) %>% 
-      dplyr::left_join(fb_species(), by = "SpecCode") %>%
-      dplyr::left_join(full_data)
-    })
+    full_data <- fix_ids(full_data)
+    out <- species_subset(species_list, full_data)
     
     if(!is.null(fields)){
       out <- out[fields]
@@ -26,3 +17,22 @@ endpoint <- function(endpt, tidy_table = default_tidy){
   }
 }
 
+species_subset <- function(species_list, full_data){
+  if(is.null(species_list))
+    return(full_data)
+  
+  suppressMessages({
+    out <- speccodes(species_list) %>% 
+      dplyr::left_join(fb_species(), by = "SpecCode") %>%
+      dplyr::left_join(full_data)
+  })
+  out
+}
+
+
+fix_ids <- function(full_data){
+  if("Speccode" %in% names(full_data)){ 
+    full_data <- dplyr::rename(full_data, SpecCode = Speccode)
+  }
+  full_data
+}
