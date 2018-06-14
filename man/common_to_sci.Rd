@@ -4,7 +4,7 @@
 \alias{common_to_sci}
 \title{common_to_sci}
 \usage{
-common_to_sci(x, Language = NULL, limit = 1000,
+common_to_sci(x, Language = NULL, limit = NULL,
   server = getOption("FISHBASE_API", FISHBASE_API))
 }
 \arguments{
@@ -33,10 +33,9 @@ The limit default is quite high in this call, as it corresponds to the number of
 match a given species, including different languages and countries.
 }
 \examples{
-\dontrun{
+\donttest{
 common_to_sci(c("Bicolor cleaner wrasse", "humphead parrotfish"), Language="English")
-common_to_sci("trout")
-common_to_sci(c("trout", "Coho Salmon"))
+common_to_sci(c("Coho Salmon", "trout"))
 }
 }
 \seealso{

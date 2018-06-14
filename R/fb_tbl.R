@@ -24,7 +24,7 @@ fb_tbl <-
 })
 
 ## Define function that maps sci names to SpecCode, subsets table by requested sci name or spec code
-#' @importFrom dplyr mudtate select
+#' @importFrom dplyr mutate select
 fb_species <- memoise::memoise(function(){
   load_taxa() %>% dplyr::select(SpecCode, Species)
 })

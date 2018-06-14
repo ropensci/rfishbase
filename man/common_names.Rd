@@ -2,12 +2,11 @@
 % Please edit documentation in R/common_names.R
 \name{common_names}
 \alias{common_names}
-\alias{commonnames}
+\alias{sci_to_common}
 \title{commonnames}
 \usage{
-common_names(species_list, limit = 1000, server = getOption("FISHBASE_API",
-  FISHBASE_API), Language = NULL, fields = c("ComName", "Language",
-  "C_Code", "SpecCode"))
+common_names(species_list, limit = NULL, server = getOption("FISHBASE_API",
+  FISHBASE_API), Language = NULL, fields = NULL)
 }
 \arguments{
 \item{species_list}{A vector of scientific names (each element as "genus species"). If empty, the table will be loaded up to the limit. This makes it possible to load an entire table without knowledge of the species in the table, thus avoiding uneccesary API calls.}
@@ -34,12 +33,10 @@ Return a table of common names
 Note that there are many common names for a given sci name, so sci_to_common doesn't make sense
 }
 \examples{
-\dontrun{
+\donttest{
 common_names(c("Labroides bicolor",  "Bolbometopon muricatum"))
 
 # subset by English language names
 fish <- common_names("Bolbometopon muricatum")
-library(dplyr)
-fish \%>\% filter(Language=="English") 
 }
 }

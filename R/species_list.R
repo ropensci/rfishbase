@@ -60,13 +60,13 @@ species_list <- function(Class = NULL,
 # @examples
 # who <- species_list(Family='Scaridae')
 # speccodes(who)
-speccodes <- function(species_list, all_taxa = load_taxa()){ 
+speccodes <- function(species_list, db = fb_species()){ 
   
     if(is.integer(species_list))
       return(dplyr::data_frame(SpecCode = species_list))
     
     left_join(dplyr::data_frame(Species = species_list),
-              fb_species()) %>%
+              db) %>%
       select(SpecCode)
   
   
