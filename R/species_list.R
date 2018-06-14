@@ -17,6 +17,8 @@
 #'   species_list(Genus = 'Labroides')
 #' }
 #' @export
+#' @importFrom dplyr enquo 
+#' @importFrom rlang !!
 species_list <- function(Class = NULL,
                          Order = NULL,
                          Family = NULL,
@@ -37,7 +39,7 @@ species_list <- function(Class = NULL,
   superclass <- enquo(SuperClass)
   spec_code <- enquo(SpecCode)
   #if(!is.nullClass)
-  taxa <- load_taxa() 
+  taxa <- load_taxa(server) 
   if(!is.null(SuperClass)) taxa <- taxa %>% filter(SuperClass %in% !!superclass) 
   if(!is.null(Class)) taxa <- taxa %>% filter(Class %in% !!class) 
   if(!is.null(Order)) taxa <- taxa %>% filter(Order %in% !!order)

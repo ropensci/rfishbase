@@ -16,8 +16,8 @@ fb_tbl <-
       paste0("https://github.com/ropensci/rfishbase/releases/download/",
              "data/fb.2f", tbl, ".tsv.bz2")
     tmp <- tempfile(tbl, fileext = ".tsv.bz2")
-    download.file(addr, tmp)
-    out <- readr::read_tsv(tmp, ...)
+    download.file(addr, tmp, quiet = TRUE)
+    suppressMessages(out <- readr::read_tsv(tmp, ...))
     unlink(tmp)
     
     out
