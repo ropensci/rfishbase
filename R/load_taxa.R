@@ -5,67 +5,42 @@ SEALIFEBASE_API <- "https://fishbase.ropensci.org/sealifebase"
 
 #' load_taxa
 #' 
-#' Load or update the taxa list
-#' @param update logical, should we query the API to update the available list? 
-#' @param cache should we cache the updated version throughout this session? 
-#' (default TRUE, leave as is)
-#' @inheritParams species
+#' @param server API for Fishbase or Sealifebase?
+#' @param ... for compatibility with previous versions
 #' @return the taxa list
 #' @export
-load_taxa <- function(update = FALSE, cache = TRUE, server = getOption("FISHBASE_API", FISHBASE_API), limit = 5000L){
-  
-  ## Load the correct taxa table based on the server setting
-  if(grepl("https*://fishbase.ropensci.org$", server)){
-    cache_name <- "fishbase"
-  } else if(grepl("https*://fishbase.ropensci.org/sealifebase", server)){
-    cache_name <- "sealifebase"
-  } else {
-    warning("Did not recognize API, assuming it is fishbase")
-    cache_name <- "fishbase"
+load_taxa <- memoise::memoise(function(server = getOption("FISHBASE_API", FISHBASE_API), ...){
+
+  taxon_species <- fb_tbl("species") %>% 
+    select(SpecCode, Species, Genus, Subfamily, GenCode, SubGenCode, FamCode)
+  taxon_genus <- fb_tbl("genera") %>% 
+    select(GenCode, GenName, GenusCommonName = GenComName, FamCode, Subfamily,
+           SubgenusOf)
+  taxon_family <- fb_tbl("families") %>% 
+    select(FamCode, Family, FamilyCommonName = CommonName, Order, 
+           Ordnum, Class, ClassNum) 
+  taxon_order <- fb_tbl("orders") %>% 
+    select(Ordnum, Order, OrderCommonName = CommonName, ClassNum, Class) 
+  taxon_class <- fb_tbl("classes") %>% 
+    select(ClassNum, Class, ClassCommonName = CommonName,
+           SuperClass, Subclass)
+
+  taxon_hierarchy <- 
+    taxon_species %>%
+    left_join(taxon_genus) %>%
+    left_join(taxon_family )%>%
+    left_join(taxon_order) %>%
+    left_join(taxon_class)
     
-  }
+  taxa_table <- 
+    taxon_hierarchy %>% 
+    select(SpecCode, Species, Genus, Subfamily, Family, 
+           Order, Class, SuperClass) %>% 
+    arrange(SpecCode) %>% 
+    mutate(Species = paste(Genus, Species))
   
-  
-    if(update){
-      
-      #limit the limit to avoid uneccesary (empty) calls
-      limit <- ifelse(server == getOption("FISHBASE_API", FISHBASE_API),  
-                      min(limit,35000L),
-                      min(limit,120000L))
-      
-      if(limit>5000){
-        k <- 0
-        all_taxa <- {}
-        while(k<limit){
-          
-          resp <- GET(paste0(server, "/taxa"), 
-                      query = list(limit=as.integer(min(5000,limit-k)), 
-                                   offset=as.integer(k+1)), 
-                      user_agent(make_ua()))
-          k <- k+5000
-          all_taxa_tmp <- check_and_parse(resp)
-          drop <- match(c("Author", "Remark"), names(all_taxa_tmp)) ## Non-ascii fields, not needed
-          all_taxa <- rbind(all_taxa,all_taxa_tmp[-drop])
-        }
-      } else {
-      
-      resp <- GET(paste0(server, "/taxa"), 
-                  query = list(family='', limit=as.integer(limit)), 
-                  user_agent(make_ua()))
-      all_taxa <- check_and_parse(resp)
-      drop <- match(c("Author", "Remark"), names(all_taxa)) ## Non-ascii fields, not needed
-      all_taxa <- all_taxa[-drop]
-      
-      }
-      
-    } else {
-      data(list = cache_name, package="rfishbase", envir = environment())
-      all_taxa <- mget(cache_name, envir = environment())[[1]]
-    }
-    
-   
-  all_taxa
-}
+  taxa_table
+})
 
 #' A table of all the the species found in FishBase, including taxonomic
 #' classification and the Species Code (SpecCode) by which the species is
