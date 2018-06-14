@@ -1,6 +1,6 @@
 
 ## Allows us to define functions for each endpoint using closures
-#' @importFrom dplyr left_join
+#' @importFrom dplyr left_join rename
 endpoint <- function(endpt, tidy_table = default_tidy){
   
   function(species_list = NULL, fields = NULL, server = getOption("FISHBASE_API", FISHBASE_API), ...){
@@ -8,7 +8,7 @@ endpoint <- function(endpt, tidy_table = default_tidy){
     
     ## fix SpecCode inconsistencies
     if("Speccode" %in% names(full_data)){ 
-      full_data <- rename(full_data, SpecCode = Speccode)
+      full_data <- dplyr::rename(full_data, SpecCode = Speccode)
     }
     
     ## Subset by species list. Include species names
