@@ -25,7 +25,7 @@ species_subset <- function(species_list, full_data){
   suppressMessages({
     out <- speccodes(species_list) %>% 
       dplyr::left_join(fb_species(), by = "SpecCode") %>%
-      dplyr::left_join(full_data)
+      dplyr::left_join(full_data, by = "SpecCode")
   })
   out
 }

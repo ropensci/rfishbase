@@ -75,8 +75,8 @@ fish
 `rfishbase` also recognizes common names. When a common name refers to multiple species, all matching species are returned:
 
 ```{r}
-fish <- common_to_sci("trout")
-fish
+trout <- common_to_sci("trout")
+trout
 ```
 
 Note that there is no need to validate names coming from `common_to_sci` or `species_list`, as these will always return valid names.
@@ -88,13 +88,13 @@ With a species list in place, we are ready to query fishbase for data. Note that
 The `species()` function returns a table containing much (but not all) of the information found on the summary or homepage for a species on [fishbase.org](http://fishbase.org). `rfishbase` functions always return [tidy](http://www.jstatsoft.org/v59/i10/paper) data tables: rows are observations (e.g. a species, individual samples from a species) and columns are variables (fields).
 
 ```{r}
-species(fish[1:2])
+species(trout$Species)
 ```
 
 Most tables contain many fields. To avoid overly cluttering the screen, `rfishbase` displays tables as `data_frame` objects from the `dplyr` package.  These act just like the familiar `data.frames` of base R except that they print to the screen in a more tidy fashion.  Note that columns that cannot fit easily in the display are summarized below the table.  This gives us an easy way to see what fields are available in a given table. For instance, from this table we may only be interested in the `PriceCateg` (Price category) and the `Vulnerability` of the species. We can repeat the query for our full species list, asking for only these fields to be returned:
 
 ```{r}
-dat <- species(fish, fields=c("SpecCode", "PriceCateg", "Vulnerability"))
+dat <- species(trout$Species, fields=c("Species", "PriceCateg", "Vulnerability"))
 dat
 ```
 
@@ -112,8 +112,7 @@ This shows us that this information appears on the `stocks` table.  Working in R
 
 
 ```{r}
-resil <- stocks(fish, fields="Resilience")
-merge(dat, resil)
+stocks(trout$Species, fields=c("Species", "Resilience", "StockDefs"))
 ```
 
 
@@ -122,33 +121,4 @@ Sometimes it is more useful to search for a broad description of the tables.
 
 ## SeaLifeBase
 
-The FishBase team has also created the SeaLifeBase project, which seeks to provide much the same data and layout as fishbase.org and the fishbase schema, but covering all sea life apart from the finfish covered in FishBase.  The rOpenSci team has created a pilot API for SeaLifeBase as well.  Most of the functions in `rfishbase` can be used directly to query SeaLifeBase data by explicitly specifying the `server` argument to use the SeaLifeBase API at `http://fishbase.ropensci.org/sealifebase`, like so: 
-
-```{r}
-options(FISHBASE_API = "https://fishbase.ropensci.org/sealifebase")
-kingcrab <- common_to_sci("king crab")
-kingcrab
-```
-
-```{r eval=FALSE}
-species(kingcrab)
-ecology(kingcrab)
-```
-
-
-Set the API back to `fishbase` for finfish data:
-
-```{r}
-options(FISHBASE_API = "https://fishbase.ropensci.org")
-```
-
-Alternately, all functions can take the explicit argument `server` to indicate which database to use, like so:
-
-```{r}
-kingcrab <- common_to_sci("king crab", server = "https://fishbase.ropensci.org/sealifebase")
-kingcrab
-```
-
-This supercedes the value set in `options()` and is the preferred method when using both databases in a single script.  
-
-
+Support for SeaLifeBase not yet implemented in `3.0`.  Should be coming soon!

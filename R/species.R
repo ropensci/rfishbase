@@ -29,7 +29,20 @@
 #' species(c("Labroides bicolor", "Bolbometopon muricatum"), fields = species_fields$habitat) 
 #' 
 #' }
-species <- endpoint("species")
+species <- function(species_list = NULL, fields = NULL, 
+                    server = getOption("FISHBASE_API", FISHBASE_API), ...){
+  full_data <- fb_tbl("species") %>% 
+    select(-Genus, -Species)
+  
+  full_data <- fix_ids(full_data)
+  out <- species_subset(species_list, full_data)
+  
+  if(!is.null(fields)){
+    out <- out[fields]
+  }
+  
+  out
+}
 
 #species <- endpoint("species", tidy_table = tidy_species_table)
 

@@ -38,7 +38,7 @@ synonyms <- function(species_list, server = getOption("FISHBASE_API", FISHBASE_A
   
   dplyr::left_join(
             data.frame(synonym = species_list, stringsAsFactors = FALSE),
-            syn) %>% 
+            syn,by="synonym") %>% 
     left_join(fb_species(server=server), by = "SpecCode")
 
   
@@ -51,12 +51,12 @@ synonyms <- function(species_list, server = getOption("FISHBASE_API", FISHBASE_A
 #' @inheritParams species
 #' @return a string of the validated names
 #' @export
+#' @importFrom dplyr filter pull
 validate_names <- function(species_list, server = getOption("FISHBASE_API", FISHBASE_API),...){
   
-  
   synonyms(species_list, server = server) %>% 
-    filter(Status = "accepted name") %>% 
-    pull(Species)
+    dplyr::filter(Status == "accepted name") %>% 
+    dplyr::pull(Species)
                        
     
 }

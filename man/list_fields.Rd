@@ -4,7 +4,7 @@
 \alias{list_fields}
 \title{list_fields}
 \usage{
-list_fields(fields, server = getOption("FISHBASE_API", FISHBASE_API),
+list_fields(fields = NULL, server = getOption("FISHBASE_API", FISHBASE_API),
   implemented_only = TRUE)
 }
 \arguments{
@@ -26,7 +26,7 @@ neither "Minimum" or "Temperature" will match "TempMin", so begin with the short
 Note also that there is no guarentee that the same column has the same value or same meaning in different tables.
 }
 \examples{
-\dontrun{
+\donttest{
 list_fields("Temp")
 }
 }

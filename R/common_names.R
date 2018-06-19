@@ -45,7 +45,7 @@ get_comnames <- memoise::memoise(function(server){
     dplyr::select(ComName, Language, SpecCode) %>%  
     dplyr::filter(Language %in% Language) %>% 
     dplyr::distinct() %>% 
-    dplyr::left_join(fb_species()) %>% 
+    dplyr::left_join(fb_species(), by = "SpecCode") %>% 
     select(Species, ComName, Language, SpecCode)
 })
 
