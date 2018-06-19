@@ -45,7 +45,9 @@ load_taxa <- memoise::memoise(function(server = getOption("FISHBASE_API", FISHBA
   
   taxa_table
 })
-
+globalVariables(c("SpecCode", "Species", "Genus", "Subfamily", "Family", 
+        "Order", "Class", "SuperClass"))
+        
 #' A table of all the the species found in FishBase, including taxonomic
 #' classification and the Species Code (SpecCode) by which the species is
 #' identified in FishBase.

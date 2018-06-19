@@ -53,6 +53,7 @@ c_code <- function(c_code, server = getOption("FISHBASE_API", FISHBASE_API), fie
    fb_tbl("country") %>% filter(C_code %in% c_code)
 }
 
+globalVariables("C_code")
 
 
 #' distribution
@@ -91,7 +92,7 @@ faoareas <- function(species_list = NULL, fields = NULL, server = getOption("FIS
   out <- left_join(fb_tbl("faoareas")[c('AreaCode', 'SpecCode', 'Status')],
             faoarrefs()[c('AreaCode', 'FAO')])
   
-  subset_species(species_list, out)
+  species_subset(species_list, out)
 }
 
 

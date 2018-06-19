@@ -34,7 +34,7 @@ species_list <- function(Class = NULL,
   class <- enquo(Class)
   order <- enquo(Order)
   family <- enquo(Family)
-  subfamiy <- enquo(Subfamily)
+  subfamily <- enquo(Subfamily)
   genus <- enquo(Genus)
   species <- enquo(Species)
   superclass <- enquo(SuperClass)

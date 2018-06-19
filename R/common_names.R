@@ -46,7 +46,7 @@ get_comnames <- memoise::memoise(function(server){
     select(Species, ComName, Language, SpecCode)
 })
 
-
+globalVariables(c("ComName", "Language"))
 #' common names
 #' 
 #' Return a table of common names

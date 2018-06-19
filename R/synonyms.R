@@ -38,9 +38,12 @@ synonyms <- function(species_list, server = getOption("FISHBASE_API", FISHBASE_A
             data.frame(synonym = species_list, stringsAsFactors = FALSE),
             syn,by="synonym") %>% 
     left_join(fb_species(server=server), by = "SpecCode")
-
-  
 }
+
+
+globalVariables(c("Status", "SpecCode", "SynCode", 
+"CoL_ID", "TSN", "WoRMS_ID", "ZooBank_ID",
+"TaxonLevel", "synonym", "SynGenus", "SynSpecies", "columns"))
 
 #' validate_names
 #' 

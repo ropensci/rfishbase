@@ -11,12 +11,11 @@
 #' can be left as is. 
 #' @inheritParams species
 #' @examples 
+#' \donttest{
 #' taxonomy(genus = "Oreochromis", species = "amphimelas")
 #' taxonomy(genus = "Oreochromis")
 #' taxonomy(species = "amphimelas")
-#' 
-#' taxonomy(genus = "Abrocoma", 
-#'   server = "https://fishbase.ropensci.org/sealifebase")
+#' }
 #'   
 taxonomy <- function(genus = NULL, species = NULL, ...){ 
   species_list(Genus = genus, 

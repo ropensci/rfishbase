@@ -1,3 +1,3 @@
-`%||%` <- function(x, y) {
-  if (is.null(x) || length(x) == 0) y else x
-}
+
+#' @importFrom utils globalVariables
+utils::globalVariables(c("Genus", "Species", "SpecCode", "Speccode"))
