@@ -49,12 +49,8 @@ countrysubref <- endpoint("countrysubref")
 #' }
 #' @details 
 #' e.g. http://www.fishbase.us/Country
-c_code <- function(c_code, server = getOption("FISHBASE_API", FISHBASE_API), fields='', limit = 500){
-  resp <- httr::GET(paste0(server, "/faoareas"), 
-                    query = list(C_Code = c_code, limit = limit,
-                                 fields = fields),
-                    httr::user_agent(make_ua()))  
-  check_and_parse(resp)
+c_code <- function(c_code, server = getOption("FISHBASE_API", FISHBASE_API), fields=NULL, ...){
+   fb_tbl("country") %>% filter(C_code %in% c_code)
 }
 
 
@@ -70,8 +66,9 @@ c_code <- function(c_code, server = getOption("FISHBASE_API", FISHBASE_API), fie
 #' }
 #' @details currently this is ~ FAO areas table (minus "note" field)
 #' e.g. http://www.fishbase.us/Country/FaoAreaList.php?ID=5537
-distribution <- function(species_list, fields = NULL, server = getOption("FISHBASE_API", FISHBASE_API), limit = 500){
-  faoareas(species_list, fields = fields, server = server, limit = limit)
+distribution <- function(species_list, fields = NULL, 
+                         server = getOption("FISHBASE_API", FISHBASE_API),...){
+  faoareas(species_list, fields = fields, server = server)
 }
 
 
@@ -80,8 +77,7 @@ distribution <- function(species_list, fields = NULL, server = getOption("FISHBA
 #' return a table of species locations as reported in FishBASE.org FAO location data
 #' 
 #' @inheritParams species
-#' @importFrom dplyr bind_rows left_join
-#' @importFrom httr GET
+#' @importFrom dplyr left_join
 #' @export
 #' @return a tibble, empty tibble if no results found
 #' @examples 

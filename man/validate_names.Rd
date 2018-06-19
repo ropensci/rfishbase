@@ -8,11 +8,11 @@ validate_names(species_list, server = getOption("FISHBASE_API", FISHBASE_API),
   ...)
 }
 \arguments{
-\item{species_list}{A vector of scientific names (each element as "genus species"). If empty, the table will be loaded up to the limit. This makes it possible to load an entire table without knowledge of the species in the table, thus avoiding uneccesary API calls.}
+\item{species_list}{A vector of scientific names (each element as "genus species"). If empty, a table for all fish will be returned.}
 
 \item{server}{base URL to the FishBase API (by default). For SeaLifeBase, use https://fishbase.ropensci.org/sealifebase}
 
-\item{...}{additional arguments to httr::GET}
+\item{...}{unused; for backwards compatibility only}
 }
 \value{
 a string of the validated names

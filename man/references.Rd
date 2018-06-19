@@ -18,8 +18,6 @@ over the network if only certain columns are needed.}
 
 \item{server}{base URL to the FishBase API (by default). For SeaLifeBase, 
 use https://fishbase.ropensci.org/sealifebase}
-
-\item{...}{additional arguments to \code{\link[httr]{GET}}}
 }
 \value{
 a tibble (data.frame) of reference data

@@ -5,22 +5,18 @@
 \alias{sci_to_common}
 \title{commonnames}
 \usage{
-common_names(species_list, limit = NULL, server = getOption("FISHBASE_API",
-  FISHBASE_API), Language = NULL, fields = NULL)
+common_names(species_list, server = getOption("FISHBASE_API", FISHBASE_API),
+  Language = NULL, fields = NULL)
 }
 \arguments{
-\item{species_list}{A vector of scientific names (each element as "genus species"). If empty, the table will be loaded up to the limit. This makes it possible to load an entire table without knowledge of the species in the table, thus avoiding uneccesary API calls.}
-
-\item{limit}{The maximum number of matches from a single API call (e.g. per species). Function
-will warn if this needs to be increased, otherwise can be left as is.}
+\item{species_list}{A vector of scientific names (each element as "genus species"). If empty, a table for all fish will be returned.}
 
 \item{server}{base URL to the FishBase API (by default). For SeaLifeBase, use https://fishbase.ropensci.org/sealifebase}
 
 \item{Language}{a string specifying the language for the common name, e.g. "English"}
 
 \item{fields}{a character vector specifying which fields (columns) should be returned. By default,
-all available columns recognized by the parser are returned. This option can be used to limit the amount
-of data transfered over the network if only certain columns are needed.}
+all available columns recognized by the parser are returned.  Mostly for backwards compatibility as users can subset by column later}
 }
 \value{
 a data.frame of common names by species queried. If multiple species are queried,

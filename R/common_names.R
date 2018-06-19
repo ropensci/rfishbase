@@ -10,9 +10,6 @@
 #' will simply return a list of all matching scientific names.  If given more than one common name,
 #' the resulting strings of matching scientific names are simply concatenated. 
 #' 
-#' Setting the language used explicitly will decrease the data transferred and speed up the function. 
-#' The limit default is quite high in this call, as it corresponds to the number of common names that
-#' match a given species, including different languages and countries. 
 #' @examples
 #' \donttest{
 #' common_to_sci(c("Bicolor cleaner wrasse", "humphead parrotfish"), Language="English")
@@ -23,7 +20,7 @@
 #' @importFrom dplyr filter select distinct
 #' @importFrom stringr str_to_lower
 #' @importFrom purrr map_dfr
-common_to_sci <- function(x, Language = NULL, limit = NULL, 
+common_to_sci <- function(x, Language = NULL, ..., 
                           server = getOption("FISHBASE_API", FISHBASE_API)){
   
   comnames <- get_comnames(server)
@@ -69,7 +66,6 @@ get_comnames <- memoise::memoise(function(server){
 #' @export common_names sci_to_common
 #' @aliases common_names sci_to_common
 common_names <- function(species_list, 
-                        limit = NULL, 
                         server = getOption("FISHBASE_API", FISHBASE_API), 
                         Language = NULL,
                         fields = NULL){

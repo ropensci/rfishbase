@@ -1,10 +1,11 @@
 #' species_list
 #' 
 #' Return the a species list given a taxonomic group
+#' @param Superclass Request all species of this Superclass
 #' @param Class Request all species in this taxonomic Class
 #' @param Order Request all species in this taxonomic Order
 #' @param Family Request all species in this taxonomic Family
-#' @param SubFamily Request all species in this taxonomic SubFamily
+#' @param Subfamily Request all species in this taxonomic SubFamily
 #' @param Genus Request all species in this taxonomic Genus
 #' @param Species Request all species in this taxonomic Species
 #' @param SpecCode Request species name of species matching this SpecCode

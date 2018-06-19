@@ -9,14 +9,14 @@
 #' over the network if only certain columns are needed. 
 #' @param server base URL to the FishBase API (by default). For SeaLifeBase, 
 #' use https://fishbase.ropensci.org/sealifebase
-#' @param ... additional arguments to \code{\link[httr]{GET}}
 #' @return a tibble (data.frame) of reference data
 #' @examples \dontrun{
 #' references(codes = 1)
 #' references(codes = 1:6)
 #' references(codes = 1:6, fields = c('Author', 'Year', 'Title'))
 #' }
-references <- function(codes = NULL, fields = NULL, server = getOption("FISHBASE_API", FISHBASE_API), ...){
+references <- function(codes = NULL, fields = NULL, 
+                       server = getOption("FISHBASE_API", FISHBASE_API), ...){
    out <- left_join(data.frame(RefNo = codes), fb_tbl("refrens"))
    if(!is.null(fields))
      out <- out[fields]

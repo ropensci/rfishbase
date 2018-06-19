@@ -9,11 +9,9 @@
 #' @details 
 #' For further information on fields returned, see:
 #' http://www.fishbase.org/manual/english/fishbasethe_synonyms_table.htm
-#' @importFrom httr GET user_agent 
-#' @importFrom dplyr bind_rows
 #' @export
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' # Query using a synonym:
 #' synonyms("Callyodon muricatus")
 #'  

@@ -7,17 +7,12 @@
 taxonomy(genus = NULL, species = NULL, ...)
 }
 \arguments{
-\item{genus, species}{(character) genus or species (aka epithet) name. 
-pass in either one or both}
-
-\item{...}{additional arguments to \code{\link[httr]{GET}}}
-
-\item{limit}{The maximum number of matches from a single API call (e.g. 
+\item{genus, species}{(character) genus or species name. 
+pass in either one or both
 per species). Function will warn if this needs to be increased, otherwise 
 can be left as is.}
 
-\item{server}{base URL to the FishBase API (by default). For SeaLifeBase, 
-use https://fishbase.ropensci.org/sealifebase}
+\item{...}{unused; for backwards compatibility only}
 }
 \description{
 Taxonomy
