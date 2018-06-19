@@ -1,7 +1,7 @@
 #' species_list
 #' 
 #' Return the a species list given a taxonomic group
-#' @param Superclass Request all species of this Superclass
+#' @param SuperClass Request all species of this Superclass
 #' @param Class Request all species in this taxonomic Class
 #' @param Order Request all species in this taxonomic Order
 #' @param Family Request all species in this taxonomic Family

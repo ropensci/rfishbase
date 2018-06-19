@@ -15,7 +15,7 @@
 #' common_to_sci(c("Bicolor cleaner wrasse", "humphead parrotfish"), Language="English")
 #' common_to_sci(c("Coho Salmon", "trout"))
 #' }
-#' @seealso \code{\link{commonnames}}, \code{\link{species_list}}, \code{\link{synonyms}}
+#' @seealso \code{\link{species_list}}, \code{\link{synonyms}}
 #' @export
 #' @importFrom dplyr filter select distinct
 #' @importFrom stringr str_to_lower
@@ -47,7 +47,7 @@ get_comnames <- memoise::memoise(function(server){
 })
 
 
-#' commonnames
+#' common names
 #' 
 #' Return a table of common names
 #' @inheritParams species

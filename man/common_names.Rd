@@ -3,7 +3,7 @@
 \name{common_names}
 \alias{common_names}
 \alias{sci_to_common}
-\title{commonnames}
+\title{common names}
 \usage{
 common_names(species_list, server = getOption("FISHBASE_API", FISHBASE_API),
   Language = NULL, fields = NULL)
