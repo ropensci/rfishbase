@@ -26,13 +26,16 @@ load_taxa <- memoise::memoise(function(server = getOption("FISHBASE_API", FISHBA
     select(ClassNum, Class, ClassCommonName = CommonName,
            SuperClass, Subclass)
 
+  
+  suppressMessages(
   taxon_hierarchy <- 
     taxon_species %>%
     left_join(taxon_genus) %>%
     left_join(taxon_family )%>%
     left_join(taxon_order) %>%
     left_join(taxon_class)
-    
+  )
+  
   taxa_table <- 
     taxon_hierarchy %>% 
     dplyr::select(SpecCode, Species, Genus, Subfamily, Family, 

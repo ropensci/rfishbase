@@ -3,7 +3,8 @@
 #' @importFrom dplyr left_join rename
 endpoint <- function(endpt, tidy_table = default_tidy){
   
-  function(species_list = NULL, fields = NULL, server = getOption("FISHBASE_API", FISHBASE_API), ...){
+  function(species_list = NULL, fields = NULL, 
+           server = getOption("FISHBASE_API", FISHBASE_API), ...){
     full_data <- fb_tbl(endpt)
     
     full_data <- fix_ids(full_data)
