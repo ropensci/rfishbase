@@ -44,18 +44,3 @@ test_that("We can validate names",{
 })
 
 
-test_that("Validation is the same using the valid column as using speccode",{
-
-  needs_api()
-   
-  x <- "Clupea pallasii"
-  syn_table <- synonyms(x)
-  code <- unique(syn_table$SpecCode)
- 
-  syn_table <- synonyms(code)
-  who <- syn_table$Valid
-  y <- paste(syn_table$SynGenus[who], syn_table$SynSpecies[who])
-  
-  valid <- validate_names("Clupea pallasii")
-  expect_identical(y, valid)
-})

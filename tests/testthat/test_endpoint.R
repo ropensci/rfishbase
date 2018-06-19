@@ -7,10 +7,11 @@ test_that("we can create endpoints with closures", {
 test_that("Custom queries give desired result", {
   
   country <- endpoint("country")
-  df <- country(query = list(C_Code=440))
-  expect_true(all(df$C_Code == '440'))
+  df <- country()
+  expect_is(df, "data.frame")
   
-  df <- country("Oreochromis niloticus", query = list(C_Code='050'))
-  expect_true(all(df$C_Code == '050'))
+  df <- country("Oreochromis niloticus")
+  expect_is(df, "data.frame")
   
 })
+

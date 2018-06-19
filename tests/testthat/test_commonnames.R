@@ -8,7 +8,7 @@ test_that("test common to sci name", {
   expect_gt(length(species$Species), 1)
   
   species <- common_to_sci("trout")
-  expect_is(species, "character")
+  expect_is(species, "data.frame")
   n <- length(species)
   
   species <- common_to_sci(c("trout", "Coho Salmon"))
@@ -23,3 +23,4 @@ test_that("test sci to common names", {
   df <- common_names(c("Labroides bicolor",  "Bolbometopon muricatum"))
   expect_is(df, "data.frame")
 })
+

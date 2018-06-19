@@ -6,3 +6,4 @@ test_that('returns a data.frame with correct sciname',
             expect_true("Epinephelus morio" %in% maturity("Epinephelus morio")$Species)
           }
           )
+

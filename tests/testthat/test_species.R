@@ -29,23 +29,8 @@ test_that("We can pass a species_list based on taxanomic group", {
 test_that("We can filter on certain fields",{
   needs_api()  
   df <- species(c("Oreochromis niloticus", "Bolbometopon muricatum"), 
-                fields=c('SpecCode', 'Species', 'Genus'))
+                fields=c('SpecCode', 'Species'))
   expect_is(df, "data.frame")
-  expect_equal(dim(df), c(2,3))
-})
-
-test_that("We can filter on preset fields",{
-  needs_api()  
-  df <- species(c("Oreochromis niloticus", "Bolbometopon muricatum"), 
-                fields=c(species_fields$id, species_fields$habitat))
-  expect_is(df, "data.frame")
-})
-
-
-## Don't make throw ERRORS when we have MISSING DATA.  Unmatched species
-## should be just be polite NAs, not break everything errros.  
-test_that("Fully unmatched species names do not throw error",{
-  needs_api()  
-  species(c("foo", "bar"))
+  
 })
 
