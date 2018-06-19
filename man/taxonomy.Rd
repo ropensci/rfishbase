@@ -18,11 +18,10 @@ can be left as is.}
 Taxonomy
 }
 \examples{
+\donttest{
 taxonomy(genus = "Oreochromis", species = "amphimelas")
 taxonomy(genus = "Oreochromis")
 taxonomy(species = "amphimelas")
-
-taxonomy(genus = "Abrocoma", 
-  server = "https://fishbase.ropensci.org/sealifebase")
+}
   
 }
