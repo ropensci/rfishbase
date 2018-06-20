@@ -16,3 +16,5 @@ circle.yml
 .github
 ^\.pbattributes$
 ^\.manifest\.json$
+^fb$
+
