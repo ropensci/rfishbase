@@ -21,7 +21,7 @@ endpoint <- function(endpt){
 species_subset <- function(species_list, full_data){
 
   ## drop any existing Species column, we'll get this data from joining on SpecCode
-  full_data <- full_data[!( names(full_data) %in% c("Genus", "Species")) ]
+  full_data <- full_data[!( names(full_data) %in% "Species") ]
 
   if(is.null(species_list)){
     return(dplyr::left_join(fb_species(), full_data, by = "SpecCode"))
