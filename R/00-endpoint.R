@@ -19,9 +19,14 @@ endpoint <- function(endpt){
 }
 
 species_subset <- function(species_list, full_data){
-  if(is.null(species_list))
-    return(full_data)
-  
+
+  ## drop any existing Species column, we'll get this data from joining on SpecCode
+  full_data <- full_data[!( names(full_data) %in% c("Genus", "Species")) ]
+
+  if(is.null(species_list)){
+    return(dplyr::left_join(fb_species(), full_data, by = "SpecCode"))
+  }
+    
   suppressMessages({
     out <- speccodes(species_list) %>% 
       dplyr::left_join(fb_species(), by = "SpecCode") %>%
