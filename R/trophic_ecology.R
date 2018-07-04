@@ -52,6 +52,19 @@ predators <- endpoint("predats")
 
 
 
+#' estimate
+#'  
+#' @return a table of estimates from some models on trophic levels
+#' @inheritParams species
+#' @export
+#' @references http://www.fishbase.us/manual/English/FishbaseThe_FOOD_ITEMS_table.htm
+#' @examples \dontrun{
+#' estimate("Oreochromis niloticus")
+#' }
+estimate <- endpoint("estimate")
+
+
+
 #' diet
 #'  
 #' @return a table of species diet
