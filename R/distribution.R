@@ -12,7 +12,7 @@
 #' }
 #' @details 
 #' e.g. http://www.fishbase.us/Country
-country <- endpoint("country")
+country <- endpoint("country", join = country_names())
 
 #' countrysub
 #' 
@@ -23,18 +23,19 @@ country <- endpoint("country")
 #' @examples \dontrun{
 #' countrysub(species_list(Genus='Labroides'))
 #' }
-countrysub <- endpoint("countrysub")
+countrysub <- endpoint("countrysub", join = country_names())
 
 #' countrysubref
 #' 
-#' return a table of countrysubref for the requested species
+#' return a table of countrysubref
 #' 
-#' @inheritParams species
 #' @export
 #' @examples \dontrun{
-#' countrysubref(species_list(Genus='Labroides'))
+#' countrysubref()
 #' }
-countrysubref <- endpoint("countrysubref")
+countrysubref <- function(){
+  fb_tbl("countrysubref") %>% left_join(country_names())
+}
 
 
 #' c_code
@@ -49,13 +50,25 @@ countrysubref <- endpoint("countrysubref")
 #' }
 #' @details 
 #' e.g. http://www.fishbase.us/Country
-c_code <- function(c_code, server = getOption("FISHBASE_API", FISHBASE_API), fields=NULL, ...){
-   fb_tbl("country") %>% filter(C_code %in% c_code)
+c_code <- function(c_code = NULL, 
+                   server = getOption("FISHBASE_API", FISHBASE_API), 
+                   ...){
+  
+  out <- 
+    fb_tbl("countrysubref") %>% 
+    left_join(country_names())
+  
+  if(is.null(c_code)) 
+    out
+  else
+    out %>% filter(C_Code %in% c_code)
 }
 
-globalVariables("C_code")
+globalVariables("C_Code")
 
-
+country_names <- function(){
+  fb_tbl("countref") %>% select(country = PAESE, C_Code)
+}
 #' distribution
 #' 
 #' return a table of species locations as reported in FishBASE.org FAO location data

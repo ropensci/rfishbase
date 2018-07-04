@@ -4,24 +4,13 @@
 \alias{countrysubref}
 \title{countrysubref}
 \usage{
-countrysubref(species_list = NULL, fields = NULL,
-  server = getOption("FISHBASE_API", FISHBASE_API), ...)
-}
-\arguments{
-\item{species_list}{A vector of scientific names (each element as "genus species"). If empty, a table for all fish will be returned.}
-
-\item{fields}{a character vector specifying which fields (columns) should be returned. By default,
-all available columns recognized by the parser are returned.  Mostly for backwards compatibility as users can subset by column later}
-
-\item{server}{base URL to the FishBase API (by default). For SeaLifeBase, use https://fishbase.ropensci.org/sealifebase}
-
-\item{...}{unused; for backwards compatibility only}
+countrysubref()
 }
 \description{
-return a table of countrysubref for the requested species
+return a table of countrysubref
 }
 \examples{
 \dontrun{
-countrysubref(species_list(Genus='Labroides'))
+countrysubref()
 }
 }
