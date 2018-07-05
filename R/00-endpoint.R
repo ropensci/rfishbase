@@ -1,7 +1,7 @@
 
 ## Allows us to define functions for each endpoint using closures
 #' @importFrom dplyr left_join rename
-endpoint <- function(endpt, join = NULL){
+endpoint <- function(endpt, join = NULL, by = NULL){
   
   function(species_list = NULL, fields = NULL, 
            server = getOption("FISHBASE_API", FISHBASE_API), ...){
@@ -15,7 +15,7 @@ endpoint <- function(endpt, join = NULL){
     }
     
     if(!is.null(join))
-      out <- left_join(out, join)
+      out <- left_join(out, join, by = by)
     
     out
   }

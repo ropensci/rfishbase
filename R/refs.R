@@ -9,13 +9,20 @@
 #' references(codes = 1)
 #' references(codes = 1:6)
 #' references(codes = 1:6, fields = c('Author', 'Year', 'Title'))
+#' references() # all references
 #' }
 references <- function(codes = NULL, fields = NULL, 
                        server = getOption("FISHBASE_API", FISHBASE_API), ...){
+  if(!is.null(codes))
    out <- left_join(data.frame(RefNo = codes), fb_tbl("refrens"))
-   if(!is.null(fields))
+  
+  else
+    return(fb_tbl("refrens"))
+  
+  if(!is.null(fields))
      out <- out[fields]
-   out
+  
+  out
 }
 
 # make_citation <- function(x) {

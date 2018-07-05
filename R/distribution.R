@@ -126,7 +126,7 @@ faoarrefs <- function(){
 #' @examples \dontrun{
 #' ecosystem("Oreochromis niloticus")
 #' }
-ecosystem <- endpoint("ecosystem")
+ecosystem <- endpoint("ecosystem", join = fb_tbl("ecosystemref"), by = "E_CODE")
 
 #' occurrence
 #' 

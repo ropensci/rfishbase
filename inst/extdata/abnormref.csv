@@ -1,0 +1,10 @@
+table_name,column_name
+abnormref,AutoCtr
+abnormref,RefNo
+abnormref,References
+abnormref,Author
+abnormref,Year
+abnormref,Title
+abnormref,Source
+abnormref,FirstAuthor
+abnormref,TS
