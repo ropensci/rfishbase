@@ -21,3 +21,8 @@ a string of the validated names
 Check for alternate versions of a scientific name and return 
 the scientific names FishBase recognizes as valid
 }
+\examples{
+\donttest{
+validate_names("Abramites ternetzi")
+}
+}

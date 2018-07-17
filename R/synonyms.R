@@ -53,10 +53,13 @@ globalVariables(c("Status", "SpecCode", "SynCode",
 #' @return a string of the validated names
 #' @export
 #' @importFrom dplyr filter pull
+#' @examples \donttest{
+#' validate_names("Abramites ternetzi")
+#' }
 validate_names <- function(species_list, server = getOption("FISHBASE_API", FISHBASE_API),...){
   
   synonyms(species_list, server = server) %>% 
-    dplyr::filter(Status == "accepted name") %>% 
+    dplyr::filter(Status == "accepted name" || Status == "synonym") %>% 
     dplyr::pull(Species)
                        
     
