@@ -21,7 +21,7 @@
 #'  # See all synonyms 
 #'  species("Bolbometopon muricatum")
 #'  }
-synonyms <- function(species_list, server = getOption("FISHBASE_API", FISHBASE_API), 
+synonyms <- function(species_list = NULL, server = getOption("FISHBASE_API", FISHBASE_API), 
                      ...){
   
   syn <- 
