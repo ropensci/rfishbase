@@ -4,8 +4,7 @@
 \alias{diet}
 \title{diet}
 \usage{
-diet(species_list = NULL, fields = NULL,
-  server = getOption("FISHBASE_API", FISHBASE_API), ...)
+diet(species_list = NULL, fields = NULL, server = NULL, ...)
 }
 \arguments{
 \item{species_list}{A vector of scientific names (each element as "genus species"). If empty, a table for all fish will be returned.}
@@ -13,7 +12,9 @@ diet(species_list = NULL, fields = NULL,
 \item{fields}{a character vector specifying which fields (columns) should be returned. By default,
 all available columns recognized by the parser are returned.  Mostly for backwards compatibility as users can subset by column later}
 
-\item{server}{base URL to the FishBase API (by default). For SeaLifeBase, use https://fishbase.ropensci.org/sealifebase}
+\item{server}{can be set to either "fishbase" or "sealifebase" to switch between databases. NOTE: it is usually
+easier to leave this as NULL and set the source instead using the environmental variable `FISHBASE_API`, e.g.
+`Sys.setenv(FISHBASE_API="sealifebase")`.}
 
 \item{...}{unused; for backwards compatibility only}
 }

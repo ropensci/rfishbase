@@ -1,8 +1,4 @@
 
-
-FISHBASE_API <- "https://fishbase.ropensci.org"
-SEALIFEBASE_API <- "https://fishbase.ropensci.org/sealifebase"
-
 #' load_taxa
 #' 
 #' @param server API for Fishbase or Sealifebase?
@@ -10,19 +6,19 @@ SEALIFEBASE_API <- "https://fishbase.ropensci.org/sealifebase"
 #' @return the taxa list
 #' @importFrom dplyr arrange
 #' @export
-load_taxa <- memoise::memoise(function(server = getOption("FISHBASE_API", FISHBASE_API), ...){
+load_taxa <- memoise::memoise(function(server = NULL, ...){
 
-  taxon_species <- fb_tbl("species") %>% 
+  taxon_species <- fb_tbl("species", server) %>% 
     select(SpecCode, Species, Genus, Subfamily, GenCode, SubGenCode, FamCode)
-  taxon_genus <- fb_tbl("genera") %>% 
+  taxon_genus <- fb_tbl("genera", server) %>% 
     select(GenCode, GenName, GenusCommonName = GenComName, FamCode, Subfamily,
            SubgenusOf)
-  taxon_family <- fb_tbl("families") %>% 
+  taxon_family <- fb_tbl("families", server) %>% 
     select(FamCode, Family, FamilyCommonName = CommonName, Order, 
            Ordnum, Class, ClassNum) 
-  taxon_order <- fb_tbl("orders") %>% 
+  taxon_order <- fb_tbl("orders", server) %>% 
     select(Ordnum, Order, OrderCommonName = CommonName, ClassNum, Class) 
-  taxon_class <- fb_tbl("classes") %>% 
+  taxon_class <- fb_tbl("classes", server) %>% 
     select(ClassNum, Class, ClassCommonName = CommonName,
            SuperClass, Subclass)
 

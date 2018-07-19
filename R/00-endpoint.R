@@ -4,8 +4,8 @@
 endpoint <- function(endpt, join = NULL, by = NULL){
   
   function(species_list = NULL, fields = NULL, 
-           server = getOption("FISHBASE_API", FISHBASE_API), ...){
-    full_data <- fb_tbl(endpt)
+           server = NULL, ...){
+    full_data <- fb_tbl(endpt, server = server)
     
     full_data <- fix_ids(full_data)
     out <- species_subset(species_list, full_data)
@@ -21,7 +21,7 @@ endpoint <- function(endpt, join = NULL, by = NULL){
   }
 }
 
-species_subset <- function(species_list, full_data){
+species_subset <- function(species_list, full_data, server = NULL){
 
   ## drop any existing Species column, we'll get this data from joining on SpecCode
   full_data <- full_data[!( names(full_data) %in% "Species") ]
