@@ -4,8 +4,7 @@
 \alias{list_fields}
 \title{list_fields}
 \usage{
-list_fields(fields, server = getOption("FISHBASE_API", FISHBASE_API),
-  implemented_only = TRUE)
+list_fields(fields = NULL, server = NULL, implemented_only = TRUE)
 }
 \arguments{
 \item{fields}{field (column name) to search for}
@@ -21,12 +20,16 @@ a data frame listing the table names (matching function names in rfishbase) and 
 list fields
 }
 \details{
-method will use partial matching. Hence "Temp" will match column names such as "TempMin" and "TempMax", but "MinTemp" will not.  Likewise,
-neither "Minimum" or "Temperature" will match "TempMin", so begin with the shortest query possible and refine based on search results when necessary.
-Note also that there is no guarentee that the same column has the same value or same meaning in different tables.
+Calling `list_fields()` with no arguments will return the full table of all known fields.
+Then users can employ standard filter techniques like grep for partial name matching; 
+see examples.
 }
 \examples{
-\dontrun{
+\donttest{
 list_fields("Temp")
+
+## Regex matching on full table
+library(dplyr)
+list_fields() \%>\% filter(grepl("length", columns, ignore.case = TRUE))
 }
 }

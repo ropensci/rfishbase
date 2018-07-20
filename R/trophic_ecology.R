@@ -15,11 +15,9 @@
 #' ecology(c("Oreochromis niloticus", "Salmo trutta"),
 #'         fields=c("SpecCode", "FoodTroph", "FoodSeTroph", "DietTroph", "DietSeTroph"))
 #' }
-ecology <- function(species_list=NULL, fields = NULL, query = NULL, limit = 1, server = getOption("FISHBASE_API", FISHBASE_API)){
-  if(limit == 1) # don't bug user about missing returns
-    suppressWarnings(ecology_endpoint(species_list, fields = fields, query = query, limit = limit, server = server))
-  else
-    ecology_endpoint(species_list, fields = fields, query = query, limit = limit, server = server)
+ecology <- function(species_list=NULL, fields = NULL,
+                    server = NULL){
+    ecology_endpoint(species_list, fields = fields,  server = server)
 }
 
 ## This function wants to have custom default for the 'limit' argument.  To do this, first create 
@@ -51,6 +49,19 @@ fooditems <- endpoint("fooditems")
 #' predators("Oreochromis niloticus")
 #' }
 predators <- endpoint("predats")
+
+
+
+#' estimate
+#'  
+#' @return a table of estimates from some models on trophic levels
+#' @inheritParams species
+#' @export
+#' @references http://www.fishbase.us/manual/English/FishbaseThe_FOOD_ITEMS_table.htm
+#' @examples \dontrun{
+#' estimate("Oreochromis niloticus")
+#' }
+estimate <- endpoint("estimate")
 
 
 

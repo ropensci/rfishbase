@@ -1,71 +1,165 @@
 
-
-FISHBASE_API <- "https://fishbase.ropensci.org"
-SEALIFEBASE_API <- "https://fishbase.ropensci.org/sealifebase"
-
 #' load_taxa
 #' 
-#' Load or update the taxa list
-#' @param update logical, should we query the API to update the available list? 
-#' @param cache should we cache the updated version throughout this session? 
-#' (default TRUE, leave as is)
-#' @inheritParams species
+#' @param server API for Fishbase or Sealifebase?
+#' @param ... for compatibility with previous versions
 #' @return the taxa list
+#' @importFrom dplyr arrange
 #' @export
-load_taxa <- function(update = FALSE, cache = TRUE, server = getOption("FISHBASE_API", FISHBASE_API), limit = 5000L){
-  
-  ## Load the correct taxa table based on the server setting
-  if(grepl("https*://fishbase.ropensci.org$", server)){
-    cache_name <- "fishbase"
-  } else if(grepl("https*://fishbase.ropensci.org/sealifebase", server)){
-    cache_name <- "sealifebase"
+load_taxa <- memoise::memoise(function(server = NULL, ...){
+
+  ## SeaLifeBase requires a different taxa table function:
+  if(is.null(server)) server <- getOption("FISHBASE_API", FISHBASE_API)
+  if(grepl("sealifebase", server)){
+    slb_taxa_table(server)
   } else {
-    warning("Did not recognize API, assuming it is fishbase")
-    cache_name <- "fishbase"
-    
+    fb_taxa_table(server)
   }
+})
   
+
+
+
+globalVariables(c("SpecCode", "Species", "Genus", "Subfamily", "Family", 
+                  "Order", "Class", "SuperClass", "Phylum", "Kingdom"))
+
+
+fb_taxa_table <- function(server){
+  taxon_species <- fb_tbl("species", server)
+  keep <- names(taxon_species) %in% 
+    c("SpecCode", "Species", "Genus", "Subfamily",
+      "GenCode", "SubGenCode", "FamCode")
+  taxon_species <- taxon_species[keep]
   
-    if(update){
-      
-      #limit the limit to avoid uneccesary (empty) calls
-      limit <- ifelse(server == getOption("FISHBASE_API", FISHBASE_API),  
-                      min(limit,35000L),
-                      min(limit,120000L))
-      
-      if(limit>5000){
-        k <- 0
-        all_taxa <- {}
-        while(k<limit){
-          
-          resp <- GET(paste0(server, "/taxa"), 
-                      query = list(limit=as.integer(min(5000,limit-k)), 
-                                   offset=as.integer(k+1)), 
-                      user_agent(make_ua()))
-          k <- k+5000
-          all_taxa_tmp <- check_and_parse(resp)
-          drop <- match(c("Author", "Remark"), names(all_taxa_tmp)) ## Non-ascii fields, not needed
-          all_taxa <- rbind(all_taxa,all_taxa_tmp[-drop])
-        }
-      } else {
-      
-      resp <- GET(paste0(server, "/taxa"), 
-                  query = list(family='', limit=as.integer(limit)), 
-                  user_agent(make_ua()))
-      all_taxa <- check_and_parse(resp)
-      drop <- match(c("Author", "Remark"), names(all_taxa)) ## Non-ascii fields, not needed
-      all_taxa <- all_taxa[-drop]
-      
-      }
-      
-    } else {
-      data(list = cache_name, package="rfishbase", envir = environment())
-      all_taxa <- mget(cache_name, envir = environment())[[1]]
-    }
-    
-   
-  all_taxa
+  taxon_genus <- fb_tbl("genera", server) 
+  keep <- names(taxon_genus) %in% 
+    c("GenCode", "GenName", "GenComName", "FamCode",
+      "Subfamily", "SubgenusOf")
+  taxon_genus <- taxon_genus[keep]
+  i <- names(taxon_genus) == "GenComName"
+  names(taxon_genus)[i] <- "GenusCommonName" 
+  
+  taxon_family <- fb_tbl("families", server)
+  keep <- names(taxon_family) %in% 
+    c("FamCode", "Family","CommonName", "Order",
+      "Ordnum", "Class", "ClassNum")
+  taxon_family <- taxon_family[keep]
+  i <- names(taxon_family) == "CommonName"
+  names(taxon_family)[i] <- "FamilyCommonName"
+  
+  taxon_order <- fb_tbl("orders", server)
+  keep <- names(taxon_order) %in% 
+    c("Ordnum", "Order", "CommonName", "ClassNum", "Class") 
+  taxon_order <- taxon_order[keep]
+  i <- names(taxon_order) == "CommonName"
+  names(taxon_order)[i] <- "OrderCommonName"
+  
+  taxon_class <- fb_tbl("classes", server)
+  keep <- names(taxon_class) %in% c("ClassNum", "Class", "CommonName",
+           "SuperClass", "Subclass")
+  i <- names(taxon_class) == "CommonName"
+  names(taxon_class)[i] <- "ClassCommonName"
+  taxon_class <- taxon_class[keep]
+
+  
+  suppressMessages(
+  taxon_hierarchy <- 
+    taxon_species %>%
+    left_join(taxon_genus) %>%
+    left_join(taxon_family )%>%
+    left_join(taxon_order) %>%
+    left_join(taxon_class)
+  )
+  
+  taxa_table <- 
+    taxon_hierarchy %>% 
+    dplyr::select(SpecCode, Species, Genus, Subfamily, Family, 
+           Order, Class, SuperClass) %>% 
+    dplyr::arrange(SpecCode) %>% 
+    dplyr::mutate(Species = paste(Genus, Species))
+  
+  taxa_table
 }
+
+
+
+
+slb_taxa_table <- function(server){
+  
+  server <- "sealifebase"
+    
+  taxon_species <- fb_tbl("species", server)
+  taxon_genus <- fb_tbl("genera", server) 
+  taxon_family <- fb_tbl("families", server)
+  taxon_order <- fb_tbl("orders", server)
+  taxon_class <- fb_tbl("classes", server)
+  taxon_phylum <- fb_tbl("phylums", server)
+  phylum_class <- fb_tbl("phylumclass", server) # just to join phylum to class tbl
+  
+  
+  keep <- names(taxon_species) %in% 
+    c("SpecCode", "Species", "Genus",
+      "GenCode", "SubGenCode", "FamCode")
+  taxon_species <- taxon_species[keep]
+  
+  
+  keep <- names(taxon_genus) %in% 
+    c("GenCode", "GEN_NAME", "GenComName", "FamCode",
+      "Subfamily", "SubgenusOf")
+  taxon_genus <- taxon_genus[keep]
+  i <- names(taxon_genus) == "GenComName"
+  names(taxon_genus)[i] <- "GenusCommonName" 
+  i <- names(taxon_genus) == "GEN_NAME"
+  names(taxon_genus)[i] <- "Genus" 
+  
+  keep <- names(taxon_family) %in% 
+    c("FamCode", "Family","CommonName", "Order",
+      "Ordnum", "Class", "ClassNum")
+  taxon_family <- taxon_family[keep]
+  i <- names(taxon_family) == "CommonName"
+  names(taxon_family)[i] <- "FamilyCommonName"
+  
+  keep <- names(taxon_order) %in% 
+    c("Ordnum", "Order", "CommonName", "ClassNum", "Class") 
+  taxon_order <- taxon_order[keep]
+  i <- names(taxon_order) == "CommonName"
+  names(taxon_order)[i] <- "OrderCommonName"
+  
+  keep <- names(taxon_class) %in% 
+    c("ClassNum", "Class", "CommonName",
+      "SuperClass", "Subclass")
+  i <- names(taxon_class) == "CommonName"
+  names(taxon_class)[i] <- "ClassCommonName"
+  taxon_class <- taxon_class[keep]
+  
+  keep <- names(taxon_phylum) %in% 
+    c("PhylumId", "Phylum", "Kingdom")
+  i <- names(taxon_phylum) == "CommonName"
+  names(taxon_phylum)[i] <- "PhylumCommonName"
+  taxon_phylum <- taxon_phylum[keep]
+  
+  suppressMessages(
+    taxon_hierarchy <- 
+      taxon_species %>%
+      left_join(taxon_genus) %>%
+      left_join(taxon_family )%>%
+      left_join(taxon_order) %>%
+      left_join(taxon_class) %>%
+      left_join(phylum_class) %>%
+      left_join(taxon_phylum)
+  )
+  
+  taxa_table <- 
+    taxon_hierarchy %>% 
+    dplyr::select(SpecCode, Species, Genus, Subfamily, Family, 
+                  Order, Class, Phylum, Kingdom) %>% 
+    dplyr::arrange(SpecCode) %>% 
+    dplyr::mutate(Species = paste(Genus, Species))
+  
+  taxa_table
+}
+
+
 
 #' A table of all the the species found in FishBase, including taxonomic
 #' classification and the Species Code (SpecCode) by which the species is

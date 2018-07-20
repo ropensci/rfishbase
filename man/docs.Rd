@@ -4,15 +4,17 @@
 \alias{docs}
 \title{docs}
 \usage{
-docs(table = "", server = getOption("FISHBASE_API", FISHBASE_API), ...)
+docs(table = NULL, server = NULL, ...)
 }
 \arguments{
 \item{table}{the table for which the documentation should be displayed.  If no table is given,
 documentation summarizing all available tables is shown.}
 
-\item{server}{base URL to the FishBase API (by default). For SeaLifeBase, use https://fishbase.ropensci.org/sealifebase}
+\item{server}{can be set to either "fishbase" or "sealifebase" to switch between databases. NOTE: it is usually
+easier to leave this as NULL and set the source instead using the environmental variable `FISHBASE_API`, e.g.
+`Sys.setenv(FISHBASE_API="sealifebase")`.}
 
-\item{...}{additional arguments to httr::GET}
+\item{...}{unused; for backwards compatibility only}
 }
 \value{
 A data.frame which lists the name of each table (if no table argument is given), along with a description
@@ -27,9 +29,12 @@ table here: https://github.com/ropensci/fishbaseapi/tree/master/docs/docs-source
 documentation of tables and fields
 }
 \examples{
-\dontrun{
+\donttest{
 tables <- docs()
-# Describe the diet table
-dplyr::filter(tables, table == "diet")$description
+# Describe the fecundity table
+dplyr::filter(tables, table == "fecundity")$description
+## See fields in fecundity table
+docs("fecundity")
+## Note: only 
 }
 }

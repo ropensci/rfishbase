@@ -1,15 +1,13 @@
 #' species
 #' 
 #' Provide wrapper to work with species lists. 
-#' @param species_list A vector of scientific names (each element as "genus species"). If empty, the table will be loaded up to the limit. This makes it possible to load an entire table without knowledge of the species in the table, thus avoiding uneccesary API calls.
-#' @param limit The maximum number of matches from a single API call (e.g. per species). Function
-#'   will warn if this needs to be increased, otherwise can be left as is. 
-#' @param server base URL to the FishBase API (by default). For SeaLifeBase, use https://fishbase.ropensci.org/sealifebase
+#' @param species_list A vector of scientific names (each element as "genus species"). If empty, a table for all fish will be returned.
+#' @param server can be set to either "fishbase" or "sealifebase" to switch between databases. NOTE: it is usually
+#' easier to leave this as NULL and set the source instead using the environmental variable `FISHBASE_API`, e.g.
+#' `Sys.setenv(FISHBASE_API="sealifebase")`.
 #' @param fields a character vector specifying which fields (columns) should be returned. By default,
-#'  all available columns recognized by the parser are returned. This option can be used to limit the amount
-#'  of data transfered over the network if only certain columns are needed. 
-#' @param query a named list specifying specific subsets of fields.
-#' @param ... additional arguments to httr::GET
+#'  all available columns recognized by the parser are returned.  Mostly for backwards compatibility as users can subset by column later
+#' @param ... unused; for backwards compatibility only
 #' @return a data.frame with rows for species and columns for the fields returned by the query (FishBase 'species' table)
 #' @details 
 #' The Species table is the heart of FishBase. This function provides a convenient way to 
@@ -29,7 +27,20 @@
 #' species(c("Labroides bicolor", "Bolbometopon muricatum"), fields = species_fields$habitat) 
 #' 
 #' }
-species <- endpoint("species")
+species <- function(species_list = NULL, fields = NULL, 
+                    server = NULL, ...){
+  full_data <- fb_tbl("species", server) %>% 
+    select(-Genus, -Species)
+  
+  full_data <- fix_ids(full_data)
+  out <- species_subset(species_list, full_data, server)
+  
+  if(!is.null(fields)){
+    out <- out[fields]
+  }
+  
+  out
+}
 
 #species <- endpoint("species", tidy_table = tidy_species_table)
 

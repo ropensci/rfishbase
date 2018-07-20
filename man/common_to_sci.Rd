@@ -4,18 +4,18 @@
 \alias{common_to_sci}
 \title{common_to_sci}
 \usage{
-common_to_sci(x, Language = NULL, limit = 1000,
-  server = getOption("FISHBASE_API", FISHBASE_API))
+common_to_sci(x, Language = NULL, ..., server = NULL)
 }
 \arguments{
 \item{x}{a common name or list of common names}
 
 \item{Language}{a string specifying the language for the common name, e.g. "English"}
 
-\item{limit}{The maximum number of matches from a single API call (e.g. per species). Function
-will warn if this needs to be increased, otherwise can be left as is.}
+\item{...}{unused; for backwards compatibility only}
 
-\item{server}{base URL to the FishBase API (by default). For SeaLifeBase, use https://fishbase.ropensci.org/sealifebase}
+\item{server}{can be set to either "fishbase" or "sealifebase" to switch between databases. NOTE: it is usually
+easier to leave this as NULL and set the source instead using the environmental variable `FISHBASE_API`, e.g.
+`Sys.setenv(FISHBASE_API="sealifebase")`.}
 }
 \value{
 a character vector of scientific names
@@ -26,19 +26,14 @@ Return a list of scientific names corresponding to given the common name(s).
 \details{
 If more than one scientific name matches the common name (e.g. "trout"), the function
 will simply return a list of all matching scientific names.  If given more than one common name,
-the resulting strings of matching scientific names are simply concatenated. 
-
-Setting the language used explicitly will decrease the data transferred and speed up the function. 
-The limit default is quite high in this call, as it corresponds to the number of common names that
-match a given species, including different languages and countries.
+the resulting strings of matching scientific names are simply concatenated.
 }
 \examples{
-\dontrun{
+\donttest{
 common_to_sci(c("Bicolor cleaner wrasse", "humphead parrotfish"), Language="English")
-common_to_sci("trout")
-common_to_sci(c("trout", "Coho Salmon"))
+common_to_sci(c("Coho Salmon", "trout"))
 }
 }
 \seealso{
-\code{\link{commonnames}}, \code{\link{species_list}}, \code{\link{synonyms}}
+\code{\link{species_list}}, \code{\link{synonyms}}
 }

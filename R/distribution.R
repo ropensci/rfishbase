@@ -12,7 +12,7 @@
 #' }
 #' @details 
 #' e.g. http://www.fishbase.us/Country
-country <- endpoint("country")
+country <- endpoint("country", join = country_names())
 
 #' countrysub
 #' 
@@ -23,18 +23,19 @@ country <- endpoint("country")
 #' @examples \dontrun{
 #' countrysub(species_list(Genus='Labroides'))
 #' }
-countrysub <- endpoint("countrysub")
+countrysub <- endpoint("countrysub", join = country_names())
 
 #' countrysubref
 #' 
-#' return a table of countrysubref for the requested species
-#' 
+#' return a table of countrysubref
 #' @inheritParams species
 #' @export
 #' @examples \dontrun{
-#' countrysubref(species_list(Genus='Labroides'))
+#' countrysubref()
 #' }
-countrysubref <- endpoint("countrysubref")
+countrysubref <- function(server = NULL){
+  fb_tbl("countrysubref", server) %>% left_join(country_names())
+}
 
 
 #' c_code
@@ -49,16 +50,25 @@ countrysubref <- endpoint("countrysubref")
 #' }
 #' @details 
 #' e.g. http://www.fishbase.us/Country
-c_code <- function(c_code, server = getOption("FISHBASE_API", FISHBASE_API), fields='', limit = 500){
-  resp <- httr::GET(paste0(server, "/faoareas"), 
-                    query = list(C_Code = c_code, limit = limit,
-                                 fields = fields),
-                    httr::user_agent(make_ua()))  
-  check_and_parse(resp)
+c_code <- function(c_code = NULL, 
+                   server = NULL, 
+                   ...){
+  
+  out <- 
+    fb_tbl("countrysubref", server) %>% 
+    left_join(country_names(server))
+  
+  if(is.null(c_code)) 
+    out
+  else
+    out %>% filter(C_Code %in% c_code)
 }
 
+globalVariables(c("C_Code", "PAESE"))
 
-
+country_names <- function(server = NULL){
+  fb_tbl("countref", server) %>% select(country = PAESE, C_Code)
+}
 #' distribution
 #' 
 #' return a table of species locations as reported in FishBASE.org FAO location data
@@ -70,8 +80,9 @@ c_code <- function(c_code, server = getOption("FISHBASE_API", FISHBASE_API), fie
 #' }
 #' @details currently this is ~ FAO areas table (minus "note" field)
 #' e.g. http://www.fishbase.us/Country/FaoAreaList.php?ID=5537
-distribution <- function(species_list, fields = NULL, server = getOption("FISHBASE_API", FISHBASE_API), limit = 500){
-  faoareas(species_list, fields = fields, server = server, limit = limit)
+distribution <- function(species_list=NULL, fields = NULL, 
+                         server = NULL,...){
+  faoareas(species_list, fields = fields, server = server)
 }
 
 
@@ -80,45 +91,26 @@ distribution <- function(species_list, fields = NULL, server = getOption("FISHBA
 #' return a table of species locations as reported in FishBASE.org FAO location data
 #' 
 #' @inheritParams species
-#' @importFrom dplyr bind_rows left_join
-#' @importFrom httr GET
+#' @importFrom dplyr left_join
 #' @export
 #' @return a tibble, empty tibble if no results found
 #' @examples 
 #' \dontrun{
-#'   faoareas(species_list(Genus='Labroides'))
+#'   faoareas()
 #' }
 #' @details currently this is ~ FAO areas table (minus "note" field)
 #' e.g. http://www.fishbase.us/Country/FaoAreaList.php?ID=5537
-faoareas <- function(species_list, fields = NULL, server = getOption("FISHBASE_API", FISHBASE_API), limit = 500){
-  codes <- speccodes(species_list)
+faoareas <- function(species_list = NULL, fields = NULL, server = NULL,...){
+
+  out <- left_join(fb_tbl("faoareas", server)[c('AreaCode', 'SpecCode', 'Status')],
+            faoarrefs()[c('AreaCode', 'FAO')])
   
-  faoareas_get <- c('AreaCode', 'SpecCode', 'Status')
-  faoarrefs_get <- c('AreaCode', 'FAO')
-  
-  faoareas_fl <- paste0(if (!is.null(fields)) c(faoareas_get, fields) else faoareas_get, collapse = ",")
-  dplyr::bind_rows(lapply(codes, function(code) {
-    resp <- httr::GET(paste0(server, "/faoareas"), 
-                      query = list(SpecCode = code, limit = limit, fields = faoareas_fl),
-                      httr::user_agent(make_ua()))
-    table1 <- check_and_parse(resp)
-    if (is.null(table1)) return(dplyr::tbl_df(NULL))
-    
-    ## Look up area codes
-    table2 <- dplyr::bind_rows(lapply(table1$AreaCode, function(x) {
-      faoarrefs_fl <- paste0(if (!is.null(fields)) c(faoarrefs_get, fields) else faoarrefs_get, collapse = ",")
-      faoarrefs(x, fields = faoarrefs_fl, server = server, limit = limit)
-    }))
-    dplyr::left_join(table1, table2, by = 'AreaCode')
-  }))
+  species_subset(species_list, out, server)
 }
 
 
-faoarrefs <- function(area_code, fields = NULL, server = getOption("FISHBASE_API", FISHBASE_API), limit = 100){
-  resp <- httr::GET(paste0(server, "/faoarref/", area_code), 
-              query = list(limit = limit, fields = fields),
-              user_agent(make_ua()))
-  check_and_parse(resp)
+faoarrefs <- function(server = NULL){
+  fb_tbl("faoarref", server)
 }
 
 
@@ -134,7 +126,7 @@ faoarrefs <- function(area_code, fields = NULL, server = getOption("FISHBASE_API
 #' @examples \dontrun{
 #' ecosystem("Oreochromis niloticus")
 #' }
-ecosystem <- endpoint("ecosystem")
+ecosystem <- endpoint("ecosystem", join = fb_tbl("ecosystemref", server = NULL), by = "E_CODE")
 
 #' occurrence
 #' 

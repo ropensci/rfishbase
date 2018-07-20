@@ -14,3 +14,7 @@ circle.yml
 ^CONDUCT\.md$
 ^codemeta\.json$
 .github
+^\.pbattributes$
+^\.manifest\.json$
+^fb$
+

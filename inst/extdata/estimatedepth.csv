@@ -1,0 +1,11 @@
+table_name,column_name
+estimatedepth,Speccode
+estimatedepth,HabitatZone
+estimatedepth,DepthMin
+estimatedepth,DepthMax
+estimatedepth,Entered
+estimatedepth,DateEntered
+estimatedepth,Modified
+estimatedepth,DateModified
+estimatedepth,Expert
+estimatedepth,DateChecked

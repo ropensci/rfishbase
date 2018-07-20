@@ -4,3 +4,5 @@ inst/doc
 .httr-oauth
 .Rhistory
 
+.manifest.json
+*.tsv.bz2

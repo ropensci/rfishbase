@@ -18,21 +18,6 @@ test_that("synonyms can resolve misspellings", {
   expect_equal(species_list(SpecCode = x$SpecCode), "Labroides dimidiatus")
 })
   
-#' 
-test_that("We can get synonyms with SpecCode", {
-
-  needs_api()
-  
-  df <- synonyms(5537)
-  expect_is(df, "data.frame")
-
-  code <- species("Bolbometopon muricatum", fields="SpecCode")[[2]]
-  
-  expect_equal(code, 5537)
-  df <- synonyms(code)
-  expect_is(df, "data.frame")
-    
-})
 
 
 test_that("We can validate names",{
@@ -44,18 +29,3 @@ test_that("We can validate names",{
 })
 
 
-test_that("Validation is the same using the valid column as using speccode",{
-
-  needs_api()
-   
-  x <- "Clupea pallasii"
-  syn_table <- synonyms(x)
-  code <- unique(syn_table$SpecCode)
- 
-  syn_table <- synonyms(code)
-  who <- syn_table$Valid
-  y <- paste(syn_table$SynGenus[who], syn_table$SynSpecies[who])
-  
-  valid <- validate_names("Clupea pallasii")
-  expect_identical(y, valid)
-})

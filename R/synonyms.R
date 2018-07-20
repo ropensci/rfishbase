@@ -9,87 +9,59 @@
 #' @details 
 #' For further information on fields returned, see:
 #' http://www.fishbase.org/manual/english/fishbasethe_synonyms_table.htm
-#' @importFrom httr GET user_agent 
-#' @importFrom dplyr bind_rows
 #' @export
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' # Query using a synonym:
 #' synonyms("Callyodon muricatus")
 #'  
 #'  # Check for misspellings or alternate names
-#'  x <- synonyms("Labroides dimidatus") # Species name misspelled
-#'  species_list(SpecCode = x$SpecCode)  # correct: "Labroides dimidiatus"
+#'  synonyms("Labroides dimidatus") # Species name misspelled
 #' 
-#'  # See all synonyms using the SpecCode
-#'  species("Bolbometopon muricatum", fields="SpecCode")[[1]]
-#'  synonyms(5537)
+#'  # See all synonyms 
+#'  species("Bolbometopon muricatum")
 #'  }
-synonyms <- function(species_list, limit = 50, server = getOption("FISHBASE_API", FISHBASE_API), 
-                     fields = c("SynGenus", "SynSpecies", "Valid", "Misspelling", 
-                                "Status", "Synonymy", "Combination", "SpecCode",
-                                "SynCode", "CoL_ID", "TSN", "WoRMS_ID")){
+synonyms <- function(species_list = NULL, server = NULL, 
+                     ...){
   
+  syn <- 
+    fb_tbl("synonyms", server) %>%
+    mutate(synonym = paste(SynGenus, SynSpecies)) %>% 
+    select(synonym, Status, SpecCode, SynCode, 
+           CoL_ID, TSN, WoRMS_ID, ZooBank_ID,
+           TaxonLevel)
   
-  dplyr::bind_rows(lapply(species_list, function(species){
-    s <- parse_name(species)
-    resp <- httr::GET(paste0(server, "/synonyms"), 
-                query = list(SynSpecies = s$species, 
-                             SynGenus = s$genus, 
-                             SpecCode = s$speccode,
-                             limit = limit,
-                             fields = paste(fields, collapse=",")),
-                user_agent(make_ua()))
-    df <- check_and_parse(resp)
-    df <- reclass(df, "Valid", "logical")
-    df <- reclass(df, "Misspelling", "logical")
-    df
-  }))
+  if(is.null(species_list))
+    return(syn)
   
-}
-
-reclass <- function(df, col_name, new_class){
-  if(col_name %in% names(df))
-    df[[col_name]] <- as(df[[col_name]], new_class)
-  df
+  dplyr::left_join(
+            data.frame(synonym = species_list, stringsAsFactors = FALSE),
+            syn,by="synonym") %>% 
+    left_join(fb_species(server), by = "SpecCode")
 }
 
 
+globalVariables(c("Status", "SpecCode", "SynCode", 
+"CoL_ID", "TSN", "WoRMS_ID", "ZooBank_ID",
+"TaxonLevel", "synonym", "SynGenus", "SynSpecies", "columns"))
 
 #' validate_names
 #' 
-#' Check for alternate versions of a scientific name and return the names FishBase recognizes as valid
+#' Check for alternate versions of a scientific name and return 
+#' the scientific names FishBase recognizes as valid
 #' @inheritParams species
 #' @return a string of the validated names
 #' @export
-validate_names <- function(species_list, limit = 50, server = getOption("FISHBASE_API", FISHBASE_API)){
-  out <- sapply(species_list, function(x) {
-    syn_table <- synonyms(x, limit = limit, server = server)
-    if(length(unique(suppressWarnings(syn_table$SpecCode))) > 1){
-      warning(paste0("FishBase says that '", x, 
-                    "' can also be misapplied to other species
-                    but is returning only the best match.  
-                    See synonyms('", x, "') for details"), call. = FALSE)
-      syn_table <- dplyr::filter_(syn_table, .dots = list(~Synonymy != "misapplied name"))
-    }
-    ## FIXME consider dplyr::distinct instead of `unique` here.
-    code <- unique(suppressWarnings(syn_table$SpecCode))
+#' @importFrom dplyr filter pull
+#' @examples \donttest{
+#' validate_names("Abramites ternetzi")
+#' }
+validate_names <- function(species_list, server = NULL,...){
   
-    if(is.null(code))
-      warning(paste0("No match found for species '", x, "'"), call. = FALSE)
-
-    ## Return the name listed as valid. 
-    ## Nope; doesn't work.  eg.  because the valid name for "Auxis rochei" is "Auxis rochei rochei",
-    ## but a syn_table doesn't return any valid name, only the spec code.   
-    # syn_table <- synonyms(code, limit = limit, server = server)
-    # who <- syn_table$Valid
-    # c(syn_table$SynGenus[who], syn_table$SynSpecies[who])
+  synonyms(species_list, server = server) %>% 
+    dplyr::filter(Status == "accepted name" || Status == "synonym") %>% 
+    dplyr::pull(Species)
+                       
     
-    ## Faster and more accurate to just return the name associated with the speccode:
-    species_names(code) %||% NA
-    
-    })
-  ## sapply will still return nested lists if a value is missing
-  unname(unlist(out))
 }
 

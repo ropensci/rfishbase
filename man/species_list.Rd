@@ -5,8 +5,8 @@
 \title{species_list}
 \usage{
 species_list(Class = NULL, Order = NULL, Family = NULL,
-  SubFamily = NULL, Genus = NULL, Species = NULL, SpecCode = NULL,
-  SpeciesRefNo = NULL, all_taxa = load_taxa())
+  Subfamily = NULL, Genus = NULL, Species = NULL, SpecCode = NULL,
+  SuperClass = NULL, server = getOption("FISHBASE_API", FISHBASE_API))
 }
 \arguments{
 \item{Class}{Request all species in this taxonomic Class}
@@ -15,7 +15,7 @@ species_list(Class = NULL, Order = NULL, Family = NULL,
 
 \item{Family}{Request all species in this taxonomic Family}
 
-\item{SubFamily}{Request all species in this taxonomic SubFamily}
+\item{Subfamily}{Request all species in this taxonomic SubFamily}
 
 \item{Genus}{Request all species in this taxonomic Genus}
 
@@ -23,20 +23,15 @@ species_list(Class = NULL, Order = NULL, Family = NULL,
 
 \item{SpecCode}{Request species name of species matching this SpecCode}
 
-\item{SpeciesRefNo}{Request species name of all species matching this SpeciesRefNo}
+\item{SuperClass}{Request all species of this Superclass}
 
-\item{all_taxa}{The data.frame of all taxa used for the lookup. By default will be loaded
-from cache if available, otherwise must be downloaded from the server; about 13 MB, may be 
-slow.}
+\item{server}{fishbase or}
 }
 \description{
 Return the a species list given a taxonomic group
 }
-\details{
-The first time the function is called it will download and cache the complete
-}
 \examples{
-\dontrun{
+\donttest{
 ## All species in the Family 
   species_list(Family = 'Scaridae')
 ## All species in the Genus 

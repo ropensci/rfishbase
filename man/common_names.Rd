@@ -2,26 +2,22 @@
 % Please edit documentation in R/common_names.R
 \name{common_names}
 \alias{common_names}
-\alias{commonnames}
-\title{commonnames}
+\alias{sci_to_common}
+\title{common names}
 \usage{
-common_names(species_list, limit = 1000, server = getOption("FISHBASE_API",
-  FISHBASE_API), Language = NULL, fields = c("ComName", "Language",
-  "C_Code", "SpecCode"))
+common_names(species_list, server = NULL, Language = NULL, fields = NULL)
 }
 \arguments{
-\item{species_list}{A vector of scientific names (each element as "genus species"). If empty, the table will be loaded up to the limit. This makes it possible to load an entire table without knowledge of the species in the table, thus avoiding uneccesary API calls.}
+\item{species_list}{A vector of scientific names (each element as "genus species"). If empty, a table for all fish will be returned.}
 
-\item{limit}{The maximum number of matches from a single API call (e.g. per species). Function
-will warn if this needs to be increased, otherwise can be left as is.}
-
-\item{server}{base URL to the FishBase API (by default). For SeaLifeBase, use https://fishbase.ropensci.org/sealifebase}
+\item{server}{can be set to either "fishbase" or "sealifebase" to switch between databases. NOTE: it is usually
+easier to leave this as NULL and set the source instead using the environmental variable `FISHBASE_API`, e.g.
+`Sys.setenv(FISHBASE_API="sealifebase")`.}
 
 \item{Language}{a string specifying the language for the common name, e.g. "English"}
 
 \item{fields}{a character vector specifying which fields (columns) should be returned. By default,
-all available columns recognized by the parser are returned. This option can be used to limit the amount
-of data transfered over the network if only certain columns are needed.}
+all available columns recognized by the parser are returned.  Mostly for backwards compatibility as users can subset by column later}
 }
 \value{
 a data.frame of common names by species queried. If multiple species are queried,
@@ -34,12 +30,10 @@ Return a table of common names
 Note that there are many common names for a given sci name, so sci_to_common doesn't make sense
 }
 \examples{
-\dontrun{
+\donttest{
 common_names(c("Labroides bicolor",  "Bolbometopon muricatum"))
 
 # subset by English language names
 fish <- common_names("Bolbometopon muricatum")
-library(dplyr)
-fish \%>\% filter(Language=="English") 
 }
 }

@@ -4,20 +4,16 @@
 \alias{c_code}
 \title{c_code}
 \usage{
-c_code(c_code, server = getOption("FISHBASE_API", FISHBASE_API),
-  fields = "", limit = 500)
+c_code(c_code = NULL, server = NULL, ...)
 }
 \arguments{
 \item{c_code}{a C_Code or list of C_Codes (FishBase country code)}
 
-\item{server}{base URL to the FishBase API (by default). For SeaLifeBase, use https://fishbase.ropensci.org/sealifebase}
+\item{server}{can be set to either "fishbase" or "sealifebase" to switch between databases. NOTE: it is usually
+easier to leave this as NULL and set the source instead using the environmental variable `FISHBASE_API`, e.g.
+`Sys.setenv(FISHBASE_API="sealifebase")`.}
 
-\item{fields}{a character vector specifying which fields (columns) should be returned. By default,
-all available columns recognized by the parser are returned. This option can be used to limit the amount
-of data transfered over the network if only certain columns are needed.}
-
-\item{limit}{The maximum number of matches from a single API call (e.g. per species). Function
-will warn if this needs to be increased, otherwise can be left as is.}
+\item{...}{unused; for backwards compatibility only}
 }
 \description{
 return a table of country information for the requested c_code, as reported in FishBASE.org

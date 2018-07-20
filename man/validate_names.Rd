@@ -4,20 +4,26 @@
 \alias{validate_names}
 \title{validate_names}
 \usage{
-validate_names(species_list, limit = 50, server = getOption("FISHBASE_API",
-  FISHBASE_API))
+validate_names(species_list, server = NULL, ...)
 }
 \arguments{
-\item{species_list}{A vector of scientific names (each element as "genus species"). If empty, the table will be loaded up to the limit. This makes it possible to load an entire table without knowledge of the species in the table, thus avoiding uneccesary API calls.}
+\item{species_list}{A vector of scientific names (each element as "genus species"). If empty, a table for all fish will be returned.}
 
-\item{limit}{The maximum number of matches from a single API call (e.g. per species). Function
-will warn if this needs to be increased, otherwise can be left as is.}
+\item{server}{can be set to either "fishbase" or "sealifebase" to switch between databases. NOTE: it is usually
+easier to leave this as NULL and set the source instead using the environmental variable `FISHBASE_API`, e.g.
+`Sys.setenv(FISHBASE_API="sealifebase")`.}
 
-\item{server}{base URL to the FishBase API (by default). For SeaLifeBase, use https://fishbase.ropensci.org/sealifebase}
+\item{...}{unused; for backwards compatibility only}
 }
 \value{
 a string of the validated names
 }
 \description{
-Check for alternate versions of a scientific name and return the names FishBase recognizes as valid
+Check for alternate versions of a scientific name and return 
+the scientific names FishBase recognizes as valid
+}
+\examples{
+\donttest{
+validate_names("Abramites ternetzi")
+}
 }
