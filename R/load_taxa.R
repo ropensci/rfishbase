@@ -8,7 +8,16 @@
 #' @export
 load_taxa <- memoise::memoise(function(server = NULL, ...){
 
+  ## Handle versioning
+  if(is.null(server)) server <- getOption("FISHBASE_API", FISHBASE_API)
+  if(grepl("sealifebase", server)){
+    slb_taxa_table()
+  } else {
+    fb_taxa_table()
+  }
+})
   
+fb_taxa_table <- function(){
   taxon_species <- fb_tbl("species", server)
   keep <- names(taxon_species) %in% c("SpecCode", "Species", "Genus", "Subfamily",
                                       "GenCode", "SubGenCode", "FamCode")
@@ -52,10 +61,73 @@ load_taxa <- memoise::memoise(function(server = NULL, ...){
     dplyr::mutate(Species = paste(Genus, Species))
   
   taxa_table
-})
+}
+
+
 globalVariables(c("SpecCode", "Species", "Genus", "Subfamily", "Family", 
         "Order", "Class", "SuperClass"))
         
+
+
+slb_taxa_table <- function(){
+  
+  server <- "sealifebase"
+    
+  taxon_species <- fb_tbl("species", server)
+  taxon_genus <- fb_tbl("genera", server) 
+  taxon_family <- fb_tbl("families", server)
+  taxon_order <- fb_tbl("orders", server)
+  taxon_class <- fb_tbl("classes", server)
+
+
+keep <- names(taxon_species) %in% c("SpecCode", "Species", "Genus",
+                                    "GenCode", "SubGenCode", "FamCode")
+taxon_species <- taxon_species[keep]
+keep <- names(taxon_genus) %in% c("GenCode", "GEN_NAME", "GenComName", "FamCode",
+                                  "Subfamily", "SubgenusOf")
+taxon_genus <- taxon_genus[keep]
+i <- names(taxon_genus) == "GenComName"
+names(taxon_genus)[i] <- "GenusCommonName" 
+i <- names(taxon_genus) == "GEN_NAME"
+names(taxon_genus)[i] <- "Genus" 
+
+left_join(taxon_species, taxon_genus)
+
+taxon_family <- fb_tbl("families", server) %>% 
+  select(FamCode, Family, FamilyCommonName = CommonName, Order, Ordnum, Class, ClassNum) 
+
+taxon_order <- fb_tbl("orders", server) %>% select(Ordnum, Order, OrderCommonName = CommonName, ClassNum, Class) 
+
+
+taxon_class <- fb_tbl("classes", server)
+keep <- names(taxon_class) %in% c("ClassNum", "Class", "CommonName",
+                                  "SuperClass", "Subclass")
+i <- names(taxon_class) == "CommonName"
+names(taxon_class)[i] <- "ClassCommonName"
+taxon_class <- taxon_class[keep]
+
+
+suppressMessages(
+  taxon_hierarchy <- 
+    taxon_species %>%
+    left_join(taxon_genus) %>%
+    left_join(taxon_family )%>%
+    left_join(taxon_order) %>%
+    left_join(taxon_class)
+)
+
+taxa_table <- 
+  taxon_hierarchy %>% 
+  dplyr::select(SpecCode, Species, Genus, Subfamily, Family, 
+                Order, Class) %>% 
+  dplyr::arrange(SpecCode) %>% 
+  dplyr::mutate(Species = paste(Genus, Species))
+
+taxa_table
+}
+
+
+
 #' A table of all the the species found in FishBase, including taxonomic
 #' classification and the Species Code (SpecCode) by which the species is
 #' identified in FishBase.

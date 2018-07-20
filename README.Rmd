@@ -125,7 +125,9 @@ Sometimes it is more useful to search for a broad description of the tables.
 
 ## SeaLifeBase
 
-
+```{r}
+load_taxa(server="sealifebase")
+```
 
 ```{r}
 species(server="sealifebase")
