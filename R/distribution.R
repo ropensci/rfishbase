@@ -64,7 +64,7 @@ c_code <- function(c_code = NULL,
     out %>% filter(C_Code %in% c_code)
 }
 
-globalVariables("C_Code")
+globalVariables(c("C_Code", "PAESE"))
 
 country_names <- function(){
   fb_tbl("countref") %>% select(country = PAESE, C_Code)
@@ -80,8 +80,8 @@ country_names <- function(){
 #' }
 #' @details currently this is ~ FAO areas table (minus "note" field)
 #' e.g. http://www.fishbase.us/Country/FaoAreaList.php?ID=5537
-distribution <- function(species_list, fields = NULL, 
-                         server = getOption("FISHBASE_API", FISHBASE_API),...){
+distribution <- function(species_list=NULL, fields = NULL, 
+                         server = NULL,...){
   faoareas(species_list, fields = fields, server = server)
 }
 
@@ -100,17 +100,17 @@ distribution <- function(species_list, fields = NULL,
 #' }
 #' @details currently this is ~ FAO areas table (minus "note" field)
 #' e.g. http://www.fishbase.us/Country/FaoAreaList.php?ID=5537
-faoareas <- function(species_list = NULL, fields = NULL, server = getOption("FISHBASE_API", FISHBASE_API),...){
+faoareas <- function(species_list = NULL, fields = NULL, server = NULL,...){
 
-  out <- left_join(fb_tbl("faoareas")[c('AreaCode', 'SpecCode', 'Status')],
+  out <- left_join(fb_tbl("faoareas", server)[c('AreaCode', 'SpecCode', 'Status')],
             faoarrefs()[c('AreaCode', 'FAO')])
   
   species_subset(species_list, out)
 }
 
 
-faoarrefs <- function(){
-  fb_tbl("faoarref")
+faoarrefs <- function(server = NULL){
+  fb_tbl("faoarref", server)
 }
 
 
@@ -126,7 +126,7 @@ faoarrefs <- function(){
 #' @examples \dontrun{
 #' ecosystem("Oreochromis niloticus")
 #' }
-ecosystem <- endpoint("ecosystem", join = fb_tbl("ecosystemref"), by = "E_CODE")
+ecosystem <- endpoint("ecosystem", join = fb_tbl("ecosystemref", server = NULL), by = "E_CODE")
 
 #' occurrence
 #' 

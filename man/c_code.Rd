@@ -9,7 +9,9 @@ c_code(c_code = NULL, server = getOption("FISHBASE_API", FISHBASE_API), ...)
 \arguments{
 \item{c_code}{a C_Code or list of C_Codes (FishBase country code)}
 
-\item{server}{base URL to the FishBase API (by default). For SeaLifeBase, use https://fishbase.ropensci.org/sealifebase}
+\item{server}{can be set to either "fishbase" or "sealifebase" to switch between databases. NOTE: it is usually
+easier to leave this as NULL and set the source instead using the environmental variable `FISHBASE_API`, e.g.
+`Sys.setenv(FISHBASE_API="sealifebase")`.}
 
 \item{...}{unused; for backwards compatibility only}
 }

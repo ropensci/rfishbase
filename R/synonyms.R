@@ -21,11 +21,11 @@
 #'  # See all synonyms 
 #'  species("Bolbometopon muricatum")
 #'  }
-synonyms <- function(species_list = NULL, server = getOption("FISHBASE_API", FISHBASE_API), 
+synonyms <- function(species_list = NULL, server = NULL, 
                      ...){
   
   syn <- 
-    fb_tbl("synonyms") %>%
+    fb_tbl("synonyms", server) %>%
     mutate(synonym = paste(SynGenus, SynSpecies)) %>% 
     select(synonym, Status, SpecCode, SynCode, 
            CoL_ID, TSN, WoRMS_ID, ZooBank_ID,
@@ -56,7 +56,7 @@ globalVariables(c("Status", "SpecCode", "SynCode",
 #' @examples \donttest{
 #' validate_names("Abramites ternetzi")
 #' }
-validate_names <- function(species_list, server = getOption("FISHBASE_API", FISHBASE_API),...){
+validate_names <- function(species_list, server = NULL,...){
   
   synonyms(species_list, server = server) %>% 
     dplyr::filter(Status == "accepted name" || Status == "synonym") %>% 

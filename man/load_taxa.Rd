@@ -4,7 +4,7 @@
 \alias{load_taxa}
 \title{load_taxa}
 \usage{
-load_taxa(server = getOption("FISHBASE_API", FISHBASE_API), ...)
+load_taxa(server = NULL, ...)
 }
 \arguments{
 \item{server}{API for Fishbase or Sealifebase?}
