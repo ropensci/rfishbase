@@ -94,6 +94,7 @@ slb_taxa_table <- function(server){
   taxon_order <- fb_tbl("orders", server)
   taxon_class <- fb_tbl("classes", server)
   taxon_phylum <- fb_tbl("phylums", server)
+  phylum_class <- fb_tbl("phylumclass", server) # just to join phylum to class tbl
   
   
   keep <- names(taxon_species) %in% 
@@ -144,6 +145,7 @@ slb_taxa_table <- function(server){
       left_join(taxon_family )%>%
       left_join(taxon_order) %>%
       left_join(taxon_class) %>%
+      left_join(phylum_class) %>%
       left_join(taxon_phylum)
   )
   

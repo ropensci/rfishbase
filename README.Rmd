@@ -44,6 +44,7 @@ remotes::install_github("ropensci/rfishbase")
 
 ```{r message=FALSE, warning=FALSE, results="hide"}
 library("rfishbase")
+library("dplyr") # convenient but not required
 ```
 
 ## Getting started
@@ -136,13 +137,20 @@ Note that the same version number applies to both the `fishbase` and `sealifebas
 
 SeaLifeBase.org is maintained by the same organization and largely parallels the database structure of Fishbase. As such, almost all `rfishbase` functions can instead be instructed to address the 
 
-We can begin by viewing the taxa table for sealifebase: 
+We can begin by getting the taxa table for sealifebase: 
 
 ```{r}
-load_taxa(server="sealifebase")
+sealife <- load_taxa(server="sealifebase")
 ```
 
+
 (Note: running `load_taxa()` at the beginning of any session, for either fishbase or sealifebase is a good way to "warm up" rfishbase by loading in taxonomic data it will need. This information is cached throughout your session and will make all subsequent commands run faster.  But no worries if you skip this step, `rfishbase` will peform it for you on the first time it is needed, and will cache these results thereafter.)
+
+Let's look at some Gastropods: 
+
+```{r}
+sealife %>% filter(Class == "Gastropoda")
+```
 
 
 All other tables can also take an argument to `server`: 
