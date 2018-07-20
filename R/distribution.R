@@ -28,7 +28,7 @@ countrysub <- endpoint("countrysub", join = country_names())
 #' countrysubref
 #' 
 #' return a table of countrysubref
-#' 
+#' @inheritParams species
 #' @export
 #' @examples \dontrun{
 #' countrysubref()

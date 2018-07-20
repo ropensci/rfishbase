@@ -4,7 +4,12 @@
 \alias{countrysubref}
 \title{countrysubref}
 \usage{
-countrysubref()
+countrysubref(server = NULL)
+}
+\arguments{
+\item{server}{can be set to either "fishbase" or "sealifebase" to switch between databases. NOTE: it is usually
+easier to leave this as NULL and set the source instead using the environmental variable `FISHBASE_API`, e.g.
+`Sys.setenv(FISHBASE_API="sealifebase")`.}
 }
 \description{
 return a table of countrysubref
