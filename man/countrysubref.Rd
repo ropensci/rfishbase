@@ -4,7 +4,7 @@
 \alias{countrysubref}
 \title{countrysubref}
 \usage{
-countrysubref()
+countrysubref(server = NULL)
 }
 \description{
 return a table of countrysubref
