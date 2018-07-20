@@ -16,7 +16,7 @@
 #'         fields=c("SpecCode", "FoodTroph", "FoodSeTroph", "DietTroph", "DietSeTroph"))
 #' }
 ecology <- function(species_list=NULL, fields = NULL,
-                    server = getOption("FISHBASE_API", FISHBASE_API)){
+                    server = NULL){
     ecology_endpoint(species_list, fields = fields,  server = server)
 }
 

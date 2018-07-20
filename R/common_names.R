@@ -21,7 +21,7 @@
 #' @importFrom stringr str_to_lower
 #' @importFrom purrr map_dfr
 common_to_sci <- function(x, Language = NULL, ..., 
-                          server = getOption("FISHBASE_API", FISHBASE_API)){
+                          server = NULL){
   
   comnames <- get_comnames(server)
   subset <- 
@@ -37,12 +37,12 @@ common_to_sci <- function(x, Language = NULL, ...,
 
 get_comnames <- memoise::memoise(function(server){  
   ## FIXME switch to SLB if server indicates
-  df <- fb_tbl("comnames")
+  df <- fb_tbl("comnames", server)
   comnames <- df %>% 
     dplyr::select(ComName, Language, SpecCode) %>%  
     dplyr::filter(Language %in% Language) %>% 
     dplyr::distinct() %>% 
-    dplyr::left_join(fb_species(), by = "SpecCode") %>% 
+    dplyr::left_join(fb_species(server), by = "SpecCode") %>% 
     select(Species, ComName, Language, SpecCode)
 })
 
@@ -66,7 +66,7 @@ globalVariables(c("ComName", "Language"))
 #' @export common_names sci_to_common
 #' @aliases common_names sci_to_common
 common_names <- function(species_list, 
-                        server = getOption("FISHBASE_API", FISHBASE_API), 
+                        server = NULL, 
                         Language = NULL,
                         fields = NULL){
   

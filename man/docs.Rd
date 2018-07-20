@@ -4,7 +4,7 @@
 \alias{docs}
 \title{docs}
 \usage{
-docs(table = NULL, server = getOption("FISHBASE_API", FISHBASE_API), ...)
+docs(table = NULL, server = NULL, ...)
 }
 \arguments{
 \item{table}{the table for which the documentation should be displayed.  If no table is given,

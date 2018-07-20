@@ -4,7 +4,7 @@
 \alias{species_names}
 \title{species names}
 \usage{
-species_names(codes, server = getOption("FISHBASE_API", FISHBASE_API))
+species_names(codes, server = NULL)
 }
 \arguments{
 \item{codes}{a vector of speccodes (e.g. column from a table)}

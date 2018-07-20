@@ -33,8 +33,8 @@ countrysub <- endpoint("countrysub", join = country_names())
 #' @examples \dontrun{
 #' countrysubref()
 #' }
-countrysubref <- function(){
-  fb_tbl("countrysubref") %>% left_join(country_names())
+countrysubref <- function(server = NULL){
+  fb_tbl("countrysubref", server) %>% left_join(country_names())
 }
 
 
@@ -51,12 +51,12 @@ countrysubref <- function(){
 #' @details 
 #' e.g. http://www.fishbase.us/Country
 c_code <- function(c_code = NULL, 
-                   server = getOption("FISHBASE_API", FISHBASE_API), 
+                   server = NULL, 
                    ...){
   
   out <- 
-    fb_tbl("countrysubref") %>% 
-    left_join(country_names())
+    fb_tbl("countrysubref", server) %>% 
+    left_join(country_names(server))
   
   if(is.null(c_code)) 
     out
@@ -66,8 +66,8 @@ c_code <- function(c_code = NULL,
 
 globalVariables(c("C_Code", "PAESE"))
 
-country_names <- function(){
-  fb_tbl("countref") %>% select(country = PAESE, C_Code)
+country_names <- function(server = NULL){
+  fb_tbl("countref", server) %>% select(country = PAESE, C_Code)
 }
 #' distribution
 #' 
@@ -105,7 +105,7 @@ faoareas <- function(species_list = NULL, fields = NULL, server = NULL,...){
   out <- left_join(fb_tbl("faoareas", server)[c('AreaCode', 'SpecCode', 'Status')],
             faoarrefs()[c('AreaCode', 'FAO')])
   
-  species_subset(species_list, out)
+  species_subset(species_list, out, server)
 }
 
 

@@ -4,8 +4,7 @@
 \alias{common_to_sci}
 \title{common_to_sci}
 \usage{
-common_to_sci(x, Language = NULL, ..., server = getOption("FISHBASE_API",
-  FISHBASE_API))
+common_to_sci(x, Language = NULL, ..., server = NULL)
 }
 \arguments{
 \item{x}{a common name or list of common names}

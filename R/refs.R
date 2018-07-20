@@ -12,12 +12,12 @@
 #' references() # all references
 #' }
 references <- function(codes = NULL, fields = NULL, 
-                       server = getOption("FISHBASE_API", FISHBASE_API), ...){
+                       server = NULL, ...){
   if(!is.null(codes))
-   out <- left_join(data.frame(RefNo = codes), fb_tbl("refrens"))
+   out <- left_join(data.frame(RefNo = codes), fb_tbl("refrens", server))
   
   else
-    return(fb_tbl("refrens"))
+    return(fb_tbl("refrens", server))
   
   if(!is.null(fields))
      out <- out[fields]

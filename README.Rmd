@@ -125,9 +125,17 @@ Sometimes it is more useful to search for a broad description of the tables.
 
 ## SeaLifeBase
 
-Support for SeaLifeBase not yet implemented in `3.0`.  Should be coming soon!
 
 
+```{r}
+species(server="sealifebase")
+```
+
+## Backwards compatibility
+
+- Most functions should work as before.  
+
+- You can still specify server using the rfishbase `2.x` format of providing a URL argument for server, e.g. `"http://fishbase.ropensci.org/sealifebase"` or `Sys.setenv(FISHBASE_API = "http://fishbase.ropensci.org/sealifebase")` if you prefer.  
 
 -----------
 

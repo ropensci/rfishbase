@@ -4,7 +4,7 @@
 \alias{c_code}
 \title{c_code}
 \usage{
-c_code(c_code = NULL, server = getOption("FISHBASE_API", FISHBASE_API), ...)
+c_code(c_code = NULL, server = NULL, ...)
 }
 \arguments{
 \item{c_code}{a C_Code or list of C_Codes (FishBase country code)}

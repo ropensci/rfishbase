@@ -4,8 +4,7 @@
 \alias{ecology}
 \title{ecology}
 \usage{
-ecology(species_list = NULL, fields = NULL,
-  server = getOption("FISHBASE_API", FISHBASE_API))
+ecology(species_list = NULL, fields = NULL, server = NULL)
 }
 \arguments{
 \item{species_list}{A vector of scientific names (each element as "genus species"). If empty, a table for all fish will be returned.}

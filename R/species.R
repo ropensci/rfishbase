@@ -28,12 +28,12 @@
 #' 
 #' }
 species <- function(species_list = NULL, fields = NULL, 
-                    server = getOption("FISHBASE_API", FISHBASE_API), ...){
-  full_data <- fb_tbl("species") %>% 
+                    server = NULL, ...){
+  full_data <- fb_tbl("species", server) %>% 
     select(-Genus, -Species)
   
   full_data <- fix_ids(full_data)
-  out <- species_subset(species_list, full_data)
+  out <- species_subset(species_list, full_data, server)
   
   if(!is.null(fields)){
     out <- out[fields]

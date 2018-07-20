@@ -32,8 +32,9 @@ fb_tbl <-
     
     
     addr <- 
-      paste0("https://github.com/ropensci/rfishbase/releases/download/", release,
-             "/fb.2f", tbl, ".tsv.bz2")
+      paste0("https://github.com/ropensci/rfishbase/releases/download/", 
+             release, "/", dbname, 
+             ".2f", tbl, ".tsv.bz2")
     tmp <- tempfile(tbl, fileext = ".tsv.bz2")
     download.file(addr, tmp, quiet = TRUE)
     suppressWarnings( # Ignore parsing failure messages for now

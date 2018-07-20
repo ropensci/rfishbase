@@ -18,7 +18,7 @@
 #' list_fields() %>% filter(grepl("length", columns, ignore.case = TRUE))
 #' }
 #' @export
-list_fields <- function(fields = NULL,  server = getOption("FISHBASE_API", FISHBASE_API), 
+list_fields <- function(fields = NULL,  server = NULL, 
                         implemented_only = TRUE){
   if(is.null(fields))
    return(field_list)

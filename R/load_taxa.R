@@ -8,19 +8,31 @@
 #' @export
 load_taxa <- memoise::memoise(function(server = NULL, ...){
 
-  taxon_species <- fb_tbl("species", server) %>% 
-    select(SpecCode, Species, Genus, Subfamily, GenCode, SubGenCode, FamCode)
-  taxon_genus <- fb_tbl("genera", server) %>% 
-    select(GenCode, GenName, GenusCommonName = GenComName, FamCode, Subfamily,
-           SubgenusOf)
+  
+  taxon_species <- fb_tbl("species", server)
+  keep <- names(taxon_species) %in% c("SpecCode", "Species", "Genus", "Subfamily",
+                                      "GenCode", "SubGenCode", "FamCode")
+  taxon_species <- taxon_species[keep]
+  
+  taxon_genus <- fb_tbl("genera", server) 
+  keep <- names(taxon_genus) %in% c("GenCode", "GenName", "GenComName", "FamCode",
+                                    "Subfamily", "SubgenusOf")
+  taxon_genus <- taxon_genus[keep]
+  i <- names(taxon_genus) == "GenComName"
+  names(taxon_genus)[i] <- "GenusCommonName" 
+  
   taxon_family <- fb_tbl("families", server) %>% 
-    select(FamCode, Family, FamilyCommonName = CommonName, Order, 
-           Ordnum, Class, ClassNum) 
-  taxon_order <- fb_tbl("orders", server) %>% 
-    select(Ordnum, Order, OrderCommonName = CommonName, ClassNum, Class) 
-  taxon_class <- fb_tbl("classes", server) %>% 
-    select(ClassNum, Class, ClassCommonName = CommonName,
-           SuperClass, Subclass)
+    select(FamCode, Family, FamilyCommonName = CommonName, Order, Ordnum, Class, ClassNum) 
+  
+  taxon_order <- fb_tbl("orders", server) %>% select(Ordnum, Order, OrderCommonName = CommonName, ClassNum, Class) 
+  
+  
+  taxon_class <- fb_tbl("classes", server)
+  keep <- names(taxon_class) %in% c("ClassNum", "Class", "CommonName",
+           "SuperClass", "Subclass")
+  i <- names(taxon_class) == "CommonName"
+  names(taxon_class)[i] <- "ClassCommonName"
+  taxon_class <- taxon_class[keep]
 
   
   suppressMessages(

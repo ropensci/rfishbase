@@ -22,7 +22,7 @@
 #' ## Note: only 
 #' }
 #' @export
-docs <- function(table = NULL, server = getOption("FISHBASE_API", FISHBASE_API), ...){
+docs <- function(table = NULL, server = NULL, ...){
   
   suppressMessages({
   if(is.null(table)){
