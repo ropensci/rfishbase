@@ -95,7 +95,7 @@ The `species()` function returns a table containing much (but not all) of the in
 species(trout$Species)
 ```
 
-Most tables contain many fields. To avoid overly cluttering the screen, `rfishbase` displays tables as `data_frame` objects from the `dplyr` package.  These act just like the familiar `data.frames` of base R except that they print to the screen in a more tidy fashion.  Note that columns that cannot fit easily in the display are summarized below the table.  This gives us an easy way to see what fields are available in a given table. For instance, from this table we may only be interested in the `PriceCateg` (Price category) and the `Vulnerability` of the species. We can repeat the query for our full species list, asking for only these fields to be returned:
+Most tables contain many fields. To avoid overly cluttering the screen, `rfishbase` displays tables as "tibbles" from the `dplyr` package.  These act just like the familiar `data.frames` of base R except that they print to the screen in a more tidy fashion.  Note that columns that cannot fit easily in the display are summarized below the table.  This gives us an easy way to see what fields are available in a given table. For instance, from this table we may only be interested in the `PriceCateg` (Price category) and the `Vulnerability` of the species. We can repeat the query for our full species list, asking for only these fields to be returned:
 
 ```{r}
 dat <- species(trout$Species, fields=c("Species", "PriceCateg", "Vulnerability"))
@@ -112,7 +112,7 @@ Because `rfishbase` accesses the back end database, it does not always line up w
 list_fields("Resilience")
 ```
 
-This shows us that this information appears on the `stocks` table.  Working in R, it is easy to query this additional table and combine the results with the data we have collected so far:
+This shows us that this information appears on the `stocks` table.  We can then request this data from the stocks table:  
 
 
 ```{r}
@@ -120,7 +120,6 @@ stocks(trout$Species, fields=c("Species", "Resilience", "StockDefs"))
 ```
 
 
-Sometimes it is more useful to search for a broad description of the tables.  
 
 
 ## SeaLifeBase

@@ -11,13 +11,13 @@ load_taxa <- memoise::memoise(function(server = NULL, ...){
   ## Handle versioning
   if(is.null(server)) server <- getOption("FISHBASE_API", FISHBASE_API)
   if(grepl("sealifebase", server)){
-    slb_taxa_table()
+    slb_taxa_table(server)
   } else {
-    fb_taxa_table()
+    fb_taxa_table(server)
   }
 })
   
-fb_taxa_table <- function(){
+fb_taxa_table <- function(server){
   taxon_species <- fb_tbl("species", server)
   keep <- names(taxon_species) %in% c("SpecCode", "Species", "Genus", "Subfamily",
                                       "GenCode", "SubGenCode", "FamCode")
@@ -69,7 +69,7 @@ globalVariables(c("SpecCode", "Species", "Genus", "Subfamily", "Family",
         
 
 
-slb_taxa_table <- function(){
+slb_taxa_table <- function(server){
   
   server <- "sealifebase"
     

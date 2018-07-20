@@ -37,7 +37,7 @@ synonyms <- function(species_list = NULL, server = NULL,
   dplyr::left_join(
             data.frame(synonym = species_list, stringsAsFactors = FALSE),
             syn,by="synonym") %>% 
-    left_join(fb_species(server=server), by = "SpecCode")
+    left_join(fb_species(server), by = "SpecCode")
 }
 
 
