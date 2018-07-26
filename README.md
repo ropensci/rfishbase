@@ -1,6 +1,28 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 [![Build Status](https://travis-ci.org/ropensci/rfishbase.svg?branch=rfishbase2.0)](https://travis-ci.org/ropensci/rfishbase) [![Coverage Status](https://coveralls.io/repos/ropensci/rfishbase/badge.svg?branch=rfishbase2.0)](https://coveralls.io/r/ropensci/rfishbase?branch=rfishbase2.0) [![Downloads](http://cranlogs.r-pkg.org/badges/rfishbase)](https://github.com/metacran/cranlogs.app) [![Onbaroding](https://badges.ropensci.org/137_status.svg)](https://github.com/ropensci/onboarding/issues/137)
 
+<details> <summary><strong>FishBase NEEDS YOUR HELP!</strong></summary>
+Dear FishBase Users,
+
+FishBase needs help and I am writing to you because you either have at one point or another requested data to be extracted from FishBase for your own research purposes or have contributed your own data to FishBase.
+
+One of the FishBase funders has had to reduce its commitment and as a result, there is a US$200,000 gap in the FishBase 2018/2019 budget, which will result in forced unpaid leave of key staff with direct consequences for the constant updating and growth of FishBase, a resource on which many of us rely.
+
+Many of us use FishBase regularly in our work given it provides important data on distribution, traits etc. Indeed, these data are so valuable that FishBase receives over 700,000 unique visits per month and underpins key scientific breakthroughs such as the Nature paper on rates of evolution [it’s slower in the tropics!] (see Nature (see https://www.nature.com/articles/d41586-018-05575-2 and https://www.facebook.com/FishBase/posts/1885134558216592).
+
+Key about FishBase is that it is free to everyone in the world, regardless of whether their institutions can afford journal subscriptions.
+
+FishBase co-founder Daniel Pauly once said “sending a bibliography is like providing cookbooks in a famine” and it has been the underpinning ethos of FishBase to make information available equally, regardless of where one works.
+
+So for nearly 30 years, FishBase (www.fishbase.org), with its team of biologists and programmers has done just that, while constantly improving and expanding this valued resource.
+
+But FishBase needs our help now. So, when you are next online on FishBase and see the donate request pop up, please donate at least $25. That’s one bottle of good VQA wine in Canada or half a carton of decent beer in Australia, 3 packs of organic Hess avocados from Loblaws or 6 latte grandes at Starbucks. If you drink more beer, use more avocado on your toast or are caffeine dependent, please consider a larger donation. IF EVERY MARINE RESEARCHER GETS ON BOARD, we can make a major contribution to FishBase. Imagine if you had to pay to access this type of information.
+
+It’s time to pay it forward!
+
+Thank you for your consideration and we all look forward to a flood of world-wide support to FishBase.
+</details>
+
 Welcome to `rfishbase 3.0`. This package is the third rewrite of the original `rfishbase` package described in [Boettiger et al. (2012)](http://www.carlboettiger.info/assets/files/pubs/10.1111/j.1095-8649.2012.03464.x.pdf), and is not backwards compatible with the original. The first version of `rfishbase` relied on the XML summary pages provided by FishBase, which contained relatively incomplete data and have since been deprecated. The package later added functions that relied on HTML scraping of fishbase.org, which was always slow, subject to server instabilities, and carried a greater risk of errors.
 
 To address all of these issues, we created `rfishbase 2.0` accompanied by a stand-alone FishBase API with the blessing of the FishBase.org team, who have kindly provided copies of the backend SQL database to our team for this purpose. At this time the API does not cover all tables provided by the SQL backend, but does access the largest and most commonly used. A list of all tables available from the API (and from rfishbase) can be seen using the `heartbeat()` function.
@@ -9,7 +31,7 @@ To address all of these issues, we created `rfishbase 2.0` accompanied by a stan
 
 `rfishbase` 3.0 tries to maintain as much backwards compatibility as possible with rfishbase 2.0. However, there are cases in which the rfishbase 2.0 behavior was not desirable -- such as throwing errors when a introducing simple `NA`s for missing data would be more appropriate, or returning vectors where `data.frame`s were needed to include all the context.
 
-We welcome any feedback, issues or questions that users may encounter through our issues tracker on GitHub: \[<https://github.com/ropensci/rfishbase/issues>\].
+We welcome any feedback, issues or questions that users may encounter through our issues tracker on GitHub: <https://github.com/ropensci/rfishbase/issues>
 
 Installation
 ------------
