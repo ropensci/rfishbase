@@ -37,6 +37,7 @@ It’s time to pay it forward!
 Thank you for your consideration and we all look forward to a flood of world-wide support to FishBase.
 </details>
 
+<br>
 
 Welcome to `rfishbase 3.0`. This package is the third rewrite of the original `rfishbase` package described in [Boettiger et al. (2012)](http://www.carlboettiger.info/assets/files/pubs/10.1111/j.1095-8649.2012.03464.x.pdf).   
 

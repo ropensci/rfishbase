@@ -23,6 +23,8 @@ It’s time to pay it forward!
 Thank you for your consideration and we all look forward to a flood of world-wide support to FishBase.
 </details>
 
+<br>
+
 Welcome to `rfishbase 3.0`. This package is the third rewrite of the original `rfishbase` package described in [Boettiger et al. (2012)](http://www.carlboettiger.info/assets/files/pubs/10.1111/j.1095-8649.2012.03464.x.pdf), and is not backwards compatible with the original. The first version of `rfishbase` relied on the XML summary pages provided by FishBase, which contained relatively incomplete data and have since been deprecated. The package later added functions that relied on HTML scraping of fishbase.org, which was always slow, subject to server instabilities, and carried a greater risk of errors.
 
 To address all of these issues, we created `rfishbase 2.0` accompanied by a stand-alone FishBase API with the blessing of the FishBase.org team, who have kindly provided copies of the backend SQL database to our team for this purpose. At this time the API does not cover all tables provided by the SQL backend, but does access the largest and most commonly used. A list of all tables available from the API (and from rfishbase) can be seen using the `heartbeat()` function.
