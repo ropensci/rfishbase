@@ -1,39 +1,77 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-[![Build Status](https://travis-ci.org/ropensci/rfishbase.svg?branch=rfishbase2.0)](https://travis-ci.org/ropensci/rfishbase) [![Coverage Status](https://coveralls.io/repos/ropensci/rfishbase/badge.svg?branch=rfishbase2.0)](https://coveralls.io/r/ropensci/rfishbase?branch=rfishbase2.0) [![Downloads](http://cranlogs.r-pkg.org/badges/rfishbase)](https://github.com/metacran/cranlogs.app) [![Onbaroding](https://badges.ropensci.org/137_status.svg)](https://github.com/ropensci/onboarding/issues/137)
+[![Build
+Status](https://travis-ci.org/ropensci/rfishbase.svg?branch=rfishbase2.0)](https://travis-ci.org/ropensci/rfishbase)
+[![Coverage
+Status](https://coveralls.io/repos/ropensci/rfishbase/badge.svg?branch=rfishbase2.0)](https://coveralls.io/r/ropensci/rfishbase?branch=rfishbase2.0)
+[![Downloads](http://cranlogs.r-pkg.org/badges/rfishbase)](https://github.com/metacran/cranlogs.app)
+[![Onbaroding](https://badges.ropensci.org/137_status.svg)](https://github.com/ropensci/onboarding/issues/137)
 
-<details> <summary><strong>FishBase NEEDS YOUR HELP!</strong></summary>
-Dear FishBase Users,
+<details>
+<summary><strong>FishBase NEEDS YOUR HELP!</strong></summary> Dear
+FishBase Users,
 
-FishBase needs help and I am writing to you because you either have at one point or another requested data to be extracted from FishBase for your own research purposes or have contributed your own data to FishBase.
+FishBase needs help and I am writing to you because you either have at
+one point or another requested data to be extracted from FishBase for
+your own research purposes or have contributed your own data to
+FishBase.
 
-One of the FishBase funders has had to reduce its commitment and as a result, there is a US$200,000 gap in the FishBase 2018/2019 budget, which will result in forced unpaid leave of key staff with direct consequences for the constant updating and growth of FishBase, a resource on which many of us rely.
+One of the FishBase funders has had to reduce its commitment and as a
+result, there is a US$200,000 gap in the FishBase 2018/2019 budget,
+which will result in forced unpaid leave of key staff with direct
+consequences for the constant updating and growth of FishBase, a
+resource on which many of us rely.
 
-Many of us use FishBase regularly in our work given it provides important data on distribution, traits etc. Indeed, these data are so valuable that FishBase receives over 700,000 unique visits per month and underpins key scientific breakthroughs such as the Nature paper on rates of evolution [it’s slower in the tropics!] (see Nature (see https://www.nature.com/articles/d41586-018-05575-2 and https://www.facebook.com/FishBase/posts/1885134558216592).
+Many of us use FishBase regularly in our work given it provides
+important data on distribution, traits etc. Indeed, these data are so
+valuable that FishBase receives over 700,000 unique visits per month and
+underpins key scientific breakthroughs such as the Nature paper on rates
+of evolution \[it’s slower in the tropics!\] (see Nature (see
+<https://www.nature.com/articles/d41586-018-05575-2> and
+<https://www.facebook.com/FishBase/posts/1885134558216592>).
 
-Key about FishBase is that it is free to everyone in the world, regardless of whether their institutions can afford journal subscriptions.
+Key about FishBase is that it is free to everyone in the world,
+regardless of whether their institutions can afford journal
+subscriptions.
 
-FishBase co-founder Daniel Pauly once said “sending a bibliography is like providing cookbooks in a famine” and it has been the underpinning ethos of FishBase to make information available equally, regardless of where one works.
+FishBase co-founder Daniel Pauly once said “sending a bibliography is
+like providing cookbooks in a famine” and it has been the underpinning
+ethos of FishBase to make information available equally, regardless of
+where one works.
 
-So for nearly 30 years, FishBase (www.fishbase.org), with its team of biologists and programmers has done just that, while constantly improving and expanding this valued resource.
+So for nearly 30 years, FishBase (www.fishbase.org), with its team of
+biologists and programmers has done just that, while constantly
+improving and expanding this valued resource.
 
-But FishBase needs our help now. So, when you are next online on FishBase and see the donate request pop up, please donate at least $25. That’s one bottle of good VQA wine in Canada or half a carton of decent beer in Australia, 3 packs of organic Hess avocados from Loblaws or 6 latte grandes at Starbucks. If you drink more beer, use more avocado on your toast or are caffeine dependent, please consider a larger donation. IF EVERY MARINE RESEARCHER GETS ON BOARD, we can make a major contribution to FishBase. Imagine if you had to pay to access this type of information.
+But FishBase needs our help now. So, when you are next online on
+FishBase and see the donate request pop up, please donate at least $25.
+That’s one bottle of good VQA wine in Canada or half a carton of decent
+beer in Australia, 3 packs of organic Hess avocados from Loblaws or 6
+latte grandes at Starbucks. If you drink more beer, use more avocado on
+your toast or are caffeine dependent, please consider a larger donation.
+IF EVERY MARINE RESEARCHER GETS ON BOARD, we can make a major
+contribution to FishBase. Imagine if you had to pay to access this type
+of information.
 
 It’s time to pay it forward!
 
-Thank you for your consideration and we all look forward to a flood of world-wide support to FishBase.
+Thank you for your consideration and we all look forward to a flood of
+world-wide support to FishBase.
 </details>
-
 <br>
 
-Welcome to `rfishbase 3.0`. This package is the third rewrite of the original `rfishbase` package described in [Boettiger et al. (2012)](http://www.carlboettiger.info/assets/files/pubs/10.1111/j.1095-8649.2012.03464.x.pdf), and is not backwards compatible with the original. The first version of `rfishbase` relied on the XML summary pages provided by FishBase, which contained relatively incomplete data and have since been deprecated. The package later added functions that relied on HTML scraping of fishbase.org, which was always slow, subject to server instabilities, and carried a greater risk of errors.
+Welcome to `rfishbase 3.0`. This package is the third rewrite of the
+original `rfishbase` package described in [Boettiger et al.
+(2012)](http://www.carlboettiger.info/assets/files/pubs/10.1111/j.1095-8649.2012.03464.x.pdf).
 
-To address all of these issues, we created `rfishbase 2.0` accompanied by a stand-alone FishBase API with the blessing of the FishBase.org team, who have kindly provided copies of the backend SQL database to our team for this purpose. At this time the API does not cover all tables provided by the SQL backend, but does access the largest and most commonly used. A list of all tables available from the API (and from rfishbase) can be seen using the `heartbeat()` function.
+`rfishbase` 3.0 queries pre-compressed tables from a static server and
+employs local caching (through memoization) to provide much greater
+performance and stability, particularly for dealing with large queries
+involving 10s of thousands of species. The user is never expected to
+deal with pagination or curl headers and timeouts.
 
-`rfishbase` 3.0 queries pre-compressed tables from a static server and employs local caching (through memoization) to provide much greater performance and stability, particularly for dealing with large queries involving 10s of thousands of species. The user is never expected to deal with pagination or curl headers and timeouts.
-
-`rfishbase` 3.0 tries to maintain as much backwards compatibility as possible with rfishbase 2.0. However, there are cases in which the rfishbase 2.0 behavior was not desirable -- such as throwing errors when a introducing simple `NA`s for missing data would be more appropriate, or returning vectors where `data.frame`s were needed to include all the context.
-
-We welcome any feedback, issues or questions that users may encounter through our issues tracker on GitHub: <https://github.com/ropensci/rfishbase/issues>
+We welcome any feedback, issues or questions that users may encounter
+through our issues tracker on GitHub:
+<https://github.com/ropensci/rfishbase/issues>
 
 Installation
 ------------
@@ -44,28 +82,42 @@ remotes::install_github("ropensci/rfishbase")
 
 ``` r
 library("rfishbase")
+library("dplyr") # convenient but not required
 ```
 
 Getting started
 ---------------
 
-[FishBase](http://fishbase.org) makes it relatively easy to look up a lot of information on most known species of fish. However, looking up a single bit of data, such as the estimated trophic level, for many different species becomes tedious very soon. This is a common reason for using `rfishbase`. As such, our first step is to assemble a good list of species we are interested in.
+[FishBase](http://fishbase.org) makes it relatively easy to look up a
+lot of information on most known species of fish. However, looking up a
+single bit of data, such as the estimated trophic level, for many
+different species becomes tedious very soon. This is a common reason for
+using `rfishbase`. As such, our first step is to assemble a good list of
+species we are interested in.
 
 ### Building a species list
 
-Almost all functions in `rfishbase` take a list (character vector) of species scientific names, for example:
+Almost all functions in `rfishbase` take a list (character vector) of
+species scientific names, for example:
 
 ``` r
 fish <- c("Oreochromis niloticus", "Salmo trutta")
 ```
 
-You can also read in a list of names from any existing data you are working with. When providing your own species list, you should always begin by validating the names. Taxonomy is a moving target, and this well help align the scientific names you are using with the names used by FishBase, and alert you to any potential issues:
+You can also read in a list of names from any existing data you are
+working with. When providing your own species list, you should always
+begin by validating the names. Taxonomy is a moving target, and this
+well help align the scientific names you are using with the names used
+by FishBase, and alert you to any potential issues:
 
 ``` r
 fish <- validate_names(c("Oreochromis niloticus", "Salmo trutta"))
 ```
 
-Another typical use case is in wanting to collect information about all species in a particular taxonomic group, such as a Genus, Family or Order. The function `species_list` recognizes six taxonomic levels, and can help you generate a list of names of all species in a given group:
+Another typical use case is in wanting to collect information about all
+species in a particular taxonomic group, such as a Genus, Family or
+Order. The function `species_list` recognizes six taxonomic levels, and
+can help you generate a list of names of all species in a given group:
 
 ``` r
 fish <- species_list(Genus = "Labroides")
@@ -76,7 +128,8 @@ fish
     [3] "Labroides pectoralis"    "Labroides phthirophagus"
     [5] "Labroides rubrolabiatus"
 
-`rfishbase` also recognizes common names. When a common name refers to multiple species, all matching species are returned:
+`rfishbase` also recognizes common names. When a common name refers to
+multiple species, all matching species are returned:
 
 ``` r
 trout <- common_to_sci("trout")
@@ -98,31 +151,40 @@ trout
     10 Salmo trutta              Aral Sea Trout       English       238
     # ... with 108 more rows
 
-Note that there is no need to validate names coming from `common_to_sci` or `species_list`, as these will always return valid names.
+Note that there is no need to validate names coming from `common_to_sci`
+or `species_list`, as these will always return valid names.
 
 ### Getting data
 
-With a species list in place, we are ready to query fishbase for data. Note that if you have a very long list of species, it is always a good idea to try out your intended functions with a subset of that list first to make sure everything is working.
+With a species list in place, we are ready to query fishbase for data.
+Note that if you have a very long list of species, it is always a good
+idea to try out your intended functions with a subset of that list first
+to make sure everything is working.
 
-The `species()` function returns a table containing much (but not all) of the information found on the summary or homepage for a species on [fishbase.org](http://fishbase.org). `rfishbase` functions always return [tidy](http://www.jstatsoft.org/v59/i10/paper) data tables: rows are observations (e.g. a species, individual samples from a species) and columns are variables (fields).
+The `species()` function returns a table containing much (but not all)
+of the information found on the summary or homepage for a species on
+[fishbase.org](http://fishbase.org). `rfishbase` functions always return
+[tidy](http://www.jstatsoft.org/v59/i10/paper) data tables: rows are
+observations (e.g. a species, individual samples from a species) and
+columns are variables (fields).
 
 ``` r
 species(trout$Species)
 ```
 
     # A tibble: 118 x 98
-       SpecCode Species     SpeciesRefNo Author      FBname   PicPreferredName
-          <int> <chr>              <int> <chr>       <chr>    <chr>           
-     1     6210 Salmo obtu…        59043 (Heckel, 1… Adriati… Saobt_u0.jpg    
-     2     8705 Schizothor…         4832 (Gray, 183… Snowtro… Scric_u1.jpg    
-     3    24454 Schizopyge…         4832 (Heckel, 1… Alghad … <NA>            
-     4      246 Salvelinus…        86798 (Mitchill,… Brook t… Safon_u4.jpg    
-     5      238 Salmo trut…         4779 Linnaeus, … Sea tro… Satru_u2.jpg    
-     6    67602 Salmo kott…        99540 Turan, Do?… Antalya… Sakot_m0.jpg    
-     7     2687 Oncorhynch…         5723 (Miller, 1… Apache … Onapa_u0.jpg    
-     8     2687 Oncorhynch…         5723 (Miller, 1… Apache … Onapa_u0.jpg    
-     9     6082 Plectropom…         5222 (R<fc>ppel… Squaret… Plare_u4.jpg    
-    10      238 Salmo trut…         4779 Linnaeus, … Sea tro… Satru_u2.jpg    
+       SpecCode Species SpeciesRefNo Author FBname PicPreferredName
+          <int> <chr>          <int> <chr>  <chr>  <chr>           
+     1     6210 Salmo …        59043 (Heck… Adria… Saobt_u0.jpg    
+     2     8705 Schizo…         4832 (Gray… Snowt… Scric_u1.jpg    
+     3    24454 Schizo…         4832 (Heck… Algha… <NA>            
+     4      246 Salvel…        86798 (Mitc… Brook… Safon_u4.jpg    
+     5      238 Salmo …         4779 Linna… Sea t… Satru_u2.jpg    
+     6    67602 Salmo …        99540 Turan… Antal… Sakot_m0.jpg    
+     7     2687 Oncorh…         5723 (Mill… Apach… Onapa_u0.jpg    
+     8     2687 Oncorh…         5723 (Mill… Apach… Onapa_u0.jpg    
+     9     6082 Plectr…         5222 (R<fc… Squar… Plare_u4.jpg    
+    10      238 Salmo …         4779 Linna… Sea t… Satru_u2.jpg    
     # ... with 108 more rows, and 92 more variables: PicPreferredNameM <chr>,
     #   PicPreferredNameF <chr>, PicPreferredNameJ <chr>, FamCode <int>,
     #   Subfamily <chr>, GenCode <int>, SubGenCode <int>, BodyShapeI <chr>,
@@ -152,7 +214,15 @@ species(trout$Species)
     #   Emblematic <int>, Entered <int>, DateEntered <dttm>, Modified <int>,
     #   DateModified <dttm>, Expert <int>, DateChecked <dttm>, TS <chr>
 
-Most tables contain many fields. To avoid overly cluttering the screen, `rfishbase` displays tables as `data_frame` objects from the `dplyr` package. These act just like the familiar `data.frames` of base R except that they print to the screen in a more tidy fashion. Note that columns that cannot fit easily in the display are summarized below the table. This gives us an easy way to see what fields are available in a given table. For instance, from this table we may only be interested in the `PriceCateg` (Price category) and the `Vulnerability` of the species. We can repeat the query for our full species list, asking for only these fields to be returned:
+Most tables contain many fields. To avoid overly cluttering the screen,
+`rfishbase` displays tables as “tibbles” from the `dplyr` package. These
+act just like the familiar `data.frames` of base R except that they
+print to the screen in a more tidy fashion. Note that columns that
+cannot fit easily in the display are summarized below the table. This
+gives us an easy way to see what fields are available in a given table.
+
+Most `rfishbase` functions will let the user subset these fields by
+listing them in the `fields` argument, for instance:
 
 ``` r
 dat <- species(trout$Species, fields=c("Species", "PriceCateg", "Vulnerability"))
@@ -174,11 +244,28 @@ dat
     10 Salmo trutta              very high           60.0
     # ... with 108 more rows
 
+Alternatively, just subset the table using the standard column selection
+in base R (`[[`) or `dplyr::select`.
+
 ### FishBase Docs: Discovering data
 
-Unfortunately identifying what fields come from which tables is often a challenge. Each summary page on fishbase.org includes a list of additional tables with more information about species ecology, diet, occurrences, and many other things. `rfishbase` provides functions that correspond to most of these tables.
+Unfortunately identifying what fields come from which tables is often a
+challenge. Each summary page on fishbase.org includes a list of
+additional tables with more information about species ecology, diet,
+occurrences, and many other things. `rfishbase` provides functions that
+correspond to most of these tables.
 
-Because `rfishbase` accesses the back end database, it does not always line up with the web display. Frequently `rfishbase` functions will return more information than is available on the web versions of the these tables. Some information found on the summary homepage for a species is not available from the `species` summary function, but must be extracted from a different table. For instance, the species `Resilience` information is not one of the fields in the `species` summary table, despite appearing on the species homepage of fishbase.org. To discover which table this information is in, we can use the special `rfishbase` function `list_fields`, which will list all tables with a field matching the query string:
+Because `rfishbase` accesses the back end database, it does not always
+line up with the web display. Frequently `rfishbase` functions will
+return more information than is available on the web versions of the
+these tables. Some information found on the summary homepage for a
+species is not available from the `species` summary function, but must
+be extracted from a different table. For instance, the species
+`Resilience` information is not one of the fields in the `species`
+summary table, despite appearing on the species homepage of
+fishbase.org. To discover which table this information is in, we can use
+the special `rfishbase` function `list_fields`, which will list all
+tables with a field matching the query string:
 
 ``` r
 list_fields("Resilience")
@@ -189,36 +276,167 @@ list_fields("Resilience")
       <chr> 
     1 stocks
 
-This shows us that this information appears on the `stocks` table. Working in R, it is easy to query this additional table and combine the results with the data we have collected so far:
+This shows us that this information appears on the `stocks` table. We
+can then request this data from the stocks table:
 
 ``` r
 stocks(trout$Species, fields=c("Species", "Resilience", "StockDefs"))
 ```
 
     # A tibble: 160 x 3
-       Species                   Resilience StockDefs                         
-       <chr>                     <chr>      <chr>                             
-     1 Salmo obtusirostris       Medium     Europe:  Adriatic basin in Krka, …
-     2 Schizothorax richardsonii Medium     Asia:  Himalayan region of India,…
-     3 Schizopyge niger          Medium     Asia:  Kashmir Valley in India an…
-     4 Salvelinus fontinalis     Medium     North America:  native to most of…
-     5 Salmo trutta              High       Europe and Asia:  Atlantic, North…
-     6 Salmo trutta              <NA>       <i>Salmo trutta aralensis</i>:  A…
-     7 Salmo trutta              Medium     <i>Salmo trutta fario</i>:  North…
-     8 Salmo trutta              Low        "<i>Salmo trutta lacustris</i>\t:…
-     9 Salmo trutta              <NA>       "<i>Salmo trutta oxianus</i>\t:  …
-    10 Salmo trutta              <NA>       <i>Salmo trutta aralensis</i>:  A…
+       Species           Resilience StockDefs                                 
+       <chr>             <chr>      <chr>                                     
+     1 Salmo obtusirost… Medium     Europe:  Adriatic basin in Krka, Jardo, V…
+     2 Schizothorax ric… Medium     Asia:  Himalayan region of India, Sikkim …
+     3 Schizopyge niger  Medium     Asia:  Kashmir Valley in India and Azad K…
+     4 Salvelinus fonti… Medium     North America:  native to most of eastern…
+     5 Salmo trutta      High       Europe and Asia:  Atlantic, North, White …
+     6 Salmo trutta      <NA>       <i>Salmo trutta aralensis</i>:  Asia:  en…
+     7 Salmo trutta      Medium     <i>Salmo trutta fario</i>:  Northeast  At…
+     8 Salmo trutta      Low        "<i>Salmo trutta lacustris</i>\t:  Europe…
+     9 Salmo trutta      <NA>       "<i>Salmo trutta oxianus</i>\t:  Asia:  A…
+    10 Salmo trutta      <NA>       <i>Salmo trutta aralensis</i>:  Asia:  Ar…
     # ... with 150 more rows
 
-Sometimes it is more useful to search for a broad description of the tables.
+Version stability
+-----------------
+
+`rfishbase` relies on periodic cache releases. The current database
+release is `17.07` (i.e. dating from July 2017). Set the version of
+FishBase you wish to access by setting the environmental variable:
+
+``` r
+Sys.setenv(FISHBASE_VERSION="17.07")
+```
+
+Note that the same version number applies to both the `fishbase` and
+`sealifebase` data. Stay tuned for new releases.
 
 SeaLifeBase
 -----------
 
-Support for SeaLifeBase not yet implemented in `3.0`. Should be coming soon!
+SeaLifeBase.org is maintained by the same organization and largely
+parallels the database structure of Fishbase. As such, almost all
+`rfishbase` functions can instead be instructed to address the
+
+We can begin by getting the taxa table for sealifebase:
+
+``` r
+sealife <- load_taxa(server="sealifebase")
+```
+
+(Note: running `load_taxa()` at the beginning of any session, for either
+fishbase or sealifebase is a good way to “warm up” rfishbase by loading
+in taxonomic data it will need. This information is cached throughout
+your session and will make all subsequent commands run faster. But no
+worries if you skip this step, `rfishbase` will peform it for you on the
+first time it is needed, and will cache these results thereafter.)
+
+Let’s look at some Gastropods:
+
+``` r
+sealife %>% filter(Class == "Gastropoda")
+```
+
+    # A tibble: 19,473 x 9
+       SpecCode Species    Genus  Subfamily Family  Order Class Phylum Kingdom
+          <int> <chr>      <chr>  <chr>     <chr>   <chr> <chr> <chr>  <chr>  
+     1       57 Salinator… Salin… <NA>      Amphib… Pulm… Gast… Mollu… Animal…
+     2       58 Tasmaphen… Tasma… <NA>      Rhytid… Pulm… Gast… Mollu… Animal…
+     3       59 Tasmaphen… Tasma… <NA>      Rhytid… Pulm… Gast… Mollu… Animal…
+     4       60 Torresiro… Torre… <NA>      Rhytid… Pulm… Gast… Mollu… Animal…
+     5       61 Victaphan… Victa… <NA>      Rhytid… Pulm… Gast… Mollu… Animal…
+     6       62 Victaphan… Victa… <NA>      Rhytid… Pulm… Gast… Mollu… Animal…
+     7       63 Victaphan… Victa… <NA>      Rhytid… Pulm… Gast… Mollu… Animal…
+     8       64 Victaphan… Victa… <NA>      Rhytid… Pulm… Gast… Mollu… Animal…
+     9       65 Anoglypta… Anogl… <NA>      Caryod… Pulm… Gast… Mollu… Animal…
+    10       66 Brazieres… Brazi… <NA>      Caryod… Pulm… Gast… Mollu… Animal…
+    # ... with 19,463 more rows
+
+All other tables can also take an argument to `server`:
+
+``` r
+species(server="sealifebase")
+```
+
+    # A tibble: 119,074 x 104
+       SpecCode Species SpeciesRefNo Author AuthorRef FBname PicPreferredName
+          <int> <chr>          <int> <chr>      <int> <chr>  <chr>           
+     1        1 Phoron…            1 Wrigh…        NA <NA>   <NA>            
+     2        2 Phoron…          997 Wrigh…        NA <NA>   <NA>            
+     3        3 Phoron…            1 Oka, …        NA <NA>   <NA>            
+     4        4 Phoron…            1 Haswe…        NA <NA>   Phaus_u0.jpg    
+     5        5 Phoron…          997 Selys…        NA <NA>   <NA>            
+     6        6 Phoron…            1 Cori,…        NA phoro… <NA>            
+     7        7 Phoron…            1 (Schn…        NA <NA>   <NA>            
+     8        8 Phoron…            1 Gilch…        NA <NA>   <NA>            
+     9        9 Phoron…            1 Pixel…        NA <NA>   <NA>            
+    10       10 Phoron…            1 Hilto…        NA Calif… <NA>            
+    # ... with 119,064 more rows, and 97 more variables:
+    #   PicPreferredNameM <chr>, PicPreferredNameF <chr>,
+    #   PicPreferredNameJ <chr>, FamCode <int>, Subfamily <chr>, Source <chr>,
+    #   Remark <chr>, TaxIssue <int>, Fresh <int>, Brack <int>,
+    #   Saltwater <int>, Land <int>, DemersPelag <chr>, AnaCat <chr>,
+    #   MigratRef <int>, DepthRangeShallow <int>, DepthRangeDeep <int>,
+    #   DepthRangeRef <int>, DepthRangeComShallow <int>,
+    #   DepthRangeComDeep <int>, DepthComRef <int>, LongevityWild <int>,
+    #   LongevityWildRef <int>, LongevityCaptive <chr>, LongevityCapRef <chr>,
+    #   Vulnerability <dbl>, Length <dbl>, LTypeMaxM <chr>,
+    #   LengthFemale <dbl>, LTypeMaxF <chr>, MaxLengthRef <int>,
+    #   CommonLength <dbl>, LTypeComM <chr>, CommonLengthF <chr>,
+    #   LTypeComF <chr>, CommonLengthRef <int>, Weight <dbl>,
+    #   WeightFemale <chr>, MaxWeightRef <int>, Pic <chr>,
+    #   PictureFemale <chr>, LarvaPic <chr>, EggPic <chr>,
+    #   ImportanceRef <int>, Importance <chr>, Remarks7 <chr>,
+    #   PriceCateg <chr>, PriceReliability <chr>, LandingStatistics <chr>,
+    #   Landings <chr>, MainCatchingMethod <chr>, II <chr>, MSeines <int>,
+    #   MGillnets <int>, MCastnets <int>, MTraps <int>, MSpears <int>,
+    #   MTrawls <int>, MDredges <int>, MLiftnets <int>, MHooksLines <int>,
+    #   MOther <int>, UsedforAquaculture <chr>, LifeCycle <chr>,
+    #   AquacultureRef <chr>, UsedasBait <chr>, BaitRef <chr>, Aquarium <chr>,
+    #   AquariumFishII <chr>, AquariumRef <chr>, GameFish <int>,
+    #   GameRef <chr>, Dangerous <chr>, DangerousRef <int>,
+    #   Electrogenic <chr>, ElectroRef <chr>, Complete <chr>, ASFA <chr>,
+    #   GoogleImage <int>, Entered <int>, DateEntered <dttm>, Modified <int>,
+    #   DateModified <dttm>, Expert <int>, DateChecked <dttm>, Synopsis <chr>,
+    #   DateSynopsis <chr>, Flag <chr>, Comments <chr>,
+    #   VancouverAquarium <int>, Profile <chr>, Sp2000_NameCode <chr>,
+    #   Sp2000_HierarchyCode <chr>, Sp2000_AuthorRefNumber <chr>,
+    #   E_Append <int>, E_DateAppend <date>, TS <dttm>
+
+CAUTION: if switching between `fishbase` and `sealifebase` in a single R
+session, we strongly advise you always set `server` explicitly in your
+function calls. Otherwise you may confuse the caching system.
+
+Backwards compatibility
+-----------------------
+
+`rfishbase` 3.0 tries to maintain as much backwards compatibility as
+possible with rfishbase 2.0. However, there are cases in which the
+rfishbase 2.0 behavior was not desirable – such as throwing errors when
+a introducing simple `NA`s for missing data would be more appropriate,
+or returning vectors where `data.frame`s were needed to include all the
+context.
+
+-   Argument names have been retained where possible to maximize
+    backwards compatibility. Using previous arguments that are no longer
+    relevant (such as `limit` for the maximum number of records) will
+    not now introduce errors, but nor will they have any effect (they
+    are simply consumed by the `...`). There are no longer any limits in
+    return sizes.
+
+-   You can still specify server using the rfishbase `2.x` format of
+    providing a URL argument for server, e.g.
+    `"http://fishbase.ropensci.org/sealifebase"` or
+    `Sys.setenv(FISHBASE_API = "http://fishbase.ropensci.org/sealifebase")`,
+    or simply `Sys.setenv("FISHBASE_API" = "sealifebase")` if you
+    prefer. Also recall that environmental variables can always be set
+    in an `.Renviron` file.
 
 ------------------------------------------------------------------------
 
-Please note that this project is released with a [Contributor Code of Conduct](CONDUCT.md). By participating in this project you agree to abide by its terms.
+Please note that this project is released with a [Contributor Code of
+Conduct](CONDUCT.md). By participating in this project you agree to
+abide by its terms.
 
 [![ropensci\_footer](http://ropensci.org/public_images/github_footer.png)](http://ropensci.org)
