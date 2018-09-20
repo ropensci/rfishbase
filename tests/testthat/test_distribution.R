@@ -12,3 +12,4 @@ test_that("We can query locations", {
   expect_is(df, "data.frame")
   
 })
+

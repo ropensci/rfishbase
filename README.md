@@ -1,10 +1,14 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 [![Build
-Status](https://travis-ci.org/ropensci/rfishbase.svg?branch=rfishbase2.0)](https://travis-ci.org/ropensci/rfishbase)
+Status](https://travis-ci.org/ropensci/rfishbase.svg)](https://travis-ci.org/ropensci/rfishbase)  
 [![Coverage
-Status](https://coveralls.io/repos/ropensci/rfishbase/badge.svg?branch=rfishbase2.0)](https://coveralls.io/r/ropensci/rfishbase?branch=rfishbase2.0)
-[![Downloads](http://cranlogs.r-pkg.org/badges/rfishbase)](https://github.com/metacran/cranlogs.app)
-[![Onbaroding](https://badges.ropensci.org/137_status.svg)](https://github.com/ropensci/onboarding/issues/137)
+Status](https://coveralls.io/repos/ropensci/rfishbase/badge.svg)](https://coveralls.io/r/ropensci/rfishbase?branch=master)
+[![AppVeyor build
+status](https://ci.appveyor.com/api/projects/status/github/ropensci/rfishbase?branch=master&svg=true)](https://ci.appveyor.com/project/ropensci/rfishbase)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/rfishbase)](https://cran.r-project.org/package=rfishbase)
+[![Downloads](http://cranlogs.r-pkg.org/badges/grand-total/rfishbase)](https://github.com/metacran/cranlogs.app)
+[![Onboarding](https://badges.ropensci.org/137_status.svg)](https://github.com/ropensci/onboarding/issues/137)
 
 <details>
 <summary><strong>FishBase NEEDS YOUR HELP!</strong></summary> Dear

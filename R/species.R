@@ -55,7 +55,8 @@ tidy_species_table <- function(df) {
     } else if(class=="logical"){
       df[[i]] <- as(as.numeric(as.character(df[[i]])), class)
     } else {
-      df[[i]] <- as(as.character(df[[i]]), class) # Will warn when class=integer & value is NA
+      df[[i]] <- as(as.character(df[[i]]), class) 
+      # Will warn when class=integer & value is NA
     }
   }
   ## Drop useless columns. 

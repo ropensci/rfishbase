@@ -102,8 +102,10 @@ distribution <- function(species_list=NULL, fields = NULL,
 #' e.g. http://www.fishbase.us/Country/FaoAreaList.php?ID=5537
 faoareas <- function(species_list = NULL, fields = NULL, server = NULL,...){
 
-  out <- left_join(fb_tbl("faoareas", server)[c('AreaCode', 'SpecCode', 'Status')],
-            faoarrefs()[c('AreaCode', 'FAO')])
+  out <- left_join(fb_tbl("faoareas", server)[c('AreaCode', 
+                                                'SpecCode', 
+                                                'Status')],
+                   faoarrefs()[c('AreaCode', 'FAO')])
   
   species_subset(species_list, out, server)
 }
@@ -126,7 +128,9 @@ faoarrefs <- function(server = NULL){
 #' @examples \dontrun{
 #' ecosystem("Oreochromis niloticus")
 #' }
-ecosystem <- endpoint("ecosystem", join = fb_tbl("ecosystemref", server = NULL), by = "E_CODE")
+ecosystem <- endpoint("ecosystem", 
+                      join = fb_tbl("ecosystemref", server = NULL), 
+                      by = "E_CODE")
 
 #' occurrence
 #' 

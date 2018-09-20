@@ -23,7 +23,8 @@ endpoint <- function(endpt, join = NULL, by = NULL){
 
 species_subset <- function(species_list, full_data, server = NULL){
 
-  ## drop any existing Species column, we'll get this data from joining on SpecCode
+  ## drop any existing Species column, 
+  ## we'll get this data from joining on SpecCode
   full_data <- full_data[!( names(full_data) %in% "Species") ]
 
   if(is.null(species_list)){

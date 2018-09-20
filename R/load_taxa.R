@@ -94,7 +94,7 @@ slb_taxa_table <- function(server){
   taxon_order <- fb_tbl("orders", server)
   taxon_class <- fb_tbl("classes", server)
   taxon_phylum <- fb_tbl("phylums", server)
-  phylum_class <- fb_tbl("phylumclass", server) # just to join phylum to class tbl
+  phylum_class <- fb_tbl("phylumclass", server) 
   
   
   keep <- names(taxon_species) %in% 

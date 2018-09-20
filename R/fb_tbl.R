@@ -23,12 +23,14 @@ fb_tbl <-
   function(tbl, server = NULL, ...){
     
     ## Handle versioning
-    if(is.null(server)) server <- getOption("FISHBASE_API", FISHBASE_API)
+    if(is.null(server)) 
+      server <- getOption("FISHBASE_API", FISHBASE_API)
     dbname <- "fb"
     if(grepl("sealifebase", server)){
       dbname <- "slb"
     } 
-    release <- paste0(dbname, "-",  getOption("FISHBASE_VERSION", FISHBASE_VERSION))
+    release <- paste0(dbname, "-",  
+                      getOption("FISHBASE_VERSION", FISHBASE_VERSION))
     
     
     addr <- 

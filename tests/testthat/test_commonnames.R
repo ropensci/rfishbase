@@ -3,7 +3,9 @@ context("common names")
 test_that("test common to sci name", { 
   
   needs_api()
-  species <- common_to_sci(c("Bicolor cleaner wrasse", "humphead parrotfish"), Language="English")
+  species <- common_to_sci(
+    c("Bicolor cleaner wrasse", "humphead parrotfish"),
+    Language="English")
   expect_is(species$Species, "character")
   expect_gt(length(species$Species), 1)
   

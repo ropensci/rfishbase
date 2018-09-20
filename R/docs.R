@@ -26,9 +26,12 @@ docs <- function(table = NULL, server = NULL, ...){
   
   suppressMessages({
   if(is.null(table)){
-    return(read.csv(system.file(file.path("extdata","tables.csv"), package="rfishbase")))
+    return(read.csv(system.file(file.path("extdata","tables.csv"), 
+                                package="rfishbase")))
   }
-  read.csv(system.file(file.path("extdata", paste0(table, ".csv")), package="rfishbase"),
+  read.csv(system.file(file.path("extdata", paste0(table, ".csv")), 
+                       package="rfishbase"),
            stringsAsFactors = FALSE)
   })
 }
+
