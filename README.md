@@ -1,3 +1,4 @@
+
 [![Build
 Status](https://travis-ci.org/ropensci/rfishbase.svg)](https://travis-ci.org/ropensci/rfishbase)
 [![AppVeyor build
@@ -10,7 +11,8 @@ status](https://www.r-pkg.org/badges/version/rfishbase)](https://cran.r-project.
 [![Downloads](http://cranlogs.r-pkg.org/badges/grand-total/rfishbase)](https://github.com/metacran/cranlogs.app)
 
 <details>
-<summary><strong>FishBase NEEDS YOUR HELP!</strong></summary> Dear
+
+<summary><strong>FishBase NEEDS YOUR HELP\!</strong></summary> Dear
 FishBase Users,
 
 FishBase needs help and I am writing to you because you either have at
@@ -28,7 +30,7 @@ Many of us use FishBase regularly in our work given it provides
 important data on distribution, traits etc. Indeed, these data are so
 valuable that FishBase receives over 700,000 unique visits per month and
 underpins key scientific breakthroughs such as the Nature paper on rates
-of evolution \[it’s slower in the tropics!\] (see Nature (see
+of evolution \[it’s slower in the tropics\!\] (see Nature (see
 <https://www.nature.com/articles/d41586-018-05575-2> and
 <https://www.facebook.com/FishBase/posts/1885134558216592>).
 
@@ -55,11 +57,13 @@ IF EVERY MARINE RESEARCHER GETS ON BOARD, we can make a major
 contribution to FishBase. Imagine if you had to pay to access this type
 of information.
 
-It’s time to pay it forward!
+It’s time to pay it forward\!
 
 Thank you for your consideration and we all look forward to a flood of
 world-wide support to FishBase.
+
 </details>
+
 <br>
 
 Welcome to `rfishbase 3.0`. This package is the third rewrite of the
@@ -76,8 +80,7 @@ We welcome any feedback, issues or questions that users may encounter
 through our issues tracker on GitHub:
 <https://github.com/ropensci/rfishbase/issues>
 
-Installation
-------------
+## Installation
 
 ``` r
 remotes::install_github("ropensci/rfishbase")
@@ -88,8 +91,7 @@ library("rfishbase")
 library("dplyr") # convenient but not required
 ```
 
-Getting started
----------------
+## Getting started
 
 [FishBase](http://fishbase.org) makes it relatively easy to look up a
 lot of information on most known species of fish. However, looking up a
@@ -225,7 +227,8 @@ cannot fit easily in the display are summarized below the table. This
 gives us an easy way to see what fields are available in a given table.
 
 Most `rfishbase` functions will let the user subset these fields by
-listing them in the `fields` argument, for instance:
+listing them in the `fields` argument, for
+instance:
 
 ``` r
 dat <- species(trout$Species, fields=c("Species", "PriceCateg", "Vulnerability"))
@@ -301,8 +304,7 @@ stocks(trout$Species, fields=c("Species", "Resilience", "StockDefs"))
     10 Salmo trutta      <NA>       <i>Salmo trutta aralensis</i>:  Asia:  Ar…
     # ... with 150 more rows
 
-Version stability
------------------
+## Version stability
 
 `rfishbase` relies on periodic cache releases. The current database
 release is `17.07` (i.e. dating from July 2017). Set the version of
@@ -315,8 +317,7 @@ Sys.setenv(FISHBASE_VERSION="17.07")
 Note that the same version number applies to both the `fishbase` and
 `sealifebase` data. Stay tuned for new releases.
 
-SeaLifeBase
------------
+## SeaLifeBase
 
 SeaLifeBase.org is maintained by the same organization and largely
 parallels the database structure of Fishbase. As such, almost all
@@ -411,8 +412,7 @@ CAUTION: if switching between `fishbase` and `sealifebase` in a single R
 session, we strongly advise you always set `server` explicitly in your
 function calls. Otherwise you may confuse the caching system.
 
-Backwards compatibility
------------------------
+## Backwards compatibility
 
 `rfishbase` 3.0 tries to maintain as much backwards compatibility as
 possible with rfishbase 2.0. However, there are cases in which the
@@ -421,25 +421,27 @@ a introducing simple `NA`s for missing data would be more appropriate,
 or returning vectors where `data.frame`s were needed to include all the
 context.
 
--   Argument names have been retained where possible to maximize
+  - Argument names have been retained where possible to maximize
     backwards compatibility. Using previous arguments that are no longer
     relevant (such as `limit` for the maximum number of records) will
     not now introduce errors, but nor will they have any effect (they
     are simply consumed by the `...`). There are no longer any limits in
     return sizes.
 
--   You can still specify server using the rfishbase `2.x` format of
+  - You can still specify server using the rfishbase `2.x` format of
     providing a URL argument for server, e.g.
     `"http://fishbase.ropensci.org/sealifebase"` or
-    `Sys.setenv(FISHBASE_API = "http://fishbase.ropensci.org/sealifebase")`,
-    or simply `Sys.setenv("FISHBASE_API" = "sealifebase")` if you
-    prefer. Also recall that environmental variables can always be set
-    in an `.Renviron` file.
+    `Sys.setenv(FISHBASE_API =
+    "http://fishbase.ropensci.org/sealifebase")`, or simply
+    `Sys.setenv("FISHBASE_API" = "sealifebase")` if you prefer. Also
+    recall that environmental variables can always be set in an
+    `.Renviron` file.
 
-------------------------------------------------------------------------
+-----
 
 Please note that this project is released with a [Contributor Code of
 Conduct](CONDUCT.md). By participating in this project you agree to
-abide by its terms.
+abide by its
+terms.
 
 [![ropensci\_footer](http://ropensci.org/public_images/github_footer.png)](http://ropensci.org)

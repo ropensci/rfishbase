@@ -161,20 +161,20 @@ The resulting data.frames are concatenated.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>common_names</span>(<span class='fu'>c</span>(<span class='st'>"Labroides bicolor"</span>,  <span class='st'>"Bolbometopon muricatum"</span>))</div><div class='output co'>#&gt; <span class='message'>Joining, by = "SpecCode"</span></div><div class='output co'>#&gt; # A tibble: 31 x 4
+    <pre class="examples"><div class='input'><span class='fu'>common_names</span>(<span class='fu'>c</span>(<span class='st'>"Labroides bicolor"</span>,  <span class='st'>"Bolbometopon muricatum"</span>))</div><div class='output co'>#&gt; <span class='message'>Joining, by = "SpecCode"</span></div><div class='output co'>#&gt; [90m# A tibble: 31 x 4[39m
 #&gt;    SpecCode Species           ComName                   Language
-#&gt;       &lt;int&gt; &lt;chr&gt;             &lt;chr&gt;                     &lt;chr&gt;   
-#&gt;  1     5650 Labroides bicolor Arinai                    Kiribati
-#&gt;  2     5650 Labroides bicolor Bayan                     Malay   
-#&gt;  3     5650 Labroides bicolor Bicolor cleaner wrasse    English 
-#&gt;  4     5650 Labroides bicolor Bicolor cleanerfish       English 
-#&gt;  5     5650 Labroides bicolor Bicolored cleaner wrasse  English 
-#&gt;  6     5650 Labroides bicolor Bicolour cleaner wrasse   English 
-#&gt;  7     5650 Labroides bicolor Bicoloured cleaner wrasse English 
-#&gt;  8     5650 Labroides bicolor bola i bulewa             Fijian  
-#&gt;  9     5650 Labroides bicolor Cleaner wrasse            English 
-#&gt; 10     5650 Labroides bicolor Dokter asli               Malay   
-#&gt; # ... with 21 more rows</div><div class='input'>
+#&gt;       [3m[90m&lt;int&gt;[39m[23m [3m[90m&lt;chr&gt;[39m[23m             [3m[90m&lt;chr&gt;[39m[23m                     [3m[90m&lt;chr&gt;[39m[23m   
+#&gt; [90m 1[39m     [4m5[24m650 Labroides bicolor Arinai                    Kiribati
+#&gt; [90m 2[39m     [4m5[24m650 Labroides bicolor Bayan                     Malay   
+#&gt; [90m 3[39m     [4m5[24m650 Labroides bicolor Bicolor cleaner wrasse    English 
+#&gt; [90m 4[39m     [4m5[24m650 Labroides bicolor Bicolor cleanerfish       English 
+#&gt; [90m 5[39m     [4m5[24m650 Labroides bicolor Bicolored cleaner wrasse  English 
+#&gt; [90m 6[39m     [4m5[24m650 Labroides bicolor Bicolour cleaner wrasse   English 
+#&gt; [90m 7[39m     [4m5[24m650 Labroides bicolor Bicoloured cleaner wrasse English 
+#&gt; [90m 8[39m     [4m5[24m650 Labroides bicolor bola i bulewa             Fijian  
+#&gt; [90m 9[39m     [4m5[24m650 Labroides bicolor Cleaner wrasse            English 
+#&gt; [90m10[39m     [4m5[24m650 Labroides bicolor Dokter asli               Malay   
+#&gt; [90m# ... with 21 more rows[39m</div><div class='input'>
 <span class='co'># subset by English language names</span>
 <span class='no'>fish</span> <span class='kw'>&lt;-</span> <span class='fu'>common_names</span>(<span class='st'>"Bolbometopon muricatum"</span>)</div><div class='output co'>#&gt; <span class='message'>Joining, by = "SpecCode"</span></div></pre>
   </div>

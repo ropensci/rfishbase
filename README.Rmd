@@ -1,10 +1,5 @@
 ---
-title: "rfishbase 3.0"
-author: "Carl Boettiger"
-date: "`r Sys.Date()`"
-output:
-  md_document:
-    variant: markdown_github
+output: github_document
 ---
 
 [![Build Status](https://travis-ci.org/ropensci/rfishbase.svg)](https://travis-ci.org/ropensci/rfishbase)
