@@ -4,8 +4,9 @@ library(arkdb)
 
 src <- src_mysql("fbapp", "mysql", password = "root")
 tables <- DBI::dbListTables(src$con)
-good_tables <- tables #[tables != "keys"]
-arkdb::ark(src, fs::dir_create("fb"), lines = 100000L, tables = good_tables)
+good_tables <- tables[tables != "keys"]
+arkdb::ark(src, fs::dir_create("fb"), lines = 100000L, 
+           tables = good_tables, overwrite = FALSE)
 
 ## Check we aren't losing stuff
 #tbl(src, "comnames") %>% summarise(n())
