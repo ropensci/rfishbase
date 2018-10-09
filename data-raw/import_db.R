@@ -1,28 +1,28 @@
-#remotes::install_github("cboettig/arkdb")
 library(readr)
-options(scipen=999) # mysql doesn't understand sci notation
 library(dplyr)
 library(arkdb)
 
-src <- src_mysql("fbapp", "mariadb", password = "password")
+src <- src_mysql("fbapp", "mysql", password = "root")
 tables <- DBI::dbListTables(src$con)
 good_tables <- tables[tables != "keys"]
-arkdb::ark(src, fs::dir_create("fb"), lines = 100000L, tables = good_tables)
+arkdb::ark(src, fs::dir_create("fb"), lines = 100000L, 
+           tables = good_tables, overwrite = FALSE)
 
 ## Check we aren't losing stuff
-tbl(src, "comnames") %>% summarise(n())
-readr::read_tsv("fb/comnames.tsv.bz2") %>% summarise(n())
+#tbl(src, "comnames") %>% summarise(n())
+#readr::read_tsv("fb/comnames.tsv.bz2") %>% summarise(n())
 
-tables <- readLines("data-raw/rfishbase_tables.txt")
+#tables <- readLines("data-raw/rfishbase_tables.txt")
 
 cache <- fs::dir_ls("fb", type = "file")
 
 # local <- paste0("fb/", tables, ".tsv.bz2")
 # files <- local[local %in% cache]
 
-lapply(cache, piggyback::pb_upload, 
+piggyback::pb_upload(cache,
        repo = "ropensci/rfishbase", 
-       tag = "data", overwrite = TRUE)
+       tag = "fb-18.10", 
+       overwrite = TRUE)
 
 
 
@@ -39,7 +39,8 @@ good_tables <- tables[!(tables %in% c("keys",
 arkdb::ark(src, fs::dir_create("slb"), lines = 100000L, tables = good_tables)
 
 cache <- fs::dir_ls("slb", type = "file")
-lapply(cache, piggyback::pb_upload, 
+
+piggyback::pb_upload(cache,
        repo = "ropensci/rfishbase", 
-       tag = "slb-17.07", overwrite = TRUE)
+       tag = "slb-18.10", overwrite = TRUE)
 
