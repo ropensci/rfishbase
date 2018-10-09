@@ -10,7 +10,7 @@ magrittr::`%>%`
 
 
 FISHBASE_API <- "fishbase" 
-FISHBASE_VERSION <- "17.07"
+FISHBASE_VERSION <- "18.10"
   
   # "https://fishbase.ropensci.org"
   # <- "https://fishbase.ropensci.org/sealifebase"
