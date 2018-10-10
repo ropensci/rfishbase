@@ -24,6 +24,8 @@
 synonyms <- function(species_list = NULL, server = NULL, 
                      ...){
   
+  if (is.null(server)) 
+    server <- getOption("FISHBASE_API", FISHBASE_API)
   if (!grepl("sealifebase", server)) {
     syn <- 
       fb_tbl("synonyms", server) %>%
