@@ -24,12 +24,22 @@
 synonyms <- function(species_list = NULL, server = NULL, 
                      ...){
   
-  syn <- 
-    fb_tbl("synonyms", server) %>%
-    mutate(synonym = paste(SynGenus, SynSpecies)) %>% 
-    select(synonym, Status, SpecCode, SynCode, 
-           CoL_ID, TSN, WoRMS_ID, ZooBank_ID,
-           TaxonLevel)
+  if (!grepl("sealifebase", server)) {
+    syn <- 
+      fb_tbl("synonyms", server) %>%
+      mutate(synonym = paste(SynGenus, SynSpecies)) %>% 
+      select(synonym, Status, SpecCode, SynCode, 
+             CoL_ID, TSN, WoRMS_ID, ZooBank_ID,
+             TaxonLevel)
+  } else {
+    syn <- 
+      fb_tbl("synonyms", server) %>%
+      mutate(synonym = paste(SynGenus, SynSpecies)) %>% 
+      select(synonym, Status, SpecCode, SynCode, 
+             CoL_ID, TSN, ZooBank_ID,
+             TaxonLevel)
+    
+ }
   
   if(is.null(species_list))
     return(syn)
