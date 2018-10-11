@@ -81,7 +81,7 @@ country_names <- function(server = NULL){
 #' @details currently this is ~ FAO areas table (minus "note" field)
 #' e.g. http://www.fishbase.us/Country/FaoAreaList.php?ID=5537
 distribution <- function(species_list=NULL, fields = NULL, 
-                         server = NULL,...){
+                         server = NULL, ...){
   faoareas(species_list, fields = fields, server = server)
 }
 
@@ -100,13 +100,19 @@ distribution <- function(species_list=NULL, fields = NULL,
 #' }
 #' @details currently this is ~ FAO areas table (minus "note" field)
 #' e.g. http://www.fishbase.us/Country/FaoAreaList.php?ID=5537
-faoareas <- function(species_list = NULL, fields = NULL, server = NULL,...){
+faoareas <- function(species_list = NULL, fields = NULL, server = NULL, ...){
   area <- fb_tbl("faoareas", server)
   ref <- faoarrefs(server)
   out <- left_join(area, ref, by = "AreaCode")
+  out <- select_fields(out, fields)
   species_subset(species_list, out, server)
 }
 
+select_fields <- function(df, fields = NULL){
+  if (is.null(fields)) return(df)
+  do.call(dplyr::select, 
+           c(list(df), as.list(c("SpecCode", fields))))
+}
 
 faoarrefs <- function(server = NULL){
   fb_tbl("faoarref", server)
