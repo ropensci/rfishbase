@@ -101,12 +101,9 @@ distribution <- function(species_list=NULL, fields = NULL,
 #' @details currently this is ~ FAO areas table (minus "note" field)
 #' e.g. http://www.fishbase.us/Country/FaoAreaList.php?ID=5537
 faoareas <- function(species_list = NULL, fields = NULL, server = NULL,...){
-
-  out <- left_join(fb_tbl("faoareas", server)[c('AreaCode', 
-                                                'SpecCode', 
-                                                'Status')],
-                   faoarrefs()[c('AreaCode', 'FAO')])
-  
+  area <- select(fb_tbl("faoareas", server))
+  ref <- faoarrefs(server)
+  out <- left_join(area, ref, by = "AreaCode")
   species_subset(species_list, out, server)
 }
 
