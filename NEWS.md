@@ -27,8 +27,27 @@ And constructed with the following guidelines:
 
 For more information on SemVer, please visit http://semver.org/.
 
-v2.2.0 (upcoming release)
+v 3.0
+------
+
+v 3.0 accesses a new static API for `fishbase` with in-memory
+memoization that significantly improves performance, particularly
+for large queries.  
+
+- Functions no longer have default limits on returns, so pagination
+  is never involved -- all functions now return full set of available
+  results.  
+- Almost all functions can be called without arguments (e.g. without
+  a species list) to return the complete record of the requested table.
+- Various minor issues in some functions have been resolved, see 
+  <https://github.com/ropensci/rfishbase/issues/> for details.
+
+
+v2.2.0 
 -------
+
+(not released to CRAN, rolled into 3.0 release)
+
 * bugfix for `validate_names()` ([#121](https://github.com/ropensci/rfishbase/issues/121))
 * bugfix for `faoareas()` ([#123](https://github.com/ropensci/rfishbase/issues/123))
 * add `genetics()` endpoint ([#122](https://github.com/ropensci/rfishbase/issues/122))
