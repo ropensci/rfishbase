@@ -9,8 +9,13 @@ Description: A programmatic interface to <http://www.fishbase.org>, re-written
 Version: 2.99
 Encoding: UTF-8
 License: CC0
-Authors@R: c(person("Carl", "Boettiger", role = c("cre", "aut"), email = "cboettig@ropensci.org"),
-             person("Scott", "Chamberlain", role = "aut", email = "scott@ropensci.org"),
+Authors@R: c(person("Carl", "Boettiger", 
+                    role = c("cre", "aut"), 
+                    email = "cboettig@gmail.com", ,
+                   comment = c(ORCID = "0000-0002-1642-628X")),
+             person("Scott", "Chamberlain", role = "aut", 
+                    email = "scott@ropensci.org", 
+                    comment = c(ORCID="0000-0003-1444-9135")),
              person("Duncan", "Temple Lang", role="aut"), 
              person("Peter", "Wainwright", role="aut"))
 URL: https://github.com/ropensci/rfishbase
