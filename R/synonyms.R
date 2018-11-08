@@ -71,7 +71,7 @@ globalVariables(c("Status", "SpecCode", "SynCode",
 validate_names <- function(species_list, server = NULL,...){
   
   synonyms(species_list, server = server) %>% 
-    dplyr::filter(Status == "accepted name" || Status == "synonym") %>% 
+    dplyr::filter(Status == "accepted name" | Status == "synonym") %>% 
     dplyr::pull(Species)
                        
     
