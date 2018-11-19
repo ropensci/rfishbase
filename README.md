@@ -3,6 +3,7 @@
 Status](https://travis-ci.org/ropensci/rfishbase.svg)](https://travis-ci.org/ropensci/rfishbase)
 [![AppVeyor build
 status](https://ci.appveyor.com/api/projects/status/github/ropensci/rfishbase?branch=master&svg=true)](https://ci.appveyor.com/project/ropensci/rfishbase)
+[![cran checks](https://cranchecks.info/badges/worst/rfishbase)](https://cranchecks.info/pkgs/rfishbase)
 [![Coverage
 Status](https://coveralls.io/repos/ropensci/rfishbase/badge.svg)](https://coveralls.io/r/ropensci/rfishbase?branch=master)
 [![Onboarding](https://badges.ropensci.org/137_status.svg)](https://github.com/ropensci/onboarding/issues/137)
