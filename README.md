@@ -1,9 +1,12 @@
 
+# rfishbase <img src="man/figures/logo.svg" align="right" alt="" width="120" />
+
 [![Build
 Status](https://travis-ci.org/ropensci/rfishbase.svg)](https://travis-ci.org/ropensci/rfishbase)
 [![AppVeyor build
 status](https://ci.appveyor.com/api/projects/status/github/ropensci/rfishbase?branch=master&svg=true)](https://ci.appveyor.com/project/ropensci/rfishbase)
-[![cran checks](https://cranchecks.info/badges/worst/rfishbase)](https://cranchecks.info/pkgs/rfishbase)
+[![cran
+checks](https://cranchecks.info/badges/worst/rfishbase)](https://cranchecks.info/pkgs/rfishbase)
 [![Coverage
 Status](https://coveralls.io/repos/ropensci/rfishbase/badge.svg)](https://coveralls.io/r/ropensci/rfishbase?branch=master)
 [![Onboarding](https://badges.ropensci.org/137_status.svg)](https://github.com/ropensci/onboarding/issues/137)
@@ -142,20 +145,20 @@ trout <- common_to_sci("trout")
 trout
 ```
 
-    # A tibble: 118 x 4
+    # A tibble: 279 x 4
        Species                   ComName              Language SpecCode
-       <chr>                     <chr>                <chr>       <int>
+       <chr>                     <chr>                <chr>       <dbl>
      1 Salmo obtusirostris       Adriatic trout       English      6210
      2 Schizothorax richardsonii Alawan snowtrout     English      8705
      3 Schizopyge niger          Alghad snowtrout     English     24454
      4 Salvelinus fontinalis     American brook trout English       246
      5 Salmo trutta              Amu-Darya trout      English       238
-     6 Salmo kottelati           Antalya trout        English     67602
-     7 Oncorhynchus apache       Apache Trout         English      2687
-     8 Oncorhynchus apache       Apache trout         English      2687
-     9 Plectropomus areolatus    Apricot trout        English      6082
-    10 Salmo trutta              Aral Sea Trout       English       238
-    # ... with 108 more rows
+     6 Oncorhynchus apache       Apache Trout         English      2687
+     7 Oncorhynchus apache       Apache trout         English      2687
+     8 Plectropomus areolatus    Apricot trout        English      6082
+     9 Salmo trutta              Aral Sea Trout       English       238
+    10 Salmo trutta              Aral trout           English       238
+    # ... with 269 more rows
 
 Note that there is no need to validate names coming from `common_to_sci`
 or `species_list`, as these will always return valid names.
@@ -178,47 +181,47 @@ columns are variables (fields).
 species(trout$Species)
 ```
 
-    # A tibble: 118 x 98
+    # A tibble: 279 x 98
        SpecCode Species SpeciesRefNo Author FBname PicPreferredName
-          <int> <chr>          <int> <chr>  <chr>  <chr>           
+          <dbl> <chr>          <dbl> <chr>  <chr>  <chr>           
      1     6210 Salmo …        59043 (Heck… Adria… Saobt_u0.jpg    
      2     8705 Schizo…         4832 (Gray… Snowt… Scric_u1.jpg    
      3    24454 Schizo…         4832 (Heck… Algha… <NA>            
-     4      246 Salvel…        86798 (Mitc… Brook… Safon_u4.jpg    
+     4      246 Salvel…         5723 (Mitc… Brook… Safon_u4.jpg    
      5      238 Salmo …         4779 Linna… Sea t… Satru_u2.jpg    
-     6    67602 Salmo …        99540 Turan… Antal… Sakot_m0.jpg    
+     6     2687 Oncorh…         5723 (Mill… Apach… Onapa_u0.jpg    
      7     2687 Oncorh…         5723 (Mill… Apach… Onapa_u0.jpg    
-     8     2687 Oncorh…         5723 (Mill… Apach… Onapa_u0.jpg    
-     9     6082 Plectr…         5222 (R<fc… Squar… Plare_u4.jpg    
+     8     6082 Plectr…         5222 (R<fc… Squar… Plare_u4.jpg    
+     9      238 Salmo …         4779 Linna… Sea t… Satru_u2.jpg    
     10      238 Salmo …         4779 Linna… Sea t… Satru_u2.jpg    
-    # ... with 108 more rows, and 92 more variables: PicPreferredNameM <chr>,
-    #   PicPreferredNameF <chr>, PicPreferredNameJ <chr>, FamCode <int>,
-    #   Subfamily <chr>, GenCode <int>, SubGenCode <int>, BodyShapeI <chr>,
-    #   Source <chr>, AuthorRef <chr>, Remark <chr>, TaxIssue <int>,
-    #   Fresh <int>, Brack <int>, Saltwater <int>, DemersPelag <chr>,
-    #   AnaCat <chr>, MigratRef <int>, DepthRangeShallow <int>,
-    #   DepthRangeDeep <int>, DepthRangeRef <int>, DepthRangeComShallow <int>,
-    #   DepthRangeComDeep <int>, DepthComRef <int>, LongevityWild <int>,
-    #   LongevityWildRef <int>, LongevityCaptive <dbl>, LongevityCapRef <int>,
+    # ... with 269 more rows, and 92 more variables: PicPreferredNameM <chr>,
+    #   PicPreferredNameF <chr>, PicPreferredNameJ <chr>, FamCode <dbl>,
+    #   Subfamily <chr>, GenCode <dbl>, SubGenCode <dbl>, BodyShapeI <chr>,
+    #   Source <chr>, AuthorRef <lgl>, Remark <chr>, TaxIssue <dbl>,
+    #   Fresh <dbl>, Brack <dbl>, Saltwater <dbl>, DemersPelag <chr>,
+    #   AnaCat <chr>, MigratRef <dbl>, DepthRangeShallow <dbl>,
+    #   DepthRangeDeep <dbl>, DepthRangeRef <dbl>, DepthRangeComShallow <dbl>,
+    #   DepthRangeComDeep <dbl>, DepthComRef <dbl>, LongevityWild <dbl>,
+    #   LongevityWildRef <dbl>, LongevityCaptive <dbl>, LongevityCapRef <dbl>,
     #   Vulnerability <dbl>, Length <dbl>, LTypeMaxM <chr>,
-    #   LengthFemale <dbl>, LTypeMaxF <chr>, MaxLengthRef <int>,
-    #   CommonLength <dbl>, LTypeComM <chr>, CommonLengthF <int>,
-    #   LTypeComF <chr>, CommonLengthRef <int>, Weight <dbl>,
-    #   WeightFemale <dbl>, MaxWeightRef <int>, Pic <chr>,
-    #   PictureFemale <chr>, LarvaPic <chr>, EggPic <chr>,
-    #   ImportanceRef <int>, Importance <chr>, PriceCateg <chr>,
+    #   LengthFemale <dbl>, LTypeMaxF <chr>, MaxLengthRef <dbl>,
+    #   CommonLength <dbl>, LTypeComM <chr>, CommonLengthF <dbl>,
+    #   LTypeComF <chr>, CommonLengthRef <dbl>, Weight <dbl>,
+    #   WeightFemale <dbl>, MaxWeightRef <dbl>, Pic <chr>,
+    #   PictureFemale <chr>, LarvaPic <chr>, EggPic <lgl>,
+    #   ImportanceRef <dbl>, Importance <chr>, PriceCateg <chr>,
     #   PriceReliability <chr>, Remarks7 <chr>, LandingStatistics <chr>,
-    #   Landings <chr>, MainCatchingMethod <chr>, II <chr>, MSeines <int>,
-    #   MGillnets <int>, MCastnets <int>, MTraps <int>, MSpears <int>,
-    #   MTrawls <int>, MDredges <int>, MLiftnets <int>, MHooksLines <int>,
-    #   MOther <int>, UsedforAquaculture <chr>, LifeCycle <chr>,
-    #   AquacultureRef <int>, UsedasBait <chr>, BaitRef <int>, Aquarium <chr>,
-    #   AquariumFishII <chr>, AquariumRef <int>, GameFish <int>,
-    #   GameRef <int>, Dangerous <chr>, DangerousRef <int>,
-    #   Electrogenic <chr>, ElectroRef <int>, Complete <chr>,
-    #   GoogleImage <int>, Comments <chr>, Profile <chr>, PD50 <dbl>,
-    #   Emblematic <int>, Entered <int>, DateEntered <dttm>, Modified <int>,
-    #   DateModified <dttm>, Expert <int>, DateChecked <dttm>, TS <chr>
+    #   Landings <chr>, MainCatchingMethod <chr>, II <chr>, MSeines <dbl>,
+    #   MGillnets <dbl>, MCastnets <dbl>, MTraps <dbl>, MSpears <dbl>,
+    #   MTrawls <dbl>, MDredges <dbl>, MLiftnets <dbl>, MHooksLines <dbl>,
+    #   MOther <dbl>, UsedforAquaculture <chr>, LifeCycle <lgl>,
+    #   AquacultureRef <dbl>, UsedasBait <chr>, BaitRef <dbl>, Aquarium <chr>,
+    #   AquariumFishII <chr>, AquariumRef <dbl>, GameFish <dbl>,
+    #   GameRef <dbl>, Dangerous <chr>, DangerousRef <dbl>,
+    #   Electrogenic <chr>, ElectroRef <dbl>, Complete <lgl>,
+    #   GoogleImage <dbl>, Comments <chr>, Profile <lgl>, PD50 <dbl>,
+    #   Emblematic <dbl>, Entered <dbl>, DateEntered <dttm>, Modified <dbl>,
+    #   DateModified <dttm>, Expert <dbl>, DateChecked <dttm>, TS <lgl>
 
 Most tables contain many fields. To avoid overly cluttering the screen,
 `rfishbase` displays tables as “tibbles” from the `dplyr` package. These
@@ -236,7 +239,7 @@ dat <- species(trout$Species, fields=c("Species", "PriceCateg", "Vulnerability")
 dat
 ```
 
-    # A tibble: 118 x 3
+    # A tibble: 279 x 3
        Species                   PriceCateg Vulnerability
        <chr>                     <chr>              <dbl>
      1 Salmo obtusirostris       very high           47.0
@@ -244,12 +247,12 @@ dat
      3 Schizopyge niger          unknown             46.8
      4 Salvelinus fontinalis     very high           43.4
      5 Salmo trutta              very high           60.0
-     6 Salmo kottelati           <NA>                33.7
+     6 Oncorhynchus apache       very high           53.8
      7 Oncorhynchus apache       very high           53.8
-     8 Oncorhynchus apache       very high           53.8
-     9 Plectropomus areolatus    very high           57.0
+     8 Plectropomus areolatus    very high           57.0
+     9 Salmo trutta              very high           60.0
     10 Salmo trutta              very high           60.0
-    # ... with 108 more rows
+    # ... with 269 more rows
 
 Alternatively, just subset the table using the standard column selection
 in base R (`[[`) or `dplyr::select`.
@@ -290,20 +293,20 @@ can then request this data from the stocks table:
 stocks(trout$Species, fields=c("Species", "Resilience", "StockDefs"))
 ```
 
-    # A tibble: 160 x 3
-       Species           Resilience StockDefs                                 
-       <chr>             <chr>      <chr>                                     
-     1 Salmo obtusirost… Medium     Europe:  Adriatic basin in Krka, Jardo, V…
-     2 Schizothorax ric… Medium     Asia:  Himalayan region of India, Sikkim …
-     3 Schizopyge niger  Medium     Asia:  Kashmir Valley in India and Azad K…
-     4 Salvelinus fonti… Medium     North America:  native to most of eastern…
-     5 Salmo trutta      High       Europe and Asia:  Atlantic, North, White …
-     6 Salmo trutta      <NA>       <i>Salmo trutta aralensis</i>:  Asia:  en…
-     7 Salmo trutta      Medium     <i>Salmo trutta fario</i>:  Northeast  At…
-     8 Salmo trutta      Low        "<i>Salmo trutta lacustris</i>\t:  Europe…
-     9 Salmo trutta      <NA>       "<i>Salmo trutta oxianus</i>\t:  Asia:  A…
-    10 Salmo trutta      <NA>       <i>Salmo trutta aralensis</i>:  Asia:  Ar…
-    # ... with 150 more rows
+    # A tibble: 380 x 3
+       Species           Resilience StockDefs                                  
+       <chr>             <chr>      <chr>                                      
+     1 Salmo obtusirost… Medium     Europe:  Adriatic basin in Krka, Jardo, Vr…
+     2 Schizothorax ric… Medium     Asia:  Himalayan region of India, Sikkim a…
+     3 Schizopyge niger  Medium     Asia:  Kashmir Valley in India and Azad Ka…
+     4 Salvelinus fonti… Medium     North America:  most of eastern Canada fro…
+     5 Salmo trutta      High       Europe and Asia:  Atlantic, North, White a…
+     6 Salmo trutta      <NA>       <i>Salmo trutta aralensis</i>:  Asia:  end…
+     7 Salmo trutta      Medium     <i>Salmo trutta fario</i>:  Northeast  Atl…
+     8 Salmo trutta      Low        "<i>Salmo trutta lacustris</i>\t:  Europe:…
+     9 Salmo trutta      <NA>       "<i>Salmo trutta oxianus</i>\t:  Asia:  Am…
+    10 Salmo trutta      <NA>       <i>Salmo trutta aralensis</i>:  Asia:  Ara…
+    # ... with 370 more rows
 
 ## Version stability
 
@@ -344,18 +347,18 @@ sealife %>% filter(Class == "Gastropoda")
 ```
 
     # A tibble: 19,473 x 9
-       SpecCode Species    Genus  Subfamily Family  Order Class Phylum Kingdom
-          <int> <chr>      <chr>  <chr>     <chr>   <chr> <chr> <chr>  <chr>  
-     1       57 Salinator… Salin… <NA>      Amphib… Pulm… Gast… Mollu… Animal…
-     2       58 Tasmaphen… Tasma… <NA>      Rhytid… Pulm… Gast… Mollu… Animal…
-     3       59 Tasmaphen… Tasma… <NA>      Rhytid… Pulm… Gast… Mollu… Animal…
-     4       60 Torresiro… Torre… <NA>      Rhytid… Pulm… Gast… Mollu… Animal…
-     5       61 Victaphan… Victa… <NA>      Rhytid… Pulm… Gast… Mollu… Animal…
-     6       62 Victaphan… Victa… <NA>      Rhytid… Pulm… Gast… Mollu… Animal…
-     7       63 Victaphan… Victa… <NA>      Rhytid… Pulm… Gast… Mollu… Animal…
-     8       64 Victaphan… Victa… <NA>      Rhytid… Pulm… Gast… Mollu… Animal…
-     9       65 Anoglypta… Anogl… <NA>      Caryod… Pulm… Gast… Mollu… Animal…
-    10       66 Brazieres… Brazi… <NA>      Caryod… Pulm… Gast… Mollu… Animal…
+       SpecCode Species    Genus  Subfamily Family  Order  Class Phylum Kingdom
+          <dbl> <chr>      <chr>  <chr>     <chr>   <chr>  <chr> <chr>  <chr>  
+     1       57 Salinator… Salin… <NA>      Amphib… Pulmo… Gast… Mollu… Animal…
+     2       58 Tasmaphen… Tasma… <NA>      Rhytid… Pulmo… Gast… Mollu… Animal…
+     3       59 Tasmaphen… Tasma… <NA>      Rhytid… Pulmo… Gast… Mollu… Animal…
+     4       60 Torresiro… Torre… <NA>      Rhytid… Pulmo… Gast… Mollu… Animal…
+     5       61 Victaphan… Victa… <NA>      Rhytid… Pulmo… Gast… Mollu… Animal…
+     6       62 Victaphan… Victa… <NA>      Rhytid… Pulmo… Gast… Mollu… Animal…
+     7       63 Victaphan… Victa… <NA>      Rhytid… Pulmo… Gast… Mollu… Animal…
+     8       64 Victaphan… Victa… <NA>      Rhytid… Pulmo… Gast… Mollu… Animal…
+     9       65 Anoglypta… Anogl… <NA>      Caryod… Pulmo… Gast… Mollu… Animal…
+    10       66 Brazieres… Brazi… <NA>      Caryod… Pulmo… Gast… Mollu… Animal…
     # ... with 19,463 more rows
 
 All other tables can also take an argument to `server`:
@@ -366,7 +369,7 @@ species(server="sealifebase")
 
     # A tibble: 119,074 x 104
        SpecCode Species SpeciesRefNo Author AuthorRef FBname PicPreferredName
-          <int> <chr>          <int> <chr>      <int> <chr>  <chr>           
+          <dbl> <chr>          <dbl> <chr>      <dbl> <chr>  <chr>           
      1        1 Phoron…            1 Wrigh…        NA <NA>   <NA>            
      2        2 Phoron…          997 Wrigh…        NA <NA>   <NA>            
      3        3 Phoron…            1 Oka, …        NA <NA>   <NA>            
@@ -379,35 +382,35 @@ species(server="sealifebase")
     10       10 Phoron…            1 Hilto…        NA Calif… <NA>            
     # ... with 119,064 more rows, and 97 more variables:
     #   PicPreferredNameM <chr>, PicPreferredNameF <chr>,
-    #   PicPreferredNameJ <chr>, FamCode <int>, Subfamily <chr>, Source <chr>,
-    #   Remark <chr>, TaxIssue <int>, Fresh <int>, Brack <int>,
-    #   Saltwater <int>, Land <int>, DemersPelag <chr>, AnaCat <chr>,
-    #   MigratRef <int>, DepthRangeShallow <int>, DepthRangeDeep <int>,
-    #   DepthRangeRef <int>, DepthRangeComShallow <int>,
-    #   DepthRangeComDeep <int>, DepthComRef <int>, LongevityWild <int>,
-    #   LongevityWildRef <int>, LongevityCaptive <chr>, LongevityCapRef <chr>,
+    #   PicPreferredNameJ <chr>, FamCode <dbl>, Subfamily <chr>, Source <chr>,
+    #   Remark <chr>, TaxIssue <dbl>, Fresh <dbl>, Brack <dbl>,
+    #   Saltwater <dbl>, Land <dbl>, DemersPelag <chr>, AnaCat <chr>,
+    #   MigratRef <dbl>, DepthRangeShallow <dbl>, DepthRangeDeep <dbl>,
+    #   DepthRangeRef <dbl>, DepthRangeComShallow <dbl>,
+    #   DepthRangeComDeep <dbl>, DepthComRef <dbl>, LongevityWild <dbl>,
+    #   LongevityWildRef <dbl>, LongevityCaptive <lgl>, LongevityCapRef <lgl>,
     #   Vulnerability <dbl>, Length <dbl>, LTypeMaxM <chr>,
-    #   LengthFemale <dbl>, LTypeMaxF <chr>, MaxLengthRef <int>,
-    #   CommonLength <dbl>, LTypeComM <chr>, CommonLengthF <chr>,
-    #   LTypeComF <chr>, CommonLengthRef <int>, Weight <dbl>,
-    #   WeightFemale <chr>, MaxWeightRef <int>, Pic <chr>,
-    #   PictureFemale <chr>, LarvaPic <chr>, EggPic <chr>,
-    #   ImportanceRef <int>, Importance <chr>, Remarks7 <chr>,
-    #   PriceCateg <chr>, PriceReliability <chr>, LandingStatistics <chr>,
-    #   Landings <chr>, MainCatchingMethod <chr>, II <chr>, MSeines <int>,
-    #   MGillnets <int>, MCastnets <int>, MTraps <int>, MSpears <int>,
-    #   MTrawls <int>, MDredges <int>, MLiftnets <int>, MHooksLines <int>,
-    #   MOther <int>, UsedforAquaculture <chr>, LifeCycle <chr>,
-    #   AquacultureRef <chr>, UsedasBait <chr>, BaitRef <chr>, Aquarium <chr>,
-    #   AquariumFishII <chr>, AquariumRef <chr>, GameFish <int>,
-    #   GameRef <chr>, Dangerous <chr>, DangerousRef <int>,
-    #   Electrogenic <chr>, ElectroRef <chr>, Complete <chr>, ASFA <chr>,
-    #   GoogleImage <int>, Entered <int>, DateEntered <dttm>, Modified <int>,
-    #   DateModified <dttm>, Expert <int>, DateChecked <dttm>, Synopsis <chr>,
-    #   DateSynopsis <chr>, Flag <chr>, Comments <chr>,
-    #   VancouverAquarium <int>, Profile <chr>, Sp2000_NameCode <chr>,
-    #   Sp2000_HierarchyCode <chr>, Sp2000_AuthorRefNumber <chr>,
-    #   E_Append <int>, E_DateAppend <date>, TS <dttm>
+    #   LengthFemale <dbl>, LTypeMaxF <chr>, MaxLengthRef <dbl>,
+    #   CommonLength <dbl>, LTypeComM <chr>, CommonLengthF <lgl>,
+    #   LTypeComF <lgl>, CommonLengthRef <dbl>, Weight <dbl>,
+    #   WeightFemale <lgl>, MaxWeightRef <dbl>, Pic <lgl>,
+    #   PictureFemale <lgl>, LarvaPic <lgl>, EggPic <lgl>,
+    #   ImportanceRef <dbl>, Importance <chr>, Remarks7 <chr>,
+    #   PriceCateg <chr>, PriceReliability <chr>, LandingStatistics <lgl>,
+    #   Landings <lgl>, MainCatchingMethod <chr>, II <chr>, MSeines <dbl>,
+    #   MGillnets <dbl>, MCastnets <dbl>, MTraps <dbl>, MSpears <dbl>,
+    #   MTrawls <dbl>, MDredges <dbl>, MLiftnets <dbl>, MHooksLines <dbl>,
+    #   MOther <dbl>, UsedforAquaculture <chr>, LifeCycle <lgl>,
+    #   AquacultureRef <lgl>, UsedasBait <chr>, BaitRef <lgl>, Aquarium <chr>,
+    #   AquariumFishII <lgl>, AquariumRef <lgl>, GameFish <dbl>,
+    #   GameRef <lgl>, Dangerous <chr>, DangerousRef <dbl>,
+    #   Electrogenic <chr>, ElectroRef <lgl>, Complete <lgl>, ASFA <lgl>,
+    #   GoogleImage <dbl>, Entered <dbl>, DateEntered <dttm>, Modified <dbl>,
+    #   DateModified <dttm>, Expert <dbl>, DateChecked <dttm>, Synopsis <lgl>,
+    #   DateSynopsis <lgl>, Flag <lgl>, Comments <chr>,
+    #   VancouverAquarium <dbl>, Profile <lgl>, Sp2000_NameCode <chr>,
+    #   Sp2000_HierarchyCode <chr>, Sp2000_AuthorRefNumber <lgl>,
+    #   E_Append <dbl>, E_DateAppend <date>, TS <dttm>
 
 CAUTION: if switching between `fishbase` and `sealifebase` in a single R
 session, we strongly advise you always set `server` explicitly in your

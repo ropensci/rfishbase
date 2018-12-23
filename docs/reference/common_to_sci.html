@@ -8,6 +8,8 @@
 
 <title>common_to_sci — common_to_sci • rfishbase</title>
 
+<link rel="shortcut icon" type="image/x-icon" href="../favicon.ico">
+
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
@@ -38,7 +40,7 @@
 
 
 <!-- mathjax -->
-<script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
 <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -62,7 +64,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rfishbase</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.99</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.0.0</span>
       </span>
     </div>
 
@@ -165,26 +167,27 @@ the resulting strings of matching scientific names are simply concatenated.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>common_to_sci</span>(<span class='fu'>c</span>(<span class='st'>"Bicolor cleaner wrasse"</span>, <span class='st'>"humphead parrotfish"</span>), <span class='kw'>Language</span><span class='kw'>=</span><span class='st'>"English"</span>)</div><div class='output co'>#&gt; [90m# A tibble: 4 x 4[39m
-#&gt;   Species                ComName                   Language SpecCode
-#&gt;   [3m[90m&lt;chr&gt;[39m[23m                  [3m[90m&lt;chr&gt;[39m[23m                     [3m[90m&lt;chr&gt;[39m[23m       [3m[90m&lt;int&gt;[39m[23m
-#&gt; [90m1[39m Labroides bicolor      Bicolor cleaner wrasse    English      [4m5[24m650
-#&gt; [90m2[39m Chlorurus cyanescens   Blue humphead parrotfish  English      [4m7[24m909
-#&gt; [90m3[39m Bolbometopon muricatum Green humphead parrotfish English      [4m5[24m537
-#&gt; [90m4[39m Bolbometopon muricatum Humphead parrotfish       English      [4m5[24m537</div><div class='input'><span class='fu'>common_to_sci</span>(<span class='fu'>c</span>(<span class='st'>"Coho Salmon"</span>, <span class='st'>"trout"</span>))</div><div class='output co'>#&gt; [90m# A tibble: 119 x 4[39m
+    <pre class="examples"><div class='input'><span class='fu'>common_to_sci</span>(<span class='fu'>c</span>(<span class='st'>"Bicolor cleaner wrasse"</span>, <span class='st'>"humphead parrotfish"</span>), <span class='kw'>Language</span><span class='kw'>=</span><span class='st'>"English"</span>)</div><div class='output co'>#&gt; [90m# A tibble: 5 x 4[39m
+#&gt;   Species                ComName                     Language SpecCode
+#&gt;   [3m[90m&lt;chr&gt;[39m[23m                  [3m[90m&lt;chr&gt;[39m[23m                       [3m[90m&lt;chr&gt;[39m[23m       [3m[90m&lt;dbl&gt;[39m[23m
+#&gt; [90m1[39m Labroides bicolor      Bicolor cleaner wrasse      English      [4m5[24m650
+#&gt; [90m2[39m Chlorurus cyanescens   Blue humphead parrotfish    English      [4m7[24m909
+#&gt; [90m3[39m Bolbometopon muricatum Green humphead parrotfish   English      [4m5[24m537
+#&gt; [90m4[39m Bolbometopon muricatum Humphead parrotfish         English      [4m5[24m537
+#&gt; [90m5[39m Chlorurus oedema       Uniform humphead parrotfish English      [4m8[24m394</div><div class='input'><span class='fu'>common_to_sci</span>(<span class='fu'>c</span>(<span class='st'>"Coho Salmon"</span>, <span class='st'>"trout"</span>))</div><div class='output co'>#&gt; [90m# A tibble: 280 x 4[39m
 #&gt;    Species                   ComName              Language SpecCode
-#&gt;    [3m[90m&lt;chr&gt;[39m[23m                     [3m[90m&lt;chr&gt;[39m[23m                [3m[90m&lt;chr&gt;[39m[23m       [3m[90m&lt;int&gt;[39m[23m
+#&gt;    [3m[90m&lt;chr&gt;[39m[23m                     [3m[90m&lt;chr&gt;[39m[23m                [3m[90m&lt;chr&gt;[39m[23m       [3m[90m&lt;dbl&gt;[39m[23m
 #&gt; [90m 1[39m Oncorhynchus kisutch      Coho salmon          English       245
 #&gt; [90m 2[39m Salmo obtusirostris       Adriatic trout       English      [4m6[24m210
 #&gt; [90m 3[39m Schizothorax richardsonii Alawan snowtrout     English      [4m8[24m705
 #&gt; [90m 4[39m Schizopyge niger          Alghad snowtrout     English     [4m2[24m[4m4[24m454
 #&gt; [90m 5[39m Salvelinus fontinalis     American brook trout English       246
 #&gt; [90m 6[39m Salmo trutta              Amu-Darya trout      English       238
-#&gt; [90m 7[39m Salmo kottelati           Antalya trout        English     [4m6[24m[4m7[24m602
-#&gt; [90m 8[39m Oncorhynchus apache       Apache Trout         English      [4m2[24m687
-#&gt; [90m 9[39m Oncorhynchus apache       Apache trout         English      [4m2[24m687
-#&gt; [90m10[39m Plectropomus areolatus    Apricot trout        English      [4m6[24m082
-#&gt; [90m# ... with 109 more rows[39m</div></pre>
+#&gt; [90m 7[39m Oncorhynchus apache       Apache Trout         English      [4m2[24m687
+#&gt; [90m 8[39m Oncorhynchus apache       Apache trout         English      [4m2[24m687
+#&gt; [90m 9[39m Plectropomus areolatus    Apricot trout        English      [4m6[24m082
+#&gt; [90m10[39m Salmo trutta              Aral Sea Trout       English       238
+#&gt; [90m# ... with 270 more rows[39m</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
