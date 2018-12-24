@@ -20,4 +20,5 @@ circle.yml
 ^\.pbattributes$
 ^\.manifest\.json$
 ^fb$
+^pkgdown$
 
