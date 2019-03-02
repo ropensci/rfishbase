@@ -3,12 +3,12 @@
 
 [![Build
 Status](https://travis-ci.org/ropensci/rfishbase.svg)](https://travis-ci.org/ropensci/rfishbase)
-[![AppVeyor build
-status](https://ci.appveyor.com/api/projects/status/github/ropensci/rfishbase?branch=master&svg=true)](https://ci.appveyor.com/project/ropensci/rfishbase)
+[![Build
+status](https://ci.appveyor.com/api/projects/status/decpqq5s57b7b0t6/branch/master?svg=true)](https://ci.appveyor.com/project/cboettig/rfishbase/branch/master)
 [![cran
 checks](https://cranchecks.info/badges/worst/rfishbase)](https://cranchecks.info/pkgs/rfishbase)
 [![Coverage
-Status](https://coveralls.io/repos/ropensci/rfishbase/badge.svg)](https://coveralls.io/r/ropensci/rfishbase?branch=master)
+status](https://codecov.io/gh/ropensci/rfishbase/branch/master/graph/badge.svg)](https://codecov.io/github/ropensci/rfishbase?branch=master)
 [![Onboarding](https://badges.ropensci.org/137_status.svg)](https://github.com/ropensci/onboarding/issues/137)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/rfishbase)](https://cran.r-project.org/package=rfishbase)
@@ -158,7 +158,7 @@ trout
      8 Plectropomus areolatus    Apricot trout        English      6082
      9 Salmo trutta              Aral Sea Trout       English       238
     10 Salmo trutta              Aral trout           English       238
-    # ... with 269 more rows
+    # … with 269 more rows
 
 Note that there is no need to validate names coming from `common_to_sci`
 or `species_list`, as these will always return valid names.
@@ -194,7 +194,7 @@ species(trout$Species)
      8     6082 Plectr…         5222 (R<fc… Squar… Plare_u4.jpg    
      9      238 Salmo …         4779 Linna… Sea t… Satru_u2.jpg    
     10      238 Salmo …         4779 Linna… Sea t… Satru_u2.jpg    
-    # ... with 269 more rows, and 92 more variables: PicPreferredNameM <chr>,
+    # … with 269 more rows, and 92 more variables: PicPreferredNameM <chr>,
     #   PicPreferredNameF <chr>, PicPreferredNameJ <chr>, FamCode <dbl>,
     #   Subfamily <chr>, GenCode <dbl>, SubGenCode <dbl>, BodyShapeI <chr>,
     #   Source <chr>, AuthorRef <lgl>, Remark <chr>, TaxIssue <dbl>,
@@ -252,7 +252,7 @@ dat
      8 Plectropomus areolatus    very high           57.0
      9 Salmo trutta              very high           60.0
     10 Salmo trutta              very high           60.0
-    # ... with 269 more rows
+    # … with 269 more rows
 
 Alternatively, just subset the table using the standard column selection
 in base R (`[[`) or `dplyr::select`.
@@ -306,7 +306,7 @@ stocks(trout$Species, fields=c("Species", "Resilience", "StockDefs"))
      8 Salmo trutta      Low        "<i>Salmo trutta lacustris</i>\t:  Europe:…
      9 Salmo trutta      <NA>       "<i>Salmo trutta oxianus</i>\t:  Asia:  Am…
     10 Salmo trutta      <NA>       <i>Salmo trutta aralensis</i>:  Asia:  Ara…
-    # ... with 370 more rows
+    # … with 370 more rows
 
 ## Version stability
 
@@ -359,7 +359,7 @@ sealife %>% filter(Class == "Gastropoda")
      8       64 Victaphan… Victa… <NA>      Rhytid… Pulmo… Gast… Mollu… Animal…
      9       65 Anoglypta… Anogl… <NA>      Caryod… Pulmo… Gast… Mollu… Animal…
     10       66 Brazieres… Brazi… <NA>      Caryod… Pulmo… Gast… Mollu… Animal…
-    # ... with 19,463 more rows
+    # … with 19,463 more rows
 
 All other tables can also take an argument to `server`:
 
@@ -380,7 +380,7 @@ species(server="sealifebase")
      8        8 Phoron…            1 Gilch…        NA <NA>   <NA>            
      9        9 Phoron…            1 Pixel…        NA <NA>   <NA>            
     10       10 Phoron…            1 Hilto…        NA Calif… <NA>            
-    # ... with 119,064 more rows, and 97 more variables:
+    # … with 119,064 more rows, and 97 more variables:
     #   PicPreferredNameM <chr>, PicPreferredNameF <chr>,
     #   PicPreferredNameJ <chr>, FamCode <dbl>, Subfamily <chr>, Source <chr>,
     #   Remark <chr>, TaxIssue <dbl>, Fresh <dbl>, Brack <dbl>,
