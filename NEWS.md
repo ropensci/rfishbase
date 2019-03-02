@@ -27,10 +27,16 @@ And constructed with the following guidelines:
 
 For more information on SemVer, please visit http://semver.org/.
 
-v 3.0
+v 3.0.1
+--------
+
+- patch for upcoming R release with staged installs
+- patch common_names to allow ommitting species_list for full table (#156)
+
+v 3.0.0
 ------
 
-v 3.0 accesses a new static API for `fishbase` with in-memory
+v 3.0.0 accesses a new static API for `fishbase` with in-memory
 memoization that significantly improves performance, particularly
 for large queries.  
 

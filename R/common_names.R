@@ -65,12 +65,11 @@ globalVariables(c("ComName", "Language"))
 #' }
 #' @export common_names sci_to_common
 #' @aliases common_names sci_to_common
-common_names <- function(species_list, 
+common_names <- function(species_list = NULL, 
                         server = NULL, 
                         Language = NULL,
                         fields = NULL){
-  
-  left_join(speccodes(species_list), get_comnames(server))
+  species_subset(species_list, get_comnames(server), server)
 }  
 
 

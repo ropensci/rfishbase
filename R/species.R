@@ -44,9 +44,18 @@ species <- function(species_list = NULL, fields = NULL,
 
 #species <- endpoint("species", tidy_table = tidy_species_table)
 
+load_species_meta <- memoise::memoise(function(){
+  meta <- system.file("metadata", "species.csv", package="rfishbase")
+  species_meta <- readr::read_csv(meta)
+  row.names(species_meta) <- species_meta$field
+  species_meta
+})
 
 ## helper routine for tidying species data
 tidy_species_table <- function(df) {
+  
+
+  species_meta <- load_species_meta()
   # Convert columns to the appropriate class
   for(i in names(df)){
     class <- as.character(species_meta[[i, "class"]])
@@ -71,10 +80,8 @@ tidy_species_table <- function(df) {
   
   df
 }
-## Metadata used by tidy_species_table
-meta <- system.file("metadata", "species.csv", package="rfishbase")
-species_meta <- read.csv(meta)
-row.names(species_meta) <- species_meta$field
+## Metadata used by tidy_species_table, created into data_raw()
+
 
 
 
