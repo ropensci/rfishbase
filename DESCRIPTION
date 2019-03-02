@@ -37,6 +37,7 @@ Suggests:
     devtools,
     testthat,
     rmarkdown,
-    knitr
+    knitr,
+    covr
 VignetteBuilder: knitr
 RoxygenNote: 6.1.1
