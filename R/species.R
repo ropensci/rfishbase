@@ -46,7 +46,7 @@ species <- function(species_list = NULL, fields = NULL,
 
 load_species_meta <- memoise::memoise(function(){
   meta <- system.file("metadata", "species.csv", package="rfishbase")
-  species_meta <- readr::read_csv(meta)
+  species_meta <- as.data.frame(readr::read_csv(meta, col_types = "cclc"))
   row.names(species_meta) <- species_meta$field
   species_meta
 })
