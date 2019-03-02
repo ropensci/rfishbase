@@ -11,5 +11,20 @@ test_that("We can query locations", {
   df <- distribution(sp)
   expect_is(df, "data.frame")
   
+  df <- distribution()
+  expect_is(df, "data.frame")
+  
+  df <- countrysubref()
+  expect_is(df, "data.frame")
+  
+  df <- c_code()
+  expect_is(df, "data.frame")
+  
+  
+  df <- country_names()
+  expect_is(df, "data.frame")
+  
+  expect_error(occurrence())
+  
 })
 
