@@ -55,7 +55,7 @@ load_species_meta <- memoise::memoise(function(){
 tidy_species_table <- function(df) {
   
 
-  species_meta <- load_species_meta()lib
+  species_meta <- load_species_meta()
   # Convert columns to the appropriate class
   for(i in names(df)){
     class <- as.character(species_meta[[i, "class"]])
