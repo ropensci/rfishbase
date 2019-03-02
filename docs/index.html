@@ -42,7 +42,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">rfishbase</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.0.1</span>
       </span>
     </div>
 
@@ -154,7 +154,7 @@ Thank you for your consideration and we all look forward to a flood of world-wid
  8 Plectropomus areolatus    Apricot trout        English      6082
  9 Salmo trutta              Aral Sea Trout       English       238
 10 Salmo trutta              Aral trout           English       238
-# ... with 269 more rows</code></pre>
+# … with 269 more rows</code></pre>
 <p>Note that there is no need to validate names coming from <code>common_to_sci</code> or <code>species_list</code>, as these will always return valid names.</p>
 </div>
 <div id="getting-data" class="section level3">
@@ -176,7 +176,7 @@ Thank you for your consideration and we all look forward to a flood of world-wid
  8     6082 Plectr…         5222 (R&lt;fc… Squar… Plare_u4.jpg    
  9      238 Salmo …         4779 Linna… Sea t… Satru_u2.jpg    
 10      238 Salmo …         4779 Linna… Sea t… Satru_u2.jpg    
-# ... with 269 more rows, and 92 more variables: PicPreferredNameM &lt;chr&gt;,
+# … with 269 more rows, and 92 more variables: PicPreferredNameM &lt;chr&gt;,
 #   PicPreferredNameF &lt;chr&gt;, PicPreferredNameJ &lt;chr&gt;, FamCode &lt;dbl&gt;,
 #   Subfamily &lt;chr&gt;, GenCode &lt;dbl&gt;, SubGenCode &lt;dbl&gt;, BodyShapeI &lt;chr&gt;,
 #   Source &lt;chr&gt;, AuthorRef &lt;lgl&gt;, Remark &lt;chr&gt;, TaxIssue &lt;dbl&gt;,
@@ -221,8 +221,8 @@ Thank you for your consideration and we all look forward to a flood of world-wid
  8 Plectropomus areolatus    very high           57.0
  9 Salmo trutta              very high           60.0
 10 Salmo trutta              very high           60.0
-# ... with 269 more rows</code></pre>
-<p>Alternatively, just subset the table using the standard column selection in base R (<code>[[</code>) or <code><a href="http://dplyr.tidyverse.org/reference/select.html">dplyr::select</a></code>.</p>
+# … with 269 more rows</code></pre>
+<p>Alternatively, just subset the table using the standard column selection in base R (<code>[[</code>) or <code><a href="https://dplyr.tidyverse.org/reference/select.html">dplyr::select</a></code>.</p>
 </div>
 <div id="fishbase-docs-discovering-data" class="section level3">
 <h3 class="hasAnchor">
@@ -249,7 +249,7 @@ Thank you for your consideration and we all look forward to a flood of world-wid
  8 Salmo trutta      Low        "&lt;i&gt;Salmo trutta lacustris&lt;/i&gt;\t:  Europe:…
  9 Salmo trutta      &lt;NA&gt;       "&lt;i&gt;Salmo trutta oxianus&lt;/i&gt;\t:  Asia:  Am…
 10 Salmo trutta      &lt;NA&gt;       &lt;i&gt;Salmo trutta aralensis&lt;/i&gt;:  Asia:  Ara…
-# ... with 370 more rows</code></pre>
+# … with 370 more rows</code></pre>
 </div>
 </div>
 <div id="version-stability" class="section level2">
@@ -267,7 +267,7 @@ Thank you for your consideration and we all look forward to a flood of world-wid
 <div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1">sealife &lt;-<span class="st"> </span><span class="kw"><a href="reference/load_taxa.html">load_taxa</a></span>(<span class="dt">server=</span><span class="st">"sealifebase"</span>)</a></code></pre></div>
 <p>(Note: running <code><a href="reference/load_taxa.html">load_taxa()</a></code> at the beginning of any session, for either fishbase or sealifebase is a good way to “warm up” rfishbase by loading in taxonomic data it will need. This information is cached throughout your session and will make all subsequent commands run faster. But no worries if you skip this step, <code>rfishbase</code> will peform it for you on the first time it is needed, and will cache these results thereafter.)</p>
 <p>Let’s look at some Gastropods:</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1">sealife <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(Class <span class="op">==</span><span class="st"> "Gastropoda"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1">sealife <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(Class <span class="op">==</span><span class="st"> "Gastropoda"</span>)</a></code></pre></div>
 <pre><code># A tibble: 19,473 x 9
    SpecCode Species    Genus  Subfamily Family  Order  Class Phylum Kingdom
       &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;  &lt;chr&gt;     &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;  
@@ -281,7 +281,7 @@ Thank you for your consideration and we all look forward to a flood of world-wid
  8       64 Victaphan… Victa… &lt;NA&gt;      Rhytid… Pulmo… Gast… Mollu… Animal…
  9       65 Anoglypta… Anogl… &lt;NA&gt;      Caryod… Pulmo… Gast… Mollu… Animal…
 10       66 Brazieres… Brazi… &lt;NA&gt;      Caryod… Pulmo… Gast… Mollu… Animal…
-# ... with 19,463 more rows</code></pre>
+# … with 19,463 more rows</code></pre>
 <p>All other tables can also take an argument to <code>server</code>:</p>
 <div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" data-line-number="1"><span class="kw"><a href="reference/species.html">species</a></span>(<span class="dt">server=</span><span class="st">"sealifebase"</span>)</a></code></pre></div>
 <pre><code># A tibble: 119,074 x 104
@@ -297,7 +297,7 @@ Thank you for your consideration and we all look forward to a flood of world-wid
  8        8 Phoron…            1 Gilch…        NA &lt;NA&gt;   &lt;NA&gt;            
  9        9 Phoron…            1 Pixel…        NA &lt;NA&gt;   &lt;NA&gt;            
 10       10 Phoron…            1 Hilto…        NA Calif… &lt;NA&gt;            
-# ... with 119,064 more rows, and 97 more variables:
+# … with 119,064 more rows, and 97 more variables:
 #   PicPreferredNameM &lt;chr&gt;, PicPreferredNameF &lt;chr&gt;,
 #   PicPreferredNameJ &lt;chr&gt;, FamCode &lt;dbl&gt;, Subfamily &lt;chr&gt;, Source &lt;chr&gt;,
 #   Remark &lt;chr&gt;, TaxIssue &lt;dbl&gt;, Fresh &lt;dbl&gt;, Brack &lt;dbl&gt;,

@@ -5,7 +5,7 @@
 \alias{sci_to_common}
 \title{common names}
 \usage{
-common_names(species_list, server = NULL, Language = NULL,
+common_names(species_list = NULL, server = NULL, Language = NULL,
   fields = NULL)
 }
 \arguments{

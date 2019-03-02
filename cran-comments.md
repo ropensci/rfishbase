@@ -1,7 +1,7 @@
 Dear CRAN Maintainers,
 
-This release provides a faster backend and resolves numerous minor bugs,
-as documented in NEWS.md.  
+This release resolves the issue regarding staged installs in R-devel
+as flagged by CRAN.  This also fixes a minor bug in common_names() function.
 
 Sincerely,
 
