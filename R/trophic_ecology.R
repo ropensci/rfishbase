@@ -39,6 +39,17 @@ ecology_endpoint <- endpoint("ecology")
 fooditems <- endpoint("fooditems")
 
 
+
+#' fooditems
+#' 
+#' @return a table of species diet_items
+#' @inheritParams species
+#' @export
+#' @examples \dontrun{
+#' diet_items("Oreochromis niloticus")
+#' }
+diet_items <- function(server = NULL)  fb_tbl("diet_items", server = server)
+
 #' predators
 #'  
 #' @return a table of predators
