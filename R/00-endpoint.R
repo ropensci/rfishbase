@@ -21,6 +21,7 @@ endpoint <- function(endpt, join = NULL, by = NULL){
   }
 }
 
+
 species_subset <- function(species_list, full_data, server = NULL){
 
   ## drop any existing Species column, 
@@ -31,8 +32,9 @@ species_subset <- function(species_list, full_data, server = NULL){
     return(dplyr::left_join(fb_species(server), full_data, by = "SpecCode"))
   }
     
+  ## 
   suppressMessages({
-    out <- speccodes(species_list) %>% 
+    out <- speccodes(species_list, db = fb_species(server), server) %>% 
       dplyr::left_join(fb_species(server), by = "SpecCode") %>%
       dplyr::left_join(full_data, by = "SpecCode")
   })
