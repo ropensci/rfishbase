@@ -17,7 +17,7 @@ FISHBASE_VERSION <-  "18.10"
 
 
 #' @importFrom memoise memoise
-#' @importFrom readr read_tsv
+#' @importFrom readr read_tsv cols col_character
 fb_tbl <- 
   memoise::memoise(
   function(tbl, server = NULL, ...){
@@ -40,7 +40,8 @@ fb_tbl <-
     tmp <- tempfile(tbl, fileext = ".tsv.bz2")
     download.file(addr, tmp, quiet = TRUE)
     suppressWarnings( # Ignore parsing failure messages for now
-    suppressMessages(out <- readr::read_tsv(tmp, ...))
+    suppressMessages(out <- readr::read_tsv(tmp, ..., 
+                     col_types = readr::cols(.default=readr::col_character())))
     )
     unlink(tmp)
     
