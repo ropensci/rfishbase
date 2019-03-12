@@ -1,5 +1,8 @@
 {
-  "@context": ["https://doi.org/doi:10.5063/schema/codemeta-2.0", "http://schema.org"],
+  "@context": [
+    "https://doi.org/doi:10.5063/schema/codemeta-2.0",
+    "http://schema.org"
+  ],
   "@type": "SoftwareSourceCode",
   "identifier": "rfishbase",
   "description": "A programmatic interface to <http://www.fishbase.org>, re-written\n    based on an accompanying 'RESTful' API. Access tables describing over 30,000\n    species of fish, their biology, ecology, morphology, and more. This package also\n    supports experimental access to <http://www.sealifebase.org> data, which contains\n    nearly 200,000 species records for all types of aquatic life not covered by\n    'FishBase.'",
@@ -7,14 +10,14 @@
   "codeRepository": "https://github.com/ropensci/rfishbase",
   "issueTracker": "https://github.com/ropensci/rfishbase/issues",
   "license": "https://spdx.org/licenses/CC0-1.0",
-  "version": "2.1.2.3",
+  "version": "3.0.3",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
-    "version": "3.4.1",
+    "version": "3.5.2",
     "url": "https://r-project.org"
   },
-  "runtimePlatform": "R version 3.4.1 (2017-06-30)",
+  "runtimePlatform": "R version 3.5.2 (2018-12-20)",
   "provider": {
     "@id": "https://cran.r-project.org",
     "@type": "Organization",
@@ -26,13 +29,15 @@
       "@type": "Person",
       "givenName": "Carl",
       "familyName": "Boettiger",
-      "email": "cboettig@ropensci.org"
+      "email": "cboettig@gmail.com",
+      "@id": "https://orcid.org/0000-0002-1642-628X"
     },
     {
       "@type": "Person",
       "givenName": "Scott",
       "familyName": "Chamberlain",
-      "email": "scott@ropensci.org"
+      "email": "myrmecocystus@gmail.com",
+      "@id": "https://orcid.org/0000-0003-1444-9135"
     },
     {
       "@type": "Person",
@@ -45,12 +50,15 @@
       "familyName": "Wainwright"
     }
   ],
-  "maintainer": {
-    "@type": "Person",
-    "givenName": "Carl",
-    "familyName": "Boettiger",
-    "email": "cboettig@ropensci.org"
-  },
+  "maintainer": [
+    {
+      "@type": "Person",
+      "givenName": "Carl",
+      "familyName": "Boettiger",
+      "email": "cboettig@gmail.com",
+      "@id": "https://orcid.org/0000-0002-1642-628X"
+    }
+  ],
   "softwareSuggestions": [
     {
       "@type": "SoftwareApplication",
@@ -59,9 +67,10 @@
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
-        "name": "Central R Archive Network (CRAN)",
+        "name": "Comprehensive R Archive Network (CRAN)",
         "url": "https://cran.r-project.org"
-      }
+      },
+      "sameAs": "https://CRAN.R-project.org/package=devtools"
     },
     {
       "@type": "SoftwareApplication",
@@ -70,9 +79,10 @@
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
-        "name": "Central R Archive Network (CRAN)",
+        "name": "Comprehensive R Archive Network (CRAN)",
         "url": "https://cran.r-project.org"
-      }
+      },
+      "sameAs": "https://CRAN.R-project.org/package=testthat"
     },
     {
       "@type": "SoftwareApplication",
@@ -81,9 +91,10 @@
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
-        "name": "Central R Archive Network (CRAN)",
+        "name": "Comprehensive R Archive Network (CRAN)",
         "url": "https://cran.r-project.org"
-      }
+      },
+      "sameAs": "https://CRAN.R-project.org/package=rmarkdown"
     },
     {
       "@type": "SoftwareApplication",
@@ -92,57 +103,54 @@
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
-        "name": "Central R Archive Network (CRAN)",
+        "name": "Comprehensive R Archive Network (CRAN)",
         "url": "https://cran.r-project.org"
-      }
+      },
+      "sameAs": "https://CRAN.R-project.org/package=knitr"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "covr",
+      "name": "covr",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=covr"
     }
   ],
   "softwareRequirements": [
     {
       "@type": "SoftwareApplication",
+      "identifier": "R",
+      "name": "R",
+      "version": ">= 3.0"
+    },
+    {
+      "@type": "SoftwareApplication",
       "identifier": "dplyr",
       "name": "dplyr",
-      "version": "0.4.0",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
-        "name": "Central R Archive Network (CRAN)",
+        "name": "Comprehensive R Archive Network (CRAN)",
         "url": "https://cran.r-project.org"
-      }
+      },
+      "sameAs": "https://CRAN.R-project.org/package=dplyr"
     },
     {
       "@type": "SoftwareApplication",
-      "identifier": "lazyeval",
-      "name": "lazyeval",
+      "identifier": "purrr",
+      "name": "purrr",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
-        "name": "Central R Archive Network (CRAN)",
+        "name": "Comprehensive R Archive Network (CRAN)",
         "url": "https://cran.r-project.org"
-      }
-    },
-    {
-      "@type": "SoftwareApplication",
-      "identifier": "httr",
-      "name": "httr",
-      "version": "1.0.0",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Central R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      }
-    },
-    {
-      "@type": "SoftwareApplication",
-      "identifier": "tidyr",
-      "name": "tidyr",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Central R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      }
+      },
+      "sameAs": "https://CRAN.R-project.org/package=purrr"
     },
     {
       "@type": "SoftwareApplication",
@@ -156,15 +164,69 @@
     },
     {
       "@type": "SoftwareApplication",
-      "identifier": "R",
-      "name": "R",
-      "version": "3.0"
+      "identifier": "memoise",
+      "name": "memoise",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=memoise"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "readr",
+      "name": "readr",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=readr"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "rlang",
+      "name": "rlang",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=rlang"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "magrittr",
+      "name": "magrittr",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=magrittr"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "stringr",
+      "name": "stringr",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=stringr"
     }
   ],
   "contIntegration": "https://travis-ci.org/ropensci/rfishbase",
   "releaseNotes": "https://github.com/ropensci/rfishbase/blob/master/NEWS.md",
   "readme": "https://github.com/ropensci/rfishbase/blob/master/README.md",
-  "fileSize": "1341.27KB",
+  "fileSize": "1611.34KB",
   "citation": [
     {
       "@type": "ScholarlyArticle",
@@ -198,5 +260,12 @@
         }
       }
     }
-  ]
+  ],
+  "review": {
+    "@type": "Review",
+    "url": "https://github.com/ropensci/onboarding/issues/137",
+    "provider": "http://ropensci.org"
+  },
+  "keywords": ["r", "rstats", "r-package", "fishbase", "taxonomy", "fish"],
+  "relatedLink": "https://CRAN.R-project.org/package=rfishbase"
 }
