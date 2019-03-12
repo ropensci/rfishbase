@@ -14,7 +14,7 @@ Authors@R: c(person("Carl", "Boettiger",
                     email = "cboettig@gmail.com", ,
                    comment = c(ORCID = "0000-0002-1642-628X")),
              person("Scott", "Chamberlain", role = "aut", 
-                    email = "scott@ropensci.org", 
+                    email = "myrmecocystus@gmail.com", 
                     comment = c(ORCID="0000-0003-1444-9135")),
              person("Duncan", "Temple Lang", role="aut"), 
              person("Peter", "Wainwright", role="aut"))
