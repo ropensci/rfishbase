@@ -24,6 +24,11 @@ And constructed with the following guidelines:
 For more information on SemVer, please visit http://semver.org/.
 
 
+v 3.0.3
+------
+
+- fix bug in sealifebase name resolution [#154]
+
 v 3.0.2
 --------
 

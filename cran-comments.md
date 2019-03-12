@@ -1,7 +1,7 @@
 Dear CRAN Maintainers,
 
-This release resolves the issue regarding staged installs in R-devel
-as flagged by CRAN.  This also fixes a minor bug in common_names() function.
+This release fixes a bug in the sealifebase data access calls.
+More details in NEWS.md.
 
 Sincerely,
 
