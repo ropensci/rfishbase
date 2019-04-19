@@ -47,7 +47,7 @@ like providing cookbooks in a famine” and it has been the underpinning
 ethos of FishBase to make information available equally, regardless of
 where one works.
 
-So for nearly 30 years, FishBase (www.fishbase.org), with its team of
+So for nearly 30 years, FishBase (https://www.fishbase.de/home.htm), with its team of
 biologists and programmers has done just that, while constantly
 improving and expanding this valued resource.
 
@@ -97,7 +97,7 @@ library("dplyr") # convenient but not required
 
 ## Getting started
 
-[FishBase](http://fishbase.org) makes it relatively easy to look up a
+[FishBase](https://sealifebase.org/search.php) makes it relatively easy to look up a
 lot of information on most known species of fish. However, looking up a
 single bit of data, such as the estimated trophic level, for many
 different species becomes tedious very soon. This is a common reason for
@@ -172,7 +172,7 @@ to make sure everything is working.
 
 The `species()` function returns a table containing much (but not all)
 of the information found on the summary or homepage for a species on
-[fishbase.org](http://fishbase.org). `rfishbase` functions always return
+[fishbase.org](https://www.fishbase.de). `rfishbase` functions always return
 [tidy](http://www.jstatsoft.org/v59/i10/paper) data tables: rows are
 observations (e.g. a species, individual samples from a species) and
 columns are variables (fields).
