@@ -32,7 +32,8 @@ Imports:
     readr,
     rlang,
     magrittr,
-    stringr
+    stringr,
+    gh
 Suggests:
     devtools,
     testthat,
