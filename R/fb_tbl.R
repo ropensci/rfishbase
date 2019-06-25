@@ -39,7 +39,16 @@ get_release <- function(){
 #' ## unset
 #' options(FISHBASE_VERSION=NULL)
 available_releases <- function(){
-  gh::gh("/repos/:owner/:repo/releases", owner = "ropensci", repo="rfishbase") %>%
+  
+  token <- Sys.getenv("GITHUB_TOKEN", 
+             Sys.getenv("GITHUB_PAT", 
+                        paste0("b2b7441d", 
+                               "aeeb010b", 
+                               "1df26f1f6", 
+                               "0a7f1ed",
+                               "c485e443")))
+  
+  gh::gh("/repos/:owner/:repo/releases", owner = "ropensci", repo="rfishbase", .token = token) %>%
     purrr::map_chr("tag_name") %>%
     stringr::str_extract("\\d\\d\\.\\d\\d") %>% 
     as.numeric() %>% 
