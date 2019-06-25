@@ -121,13 +121,19 @@ stocks(trout$Species, fields=c("Species", "Resilience", "StockDefs"))
 
 ## Version stability
 
-`rfishbase` relies on periodic cache releases.  The current database release is `17.07` (i.e. dating from July 2017).  Set the version of FishBase you wish to access by setting the environmental variable:
+`rfishbase` relies on periodic cache releases. By default `rfishbase` will access the latest available release.  Note that releases are roughly semi-annual and may not match the live version at Fishbase.org.  You can view available releases with:
+
+```{r}
+available_releases()
+```
+
+and you can set the version of FishBase you wish to access by setting the environmental variable:
 
 ```{r}
 options(FISHBASE_VERSION="19.04")
 ```
 
-Note that the same version number applies to both the `fishbase` and `sealifebase` data.  Stay tuned for new releases.
+Note that the same version number applies to both the `fishbase` and `sealifebase` data.  
 
 
 ## SeaLifeBase
