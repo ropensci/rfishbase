@@ -263,7 +263,7 @@ view available releases with:
 available_releases()
 ```
 
-    [1] "19.04" NA      "18.10" "17.07" "18.07"
+    [1] "19.04" "18.1"  "18.07" "17.07"
 
 and you can set the version of FishBase you wish to access by setting
 the environmental variable:
