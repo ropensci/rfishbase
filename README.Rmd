@@ -27,6 +27,8 @@ We welcome any feedback, issues or questions that users may encounter through ou
 
 ```{r include=FALSE}
 knitr::opts_chunk$set(warning=FALSE, comment=NA)
+Sys.setenv(GITHUB_TOKEN=paste0("b2b7441d", "aeeb010b", "1df26f1f6", "0a7f1ed", 
+                               "c485e443"))
 ```
 
 
@@ -121,13 +123,19 @@ stocks(trout$Species, fields=c("Species", "Resilience", "StockDefs"))
 
 ## Version stability
 
-`rfishbase` relies on periodic cache releases.  The current database release is `17.07` (i.e. dating from July 2017).  Set the version of FishBase you wish to access by setting the environmental variable:
+`rfishbase` relies on periodic cache releases. By default `rfishbase` will access the latest available release.  Note that releases are roughly semi-annual and may not match the live version at Fishbase.org.  You can view available releases with:
+
+```{r}
+available_releases()
+```
+
+and you can set the version of FishBase you wish to access by setting the environmental variable:
 
 ```{r}
 options(FISHBASE_VERSION="19.04")
 ```
 
-Note that the same version number applies to both the `fishbase` and `sealifebase` data.  Stay tuned for new releases.
+Note that the same version number applies to both the `fishbase` and `sealifebase` data.  
 
 
 ## SeaLifeBase
@@ -176,4 +184,6 @@ Please note that this project is released with a [Contributor Code of Conduct](C
 
 [![ropensci_footer](http://ropensci.org/public_images/github_footer.png)](http://ropensci.org)
 
-
+```{r include=FALSE, codemetar}
+codemetar::write_codemeta()
+```
