@@ -90,7 +90,7 @@ tidy_species_table <- function(df) {
 #' @name species_fields
 #' @docType data
 #' @author Carl Boettiger \email{carl@@ropensci.org}
-#' @references \url{FishBase.org}
+#' @references \url{http://fishbase.org}
 #' @keywords data
 NULL
 

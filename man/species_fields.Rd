@@ -8,7 +8,7 @@
 A list of the species_fields available
 }
 \references{
-\url{FishBase.org}
+\url{http://fishbase.org}
 }
 \author{
 Carl Boettiger \email{carl@ropensci.org}

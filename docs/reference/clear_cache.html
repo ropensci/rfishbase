@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>spawning — spawning • rfishbase</title>
+<title>Clear rfishbase cache — clear_cache • rfishbase</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -37,9 +37,10 @@
 
 
 
-<meta property="og:title" content="spawning — spawning" />
+<meta property="og:title" content="Clear rfishbase cache — clear_cache" />
 
-<meta property="og:description" content="spawning" />
+<meta property="og:description" content="rfishbase caches data downloads for faster access.  Use this to reset 
+the cache when changing versions of rfishbase." />
 
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -123,62 +124,26 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>spawning</h1>
-    <small class="dont-index">Source: <a href='https://github.com/ropensci/rfishbase/blob/master/R/reproduction.R'><code>R/reproduction.R</code></a></small>
-    <div class="hidden name"><code>spawning.Rd</code></div>
+    <h1>Clear rfishbase cache</h1>
+    <small class="dont-index">Source: <a href='https://github.com/ropensci/rfishbase/blob/master/R/fb_tbl.R'><code>R/fb_tbl.R</code></a></small>
+    <div class="hidden name"><code>clear_cache.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>spawning</p>
+    <p>rfishbase caches data downloads for faster access.  Use this to reset 
+the cache when changing versions of rfishbase.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>spawning</span>(<span class='kw'>species_list</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>fields</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>server</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)</pre>
-    
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>species_list</th>
-      <td><p>A vector of scientific names (each element as "genus species"). If empty, a table for all fish will be returned.</p></td>
-    </tr>
-    <tr>
-      <th>fields</th>
-      <td><p>a character vector specifying which fields (columns) should be returned. By default,
-all available columns recognized by the parser are returned.  Mostly for backwards compatibility as users can subset by column later</p></td>
-    </tr>
-    <tr>
-      <th>server</th>
-      <td><p>can be set to either "fishbase" or "sealifebase" to switch between databases. NOTE: it is usually
-easier to leave this as NULL and set the source instead using the environmental variable `FISHBASE_API`, e.g.
-`Sys.setenv(FISHBASE_API="sealifebase")`.</p></td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td><p>unused; for backwards compatibility only</p></td>
-    </tr>
-    </table>
-    
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+    <pre class="usage"><span class='fu'>clear_cache</span>()</pre>
+        
 
-    <p>a table of species spawning</p>
-    
-
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='fu'>spawning</span>(<span class='st'>"Oreochromis niloticus"</span>)
-<span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      
-      <li><a href="#value">Value</a></li>
-      
-      <li><a href="#examples">Examples</a></li>
-    </ul>
+                </ul>
 
   </div>
 </div>

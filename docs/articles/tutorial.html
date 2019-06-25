@@ -37,7 +37,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rfishbase</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.0.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.0.4</span>
       </span>
     </div>
 
@@ -90,7 +90,7 @@
       <h1>The New rfishbase</h1>
                         <h4 class="author">Carl Boettiger</h4>
             
-            <h4 class="date">2019-03-12</h4>
+            <h4 class="date">2019-06-25</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/ropensci/rfishbase/blob/master/vignettes/tutorial.Rmd"><code>vignettes/tutorial.Rmd</code></a></small>
       <div class="hidden name"><code>tutorial.Rmd</code></div>
@@ -101,12 +101,13 @@
     
 <p>Welcome to <code>rfishbase 3.0</code>. This package is the third rewrite of the original <code>rfishbase</code> package described in <a href="http://www.carlboettiger.info/assets/files/pubs/10.1111/j.1095-8649.2012.03464.x.pdf">Boettiger et al. (2012)</a>.</p>
 <p><code>rfishbase</code> 3.0 queries pre-compressed tables from a static server and employs local caching (through memoization) to provide much greater performance and stability, particularly for dealing with large queries involving 10s of thousands of species. The user is never expected to deal with pagination or curl headers and timeouts.</p>
-<p>We welcome any feedback, issues or questions that users may encounter through our issues tracker on GitHub: [<a href="https://github.com/ropensci/rfishbase/issues" class="uri">https://github.com/ropensci/rfishbase/issues</a>].</p>
+<p>We welcome any feedback, issues or questions that users may encounter through our issues tracker on GitHub: <a href="https://github.com/ropensci/rfishbase/issues" class="uri">https://github.com/ropensci/rfishbase/issues</a></p>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1">remotes<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/remotes/topics/install_github">install_github</a></span>(<span class="st">"ropensci/rfishbase"</span>)</a></code></pre></div>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(<span class="st">"rfishbase"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(<span class="st">"rfishbase"</span>)</a>
+<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(<span class="st">"dplyr"</span>) <span class="co"># convenient but not required</span></a></code></pre></div>
 </div>
 <div id="getting-started" class="section level2">
 <h2 class="hasAnchor">
@@ -128,7 +129,7 @@
 <p><code>rfishbase</code> also recognizes common names. When a common name refers to multiple species, all matching species are returned:</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">trout &lt;-<span class="st"> </span><span class="kw"><a href="../reference/common_to_sci.html">common_to_sci</a></span>(<span class="st">"trout"</span>)</a>
 <a class="sourceLine" id="cb7-2" data-line-number="2">trout</a></code></pre></div>
-<pre><code># A tibble: 279 x 4
+<pre><code># A tibble: 306 x 4
    Species                   ComName              Language SpecCode
    &lt;chr&gt;                     &lt;chr&gt;                &lt;chr&gt;       &lt;dbl&gt;
  1 Salmo obtusirostris       Adriatic trout       English      6210
@@ -136,12 +137,12 @@
  3 Schizopyge niger          Alghad snowtrout     English     24454
  4 Salvelinus fontinalis     American brook trout English       246
  5 Salmo trutta              Amu-Darya trout      English       238
- 6 Oncorhynchus apache       Apache Trout         English      2687
- 7 Oncorhynchus apache       Apache trout         English      2687
- 8 Plectropomus areolatus    Apricot trout        English      6082
- 9 Salmo trutta              Aral Sea Trout       English       238
-10 Salmo trutta              Aral trout           English       238
-# … with 269 more rows</code></pre>
+ 6 Salmo kottelati           Antalya trout        English     67602
+ 7 Oncorhynchus apache       Apache Trout         English      2687
+ 8 Oncorhynchus apache       Apache trout         English      2687
+ 9 Plectropomus areolatus    Apricot trout        English      6082
+10 Salmo trutta              Aral Sea Trout       English       238
+# … with 296 more rows</code></pre>
 <p>Note that there is no need to validate names coming from <code>common_to_sci</code> or <code>species_list</code>, as these will always return valid names.</p>
 </div>
 <div id="getting-data" class="section level3">
@@ -150,33 +151,33 @@
 <p>With a species list in place, we are ready to query fishbase for data. Note that if you have a very long list of species, it is always a good idea to try out your intended functions with a subset of that list first to make sure everything is working.</p>
 <p>The <code><a href="../reference/species.html">species()</a></code> function returns a table containing much (but not all) of the information found on the summary or homepage for a species on <a href="http://fishbase.org">fishbase.org</a>. <code>rfishbase</code> functions always return <a href="http://www.jstatsoft.org/v59/i10/paper">tidy</a> data tables: rows are observations (e.g. a species, individual samples from a species) and columns are variables (fields).</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="kw"><a href="../reference/species.html">species</a></span>(trout<span class="op">$</span>Species)</a></code></pre></div>
-<pre><code># A tibble: 279 x 98
+<pre><code># A tibble: 306 x 100
    SpecCode Species SpeciesRefNo Author FBname PicPreferredName
       &lt;dbl&gt; &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;  &lt;chr&gt;           
  1     6210 Salmo …        59043 (Heck… Adria… Saobt_u0.jpg    
  2     8705 Schizo…         4832 (Gray… Snowt… Scric_u1.jpg    
  3    24454 Schizo…         4832 (Heck… Algha… &lt;NA&gt;            
- 4      246 Salvel…         5723 (Mitc… Brook… Safon_u4.jpg    
+ 4      246 Salvel…        86798 (Mitc… Brook… Safon_u4.jpg    
  5      238 Salmo …         4779 Linna… Sea t… Satru_u2.jpg    
- 6     2687 Oncorh…         5723 (Mill… Apach… Onapa_u0.jpg    
+ 6    67602 Salmo …        99540 Turan… Antal… Sakot_m0.jpg    
  7     2687 Oncorh…         5723 (Mill… Apach… Onapa_u0.jpg    
- 8     6082 Plectr…         5222 (R&lt;fc… Squar… Plare_u4.jpg    
- 9      238 Salmo …         4779 Linna… Sea t… Satru_u2.jpg    
+ 8     2687 Oncorh…         5723 (Mill… Apach… Onapa_u0.jpg    
+ 9     6082 Plectr…         5222 (R&lt;fc… Squar… Plare_u4.jpg    
 10      238 Salmo …         4779 Linna… Sea t… Satru_u2.jpg    
-# … with 269 more rows, and 92 more variables: PicPreferredNameM &lt;chr&gt;,
+# … with 296 more rows, and 94 more variables: PicPreferredNameM &lt;chr&gt;,
 #   PicPreferredNameF &lt;chr&gt;, PicPreferredNameJ &lt;chr&gt;, FamCode &lt;dbl&gt;,
 #   Subfamily &lt;chr&gt;, GenCode &lt;dbl&gt;, SubGenCode &lt;dbl&gt;, BodyShapeI &lt;chr&gt;,
 #   Source &lt;chr&gt;, AuthorRef &lt;lgl&gt;, Remark &lt;chr&gt;, TaxIssue &lt;dbl&gt;,
 #   Fresh &lt;dbl&gt;, Brack &lt;dbl&gt;, Saltwater &lt;dbl&gt;, DemersPelag &lt;chr&gt;,
-#   AnaCat &lt;chr&gt;, MigratRef &lt;dbl&gt;, DepthRangeShallow &lt;dbl&gt;,
-#   DepthRangeDeep &lt;dbl&gt;, DepthRangeRef &lt;dbl&gt;, DepthRangeComShallow &lt;dbl&gt;,
-#   DepthRangeComDeep &lt;dbl&gt;, DepthComRef &lt;dbl&gt;, LongevityWild &lt;dbl&gt;,
-#   LongevityWildRef &lt;dbl&gt;, LongevityCaptive &lt;dbl&gt;, LongevityCapRef &lt;dbl&gt;,
-#   Vulnerability &lt;dbl&gt;, Length &lt;dbl&gt;, LTypeMaxM &lt;chr&gt;,
-#   LengthFemale &lt;dbl&gt;, LTypeMaxF &lt;chr&gt;, MaxLengthRef &lt;dbl&gt;,
-#   CommonLength &lt;dbl&gt;, LTypeComM &lt;chr&gt;, CommonLengthF &lt;dbl&gt;,
-#   LTypeComF &lt;chr&gt;, CommonLengthRef &lt;dbl&gt;, Weight &lt;dbl&gt;,
-#   WeightFemale &lt;dbl&gt;, MaxWeightRef &lt;dbl&gt;, Pic &lt;chr&gt;,
+#   Amphibious &lt;lgl&gt;, AmphibiousRef &lt;lgl&gt;, AnaCat &lt;chr&gt;, MigratRef &lt;dbl&gt;,
+#   DepthRangeShallow &lt;dbl&gt;, DepthRangeDeep &lt;dbl&gt;, DepthRangeRef &lt;dbl&gt;,
+#   DepthRangeComShallow &lt;dbl&gt;, DepthRangeComDeep &lt;dbl&gt;,
+#   DepthComRef &lt;dbl&gt;, LongevityWild &lt;dbl&gt;, LongevityWildRef &lt;dbl&gt;,
+#   LongevityCaptive &lt;dbl&gt;, LongevityCapRef &lt;dbl&gt;, Vulnerability &lt;dbl&gt;,
+#   Length &lt;dbl&gt;, LTypeMaxM &lt;chr&gt;, LengthFemale &lt;dbl&gt;, LTypeMaxF &lt;chr&gt;,
+#   MaxLengthRef &lt;dbl&gt;, CommonLength &lt;dbl&gt;, LTypeComM &lt;chr&gt;,
+#   CommonLengthF &lt;dbl&gt;, LTypeComF &lt;chr&gt;, CommonLengthRef &lt;dbl&gt;,
+#   Weight &lt;dbl&gt;, WeightFemale &lt;dbl&gt;, MaxWeightRef &lt;dbl&gt;, Pic &lt;chr&gt;,
 #   PictureFemale &lt;chr&gt;, LarvaPic &lt;chr&gt;, EggPic &lt;chr&gt;,
 #   ImportanceRef &lt;dbl&gt;, Importance &lt;chr&gt;, PriceCateg &lt;chr&gt;,
 #   PriceReliability &lt;chr&gt;, Remarks7 &lt;chr&gt;, LandingStatistics &lt;chr&gt;,
@@ -195,7 +196,7 @@
 <p>Most <code>rfishbase</code> functions will let the user subset these fields by listing them in the <code>fields</code> argument, for instance:</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1">dat &lt;-<span class="st"> </span><span class="kw"><a href="../reference/species.html">species</a></span>(trout<span class="op">$</span>Species, <span class="dt">fields=</span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"Species"</span>, <span class="st">"PriceCateg"</span>, <span class="st">"Vulnerability"</span>))</a>
 <a class="sourceLine" id="cb11-2" data-line-number="2">dat</a></code></pre></div>
-<pre><code># A tibble: 279 x 3
+<pre><code># A tibble: 306 x 3
    Species                   PriceCateg Vulnerability
    &lt;chr&gt;                     &lt;chr&gt;              &lt;dbl&gt;
  1 Salmo obtusirostris       very high           47.0
@@ -203,12 +204,12 @@
  3 Schizopyge niger          unknown             46.8
  4 Salvelinus fontinalis     very high           43.4
  5 Salmo trutta              very high           60.0
- 6 Oncorhynchus apache       very high           53.8
+ 6 Salmo kottelati           &lt;NA&gt;                33.7
  7 Oncorhynchus apache       very high           53.8
- 8 Plectropomus areolatus    very high           57.0
- 9 Salmo trutta              very high           60.0
+ 8 Oncorhynchus apache       very high           53.8
+ 9 Plectropomus areolatus    very high           30.3
 10 Salmo trutta              very high           60.0
-# … with 269 more rows</code></pre>
+# … with 296 more rows</code></pre>
 <p>Alternatively, just subset the table using the standard column selection in base R (<code>[[</code>) or <code><a href="https://dplyr.tidyverse.org/reference/select.html">dplyr::select</a></code>.</p>
 </div>
 <div id="fishbase-docs-discovering-data" class="section level3">
@@ -223,74 +224,79 @@
 1 stocks</code></pre>
 <p>This shows us that this information appears on the <code>stocks</code> table. We can then request this data from the stocks table:</p>
 <div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="kw"><a href="../reference/stocks.html">stocks</a></span>(trout<span class="op">$</span>Species, <span class="dt">fields=</span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"Species"</span>, <span class="st">"Resilience"</span>, <span class="st">"StockDefs"</span>))</a></code></pre></div>
-<pre><code># A tibble: 380 x 3
+<pre><code># A tibble: 408 x 3
    Species           Resilience StockDefs                                  
    &lt;chr&gt;             &lt;chr&gt;      &lt;chr&gt;                                      
  1 Salmo obtusirost… Medium     Europe:  Adriatic basin in Krka, Jardo, Vr…
  2 Schizothorax ric… Medium     Asia:  Himalayan region of India, Sikkim a…
  3 Schizopyge niger  Medium     Asia:  Kashmir Valley in India and Azad Ka…
- 4 Salvelinus fonti… Medium     North America:  most of eastern Canada fro…
- 5 Salmo trutta      High       Europe and Asia:  Atlantic, North, White a…
+ 4 Salvelinus fonti… Medium     North America:  native to most of eastern …
+ 5 Salmo trutta      Medium     Europe and Asia:  Atlantic, North, White a…
  6 Salmo trutta      &lt;NA&gt;       &lt;i&gt;Salmo trutta aralensis&lt;/i&gt;:  Asia:  end…
  7 Salmo trutta      Medium     &lt;i&gt;Salmo trutta fario&lt;/i&gt;:  Northeast  Atl…
  8 Salmo trutta      Low        "&lt;i&gt;Salmo trutta lacustris&lt;/i&gt;\t:  Europe:…
  9 Salmo trutta      &lt;NA&gt;       "&lt;i&gt;Salmo trutta oxianus&lt;/i&gt;\t:  Asia:  Am…
 10 Salmo trutta      &lt;NA&gt;       &lt;i&gt;Salmo trutta aralensis&lt;/i&gt;:  Asia:  Ara…
-# … with 370 more rows</code></pre>
+# … with 398 more rows</code></pre>
 </div>
 </div>
 <div id="version-stability" class="section level2">
 <h2 class="hasAnchor">
 <a href="#version-stability" class="anchor"></a>Version stability</h2>
-<p><code>rfishbase</code> relies on periodic cache releases. The current database release is <code>17.07</code> (i.e. dating from July 2017). Set the version of FishBase you wish to access by setting the environmental variable:</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/Sys.setenv">Sys.setenv</a></span>(<span class="dt">FISHBASE_VERSION=</span><span class="st">"17.07"</span>)</a></code></pre></div>
-<p>Note that the same version number applies to both the <code>fishbase</code> and <code>sealifebase</code> data. Stay tuned for new releases.</p>
+<p><code>rfishbase</code> relies on periodic cache releases. By default <code>rfishbase</code> will access the latest available release. Note that releases are roughly semi-annual and may not match the live version at Fishbase.org. You can view available releases with:</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="kw"><a href="../reference/available_releases.html">available_releases</a></span>()</a></code></pre></div>
+<pre><code>[1] "19.04" "18.1"  "18.07" "17.07"</code></pre>
+<p>and you can set the version of FishBase you wish to access by setting the environmental variable:</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/options">options</a></span>(<span class="dt">FISHBASE_VERSION=</span><span class="st">"19.04"</span>)</a></code></pre></div>
+<p>Note that the same version number applies to both the <code>fishbase</code> and <code>sealifebase</code> data.</p>
 </div>
 <div id="sealifebase" class="section level2">
 <h2 class="hasAnchor">
 <a href="#sealifebase" class="anchor"></a>SeaLifeBase</h2>
 <p>SeaLifeBase.org is maintained by the same organization and largely parallels the database structure of Fishbase. As such, almost all <code>rfishbase</code> functions can instead be instructed to address the</p>
-<p>We can begin by viewing the taxa table for sealifebase:</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1"><span class="kw"><a href="../reference/load_taxa.html">load_taxa</a></span>(<span class="dt">server=</span><span class="st">"sealifebase"</span>)</a></code></pre></div>
-<pre><code># A tibble: 119,074 x 9
+<p>We can begin by getting the taxa table for sealifebase:</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" data-line-number="1">sealife &lt;-<span class="st"> </span><span class="kw"><a href="../reference/load_taxa.html">load_taxa</a></span>(<span class="dt">server=</span><span class="st">"sealifebase"</span>)</a></code></pre></div>
+<p>(Note: running <code><a href="../reference/load_taxa.html">load_taxa()</a></code> at the beginning of any session, for either fishbase or sealifebase is a good way to “warm up” rfishbase by loading in taxonomic data it will need. This information is cached throughout your session and will make all subsequent commands run faster. But no worries if you skip this step, <code>rfishbase</code> will peform it for you on the first time it is needed, and will cache these results thereafter.)</p>
+<p>Let’s look at some Gastropods:</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" data-line-number="1">sealife <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(Class <span class="op">==</span><span class="st"> "Gastropoda"</span>)</a></code></pre></div>
+<pre><code># A tibble: 19,479 x 9
    SpecCode Species    Genus  Subfamily Family  Order  Class Phylum Kingdom
       &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;  &lt;chr&gt;     &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;  
- 1        1 Phoronis … Phoro… &lt;NA&gt;      Not as… Not a… Not … &lt;NA&gt;   &lt;NA&gt;   
- 2        2 Phoronis … Phoro… &lt;NA&gt;      Not as… Not a… Not … &lt;NA&gt;   &lt;NA&gt;   
- 3        3 Phoronis … Phoro… &lt;NA&gt;      Not as… Not a… Not … &lt;NA&gt;   &lt;NA&gt;   
- 4        4 Phoronis … Phoro… &lt;NA&gt;      Not as… Not a… Not … &lt;NA&gt;   &lt;NA&gt;   
- 5        5 Phoronis … Phoro… &lt;NA&gt;      Not as… Not a… Not … &lt;NA&gt;   &lt;NA&gt;   
- 6        6 Phoronis … Phoro… &lt;NA&gt;      Not as… Not a… Not … &lt;NA&gt;   &lt;NA&gt;   
- 7        7 Phoronis … Phoro… &lt;NA&gt;      Not as… Not a… Not … &lt;NA&gt;   &lt;NA&gt;   
- 8        8 Phoronops… Phoro… &lt;NA&gt;      Not as… Not a… Not … &lt;NA&gt;   &lt;NA&gt;   
- 9        9 Phoronops… Phoro… &lt;NA&gt;      Not as… Not a… Not … &lt;NA&gt;   &lt;NA&gt;   
-10       10 Phoronops… Phoro… &lt;NA&gt;      Not as… Not a… Not … &lt;NA&gt;   &lt;NA&gt;   
-# … with 119,064 more rows</code></pre>
-<p>(Note: running <code><a href="../reference/load_taxa.html">load_taxa()</a></code> at the beginning of any session, for either fishbase or sealifebase is a good way to “warm up” rfishbase by loading in taxonomic data it will need. This information is cached throughout your session and will make all subsequent commands run faster. But no worries if you skip this step, <code>rfishbase</code> will peform it for you on the first time it is needed, and will cache these results thereafter.)</p>
+ 1       57 Salinator… Salin… &lt;NA&gt;      Amphib… Pulmo… Gast… Mollu… Animal…
+ 2       58 Tasmaphen… Tasma… &lt;NA&gt;      Rhytid… Pulmo… Gast… Mollu… Animal…
+ 3       59 Tasmaphen… Tasma… &lt;NA&gt;      Rhytid… Pulmo… Gast… Mollu… Animal…
+ 4       60 Torresiro… Torre… &lt;NA&gt;      Rhytid… Pulmo… Gast… Mollu… Animal…
+ 5       61 Victaphan… Victa… &lt;NA&gt;      Rhytid… Pulmo… Gast… Mollu… Animal…
+ 6       62 Victaphan… Victa… &lt;NA&gt;      Rhytid… Pulmo… Gast… Mollu… Animal…
+ 7       63 Victaphan… Victa… &lt;NA&gt;      Rhytid… Pulmo… Gast… Mollu… Animal…
+ 8       64 Victaphan… Victa… &lt;NA&gt;      Rhytid… Pulmo… Gast… Mollu… Animal…
+ 9       65 Anoglypta… Anogl… &lt;NA&gt;      Caryod… Pulmo… Gast… Mollu… Animal…
+10       66 Brazieres… Brazi… &lt;NA&gt;      Caryod… Pulmo… Gast… Mollu… Animal…
+# … with 19,469 more rows</code></pre>
 <p>All other tables can also take an argument to <code>server</code>:</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" data-line-number="1"><span class="kw"><a href="../reference/species.html">species</a></span>(<span class="dt">server=</span><span class="st">"sealifebase"</span>)</a></code></pre></div>
-<pre><code># A tibble: 119,074 x 104
-   SpecCode Species SpeciesRefNo Author AuthorRef FBname PicPreferredName
-      &lt;dbl&gt; &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt;      &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;           
- 1        1 Phoron…            1 Wrigh…        NA &lt;NA&gt;   &lt;NA&gt;            
- 2        2 Phoron…          997 Wrigh…        NA &lt;NA&gt;   &lt;NA&gt;            
- 3        3 Phoron…            1 Oka, …        NA &lt;NA&gt;   &lt;NA&gt;            
- 4        4 Phoron…            1 Haswe…        NA &lt;NA&gt;   Phaus_u0.jpg    
- 5        5 Phoron…          997 Selys…        NA &lt;NA&gt;   &lt;NA&gt;            
- 6        6 Phoron…            1 Cori,…        NA phoro… &lt;NA&gt;            
- 7        7 Phoron…            1 (Schn…        NA &lt;NA&gt;   &lt;NA&gt;            
- 8        8 Phoron…            1 Gilch…        NA &lt;NA&gt;   &lt;NA&gt;            
- 9        9 Phoron…            1 Pixel…        NA &lt;NA&gt;   &lt;NA&gt;            
-10       10 Phoron…            1 Hilto…        NA Calif… &lt;NA&gt;            
-# … with 119,064 more rows, and 97 more variables:
-#   PicPreferredNameM &lt;chr&gt;, PicPreferredNameF &lt;chr&gt;,
-#   PicPreferredNameJ &lt;chr&gt;, FamCode &lt;dbl&gt;, Subfamily &lt;chr&gt;, Source &lt;chr&gt;,
-#   Remark &lt;chr&gt;, TaxIssue &lt;dbl&gt;, Fresh &lt;dbl&gt;, Brack &lt;dbl&gt;,
-#   Saltwater &lt;dbl&gt;, Land &lt;dbl&gt;, DemersPelag &lt;chr&gt;, AnaCat &lt;chr&gt;,
-#   MigratRef &lt;dbl&gt;, DepthRangeShallow &lt;dbl&gt;, DepthRangeDeep &lt;dbl&gt;,
-#   DepthRangeRef &lt;dbl&gt;, DepthRangeComShallow &lt;dbl&gt;,
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" data-line-number="1"><span class="kw"><a href="../reference/species.html">species</a></span>(<span class="dt">server=</span><span class="st">"sealifebase"</span>)</a></code></pre></div>
+<pre><code># A tibble: 121,348 x 108
+   SpecCode Species Author SpeciesRefNo FBname FamCode Subfamily GenCode
+      &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;         &lt;dbl&gt; &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt;       &lt;dbl&gt;
+ 1        1 Phoron… Wrigh…            1 &lt;NA&gt;      4793 &lt;NA&gt;        12365
+ 2        2 Phoron… Wrigh…          997 &lt;NA&gt;      4793 &lt;NA&gt;        12365
+ 3        3 Phoron… Oka, …            1 horse…    4793 &lt;NA&gt;        12365
+ 4        4 Phoron… Haswe…            1 Phoro…    4793 &lt;NA&gt;        12365
+ 5        5 Phoron… Selys…          997 &lt;NA&gt;      4793 &lt;NA&gt;        12365
+ 6        6 Phoron… Cori,…            1 phoro…    4793 &lt;NA&gt;        12365
+ 7        7 Phoron… (Schn…            1 &lt;NA&gt;      4793 &lt;NA&gt;        12365
+ 8        8 Phoron… Gilch…            1 &lt;NA&gt;      4793 &lt;NA&gt;        12366
+ 9        9 Phoron… Pixel…            1 large…    4793 &lt;NA&gt;        12366
+10       10 Phoron… Hilto…            1 Calif…    4793 &lt;NA&gt;        12366
+# … with 121,338 more rows, and 100 more variables: TaxIssue &lt;dbl&gt;,
+#   Remark &lt;chr&gt;, PicPreferredName &lt;chr&gt;, PicPreferredNameM &lt;chr&gt;,
+#   PicPreferredNameF &lt;chr&gt;, PicPreferredNameJ &lt;chr&gt;, Source &lt;chr&gt;,
+#   AuthorRef &lt;dbl&gt;, SubGenCode &lt;lgl&gt;, Fresh &lt;dbl&gt;, Brack &lt;dbl&gt;,
+#   Saltwater &lt;dbl&gt;, Land &lt;dbl&gt;, BodyShapeI &lt;lgl&gt;, DemersPelag &lt;chr&gt;,
+#   AnaCat &lt;chr&gt;, MigratRef &lt;dbl&gt;, DepthRangeShallow &lt;dbl&gt;,
+#   DepthRangeDeep &lt;dbl&gt;, DepthRangeRef &lt;dbl&gt;, DepthRangeComShallow &lt;dbl&gt;,
 #   DepthRangeComDeep &lt;dbl&gt;, DepthComRef &lt;dbl&gt;, LongevityWild &lt;dbl&gt;,
-#   LongevityWildRef &lt;dbl&gt;, LongevityCaptive &lt;lgl&gt;, LongevityCapRef &lt;lgl&gt;,
+#   LongevityWildRef &lt;dbl&gt;, LongevityCaptive &lt;dbl&gt;, LongevityCapRef &lt;dbl&gt;,
 #   Vulnerability &lt;dbl&gt;, Length &lt;dbl&gt;, LTypeMaxM &lt;chr&gt;,
 #   LengthFemale &lt;dbl&gt;, LTypeMaxF &lt;chr&gt;, MaxLengthRef &lt;dbl&gt;,
 #   CommonLength &lt;dbl&gt;, LTypeComM &lt;chr&gt;, CommonLengthF &lt;dbl&gt;,
@@ -307,12 +313,13 @@
 #   AquariumFishII &lt;chr&gt;, AquariumRef &lt;dbl&gt;, GameFish &lt;dbl&gt;,
 #   GameRef &lt;lgl&gt;, Dangerous &lt;chr&gt;, DangerousRef &lt;dbl&gt;,
 #   Electrogenic &lt;chr&gt;, ElectroRef &lt;dbl&gt;, Complete &lt;lgl&gt;, ASFA &lt;lgl&gt;,
-#   GoogleImage &lt;dbl&gt;, Entered &lt;dbl&gt;, DateEntered &lt;dttm&gt;, Modified &lt;dbl&gt;,
-#   DateModified &lt;dttm&gt;, Expert &lt;dbl&gt;, DateChecked &lt;dttm&gt;, Synopsis &lt;lgl&gt;,
-#   DateSynopsis &lt;lgl&gt;, Flag &lt;lgl&gt;, Comments &lt;chr&gt;,
-#   VancouverAquarium &lt;dbl&gt;, Profile &lt;lgl&gt;, Sp2000_NameCode &lt;chr&gt;,
-#   Sp2000_HierarchyCode &lt;chr&gt;, Sp2000_AuthorRefNumber &lt;chr&gt;,
-#   E_Append &lt;dbl&gt;, E_DateAppend &lt;date&gt;, TS &lt;dttm&gt;</code></pre>
+#   GoogleImage &lt;dbl&gt;, Emblematic &lt;dbl&gt;, Entered &lt;dbl&gt;,
+#   DateEntered &lt;dttm&gt;, Modified &lt;dbl&gt;, DateModified &lt;dttm&gt;, Expert &lt;dbl&gt;,
+#   DateChecked &lt;dttm&gt;, Synopsis &lt;lgl&gt;, DateSynopsis &lt;lgl&gt;, Flag &lt;lgl&gt;,
+#   Comments &lt;chr&gt;, VancouverAquarium &lt;dbl&gt;, Profile &lt;lgl&gt;,
+#   Sp2000_NameCode &lt;chr&gt;, Sp2000_HierarchyCode &lt;chr&gt;,
+#   Sp2000_AuthorRefNumber &lt;chr&gt;, E_Append &lt;dbl&gt;, E_DateAppend &lt;date&gt;,
+#   TS &lt;dttm&gt;</code></pre>
 <p>CAUTION: if switching between <code>fishbase</code> and <code>sealifebase</code> in a single R session, we strongly advise you always set <code>server</code> explicitly in your function calls. Otherwise you may confuse the caching system.</p>
 </div>
 <div id="backwards-compatibility" class="section level2">
