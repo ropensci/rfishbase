@@ -1,7 +1,8 @@
 Dear CRAN Maintainers,
 
-This release fixes a bug in the sealifebase data access calls.
-More details in NEWS.md.
+This release now provides access to the most recent version of FishBase & SeaLifeData by
+default, while still allowing users to manually opt for a fixed timestamp version.
+See NEWS.md.
 
 Sincerely,
 
