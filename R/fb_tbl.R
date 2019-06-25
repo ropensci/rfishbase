@@ -38,6 +38,7 @@ get_release <- function(){
 #' options(FISHBASE_VERSION="19.04")
 #' ## unset
 #' options(FISHBASE_VERSION=NULL)
+#' @importFrom stats na.omit
 available_releases <- function(){
   
   token <- Sys.getenv("GITHUB_TOKEN", 
@@ -52,7 +53,7 @@ available_releases <- function(){
     purrr::map_chr("tag_name") %>%
     stringr::str_extract("\\d\\d\\.\\d\\d") %>% 
     as.numeric() %>% 
-    na.omit() %>%
+    stats::na.omit() %>%
     unique() %>% 
     sort(decreasing = TRUE) %>% 
     as.character()
