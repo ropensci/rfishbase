@@ -27,6 +27,8 @@ We welcome any feedback, issues or questions that users may encounter through ou
 
 ```{r include=FALSE}
 knitr::opts_chunk$set(warning=FALSE, comment=NA)
+Sys.setenv(GITHUB_TOKEN=paste0("b2b7441d", "aeeb010b", "1df26f1f6", "0a7f1ed", 
+                               "c485e443"))
 ```
 
 
@@ -182,4 +184,6 @@ Please note that this project is released with a [Contributor Code of Conduct](C
 
 [![ropensci_footer](http://ropensci.org/public_images/github_footer.png)](http://ropensci.org)
 
-
+```{r include=FALSE, codemetar}
+codemetar::write_codemeta()
+```

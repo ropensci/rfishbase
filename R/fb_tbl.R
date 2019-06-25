@@ -42,7 +42,11 @@ available_releases <- function(){
   gh::gh("/repos/:owner/:repo/releases", owner = "ropensci", repo="rfishbase") %>%
     purrr::map_chr("tag_name") %>%
     stringr::str_extract("\\d\\d\\.\\d\\d") %>% 
-    unique()
+    as.numeric() %>% 
+    na.omit() %>%
+    unique() %>% 
+    sort(decreasing = TRUE) %>% 
+    as.character()
   
 }
 
@@ -50,10 +54,7 @@ available_releases <- function(){
 #' @importFrom purrr map_chr
 #' @importFrom stringr str_extract
 get_latest_release <- function() {
-  available_releases() %>% 
-    as.numeric() %>% 
-    max(na.rm=TRUE) %>% 
-    as.character()
+  available_releases()[[1]]
 }
 
   # "https://fishbase.ropensci.org"
