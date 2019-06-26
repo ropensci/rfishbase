@@ -36,41 +36,29 @@ get_latest_release <- function() {
   # <- "https://fishbase.ropensci.org/sealifebase"
 
 
+has_table <- function(tbl, db = default_db()){
+  tbl %in% DBI::dbListTables(db)
+}
+
+
 #' @importFrom memoise memoise
 #' @importFrom readr read_tsv cols col_character type_convert
 fb_tbl <- 
-  memoise::memoise(
-  function(tbl, server = NULL, ...){
-    
-    ## Handle versioning
-    if(is.null(server)) 
-      server <- getOption("FISHBASE_API", FISHBASE_API)
-    dbname <- "fb"
-    if(grepl("sealifebase", server)){
-      dbname <- "slb"
-    } 
-    release <- paste0(dbname, "-",  
-                      get_release())
-    
-    
-    addr <- 
-      paste0("https://github.com/ropensci/rfishbase/releases/download/", 
-             release, "/", dbname, 
-             ".2f", tbl, ".tsv.bz2")
-    tmp <- tempfile(tbl, fileext = ".tsv.bz2")
-    download.file(addr, tmp, quiet = TRUE)
-    suppressWarnings( # Ignore parsing failure messages for now
-    suppressMessages({
-      tmp_out <- readr::read_tsv(tmp, ..., col_types = readr::cols(.default=readr::col_character()))
-      out <- readr::type_convert(tmp_out)
-    }))
-    unlink(tmp)
-    
-    out
-})
+  function(tbl, 
+           server = getOption("FISHBASE_API", "fishbase"), 
+           version = get_latest_release(),
+           db = default_db(),
+           ...){
+    db_tbl <- tbl_name(tbl,  server, version)
+    if(!has_table(db_tbl)) db_create(tbl, server, version, db)
+    dplyr::tbl(db, db_tbl)
+    }
 
 ## Define function that maps sci names to SpecCode, subsets table by requested sci name or spec code
 #' @importFrom dplyr mutate select
-fb_species <- memoise::memoise(function(server = NULL){
-  load_taxa(server = server) %>% dplyr::select(SpecCode, Species)
-})
+fb_species <- function(server = getOption("FISHBASE_API", "fishbase"),
+                       version = get_latest_release(),
+                       db = default_db(), 
+                       ...){
+  load_taxa(server, version, db, ...) %>% dplyr::select("SpecCode", "Species")
+}

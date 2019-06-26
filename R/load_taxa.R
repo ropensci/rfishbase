@@ -6,77 +6,71 @@
 #' @return the taxa list
 #' @importFrom dplyr arrange
 #' @export
-load_taxa <- memoise::memoise(function(server = NULL, ...){
-
+load_taxa <- function(server = NULL, 
+                      version = get_latest_release(),
+                      db = default_db(),
+                      ...){
+  
+  db_tbl <- tbl_name("taxa",  server, version)
+  if(has_table(db_tbl)) return(db_tbl)
+  
   ## SeaLifeBase requires a different taxa table function:
   if(is.null(server)) server <- getOption("FISHBASE_API", FISHBASE_API)
   if(grepl("sealifebase", server)){
-    slb_taxa_table(server)
+    slb_taxa_table(server, version, db)
   } else {
-    fb_taxa_table(server)
+    fb_taxa_table(server, version, db)
   }
-})
+}
   
 
 
 
 globalVariables(c("SpecCode", "Species", "Genus", "Subfamily", "Family", 
-                  "Order", "Class", "SuperClass", "Phylum", "Kingdom"))
+                  "Order", "Class", "SuperClass", "Phylum", "Kingdom", "tempcolumn"))
 
 
-fb_taxa_table <- function(server){
-  taxon_species <- fb_tbl("species", server)
-  keep <- names(taxon_species) %in% 
-    c("SpecCode", "Species", "Genus", "Subfamily",
+fb_taxa_table <- function(server = getOption("FISHBASE_API", "fishbase"),
+                          version = get_latest_release(),
+                          db = default_db()){
+  
+  taxon_species <- fb_tbl("species", server, version, db) %>% 
+      select("SpecCode", "Species", "Genus", "Subfamily",
       "GenCode", "SubGenCode", "FamCode")
-  taxon_species <- taxon_species[keep]
   
-  taxon_genus <- fb_tbl("genera", server) 
-  keep <- names(taxon_genus) %in% 
-    c("GenCode", "GenName", "GenComName", "FamCode",
-      "Subfamily", "SubgenusOf")
-  taxon_genus <- taxon_genus[keep]
-  i <- names(taxon_genus) == "GenComName"
-  names(taxon_genus)[i] <- "GenusCommonName" 
+  taxon_genus <- fb_tbl("genera", server, version, db) %>%
+    select("GenCode", "GenName", "GenusCommonName" = "GenComName", 
+           "FamCode", "Subfamily", "SubgenusOf")
   
-  taxon_family <- fb_tbl("families", server)
-  keep <- names(taxon_family) %in% 
-    c("FamCode", "Family","CommonName", "Order",
-      "Ordnum", "Class", "ClassNum")
-  taxon_family <- taxon_family[keep]
-  i <- names(taxon_family) == "CommonName"
-  names(taxon_family)[i] <- "FamilyCommonName"
+  taxon_family <- fb_tbl("families", server, version, db) %>% 
+    select("FamCode", "Family","FamilyCommonName" = "CommonName", "Order",
+           "Ordnum", "Class", "ClassNum")
   
-  taxon_order <- fb_tbl("orders", server)
-  keep <- names(taxon_order) %in% 
-    c("Ordnum", "Order", "CommonName", "ClassNum", "Class") 
-  taxon_order <- taxon_order[keep]
-  i <- names(taxon_order) == "CommonName"
-  names(taxon_order)[i] <- "OrderCommonName"
-  
-  taxon_class <- fb_tbl("classes", server)
-  keep <- names(taxon_class) %in% c("ClassNum", "Class", "CommonName",
-           "SuperClass", "Subclass")
-  i <- names(taxon_class) == "CommonName"
-  names(taxon_class)[i] <- "ClassCommonName"
-  taxon_class <- taxon_class[keep]
+  taxon_order <- fb_tbl("orders", server, version, db) %>%
+    select("Ordnum", "Order", "OrderCommonName" = "CommonName",
+           "ClassNum", "Class") 
 
+  taxon_class <- fb_tbl("classes", server, version, db) %>% 
+    select("ClassNum", "Class", "ClassCommonName" = "CommonName",
+           "SuperClass", "Subclass")
   
-  suppressMessages(
   taxon_hierarchy <- 
     taxon_species %>%
     left_join(taxon_genus) %>%
     left_join(taxon_family )%>%
     left_join(taxon_order) %>%
     left_join(taxon_class)
-  )
   
   taxa_table <- 
     taxon_hierarchy %>% 
-    dplyr::select(SpecCode, Species, Genus, Subfamily, Family, 
-           Order, Class, SuperClass) %>% 
+    dplyr::select("SpecCode", "Species", "Genus", "Subfamily", "Family", 
+           "Order", "Class", "SuperClass") %>% 
     dplyr::arrange(SpecCode) %>% 
-    dplyr::mutate(Species = paste(Genus, Species))
+    ## paste -> concat_ws fun, not implemented in Monet or duckdb now
+    dplyr::mutate(tempcolumn = concat(Genus, " ")) %>%
+    dplyr::mutate(Species = concat(tempcolumn, Species)) %>%
+    dplyr::select(-tempcolumn) %>%
+    dplyr::compute(tbl_name("taxa", server, version), temporary=FALSE)
   
   taxa_table
 }
@@ -84,17 +78,17 @@ fb_taxa_table <- function(server){
 
 
 
-slb_taxa_table <- function(server){
+slb_taxa_table <- function(server, version, db){
   
   server <- "sealifebase"
     
-  taxon_species <- fb_tbl("species", server)
-  taxon_genus <- fb_tbl("genera", server) 
-  taxon_family <- fb_tbl("families", server)
-  taxon_order <- fb_tbl("orders", server)
-  taxon_class <- fb_tbl("classes", server)
-  taxon_phylum <- fb_tbl("phylums", server)
-  phylum_class <- fb_tbl("phylumclass", server) 
+  taxon_species <- fb_tbl("species", server, version, db)
+  taxon_genus <- fb_tbl("genera", server, version, db) 
+  taxon_family <- fb_tbl("families", server, version, db)
+  taxon_order <- fb_tbl("orders", server, version, db)
+  taxon_class <- fb_tbl("classes", server, version, db)
+  taxon_phylum <- fb_tbl("phylums", server, version, db)
+  phylum_class <- fb_tbl("phylumclass", server, version, db) 
   
   
   keep <- names(taxon_species) %in% 
