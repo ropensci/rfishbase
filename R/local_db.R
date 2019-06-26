@@ -6,7 +6,7 @@ db_create <- function(tbl,
                       overwrite = FALSE,
                       ...){
   
-  addr <- remote_url(tbl,  server, version)
+  addr <- remote_url(tbl, server, version)
 
   local_tbl <- file.path(db_dir(), tbl_name(tbl, server, version))
   dir.create(db_dir(), FALSE, TRUE)
@@ -107,7 +107,7 @@ db_driver <- function(dbname, driver = Sys.getenv("DB_DRIVER")){
   }
   if (requireNamespace("MonetDBLite", quietly = TRUE)){
     MonetDBLite <- getExportedValue("MonetDBLite", "MonetDBLite")
-    drivers <- c("MonetDBLite", drivers)
+    ## drivers <- c("MonetDBLite", drivers)  ## lacks concat_ws (paste)
   }
   ## duckdb lacks necessary capabilities (e.g. temp tables) at this time
   ## https://github.com/cwida/duckdb/issues/58

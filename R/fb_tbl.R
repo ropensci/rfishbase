@@ -53,12 +53,3 @@ fb_tbl <-
     if(!has_table(db_tbl)) db_create(tbl, server, version, db)
     dplyr::tbl(db, db_tbl)
     }
-
-## Define function that maps sci names to SpecCode, subsets table by requested sci name or spec code
-#' @importFrom dplyr mutate select
-fb_species <- function(server = getOption("FISHBASE_API", "fishbase"),
-                       version = get_latest_release(),
-                       db = default_db(), 
-                       ...){
-  load_taxa(server, version, db, ...) %>% dplyr::select("SpecCode", "Species")
-}

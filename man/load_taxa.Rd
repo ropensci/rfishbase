@@ -4,7 +4,8 @@
 \alias{load_taxa}
 \title{load_taxa}
 \usage{
-load_taxa(server = NULL, ...)
+load_taxa(server = NULL, version = get_latest_release(),
+  db = default_db(), ...)
 }
 \arguments{
 \item{server}{API for Fishbase or Sealifebase?}

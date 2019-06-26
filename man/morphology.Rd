@@ -4,7 +4,9 @@
 \alias{morphology}
 \title{morphology}
 \usage{
-morphology(species_list = NULL, fields = NULL, server = NULL, ...)
+morphology(species_list = NULL, fields = NULL,
+  server = getOption("FISHBASE_API", "fishbase"),
+  version = get_latest_release(), db = default_db(), ...)
 }
 \arguments{
 \item{species_list}{A vector of scientific names (each element as "genus species"). If empty, a table for all fish will be returned.}

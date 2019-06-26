@@ -12,7 +12,7 @@ load_taxa <- function(server = NULL,
                       ...){
   
   db_tbl <- tbl_name("taxa",  server, version)
-  if(has_table(db_tbl)) return(db_tbl)
+  if(has_table(db_tbl)) return(dplyr::tbl(db, db_tbl))
   
   ## SeaLifeBase requires a different taxa table function:
   if(is.null(server)) server <- getOption("FISHBASE_API", FISHBASE_API)
@@ -66,10 +66,11 @@ fb_taxa_table <- function(server = getOption("FISHBASE_API", "fishbase"),
     dplyr::select("SpecCode", "Species", "Genus", "Subfamily", "Family", 
            "Order", "Class", "SuperClass") %>% 
     dplyr::arrange(SpecCode) %>% 
+    dplyr::mutate(Species = paste(Genus, Species)) %>%
     ## paste -> concat_ws fun, not implemented in Monet or duckdb now
-    dplyr::mutate(tempcolumn = concat(Genus, " ")) %>%
-    dplyr::mutate(Species = concat(tempcolumn, Species)) %>%
-    dplyr::select(-tempcolumn) %>%
+    #dplyr::mutate(tempcolumn = concat(Genus, " ")) %>%
+    #dplyr::mutate(Species = concat(tempcolumn, Species)) %>%
+    #dplyr::select(-tempcolumn) %>%
     dplyr::compute(tbl_name("taxa", server, version), temporary=FALSE)
   
   taxa_table

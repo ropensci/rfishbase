@@ -27,20 +27,21 @@
 #' species(c("Labroides bicolor", "Bolbometopon muricatum"), fields = species_fields$habitat) 
 #' 
 #' }
-species <- function(species_list = NULL, fields = NULL, 
-                    server = NULL, ...){
-  full_data <- fb_tbl("species", server) %>% 
-    select(-Genus, -Species)
-  
-  full_data <- fix_ids(full_data)
-  out <- species_subset(species_list, full_data, server)
-  
-  if(!is.null(fields)){
-    out <- out[fields]
-  }
-  
-  out
-}
+species <- endpoint("species")
+# species <- function(species_list = NULL, fields = NULL, 
+#                     server = NULL, ...){
+#   full_data <- fb_tbl("species", server) %>% 
+#     select(-Genus, -Species)
+#   
+#   full_data <- fix_ids(full_data)
+#   out <- species_subset(species_list, full_data, server)
+#   
+#   if(!is.null(fields)){
+#     out <- out[fields]
+#   }
+#   
+#   out
+# }
 
 #species <- endpoint("species", tidy_table = tidy_species_table)
 
