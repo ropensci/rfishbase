@@ -8,7 +8,7 @@ output: github_document
 [![Build status](https://ci.appveyor.com/api/projects/status/decpqq5s57b7b0t6/branch/master?svg=true)](https://ci.appveyor.com/project/cboettig/rfishbase/branch/master)
 [![cran checks](https://cranchecks.info/badges/worst/rfishbase)](https://cranchecks.info/pkgs/rfishbase)
 [![Coverage status](https://codecov.io/gh/ropensci/rfishbase/branch/master/graph/badge.svg)](https://codecov.io/github/ropensci/rfishbase?branch=master)
-[![Onboarding](https://badges.ropensci.org/137_status.svg)](https://github.com/ropensci/onboarding/issues/137)
+[![Onboarding](http://badges.ropensci.org/137_status.svg)](https://github.com/ropensci/onboarding/issues/137)
 [![CRAN status](https://www.r-pkg.org/badges/version/rfishbase)](https://cran.r-project.org/package=rfishbase)
 [![Downloads](http://cranlogs.r-pkg.org/badges/grand-total/rfishbase)](https://github.com/metacran/cranlogs.app)
 
@@ -26,7 +26,7 @@ We welcome any feedback, issues or questions that users may encounter through ou
 
 
 ```{r include=FALSE}
-knitr::opts_chunk$set(warning=FALSE, comment=NA)
+knitr::opts_chunk$set(warning=FALSE, comment=NA, cache=TRUE)
 Sys.setenv(GITHUB_TOKEN=paste0("b2b7441d", "aeeb010b", "1df26f1f6", "0a7f1ed", 
                                "c485e443"))
 ```
@@ -140,7 +140,7 @@ Note that the same version number applies to both the `fishbase` and `sealifebas
 
 ## SeaLifeBase
 
-SeaLifeBase.org is maintained by the same organization and largely parallels the database structure of Fishbase. As such, almost all `rfishbase` functions can instead be instructed to address the 
+SeaLifeBase is maintained by the same organization and largely parallels the database structure of Fishbase. As such, almost all `rfishbase` functions can instead be instructed to address the 
 
 We can begin by getting the taxa table for sealifebase: 
 

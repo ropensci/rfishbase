@@ -9,7 +9,7 @@ status](https://ci.appveyor.com/api/projects/status/decpqq5s57b7b0t6/branch/mast
 checks](https://cranchecks.info/badges/worst/rfishbase)](https://cranchecks.info/pkgs/rfishbase)
 [![Coverage
 status](https://codecov.io/gh/ropensci/rfishbase/branch/master/graph/badge.svg)](https://codecov.io/github/ropensci/rfishbase?branch=master)
-[![Onboarding](https://badges.ropensci.org/137_status.svg)](https://github.com/ropensci/onboarding/issues/137)
+[![Onboarding](http://badges.ropensci.org/137_status.svg)](https://github.com/ropensci/onboarding/issues/137)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/rfishbase)](https://cran.r-project.org/package=rfishbase)
 [![Downloads](http://cranlogs.r-pkg.org/badges/grand-total/rfishbase)](https://github.com/metacran/cranlogs.app)
@@ -277,9 +277,9 @@ Note that the same version number applies to both the `fishbase` and
 
 ## SeaLifeBase
 
-SeaLifeBase.org is maintained by the same organization and largely
-parallels the database structure of Fishbase. As such, almost all
-`rfishbase` functions can instead be instructed to address the
+SeaLifeBase is maintained by the same organization and largely parallels
+the database structure of Fishbase. As such, almost all `rfishbase`
+functions can instead be instructed to address the
 
 We can begin by getting the taxa table for sealifebase:
 
@@ -399,8 +399,8 @@ context.
 -----
 
 Please note that this project is released with a [Contributor Code of
-Conduct](CONDUCT.md). By participating in this project you agree to
-abide by its
+Conduct](https://github.com/ropensci/rfishbase/tree/master/CONDUCT.md).
+By participating in this project you agree to abide by its
 terms.
 
 [![ropensci\_footer](http://ropensci.org/public_images/github_footer.png)](http://ropensci.org)

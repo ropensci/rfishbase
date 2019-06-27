@@ -180,7 +180,7 @@ NULL
 #' @name sealifebase
 #' @docType data
 #' @author Carl Boettiger \email{carl@@ropensci.org}
-#' @references \url{www.sealifebase.org}
+#' @references \url{http://www.sealifebase.org}
 #' @keywords data
 NULL
 

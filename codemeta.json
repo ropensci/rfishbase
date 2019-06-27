@@ -238,7 +238,7 @@
   "contIntegration": "https://travis-ci.org/ropensci/rfishbase",
   "releaseNotes": "https://github.com/ropensci/rfishbase/blob/master/NEWS.md",
   "readme": "https://github.com/ropensci/rfishbase/blob/master/README.md",
-  "fileSize": "1611.241KB",
+  "fileSize": "3331.786KB",
   "citation": [
     {
       "@type": "ScholarlyArticle",
