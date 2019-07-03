@@ -4,7 +4,8 @@
 \alias{species_names}
 \title{species names}
 \usage{
-species_names(codes, server = NULL)
+species_names(codes, server = getOption("FISHBASE_API", "fishbase"),
+  version = get_latest_release(), db = default_db())
 }
 \arguments{
 \item{codes}{a vector of speccodes (e.g. column from a table)}
@@ -12,6 +13,10 @@ species_names(codes, server = NULL)
 \item{server}{can be set to either "fishbase" or "sealifebase" to switch between databases. NOTE: it is usually
 easier to leave this as NULL and set the source instead using the environmental variable `FISHBASE_API`, e.g.
 `Sys.setenv(FISHBASE_API="sealifebase")`.}
+
+\item{version}{a version string for the database, will default to the latest release. see [get_releases()] for details.}
+
+\item{db}{the}
 }
 \value{
 A character vector of species names for the SpecCodes

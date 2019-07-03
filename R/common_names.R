@@ -17,13 +17,16 @@
 #' }
 #' @seealso \code{\link{species_list}}, \code{\link{synonyms}}
 #' @export
-#' @importFrom dplyr filter select distinct
+#' @importFrom dplyr filter select distinct collect
 #' @importFrom stringr str_to_lower
 #' @importFrom purrr map_dfr
-common_to_sci <- function(x, Language = NULL, ..., 
-                          server = NULL){
+common_to_sci <- function(x, 
+                          Language = "English", 
+                          server = getOption("FISHBASE_API", "fishbase"), 
+                          version = get_latest_release(),
+                          db = default_db()){
   
-  comnames <- get_comnames(server)
+  comnames <- get_comnames(server, version, db) %>% dplyr::collect()
   subset <- 
     purrr::map_dfr(x, function(y){
       y <- stringr::str_to_lower(y)
@@ -35,16 +38,23 @@ common_to_sci <- function(x, Language = NULL, ...,
 } 
 
 
-get_comnames <- memoise::memoise(function(server){  
+get_comnames <- function(server = getOption("FISHBASE_API", "fishbase"), 
+                         version = get_latest_release(),
+                         db = default_db(),
+                         lang = "English"){  
   ## FIXME switch to SLB if server indicates
-  df <- fb_tbl("comnames", server)
+  df <- fb_tbl("comnames", server, version, db)
+  Language <- rlang::sym("Language")
+  lang <- rlang::enquo(lang)
   comnames <- df %>% 
-    dplyr::select(ComName, Language, SpecCode) %>%  
-    dplyr::filter(Language %in% Language) %>% 
+    dplyr::select("ComName", "Language", "SpecCode") %>%  
+    dplyr::filter(!!Language == !!lang) %>% 
     dplyr::distinct() %>% 
-    dplyr::left_join(fb_species(server), by = "SpecCode") %>% 
-    select(Species, ComName, Language, SpecCode)
-})
+    dplyr::left_join(fb_species(server, version, db), by = "SpecCode") %>% 
+    dplyr::select("Species", "ComName", "Language", "SpecCode")
+  
+  comnames
+}
 
 globalVariables(c("ComName", "Language"))
 #' common names
@@ -66,10 +76,14 @@ globalVariables(c("ComName", "Language"))
 #' @export common_names sci_to_common
 #' @aliases common_names sci_to_common
 common_names <- function(species_list = NULL, 
-                        server = NULL, 
+                         server = getOption("FISHBASE_API", "fishbase"), 
+                         version = get_latest_release(),
+                         db = default_db(),
                         Language = NULL,
                         fields = NULL){
-  species_subset(species_list, get_comnames(server), server)
+  species_subset(species_list, 
+                 dplyr::select(get_comnames(server, version, db, lang = Language)), 
+                 server, version, db)
 }  
 
 

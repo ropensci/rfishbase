@@ -35,11 +35,16 @@ species_subset <- function(species_list,
                            db = default_db()){
 
   species <- load_taxa(server, version, db) %>% dplyr::select("SpecCode", "Species")
+  if("Species" %in% colnames(full_data)){
+    sp <- dplyr::sym("Species")
+    full_data <- dplyr::select(full_data, - !!sp)
+  }
+  
   if(is.null(species_list)){
     return(dplyr::left_join(species, full_data, by = "SpecCode"))
   }
     
-  ## 
+  ## stramline
   suppressMessages({
     speccodes(species_list, table = species) %>% 
     dplyr::copy_to(db, "species_list", overwrite=TRUE, temporary=TRUE) 

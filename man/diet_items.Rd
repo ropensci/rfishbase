@@ -4,12 +4,19 @@
 \alias{diet_items}
 \title{fooditems}
 \usage{
-diet_items(server = NULL)
+diet_items(server = getOption("FISHBASE_API", "fishbase"),
+  version = get_latest_release(), db = default_db(), ...)
 }
 \arguments{
 \item{server}{can be set to either "fishbase" or "sealifebase" to switch between databases. NOTE: it is usually
 easier to leave this as NULL and set the source instead using the environmental variable `FISHBASE_API`, e.g.
 `Sys.setenv(FISHBASE_API="sealifebase")`.}
+
+\item{version}{a version string for the database, will default to the latest release. see [get_releases()] for details.}
+
+\item{db}{the}
+
+\item{...}{unused; for backwards compatibility only}
 }
 \value{
 a table of species diet_items

@@ -5,6 +5,8 @@
 #' @param server can be set to either "fishbase" or "sealifebase" to switch between databases. NOTE: it is usually
 #' easier to leave this as NULL and set the source instead using the environmental variable `FISHBASE_API`, e.g.
 #' `Sys.setenv(FISHBASE_API="sealifebase")`.
+#' @param version a version string for the database, will default to the latest release. see [get_releases()] for details.
+#' @param db the 
 #' @param fields a character vector specifying which fields (columns) should be returned. By default,
 #'  all available columns recognized by the parser are returned.  Mostly for backwards compatibility as users can subset by column later
 #' @param ... unused; for backwards compatibility only
@@ -28,20 +30,6 @@
 #' 
 #' }
 species <- endpoint("species")
-# species <- function(species_list = NULL, fields = NULL, 
-#                     server = NULL, ...){
-#   full_data <- fb_tbl("species", server) %>% 
-#     select(-Genus, -Species)
-#   
-#   full_data <- fix_ids(full_data)
-#   out <- species_subset(species_list, full_data, server)
-#   
-#   if(!is.null(fields)){
-#     out <- out[fields]
-#   }
-#   
-#   out
-# }
 
 #species <- endpoint("species", tidy_table = tidy_species_table)
 

@@ -6,7 +6,7 @@
 #' @return the taxa list
 #' @importFrom dplyr arrange
 #' @export
-load_taxa <- function(server = NULL, 
+load_taxa <- function(server = getOption("FISHBASE_API", "fishbase"), 
                       version = get_latest_release(),
                       db = default_db(),
                       ...){

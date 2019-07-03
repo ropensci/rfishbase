@@ -21,21 +21,24 @@
 #'  # See all synonyms 
 #'  species("Bolbometopon muricatum")
 #'  }
-synonyms <- function(species_list = NULL, server = NULL, 
+synonyms <- function(species_list = NULL, 
+                     server = getOption("FISHBASE_API", "fishbase"), 
+                     version = get_latest_release(),
+                     db = default_db(), 
                      ...){
   
   if (is.null(server)) 
     server <- getOption("FISHBASE_API", FISHBASE_API)
   if (!grepl("sealifebase", server)) {
     syn <- 
-      fb_tbl("synonyms", server) %>%
+      fb_tbl("synonyms", server, version, db) %>%
       mutate(synonym = paste(SynGenus, SynSpecies)) %>% 
       select(synonym, Status, SpecCode, SynCode, 
              CoL_ID, TSN, WoRMS_ID, ZooBank_ID,
              TaxonLevel)
   } else {
     syn <- 
-      fb_tbl("synonyms", server) %>%
+      fb_tbl("synonyms", server, version, db) %>%
       mutate(synonym = paste(SynGenus, SynSpecies)) %>% 
       select(synonym, Status, SpecCode, SynCode, 
              CoL_ID, TSN, ZooBank_ID,
@@ -49,7 +52,7 @@ synonyms <- function(species_list = NULL, server = NULL,
   dplyr::left_join(
             data.frame(synonym = species_list, stringsAsFactors = FALSE),
             syn,by="synonym") %>% 
-    left_join(fb_species(server), by = "SpecCode")
+    left_join(fb_species(server, version, db), by = "SpecCode")
 }
 
 
@@ -68,9 +71,13 @@ globalVariables(c("Status", "SpecCode", "SynCode",
 #' @examples \donttest{
 #' validate_names("Abramites ternetzi")
 #' }
-validate_names <- function(species_list, server = NULL,...){
+validate_names <- function(species_list, 
+                           server = getOption("FISHBASE_API", "fishbase"), 
+                           version = get_latest_release(),
+                           db = default_db(),
+                           ...){
   
-  synonyms(species_list, server = server) %>% 
+  synonyms(species_list, server = server, version = version, db = db) %>% 
     dplyr::filter(Status == "accepted name" | Status == "synonym") %>% 
     dplyr::pull(Species)
                        

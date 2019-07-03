@@ -18,6 +18,10 @@ all available columns recognized by the parser are returned.  Mostly for backwar
 easier to leave this as NULL and set the source instead using the environmental variable `FISHBASE_API`, e.g.
 `Sys.setenv(FISHBASE_API="sealifebase")`.}
 
+\item{version}{a version string for the database, will default to the latest release. see [get_releases()] for details.}
+
+\item{db}{the}
+
 \item{...}{unused; for backwards compatibility only}
 }
 \description{

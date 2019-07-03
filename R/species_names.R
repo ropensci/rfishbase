@@ -7,9 +7,12 @@
 #' @inheritParams species
 #' @export  species_names
 #' @aliases  species_names
-species_names <- function(codes, server =  NULL){
+species_names <- function(codes, 
+                          server = getOption("FISHBASE_API", "fishbase"), 
+                          version = get_latest_release(),
+                          db = default_db()){
   
-  fb_species(server=server) %>% filter(SpecCode %in% codes)
+  fb_species(server, version, db) %>% filter(SpecCode %in% codes)
 }
 
 

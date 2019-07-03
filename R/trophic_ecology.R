@@ -15,10 +15,15 @@
 #' ecology(c("Oreochromis niloticus", "Salmo trutta"),
 #'         fields=c("SpecCode", "FoodTroph", "FoodSeTroph", "DietTroph", "DietSeTroph"))
 #' }
-ecology <- function(species_list=NULL, fields = NULL,
-                    server = NULL){
-    ecology_endpoint(species_list, fields = fields,  server = server)
-}
+ecology <- endpoint("ecology") 
+
+#ecology <- function(species_list=NULL, fields = NULL,
+#                    server = NULL){
+#    ecology_endpoint(species_list, fields = fields,  
+#                     server = getOption("FISHBASE_API", "fishbase"), 
+#                     version = get_latest_release(),
+#                     db = default_db())
+#}
 
 ## This function wants to have custom default for the 'limit' argument.  To do this, first create 
 ## a function with the generic default using endpoint(), and then use it to define a new function.
@@ -48,7 +53,11 @@ fooditems <- endpoint("fooditems")
 #' @examples \dontrun{
 #' diet_items("Oreochromis niloticus")
 #' }
-diet_items <- function(server = NULL)  fb_tbl("diet_items", server = server)
+diet_items <- function(server = getOption("FISHBASE_API", "fishbase"), 
+                       version = get_latest_release(),
+                       db = default_db(),
+                       ...)  
+  fb_tbl("diet_items", server = server, version = version, db = db)
 
 #' predators
 #'  
