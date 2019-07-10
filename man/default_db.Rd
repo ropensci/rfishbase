@@ -4,8 +4,7 @@
 \alias{default_db}
 \title{Connect to the rfishbase database}
 \usage{
-default_db(dbname = "database", dbdir = db_dir(),
-  driver = Sys.getenv("DB_DRIVER"))
+default_db(dbdir = db_dir(), driver = Sys.getenv("DB_DRIVER"))
 }
 \arguments{
 \item{dbdir}{Path to the database.}

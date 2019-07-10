@@ -1,4 +1,5 @@
 #' @importFrom arkdb unark
+#' @importFrom utils download.file
 db_create <- function(tbl, 
                       server = getOption("FISHBASE_API", "fishbase"),
                       version = get_latest_release(),
@@ -12,6 +13,9 @@ db_create <- function(tbl,
   dir.create(db_dir(), FALSE, TRUE)
   utils::download.file(addr, dest =  local_tbl)
   
+  
+  ## FIXME FISHBASE uses mixed-case names for cols that should be case-insensitive
+  ## Consider lowercasing all column names (though makes many camelCase names hard to read...)
   arkdb::unark(local_tbl, 
                db, 
                arkdb::streamable_readr_tsv(), 
@@ -19,6 +23,9 @@ db_create <- function(tbl,
                col_types = readr::cols(.default = "c")
   )
 }
+
+
+
 
 ## Deal with somewhat poorly constructed URL conventions:
 prefix <- function(server = getOption("FISHBASE_API", "fishbase")){
@@ -42,7 +49,6 @@ tbl_name <- function(tbl, server, version){
 }
 
 #' Connect to the rfishbase database
-#'
 #' @param dbdir Path to the database.
 #' @param driver Default driver, one of "duckdb", "MonetDBLite", "RSQLite".
 #'   `rfishbase` will select the first one of those it finds available if a
@@ -66,7 +72,7 @@ tbl_name <- function(tbl, server, version){
 #'
 #'
 #' @importFrom DBI dbConnect dbIsValid
-#' @importFrom duckdb duckdb
+# @importFrom duckdb duckdb
 #' @export
 #' @examples \donttest{
 #' ## OPTIONAL: you can first set an alternative home location,
@@ -77,11 +83,10 @@ tbl_name <- function(tbl, server, version){
 #' db <- connect_db()
 #'
 #' }
-default_db <- function(dbname = "database",
-                       dbdir = db_dir(),
+default_db <- function(dbdir = db_dir(),
                        driver = Sys.getenv("DB_DRIVER")){
   
-  db_path <- file.path(dbdir, dbname)
+  db_path <- file.path(dbdir, "database")
   db <- mget("local_db", envir = db_cache, ifnotfound = NA)[[1]]
   if (inherits(db, "DBIConnection")) {
     if (DBI::dbIsValid(db)) {
@@ -105,16 +110,15 @@ db_driver <- function(dbname, driver = Sys.getenv("DB_DRIVER")){
     SQLite <- getExportedValue("RSQLite", "SQLite")
     drivers <- c("RSQLite", drivers)
   }
-  if (requireNamespace("MonetDBLite", quietly = TRUE)){
-    MonetDBLite <- getExportedValue("MonetDBLite", "MonetDBLite")
-    ## drivers <- c("MonetDBLite", drivers)  ## lacks concat_ws (paste)
-  }
-  ## duckdb lacks necessary capabilities (e.g. temp tables) at this time
-  ## https://github.com/cwida/duckdb/issues/58
-  if (requireNamespace("duckdb", quietly = TRUE)){
-      duckdb <- getExportedValue("duckdb", "duckdb")
-  ##    drivers <- c("duckdb", drivers)  ## duckdb can't dplyr::compute
-  }
+#  if (requireNamespace("MonetDBLite", quietly = TRUE)){
+#    MonetDBLite <- getExportedValue("MonetDBLite", "MonetDBLite")
+#    drivers <- c("MonetDBLite", drivers)  ## lacks concat_ws (paste)
+#  }
+ 
+#  if (requireNamespace("duckdb", quietly = TRUE)){
+#      duckdb <- getExportedValue("duckdb", "duckdb")
+#      drivers <- c("duckdb", drivers)  
+#  }
   
   ## If driver is undefined or not in available list, use first from the list
   if (  !(driver %in% drivers) ) driver <- drivers[[1]]
@@ -166,6 +170,7 @@ db_disconnect <- function(env = db_cache){
 db_cache <- new.env()
 reg.finalizer(db_cache, db_disconnect, onexit = TRUE)
 
+#' @importFrom rappdirs user_data_dir
 db_dir <- function(){
   Sys.getenv("FISHBASE_HOME",  rappdirs::user_data_dir("rfishbase"))
 }

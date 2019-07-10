@@ -8,7 +8,13 @@ load_taxa(server = getOption("FISHBASE_API", "fishbase"),
   version = get_latest_release(), db = default_db(), ...)
 }
 \arguments{
-\item{server}{API for Fishbase or Sealifebase?}
+\item{server}{Either "fishbase" (the default) or "sealifebase"}
+
+\item{version}{the version of the database you want. Will default to the
+latest avialable; see [available_releases()].}
+
+\item{db}{A remote database connection. Will default to the best available
+system, see [default_db()].}
 
 \item{...}{for compatibility with previous versions}
 }

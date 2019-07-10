@@ -1,7 +1,11 @@
 
 #' load_taxa
 #' 
-#' @param server API for Fishbase or Sealifebase?
+#' @param server Either "fishbase" (the default) or "sealifebase"
+#' @param version the version of the database you want. Will default to the
+#' latest avialable; see [available_releases()].
+#' @param db A remote database connection. Will default to the best available
+#' system, see [default_db()].
 #' @param ... for compatibility with previous versions
 #' @return the taxa list
 #' @importFrom dplyr arrange
@@ -87,16 +91,15 @@ slb_taxa_table <- function(server, version, db){
     select("SpecCode", "Species", "Genus",
            "GenCode", "SubGenCode", "FamCode")
   taxon_genus <- fb_tbl("genera", server, version, db) %>% 
-    select("GenCode", "Genus" = "GEN_NAME", "GenusCommonName"="GenComName", "FamCode",
-           "Subfamily", "SubgenusOf")
+    select("GenCode", "Genus" = "GEN_NAME", "GenusCommonName" = "CommonName", "FamCode" = "Famcode",
+           "Subfamily")
   taxon_family <- fb_tbl("families", server, version, db) %>% 
     select("FamCode", "Family","FamilyCommonName"="CommonName", "Order",
             "Ordnum", "Class", "ClassNum")
   taxon_order <- fb_tbl("orders", server, version, db) %>% 
     select("Ordnum", "Order", "OrderCommonName"= "CommonName", "ClassNum", "Class") 
   taxon_class <- fb_tbl("classes", server, version, db) %>% 
-    select("ClassNum", "ClassCommonName" = "Class", "CommonName",
-           "SuperClass", "Subclass")
+    select("ClassNum", "Class", "ClassCommonName" = "CommonName")
   taxon_phylum <- fb_tbl("phylums", server, version, db) %>% 
     select("PhylumId", "Phylum", "Kingdom", "PhylumCommonName" = "CommonName")
   phylum_class <- fb_tbl("phylumclass", server, version, db) 

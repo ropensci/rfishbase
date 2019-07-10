@@ -10,7 +10,7 @@ test_that("We can pass a species_list based on taxanomic group", {
 
 test_that("Look up species by SpecCode", {
   
-  fish <- species_list(SpecCode = 5537) 
+  fish <- species_list(SpecCode = "5537") 
   expect_is(fish, "character")
   expect_equal(fish, "Bolbometopon muricatum")
   

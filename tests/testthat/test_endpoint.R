@@ -10,17 +10,14 @@ test_that("Custom queries give desired result", {
   country <- endpoint("country")
   df <- country()
   expect_is(df, "tbl")
-  expect_gt(dim(df)[1], 0)
-  
+
   df <- country("Oreochromis niloticus")
   expect_is(df, "tbl")
-  expect_gt(dim(df)[1], 0)
-  
+
   references()
   
   df <- species_names(2)
   expect_is(df, "tbl")
-  expect_gt(dim(df)[1], 0)
-  
+
 })
 

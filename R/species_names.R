@@ -12,7 +12,7 @@ species_names <- function(codes,
                           version = get_latest_release(),
                           db = default_db()){
   
-  fb_species(server, version, db) %>% filter(SpecCode %in% codes)
+  fb_species(server, version, db) %>% filter(SpecCode %in% codes) %>% collect()
 }
 
 

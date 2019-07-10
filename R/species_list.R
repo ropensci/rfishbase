@@ -58,7 +58,7 @@ species_list <- function(Class = NULL,
   if(!is.null(SpecCode)) 
     taxa <- taxa %>% filter(SpecCode %in% !!spec_code)
   
-  taxa$Species
+  taxa %>% pull(Species)
 
 }
 

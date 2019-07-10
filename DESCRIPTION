@@ -33,7 +33,11 @@ Imports:
     rlang,
     magrittr,
     stringr,
-    gh
+    gh,
+    DBI,
+    RSQLite,
+    arkdb,
+    rappdirs
 Suggests:
     devtools,
     testthat,
