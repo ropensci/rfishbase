@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>distribution — distribution • rfishbase</title>
+<title>List available releases — available_releases • rfishbase</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -37,9 +37,9 @@
 
 
 
-<meta property="og:title" content="distribution — distribution" />
+<meta property="og:title" content="List available releases — available_releases" />
 
-<meta property="og:description" content="return a table of species locations as reported in FishBASE.org FAO location data" />
+<meta property="og:description" content="List available releases" />
 
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -123,68 +123,38 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>distribution</h1>
-    <small class="dont-index">Source: <a href='https://github.com/ropensci/rfishbase/blob/master/R/distribution.R'><code>R/distribution.R</code></a></small>
-    <div class="hidden name"><code>distribution.Rd</code></div>
+    <h1>List available releases</h1>
+    <small class="dont-index">Source: <a href='https://github.com/ropensci/rfishbase/blob/master/R/fb_tbl.R'><code>R/fb_tbl.R</code></a></small>
+    <div class="hidden name"><code>available_releases.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>return a table of species locations as reported in FishBASE.org FAO location data</p>
+    <p>List available releases</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>distribution</span>(<span class='kw'>species_list</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>fields</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>server</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/options'>getOption</a></span>(<span class='st'>"FISHBASE_API"</span>, <span class='st'>"fishbase"</span>),
-  <span class='kw'>version</span> <span class='kw'>=</span> <span class='fu'>get_latest_release</span>(), <span class='kw'>db</span> <span class='kw'>=</span> <span class='fu'><a href='default_db.html'>default_db</a></span>(), <span class='no'>...</span>)</pre>
-    
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>species_list</th>
-      <td><p>A vector of scientific names (each element as "genus species"). If empty, a table for all fish will be returned.</p></td>
-    </tr>
-    <tr>
-      <th>fields</th>
-      <td><p>a character vector specifying which fields (columns) should be returned. By default,
-all available columns recognized by the parser are returned.  Mostly for backwards compatibility as users can subset by column later</p></td>
-    </tr>
-    <tr>
-      <th>server</th>
-      <td><p>can be set to either "fishbase" or "sealifebase" to switch between databases. NOTE: it is usually
-easier to leave this as NULL and set the source instead using the environmental variable `FISHBASE_API`, e.g.
-`Sys.setenv(FISHBASE_API="sealifebase")`.</p></td>
-    </tr>
-    <tr>
-      <th>version</th>
-      <td><p>a version string for the database, will default to the latest release. see [get_releases()] for details.</p></td>
-    </tr>
-    <tr>
-      <th>db</th>
-      <td><p>the</p></td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td><p>unused; for backwards compatibility only</p></td>
-    </tr>
-    </table>
-    
+    <pre class="usage"><span class='fu'>available_releases</span>()</pre>
+        
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>currently this is ~ FAO areas table (minus "note" field)
-e.g. http://www.fishbase.us/Country/FaoAreaList.php?ID=5537</p>
+    <p>Lists all available releases (year.month format).  
+To use a specific release, set the desired release using
+`options(FISHBASE_VERSION=)`, as shown in the examples. 
+Otherwise, rfishbase will use the latest available version if this
+option is unset.  NOTE: it will be necessary 
+to clear the cache with `clear_cache()` or by restarting the R session
+with a fresh environment.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='fu'>distribution</span>(<span class='fu'><a href='species_list.html'>species_list</a></span>(<span class='kw'>Genus</span><span class='kw'>=</span><span class='st'>'Labroides'</span>))
-<span class='co'># }</span></pre>
+    <pre class="examples"><div class='input'><span class='fu'>available_releases</span>()</div><div class='output co'>#&gt; [1] "19.04" "18.1"  "18.07" "17.07"</div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/options'>options</a></span>(<span class='kw'>FISHBASE_VERSION</span><span class='kw'>=</span><span class='st'>"19.04"</span>)
+<span class='co'>## unset</span>
+<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/options'>options</a></span>(<span class='kw'>FISHBASE_VERSION</span><span class='kw'>=</span><span class='kw'>NULL</span>)</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#details">Details</a></li>
       

@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rfishbase</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.0.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.1.0</span>
       </span>
     </div>
 
@@ -134,8 +134,9 @@
     
     </div>
 
-    <pre class="usage"><span class='fu'>common_names</span>(<span class='kw'>species_list</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>server</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>Language</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>fields</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>common_names</span>(<span class='kw'>species_list</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>server</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/options'>getOption</a></span>(<span class='st'>"FISHBASE_API"</span>,
+  <span class='st'>"fishbase"</span>), <span class='kw'>version</span> <span class='kw'>=</span> <span class='fu'>get_latest_release</span>(), <span class='kw'>db</span> <span class='kw'>=</span> <span class='fu'><a href='default_db.html'>default_db</a></span>(),
+  <span class='kw'>Language</span> <span class='kw'>=</span> <span class='st'>"English"</span>, <span class='kw'>fields</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -149,6 +150,14 @@
       <td><p>can be set to either "fishbase" or "sealifebase" to switch between databases. NOTE: it is usually
 easier to leave this as NULL and set the source instead using the environmental variable `FISHBASE_API`, e.g.
 `Sys.setenv(FISHBASE_API="sealifebase")`.</p></td>
+    </tr>
+    <tr>
+      <th>version</th>
+      <td><p>a version string for the database, will default to the latest release. see [get_releases()] for details.</p></td>
+    </tr>
+    <tr>
+      <th>db</th>
+      <td><p>the</p></td>
     </tr>
     <tr>
       <th>Language</th>
@@ -172,20 +181,24 @@ The resulting data.frames are concatenated.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>common_names</span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"Labroides bicolor"</span>,  <span class='st'>"Bolbometopon muricatum"</span>))</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 77 x 4</span><span>
-#&gt;    SpecCode Species           ComName                   Language
-#&gt;       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>             </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                     </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   
-#&gt; </span><span style='color: #555555;'> 1</span><span>     </span><span style='text-decoration: underline;'>5</span><span>650 Labroides bicolor Arinai                    Kiribati
-#&gt; </span><span style='color: #555555;'> 2</span><span>     </span><span style='text-decoration: underline;'>5</span><span>650 Labroides bicolor Bayan                     Malay   
-#&gt; </span><span style='color: #555555;'> 3</span><span>     </span><span style='text-decoration: underline;'>5</span><span>650 Labroides bicolor Bicolored cleaner wrasse  English 
-#&gt; </span><span style='color: #555555;'> 4</span><span>     </span><span style='text-decoration: underline;'>5</span><span>650 Labroides bicolor Bicolour cleaner wrasse   English 
-#&gt; </span><span style='color: #555555;'> 5</span><span>     </span><span style='text-decoration: underline;'>5</span><span>650 Labroides bicolor Bicoloured cleaner wrasse English 
-#&gt; </span><span style='color: #555555;'> 6</span><span>     </span><span style='text-decoration: underline;'>5</span><span>650 Labroides bicolor Bicolor cleaner wrasse    English 
-#&gt; </span><span style='color: #555555;'> 7</span><span>     </span><span style='text-decoration: underline;'>5</span><span>650 Labroides bicolor Bicolor cleanerfish       English 
-#&gt; </span><span style='color: #555555;'> 8</span><span>     </span><span style='text-decoration: underline;'>5</span><span>650 Labroides bicolor bola i bulewa             Fijian  
-#&gt; </span><span style='color: #555555;'> 9</span><span>     </span><span style='text-decoration: underline;'>5</span><span>650 Labroides bicolor Cleaner wrasse            English 
-#&gt; </span><span style='color: #555555;'>10</span><span>     </span><span style='text-decoration: underline;'>5</span><span>650 Labroides bicolor Dokter asli               Malay   
-#&gt; </span><span style='color: #555555;'># … with 67 more rows</span><span></div><div class='input'>
+    <pre class="examples"><div class='input'><span class='fu'>common_names</span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"Labroides bicolor"</span>,  <span class='st'>"Bolbometopon muricatum"</span>))</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 15 x 4</span><span>
+#&gt;    SpecCode Species                ComName                   Language
+#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                  </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                     </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   
+#&gt; </span><span style='color: #555555;'> 1</span><span> 5650     Labroides bicolor      Bicolor cleaner wrasse    English 
+#&gt; </span><span style='color: #555555;'> 2</span><span> 5650     Labroides bicolor      Bicolor cleanerfish       English 
+#&gt; </span><span style='color: #555555;'> 3</span><span> 5650     Labroides bicolor      Bicolored cleaner wrasse  English 
+#&gt; </span><span style='color: #555555;'> 4</span><span> 5650     Labroides bicolor      Bicolour cleaner wrasse   English 
+#&gt; </span><span style='color: #555555;'> 5</span><span> 5650     Labroides bicolor      Bicoloured cleaner wrasse English 
+#&gt; </span><span style='color: #555555;'> 6</span><span> 5650     Labroides bicolor      Cleaner wrasse            English 
+#&gt; </span><span style='color: #555555;'> 7</span><span> 5650     Labroides bicolor      Two-colour cleaner        English 
+#&gt; </span><span style='color: #555555;'> 8</span><span> 5650     Labroides bicolor      Two-colour cleaner wrasse English 
+#&gt; </span><span style='color: #555555;'> 9</span><span> 5650     Labroides bicolor      Wrasse                    English 
+#&gt; </span><span style='color: #555555;'>10</span><span> 5650     Labroides bicolor      Yellow diesel wrasse      English 
+#&gt; </span><span style='color: #555555;'>11</span><span> 5537     Bolbometopon muricatum Bumphead parrotfish       English 
+#&gt; </span><span style='color: #555555;'>12</span><span> 5537     Bolbometopon muricatum Double-headed parrotfish  English 
+#&gt; </span><span style='color: #555555;'>13</span><span> 5537     Bolbometopon muricatum Green humphead parrotfish English 
+#&gt; </span><span style='color: #555555;'>14</span><span> 5537     Bolbometopon muricatum Humphead parrotfish       English 
+#&gt; </span><span style='color: #555555;'>15</span><span> 5537     Bolbometopon muricatum Napoleon's fish           English </div><div class='input'>
 <span class='co'># subset by English language names</span>
 <span class='no'>fish</span> <span class='kw'>&lt;-</span> <span class='fu'>common_names</span>(<span class='st'>"Bolbometopon muricatum"</span>)</div></span></pre>
   </div>
