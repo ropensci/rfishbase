@@ -37,7 +37,8 @@ Imports:
     DBI,
     RSQLite,
     arkdb,
-    rappdirs
+    rappdirs,
+    dbplyr
 Suggests:
     devtools,
     testthat,

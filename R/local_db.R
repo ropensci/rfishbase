@@ -124,9 +124,9 @@ db_driver <- function(dbname, driver = Sys.getenv("DB_DRIVER")){
   if (  !(driver %in% drivers) ) driver <- drivers[[1]]
   
   switch(driver,
-         duckdb = DBI::dbConnect(duckdb(),
-                                       dbname = file.path(dbname,"duckdb")),
-         MonetDBLite = monetdblite_connect(file.path(dbname,"MonetDBLite")),
+#         duckdb = DBI::dbConnect(duckdb(),
+#                                       dbname = file.path(dbname,"duckdb")),
+#         MonetDBLite = monetdblite_connect(file.path(dbname,"MonetDBLite")),
          RSQLite = DBI::dbConnect(SQLite(),
                                         file.path(dbname, "sqlite_db.sqlite")),
          dplyr = NULL,
