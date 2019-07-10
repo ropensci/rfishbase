@@ -40,19 +40,23 @@ synonyms <- function(species_list = NULL,
     syn <- 
       fb_tbl("synonyms", server, version, db) %>%
       mutate(synonym = paste(SynGenus, SynSpecies)) %>% 
-      select(synonym, Status, SpecCode, SynCode, 
-             CoL_ID, TSN, ZooBank_ID,
-             TaxonLevel)
+      select("synonym", "Status", "SpecCode", "SynCode", 
+             "CoL_ID", "TSN", "ZooBank_ID",
+             "TaxonLevel")
     
  }
   
   if(is.null(species_list))
-    return(syn)
+    return(collect(syn))
   
-  dplyr::left_join(
-            data.frame(synonym = species_list, stringsAsFactors = FALSE),
-            syn,by="synonym") %>% 
-    left_join(fb_species(server, version, db), by = "SpecCode")
+  df <- data.frame(synonym = species_list, stringsAsFactors = FALSE)
+  tmp <- tmp_tablename()
+  dplyr::copy_to(db, df = df, name = tmp, overwrite=TRUE, temporary=TRUE) 
+  df <- dplyr::tbl(db, tmp)
+  
+  left_join(df, syn, by="synonym") %>% 
+    left_join(fb_species(server, version, db), by = "SpecCode") %>% 
+    collect()
 }
 
 

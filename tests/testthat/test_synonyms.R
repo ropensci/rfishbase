@@ -7,7 +7,7 @@ test_that("synonyms can query by species", {
   
   df <- synonyms("Callyodon muricatus")
   expect_is(df, "data.frame")
-  expect_equal(df$SpecCode[[1]], 5537)
+  expect_equal(as.numeric(df$SpecCode[[1]]), 5537)
 })
 
 test_that("synonyms can resolve misspellings", {
@@ -15,7 +15,7 @@ test_that("synonyms can resolve misspellings", {
   needs_api()
   
   x <- synonyms("Labroides dimidatus") # Species name misspelled
-  expect_equal(species_list(SpecCode = x$SpecCode), "Labroides dimidiatus")
+  expect_equal(x %>% pull(Species), "Labroides dimidiatus")
 })
   
 
