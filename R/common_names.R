@@ -45,10 +45,10 @@ get_comnames <- function(server = getOption("FISHBASE_API", "fishbase"),
   ## FIXME switch to SLB if server indicates
   df <- fb_tbl("comnames", server, version, db)
   Language <- rlang::sym("Language")
-  lang <- rlang::enquo(lang)
+  value <- rlang::quo(lang)
   comnames <- df %>% 
     dplyr::select("ComName", "Language", "SpecCode") %>%  
-    dplyr::filter(!!Language == !!lang) %>% 
+    dplyr::filter(!!Language == !!value) %>% 
     dplyr::distinct() %>% 
     dplyr::left_join(fb_species(server, version, db), by = "SpecCode") %>% 
     dplyr::select("Species", "ComName", "Language", "SpecCode")
@@ -79,11 +79,12 @@ common_names <- function(species_list = NULL,
                          server = getOption("FISHBASE_API", "fishbase"), 
                          version = get_latest_release(),
                          db = default_db(),
-                        Language = NULL,
+                        Language = "English",
                         fields = NULL){
   species_subset(species_list, 
-                 dplyr::select(get_comnames(server, version, db, lang = Language)), 
-                 server, version, db)
+                 get_comnames(server, version, db, lang = Language), 
+                 server, version, db) %>% 
+    dplyr::collect()
 }  
 
 

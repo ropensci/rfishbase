@@ -93,7 +93,7 @@ distribution <- function(species_list=NULL,
                          version = get_latest_release(),
                          db = default_db(),
                          ...){
-  faoareas(species_list, fields = fields, server = server, version, db)
+  faoareas(species_list, fields = fields, server = server, version, db) 
 }
 
 
@@ -120,7 +120,9 @@ faoareas <- function(species_list = NULL, fields = NULL,
   ref <- faoarrefs(server, version, db)
   out <- left_join(area, ref, by = "AreaCode")
   out <- select_fields(out, fields)
-  species_subset(species_list, out, server, version, db)
+  
+  species_subset(species_list, out, server, version, db) %>%
+    dplyr::collect()
 }
 
 select_fields <- function(df, fields = NULL){

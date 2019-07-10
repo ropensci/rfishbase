@@ -63,23 +63,3 @@ species_list <- function(Class = NULL,
 }
 
 
-
-# speccodes
-#
-# Returns SpecCodes given a list of species. Primarily for internal use
-# 
-# @examples
-# who <- species_list(Family='Scaridae')
-# speccodes(who)
-speccodes <- function(species_list, table){ 
-  
-    if(is.integer(species_list))
-      return(dplyr::data_frame(SpecCode = species_list))
-    
-    left_join(dplyr::data_frame(Species = species_list),
-              table, by = "Species") %>%
-      select("SpecCode")
-  
-  
-}
-
