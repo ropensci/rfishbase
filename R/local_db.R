@@ -137,8 +137,8 @@ db_driver <- function(dbname, driver = Sys.getenv("DB_DRIVER")){
 # Provide an error handler for connecting to monetdblite if locked by another session
 # @importFrom MonetDBLite MonetDBLite
 monetdblite_connect <- function(dbname, ignore_lock = TRUE){
-  if (requireNamespace("MonetDBLite", quietly = TRUE))
-    MonetDBLite <- getExportedValue("MonetDBLite", "MonetDBLite")
+  #if (requireNamespace("MonetDBLite", quietly = TRUE))
+  MonetDBLite <- getExportedValue("MonetDBLite", "MonetDBLite")
   db <- tryCatch({
     if (ignore_lock) unlink(file.path(dbname, ".gdk_lock"))
     DBI::dbConnect(MonetDBLite(), dbname = dbname)
