@@ -19,6 +19,13 @@ test_that("synonyms can resolve misspellings", {
 })
   
 
+test_that("synonyms can resolve in sealifebase", {
+  
+  needs_api()
+  
+  x <- synonyms(server="sealifebase") 
+  expect_is(x, "tbl")
+})
 
 test_that("We can validate names",{
 
