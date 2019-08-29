@@ -25,7 +25,7 @@ species_list(Class = NULL, Order = NULL, Family = NULL,
 
 \item{SuperClass}{Request all species of this Superclass}
 
-\item{server}{fishbase or}
+\item{server}{fishbase or sealifebase}
 }
 \description{
 Return the a species list given a taxonomic group
