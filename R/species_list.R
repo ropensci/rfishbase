@@ -9,7 +9,7 @@
 #' @param Genus Request all species in this taxonomic Genus
 #' @param Species Request all species in this taxonomic Species
 #' @param SpecCode Request species name of species matching this SpecCode
-#' @param server fishbase or 
+#' @param server fishbase or sealifebase
 #' @examples
 #' \donttest{
 #' ## All species in the Family 
