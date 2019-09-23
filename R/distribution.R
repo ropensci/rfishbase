@@ -150,9 +150,27 @@ faoarrefs <- function(server = getOption("FISHBASE_API", "fishbase"),
 #' @examples \dontrun{
 #' ecosystem("Oreochromis niloticus")
 #' }
-ecosystem <- endpoint("ecosystem", 
-                      join = fb_tbl("ecosystemref", server = server, version = version, db = db), 
-                      by = "E_CODE")
+ecosystem <-  function(species_list = NULL, 
+                       fields = NULL, 
+                       server = getOption("FISHBASE_API", "fishbase"), 
+                       version = get_latest_release(),
+                       db = default_db(),
+                       ...){
+  endpt = "ecosystem"
+  join = fb_tbl("ecosystemref", server = server, version = version, db = db)
+  by = "E_CODE"
+  full_data <- fb_tbl(endpt, server, version, db) %>% fix_ids()
+  out <- species_subset(species_list, full_data, server, version, db)
+  if(!is.null(fields)){
+    out <- select(out, !!fields)
+  }
+  if(!is.null(join))
+    out <- left_join(out, join, by = by)
+  dplyr::collect(out)
+}
+
+
+                      
 
 #' occurrence
 #' 
