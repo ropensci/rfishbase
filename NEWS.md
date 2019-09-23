@@ -24,6 +24,12 @@ And constructed with the following guidelines:
 For more information on SemVer, please visit http://semver.org/.
 
 
+
+v 3.0.5
+--------
+
+- `validate_names()` has been rewritten [#170]
+
 v 3.0.4
 --------
 
@@ -44,7 +50,7 @@ v 3.0.1
 --------
 
 - patch for upcoming R release with staged installs
-- patch common_names to allow ommitting species_list for full table (#156)
+- patch common_names to allow omitting species_list for full table (#156)
 
 v 3.0.0
 ------

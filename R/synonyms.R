@@ -71,7 +71,7 @@ globalVariables(c("Status", "SpecCode", "SynCode",
 #' @inheritParams species
 #' @return a string of the validated names
 #' @export
-#' @importFrom dplyr filter pull
+#' @importFrom dplyr filter pull right_join
 #' @examples \donttest{
 #' validate_names("Abramites ternetzi")
 #' }
@@ -82,9 +82,9 @@ validate_names <- function(species_list,
                            ...){
   
   synonyms(species_list, server = server, version = version, db = db) %>% 
-    dplyr::filter(Status == "accepted name" | Status == "synonym") %>% 
+    dplyr::filter(Status == "accepted name" | Status == "synonym" | Status == "Synonym") %>% 
     dplyr::pull(Species)
                        
-    
+
 }
 
