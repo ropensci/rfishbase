@@ -34,17 +34,26 @@ prefix <- function(server = getOption("FISHBASE_API", "fishbase")){
   if(grepl("sealifebase", server)) dbname <- "slb"
   dbname
 }
-tag <- function(server, version){
+
+
+tag <- function(server = getOption("FISHBASE_API", "fishbase"),
+                version = get_latest_release()){
   release <- paste0(prefix(server), "-", version)
 }
-remote_url <- function(tbl, server, version){
+
+
+remote_url <- function(tbl, 
+                       server  = getOption("FISHBASE_API", "fishbase"), 
+                       version = get_latest_release()){
   paste0("https://github.com/ropensci/rfishbase/releases/download/", 
          tag(server, version), "/", prefix(server), 
          ".2f", tbl, ".tsv.bz2")
 }
 
 
-tbl_name <- function(tbl, server, version){
+tbl_name <- function(tbl, 
+                     server = getOption("FISHBASE_API", "fishbase"), 
+                     version = get_latest_release()){
   paste(tbl, prefix(server), gsub("\\.", "", version), sep="_")
 }
 
