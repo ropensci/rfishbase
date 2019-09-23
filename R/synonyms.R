@@ -81,10 +81,16 @@ validate_names <- function(species_list,
                            db = default_db(),
                            ...){
   
-  synonyms(species_list, server = server, version = version, db = db) %>% 
-    dplyr::filter(Status == "accepted name" | Status == "synonym" | Status == "Synonym") %>% 
-    dplyr::pull(Species)
                        
-
+  rx <- "^[sS]ynonym$|^accepted name$"
+  tmp <- data.frame(synonym  = species_list, stringsAsFactors = FALSE)
+  synonyms(species_list, server = server, version = version, db = db) %>%
+    collect() %>%
+    mutate(Species = ifelse(grepl(rx, Status), Species, NA)) %>%
+    dplyr::select(synonym, Species) %>% unique %>%
+    right_join(tmp, by = "synonym") %>%
+    pull(Species)
+  
+  
 }
 
