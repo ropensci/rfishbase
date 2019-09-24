@@ -33,8 +33,11 @@ countrysub <- endpoint("countrysub", join = country_names())
 #' @examples \dontrun{
 #' countrysubref()
 #' }
-countrysubref <- function(server = NULL){
-  fb_tbl("countrysubref", server) %>% left_join(country_names())
+countrysubref <- function(server = getOption("FISHBASE_API", "fishbase"), 
+                          version = get_latest_release(),
+                          db = default_db(),
+                          ...){
+  fb_tbl("countrysubref", server, version, db) %>% left_join(country_names())
 }
 
 
@@ -51,12 +54,14 @@ countrysubref <- function(server = NULL){
 #' @details 
 #' e.g. http://www.fishbase.us/Country
 c_code <- function(c_code = NULL, 
-                   server = NULL, 
+                   server = getOption("FISHBASE_API", "fishbase"), 
+                   version = get_latest_release(),
+                   db = default_db(), 
                    ...){
   
   out <- 
-    fb_tbl("countrysubref", server) %>% 
-    left_join(country_names(server))
+    fb_tbl("countrysubref", server, version, db) %>% 
+    left_join(country_names(server, version, db))
   
   if(is.null(c_code)) 
     out
@@ -66,8 +71,10 @@ c_code <- function(c_code = NULL,
 
 globalVariables(c("C_Code", "PAESE"))
 
-country_names <- function(server = NULL){
-  fb_tbl("countref", server) %>% select(country = PAESE, C_Code)
+country_names <- function(server = getOption("FISHBASE_API", "fishbase"), 
+                          version = get_latest_release(),
+                          db = default_db()){
+  fb_tbl("countref", server, version, db) %>% select(country = PAESE, C_Code)
 }
 #' distribution
 #' 
@@ -80,9 +87,13 @@ country_names <- function(server = NULL){
 #' }
 #' @details currently this is ~ FAO areas table (minus "note" field)
 #' e.g. http://www.fishbase.us/Country/FaoAreaList.php?ID=5537
-distribution <- function(species_list=NULL, fields = NULL, 
-                         server = NULL, ...){
-  faoareas(species_list, fields = fields, server = server)
+distribution <- function(species_list=NULL, 
+                         fields = NULL, 
+                         server = getOption("FISHBASE_API", "fishbase"), 
+                         version = get_latest_release(),
+                         db = default_db(),
+                         ...){
+  faoareas(species_list, fields = fields, server = server, version, db) 
 }
 
 
@@ -100,12 +111,18 @@ distribution <- function(species_list=NULL, fields = NULL,
 #' }
 #' @details currently this is ~ FAO areas table (minus "note" field)
 #' e.g. http://www.fishbase.us/Country/FaoAreaList.php?ID=5537
-faoareas <- function(species_list = NULL, fields = NULL, server = NULL, ...){
-  area <- fb_tbl("faoareas", server)
-  ref <- faoarrefs(server)
+faoareas <- function(species_list = NULL, fields = NULL, 
+                     server = getOption("FISHBASE_API", "fishbase"), 
+                     version = get_latest_release(),
+                     db = default_db(),
+                     ...){
+  area <- fb_tbl("faoareas", server, version, db)
+  ref <- faoarrefs(server, version, db)
   out <- left_join(area, ref, by = "AreaCode")
   out <- select_fields(out, fields)
-  species_subset(species_list, out, server)
+  
+  species_subset(species_list, out, server, version, db) %>%
+    dplyr::collect()
 }
 
 select_fields <- function(df, fields = NULL){
@@ -114,8 +131,10 @@ select_fields <- function(df, fields = NULL){
            c(list(df), as.list(c("SpecCode", fields))))
 }
 
-faoarrefs <- function(server = NULL){
-  fb_tbl("faoarref", server)
+faoarrefs <- function(server = getOption("FISHBASE_API", "fishbase"), 
+                      version = get_latest_release(),
+                      db = default_db()){
+  fb_tbl("faoarref", server, version, db)
 }
 
 
@@ -131,9 +150,27 @@ faoarrefs <- function(server = NULL){
 #' @examples \dontrun{
 #' ecosystem("Oreochromis niloticus")
 #' }
-ecosystem <- endpoint("ecosystem", 
-                      join = fb_tbl("ecosystemref", server = NULL), 
-                      by = "E_CODE")
+ecosystem <-  function(species_list = NULL, 
+                       fields = NULL, 
+                       server = getOption("FISHBASE_API", "fishbase"), 
+                       version = get_latest_release(),
+                       db = default_db(),
+                       ...){
+  endpt = "ecosystem"
+  join = fb_tbl("ecosystemref", server = server, version = version, db = db)
+  by = "E_CODE"
+  full_data <- fb_tbl(endpt, server, version, db) %>% fix_ids()
+  out <- species_subset(species_list, full_data, server, version, db)
+  if(!is.null(fields)){
+    out <- select(out, !!fields)
+  }
+  if(!is.null(join))
+    out <- left_join(out, join, by = by)
+  dplyr::collect(out)
+}
+
+
+                      
 
 #' occurrence
 #' 

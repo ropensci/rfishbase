@@ -12,6 +12,7 @@ magrittr::`%>%`
 FISHBASE_API <- "fishbase" 
 
 
+
 get_release <- function(){
   
   version <- getOption("FISHBASE_VERSION")
@@ -41,15 +42,27 @@ get_release <- function(){
 #' @importFrom stats na.omit
 available_releases <- function(){
   
-  token <- Sys.getenv("GITHUB_TOKEN", 
-             Sys.getenv("GITHUB_PAT", 
-                        paste0("b2b7441d", 
-                               "aeeb010b", 
-                               "1df26f1f6", 
-                               "0a7f1ed",
-                               "c485e443")))
+
+  ## check for cached version first
+  avail_releases <- mget("avail_releases", 
+                         envir = db_cache, 
+                         ifnotfound = NA)[[1]]
+  if(!all(is.na(avail_releases)))
+    return(avail_releases)
   
-  gh::gh("/repos/:owner/:repo/releases", owner = "ropensci", repo="rfishbase", .token = token) %>%
+  
+  ## Okay, check GH for a release
+  token <- Sys.getenv("GITHUB_TOKEN", 
+                      Sys.getenv("GITHUB_PAT", 
+                                 paste0("b2b7441d", 
+                                        "aeeb010b", 
+                                        "1df26f1f6", 
+                                        "0a7f1ed",
+                                        "c485e443")))
+  avail_releases <- gh::gh("/repos/:owner/:repo/releases", 
+         owner = "ropensci",
+         repo="rfishbase", 
+         .token = token) %>%
     purrr::map_chr("tag_name") %>%
     stringr::str_extract("\\d\\d\\.\\d\\d") %>% 
     as.numeric() %>% 
@@ -58,6 +71,10 @@ available_releases <- function(){
     sort(decreasing = TRUE) %>% 
     as.character()
   
+  ## Cache this so we don't hit GH every single time!
+  assign("avail_releases", avail_releases, envir = db_cache)
+  
+  avail_releases
 }
 
 #' @importFrom gh gh
@@ -67,55 +84,26 @@ get_latest_release <- function() {
   available_releases()[[1]]
 }
 
+
+
   # "https://fishbase.ropensci.org"
   # <- "https://fishbase.ropensci.org/sealifebase"
+
+
+has_table <- function(tbl, db = default_db()){
+  tbl %in% DBI::dbListTables(db)
+}
 
 
 #' @importFrom memoise memoise
 #' @importFrom readr read_tsv cols col_character type_convert
 fb_tbl <- 
-  memoise::memoise(
-  function(tbl, server = NULL, ...){
-    
-    ## Handle versioning
-    if(is.null(server)) 
-      server <- getOption("FISHBASE_API", FISHBASE_API)
-    dbname <- "fb"
-    if(grepl("sealifebase", server)){
-      dbname <- "slb"
-    } 
-    release <- paste0(dbname, "-",  
-                      get_release())
-    
-    
-    addr <- 
-      paste0("https://github.com/ropensci/rfishbase/releases/download/", 
-             release, "/", dbname, 
-             ".2f", tbl, ".tsv.bz2")
-    tmp <- tempfile(tbl, fileext = ".tsv.bz2")
-    download.file(addr, tmp, quiet = TRUE)
-    suppressWarnings( # Ignore parsing failure messages for now
-    suppressMessages({
-      tmp_out <- readr::read_tsv(tmp, ..., col_types = readr::cols(.default=readr::col_character()))
-      out <- readr::type_convert(tmp_out)
-    }))
-    unlink(tmp)
-    
-    out
-})
-
-#' Clear rfishbase cache
-#' 
-#' rfishbase caches data downloads for faster access.  Use this to reset 
-#' the cache when changing versions of rfishbase. 
-#' @export
-clear_cache <- function(){
-  memoise::forget(fb_tbl)
-  memoise::forget(fb_species)
-}
-
-## Define function that maps sci names to SpecCode, subsets table by requested sci name or spec code
-#' @importFrom dplyr mutate select
-fb_species <- memoise::memoise(function(server = NULL){
-  load_taxa(server = server) %>% dplyr::select(SpecCode, Species)
-})
+  function(tbl, 
+           server = getOption("FISHBASE_API", "fishbase"), 
+           version = get_latest_release(),
+           db = default_db(),
+           ...){
+    db_tbl <- tbl_name(tbl,  server, version)
+    if(!has_table(db_tbl)) db_create(tbl, server, version, db)
+    dplyr::tbl(db, db_tbl)
+    }

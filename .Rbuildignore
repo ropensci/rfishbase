@@ -23,4 +23,4 @@ circle.yml
 ^\.manifest\.json$
 ^fb$
 ^pkgdown$
-^README_.*$
+

@@ -14,15 +14,18 @@ test_that("We can query locations", {
   df <- distribution()
   expect_is(df, "data.frame")
   
+  ## currently these are remote tables
+  ## collecting them may create issues since
+  ## country_names() is used internally
   df <- countrysubref()
-  expect_is(df, "data.frame")
+  expect_is(df, "tbl")
   
   df <- c_code()
-  expect_is(df, "data.frame")
+  expect_is(df, "tbl")
   
   
   df <- country_names()
-  expect_is(df, "data.frame")
+  expect_is(df, "tbl")
   
   expect_error(occurrence())
   

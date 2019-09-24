@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rfishbase</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.0.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.1.0</span>
       </span>
     </div>
 
@@ -134,7 +134,9 @@
     
     </div>
 
-    <pre class="usage"><span class='fu'>genetics</span>(<span class='kw'>species_list</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>fields</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>server</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>genetics</span>(<span class='kw'>species_list</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>fields</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>server</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/options'>getOption</a></span>(<span class='st'>"FISHBASE_API"</span>, <span class='st'>"fishbase"</span>),
+  <span class='kw'>version</span> <span class='kw'>=</span> <span class='fu'>get_latest_release</span>(), <span class='kw'>db</span> <span class='kw'>=</span> <span class='fu'><a href='default_db.html'>default_db</a></span>(), <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -153,6 +155,14 @@ all available columns recognized by the parser are returned.  Mostly for backwar
       <td><p>can be set to either "fishbase" or "sealifebase" to switch between databases. NOTE: it is usually
 easier to leave this as NULL and set the source instead using the environmental variable `FISHBASE_API`, e.g.
 `Sys.setenv(FISHBASE_API="sealifebase")`.</p></td>
+    </tr>
+    <tr>
+      <th>version</th>
+      <td><p>a version string for the database, will default to the latest release. see [get_releases()] for details.</p></td>
+    </tr>
+    <tr>
+      <th>db</th>
+      <td><p>the</p></td>
     </tr>
     <tr>
       <th>...</th>

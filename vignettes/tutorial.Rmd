@@ -10,13 +10,15 @@ vignette: >
 ---
 
 
+
+
 Welcome to `rfishbase 3.0`. This package is the third rewrite of the original `rfishbase` package described in [Boettiger et al. (2012)](http://www.carlboettiger.info/assets/files/pubs/10.1111/j.1095-8649.2012.03464.x.pdf).   
 
 `rfishbase` 3.0 queries pre-compressed tables from a static server and employs local caching (through memoization) to provide much greater performance and stability, particularly for dealing with large queries involving 10s of thousands of species.  The user is never expected to deal with pagination or curl headers and timeouts.  
 
 
 
-We welcome any feedback, issues or questions that users may encounter through our issues tracker on GitHub: <https://github.com/ropensci/rfishbase/issues>
+We welcome any feedback, issues or questions that users may encounter through our issues tracker on GitHub: [https://github.com/ropensci/rfishbase/issues].
 
 
 
@@ -24,7 +26,7 @@ We welcome any feedback, issues or questions that users may encounter through ou
 ```{r include=FALSE}
 knitr::opts_chunk$set(warning=FALSE, comment=NA)
 Sys.setenv(GITHUB_TOKEN=paste0("b2b7441d", "aeeb010b", "1df26f1f6", "0a7f1ed", 
-                               "c485e443"))
+            "c485e443"))
 ```
 
 
@@ -39,7 +41,6 @@ remotes::install_github("ropensci/rfishbase")
 
 ```{r message=FALSE, warning=FALSE, results="hide"}
 library("rfishbase")
-library("dplyr") # convenient but not required
 ```
 
 ## Getting started
@@ -119,39 +120,26 @@ stocks(trout$Species, fields=c("Species", "Resilience", "StockDefs"))
 
 ## Version stability
 
-`rfishbase` relies on periodic cache releases. By default `rfishbase` will access the latest available release.  Note that releases are roughly semi-annual and may not match the live version at Fishbase.org.  You can view available releases with:
+`rfishbase` relies on periodic cache releases.  The current database release is `17.07` (i.e. dating from July 2017).  Set the version of FishBase you wish to access by setting the environmental variable:
 
 ```{r}
-available_releases()
+Sys.setenv(FISHBASE_VERSION="17.07")
 ```
 
-and you can set the version of FishBase you wish to access by setting the environmental variable:
-
-```{r}
-options(FISHBASE_VERSION="19.04")
-```
-
-Note that the same version number applies to both the `fishbase` and `sealifebase` data.  
+Note that the same version number applies to both the `fishbase` and `sealifebase` data.  Stay tuned for new releases.
 
 
 ## SeaLifeBase
 
 SeaLifeBase.org is maintained by the same organization and largely parallels the database structure of Fishbase. As such, almost all `rfishbase` functions can instead be instructed to address the 
 
-We can begin by getting the taxa table for sealifebase: 
+We can begin by viewing the taxa table for sealifebase: 
 
 ```{r}
-sealife <- load_taxa(server="sealifebase")
+load_taxa(server="sealifebase")
 ```
-
 
 (Note: running `load_taxa()` at the beginning of any session, for either fishbase or sealifebase is a good way to "warm up" rfishbase by loading in taxonomic data it will need. This information is cached throughout your session and will make all subsequent commands run faster.  But no worries if you skip this step, `rfishbase` will peform it for you on the first time it is needed, and will cache these results thereafter.)
-
-Let's look at some Gastropods: 
-
-```{r}
-sealife %>% filter(Class == "Gastropoda")
-```
 
 
 All other tables can also take an argument to `server`: 

@@ -10,14 +10,14 @@
   "codeRepository": "https://github.com/ropensci/rfishbase",
   "issueTracker": "https://github.com/ropensci/rfishbase/issues",
   "license": "https://spdx.org/licenses/CC0-1.0",
-  "version": "3.0.4",
+  "version": "3.0.3",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
-    "version": "3.6.0",
+    "version": "3.5.2",
     "url": "https://r-project.org"
   },
-  "runtimePlatform": "R version 3.6.0 (2019-04-26)",
+  "runtimePlatform": "R version 3.5.2 (2018-12-20)",
   "provider": {
     "@id": "https://cran.r-project.org",
     "@type": "Organization",
@@ -221,24 +221,12 @@
         "url": "https://cran.r-project.org"
       },
       "sameAs": "https://CRAN.R-project.org/package=stringr"
-    },
-    {
-      "@type": "SoftwareApplication",
-      "identifier": "gh",
-      "name": "gh",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=gh"
     }
   ],
   "contIntegration": "https://travis-ci.org/ropensci/rfishbase",
   "releaseNotes": "https://github.com/ropensci/rfishbase/blob/master/NEWS.md",
   "readme": "https://github.com/ropensci/rfishbase/blob/master/README.md",
-  "fileSize": "3331.786KB",
+  "fileSize": "1611.34KB",
   "citation": [
     {
       "@type": "ScholarlyArticle",
@@ -278,16 +266,6 @@
     "url": "https://github.com/ropensci/onboarding/issues/137",
     "provider": "http://ropensci.org"
   },
-  "keywords": [
-    "r",
-    "rstats",
-    "r-package",
-    "fishbase",
-    "taxonomy",
-    "fish"
-  ],
-  "relatedLink": "https://CRAN.R-project.org/package=rfishbase",
-  "contributor": {},
-  "copyrightHolder": {},
-  "funder": {}
+  "keywords": ["r", "rstats", "r-package", "fishbase", "taxonomy", "fish"],
+  "relatedLink": "https://CRAN.R-project.org/package=rfishbase"
 }

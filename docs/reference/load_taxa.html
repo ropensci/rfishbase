@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rfishbase</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.0.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.1.0</span>
       </span>
     </div>
 
@@ -134,14 +134,25 @@
     
     </div>
 
-    <pre class="usage"><span class='fu'>load_taxa</span>(<span class='kw'>server</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>load_taxa</span>(<span class='kw'>server</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/options'>getOption</a></span>(<span class='st'>"FISHBASE_API"</span>, <span class='st'>"fishbase"</span>),
+  <span class='kw'>version</span> <span class='kw'>=</span> <span class='fu'>get_latest_release</span>(), <span class='kw'>db</span> <span class='kw'>=</span> <span class='fu'><a href='default_db.html'>default_db</a></span>(), <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>server</th>
-      <td><p>API for Fishbase or Sealifebase?</p></td>
+      <td><p>Either "fishbase" (the default) or "sealifebase"</p></td>
+    </tr>
+    <tr>
+      <th>version</th>
+      <td><p>the version of the database you want. Will default to the
+latest avialable; see [available_releases()].</p></td>
+    </tr>
+    <tr>
+      <th>db</th>
+      <td><p>A remote database connection. Will default to the best available
+system, see [default_db()].</p></td>
     </tr>
     <tr>
       <th>...</th>

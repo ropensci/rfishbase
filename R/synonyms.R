@@ -21,35 +21,42 @@
 #'  # See all synonyms 
 #'  species("Bolbometopon muricatum")
 #'  }
-synonyms <- function(species_list = NULL, server = NULL, 
+synonyms <- function(species_list = NULL, 
+                     server = getOption("FISHBASE_API", "fishbase"), 
+                     version = get_latest_release(),
+                     db = default_db(), 
                      ...){
   
   if (is.null(server)) 
     server <- getOption("FISHBASE_API", FISHBASE_API)
   if (!grepl("sealifebase", server)) {
     syn <- 
-      fb_tbl("synonyms", server) %>%
+      fb_tbl("synonyms", server, version, db) %>%
       mutate(synonym = paste(SynGenus, SynSpecies)) %>% 
       select(synonym, Status, SpecCode, SynCode, 
              CoL_ID, TSN, WoRMS_ID, ZooBank_ID,
              TaxonLevel)
   } else {
     syn <- 
-      fb_tbl("synonyms", server) %>%
+      fb_tbl("synonyms", server, version, db) %>%
       mutate(synonym = paste(SynGenus, SynSpecies)) %>% 
-      select(synonym, Status, SpecCode, SynCode, 
-             CoL_ID, TSN, ZooBank_ID,
-             TaxonLevel)
+      select("synonym", "Status", "SpecCode", "SynCode", 
+             "CoL_ID", "TSN", "ZooBank_ID",
+             "TaxonLevel")
     
  }
   
   if(is.null(species_list))
-    return(syn)
+    return(collect(syn))
   
-  dplyr::left_join(
-            data.frame(synonym = species_list, stringsAsFactors = FALSE),
-            syn,by="synonym") %>% 
-    left_join(fb_species(server), by = "SpecCode")
+  df <- data.frame(synonym = species_list, stringsAsFactors = FALSE)
+  tmp <- tmp_tablename()
+  dplyr::copy_to(db, df = df, name = tmp, overwrite=TRUE, temporary=TRUE) 
+  df <- dplyr::tbl(db, tmp)
+  
+  left_join(df, syn, by="synonym") %>% 
+    left_join(fb_species(server, version, db), by = "SpecCode") %>% 
+    collect()
 }
 
 
@@ -68,16 +75,22 @@ globalVariables(c("Status", "SpecCode", "SynCode",
 #' @examples \donttest{
 #' validate_names("Abramites ternetzi")
 #' }
-validate_names <- function(species_list, server = NULL, ...){
+validate_names <- function(species_list, 
+                           server = getOption("FISHBASE_API", "fishbase"), 
+                           version = get_latest_release(),
+                           db = default_db(),
+                           ...){
   
+                       
   rx <- "^[sS]ynonym$|^accepted name$"
   tmp <- data.frame(synonym  = species_list, stringsAsFactors = FALSE)
-  
-  synonyms(species_list, server = server) %>%
+  synonyms(species_list, server = server, version = version, db = db) %>%
+    collect() %>%
     mutate(Species = ifelse(grepl(rx, Status), Species, NA)) %>%
     dplyr::select(synonym, Species) %>% unique %>%
     right_join(tmp, by = "synonym") %>%
     pull(Species)
-    
+  
+  
 }
 

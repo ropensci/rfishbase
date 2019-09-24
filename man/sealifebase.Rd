@@ -12,7 +12,7 @@ classification and the Species Code (SpecCode) by which the species is
 identified in SeaLifeBase
 }
 \references{
-\url{http://www.sealifebase.org}
+\url{www.sealifebase.org}
 }
 \author{
 Carl Boettiger \email{carl@ropensci.org}
