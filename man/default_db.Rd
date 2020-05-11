@@ -43,7 +43,7 @@ faster and more failsafe than repeated calls to [DBI::dbConnect]
 Sys.setenv(FISHBASE_HOME=tempdir())
 
 ## Connect to the database:
-db <- connect_db()
+db <- default_db()
 
 }
 }

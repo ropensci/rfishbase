@@ -89,7 +89,7 @@ tbl_name <- function(tbl,
 #' Sys.setenv(FISHBASE_HOME=tempdir())
 #'
 #' ## Connect to the database:
-#' db <- connect_db()
+#' db <- default_db()
 #'
 #' }
 default_db <- function(dbdir = db_dir(),
