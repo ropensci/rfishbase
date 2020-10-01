@@ -4,8 +4,13 @@
 \alias{c_code}
 \title{c_code}
 \usage{
-c_code(c_code = NULL, server = getOption("FISHBASE_API", "fishbase"),
-  version = get_latest_release(), db = default_db(), ...)
+c_code(
+  c_code = NULL,
+  server = getOption("FISHBASE_API", "fishbase"),
+  version = get_latest_release(),
+  db = default_db(),
+  ...
+)
 }
 \arguments{
 \item{c_code}{a C_Code or list of C_Codes (FishBase country code)}

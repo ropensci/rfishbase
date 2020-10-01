@@ -5,9 +5,14 @@
 \alias{sci_to_common}
 \title{common names}
 \usage{
-common_names(species_list = NULL, server = getOption("FISHBASE_API",
-  "fishbase"), version = get_latest_release(), db = default_db(),
-  Language = "English", fields = NULL)
+common_names(
+  species_list = NULL,
+  server = getOption("FISHBASE_API", "fishbase"),
+  version = get_latest_release(),
+  db = default_db(),
+  Language = "English",
+  fields = NULL
+)
 }
 \arguments{
 \item{species_list}{A vector of scientific names (each element as "genus species"). If empty, a table for all fish will be returned.}

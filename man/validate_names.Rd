@@ -4,8 +4,13 @@
 \alias{validate_names}
 \title{validate_names}
 \usage{
-validate_names(species_list, server = getOption("FISHBASE_API",
-  "fishbase"), version = get_latest_release(), db = default_db(), ...)
+validate_names(
+  species_list,
+  server = getOption("FISHBASE_API", "fishbase"),
+  version = get_latest_release(),
+  db = default_db(),
+  ...
+)
 }
 \arguments{
 \item{species_list}{A vector of scientific names (each element as "genus species"). If empty, a table for all fish will be returned.}
@@ -24,7 +29,7 @@ easier to leave this as NULL and set the source instead using the environmental 
 a string of the validated names
 }
 \description{
-Check for alternate versions of a scientific name and return 
+Check for alternate versions of a scientific name and return
 the scientific names FishBase recognizes as valid
 }
 \examples{

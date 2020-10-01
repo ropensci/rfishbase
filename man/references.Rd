@@ -4,9 +4,14 @@
 \alias{references}
 \title{references}
 \usage{
-references(codes = NULL, fields = NULL,
+references(
+  codes = NULL,
+  fields = NULL,
   server = getOption("FISHBASE_API", "fishbase"),
-  version = get_latest_release(), db = default_db(), ...)
+  version = get_latest_release(),
+  db = default_db(),
+  ...
+)
 }
 \arguments{
 \item{codes}{One or more Fishbase reference numbers, matching the RefNo 

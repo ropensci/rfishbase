@@ -4,8 +4,13 @@
 \alias{synonyms}
 \title{synonyms}
 \usage{
-synonyms(species_list = NULL, server = getOption("FISHBASE_API",
-  "fishbase"), version = get_latest_release(), db = default_db(), ...)
+synonyms(
+  species_list = NULL,
+  server = getOption("FISHBASE_API", "fishbase"),
+  version = get_latest_release(),
+  db = default_db(),
+  ...
+)
 }
 \arguments{
 \item{species_list}{A vector of scientific names (each element as "genus species"). If empty, a table for all fish will be returned.}
@@ -37,11 +42,11 @@ http://www.fishbase.org/manual/english/fishbasethe_synonyms_table.htm
 \donttest{
 # Query using a synonym:
 synonyms("Callyodon muricatus")
- 
+
  # Check for misspellings or alternate names
  synonyms("Labroides dimidatus") # Species name misspelled
 
- # See all synonyms 
+ # See all synonyms
  species("Bolbometopon muricatum")
  }
 }

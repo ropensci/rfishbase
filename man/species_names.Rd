@@ -4,8 +4,12 @@
 \alias{species_names}
 \title{species names}
 \usage{
-species_names(codes, server = getOption("FISHBASE_API", "fishbase"),
-  version = get_latest_release(), db = default_db())
+species_names(
+  codes,
+  server = getOption("FISHBASE_API", "fishbase"),
+  version = get_latest_release(),
+  db = default_db()
+)
 }
 \arguments{
 \item{codes}{a vector of speccodes (e.g. column from a table)}

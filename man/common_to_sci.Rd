@@ -4,9 +4,13 @@
 \alias{common_to_sci}
 \title{common_to_sci}
 \usage{
-common_to_sci(x, Language = "English",
+common_to_sci(
+  x,
+  Language = "English",
   server = getOption("FISHBASE_API", "fishbase"),
-  version = get_latest_release(), db = default_db())
+  version = get_latest_release(),
+  db = default_db()
+)
 }
 \arguments{
 \item{x}{a common name or list of common names}

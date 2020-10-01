@@ -4,8 +4,12 @@
 \alias{countrysubref}
 \title{countrysubref}
 \usage{
-countrysubref(server = getOption("FISHBASE_API", "fishbase"),
-  version = get_latest_release(), db = default_db(), ...)
+countrysubref(
+  server = getOption("FISHBASE_API", "fishbase"),
+  version = get_latest_release(),
+  db = default_db(),
+  ...
+)
 }
 \arguments{
 \item{server}{can be set to either "fishbase" or "sealifebase" to switch between databases. NOTE: it is usually
