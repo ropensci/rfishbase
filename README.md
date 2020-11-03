@@ -1,10 +1,7 @@
 
 # rfishbase <img src="man/figures/logo.svg" align="right" alt="" width="120" />
 
-[![Build
-Status](https://travis-ci.org/ropensci/rfishbase.svg)](https://travis-ci.org/ropensci/rfishbase)
-[![Build
-status](https://ci.appveyor.com/api/projects/status/decpqq5s57b7b0t6/branch/master?svg=true)](https://ci.appveyor.com/project/cboettig/rfishbase/branch/master)
+[![R-check](https://github.com/ropensci/rfishbase/workflows/R-check/badge.svg)](https://github.com/ropensci/rfishbase/actions?query=workflow%3AR-check)
 [![cran
 checks](https://cranchecks.info/badges/worst/rfishbase)](https://cranchecks.info/pkgs/rfishbase)
 [![Coverage
