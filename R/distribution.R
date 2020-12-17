@@ -161,6 +161,8 @@ ecosystem <-  function(species_list = NULL,
   by = "E_CODE"
   full_data <- fb_tbl(endpt, server, version, db) %>% fix_ids()
   out <- species_subset(species_list, full_data, server, version, db)
+  out <- rename(out, DateEntered = Dateentered,
+    DateModified = Datemodified, DateChecked = Datechecked)
   if(!is.null(fields)){
     out <- select(out, !!fields)
   }
@@ -169,8 +171,33 @@ ecosystem <-  function(species_list = NULL,
   dplyr::collect(out)
 }
 
+#' Species list by ecosystem
+#' 
+#' @return a table of species ecosystems data
+#' @inheritParams species
+#' @param ecosystem (character) an ecosystem name
+#' @export
+#' @examples \dontrun{
+#' species_by_ecosystem(ecosystem = "Arctic", server = "sealifebase")
+#' }
+species_by_ecosystem <- function(ecosystem, species_list = NULL,
+  server = getOption("FISHBASE_API", "fishbase"),
+  version = get_latest_release(), db = default_db(), ...) {
 
-                      
+  ecosysref = fb_tbl("ecosystemref", server, version, db)
+  ecosysname <- dplyr::filter(ecosysref, EcosystemName == ecosystem)
+  if (dplyr::collect(dplyr::count(ecosysname))$n == 0)
+    stop("ecosystem '", ecosystem, "' not found", call. = FALSE)
+  ecosys <- fb_tbl("ecosystem", server, version, db) %>% fix_ids()
+  e_code <- dplyr::collect(ecosysname)$E_CODE
+  out <- dplyr::filter(ecosys, E_CODE == e_code)
+  species <- dplyr::select(load_taxa(server, version, db), "SpecCode", "Species")
+  out <- left_join(out, species, by = "SpecCode")
+  out <- left_join(out, dplyr::select(ecosysref, E_CODE, EcosystemName),
+    by = "E_CODE")
+  out <- dplyr::relocate(out, E_CODE, EcosystemName, SpecCode, Species)
+  dplyr::collect(out)
+}
 
 #' occurrence
 #' 
