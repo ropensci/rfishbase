@@ -17,6 +17,7 @@ test_that("we can search for a field name", {
 
 test_that("we can browse docs", {
   
+  needs_api()
   df <- docs()
   expect_is(df, "data.frame")
   expect_gt(dim(df)[1], 0)
