@@ -40,11 +40,3 @@ Return a table of common names
 \details{
 Note that there are many common names for a given sci name, so sci_to_common doesn't make sense
 }
-\examples{
-\donttest{
-common_names(c("Labroides bicolor",  "Bolbometopon muricatum"))
-
-# subset by English language names
-fish <- common_names("Bolbometopon muricatum")
-}
-}

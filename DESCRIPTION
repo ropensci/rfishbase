@@ -41,7 +41,8 @@ Imports:
     arkdb,
     rappdirs,
     dbplyr,
-    curl
+    curl,
+    progress
 Suggests:
     devtools,
     testthat,
