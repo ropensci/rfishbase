@@ -84,7 +84,7 @@ get_latest_release <- function() {
   available_releases()[[1]]
 }
 
-
+db_cache <- new.env()
 
   # "https://fishbase.ropensci.org"
   # <- "https://fishbase.ropensci.org/sealifebase"

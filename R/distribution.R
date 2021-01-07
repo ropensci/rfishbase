@@ -1,6 +1,14 @@
 ## Consider information from: Countries | FAO areas | Ecosystems | Occurrences | Point map | Introductions | Faunaf
 
 
+# avoid globals
+DateEntered <- NA
+Datemodified <- NA
+Datechecked <- NA
+E_CODE <- NA
+Ecosystemname <- NA
+
+
 #' country
 #' 
 #' return a table of country for the requested species, as reported in FishBASE.org 
@@ -228,7 +236,6 @@ introductions <- endpoint("intrcase")
 #' stocks("Oreochromis niloticus")
 #' }
 stocks <- endpoint("stocks")
-
 
 ## Not indexed by speccode, needs new method
 # country <- endpoint("country")

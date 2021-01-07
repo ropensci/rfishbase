@@ -66,13 +66,6 @@ globalVariables(c("ComName", "Language"))
 #' The resulting data.frames are concatenated. 
 #' @details Note that there are many common names for a given sci name, so sci_to_common doesn't make sense
 #' 
-#' @examples
-#' \donttest{
-#' common_names(c("Labroides bicolor",  "Bolbometopon muricatum"))
-#' 
-#' # subset by English language names
-#' fish <- common_names("Bolbometopon muricatum")
-#' }
 #' @export common_names sci_to_common
 #' @aliases common_names sci_to_common
 common_names <- function(species_list = NULL, 
