@@ -39,15 +39,15 @@ Imports:
     DBI,
     arkdb,
     rappdirs,
-    curl
+    curl,
+    dbplyr, 
+    progress
 Suggests:
     devtools,
     testthat,
     rmarkdown,
     knitr,
     covr,
-    RSQLite,
-    duckdb,
-    progress
+    duckdb
 VignetteBuilder: knitr
 RoxygenNote: 7.1.1
