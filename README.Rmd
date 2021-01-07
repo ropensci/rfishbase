@@ -9,11 +9,11 @@ output: github_document
 [![Coverage status](https://codecov.io/gh/ropensci/rfishbase/branch/master/graph/badge.svg)](https://codecov.io/github/ropensci/rfishbase?branch=master)
 [![Onboarding](https://badges.ropensci.org/137_status.svg)](https://github.com/ropensci/onboarding/issues/137)
 [![CRAN status](https://www.r-pkg.org/badges/version/rfishbase)](https://cran.r-project.org/package=rfishbase)
-[![Downloads](http://cranlogs.r-pkg.org/badges/grand-total/rfishbase)](https://github.com/metacran/cranlogs.app)
+[![Downloads](https://cranlogs.r-pkg.org/badges/grand-total/rfishbase)](https://github.com/metacran/cranlogs.app)
 
 
 
-Welcome to `rfishbase 3.0`. This package is the third rewrite of the original `rfishbase` package described in [Boettiger et al. (2012)](http://www.carlboettiger.info/assets/files/pubs/10.1111/j.1095-8649.2012.03464.x.pdf).   
+Welcome to `rfishbase 3.0`. This package is the third rewrite of the original `rfishbase` package described in [Boettiger et al. (2012)](https://www.carlboettiger.info/assets/files/pubs/10.1111/j.1095-8649.2012.03464.x.pdf).   
 
 `rfishbase` 3.0 queries pre-compressed tables from a static server and employs local caching (through memoization) to provide much greater performance and stability, particularly for dealing with large queries involving 10s of thousands of species.  The user is never expected to deal with pagination or curl headers and timeouts.  
 
@@ -46,7 +46,7 @@ library("dplyr") # convenient but not required
 ## Getting started
 
 
-[FishBase](http://fishbase.org) makes it relatively easy to look up a lot of information on most known species of fish.  However, looking up a single bit of data, such as the estimated trophic level, for many different species becomes tedious very soon. This is a common reason for using `rfishbase`.  As such, our first step is to assemble a good list of species we are interested in.
+[FishBase](https://fishbase.org) makes it relatively easy to look up a lot of information on most known species of fish.  However, looking up a single bit of data, such as the estimated trophic level, for many different species becomes tedious very soon. This is a common reason for using `rfishbase`.  As such, our first step is to assemble a good list of species we are interested in.
 
 ### Building a species list
 
@@ -83,7 +83,7 @@ Note that there is no need to validate names coming from `common_to_sci` or `spe
 
 With a species list in place, we are ready to query fishbase for data. Note that if you have a very long list of species, it is always a good idea to try out your intended functions with a subset of that list first to make sure everything is working. 
 
-The `species()` function returns a table containing much (but not all) of the information found on the summary or homepage for a species on [fishbase.org](http://fishbase.org). `rfishbase` functions always return [tidy](http://www.jstatsoft.org/v59/i10/paper) data tables: rows are observations (e.g. a species, individual samples from a species) and columns are variables (fields).
+The `species()` function returns a table containing much (but not all) of the information found on the summary or homepage for a species on [fishbase.org](https://fishbase.org). `rfishbase` functions always return [tidy](https://www.jstatsoft.org/v59/i10/paper) data tables: rows are observations (e.g. a species, individual samples from a species) and columns are variables (fields).
 
 ```{r}
 species(trout$Species)
@@ -166,13 +166,13 @@ CAUTION: if switching between `fishbase` and `sealifebase` in a single R session
 
 - Argument names have been retained where possible to maximize backwards compatibility.  Using previous arguments that are no longer relevant (such as `limit` for the maximum number of records) will not now introduce errors, but nor will they have any effect (they are simply consumed by the `...`).  There are no longer any limits in return sizes.  
 
-- You can still specify server using the rfishbase `2.x` format of providing a URL argument for server, e.g. `"http://fishbase.ropensci.org/sealifebase"` or `Sys.setenv(FISHBASE_API = "http://fishbase.ropensci.org/sealifebase")`, or simply `Sys.setenv("FISHBASE_API" = "sealifebase")` if you prefer.  Also recall that environmental variables can always be set in an `.Renviron` file.  
+- You can still specify server using the rfishbase `2.x` format of providing a URL argument for server, e.g. `"https://fishbase.ropensci.org/sealifebase"` or `Sys.setenv(FISHBASE_API = "https://fishbase.ropensci.org/sealifebase")`, or simply `Sys.setenv("FISHBASE_API" = "sealifebase")` if you prefer.  Also recall that environmental variables can always be set in an `.Renviron` file.  
 
 -----------
 
 Please note that this package is released with a [Contributor Code of Conduct](https://ropensci.org/code-of-conduct/). By contributing to this project, you agree to abide by its terms.
 
 
-[![ropensci_footer](http://ropensci.org/public_images/github_footer.png)](http://ropensci.org)
+[![ropensci_footer](https://ropensci.org/public_images/github_footer.png)](https://ropensci.org)
 
 

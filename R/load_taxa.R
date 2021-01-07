@@ -69,12 +69,12 @@ fb_taxa_table <- function(server = getOption("FISHBASE_API", "fishbase"),
     taxon_hierarchy %>% 
     dplyr::select("SpecCode", "Species", "Genus", "Subfamily", "Family", 
            "Order", "Class", "SuperClass") %>% 
-    dplyr::arrange(SpecCode) %>% 
     dplyr::mutate(Species = paste(Genus, Species)) %>%
     ## paste -> concat_ws fun, not implemented in Monet or duckdb now
     #dplyr::mutate(tempcolumn = concat(Genus, " ")) %>%
     #dplyr::mutate(Species = concat(tempcolumn, Species)) %>%
     #dplyr::select(-tempcolumn) %>%
+    dplyr::arrange(SpecCode) %>% 
     dplyr::compute(tbl_name("taxa", server, version), temporary=FALSE)
   
   taxa_table
@@ -119,9 +119,9 @@ slb_taxa_table <- function(server, version, db){
     taxon_hierarchy %>% 
     dplyr::select("SpecCode", "Species", "Genus", "Subfamily", "Family", 
                   "Order", "Class", "Phylum", "Kingdom") %>% 
-    dplyr::arrange("SpecCode") %>% 
-    dplyr::mutate(Species = paste(Genus, Species))
-  
+    dplyr::mutate(Species = paste(Genus, Species)) %>%
+    dplyr::arrange("SpecCode")
+    
   taxa_table
 }
 

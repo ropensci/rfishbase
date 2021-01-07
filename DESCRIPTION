@@ -40,12 +40,14 @@ Imports:
     RSQLite,
     arkdb,
     rappdirs,
-    dbplyr
+    dbplyr,
+    curl
 Suggests:
     devtools,
     testthat,
     rmarkdown,
     knitr,
-    covr
+    covr,
+    duckdb
 VignetteBuilder: knitr
 RoxygenNote: 7.1.1
