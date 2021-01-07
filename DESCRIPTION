@@ -37,18 +37,17 @@ Imports:
     stringr,
     gh,
     DBI,
-    RSQLite,
     arkdb,
     rappdirs,
-    dbplyr,
-    curl,
-    progress
+    curl
 Suggests:
     devtools,
     testthat,
     rmarkdown,
     knitr,
     covr,
-    duckdb
+    RSQLite,
+    duckdb,
+    progress
 VignetteBuilder: knitr
 RoxygenNote: 7.1.1
