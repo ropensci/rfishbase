@@ -6,10 +6,10 @@
 checks](https://cranchecks.info/badges/worst/rfishbase)](https://cranchecks.info/pkgs/rfishbase)
 [![Coverage
 status](https://codecov.io/gh/ropensci/rfishbase/branch/master/graph/badge.svg)](https://codecov.io/github/ropensci/rfishbase?branch=master)
-[![Onboarding](https://badges.ropensci.org/137_status.svg)](https://github.com/ropensci/onboarding/issues/137)
+[![Onboarding](https://badges.ropensci.org/137_status.svg)](https://github.com/ropensci/software-review/issues/137)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/rfishbase)](https://cran.r-project.org/package=rfishbase)
-[![Downloads](https://cranlogs.r-pkg.org/badges/grand-total/rfishbase)](https://github.com/metacran/cranlogs.app)
+[![Downloads](https://cranlogs.r-pkg.org/badges/grand-total/rfishbase)](https://github.com/r-hub/cranlogs.app)
 
 Welcome to `rfishbase 3.0`. This package is the third rewrite of the
 original `rfishbase` package described in [Boettiger et
@@ -64,50 +64,6 @@ by FishBase, and alert you to any potential issues:
 fish <- validate_names(c("Oreochromis niloticus", "Salmo trutta"))
 ```
 
-    Importing /home/cboettig/.local/share/rfishbase/synonyms_fb_1904 in 50000 line chunks:
-
-``` 
-    ...Done! (in 3.293953 secs)
-```
-
-    Importing /home/cboettig/.local/share/rfishbase/species_fb_1904 in 50000 line chunks:
-
-``` 
-    ...Done! (in 1.21836 secs)
-```
-
-    Importing /home/cboettig/.local/share/rfishbase/genera_fb_1904 in 50000 line chunks:
-
-``` 
-    ...Done! (in 0.199697 secs)
-```
-
-    Importing /home/cboettig/.local/share/rfishbase/families_fb_1904 in 50000 line chunks:
-
-``` 
-    ...Done! (in 0.040802 secs)
-```
-
-    Importing /home/cboettig/.local/share/rfishbase/orders_fb_1904 in 50000 line chunks:
-
-``` 
-    ...Done! (in 0.01995826 secs)
-```
-
-    Importing /home/cboettig/.local/share/rfishbase/classes_fb_1904 in 50000 line chunks:
-
-``` 
-    ...Done! (in 0.03259182 secs)
-```
-
-    Joining, by = c("Subfamily", "GenCode", "FamCode")
-
-    Joining, by = "FamCode"
-
-    Joining, by = c("Order", "Ordnum", "Class", "ClassNum")
-
-    Joining, by = c("Class", "ClassNum")
-
 Another typical use case is in wanting to collect information about all
 species in a particular taxonomic group, such as a Genus, Family or
 Order. The function `species_list` recognizes six taxonomic levels, and
@@ -127,15 +83,6 @@ multiple species, all matching species are returned:
 
 ``` r
 trout <- common_to_sci("trout")
-```
-
-    Importing /home/cboettig/.local/share/rfishbase/comnames_fb_1904 in 50000 line chunks:
-
-``` 
-    ...Done! (in 10.21128 secs)
-```
-
-``` r
 trout
 ```
 
@@ -285,12 +232,6 @@ can then request this data from the stocks table:
 stocks(trout$Species, fields=c("Species", "Resilience", "StockDefs"))
 ```
 
-    Importing /home/cboettig/.local/share/rfishbase/stocks_fb_1904 in 50000 line chunks:
-
-``` 
-    ...Done! (in 1.228194 secs)
-```
-
     # A tibble: 407 x 3
        Species            Resilience StockDefs                                      
        <chr>              <chr>      <chr>                                          
@@ -329,48 +270,6 @@ We can begin by getting the taxa table for sealifebase:
 
 ``` r
 sealife <- load_taxa(server="sealifebase")
-```
-
-    Importing /home/cboettig/.local/share/rfishbase/species_slb_1904 in 50000 line chunks:
-
-``` 
-    ...Done! (in 8.390737 secs)
-```
-
-    Importing /home/cboettig/.local/share/rfishbase/genera_slb_1904 in 50000 line chunks:
-
-``` 
-    ...Done! (in 0.6657629 secs)
-```
-
-    Importing /home/cboettig/.local/share/rfishbase/families_slb_1904 in 50000 line chunks:
-
-``` 
-    ...Done! (in 0.09136724 secs)
-```
-
-    Importing /home/cboettig/.local/share/rfishbase/orders_slb_1904 in 50000 line chunks:
-
-``` 
-    ...Done! (in 0.020715 secs)
-```
-
-    Importing /home/cboettig/.local/share/rfishbase/classes_slb_1904 in 50000 line chunks:
-
-``` 
-    ...Done! (in 0.01154637 secs)
-```
-
-    Importing /home/cboettig/.local/share/rfishbase/phylums_slb_1904 in 50000 line chunks:
-
-``` 
-    ...Done! (in 0.009576797 secs)
-```
-
-    Importing /home/cboettig/.local/share/rfishbase/phylumclass_slb_1904 in 50000 line chunks:
-
-``` 
-    ...Done! (in 0.007248402 secs)
 ```
 
 (Note: running `load_taxa()` at the beginning of any session, for either

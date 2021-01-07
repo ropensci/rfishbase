@@ -20,7 +20,7 @@ Authors@R: c(person("Carl", "Boettiger",
              person("Peter", "Wainwright", role = "aut"),
              person("Kevin", "Cazelles", role = "ctb", 
                     comment = c(ORCID = "0000-0001-6619-9874")))
-URL: https://docs.ropensci.org/rfishbase, https://github.com/ropensci/rfishbase
+URL: https://docs.ropensci.org/rfishbase/, https://github.com/ropensci/rfishbase
 BugReports: https://github.com/ropensci/rfishbase/issues
 LazyData: true
 Depends:

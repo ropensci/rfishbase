@@ -46,7 +46,7 @@ library("rfishbase")
 ## Getting started
 
 
-[FishBase](http://fishbase.org) makes it relatively easy to look up a lot of information on most known species of fish.  However, looking up a single bit of data, such as the estimated trophic level, for many different species becomes tedious very soon. This is a common reason for using `rfishbase`.  As such, our first step is to assemble a good list of species we are interested in.
+[FishBase](https://fishbase.de) makes it relatively easy to look up a lot of information on most known species of fish.  However, looking up a single bit of data, such as the estimated trophic level, for many different species becomes tedious very soon. This is a common reason for using `rfishbase`.  As such, our first step is to assemble a good list of species we are interested in.
 
 ### Building a species list
 
@@ -83,7 +83,7 @@ Note that there is no need to validate names coming from `common_to_sci` or `spe
 
 With a species list in place, we are ready to query fishbase for data. Note that if you have a very long list of species, it is always a good idea to try out your intended functions with a subset of that list first to make sure everything is working. 
 
-The `species()` function returns a table containing much (but not all) of the information found on the summary or homepage for a species on [fishbase.org](http://fishbase.org). `rfishbase` functions always return [tidy](http://www.jstatsoft.org/v59/i10/paper) data tables: rows are observations (e.g. a species, individual samples from a species) and columns are variables (fields).
+The `species()` function returns a table containing much (but not all) of the information found on the summary or homepage for a species on [fishbase.org](https://fishbase.de). `rfishbase` functions always return [tidy](https://www.jstatsoft.org/v59/i10/paper) data tables: rows are observations (e.g. a species, individual samples from a species) and columns are variables (fields).
 
 ```{r}
 species(trout$Species)
