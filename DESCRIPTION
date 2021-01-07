@@ -43,7 +43,6 @@ Imports:
     dbplyr, 
     progress
 Suggests:
-    devtools,
     testthat,
     rmarkdown,
     knitr,
