@@ -1,8 +1,8 @@
 #' @name rfishbase-package
-#' @description A programmatic interface to http://www.fishbase.org, re-written
+#' @description A programmatic interface to FishBase, re-written
 #' based on an accompanying 'RESTful' API. Access tables describing over 30,000
 #' species of fish, their biology, ecology, morphology, and more. This package also
-#' supports experimental access to http://www.sealifebase.org data, which contains
+#' supports experimental access to SeaLifeBase data, which contains
 #' nearly 200,000 species records for all types of aquatic life not covered by
 #' FishBase.'
 #' @aliases rfishbase
