@@ -12,7 +12,7 @@ vignette: >
 
 
 
-Welcome to `rfishbase 3.0`. This package is the third rewrite of the original `rfishbase` package described in [Boettiger et al. (2012)](http://www.carlboettiger.info/assets/files/pubs/10.1111/j.1095-8649.2012.03464.x.pdf).   
+Welcome to `rfishbase 3.0`. This package is the third rewrite of the original `rfishbase` package described in [Boettiger et al. (2012)](https://doi.org/10.1111/j.1095-8649.2012.03464.x).   
 
 `rfishbase` 3.0 queries pre-compressed tables from a static server and employs local caching (through memoization) to provide much greater performance and stability, particularly for dealing with large queries involving 10s of thousands of species.  The user is never expected to deal with pagination or curl headers and timeouts.  
 

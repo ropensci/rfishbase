@@ -13,7 +13,7 @@ status](https://www.r-pkg.org/badges/version/rfishbase)](https://cran.r-project.
 
 Welcome to `rfishbase 3.0`. This package is the third rewrite of the
 original `rfishbase` package described in [Boettiger et
-al. (2012)](https://www.carlboettiger.info/assets/files/pubs/10.1111/j.1095-8649.2012.03464.x.pdf).
+al. (2012)](https://doi.org/10.1111/j.1095-8649.2012.03464.x).
 
 `rfishbase` 3.0 queries pre-compressed tables from a static server and
 employs local caching (through memoization) to provide much greater
