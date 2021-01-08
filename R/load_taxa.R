@@ -134,7 +134,6 @@ slb_taxa_table <- function(server, version, db){
 #' @name fishbase
 #' @docType data
 #' @author Carl Boettiger \email{carl@@ropensci.org}
-#' @references \url{FishBase.org}
 #' @keywords data
 NULL
 
@@ -146,7 +145,6 @@ NULL
 #' @name sealifebase
 #' @docType data
 #' @author Carl Boettiger \email{carl@@ropensci.org}
-#' @references \url{www.sealifebase.org}
 #' @keywords data
 NULL
 

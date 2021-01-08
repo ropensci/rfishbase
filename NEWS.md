@@ -23,7 +23,10 @@ And constructed with the following guidelines:
 
 For more information on SemVer, please visit http://semver.org/.
 
+v 3.1.3
+-------
 
+- Uses `arkdb` with `duckdb` as database backend
 
 v 3.0.5
 --------
