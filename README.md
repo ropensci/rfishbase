@@ -38,7 +38,7 @@ library("dplyr") # convenient but not required
 
 ## Getting started
 
-[FishBase](https://fishbase.org) makes it relatively easy to look up a
+FishBase (`https://fishbase.org`) makes it relatively easy to look up a
 lot of information on most known species of fish. However, looking up a
 single bit of data, such as the estimated trophic level, for many
 different species becomes tedious very soon. This is a common reason for
@@ -113,9 +113,9 @@ to make sure everything is working.
 
 The `species()` function returns a table containing much (but not all)
 of the information found on the summary or homepage for a species on
-[fishbase.org](https://fishbase.org). `rfishbase` functions always
-return [tidy](https://www.jstatsoft.org/v59/i10/paper) data tables: rows
-are observations (e.g. a species, individual samples from a species) and
+FishBase. `rfishbase` functions always return
+[tidy](https://www.jstatsoft.org/v59/i10/paper) data tables: rows are
+observations (e.g. a species, individual samples from a species) and
 columns are variables (fields).
 
 ``` r
@@ -199,10 +199,10 @@ in base R (`[[`) or `dplyr::select`.
 ### FishBase Docs: Discovering data
 
 Unfortunately identifying what fields come from which tables is often a
-challenge. Each summary page on fishbase.org includes a list of
-additional tables with more information about species ecology, diet,
-occurrences, and many other things. `rfishbase` provides functions that
-correspond to most of these tables.
+challenge. Each summary page on FishBase includes a list of additional
+tables with more information about species ecology, diet, occurrences,
+and many other things. `rfishbase` provides functions that correspond to
+most of these tables.
 
 Because `rfishbase` accesses the back end database, it does not always
 line up with the web display. Frequently `rfishbase` functions will
@@ -211,10 +211,10 @@ these tables. Some information found on the summary homepage for a
 species is not available from the `species` summary function, but must
 be extracted from a different table. For instance, the species
 `Resilience` information is not one of the fields in the `species`
-summary table, despite appearing on the species homepage of
-fishbase.org. To discover which table this information is in, we can use
-the special `rfishbase` function `list_fields`, which will list all
-tables with a field matching the query string:
+summary table, despite appearing on the species homepage of FishBase. To
+discover which table this information is in, we can use the special
+`rfishbase` function `list_fields`, which will list all tables with a
+field matching the query string:
 
 ``` r
 list_fields("Resilience")

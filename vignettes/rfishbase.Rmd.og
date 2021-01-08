@@ -46,7 +46,7 @@ library("rfishbase")
 ## Getting started
 
 
-[FishBase](https://fishbase.de) makes it relatively easy to look up a lot of information on most known species of fish.  However, looking up a single bit of data, such as the estimated trophic level, for many different species becomes tedious very soon. This is a common reason for using `rfishbase`.  As such, our first step is to assemble a good list of species we are interested in.
+FishBase makes it relatively easy to look up a lot of information on most known species of fish.  However, looking up a single bit of data, such as the estimated trophic level, for many different species becomes tedious very soon. This is a common reason for using `rfishbase`.  As such, our first step is to assemble a good list of species we are interested in.
 
 ### Building a species list
 
@@ -83,7 +83,7 @@ Note that there is no need to validate names coming from `common_to_sci` or `spe
 
 With a species list in place, we are ready to query fishbase for data. Note that if you have a very long list of species, it is always a good idea to try out your intended functions with a subset of that list first to make sure everything is working. 
 
-The `species()` function returns a table containing much (but not all) of the information found on the summary or homepage for a species on [fishbase.org](https://fishbase.de). `rfishbase` functions always return [tidy](https://www.jstatsoft.org/v59/i10/paper) data tables: rows are observations (e.g. a species, individual samples from a species) and columns are variables (fields).
+The `species()` function returns a table containing much (but not all) of the information found on the summary or homepage for a species on FishBase. `rfishbase` functions always return [tidy](https://www.jstatsoft.org/v59/i10/paper) data tables: rows are observations (e.g. a species, individual samples from a species) and columns are variables (fields).
 
 ```{r}
 species(trout$Species)
@@ -103,9 +103,9 @@ Alternatively, just subset the table using the standard column selection in base
 
 ### FishBase Docs: Discovering data
 
-Unfortunately identifying what fields come from which tables is often a challenge.  Each summary page on fishbase.org includes a list of additional tables with more information about species ecology, diet, occurrences, and many other things.  `rfishbase` provides functions that correspond to most of these tables.  
+Unfortunately identifying what fields come from which tables is often a challenge.  Each summary page on FishBase includes a list of additional tables with more information about species ecology, diet, occurrences, and many other things.  `rfishbase` provides functions that correspond to most of these tables.  
 
-Because `rfishbase` accesses the back end database, it does not always line up with the web display. Frequently `rfishbase` functions will return more information than is available on the web versions of the these tables. Some information found on the summary homepage for a species is not available from the `species` summary function, but must be extracted from a different table. For instance, the species `Resilience` information is not one of the fields in the `species` summary table, despite appearing on the species homepage of fishbase.org.  To discover which table this information is in, we can use the special `rfishbase` function `list_fields`, which will list all tables with a field matching the query string:
+Because `rfishbase` accesses the back end database, it does not always line up with the web display. Frequently `rfishbase` functions will return more information than is available on the web versions of the these tables. Some information found on the summary homepage for a species is not available from the `species` summary function, but must be extracted from a different table. For instance, the species `Resilience` information is not one of the fields in the `species` summary table, despite appearing on the species homepage of FishBase.  To discover which table this information is in, we can use the special `rfishbase` function `list_fields`, which will list all tables with a field matching the query string:
 
 ```{r}
 list_fields("Resilience")
