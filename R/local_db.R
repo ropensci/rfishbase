@@ -93,12 +93,15 @@ tbl_name <- function(tbl,
 #'
 #' }
 default_db <- function(dbdir = db_dir(),
-                       driver = Sys.getenv("DB_DRIVER", Sys.getenv("ARKDB_DRIVER"))){
+                       driver = Sys.getenv("DB_DRIVER", "duckdb")){
   
   arkdb::local_db(dbdir, driver)
   
 }
 
+disconnect_duckdb <- function(){
+  duckdb::duckdb_shutdown()
+}
 
 #' @importFrom rappdirs user_data_dir
 db_dir <- function(){
