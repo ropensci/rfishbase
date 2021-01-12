@@ -16,8 +16,7 @@ test_that("db_create", {
   arkdb::unark(local_tbl,
                db, 
                arkdb::streamable_readr_tsv(), 
-               overwrite = TRUE,
-               col_types = readr::cols(.default = "c")
+               overwrite = TRUE
   )
 })
 

@@ -20,7 +20,7 @@ db_create <- function(tbl,
                db, 
                arkdb::streamable_readr_tsv(), 
                overwrite = overwrite,
-               col_types = readr::cols(.default = "c")
+               guess_max = Inf
   )
 }
 
