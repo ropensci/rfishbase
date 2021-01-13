@@ -93,14 +93,15 @@ tbl_name <- function(tbl,
 #'
 #' }
 default_db <- function(dbdir = db_dir(),
-                       driver = Sys.getenv("DB_DRIVER", "duckdb")){
+                       driver = Sys.getenv("DB_DRIVER", "RSQLite")){
   
   arkdb::local_db(dbdir, driver)
   
 }
 
-disconnect_duckdb <- function(){
-  duckdb::duckdb_shutdown()
+# Some function call is required if RSQLite is in Imports
+dummy <- function(){
+  RSQLite::rsqliteVersion()
 }
 
 #' @importFrom rappdirs user_data_dir

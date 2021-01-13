@@ -42,7 +42,7 @@ Imports:
     curl,
     dbplyr, 
     progress,
-    duckdb
+    RSQLite
 Suggests:
     testthat,
     rmarkdown,
