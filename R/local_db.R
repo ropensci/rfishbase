@@ -20,7 +20,7 @@ db_create <- function(tbl,
                db, 
                arkdb::streamable_readr_tsv(), 
                overwrite = overwrite,
-               guess_max = Inf
+               guess_max = 1e6
   )
 }
 
