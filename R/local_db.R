@@ -104,7 +104,7 @@ dummy <- function(){
   RSQLite::rsqliteVersion()
 }
 
-#' @importFrom rappdirs user_data_dir
+#' @importFrom tools R_user_dir
 db_dir <- function(){
-  Sys.getenv("FISHBASE_HOME",  rappdirs::user_data_dir("rfishbase"))
+  Sys.getenv("FISHBASE_HOME",  tools::R_user_dir("rfishbase"))
 }
