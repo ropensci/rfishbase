@@ -24,7 +24,7 @@ URL: https://docs.ropensci.org/rfishbase/, https://github.com/ropensci/rfishbase
 BugReports: https://github.com/ropensci/rfishbase/issues
 LazyData: true
 Depends:
-    R (>= 3.0)
+    R (>= 4.0)
 Imports:
     dplyr,
     purrr,
