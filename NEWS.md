@@ -23,6 +23,12 @@ And constructed with the following guidelines:
 
 For more information on SemVer, please visit http://semver.org/.
 
+v 3.1.6
+-------
+
+- ensure any test needing internet connection is "fails gracefully" with
+  no warnings or errors whenever tests are run without internet or the 
+  CRAN test environment where internet connectivity may be unreliable.
 
 v 3.1.5
 -------

@@ -2,6 +2,7 @@ context("db_create")
 
 test_that("db_create", {
   
+  needs_api()
   tbl = "brains"
   server = "rfishbase"
   version = "19.04"
