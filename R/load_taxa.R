@@ -8,7 +8,6 @@
 #' system, see [default_db()].
 #' @param ... for compatibility with previous versions
 #' @return the taxa list
-#' @importFrom dplyr arrange
 #' @export
 load_taxa <- function(server = getOption("FISHBASE_API", "fishbase"), 
                       version = get_latest_release(),
@@ -74,7 +73,7 @@ fb_taxa_table <- function(server = getOption("FISHBASE_API", "fishbase"),
     #dplyr::mutate(tempcolumn = concat(Genus, " ")) %>%
     #dplyr::mutate(Species = concat(tempcolumn, Species)) %>%
     #dplyr::select(-tempcolumn) %>%
-    dplyr::arrange(SpecCode) %>% 
+    #dplyr::arrange(SpecCode) %>% 
     dplyr::compute(tbl_name("taxa", server, version), temporary=FALSE)
   
   taxa_table
@@ -119,8 +118,8 @@ slb_taxa_table <- function(server, version, db){
     taxon_hierarchy %>% 
     dplyr::select("SpecCode", "Species", "Genus", "Subfamily", "Family", 
                   "Order", "Class", "Phylum", "Kingdom") %>% 
-    dplyr::mutate(Species = paste(Genus, Species)) %>%
-    dplyr::arrange("SpecCode")
+    dplyr::mutate(Species = paste(Genus, Species)) #%>%
+    #dplyr::arrange("SpecCode")
     
   taxa_table
 }

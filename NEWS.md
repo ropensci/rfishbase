@@ -23,6 +23,11 @@ And constructed with the following guidelines:
 
 For more information on SemVer, please visit http://semver.org/.
 
+v 3.1.7
+-------
+
+- Avoid needless warning about `arrange()`
+
 v 3.1.6
 -------
 

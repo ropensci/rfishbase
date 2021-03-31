@@ -63,9 +63,6 @@ tidy_species_table <- function(df) {
   # keep_id <- keep_id[!is.na(keep_id)]
   # df <- df[,keep_id]
   
-  ## Rename columns (pick names to indicate units on numeric values?)
-  
-  ## Arrange columns
   
   df
 }
