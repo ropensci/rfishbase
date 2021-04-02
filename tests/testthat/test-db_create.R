@@ -26,6 +26,6 @@ test_that("we can create the local db for a specified tbl", {
   needs_api()
   db = default_db(tempdir())
   db_create("brains", db = db)
-  eco <- fb_tbl("ecology", db = db)
+  eco <- fb_tbl("ecology")
   expect_is(eco, "tbl")
 })
