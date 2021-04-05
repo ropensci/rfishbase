@@ -37,7 +37,7 @@ Imports:
     stringr,
     gh,
     DBI,
-    arkdb,
+    arkdb >= 0.0.12,
     tools,
     curl,
     dbplyr, 
