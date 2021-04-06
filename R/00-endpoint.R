@@ -1,7 +1,7 @@
 
 ## Allows us to define functions for each endpoint using closures
 #' @importFrom dplyr left_join rename sym
-#' @importFrom rlang !!
+#' @importFrom rlang !! .data
 endpoint <- function(endpt, join = NULL, by = NULL){
   
   function(species_list = NULL, 

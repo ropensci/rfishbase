@@ -15,16 +15,11 @@ references <- function(codes = NULL, fields = NULL,
                        server = getOption("FISHBASE_API", "fishbase"), 
                        version = get_latest_release(),
                        db = default_db(), ...){
-  if(!is.null(codes))
-   out <- left_join(data.frame(RefNo = codes), fb_tbl("refrens", server, version, db))
-  
-  else
-    return(fb_tbl("refrens", server, version, db))
-  
-  if(!is.null(fields))
-     out <- out[fields]
-  
-  out
+    out <- fb_tbl("refrens", server, version, db)
+    if(!is.null(codes)) out <- dplyr::filter(out, .data$RefNo %in% codes)
+    out <- dplyr::collect(out)
+    if(!is.null(fields)) out <- out[fields]
+    out
 }
 
 # make_citation <- function(x) {
