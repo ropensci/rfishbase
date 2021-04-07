@@ -83,13 +83,15 @@ validate_names <- function(species_list,
   rx <- "^[sS]ynonym$|^accepted name$"
   tmp <- data.frame(synonym  = species_list, stringsAsFactors = FALSE)
   synonyms(species_list, server = server, version = version, db = db) %>%
-    collect() %>%
-    mutate(Species = ifelse(grepl(rx, Status), Species, NA)) %>%
+    dplyr::collect() %>%
+    dplyr::mutate(Species = ifelse(grepl(rx, Status), Species, NA)) %>%
     # group by input taxon, remove NAs
     dplyr::group_by(synonym) %>%
     dplyr::filter(!is.na(Species)) %>%
     dplyr::ungroup() %>%
-    dplyr::select(synonym, Species) %>% unique %>%
-    right_join(tmp, by = "synonym") %>%
-    pull(Species)
+    dplyr::select(synonym, Species) %>% 
+    dplyr::distinct() %>%
+    # left_join to tmp to preserve species order from tmp
+    dplyr::left_join(x = tmp, y = ., by = "synonym") %>% 
+    dplyr::pull(Species)
 }
