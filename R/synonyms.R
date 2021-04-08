@@ -95,3 +95,5 @@ validate_names <- function(species_list,
     dplyr::left_join(x = tmp, y = ., by = "synonym") %>% 
     dplyr::pull(Species)
 }
+
+utils::globalVariables(".", package="rfishbase")
