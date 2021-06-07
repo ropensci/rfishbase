@@ -36,7 +36,7 @@ species_subset <- function(species_list,
                            db = default_db()){
 
   ## load_taxa provides "Genus species"-style species names for a consistent interface
-  species <- load_taxa(server, version, db) %>% 
+  species <- load_taxa(server, version, db, collect=FALSE) %>% 
     dplyr::select("SpecCode", "Species")
   
   ## "Species" in many tables is just the epithet, we want full species name so drop that.
@@ -105,7 +105,7 @@ fb_species <- function(server = getOption("FISHBASE_API", "fishbase"),
                        version = get_latest_release(),
                        db = default_db(), 
                        ...){
-  load_taxa(server, version, db, ...) %>% dplyr::select("SpecCode", "Species")
+  load_taxa(server, version, db, collect = FALSE, ...) %>% dplyr::select("SpecCode", "Species")
 }
 
 

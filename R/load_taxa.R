@@ -6,12 +6,15 @@
 #' latest avialable; see [available_releases()].
 #' @param db A remote database connection. Will default to the best available
 #' system, see [default_db()].
+#' @param collect return a data.frame if TRUE, otherwise, a DBI connection to
+#'  the table in the database
 #' @param ... for compatibility with previous versions
 #' @return the taxa list
 #' @export
 load_taxa <- function(server = getOption("FISHBASE_API", "fishbase"), 
                       version = get_latest_release(),
                       db = default_db(),
+                      collect = TRUE,
                       ...){
   
   db_tbl <- tbl_name("taxa",  server, version)
@@ -20,11 +23,16 @@ load_taxa <- function(server = getOption("FISHBASE_API", "fishbase"),
   ## SeaLifeBase requires a different taxa table function:
   if(is.null(server)) server <- getOption("FISHBASE_API", FISHBASE_API)
   if(grepl("sealifebase", server)){
-    slb_taxa_table(server, version, db)
+    taxa_table <- slb_taxa_table(server, version, db)
   } else {
-    fb_taxa_table(server, version, db)
+    taxa_table<- fb_taxa_table(server, version, db)
   }
+  
+  if(collect) return(dplyr::collect(taxa_table))
+  
+  taxa_table
 }
+
   
 
 
@@ -75,8 +83,9 @@ fb_taxa_table <- function(server = getOption("FISHBASE_API", "fishbase"),
     #dplyr::select(-tempcolumn) %>%
     #dplyr::arrange(SpecCode) %>% 
     dplyr::compute(tbl_name("taxa", server, version), temporary=FALSE)
+  taxa_table
   
-  dplyr::collect(taxa_table)
+
 }
 
 

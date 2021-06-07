@@ -8,6 +8,7 @@ load_taxa(
   server = getOption("FISHBASE_API", "fishbase"),
   version = get_latest_release(),
   db = default_db(),
+  collect = TRUE,
   ...
 )
 }
@@ -19,6 +20,9 @@ latest avialable; see [available_releases()].}
 
 \item{db}{A remote database connection. Will default to the best available
 system, see [default_db()].}
+
+\item{collect}{return a data.frame if TRUE, otherwise, a DBI connection to
+the table in the database}
 
 \item{...}{for compatibility with previous versions}
 }

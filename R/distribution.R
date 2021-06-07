@@ -199,7 +199,7 @@ species_by_ecosystem <- function(ecosystem, species_list = NULL,
   ecosys <- fb_tbl("ecosystem", server, version, db) %>% fix_ids()
   e_code <- dplyr::collect(ecosysname)$E_CODE
   out <- dplyr::filter(ecosys, E_CODE == e_code)
-  species <- dplyr::select(load_taxa(server, version, db), "SpecCode", "Species")
+  species <- dplyr::select(load_taxa(server, version, db, collect=FALSE), "SpecCode", "Species")
   out <- left_join(out, species, by = "SpecCode")
   out <- left_join(out, dplyr::select(ecosysref, E_CODE, EcosystemName),
     by = "E_CODE")
