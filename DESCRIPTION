@@ -6,7 +6,7 @@ Description: A programmatic interface to 'FishBase', re-written
     supports experimental access to 'SeaLifeBase' data, which contains
     nearly 200,000 species records for all types of aquatic life not covered by
     'FishBase.'
-Version: 3.1.7
+Version: 3.1.8
 Encoding: UTF-8
 License: CC0
 Authors@R: c(person("Carl", "Boettiger",

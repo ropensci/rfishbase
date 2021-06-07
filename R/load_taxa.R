@@ -76,7 +76,7 @@ fb_taxa_table <- function(server = getOption("FISHBASE_API", "fishbase"),
     #dplyr::arrange(SpecCode) %>% 
     dplyr::compute(tbl_name("taxa", server, version), temporary=FALSE)
   
-  taxa_table
+  dplyr::collect(taxa_table)
 }
 
 

@@ -1,8 +1,6 @@
 Dear CRAN Maintainers,
 
-This release now provides access to the most recent version of FishBase & SeaLifeData by
-default, while still allowing users to manually opt for a fixed timestamp version.
-See NEWS.md.
+This release sets R_USER_DATA_DIR during testing to a temporary location.
 
 Sincerely,
 

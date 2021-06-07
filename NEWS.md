@@ -23,6 +23,11 @@ And constructed with the following guidelines:
 
 For more information on SemVer, please visit http://semver.org/.
 
+v 3.1.8
+-------
+
+use `collect()` on taxa_tbl()
+
 v 3.1.7
 -------
 
