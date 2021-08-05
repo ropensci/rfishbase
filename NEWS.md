@@ -23,6 +23,11 @@ And constructed with the following guidelines:
 
 For more information on SemVer, please visit http://semver.org/.
 
+v 3.1.9
+-------
+
+* avoid GitHub API calls to determine versions.
+
 v 3.1.8
 -------
 

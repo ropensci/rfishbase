@@ -1,6 +1,6 @@
 Dear CRAN Maintainers,
 
-This release sets R_USER_DATA_DIR during testing to a temporary location.
+This release provides the changes detailed in NEWS.md.
 
 Sincerely,
 
