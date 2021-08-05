@@ -1,8 +1,0 @@
-table_name,column_name
-searchpagestats,TableName
-searchpagestats,ActualCount
-searchpagestats,DisplayCount
-searchpagestats,DateCovered
-searchpagestats,HitsMonthInMillions
-searchpagestats,Sessions
-searchpagestats,TS

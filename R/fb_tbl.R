@@ -41,39 +41,20 @@ get_release <- function(){
 #' options(FISHBASE_VERSION=NULL)
 #' @importFrom stats na.omit
 available_releases <- function(){
-  
+  avail_releases <- tryCatch({
+    readLines(paste0(
+    "https://raw.githubusercontent.com/ropensci/",
+     "rfishbase/master/inst/extdata/rfishbase_available_releases.txt"))
+    }, 
+    error = function(e){
+      readLines(system.file("extdata", 
+                            "rfishbase_available_releases.txt",
+                            package = "rfishbase", mustWork = TRUE))
+    },
+    finally = readLines(system.file("extdata", 
+                                    "rfishbase_available_releases.txt",
+                                    package = "rfishbase", mustWork = TRUE)))
 
-  ## check for cached version first
-  avail_releases <- mget("avail_releases", 
-                         envir = db_cache, 
-                         ifnotfound = NA)[[1]]
-  if(!all(is.na(avail_releases)))
-    return(avail_releases)
-  
-  
-  ## Okay, check GH for a release
-  token <- Sys.getenv("GITHUB_TOKEN", 
-                      Sys.getenv("GITHUB_PAT", 
-                                 paste0("b2b7441d", 
-                                        "aeeb010b", 
-                                        "1df26f1f6", 
-                                        "0a7f1ed",
-                                        "c485e443")))
-  avail_releases <- gh::gh("/repos/:owner/:repo/releases", 
-         owner = "ropensci",
-         repo="rfishbase", 
-         .token = token) %>%
-    purrr::map_chr("tag_name") %>%
-    stringr::str_extract("\\d\\d\\.\\d\\d") %>% 
-    as.numeric() %>% 
-    stats::na.omit() %>%
-    unique() %>% 
-    sort(decreasing = TRUE) %>% 
-    as.character()
-  
-  ## Cache this so we don't hit GH every single time!
-  assign("avail_releases", avail_releases, envir = db_cache)
-  
   avail_releases
 }
 

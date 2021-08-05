@@ -1,8 +1,0 @@
-table_name,column_name
-fl_processdetails,LossCode
-fl_processdetails,Process
-fl_processdetails,OtherProcess
-fl_processdetails,TimeToCompleteProcess
-fl_processdetails,SpecialTreatments
-fl_processdetails,Editable
-fl_processdetails,TS
