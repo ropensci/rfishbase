@@ -16,12 +16,15 @@ db_create <- function(tbl,
   
   ## FIXME FISHBASE uses mixed-case names for cols that should be case-insensitive
   ## Consider lowercasing all column names (though makes many camelCase names hard to read...)
+  suppressWarnings({
   arkdb::unark(local_tbl, 
                db, 
                arkdb::streamable_readr_tsv(), 
+               lines = 1e6,
                overwrite = overwrite,
                guess_max = 1e6
   )
+  })
 }
 
 

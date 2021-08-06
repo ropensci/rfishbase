@@ -24,7 +24,7 @@ for(table in tables){
         df <- df %>% mutate(across(where(is.list), as.character))
         path <- file.path("fb", paste0(table, ".tsv.bz2"))
         if(nrow(df) > 0){
-                readr::write_tsv(df, path, quote="")
+                readr::write_tsv(df, path, quote="none")
                 arrow::write_parquet(df, file.path("parquet", path))
         }
 }
@@ -48,7 +48,7 @@ for(table in tables){
                 df <- dplyr::collect(dplyr::tbl(con, table))
                 df <- df %>% mutate(across(where(is.list), as.character))
                 if(nrow(df) > 0){
-                        readr::write_tsv(df, path, quote="")
+                        readr::write_tsv(df, path, quote="none")
                         #arrow::write_parquet(df, file.path("parquet", path))
                 }
         }, error = function(e) {
@@ -56,8 +56,8 @@ for(table in tables){
                 df <- dplyr::collect(dplyr::tbl(con2, table))
                 df <- df %>% mutate(across(where(is.list), as.character))
                 if(nrow(df) > 0){
-                        write.delim(df, path, sep="\t", quote=FALSE)
-                        #arrow::write_parquet(df, file.path("parquet", path))
+                        write.table(df, path, sep="\t", quote=FALSE)
+                        arrow::write_parquet(df, file.path("parquet", paste0("slb", table, ".parquet")))
                 }
         },
         finally=data.frame())
@@ -86,7 +86,6 @@ piggyback::pb_upload(cache,
 
 
 cache <- fs::dir_ls("slb", type = "file")
-
 piggyback::pb_upload(cache,
        repo = "ropensci/rfishbase", 
        tag = "slb-21.04", overwrite = TRUE)

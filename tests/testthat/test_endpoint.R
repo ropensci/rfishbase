@@ -15,7 +15,7 @@ test_that("Custom queries give desired result", {
   expect_is(df, "tbl")
 
   references()
-  rr <- references(codes = c(1, 4))
+  rr <- references(codes = c("1", "4"))
   expect_is(rr, "tbl")
   expect_equal(nrow(rr), 2)
   

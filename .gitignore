@@ -7,3 +7,4 @@ inst/doc
 *.tsv.bz2
 .DS_Store
 *.7z
+parquet
