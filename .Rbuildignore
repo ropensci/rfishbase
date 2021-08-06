@@ -23,4 +23,5 @@ circle.yml
 ^\.manifest\.json$
 ^fb$
 ^pkgdown$
-
+^slb$
+^parquet$
