@@ -1,0 +1,10 @@
+table_name,column_name
+predatortroph,Predatorlevel
+predatortroph,Predator
+predatortroph,TL
+predatortroph,SETL
+predatortroph,RefNo
+predatortroph,Remark
+predatortroph,MaxLength
+predatortroph,MinLength
+predatortroph,TS
