@@ -24,7 +24,7 @@ for(table in tables){
         df <- df %>% mutate(across(where(is.list), as.character))
         path <- file.path("fb", paste0(table, ".tsv.bz2"))
         if(nrow(df) > 0){
-                readr::write_tsv(df, path)
+                readr::write_tsv(df, path, quote="")
                 arrow::write_parquet(df, file.path("parquet", path))
         }
 }
@@ -34,7 +34,7 @@ for(table in tables){
 
 
 con <- DBI::dbConnect(RMariaDB::MariaDB(), "slbapp", user="root", host="mariadb", password = "password")
-tables <- DBI::dbListTables(con)
+tables <- DBI::dbListTables(con) %>% sort()
 
 ## Fallback on RMySQL -- does not handle dates or some long text columns as well, but does not fail hard
 con2 <- DBI::dbConnect(RMySQL::MySQL(), "slbapp", user="root", host="mariadb", password = "password")
@@ -42,18 +42,26 @@ fs::dir_create("parquet/slb", recurse = TRUE)
 fs::dir_create("slb")
 for(table in tables){
         message(table)
-        df <- tryCatch({
-                dplyr::collect(dplyr::tbl(con, table))
+        path <- file.path("slb", paste0(table, ".tsv.bz2"))
+        
+        tryCatch({
+                df <- dplyr::collect(dplyr::tbl(con, table))
+                df <- df %>% mutate(across(where(is.list), as.character))
+                if(nrow(df) > 0){
+                        readr::write_tsv(df, path, quote="")
+                        #arrow::write_parquet(df, file.path("parquet", path))
+                }
         }, error = function(e) {
-                dplyr::collect(dplyr::tbl(con2, table))
+                message(paste("using fallback on table", table))
+                df <- dplyr::collect(dplyr::tbl(con2, table))
+                df <- df %>% mutate(across(where(is.list), as.character))
+                if(nrow(df) > 0){
+                        write.delim(df, path, sep="\t", quote=FALSE)
+                        #arrow::write_parquet(df, file.path("parquet", path))
+                }
         },
         finally=data.frame())
-        df <- df %>% mutate(across(where(is.list), as.character))
-        path <- file.path("slb", paste0(table, ".tsv.bz2"))
-        if(nrow(df) > 0){
-                readr::write_tsv(df, path)
-                #arrow::write_parquet(df, file.path("parquet", path))
-        }
+        
         gc()
 }
 
