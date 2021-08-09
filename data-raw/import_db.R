@@ -11,7 +11,7 @@ tables <- DBI::dbListTables(con)
 ## Fallback on RMySQL -- does not handle dates or some long text columns as well, but does not fail hard
 con2 <- DBI::dbConnect(RMySQL::MySQL(), "fbapp", user="root", host="mariadb", password = "password")
 fs::dir_create("fb")
-fs::dir_create("parquet/fb", recurse = TRUE)
+fs::dir_create("~/fb_parquet_2021-04")
 
 for(table in tables){
         message(table)
@@ -25,7 +25,7 @@ for(table in tables){
         path <- file.path("fb", paste0(table, ".tsv.bz2"))
         if(nrow(df) > 0){
                 readr::write_tsv(df, path, quote="none")
-                arrow::write_parquet(df, file.path("parquet", path))
+                arrow::write_parquet(df, file.path("~/fb_parquet_2021-04", paste0(table, ".parquet")))
         }
 }
 
@@ -38,7 +38,7 @@ tables <- DBI::dbListTables(con) %>% sort()
 
 ## Fallback on RMySQL -- does not handle dates or some long text columns as well, but does not fail hard
 con2 <- DBI::dbConnect(RMySQL::MySQL(), "slbapp", user="root", host="mariadb", password = "password")
-fs::dir_create("parquet/slb", recurse = TRUE)
+fs::dir_create("~/slb_2021-04_parquet")
 fs::dir_create("slb")
 for(table in tables){
         message(table)
@@ -57,7 +57,7 @@ for(table in tables){
                 df <- df %>% mutate(across(where(is.list), as.character))
                 if(nrow(df) > 0){
                         write.table(df, path, sep="\t", quote=FALSE)
-                        arrow::write_parquet(df, file.path("parquet", paste0("slb", table, ".parquet")))
+                        arrow::write_parquet(df, file.path("slb_2021-04_parquet", paste0(table, ".parquet")))
                 }
         },
         finally=data.frame())
