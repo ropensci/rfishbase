@@ -42,7 +42,8 @@ Imports:
     curl,
     dbplyr, 
     progress,
-    RSQLite
+    RSQLite,
+    openssl
 Suggests:
     testthat,
     rmarkdown,
