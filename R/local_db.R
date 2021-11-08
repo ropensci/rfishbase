@@ -111,3 +111,11 @@ dummy <- function(){
 db_dir <- function(){
   Sys.getenv("FISHBASE_HOME",  tools::R_user_dir("rfishbase"))
 }
+
+#' Delete the existing local fishbase database
+#' @inheritParams default_db
+#' @export
+db_delete <- function(dbdir = db_dir()){
+  unlink(dbdir, TRUE, TRUE)
+}
+
