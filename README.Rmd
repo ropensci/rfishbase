@@ -13,9 +13,9 @@ output: github_document
 
 
 
-Welcome to `rfishbase 3.0`. This package is the third rewrite of the original `rfishbase` package described in [Boettiger et al. (2012)](https://doi.org/10.1111/j.1095-8649.2012.03464.x).   
+Welcome to `rfishbase 3`. This package is the third rewrite of the original `rfishbase` package described in [Boettiger et al. (2012)](https://doi.org/10.1111/j.1095-8649.2012.03464.x).   
 
-`rfishbase` 3.0 queries pre-compressed tables from a static server and employs local caching (through memoization) to provide much greater performance and stability, particularly for dealing with large queries involving 10s of thousands of species.  The user is never expected to deal with pagination or curl headers and timeouts.  
+`rfishbase` 3 queries pre-compressed tables from a static server and employs local caching (through memoization) to provide much greater performance and stability, particularly for dealing with large queries involving 10s of thousands of species.  The user is never expected to deal with pagination or curl headers and timeouts.  
 
 
 
@@ -83,7 +83,7 @@ Note that there is no need to validate names coming from `common_to_sci` or `spe
 
 With a species list in place, we are ready to query fishbase for data. Note that if you have a very long list of species, it is always a good idea to try out your intended functions with a subset of that list first to make sure everything is working. 
 
-The `species()` function returns a table containing much (but not all) of the information found on the summary or homepage for a species on FishBase. `rfishbase` functions always return [tidy](https://www.jstatsoft.org/v59/i10/paper) data tables: rows are observations (e.g. a species, individual samples from a species) and columns are variables (fields).
+The `species()` function returns a table containing much (but not all) of the information found on the summary or homepage for a species on FishBase. `rfishbase` functions always return [tidy](https://doi.org/10.18637/jss.v059.i10) data tables: rows are observations (e.g. a species, individual samples from a species) and columns are variables (fields).
 
 ```{r}
 species(trout$Species)
@@ -120,7 +120,7 @@ stocks(trout$Species, fields=c("Species", "Resilience", "StockDefs"))
 
 ## Version stability
 
-`rfishbase` relies on periodic cache releases.  The current database release is `17.07` (i.e. dating from July 2017).  Set the version of FishBase you wish to access by setting the environmental variable:
+`rfishbase` relies on periodic cache releases -- the database release `17.07` dates to a release in July 2017.  Set the version of FishBase you wish to access by setting the environmental variable:
 
 ```{r}
 options(FISHBASE_VERSION="19.04")
