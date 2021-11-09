@@ -36,9 +36,11 @@ a table of species ration
 ration
 }
 \examples{
-\dontrun{
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+ \dontrun{
 ration("Oreochromis niloticus")
 }
+\dontshow{\}) # examplesIf}
 }
 \references{
 http://www.fishbase.org/manual/english/fishbasethe_ration_table.htm

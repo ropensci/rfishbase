@@ -4,7 +4,8 @@
 #' @return a table of species reproduction
 #' @inheritParams species
 #' @export
-#' @examples \dontrun{
+#' @examplesIf interactive()
+#'  \dontrun{
 #' reproduction("Oreochromis niloticus")
 #' }
 reproduction <- endpoint("reproduc")
@@ -15,7 +16,8 @@ reproduction <- endpoint("reproduc")
 #' @return a table of species fecundity
 #' @inheritParams species
 #' @export
-#' @examples \dontrun{
+#' @examplesIf interactive()
+#'  \dontrun{
 #' fecundity("Oreochromis niloticus")
 #' }
 fecundity <- endpoint("fecundity")
@@ -26,7 +28,8 @@ fecundity <- endpoint("fecundity")
 #' @return a table of species maturity
 #' @inheritParams species
 #' @export
-#' @examples \dontrun{
+#' @examplesIf interactive()
+#'  \dontrun{
 #' maturity("Oreochromis niloticus")
 #' }
 maturity <- endpoint("maturity")
@@ -37,7 +40,8 @@ maturity <- endpoint("maturity")
 #' @return a table of species spawning
 #' @inheritParams species
 #' @export
-#' @examples \dontrun{
+#' @examplesIf interactive()
+#'  \dontrun{
 #' spawning("Oreochromis niloticus")
 #' }
 spawning <- endpoint("spawning")
@@ -47,7 +51,8 @@ spawning <- endpoint("spawning")
 #' @return a table of larval data
 #' @inheritParams species
 #' @export
-#' @examples \dontrun{
+#' @examplesIf interactive()
+#'  \dontrun{
 #' larvae("Oreochromis niloticus")
 #' }
 larvae <- endpoint("larvae")

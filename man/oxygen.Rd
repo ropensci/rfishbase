@@ -36,7 +36,9 @@ a table of species oxygen data
 oxygen
 }
 \examples{
-\dontrun{
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+ \dontrun{
 oxygen("Oreochromis niloticus")
 }
+\dontshow{\}) # examplesIf}
 }

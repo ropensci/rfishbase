@@ -33,7 +33,9 @@ easier to leave this as NULL and set the source instead using the environmental 
 return a table of countrysub for the requested species
 }
 \examples{
-\dontrun{
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+ \dontrun{
 countrysub(species_list(Genus='Labroides'))
 }
+\dontshow{\}) # examplesIf}
 }

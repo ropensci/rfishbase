@@ -25,6 +25,7 @@ Then users can employ standard filter techniques like grep for partial name matc
 see examples.
 }
 \examples{
+\dontshow{if (interactive() ) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 \donttest{
 list_fields("Temp")
 
@@ -32,4 +33,5 @@ list_fields("Temp")
 library(dplyr)
 list_fields() \%>\% filter(grepl("length", columns, ignore.case = TRUE))
 }
+\dontshow{\}) # examplesIf}
 }

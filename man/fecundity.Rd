@@ -36,7 +36,9 @@ a table of species fecundity
 fecundity
 }
 \examples{
-\dontrun{
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+ \dontrun{
 fecundity("Oreochromis niloticus")
 }
+\dontshow{\}) # examplesIf}
 }

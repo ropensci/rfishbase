@@ -41,6 +41,7 @@ get multiple returns for different stocks of the same species, though often data
 identical to the first or simply missing in the additional stocks.
 }
 \examples{
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 \dontrun{
 ecology("Oreochromis niloticus")
 
@@ -48,6 +49,7 @@ ecology("Oreochromis niloticus")
 ecology(c("Oreochromis niloticus", "Salmo trutta"),
         fields=c("SpecCode", "FoodTroph", "FoodSeTroph", "DietTroph", "DietSeTroph"))
 }
+\dontshow{\}) # examplesIf}
 }
 \references{
 http://www.fishbase.org/manual/english/fishbasethe_ecology_table.htm

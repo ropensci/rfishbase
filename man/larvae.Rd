@@ -36,7 +36,9 @@ a table of larval data
 larvae
 }
 \examples{
-\dontrun{
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+ \dontrun{
 larvae("Oreochromis niloticus")
 }
+\dontshow{\}) # examplesIf}
 }

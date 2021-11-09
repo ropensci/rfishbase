@@ -12,7 +12,8 @@
 #' @references http://www.fishbase.org/manual/english/fishbasethe_popchar_table.htm
 #' @inheritParams species
 #' @export
-#' @examples \dontrun{
+#' @examplesIf interactive()
+#'  \dontrun{
 #' popchar("Oreochromis niloticus")
 #' }
 popchar <- endpoint("popchar")
@@ -33,7 +34,8 @@ popchar <- endpoint("popchar")
 #' @return a table of population growth information by species; see details
 #' @export
 #' @references http://www.fishbase.org/manual/english/fishbasethe_popgrowth_table.htm
-#' @examples \dontrun{
+#' @examplesIf interactive()
+#'  \dontrun{
 #' popgrowth("Oreochromis niloticus")
 #' }
 popgrowth <- endpoint("popgrowth")
@@ -48,7 +50,8 @@ popgrowth <- endpoint("popgrowth")
 #' @export length_freq poplf
 #' @aliases length_freq poplf
 #' @return a table of length_freq information by species; see details
-#' @examples \dontrun{
+#' @examplesIf interactive()
+#'  \dontrun{
 #' length_freq("Oreochromis niloticus")
 #' }
 length_freq <- endpoint("poplf")
@@ -82,7 +85,8 @@ poplf <- length_freq
 #' @return a table of lengths
 #' @export popll length_length
 #' @aliases popll length_length
-#' @examples \dontrun{
+#' @examplesIf interactive()
+#'  \dontrun{
 #' length_length("Oreochromis niloticus")
 #' }
 length_length <- endpoint("popll")
@@ -124,7 +128,8 @@ popll <- length_length
 #' @inheritParams species
 #' @export length_weight poplw
 #' @aliases length_weight poplw
-#' @examples \dontrun{
+#' @examplesIf interactive()
+#'  \dontrun{
 #' length_weight("Oreochromis niloticus")
 #' }
 length_weight <- endpoint("poplw")

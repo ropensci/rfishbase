@@ -9,7 +9,7 @@
 #' Calling `list_fields()` with no arguments will return the full table of all known fields.
 #' Then users can employ standard filter techniques like grep for partial name matching; 
 #' see examples.
-#' @examples 
+#' @examplesIf interactive() 
 #' \donttest{
 #' list_fields("Temp")
 #' 

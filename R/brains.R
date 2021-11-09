@@ -4,7 +4,8 @@
 #' @return a table of species brains
 #' @inheritParams species
 #' @export
-#' @examples \dontrun{
+#' @examplesIf interactive()
+#'  \dontrun{
 #' brains("Oreochromis niloticus")
 #' }
 brains <- endpoint("brains")

@@ -10,7 +10,7 @@
 #' @param Species Request all species in this taxonomic Species
 #' @param SpecCode Request species name of species matching this SpecCode
 #' @param server fishbase or sealifebase
-#' @examples
+#' @examplesIf interactive()
 #' \donttest{
 #' ## All species in the Family 
 #'   species_list(Family = 'Scaridae')

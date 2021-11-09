@@ -86,7 +86,8 @@ tbl_name <- function(tbl,
 #' @importFrom DBI dbConnect dbIsValid
 # @importFrom duckdb duckdb
 #' @export
-#' @examples \donttest{
+#' @examplesIf interactive()
+#'  \donttest{
 #' ## OPTIONAL: you can first set an alternative home location,
 #' ## such as a temporary directory:
 #' Sys.setenv(FISHBASE_HOME=tempdir())

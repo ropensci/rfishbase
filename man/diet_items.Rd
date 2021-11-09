@@ -29,7 +29,9 @@ a table of species diet_items
 fooditems
 }
 \examples{
-\dontrun{
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+ \dontrun{
 diet_items("Oreochromis niloticus")
 }
+\dontshow{\}) # examplesIf}
 }

@@ -36,7 +36,9 @@ a table of species maturity
 maturity
 }
 \examples{
-\dontrun{
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+ \dontrun{
 maturity("Oreochromis niloticus")
 }
+\dontshow{\}) # examplesIf}
 }

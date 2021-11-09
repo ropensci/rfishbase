@@ -37,7 +37,8 @@ existing database connection, making repeated calls to `default_db()` much
 faster and more failsafe than repeated calls to [DBI::dbConnect]
 }
 \examples{
-\donttest{
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+ \donttest{
 ## OPTIONAL: you can first set an alternative home location,
 ## such as a temporary directory:
 Sys.setenv(FISHBASE_HOME=tempdir())
@@ -46,4 +47,5 @@ Sys.setenv(FISHBASE_HOME=tempdir())
 db <- default_db()
 
 }
+\dontshow{\}) # examplesIf}
 }

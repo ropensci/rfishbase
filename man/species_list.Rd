@@ -39,10 +39,12 @@ species_list(
 Return the a species list given a taxonomic group
 }
 \examples{
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 \donttest{
 ## All species in the Family 
   species_list(Family = 'Scaridae')
 ## All species in the Genus 
   species_list(Genus = 'Labroides')
 }
+\dontshow{\}) # examplesIf}
 }
