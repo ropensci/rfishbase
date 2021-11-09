@@ -478,7 +478,7 @@ context.
 
 -   You can still specify server using the rfishbase `2.x` format of
     providing a URL argument for server,
-    e.g. `"https://fishbase.ropensci.org/sealifebase"` or
+    e.g. `"https://fishbase.ropensci.org/sealifebase"` or
     `Sys.setenv(FISHBASE_API = "https://fishbase.ropensci.org/sealifebase")`,
     or simply `Sys.setenv("FISHBASE_API" = "sealifebase")` if you
     prefer. Also recall that environmental variables can always be set
