@@ -5,27 +5,32 @@ library(dplyr)
 library(readr)
 
 
-con <- DBI::dbConnect(RMariaDB::MariaDB(), "fbapp", user="root", host="mariadb", password = "password")
+con <- DBI::dbConnect(RMariaDB::MariaDB(), "fbapp",
+                      user="root", host="mariadb", password = "password")
 tables <- DBI::dbListTables(con)
 
+species <- dbReadTable(con, "species")
+
 ## Fallback on RMySQL -- does not handle dates or some long text columns as well, but does not fail hard
-con2 <- DBI::dbConnect(RMySQL::MySQL(), "fbapp", user="root", host="mariadb", password = "password")
-fs::dir_create("fb")
-fs::dir_create("~/fb_parquet_2021-04")
+#con2 <- DBI::dbConnect(RMySQL::MySQL(), "fbapp", user="root", host="mariadb", password = "password")
+fb <- fs::dir_create("data-raw/fb_2021-06")
+fb_parquet <- fs::dir_create("data-raw/fb_parquet_2021-06")
 
 for(table in tables){
         message(table)
         df <- tryCatch({
                 dplyr::collect(dplyr::tbl(con, table))
         }, error = function(e) {
-                dplyr::collect(dplyr::tbl(con2, table))
+                stop(e)
+                #dplyr::collect(dplyr::tbl(con2, table))
         },
         finally=data.frame())
         df <- df %>% mutate(across(where(is.list), as.character))
-        path <- file.path("fb", paste0(table, ".tsv.bz2"))
+        path <- file.path(fb, paste0(table, ".tsv.gz"))
         if(nrow(df) > 0){
                 readr::write_tsv(df, path, quote="none")
-                arrow::write_parquet(df, file.path("~/fb_parquet_2021-04", paste0(table, ".parquet")))
+                arrow::write_parquet(df, file.path(fb_parquet, 
+                                                   paste0(table, ".parquet")))
         }
 }
 
@@ -38,34 +43,43 @@ tables <- DBI::dbListTables(con) %>% sort()
 
 ## Fallback on RMySQL -- does not handle dates or some long text columns as well, but does not fail hard
 con2 <- DBI::dbConnect(RMySQL::MySQL(), "slbapp", user="root", host="mariadb", password = "password")
-fs::dir_create("~/slb_2021-04_parquet")
-fs::dir_create("slb")
-for(table in tables){
+
+
+
+slb <- fs::dir_create("data-raw/slb_2021-08")
+slb_parquet <- fs::dir_create("data-raw/slb_parquet_2021-08")
+
+safe_tables <- tables[!(tables %in% c("ecosystem", "ecosystemcountry"))]
+
+# Note: internal error: row 378050 field 9 truncated
+ecosystem <- DBI::dbReadTable(con2, "ecosystem") %>% as_tibble()
+
+for(table in safe_tables){
         message(table)
-        path <- file.path("slb", paste0(table, ".tsv.bz2"))
-        
-        tryCatch({
-                df <- dplyr::collect(dplyr::tbl(con, table))
-                df <- df %>% mutate(across(where(is.list), as.character))
-                if(nrow(df) > 0){
-                        readr::write_tsv(df, path, quote="none")
-                        #arrow::write_parquet(df, file.path("parquet", path))
-                }
+        df <- tryCatch({
+                DBI::dbReadTable(con, table)
         }, error = function(e) {
-                message(paste("using fallback on table", table))
-                df <- dplyr::collect(dplyr::tbl(con2, table))
-                df <- df %>% mutate(across(where(is.list), as.character))
-                if(nrow(df) > 0){
-                        write.table(df, path, sep="\t", quote=FALSE)
-                        arrow::write_parquet(df, file.path("slb_2021-04_parquet", paste0(table, ".parquet")))
-                }
+                # warning(e)
+                DBI::dbReadTable(con2, table)
         },
         finally=data.frame())
-        
+        df <- df %>% mutate(across(where(is.list), as.character))
+        path <- 
+        if(nrow(df) > 0){
+                readr::write_tsv(df, path, quote="none")
+                arrow::write_parquet(df, file.path(slb_parquet, 
+                                                   paste0(table, ".parquet")))
+        }
         gc()
 }
 
+## These are a bit unstable in readr...
+table<- "ecosystemcountry" # "ecosystem" 
+df <- DBI::dbReadTable(con2, table)
+readr::write_tsv(df, file.path(slb, paste0(table,".tsv.gz")), quote="none")
+arrow::write_parquet(df, file.path(slb_parquet, paste0(table, ".parquet")))
 
+### CSV uploads
 
 ## Check we aren't losing stuff
 #tbl(src, "comnames") %>% summarise(n())
@@ -73,10 +87,10 @@ for(table in tables){
 
 #tables <- readLines("data-raw/rfishbase_tables.txt")
 
-cache <- fs::dir_ls("fb", type = "file")
+cache <- fs::dir_ls(fb, type = "file")
 piggyback::pb_upload(cache,
                      repo = "ropensci/rfishbase", 
-                     tag = "fb-21.04", overwrite = TRUE)
+                     tag = "fb-21.06", overwrite = TRUE)
 
 # local <- paste0("fb/", tables, ".tsv.bz2")
 # files <- local[local %in% cache]
@@ -85,8 +99,8 @@ piggyback::pb_upload(cache,
 
 
 
-cache <- fs::dir_ls("slb", type = "file")
+cache <- fs::dir_ls(slb, type = "file")
 piggyback::pb_upload(cache,
-       repo = "ropensci/rfishbase", 
-       tag = "slb-21.04", overwrite = TRUE)
+                     repo = "ropensci/rfishbase", 
+                     tag = "slb-21.08", overwrite = TRUE)
 
