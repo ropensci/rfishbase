@@ -44,10 +44,12 @@ For details, see: http://www.fishbase.org/manual/english/fishbasethe_species_tab
 Species scientific names are defined according to fishbase taxonomy and nomenclature.
 }
 \examples{
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 \dontrun{
 
 species(c("Labroides bicolor", "Bolbometopon muricatum")) 
 species(c("Labroides bicolor", "Bolbometopon muricatum"), fields = species_fields$habitat) 
 
 }
+\dontshow{\}) # examplesIf}
 }

@@ -34,7 +34,7 @@ get_release <- function(){
 #' to clear the cache with `clear_cache()` or by restarting the R session
 #' with a fresh environment.  
 #' @export
-#' @examples
+#' @examplesIf interactive()
 #' available_releases()
 #' options(FISHBASE_VERSION="19.04")
 #' ## unset

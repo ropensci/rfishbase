@@ -86,7 +86,8 @@ tbl_name <- function(tbl,
 #' @importFrom DBI dbConnect dbIsValid
 # @importFrom duckdb duckdb
 #' @export
-#' @examples \donttest{
+#' @examplesIf interactive()
+#'  \donttest{
 #' ## OPTIONAL: you can first set an alternative home location,
 #' ## such as a temporary directory:
 #' Sys.setenv(FISHBASE_HOME=tempdir())
@@ -111,3 +112,11 @@ dummy <- function(){
 db_dir <- function(){
   Sys.getenv("FISHBASE_HOME",  tools::R_user_dir("rfishbase"))
 }
+
+#' Delete the existing local fishbase database
+#' @inheritParams default_db
+#' @export
+db_delete <- function(dbdir = db_dir()){
+  unlink(dbdir, TRUE, TRUE)
+}
+

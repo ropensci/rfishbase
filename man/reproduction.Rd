@@ -36,7 +36,9 @@ a table of species reproduction
 reproduction
 }
 \examples{
-\dontrun{
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+ \dontrun{
 reproduction("Oreochromis niloticus")
 }
+\dontshow{\}) # examplesIf}
 }

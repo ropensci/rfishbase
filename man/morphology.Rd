@@ -36,7 +36,9 @@ a table of species morphology data
 morphology
 }
 \examples{
-\dontrun{
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+ \dontrun{
 morphology("Oreochromis niloticus")
 }
+\dontshow{\}) # examplesIf}
 }

@@ -36,8 +36,10 @@ a table of species genetics data
 genetics
 }
 \examples{
-\dontrun{
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+ \dontrun{
 genetics("Oreochromis niloticus")
 genetics("Labroides dimidiatus")
 }
+\dontshow{\}) # examplesIf}
 }

@@ -12,7 +12,7 @@
 #' At this time, many fields are still missing.  Please take a moment to fill in any fields you use in the source
 #' table here: https://github.com/ropensci/fishbaseapi/tree/master/docs/docs-sources
 #' @importFrom utils read.csv
-#' @examples 
+#' @examplesIf interactive() 
 #' \donttest{
 #' tables <- docs()
 #' # Describe the fecundity table

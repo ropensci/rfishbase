@@ -36,7 +36,9 @@ a table of species introductions data
 introductions
 }
 \examples{
-\dontrun{
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+ \dontrun{
 introductions("Oreochromis niloticus")
 }
+\dontshow{\}) # examplesIf}
 }

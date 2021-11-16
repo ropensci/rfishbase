@@ -72,7 +72,8 @@ globalVariables(c("Status", "SpecCode", "SynCode",
 #' @return a string of the validated names
 #' @export
 #' @importFrom dplyr filter pull right_join
-#' @examples \donttest{
+#' @examplesIf interactive()
+#'  \donttest{
 #' validate_names("Abramites ternetzi")
 #' }
 validate_names <- function(species_list,

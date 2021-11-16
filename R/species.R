@@ -22,7 +22,7 @@
 #' @importFrom utils data lsf.str packageVersion
 #' @export species
 #' @aliases species species_info
-#' @examples
+#' @examplesIf interactive()
 #' \dontrun{
 #' 
 #' species(c("Labroides bicolor", "Bolbometopon muricatum")) 

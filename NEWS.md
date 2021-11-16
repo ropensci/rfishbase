@@ -23,6 +23,13 @@ And constructed with the following guidelines:
 
 For more information on SemVer, please visit http://semver.org/.
 
+v 3.1.10
+--------
+
+- new function `db_delete()` will purge the local DB for a clean start
+- Patch temp table
+- require readr >= 2.0.0
+
 v 3.1.9
 -------
 

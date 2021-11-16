@@ -36,7 +36,9 @@ a table of species stocks data
 stocks
 }
 \examples{
-\dontrun{
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+ \dontrun{
 stocks("Oreochromis niloticus")
 }
+\dontshow{\}) # examplesIf}
 }

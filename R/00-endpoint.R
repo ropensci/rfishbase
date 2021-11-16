@@ -111,4 +111,4 @@ fb_species <- function(server = getOption("FISHBASE_API", "fishbase"),
 
 
 tmp_tablename <- function(n=10)
-  paste0("tmp_", paste0(sample(letters, n, replace = TRUE), collapse = ""))
+  paste0("tmp_", paste0(openssl::rand_bytes(10), collapse = ""))

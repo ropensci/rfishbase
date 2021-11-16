@@ -36,7 +36,9 @@ a table of species ecosystems data
 ecosystem
 }
 \examples{
-\dontrun{
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+ \dontrun{
 ecosystem("Oreochromis niloticus")
 }
+\dontshow{\}) # examplesIf}
 }
