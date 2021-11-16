@@ -1,7 +1,9 @@
 
 # rfishbase <img src="man/figures/logo.svg" align="right" alt="" width="120" />
 
-[![R-check](https://github.com/ropensci/rfishbase/workflows/R-check/badge.svg)](https://github.com/ropensci/rfishbase/actions?query=workflow%3AR-check)
+<!-- badges: start -->
+
+[![R-CMD-check](https://github.com/ropensci/rfishbase/workflows/R-CMD-check/badge.svg)](https://github.com/ropensci/rfishbase/actions)
 [![cran
 checks](https://cranchecks.info/badges/worst/rfishbase)](https://cranchecks.info/pkgs/rfishbase)
 [![Coverage
@@ -10,6 +12,7 @@ status](https://codecov.io/gh/ropensci/rfishbase/branch/master/graph/badge.svg)]
 [![CRAN
 status](https://www.r-pkg.org/badges/version/rfishbase)](https://cran.r-project.org/package=rfishbase)
 [![Downloads](https://cranlogs.r-pkg.org/badges/grand-total/rfishbase)](https://github.com/r-hub/cranlogs.app)
+<!-- badges: end -->
 
 Welcome to `rfishbase 3.0`. This package is the third rewrite of the
 original `rfishbase` package described in [Boettiger et
@@ -83,24 +86,6 @@ multiple species, all matching species are returned:
 
 ``` r
 trout <- common_to_sci("trout")
-```
-
-    Importing /home/cboettig/.local/share/R/rfishbase/comnames_fb_2104.tsv.bz2 in 1000000 line chunks:
-
-    Rows: 324211 Columns: 35
-
-    ── Column specification ────────────────────────────────────────────────────────
-    Delimiter: "\t"
-    chr (34): autoctr, ComName, Transliteration, StockCode, SpecCode, C_Code, La...
-    dbl  (1): ComNamesRefNo
-
-
-    ℹ Use `spec()` to retrieve the full column specification for this data.
-    ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
-
-        ...Done! (in 12.80611 secs)
-
-``` r
 trout
 ```
 
@@ -141,18 +126,18 @@ species(trout$Species)
 ```
 
     # A tibble: 296 × 101
-       SpecCode Species                   Genus SpeciesRefNo Author FBname PicPreferredName
-       <chr>    <chr>                     <chr>        <dbl> <chr>  <chr>  <chr>           
-     1 6210     Salmo obtusirostris       Salmo        59043 (Heck… Adria… Saobt_u0.jpg    
-     2 8705     Schizothorax richardsonii Schi…         4832 (Gray… Snowt… Scric_u1.jpg    
-     3 24454    Schizopyge niger          Schi…         4832 (Heck… Algha… <NA>            
-     4 246      Salvelinus fontinalis     Salv…        86798 (Mitc… Brook… Safon_u4.jpg    
-     5 238      Salmo trutta              Salmo         4779 Linna… Sea t… Satru_u2.jpg    
-     6 67602    Salmo kottelati           Salmo        99540 Turan… Antal… Sakot_m0.jpg    
-     7 2687     Oncorhynchus apache       Onco…         5723 (Mill… Apach… Onapa_u0.jpg    
-     8 2687     Oncorhynchus apache       Onco…         5723 (Mill… Apach… Onapa_u0.jpg    
-     9 6082     Plectropomus areolatus    Plec…         5222 (Rüpp… Squar… Plare_u4.jpg    
-    10 238      Salmo trutta              Salmo         4779 Linna… Sea t… Satru_u2.jpg    
+       SpecCode Species    Genus   SpeciesRefNo Author     FBname   PicPreferredName
+       <chr>    <chr>      <chr>          <dbl> <chr>      <chr>    <chr>           
+     1 6210     Salmo obt… Salmo          59043 (Heckel, … Adriati… Saobt_u0.jpg    
+     2 8705     Schizotho… Schizo…         4832 (Gray, 18… Snowtro… Scric_u1.jpg    
+     3 24454    Schizopyg… Schizo…         4832 (Heckel, … Alghad … <NA>            
+     4 246      Salvelinu… Salvel…        86798 (Mitchill… Brook t… Safon_u4.jpg    
+     5 238      Salmo tru… Salmo           4779 Linnaeus,… Sea tro… Satru_u2.jpg    
+     6 67602    Salmo kot… Salmo          99540 Turan, Do… Antalya… Sakot_m0.jpg    
+     7 2687     Oncorhync… Oncorh…         5723 (Miller, … Apache … Onapa_u0.jpg    
+     8 2687     Oncorhync… Oncorh…         5723 (Miller, … Apache … Onapa_u0.jpg    
+     9 6082     Plectropo… Plectr…         5222 (Rüppell,… Squaret… Plare_u4.jpg    
+    10 238      Salmo tru… Salmo           4779 Linnaeus,… Sea tro… Satru_u2.jpg    
     # … with 286 more rows, and 94 more variables: PicPreferredNameM <chr>,
     #   PicPreferredNameF <chr>, PicPreferredNameJ <chr>, FamCode <dbl>,
     #   Subfamily <chr>, GenCode <dbl>, SubGenCode <dbl>, BodyShapeI <chr>,
@@ -230,22 +215,6 @@ can then request this data from the stocks table:
 stocks(trout$Species, fields=c("Species", "Resilience", "StockDefs"))
 ```
 
-    Importing /home/cboettig/.local/share/R/rfishbase/stocks_fb_2104.tsv.bz2 in 1000000 line chunks:
-
-    Rows: 35322 Columns: 119
-
-    ── Column specification ────────────────────────────────────────────────────────
-    Delimiter: "\t"
-    chr  (50): StockCode, SpecCode, SynOC, StockDefs, StockDefsGeneral, Level, L...
-    dbl  (67): StocksRefNo, Easternmost, BoundingRef, BoundingMethod, TempMin, T...
-    dttm  (2): DateModified, DateChecked
-
-
-    ℹ Use `spec()` to retrieve the full column specification for this data.
-    ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
-
-        ...Done! (in 2.677451 secs)
-
     # A tibble: 397 × 3
        Species                   Resilience StockDefs                               
        <chr>                     <chr>      <chr>                                   
@@ -285,121 +254,6 @@ We can begin by getting the taxa table for sealifebase:
 ``` r
 sealife <- load_taxa(server="sealifebase")
 ```
-
-    Importing /home/cboettig/.local/share/R/rfishbase/species_slb_2104.tsv.bz2 in 1000000 line chunks:
-
-    Rows: 96814 Columns: 109
-
-    ── Column specification ────────────────────────────────────────────────────────
-    Delimiter: "\t"
-    chr  (63): SpecCode, Genus, Species, Author, SpeciesRefNo, FBname, Subfamily...
-    dbl  (40): FamCode, TaxIssue, AuthorRef, SubGenCode, Brack, Land, MigratRef,...
-    lgl   (3): Pic, PictureFemale, Profile
-    dttm  (2): DateEntered, TS
-    date  (1): E_DateAppend
-
-
-    ℹ Use `spec()` to retrieve the full column specification for this data.
-    ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
-
-        ...Done! (in 9.489418 secs)
-
-    Importing /home/cboettig/.local/share/R/rfishbase/genera_slb_2104.tsv.bz2 in 1000000 line chunks:
-
-    Rows: 27798 Columns: 60
-
-    ── Column specification ────────────────────────────────────────────────────────
-    Delimiter: "\t"
-    chr  (26): GenCode, GEN_NAME, AuthorYear, SUBGEN, CommonName, AUTH, QUALIFIC...
-    dbl  (12): GenusRefno, Famcode, Syncode, LineageID, CurrentGenusID, Marine, ...
-    lgl  (17): FB_NbSpp, DspinesMin, DspinesMax, DsoftRaysMin, DsoftRaysMax, Tot...
-    dttm  (5): STAT_CODE1, Dateentered, Datemodified, Datechecked, TS
-
-
-    ℹ Use `spec()` to retrieve the full column specification for this data.
-    ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
-
-        ...Done! (in 1.084938 secs)
-
-    Importing /home/cboettig/.local/share/R/rfishbase/families_slb_2104.tsv.bz2 in 1000000 line chunks:
-
-    Rows: 4564 Columns: 79
-
-    ── Column specification ────────────────────────────────────────────────────────
-    Delimiter: "\t"
-    chr  (21): FamCode, Family, AuthorYear, Qualification, CommonName, SuperFami...
-    dbl  (14): FamiliesRefNo, Fossil, Ordnum, Genera, Species, Brackish, Freshwa...
-    lgl  (41): SwimMode, Activity, PeriodRange, Period, EpochRange, Epoch, LarvP...
-    dttm  (3): DateEntered, DateModified, DateChecked
-
-
-    ℹ Use `spec()` to retrieve the full column specification for this data.
-    ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
-
-        ...Done! (in 0.3119028 secs)
-
-    Importing /home/cboettig/.local/share/R/rfishbase/orders_slb_2104.tsv.bz2 in 1000000 line chunks:
-
-    Rows: 743 Columns: 45
-
-    ── Column specification ────────────────────────────────────────────────────────
-    Delimiter: "\t"
-    chr   (6): Order, CommonName, Class, Phylum, Remark, CommonName_German
-    dbl  (11): OrderRefNo, Ordnum, ClassNum, PhylumNum, Marine, Brackish, Freshw...
-    lgl  (26): EtymologyOrder, Class_Russian, EtymologyClass, SisterOrder, ComAn...
-    dttm  (2): DateEntered, DateModified
-
-
-    ℹ Use `spec()` to retrieve the full column specification for this data.
-    ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
-
-        ...Done! (in 0.1214426 secs)
-
-    Importing /home/cboettig/.local/share/R/rfishbase/classes_slb_2104.tsv.bz2 in 1000000 line chunks:
-
-    Rows: 176 Columns: 9
-
-    ── Column specification ────────────────────────────────────────────────────────
-    Delimiter: "\t"
-    chr (5): Class, CommonName, Phylum, Remarks, WaterSalinity
-    dbl (2): ClassNum, PhylumNum
-    lgl (2): SortNo, TS
-
-
-    ℹ Use `spec()` to retrieve the full column specification for this data.
-    ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
-
-        ...Done! (in 0.03971982 secs)
-
-    Importing /home/cboettig/.local/share/R/rfishbase/phylums_slb_2104.tsv.bz2 in 1000000 line chunks:
-
-    Rows: 110 Columns: 10
-
-    ── Column specification ────────────────────────────────────────────────────────
-    Delimiter: "\t"
-    chr (3): Kingdom, Phylum, CommonName
-    dbl (5): PhylumId, Valid, ValidPhylumId, ParentPhylumId, PhylumRefNo
-    lgl (2): ParentKingdomId, ParentKingdomInfId
-
-
-    ℹ Use `spec()` to retrieve the full column specification for this data.
-    ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
-
-        ...Done! (in 0.07787085 secs)
-
-    Importing /home/cboettig/.local/share/R/rfishbase/phylumclass_slb_2104.tsv.bz2 in 1000000 line chunks:
-
-    Rows: 238 Columns: 2
-
-    ── Column specification ────────────────────────────────────────────────────────
-    Delimiter: "\t"
-    chr (2): Phylum, Class
-
-
-    ℹ Use `spec()` to retrieve the full column specification for this data.
-    ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
-
-        ...Done! (in 0.0332849 secs)
 
 (Note: running `load_taxa()` at the beginning of any session, for either
 fishbase or sealifebase is a good way to “warm up” rfishbase by loading
