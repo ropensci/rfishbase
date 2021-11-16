@@ -5,16 +5,19 @@ library(dplyr)
 library(readr)
 
 
+fb <- fs::dir_create("data-raw/fb_2021-06")
+fb_parquet <- fs::dir_create("parquet/fb_parquet_2021-06")
+slb <- fs::dir_create("data-raw/slb_2021-08")
+slb_parquet <- fs::dir_create("parquet/slb_parquet_2021-08")
+
+
 con <- DBI::dbConnect(RMariaDB::MariaDB(), "fbapp",
                       user="root", host="mariadb", password = "password")
 tables <- DBI::dbListTables(con)
-
 species <- dbReadTable(con, "species")
 
 ## Fallback on RMySQL -- does not handle dates or some long text columns as well, but does not fail hard
 #con2 <- DBI::dbConnect(RMySQL::MySQL(), "fbapp", user="root", host="mariadb", password = "password")
-fb <- fs::dir_create("data-raw/fb_2021-06")
-fb_parquet <- fs::dir_create("data-raw/fb_parquet_2021-06")
 
 for(table in tables){
         message(table)
@@ -46,8 +49,6 @@ con2 <- DBI::dbConnect(RMySQL::MySQL(), "slbapp", user="root", host="mariadb", p
 
 
 
-slb <- fs::dir_create("data-raw/slb_2021-08")
-slb_parquet <- fs::dir_create("data-raw/slb_parquet_2021-08")
 
 safe_tables <- tables[!(tables %in% c("ecosystem", "ecosystemcountry"))]
 
