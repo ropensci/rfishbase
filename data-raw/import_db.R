@@ -92,8 +92,8 @@ prov::write_prov(data_out = files,
                  version = "21.06",
                  issued = "2021-06-01",
                  code = "data-raw/import_db.R",
-                 provdb = "parquet/fb.prov",
-                 append = TRUE,
+                 provdb = "inst/prov/fb.prov",
+                 append = FALSE,
                  schema="http://schema.org")
 
 
@@ -105,10 +105,10 @@ prov::write_prov(data_out = files,
                  description = "Database snapshot prepared by rOpenSci courtesy of SeaLifeBase and Fishbase.org",
                  license = "https://creativecommons.org/licenses/by-nc/3.0/",
                  creator = list("type" = "Organization", name = "SeaLifeBase.org"),
-                 version = "21.08",
+                 version = "21.11",
                  issued = "2021-08-01",
                  code = "data-raw/import_db.R",
-                 provdb = "parquet/slb.prov",
+                 provdb = "inst/prov/slb.prov",
                  append = TRUE,
                  schema="http://schema.org")
 

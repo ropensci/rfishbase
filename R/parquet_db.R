@@ -1,21 +1,34 @@
 
 
 
-parse_metadata <- function(prov_log = "parquet/fb-2021-06.prov"){
-  prov <- jsonlite::read_json(prov_log)
-  names(prov[["@graph"]][[1]][[1]])
-  meta <- prov[["@graph"]][[1]]
-  meta_df <- tibble(
-    title = map_chr(meta, "title") %>% tools::file_path_sans_ext(),
+parse_metadata <- function(prov, version = version){
+  
+  who <- names(prov)
+  if("@graph" %in% who){
+    prov <- prov[["@graph"]]
+  } else {
+    prov <- list(prov)
+  }
+  
+  avail_versions <-  map_chr(prov, "version")
+  if(version == "latest"){
+    version <- max(avail_versions)
+  }
+  i <- which(version == avail_versions)
+  dataset <- prov[[i]]
+
+  meta <- dataset$distribution
+  meta_df <- tibble::tibble(
+    name = map_chr(meta, "name") %>% tools::file_path_sans_ext(),
     id =  map_chr(meta,"id"),
-    wasGeneratedAtTime =  map_chr(meta, "wasGeneratedAtTime"),
-    byteSize = map_chr(meta, "byteSize"),
+  #  contentSize = map_chr(meta, "contentSize"),
     description = map_chr(meta, "description"),
-    format = map_chr(meta, "format"),
-    #compressFormat = map_chr(meta, "compressFormat"),
+    format = map_chr(meta, "encodingFormat"),
     type =  map_chr(meta, "type")
   )
-  ## Filter by date etc?
+
+    
+  meta_df
 }
 
 create_views <- function(parquets, tblnames){
@@ -34,8 +47,29 @@ create_view <- function(parquet, tblname, conn){
 conn
 }
 
-import_db <- function(){
-  parse_metadata()
+
+read_prov <- function(app = c("fishbase", "sealifebase")){
+  app <- match.arg(app)
+  prov_latest <- 
+    switch(app, 
+           fishbase = "https://github.com/ropensci/rfishbase/raw/master/inst/prov/fb.prov",
+           sealifebase = "https://github.com/ropensci/rfishbase/raw/master/prov/slb.prov"
+           )
+
+  prov_local <- 
+    switch(app, 
+           fishbase = system.file("prov", "fb.prov", package="rfishbase"),
+           sealifebase = system.file("prov", "slb.prov", package="rfishbase")
+           )
+
+  prov <- purrr::possibly(jsonlite::read_json,
+                          otherwise = jsonlite::read_json(prov_local))
+  prov(prov_latest)
+}
+
+import_db <- function(app = c("fishbase", "sealifebase"), version = "latest"){
+  prov_document <- read_prov(app)
+  parse_metadata(prov_document, version = version)
   ## Resolve data sources (downloading if necessary)
   meta_df$parquets <- map_chr(meta_df$id, contentid::resolve, store=TRUE)
   ## Create views in temporary table
