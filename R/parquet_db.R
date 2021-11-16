@@ -28,7 +28,7 @@ parse_metadata <- function(prov, version = version){
   )
 
     
-  meta_df
+  meta_df[meta_df$type == "DataDownload", ]
 }
 
 create_views <- function(parquets, tblnames){
@@ -67,13 +67,17 @@ read_prov <- function(app = c("fishbase", "sealifebase")){
   prov(prov_latest)
 }
 
-import_db <- function(app = c("fishbase", "sealifebase"), version = "latest"){
+parquet_db <- function(app = c("fishbase", "sealifebase"), version = "latest"){
   prov_document <- read_prov(app)
-  parse_metadata(prov_document, version = version)
+  meta_df <- parse_metadata(prov_document, version = version)
   ## Resolve data sources (downloading if necessary)
-  meta_df$parquets <- map_chr(meta_df$id, contentid::resolve, store=TRUE)
+  meta_df$parquets <- map_chr(meta_df$id,
+                              contentid::resolve,
+                              store=TRUE,
+                              dir = db_dir())
   ## Create views in temporary table
-  conn <- create_views(meta_df$parquets, meta_df$title)
+  conn <- create_views(meta_df$parquets, meta_df$name)
+  conn
 }
 
 
