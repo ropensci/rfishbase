@@ -79,6 +79,38 @@ df <- DBI::dbReadTable(con2, table)
 readr::write_tsv(df, file.path(slb, paste0(table,".tsv.gz")), quote="none")
 arrow::write_parquet(df, file.path(slb_parquet, paste0(table, ".parquet")))
 
+
+
+## PROVENANCE
+files <- fs::dir_ls(fb_parquet, regexp = "[.]parquet")
+prov::write_prov(data_out = files, 
+                 title = "Fishbase Database Snapshot: A Parquet serialization",
+                 description = "Database snapshot prepared by rOpenSci courtesy of Fishbase.org",
+                 license = "https://creativecommons.org/licenses/by-nc/3.0/",
+                 creator = list("type" = "Organization", name = "FishBase.org"),
+                 version = "21.06",
+                 code = "data-raw/import_db.R",
+                 provdb = "parquet/fb-2021-06.prov",
+                 append = FALSE,
+                 schema="http://schema.org")
+
+
+
+## PROVENANCE
+files <- fs::dir_ls(slb_parquet, regexp = "[.]parquet")
+prov::write_prov(data_out = files, 
+                 title = "SeaLifeBase Database Snapshot: A Parquet serialization",
+                 description = "Database snapshot prepared by rOpenSci courtesy of SeaLifeBase and Fishbase.org",
+                 license = "https://creativecommons.org/licenses/by-nc/3.0/",
+                 creator = list("type" = "Organization", name = "SeaLifeBase.org"),
+                 version = "21.06",
+                 code = "data-raw/import_db.R",
+                 provdb = "parquet/slb-2021-06.prov",
+                 append = TRUE,
+                 schema="http://schema.org")
+
+
+
 ### CSV uploads
 
 ## Check we aren't losing stuff
@@ -87,20 +119,16 @@ arrow::write_parquet(df, file.path(slb_parquet, paste0(table, ".parquet")))
 
 #tables <- readLines("data-raw/rfishbase_tables.txt")
 
-cache <- fs::dir_ls(fb, type = "file")
-piggyback::pb_upload(cache,
-                     repo = "ropensci/rfishbase", 
-                     tag = "fb-21.06", overwrite = TRUE)
+#cache <- fs::dir_ls(fb, type = "file")
+#piggyback::pb_upload(cache,
+#                     repo = "ropensci/rfishbase", 
+#                     tag = "fb-21.06", overwrite = TRUE)
 
 # local <- paste0("fb/", tables, ".tsv.bz2")
 # files <- local[local %in% cache]
 
-
-
-
-
-cache <- fs::dir_ls(slb, type = "file")
-piggyback::pb_upload(cache,
-                     repo = "ropensci/rfishbase", 
-                     tag = "slb-21.08", overwrite = TRUE)
+#cache <- fs::dir_ls(slb, type = "file")
+#piggyback::pb_upload(cache,
+#                     repo = "ropensci/rfishbase", 
+#                     tag = "slb-21.08", overwrite = TRUE)
 
