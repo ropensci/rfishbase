@@ -1,4 +1,28 @@
 
+parquet_db <- function(app = c("fishbase", "sealifebase"), 
+                       version = "latest",
+                       conn = DBI::dbConnect(drv = duckdb::duckdb())){
+  
+  prov_document <- read_prov(app)
+  meta_df <- parse_metadata(prov_document, version = version)
+  
+  ## Resolve data sources (downloading if necessary)
+  parquets <- resolve_ids(meta_df$id)
+  
+  ## Create views in temporary table
+  create_views(parquets, meta_df$name, conn = conn)
+  conn
+}
+
+## Slowest step, ~ 1.9 seconds even after paths are resolved
+## lots of small fs operations to repeatedly determine dirs, sizes, info take time!
+## alternately, just cache the connection...
+resolve_ids <- memoise::memoise(function(ids){
+  purrr::map_chr(ids,
+                 contentid::resolve,
+                 store=TRUE,
+                 dir = db_dir())
+})
 
 
 parse_metadata <- function(prov, version = version){
@@ -31,8 +55,9 @@ parse_metadata <- function(prov, version = version){
   meta_df[meta_df$type == "DataDownload", ]
 }
 
-create_views <- function(parquets, tblnames){
-  conn <- DBI::dbConnect(drv = duckdb::duckdb())
+create_views <- function(parquets, 
+                         tblnames,
+                         conn = DBI::dbConnect(drv = duckdb::duckdb())){
   purrr::walk2(parquets, tblnames, create_view, conn)
   conn
 }
@@ -62,22 +87,13 @@ read_prov <- function(app = c("fishbase", "sealifebase")){
            sealifebase = system.file("prov", "slb.prov", package="rfishbase")
            )
 
+  
   prov <- purrr::possibly(jsonlite::read_json,
                           otherwise = jsonlite::read_json(prov_local))
-  prov(prov_latest)
-}
-
-parquet_db <- function(app = c("fishbase", "sealifebase"), version = "latest"){
-  prov_document <- read_prov(app)
-  meta_df <- parse_metadata(prov_document, version = version)
-  ## Resolve data sources (downloading if necessary)
-  meta_df$parquets <- map_chr(meta_df$id,
-                              contentid::resolve,
-                              store=TRUE,
-                              dir = db_dir())
-  ## Create views in temporary table
-  conn <- create_views(meta_df$parquets, meta_df$name)
-  conn
+  suppressWarnings({
+    out <- prov(prov_latest)
+  })
+  out
 }
 
 

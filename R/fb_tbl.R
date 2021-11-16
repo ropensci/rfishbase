@@ -2,13 +2,6 @@
 #' @export
 magrittr::`%>%`
 
-
-#memoise::cache_filesystem()
-#memoise::memoise()
-
-
-
-
 FISHBASE_API <- "fishbase" 
 
 
@@ -58,17 +51,11 @@ available_releases <- function(){
   avail_releases
 }
 
-#' @importFrom gh gh
 #' @importFrom purrr map_chr
 #' @importFrom stringr str_extract
 get_latest_release <- function() {
-  available_releases()[[1]]
+  "latest"
 }
-
-db_cache <- new.env()
-
-  # "https://fishbase.ropensci.org"
-  # <- "https://fishbase.ropensci.org/sealifebase"
 
 
 has_table <- function(tbl, db = default_db()){
@@ -81,10 +68,9 @@ has_table <- function(tbl, db = default_db()){
 fb_tbl <- 
   function(tbl, 
            server = getOption("FISHBASE_API", "fishbase"), 
-           version = get_latest_release(),
+           version = "latest",
            db = default_db(),
            ...){
-    db_tbl <- tbl_name(tbl,  server, version)
-    if(!has_table(db_tbl)) db_create(tbl, server, version, db)
-    dplyr::tbl(db, db_tbl)
+    db <- parquet_db(server, version, db)
+    dplyr::tbl(db, tbl)
     }

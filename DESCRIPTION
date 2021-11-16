@@ -6,7 +6,7 @@ Description: A programmatic interface to 'FishBase', re-written
     supports experimental access to 'SeaLifeBase' data, which contains
     nearly 200,000 species records for all types of aquatic life not covered by
     'FishBase.'
-Version: 3.1.9.99
+Version: 3.2.0
 Encoding: UTF-8
 License: CC0
 Authors@R: c(person("Carl", "Boettiger",
@@ -26,23 +26,25 @@ LazyData: true
 Depends:
     R (>= 4.0)
 Imports:
-    dplyr,
-    purrr,
     methods,
     utils,
+    tools,
+    purrr,
+    curl,
+    progress,
     memoise,
-    readr (>= 2.0.0),
     rlang,
     magrittr,
+    tibble,
+    readr (>= 2.0.0),
     stringr,
-    gh,
-    DBI,
     arkdb (>= 0.0.12),
-    tools,
-    curl,
+    jsonlite,
+    DBI,
+    dplyr,
     dbplyr, 
-    progress,
-    RSQLite
+    duckdb,
+    contentid
 Suggests:
     testthat,
     rmarkdown,
@@ -50,5 +52,5 @@ Suggests:
     covr,
     spelling
 VignetteBuilder: knitr
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.2
 Language: en-US
