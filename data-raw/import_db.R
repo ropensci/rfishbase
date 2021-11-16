@@ -92,8 +92,8 @@ prov::write_prov(data_out = files,
                  version = "21.06",
                  issued = "2021-06-01",
                  code = "data-raw/import_db.R",
-                 provdb = "parquet/fb-2021-06.prov",
-                 append = FALSE,
+                 provdb = "parquet/fb.prov",
+                 append = TRUE,
                  schema="http://schema.org")
 
 
@@ -108,8 +108,8 @@ prov::write_prov(data_out = files,
                  version = "21.08",
                  issued = "2021-08-01",
                  code = "data-raw/import_db.R",
-                 provdb = "parquet/slb-2021-08.prov",
-                 append = FALSE,
+                 provdb = "parquet/slb.prov",
+                 append = TRUE,
                  schema="http://schema.org")
 
 
