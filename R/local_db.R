@@ -21,7 +21,9 @@ tbl_name <- function(tbl,
 
 ## Cacheable connection
 rfishbase_cache <- new.env()
-default_db <- function(){
+default_db <- function(cache = TRUE){
+  if(!cache) return(DBI::dbConnect(drv = duckdb::duckdb()))
+  
   db <- mget("db", envir = rfishbase_cache, ifnotfound = NA)[[1]]
   if(!inherits(db, "duckdb_connection")){
    db <- DBI::dbConnect(drv = duckdb::duckdb())
