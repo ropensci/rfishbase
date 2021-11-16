@@ -1,5 +1,6 @@
 
-parquet_db <- function(app = c("fishbase", "sealifebase"), 
+parquet_db <- memoise::memoise(
+  function(app = c("fishbase", "sealifebase"), 
                        version = "latest",
                        conn = DBI::dbConnect(drv = duckdb::duckdb())){
   
@@ -12,17 +13,17 @@ parquet_db <- function(app = c("fishbase", "sealifebase"),
   ## Create views in temporary table
   create_views(parquets, meta_df$name, conn = conn)
   conn
-}
+})
 
 ## Slowest step, ~ 1.9 seconds even after paths are resolved
 ## lots of small fs operations to repeatedly determine dirs, sizes, info take time!
 ## alternately, just cache the connection...
-resolve_ids <- memoise::memoise(function(ids){
+resolve_ids <- function(ids){
   purrr::map_chr(ids,
                  contentid::resolve,
                  store=TRUE,
                  dir = db_dir())
-})
+}
 
 
 parse_metadata <- function(prov, version = version){

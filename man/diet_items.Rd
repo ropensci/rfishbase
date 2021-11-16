@@ -2,12 +2,12 @@
 % Please edit documentation in R/trophic_ecology.R
 \name{diet_items}
 \alias{diet_items}
-\title{fooditems}
+\title{diet_items}
 \usage{
 diet_items(
   server = getOption("FISHBASE_API", "fishbase"),
-  version = get_latest_release(),
-  db = default_db(),
+  version = "latest",
+  db = default_db(server, version),
   ...
 )
 }
@@ -23,10 +23,10 @@ easier to leave this as NULL and set the source instead using the environmental 
 \item{...}{unused; for backwards compatibility only}
 }
 \value{
-a table of species diet_items
+a table of diet_items
 }
 \description{
-fooditems
+diet_items
 }
 \examples{
 \dontrun{

@@ -13,7 +13,7 @@
 #' @export
 load_taxa <- function(server = getOption("FISHBASE_API", "fishbase"), 
                       version = get_latest_release(),
-                      db = default_db(),
+                      db = default_db(server, version),
                       collect = TRUE,
                       ...){
   
@@ -41,9 +41,10 @@ globalVariables(c("SpecCode", "Species", "Genus", "Subfamily", "Family",
                   "Order", "Class", "SuperClass", "Phylum", "Kingdom", "tempcolumn"))
 
 
-fb_taxa_table <- function(server = getOption("FISHBASE_API", "fishbase"),
-                          version = get_latest_release(),
-                          db = default_db()){
+fb_taxa_table <- memoise::memoise(
+  function(server = getOption("FISHBASE_API", "fishbase"),
+           version = get_latest_release(),
+           db = default_db(server, version)){
   
   taxon_species <- fb_tbl("species", server, version, db) %>% 
       select("SpecCode", "Species", "Genus", "Subfamily",
@@ -86,12 +87,12 @@ fb_taxa_table <- function(server = getOption("FISHBASE_API", "fishbase"),
   taxa_table
   
 
-}
+})
 
 
 
 
-slb_taxa_table <- function(server, version, db){
+slb_taxa_table <- memoise::memoise(function(server, version, db){
   
   server <- "sealifebase"
     
@@ -131,7 +132,7 @@ slb_taxa_table <- function(server, version, db){
     #dplyr::arrange("SpecCode")
     
   taxa_table
-}
+})
 
 
 

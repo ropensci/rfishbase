@@ -1,4 +1,26 @@
-
+new_endpoint <- function(endpt, join = NULL, by = NULL){
+  
+  function(species_list = NULL, 
+           fields = NULL, 
+           server = getOption("FISHBASE_API", "fishbase"), 
+           version = get_latest_release(),
+           db = default_db(server, version),
+           ...){
+    
+    df <- fb_tbl(endpt, server, version, db)
+    sp <- fb_tbl("species", server, version, db) %>%
+      mutate(sci_name = paste(Genus, Species)) %>%
+      select("SpecCode", "sci_name")
+      
+    sp %>%
+      filter(sci_name %in% species_list) %>% 
+      dplyr::inner_join(df) %>% 
+      collect()
+  }
+}
+utils::globalVariables("sci_name", package="rfishbase")
+    
+    
 ## Allows us to define functions for each endpoint using closures
 #' @importFrom dplyr left_join rename sym
 #' @importFrom rlang !! .data
@@ -8,7 +30,7 @@ endpoint <- function(endpt, join = NULL, by = NULL){
            fields = NULL, 
            server = getOption("FISHBASE_API", "fishbase"), 
            version = get_latest_release(),
-           db = default_db(),
+           db = default_db(server, version),
            ...){
     
     
@@ -103,7 +125,7 @@ fix_ids <- function(full_data){
 #' @importFrom dplyr mutate select
 fb_species <- function(server = getOption("FISHBASE_API", "fishbase"),
                        version = get_latest_release(),
-                       db = default_db(), 
+                       db = default_db(server, version), 
                        ...){
   load_taxa(server, version, db, collect = FALSE, ...) %>% dplyr::select("SpecCode", "Species")
 }

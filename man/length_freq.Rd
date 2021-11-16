@@ -10,7 +10,7 @@ length_freq(
   fields = NULL,
   server = getOption("FISHBASE_API", "fishbase"),
   version = get_latest_release(),
-  db = default_db(),
+  db = default_db(server, version),
   ...
 )
 }

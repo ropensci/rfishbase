@@ -21,13 +21,16 @@ tbl_name <- function(tbl,
 
 ## Cacheable connection
 rfishbase_cache <- new.env()
-default_db <- function(cache = TRUE){
+default_db <- function(server = getOption("FISHBASE_API", "fishbase"),
+                       version =  get_latest_release(),
+                       cache = TRUE){
   if(!cache) return(DBI::dbConnect(drv = duckdb::duckdb()))
   
-  db <- mget("db", envir = rfishbase_cache, ifnotfound = NA)[[1]]
+  db_name <- paste(server,version, sep="_")
+  db <- mget(db_name, envir = rfishbase_cache, ifnotfound = NA)[[1]]
   if(!inherits(db, "duckdb_connection")){
    db <- DBI::dbConnect(drv = duckdb::duckdb())
-   assign("db", db, envir = rfishbase_cache)
+   assign(db_name, db, envir = rfishbase_cache)
   }
   db
 }

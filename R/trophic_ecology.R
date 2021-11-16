@@ -45,19 +45,15 @@ fooditems <- endpoint("fooditems")
 
 
 
-#' fooditems
+#' diet_items
 #' 
-#' @return a table of species diet_items
+#' @return a table of diet_items
 #' @inheritParams species
 #' @export
 #' @examples \dontrun{
 #' diet_items("Oreochromis niloticus")
 #' }
-diet_items <- function(server = getOption("FISHBASE_API", "fishbase"), 
-                       version = get_latest_release(),
-                       db = default_db(),
-                       ...)  
-  fb_tbl("diet_items", server = server, version = version, db = db)
+diet_items <- fb_tbl_endpoint("diet_items")
 
 #' predators
 #'  

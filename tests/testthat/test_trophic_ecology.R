@@ -1,8 +1,8 @@
 context("trophic_ecology")
-test_that("we can call the trpohic ecology information  table", {
+test_that("we can call the trophic ecology information  table", {
   needs_api()
 
-  df <- diet_items("Oreochromis niloticus")
+  df <- diet_items() # not a species-oriented table
   expect_is(df, "tbl")
     
   df <- fooditems("Oreochromis niloticus")
