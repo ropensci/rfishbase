@@ -42,9 +42,10 @@ Imports:
     jsonlite,
     DBI,
     dplyr,
-    dbplyr, 
+    dbplyr,
     duckdb,
-    contentid
+    contentid,
+    rstudioapi
 Suggests:
     testthat,
     rmarkdown,

@@ -36,6 +36,20 @@ default_db <- function(server = getOption("FISHBASE_API", "fishbase"),
 }
 
 
+db_disconnect <- function(db = NULL){
+  if(is.null(db)){
+    db_name <- ls(envir = rfishbase_cache)[[1]]
+    db <- mget(db_name, envir = rfishbase_cache, ifnotfound = NA)[[1]]
+  }
+  if(!inherits(db, "duckdb_connection"))
+    DBI::dbDisconnect(db, shutdown=TRUE)
+}
+
+fish_db <- function(version = "latest"){
+  db = default_db(version = version)
+  parquet_db("fishbase", version = version, db)
+}
+
 #' @importFrom tools R_user_dir
 db_dir <- function(){
   Sys.getenv("FISHBASE_HOME",  tools::R_user_dir("rfishbase"))
