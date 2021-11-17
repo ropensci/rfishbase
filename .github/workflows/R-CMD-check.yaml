@@ -42,5 +42,8 @@ jobs:
       - uses: r-lib/actions/setup-r-dependencies@v1
         with:
           extra-packages: rcmdcheck
-
+          
+      - name: additional deps 
+        run: Rscript -e "remotes::install_deps('cboettig/contentid')"
+        
       - uses: r-lib/actions/check-r-package@v1
