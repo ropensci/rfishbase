@@ -9,6 +9,13 @@ parquet_db <- memoise::memoise(
   
   ## Resolve data sources (downloading if necessary)
   parquets <- resolve_ids(meta_df$id)
+
+  ## re-attempt any   
+  misses <- is.na(parquets)
+  parquets[misses] <- resolve_ids(meta_df$id[misses])
+  
+  if(any(is.na(parquets)))
+    error(paste("Some ids failed to resolve"))
   
   ## Create views in temporary table
   create_views(parquets, meta_df$name, conn = conn)
@@ -18,12 +25,12 @@ parquet_db <- memoise::memoise(
 ## Slowest step, ~ 1.9 seconds even after paths are resolved
 ## lots of small fs operations to repeatedly determine dirs, sizes, info take time!
 ## alternately, just cache the connection...
-resolve_ids <- function(ids){
+resolve_ids <- memoise::memoise(function(ids){
   purrr::map_chr(ids,
                  contentid::resolve,
                  store=TRUE,
                  dir = db_dir())
-}
+})
 
 
 parse_metadata <- function(prov, version = version){
