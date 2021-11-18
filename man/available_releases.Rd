@@ -6,6 +6,9 @@
 \usage{
 available_releases(server = c("fishbase", "sealifebase"))
 }
+\arguments{
+\item{server}{fishbase or sealifebase}
+}
 \description{
 List available releases
 }
