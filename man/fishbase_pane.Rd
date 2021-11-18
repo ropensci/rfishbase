@@ -11,5 +11,8 @@ This function launches the RStudio "Connection" pane to interactively
 explore the database.
 }
 \examples{
-if (!is.null(getOption("connectionObserver"))) neon_pane()
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+
+if (!is.null(getOption("connectionObserver"))) fishbase_pane()
+\dontshow{\}) # examplesIf}
 }

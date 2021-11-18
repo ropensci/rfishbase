@@ -37,10 +37,12 @@ will simply return a list of all matching scientific names.  If given more than 
 the resulting strings of matching scientific names are simply concatenated.
 }
 \examples{
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 \donttest{
 common_to_sci(c("Bicolor cleaner wrasse", "humphead parrotfish"), Language="English")
 common_to_sci(c("Coho Salmon", "trout"))
 }
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 \code{\link{species_list}}, \code{\link{synonyms}}

@@ -4,7 +4,7 @@
 \alias{available_releases}
 \title{List available releases}
 \usage{
-available_releases()
+available_releases(server = c("fishbase", "sealifebase"))
 }
 \description{
 List available releases
@@ -19,8 +19,10 @@ to clear the cache with `clear_cache()` or by restarting the R session
 with a fresh environment.
 }
 \examples{
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 available_releases()
 options(FISHBASE_VERSION="19.04")
 ## unset
 options(FISHBASE_VERSION=NULL)
+\dontshow{\}) # examplesIf}
 }

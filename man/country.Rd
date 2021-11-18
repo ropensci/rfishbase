@@ -36,7 +36,9 @@ return a table of country for the requested species, as reported in FishBASE.org
 e.g. http://www.fishbase.us/Country
 }
 \examples{
+\dontshow{if (interactive() ) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 \dontrun{
 country(species_list(Genus='Labroides'))
 }
+\dontshow{\}) # examplesIf}
 }

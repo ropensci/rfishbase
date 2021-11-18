@@ -7,8 +7,9 @@
 #' @return NULL
 #' @export
 #'
-#' @examples
-#' if (!is.null(getOption("connectionObserver"))) neon_pane()
+#' @examplesIf interactive()
+#' 
+#' if (!is.null(getOption("connectionObserver"))) fishbase_pane()
 fishbase_pane <- function() {
   observer <- getOption("connectionObserver")
   if (!is.null(observer) && interactive()) {
@@ -60,7 +61,7 @@ fishbase_pane <- function() {
   }
 }
 
-update_neon_pane <- function() {
+update_fishbase_pane <- function() {
   observer <- getOption("connectionObserver")
   if (!is.null(observer)) {
     observer$connectionUpdated("FishBase", "neonstore", "")
@@ -92,10 +93,10 @@ fish_db_status <- function () {
 }
 
 
-## Do not open the pane onAttach, wait for user to call neon_pane()
+## Do not open the pane onAttach, wait for user to call fishbase_pane()
 #.onAttach <- function(libname, pkgname) {  #nolint
 #  if (interactive() && Sys.getenv("RSTUDIO") == "1"  && !in_chk()) {
-#    tryCatch({neon_pane()}, error = function(e) NULL, finally = NULL)
+#    tryCatch({fishbase_pane()}, error = function(e) NULL, finally = NULL)
 #  }
 #  if (interactive()) 
 #    tryCatch(fish_db_status(),  error = function(e) NULL, finally = NULL)

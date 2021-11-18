@@ -29,6 +29,7 @@ table here: https://github.com/ropensci/fishbaseapi/tree/master/docs/docs-source
 documentation of tables and fields
 }
 \examples{
+\dontshow{if (interactive() ) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 \donttest{
 tables <- docs()
 # Describe the fecundity table
@@ -37,4 +38,5 @@ dplyr::filter(tables, table == "fecundity")$description
 docs("fecundity")
 ## Note: only 
 }
+\dontshow{\}) # examplesIf}
 }

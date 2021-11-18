@@ -15,7 +15,8 @@ Ecosystemname <- NA
 #' 
 #' @inheritParams species
 #' @export
-#' @examples \dontrun{
+#' @examplesIf interactive() 
+#' \dontrun{
 #' country(species_list(Genus='Labroides'))
 #' }
 #' @details 
@@ -28,7 +29,8 @@ country <- endpoint("country", join = country_names())
 #' 
 #' @inheritParams species
 #' @export
-#' @examples \dontrun{
+#' @examplesIf interactive() 
+#' \dontrun{
 #' countrysub(species_list(Genus='Labroides'))
 #' }
 countrysub <- endpoint("countrysub", join = country_names())
@@ -38,7 +40,8 @@ countrysub <- endpoint("countrysub", join = country_names())
 #' return a table of countrysubref
 #' @inheritParams species
 #' @export
-#' @examples \dontrun{
+#' @examplesIf interactive() 
+#' \dontrun{
 #' countrysubref()
 #' }
 countrysubref <- function(server = getOption("FISHBASE_API", "fishbase"), 
@@ -56,7 +59,8 @@ countrysubref <- function(server = getOption("FISHBASE_API", "fishbase"),
 #' @inheritParams species
 #' @param c_code a C_Code or list of C_Codes (FishBase country code)
 #' @export
-#' @examples \dontrun{
+#' @examplesIf interactive() 
+#' \dontrun{
 #' c_code(440)
 #' }
 #' @details 
@@ -90,7 +94,8 @@ country_names <- function(server = getOption("FISHBASE_API", "fishbase"),
 #' 
 #' @inheritParams species
 #' @export
-#' @examples \dontrun{
+#' @examplesIf interactive() 
+#' \dontrun{
 #' distribution(species_list(Genus='Labroides'))
 #' }
 #' @details currently this is ~ FAO areas table (minus "note" field)
@@ -113,7 +118,7 @@ distribution <- function(species_list=NULL,
 #' @importFrom dplyr left_join
 #' @export
 #' @return a tibble, empty tibble if no results found
-#' @examples 
+#' @examplesIf interactive() 
 #' \dontrun{
 #'   faoareas()
 #' }
@@ -155,7 +160,8 @@ faoarrefs <- function(server = getOption("FISHBASE_API", "fishbase"),
 #' @return a table of species ecosystems data
 #' @inheritParams species
 #' @export
-#' @examples \dontrun{
+#' @examplesIf interactive() 
+#' \dontrun{
 #' ecosystem("Oreochromis niloticus")
 #' }
 ecosystem <-  function(species_list = NULL, 
@@ -185,7 +191,8 @@ ecosystem <-  function(species_list = NULL,
 #' @inheritParams species
 #' @param ecosystem (character) an ecosystem name
 #' @export
-#' @examples \dontrun{
+#' @examplesIf interactive() 
+#' \dontrun{
 #' species_by_ecosystem(ecosystem = "Arctic", server = "sealifebase")
 #' }
 species_by_ecosystem <- function(ecosystem, species_list = NULL,
@@ -222,7 +229,8 @@ occurrence <- function() {
 #' @return a table of species introductions data
 #' @inheritParams species
 #' @export
-#' @examples \dontrun{
+#' @examplesIf interactive() 
+#' \dontrun{
 #' introductions("Oreochromis niloticus")
 #' }
 introductions <- endpoint("intrcase")
@@ -232,7 +240,8 @@ introductions <- endpoint("intrcase")
 #' @return a table of species stocks data
 #' @inheritParams species
 #' @export
-#' @examples \dontrun{
+#' @examplesIf interactive() 
+#' \dontrun{
 #' stocks("Oreochromis niloticus")
 #' }
 stocks <- endpoint("stocks")

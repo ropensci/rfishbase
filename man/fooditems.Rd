@@ -36,9 +36,11 @@ a table of species fooditems
 fooditems
 }
 \examples{
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 \dontrun{
 fooditems("Oreochromis niloticus")
 }
+\dontshow{\}) # examplesIf}
 }
 \references{
 http://www.fishbase.org/manual/english/fishbasethe_food_items_table.htm

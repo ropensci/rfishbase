@@ -10,7 +10,7 @@
 #' For further information on fields returned, see:
 #' http://www.fishbase.org/manual/english/fishbasethe_synonyms_table.htm
 #' @export
-# @examples
+# @examplesIf interactive()
 # \donttest{
 # # Query using a synonym:
 # synonyms("Callyodon muricatus")
@@ -72,7 +72,9 @@ globalVariables(c("Status", "SpecCode", "SynCode",
 #' @return a string of the validated names
 #' @export
 #' @importFrom dplyr filter pull right_join
-#' @examples \donttest{
+#' @examplesIf interactive()
+#' 
+#'   \donttest{
 #' validate_names("Abramites ternetzi")
 #' }
 validate_names <- function(species_list,

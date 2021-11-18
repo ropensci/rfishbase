@@ -32,7 +32,9 @@ return a table of country information for the requested c_code, as reported in F
 e.g. http://www.fishbase.us/Country
 }
 \examples{
+\dontshow{if (interactive() ) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 \dontrun{
 c_code(440)
 }
+\dontshow{\}) # examplesIf}
 }

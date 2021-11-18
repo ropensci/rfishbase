@@ -36,9 +36,11 @@ a table of species diet
 diet
 }
 \examples{
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 \dontrun{
-diet("Oreochromis niloticus")
+diet()
 }
+\dontshow{\}) # examplesIf}
 }
 \references{
 http://www.fishbase.org/manual/english/fishbasethe_diet_table.htm

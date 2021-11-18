@@ -10,7 +10,7 @@
 #' will simply return a list of all matching scientific names.  If given more than one common name,
 #' the resulting strings of matching scientific names are simply concatenated. 
 #' 
-#' @examples
+#' @examplesIf interactive()
 #' \donttest{
 #' common_to_sci(c("Bicolor cleaner wrasse", "humphead parrotfish"), Language="English")
 #' common_to_sci(c("Coho Salmon", "trout"))

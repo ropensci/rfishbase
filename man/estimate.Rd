@@ -36,9 +36,11 @@ a table of estimates from some models on trophic levels
 estimate
 }
 \examples{
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 \dontrun{
 estimate("Oreochromis niloticus")
 }
+\dontshow{\}) # examplesIf}
 }
 \references{
 http://www.fishbase.us/manual/English/FishbaseThe_FOOD_ITEMS_table.htm

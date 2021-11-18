@@ -42,9 +42,11 @@ that is useful both for stock assessment and for increasing understanding
 of the evolution of life-history strategies
 }
 \examples{
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 \dontrun{
 popgrowth("Oreochromis niloticus")
 }
+\dontshow{\}) # examplesIf}
 }
 \references{
 http://www.fishbase.org/manual/english/fishbasethe_popgrowth_table.htm

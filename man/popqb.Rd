@@ -36,9 +36,11 @@ a table of species popqb
 popqb
 }
 \examples{
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 \dontrun{
 popqb("Oreochromis niloticus")
 }
+\dontshow{\}) # examplesIf}
 }
 \references{
 http://www.fishbase.org/manual/english/fishbasethe_popqb_table.htm
