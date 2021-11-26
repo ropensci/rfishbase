@@ -39,11 +39,13 @@ jobs:
           http-user-agent: ${{ matrix.config.http-user-agent }}
           use-public-rspm: true
 
+      - name: additional deps 
+        run: |
+          Rscript  -e "install.packages('remotes')" -e "remotes::install_github('cboettig/contentid')"
+
       - uses: r-lib/actions/setup-r-dependencies@v1
         with:
           extra-packages: rcmdcheck
           
-      - name: additional deps 
-        run: Rscript  -e "install.packages('remotes')" -e "remotes::install_github('cboettig/contentid')"
         
       - uses: r-lib/actions/check-r-package@v1
