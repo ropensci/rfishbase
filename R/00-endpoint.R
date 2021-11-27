@@ -68,17 +68,16 @@ species_subset <- function(species_list,
   }
   
   ## ensure that full_data is a remote table
-  if(!inherits(full_data, "src_dbi")){
-    tmp <- tmp_tablename()
-    dplyr::copy_to(db, df = full_data, name = tmp, overwrite=TRUE, temporary=TRUE) 
-    full_data <- dplyr::tbl(db, tmp)
-  }
+#  if(!inherits(full_data, "src_dbi")){
+#    tmp <- tmp_tablename()
+#    dplyr::copy_to(db, df = full_data, name = tmp, overwrite=TRUE, temporary=TRUE) 
+#    full_data <- dplyr::tbl(db, tmp)
+#  }
   
   if(is.null(species_list)){
     return(dplyr::left_join(species, full_data, by = "SpecCode"))
   }
     
-  ## These are both remote tables now
   speccodes(species_list, table = species, db = db) %>% 
       dplyr::left_join(full_data, by = "SpecCode")
 }
@@ -94,9 +93,9 @@ speccodes <- function(species_list, table, db){
   
   ## Manually copy. we want a left_join since right_join isn't in RSQLite
   ## but left_join(copy=TRUE) would copy the larger table instead
-  tmp <- tmp_tablename()
-  dplyr::copy_to(db, df = df, name = tmp, overwrite=TRUE, temporary=TRUE) 
-  df <- dplyr::tbl(db, tmp)
+  #tmp <- tmp_tablename()
+  #dplyr::copy_to(db, df = df, name = tmp, overwrite=TRUE, temporary=TRUE) 
+  #df <- dplyr::tbl(db, tmp)
   
   suppressMessages({
   dplyr::left_join(df, table) %>%

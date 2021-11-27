@@ -50,10 +50,7 @@ synonyms <- function(species_list = NULL,
     return(collect(syn))
 
   df <- data.frame(synonym = species_list, stringsAsFactors = FALSE)
-  tmp <- tmp_tablename()
-  dplyr::copy_to(db, df = df, name = tmp, overwrite=TRUE, temporary=TRUE)
-  df <- dplyr::tbl(db, tmp)
-
+  
   left_join(df, syn, by="synonym") %>%
     left_join(fb_species(server, version, db), by = "SpecCode") %>%
     collect()
