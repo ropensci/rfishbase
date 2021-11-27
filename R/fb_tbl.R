@@ -1,44 +1,29 @@
-
-#' @importFrom memoise memoise
-#' @importFrom readr read_tsv cols col_character type_convert
+#' 
+#' Access a fishbase or sealifebase table
+#' @param tbl table name, as it appears in the database. See [fb_tables()]
+#' for a list.
+#' @param collect should we return an in-memory table? Generally best to leave
+#' as TRUE unless RAM is too limited.  A remote table can be used with most
+#' dplyr functions (filter, select, joins, etc) to further refine.
+#' @inheritParams fb_import
+#' @export
+#' @examplesIf interactive()
+#' fb_tbl("species")
 fb_tbl <- 
   function(tbl, 
-           server = getOption("FISHBASE_API", "fishbase"), 
+           server = c("fishbase", "sealifebase"), 
            version = "latest",
-           db = default_db(server, version),
-           collect = FALSE,
+           db = fb_conn(server, version),
+           collect = TRUE,
            ...){
-    db <- parquet_db(server, version, db, tbl)
+    db <- fb_import(server, version, db, tbl)
     out <- dplyr::tbl(db, tbl)
     if(!collect) return(out)
     dplyr::collect(out)
   }
 
  
-
-has_table <- function(tbl, db = default_db()){
-  tbl %in% DBI::dbListTables(db)
-}
-
-
-fb_tbl_endpoint <- function(tbl){
-  function(server = getOption("FISHBASE_API", "fishbase"), 
-           version = "latest",
-           db = default_db(server, version),
-           ...){
-    db <- parquet_db(server, version, db)
-    dplyr::collect(dplyr::tbl(db, tbl))
-  }
-}
-
-
-
-
-
-#' @importFrom magrittr %>%
+#' @importFrom magrittr `%>%`
 #' @export
 magrittr::`%>%`
-
-
-
 FISHBASE_API <- "fishbase"

@@ -7,7 +7,7 @@ test_that("We can load taxa", {
   expect_is(df, "tbl")
   
   
-  df <- load_taxa(server="sealifebase", db = default_db(cache=FALSE))
+  df <- load_taxa(server="sealifebase")
   expect_is(df, "tbl")
 
 })

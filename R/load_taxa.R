@@ -17,8 +17,8 @@ load_taxa <- function(server = getOption("FISHBASE_API", "fishbase"),
                       collect = TRUE,
                       ...){
   
-  db_tbl <- tbl_name("taxa",  server, version)
-  if(has_table(db_tbl)) return(dplyr::tbl(db, db_tbl))
+  #db_tbl <- tbl_name("taxa",  server, version)
+  #if(has_table(db_tbl)) return(dplyr::tbl(db, db_tbl))
   
   ## SeaLifeBase requires a different taxa table function:
   if(is.null(server)) server <- getOption("FISHBASE_API", FISHBASE_API)
@@ -41,7 +41,7 @@ globalVariables(c("SpecCode", "Species", "Genus", "Subfamily", "Family",
                   "Order", "Class", "SuperClass", "Phylum", "Kingdom", "tempcolumn"))
 
 
-fb_taxa_table <- memoise::memoise(
+fb_taxa_table <- 
   function(server = getOption("FISHBASE_API", "fishbase"),
            version = get_latest_release(),
            db = default_db(server, version)){
@@ -78,21 +78,16 @@ fb_taxa_table <- memoise::memoise(
     dplyr::select("SpecCode", "Species", "Genus", "Subfamily", "Family", 
            "Order", "Class", "SuperClass") %>% 
     dplyr::mutate(Species = paste(Genus, Species)) %>%
-    ## paste -> concat_ws fun, not implemented in Monet or duckdb now
-    #dplyr::mutate(tempcolumn = concat(Genus, " ")) %>%
-    #dplyr::mutate(Species = concat(tempcolumn, Species)) %>%
-    #dplyr::select(-tempcolumn) %>%
-    #dplyr::arrange(SpecCode) %>% 
-    dplyr::compute(tbl_name("taxa", server, version), temporary=FALSE)
+    dplyr::compute(temporary=FALSE)
   taxa_table
   
 
-})
+}
 
 
 
 
-slb_taxa_table <- memoise::memoise(function(server, version, db){
+slb_taxa_table <- function(server, version, db){
   
   server <- "sealifebase"
     
@@ -132,7 +127,7 @@ slb_taxa_table <- memoise::memoise(function(server, version, db){
     #dplyr::arrange("SpecCode")
     
   taxa_table
-})
+}
 
 
 

@@ -1,31 +1,10 @@
 
+#' Cacheable database connection
+#' @inheritParams fb_import
+fb_conn <- function(server = c("fishbase", "sealifebase"),
+                    version =  "latest"){
 
-
-
-
-
-## Deal with somewhat poorly constructed URL conventions:
-prefix <- function(server = getOption("FISHBASE_API", "fishbase")){
-  if(is.null(server)) server <- "fishbase"
-  dbname <- "fb"
-  if(grepl("sealifebase", server)) dbname <- "slb"
-  dbname
-}
-
-
-tbl_name <- function(tbl, 
-                     server = getOption("FISHBASE_API", "fishbase"), 
-                     version = get_latest_release()){
-  paste(tbl, prefix(server), gsub("\\.", "", version), sep="_")
-}
-
-## Cacheable connection
-rfishbase_cache <- new.env()
-default_db <- function(server = getOption("FISHBASE_API", "fishbase"),
-                       version =  get_latest_release(),
-                       cache = TRUE){
-  if(!cache) return(DBI::dbConnect(drv = duckdb::duckdb()))
-  
+  server <- match.arg(server)
   db_name <- paste(server,version, sep="_")
   db <- mget(db_name, envir = rfishbase_cache, ifnotfound = NA)[[1]]
   if(!inherits(db, "duckdb_connection")){
@@ -35,6 +14,10 @@ default_db <- function(server = getOption("FISHBASE_API", "fishbase"),
   db
 }
 
+rfishbase_cache <- new.env()
+
+# internal alias
+default_db <- fb_conn
 
 db_disconnect <- function(db = NULL){
   if(is.null(db)){
@@ -45,12 +28,17 @@ db_disconnect <- function(db = NULL){
     DBI::dbDisconnect(db, shutdown=TRUE)
 }
 
-fish_db <- function(version = "latest"){
-  db = default_db(version = version)
-  parquet_db("fishbase", version = version, db)
-}
 
+#' show fishbase directory
+#' 
+#' @export
 #' @importFrom tools R_user_dir
 db_dir <- function(){
   Sys.getenv("FISHBASE_HOME",  tools::R_user_dir("rfishbase"))
+}
+
+
+fish_db <- function(version = "latest"){
+  db = default_db(version = version)
+  fb_import("fishbase", version = version, db)
 }

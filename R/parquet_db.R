@@ -1,12 +1,33 @@
 
 
+fb_tables <- function(server = c("fishbase", "sealifebase"),
+                      version = "latest"){
+  
+  prov_document <- read_prov(server)
+  meta_df <- parse_metadata(prov_document, version = version)
+  meta_df$name
+}
 
-parquet_db <- memoise::memoise(
-  function(app = c("fishbase", "sealifebase"),
+#' Import tables to local store
+#' 
+#' @param server fishbase or sealifebase
+#' @param version release version
+#' @param db A cachable duckdb database connection
+#' @param tables list of tables to import. Default `NULL` will
+#' import all tables. 
+#' @details Downloads and stores tables from the requested version of 
+#' fishbase or sealifebase.  If the table is already downloaded, it will
+#' not be re-downloaded.  Imported tables are added to the active duckdb
+#' connection. Note that there is no need to call this
+#' @export
+#' @examplesIf interactive()
+#' conn <- fb_import()
+fb_import <- memoise::memoise(
+  function(server = c("fishbase", "sealifebase"),
            version = "latest",
-           conn = DBI::dbConnect(drv = duckdb::duckdb()),
+           db = fb_conn(server, version),
            tables = NULL) {
-  prov_document <- read_prov(app)
+  prov_document <- read_prov(server)
   meta_df <- parse_metadata(prov_document, version = version)
   if(!is.null(tables)){
     meta_df <- meta_df[meta_df$name %in% tables, ]
@@ -22,8 +43,8 @@ parquet_db <- memoise::memoise(
     error(paste("Some ids failed to resolve"))
   
   ## Create views in temporary table
-  create_views(parquets, meta_df$name, conn = conn)
-  conn
+  create_views(parquets, meta_df$name, conn = db)
+  db
 })
 
 ## Slowest step, ~ 1.9 seconds even after paths are resolved
@@ -86,16 +107,16 @@ create_view <- function(parquet, tblname, conn) {
 }
 
 
-read_prov <- function(app = c("fishbase", "sealifebase")) {
-  app <- match.arg(app)
+read_prov <- function(server = c("fishbase", "sealifebase")) {
+  server <- match.arg(server)
   prov_latest <-
-    switch(app,
+    switch(server,
            fishbase = "https://github.com/ropensci/rfishbase/raw/master/inst/prov/fb.prov",
            sealifebase = "https://github.com/ropensci/rfishbase/raw/master/prov/slb.prov")
   
   prov_local <-
     switch(
-      app,
+      server,
       fishbase = system.file("prov", "fb.prov", package = "rfishbase"),
       sealifebase = system.file("prov", "slb.prov", package = "rfishbase")
     )

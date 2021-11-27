@@ -48,15 +48,14 @@ fooditems <- endpoint("fooditems")
 
 
 #' diet_items
-#' 
+#' @param ... additional arguments (not useds)
 #' @return a table of diet_items
-#' @inheritParams species
 #' @export
 #' @examplesIf interactive()
 #' \dontrun{
-#' diet_items("Oreochromis niloticus")
+#' diet_items()
 #' }
-diet_items <- fb_tbl_endpoint("diet_items")
+diet_items <- function(...) fb_tbl("diet_items")
 
 #' predators
 #'  
