@@ -9,8 +9,7 @@ fb_tbl(
   server = c("fishbase", "sealifebase"),
   version = "latest",
   db = fb_conn(server, version),
-  collect = TRUE,
-  ...
+  collect = TRUE
 )
 }
 \arguments{
