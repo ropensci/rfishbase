@@ -44,7 +44,7 @@ Imports:
     dplyr,
     dbplyr,
     duckdb,
-    contentid,
+    contentid (>= 0.0.15),
     rstudioapi
 Suggests:
     testthat,
