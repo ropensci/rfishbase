@@ -1,4 +1,26 @@
-
+new_endpoint <- function(endpt, join = NULL, by = NULL){
+  
+  function(species_list = NULL, 
+           fields = NULL, 
+           server = getOption("FISHBASE_API", "fishbase"), 
+           version = get_latest_release(),
+           db = default_db(server, version),
+           ...){
+    
+    df <- fb_tbl(endpt, server, version, db)
+    sp <- fb_tbl("species", server, version, db) %>%
+      mutate(sci_name = paste(Genus, Species)) %>%
+      select("SpecCode", "sci_name")
+      
+    sp %>%
+      filter(sci_name %in% species_list) %>% 
+      dplyr::inner_join(df) %>% 
+      collect()
+  }
+}
+utils::globalVariables("sci_name", package="rfishbase")
+    
+    
 ## Allows us to define functions for each endpoint using closures
 #' @importFrom dplyr left_join rename sym
 #' @importFrom rlang !! .data
@@ -8,7 +30,7 @@ endpoint <- function(endpt, join = NULL, by = NULL){
            fields = NULL, 
            server = getOption("FISHBASE_API", "fishbase"), 
            version = get_latest_release(),
-           db = default_db(),
+           db = default_db(server, version),
            ...){
     
     
@@ -46,17 +68,16 @@ species_subset <- function(species_list,
   }
   
   ## ensure that full_data is a remote table
-  if(!inherits(full_data, "src_dbi")){
-    tmp <- tmp_tablename()
-    dplyr::copy_to(db, df = full_data, name = tmp, overwrite=TRUE, temporary=TRUE) 
-    full_data <- dplyr::tbl(db, tmp)
-  }
+#  if(!inherits(full_data, "src_dbi")){
+#    tmp <- tmp_tablename()
+#    dplyr::copy_to(db, df = full_data, name = tmp, overwrite=TRUE, temporary=TRUE) 
+#    full_data <- dplyr::tbl(db, tmp)
+#  }
   
   if(is.null(species_list)){
     return(dplyr::left_join(species, full_data, by = "SpecCode"))
   }
     
-  ## These are both remote tables now
   speccodes(species_list, table = species, db = db) %>% 
       dplyr::left_join(full_data, by = "SpecCode")
 }
@@ -72,9 +93,9 @@ speccodes <- function(species_list, table, db){
   
   ## Manually copy. we want a left_join since right_join isn't in RSQLite
   ## but left_join(copy=TRUE) would copy the larger table instead
-  tmp <- tmp_tablename()
-  dplyr::copy_to(db, df = df, name = tmp, overwrite=TRUE, temporary=TRUE) 
-  df <- dplyr::tbl(db, tmp)
+  #tmp <- tmp_tablename()
+  #dplyr::copy_to(db, df = df, name = tmp, overwrite=TRUE, temporary=TRUE) 
+  #df <- dplyr::tbl(db, tmp)
   
   suppressMessages({
   dplyr::left_join(df, table) %>%
@@ -103,7 +124,7 @@ fix_ids <- function(full_data){
 #' @importFrom dplyr mutate select
 fb_species <- function(server = getOption("FISHBASE_API", "fishbase"),
                        version = get_latest_release(),
-                       db = default_db(), 
+                       db = default_db(server, version), 
                        ...){
   load_taxa(server, version, db, collect = FALSE, ...) %>% dplyr::select("SpecCode", "Species")
 }
@@ -111,4 +132,4 @@ fb_species <- function(server = getOption("FISHBASE_API", "fishbase"),
 
 
 tmp_tablename <- function(n=10)
-  paste0("tmp_", paste0(openssl::rand_bytes(10), collapse = ""))
+  paste0("tmp_", paste0(sample(letters, n, replace = TRUE), collapse = ""))

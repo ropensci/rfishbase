@@ -8,6 +8,7 @@
 #' @export
 #' @references http://www.fishbase.org/manual/english/fishbasethe_ecology_table.htm
 #' @examplesIf interactive()
+#'
 #' \dontrun{
 #' ecology("Oreochromis niloticus")
 #' 
@@ -39,27 +40,22 @@ ecology_endpoint <- endpoint("ecology")
 #' @export
 #' @references http://www.fishbase.org/manual/english/fishbasethe_food_items_table.htm
 #' @examplesIf interactive()
-#'  \dontrun{
+#' \dontrun{
 #' fooditems("Oreochromis niloticus")
 #' }
 fooditems <- endpoint("fooditems")
 
 
 
-#' fooditems
-#' 
-#' @return a table of species diet_items
-#' @inheritParams species
+#' diet_items
+#' @param ... additional arguments (not useds)
+#' @return a table of diet_items
 #' @export
 #' @examplesIf interactive()
-#'  \dontrun{
-#' diet_items("Oreochromis niloticus")
+#' \dontrun{
+#' diet_items()
 #' }
-diet_items <- function(server = getOption("FISHBASE_API", "fishbase"), 
-                       version = get_latest_release(),
-                       db = default_db(),
-                       ...)  
-  fb_tbl("diet_items", server = server, version = version, db = db)
+diet_items <- function(...) fb_tbl("diet_items")
 
 #' predators
 #'  
@@ -68,7 +64,7 @@ diet_items <- function(server = getOption("FISHBASE_API", "fishbase"),
 #' @export
 #' @references http://www.fishbase.org/manual/english/fishbasethe_predators_table.htm
 #' @examplesIf interactive()
-#'  \dontrun{
+#' \dontrun{
 #' predators("Oreochromis niloticus")
 #' }
 predators <- endpoint("predats")
@@ -82,7 +78,7 @@ predators <- endpoint("predats")
 #' @export
 #' @references http://www.fishbase.us/manual/English/FishbaseThe_FOOD_ITEMS_table.htm
 #' @examplesIf interactive()
-#'  \dontrun{
+#' \dontrun{
 #' estimate("Oreochromis niloticus")
 #' }
 estimate <- endpoint("estimate")
@@ -96,8 +92,8 @@ estimate <- endpoint("estimate")
 #' @export
 #' @references http://www.fishbase.org/manual/english/fishbasethe_diet_table.htm
 #' @examplesIf interactive()
-#'  \dontrun{
-#' diet("Oreochromis niloticus")
+#' \dontrun{
+#' diet()
 #' }
 diet <- endpoint("diet")
 
@@ -109,7 +105,7 @@ diet <- endpoint("diet")
 #' @export
 #' @references http://www.fishbase.org/manual/english/fishbasethe_popqb_table.htm
 #' @examplesIf interactive()
-#'  \dontrun{
+#' \dontrun{
 #' popqb("Oreochromis niloticus")
 #' }
 popqb <- endpoint("popqb")
@@ -122,7 +118,7 @@ popqb <- endpoint("popqb")
 #' @export
 #' @references http://www.fishbase.org/manual/english/fishbasethe_ration_table.htm
 #' @examplesIf interactive()
-#'  \dontrun{
+#' \dontrun{
 #' ration("Oreochromis niloticus")
 #' }
 ration <- endpoint("ration")

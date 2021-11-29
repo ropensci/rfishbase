@@ -9,7 +9,7 @@ popqb(
   fields = NULL,
   server = getOption("FISHBASE_API", "fishbase"),
   version = get_latest_release(),
-  db = default_db(),
+  db = default_db(server, version),
   ...
 )
 }
@@ -37,7 +37,7 @@ popqb
 }
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
- \dontrun{
+\dontrun{
 popqb("Oreochromis niloticus")
 }
 \dontshow{\}) # examplesIf}

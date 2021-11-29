@@ -5,16 +5,19 @@ library(dplyr)
 library(readr)
 
 
+fb <- fs::dir_create("data-raw/fb_2021-06")
+fb_parquet <- fs::dir_create("parquet/fb_parquet_2021-06")
+slb <- fs::dir_create("data-raw/slb_2021-08")
+slb_parquet <- fs::dir_create("parquet/slb_parquet_2021-08")
+
+
 con <- DBI::dbConnect(RMariaDB::MariaDB(), "fbapp",
                       user="root", host="mariadb", password = "password")
 tables <- DBI::dbListTables(con)
-
 species <- dbReadTable(con, "species")
 
 ## Fallback on RMySQL -- does not handle dates or some long text columns as well, but does not fail hard
 #con2 <- DBI::dbConnect(RMySQL::MySQL(), "fbapp", user="root", host="mariadb", password = "password")
-fb <- fs::dir_create("data-raw/fb_2021-06")
-fb_parquet <- fs::dir_create("data-raw/fb_parquet_2021-06")
 
 for(table in tables){
         message(table)
@@ -46,8 +49,6 @@ con2 <- DBI::dbConnect(RMySQL::MySQL(), "slbapp", user="root", host="mariadb", p
 
 
 
-slb <- fs::dir_create("data-raw/slb_2021-08")
-slb_parquet <- fs::dir_create("data-raw/slb_parquet_2021-08")
 
 safe_tables <- tables[!(tables %in% c("ecosystem", "ecosystemcountry"))]
 
@@ -79,6 +80,40 @@ df <- DBI::dbReadTable(con2, table)
 readr::write_tsv(df, file.path(slb, paste0(table,".tsv.gz")), quote="none")
 arrow::write_parquet(df, file.path(slb_parquet, paste0(table, ".parquet")))
 
+
+
+## PROVENANCE
+files <- fs::dir_ls(fb_parquet, regexp = "[.]parquet")
+prov::write_prov(data_out = files, 
+                 title = "Fishbase Database Snapshot: A Parquet serialization",
+                 description = "Database snapshot prepared by rOpenSci courtesy of Fishbase.org",
+                 license = "https://creativecommons.org/licenses/by-nc/3.0/",
+                 creator = list("type" = "Organization", name = "FishBase.org"),
+                 version = "21.06",
+                 issued = "2021-06-01",
+                 code = "data-raw/import_db.R",
+                 provdb = "inst/prov/fb.prov",
+                 append = FALSE,
+                 schema="http://schema.org")
+
+
+
+## PROVENANCE
+files <- fs::dir_ls(slb_parquet, regexp = "[.]parquet")
+prov::write_prov(data_out = files, 
+                 title = "SeaLifeBase Database Snapshot: A Parquet serialization",
+                 description = "Database snapshot prepared by rOpenSci courtesy of SeaLifeBase and Fishbase.org",
+                 license = "https://creativecommons.org/licenses/by-nc/3.0/",
+                 creator = list("type" = "Organization", name = "SeaLifeBase.org"),
+                 version = "21.11",
+                 issued = "2021-08-01",
+                 code = "data-raw/import_db.R",
+                 provdb = "inst/prov/slb.prov",
+                 append = TRUE,
+                 schema="http://schema.org")
+
+
+
 ### CSV uploads
 
 ## Check we aren't losing stuff
@@ -87,20 +122,16 @@ arrow::write_parquet(df, file.path(slb_parquet, paste0(table, ".parquet")))
 
 #tables <- readLines("data-raw/rfishbase_tables.txt")
 
-cache <- fs::dir_ls(fb, type = "file")
-piggyback::pb_upload(cache,
-                     repo = "ropensci/rfishbase", 
-                     tag = "fb-21.06", overwrite = TRUE)
+#cache <- fs::dir_ls(fb, type = "file")
+#piggyback::pb_upload(cache,
+#                     repo = "ropensci/rfishbase", 
+#                     tag = "fb-21.06", overwrite = TRUE)
 
 # local <- paste0("fb/", tables, ".tsv.bz2")
 # files <- local[local %in% cache]
 
-
-
-
-
-cache <- fs::dir_ls(slb, type = "file")
-piggyback::pb_upload(cache,
-                     repo = "ropensci/rfishbase", 
-                     tag = "slb-21.08", overwrite = TRUE)
+#cache <- fs::dir_ls(slb, type = "file")
+#piggyback::pb_upload(cache,
+#                     repo = "ropensci/rfishbase", 
+#                     tag = "slb-21.08", overwrite = TRUE)
 

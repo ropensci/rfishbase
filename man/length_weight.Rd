@@ -10,7 +10,7 @@ length_weight(
   fields = NULL,
   server = getOption("FISHBASE_API", "fishbase"),
   version = get_latest_release(),
-  db = default_db(),
+  db = default_db(server, version),
   ...
 )
 }
@@ -64,7 +64,7 @@ form of a species.
 }
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
- \dontrun{
+\dontrun{
 length_weight("Oreochromis niloticus")
 }
 \dontshow{\}) # examplesIf}

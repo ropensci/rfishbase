@@ -37,8 +37,8 @@ currently this is ~ FAO areas table (minus "note" field)
 e.g. http://www.fishbase.us/Country/FaoAreaList.php?ID=5537
 }
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
- \dontrun{
+\dontshow{if (interactive() ) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontrun{
 distribution(species_list(Genus='Labroides'))
 }
 \dontshow{\}) # examplesIf}

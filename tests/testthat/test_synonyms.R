@@ -32,7 +32,8 @@ test_that("We can validate names",{
   needs_api()
   x <- validate_names("Clupea pallasii")
   expect_is(x, "character")
-  expect_identical(x, "Clupea pallasii pallasii")
+  expect_identical(x, "Clupea pallasii")
+  # expect_identical(x, "Clupea pallasii pallasii")
 
   x <- validate_names(c(rep("Agonomalus jordani", 2), "wrong"))
   expect_identical(x, c(rep("Agonomalus jordani", 2), NA))

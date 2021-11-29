@@ -25,4 +25,4 @@ circle.yml
 ^pkgdown$
 ^slb$
 ^parquet$
-^docs$
+^\.github$

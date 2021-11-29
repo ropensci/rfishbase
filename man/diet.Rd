@@ -9,7 +9,7 @@ diet(
   fields = NULL,
   server = getOption("FISHBASE_API", "fishbase"),
   version = get_latest_release(),
-  db = default_db(),
+  db = default_db(server, version),
   ...
 )
 }
@@ -37,8 +37,8 @@ diet
 }
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
- \dontrun{
-diet("Oreochromis niloticus")
+\dontrun{
+diet()
 }
 \dontshow{\}) # examplesIf}
 }

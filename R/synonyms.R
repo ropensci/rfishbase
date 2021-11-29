@@ -10,7 +10,7 @@
 #' For further information on fields returned, see:
 #' http://www.fishbase.org/manual/english/fishbasethe_synonyms_table.htm
 #' @export
-# @examples
+# @examplesIf interactive()
 # \donttest{
 # # Query using a synonym:
 # synonyms("Callyodon muricatus")
@@ -50,10 +50,7 @@ synonyms <- function(species_list = NULL,
     return(collect(syn))
 
   df <- data.frame(synonym = species_list, stringsAsFactors = FALSE)
-  tmp <- tmp_tablename()
-  dplyr::copy_to(db, df = df, name = tmp, overwrite=TRUE, temporary=TRUE)
-  df <- dplyr::tbl(db, tmp)
-
+  
   left_join(df, syn, by="synonym") %>%
     left_join(fb_species(server, version, db), by = "SpecCode") %>%
     collect()
@@ -73,7 +70,8 @@ globalVariables(c("Status", "SpecCode", "SynCode",
 #' @export
 #' @importFrom dplyr filter pull right_join
 #' @examplesIf interactive()
-#'  \donttest{
+#' 
+#'   \donttest{
 #' validate_names("Abramites ternetzi")
 #' }
 validate_names <- function(species_list,

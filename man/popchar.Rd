@@ -9,7 +9,7 @@ popchar(
   fields = NULL,
   server = getOption("FISHBASE_API", "fishbase"),
   version = get_latest_release(),
-  db = default_db(),
+  db = default_db(server, version),
   ...
 )
 }
@@ -43,7 +43,7 @@ same individual fish.
 }
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
- \dontrun{
+\dontrun{
 popchar("Oreochromis niloticus")
 }
 \dontshow{\}) # examplesIf}

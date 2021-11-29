@@ -26,8 +26,8 @@ easier to leave this as NULL and set the source instead using the environmental 
 return a table of countrysubref
 }
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
- \dontrun{
+\dontshow{if (interactive() ) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontrun{
 countrysubref()
 }
 \dontshow{\}) # examplesIf}

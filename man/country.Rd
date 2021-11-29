@@ -9,7 +9,7 @@ country(
   fields = NULL,
   server = getOption("FISHBASE_API", "fishbase"),
   version = get_latest_release(),
-  db = default_db(),
+  db = default_db(server, version),
   ...
 )
 }
@@ -36,8 +36,8 @@ return a table of country for the requested species, as reported in FishBASE.org
 e.g. http://www.fishbase.us/Country
 }
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
- \dontrun{
+\dontshow{if (interactive() ) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontrun{
 country(species_list(Genus='Labroides'))
 }
 \dontshow{\}) # examplesIf}

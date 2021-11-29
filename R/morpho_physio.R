@@ -29,7 +29,7 @@ morphology <- endpoint("morphdat")
 #' @inheritParams species
 #' @export
 #' @examplesIf interactive()
-#'  \dontrun{
+#' \dontrun{
 #' morphometrics("Oreochromis niloticus")
 #' }
 morphometrics <- endpoint("morphmet")
@@ -39,8 +39,8 @@ morphometrics <- endpoint("morphmet")
 #' @return a table of species swimming data
 #' @inheritParams species
 #' @export
-#' @examplesIf interactive()
-#'  \dontrun{
+#' @examplesIf interactive() 
+#' \dontrun{
 #' swimming("Oreochromis niloticus")
 #' }
 swimming <- endpoint("swimming")
@@ -51,7 +51,7 @@ swimming <- endpoint("swimming")
 #' @inheritParams species
 #' @export
 #' @examplesIf interactive()
-#'  \dontrun{
+#' \dontrun{
 #' speed("Oreochromis niloticus")
 #' }
 speed <- endpoint("speed")
@@ -62,7 +62,7 @@ speed <- endpoint("speed")
 #' @inheritParams species
 #' @export
 #' @examplesIf interactive()
-#'  \dontrun{
+#' \dontrun{
 #' genetics("Oreochromis niloticus")
 #' genetics("Labroides dimidiatus")
 #' }

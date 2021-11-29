@@ -10,7 +10,7 @@ length_freq(
   fields = NULL,
   server = getOption("FISHBASE_API", "fishbase"),
   version = get_latest_release(),
-  db = default_db(),
+  db = default_db(server, version),
   ...
 )
 }
@@ -38,7 +38,7 @@ return a table of species fooditems
 }
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
- \dontrun{
+\dontrun{
 length_freq("Oreochromis niloticus")
 }
 \dontshow{\}) # examplesIf}
