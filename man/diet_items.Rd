@@ -7,7 +7,7 @@
 diet_items(...)
 }
 \arguments{
-\item{...}{additional arguments (not useds)}
+\item{...}{additional arguments (not used)}
 }
 \value{
 a table of diet_items

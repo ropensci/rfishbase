@@ -48,7 +48,7 @@ fooditems <- endpoint("fooditems")
 
 
 #' diet_items
-#' @param ... additional arguments (not useds)
+#' @param ... additional arguments (not used)
 #' @return a table of diet_items
 #' @export
 #' @examplesIf interactive()

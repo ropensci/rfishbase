@@ -1,5 +1,8 @@
 
-
+#' fb_tables
+#' list tables
+#' @inheritParams fb_import
+#' @export
 fb_tables <- function(server = c("fishbase", "sealifebase"),
                       version = "latest"){
   
@@ -51,10 +54,12 @@ fb_import <- memoise::memoise(
 ## lots of small fs operations to repeatedly determine dirs, sizes, info take time!
 ## alternately, just cache the connection...
 resolve_ids <- memoise::memoise(function(ids) {
+  suppressMessages({
   purrr::map_chr(ids,
                  contentid::resolve,
                  store = TRUE,
                  dir = db_dir())
+  })
 })
 
 
@@ -75,12 +80,13 @@ parse_metadata <- function(prov, version = version) {
   
   meta <- dataset$distribution
   meta_df <- tibble::tibble(
-    name = map_chr(meta, "name") %>% tools::file_path_sans_ext(),
-    id =  map_chr(meta, "id"),
-    #  contentSize = map_chr(meta, "contentSize"),
-    description = map_chr(meta, "description"),
-    format = map_chr(meta, "encodingFormat"),
-    type =  map_chr(meta, "type")
+    name = purrr::map(meta, "name") %>% 
+      purrr::map_chr(getElement,1) %>% tools::file_path_sans_ext(),
+    id =  purrr::map_chr(meta, "id"),
+    #  contentSize = purrr::map_chr(meta, "contentSize"),
+    description = purrr::map_chr(meta, "description"),
+    format = purrr::map_chr(meta, "encodingFormat"),
+    type =  purrr::map_chr(meta, "type")
   )
   
   
