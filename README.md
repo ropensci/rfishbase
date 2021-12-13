@@ -149,7 +149,7 @@ fishbase.org. Check available releases:
 available_releases()
 ```
 
-    [1] "21.06"
+    [1] "21.06" "19.04"
 
 Users can trigger a one-time download of all fishbase tables (or a list
 of desired tables) using `fb_import()`. This will ensure later use of
