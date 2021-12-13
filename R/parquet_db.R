@@ -25,6 +25,7 @@ fb_tables <- function(server = c("fishbase", "sealifebase"),
 #' @export
 #' @examplesIf interactive()
 #' conn <- fb_import()
+#' @importFrom memoise memoise
 fb_import <- memoise::memoise(
   function(server = c("fishbase", "sealifebase"),
            version = "latest",
@@ -53,6 +54,8 @@ fb_import <- memoise::memoise(
 ## Slowest step, ~ 1.9 seconds even after paths are resolved
 ## lots of small fs operations to repeatedly determine dirs, sizes, info take time!
 ## alternately, just cache the connection...
+
+#' @importFrom contentid resolve
 resolve_ids <- memoise::memoise(function(ids) {
   suppressMessages({
   purrr::map_chr(ids,

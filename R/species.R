@@ -32,7 +32,7 @@
 species <- endpoint("species")
 
 #species <- endpoint("species", tidy_table = tidy_species_table)
-
+#' @importFrom readr read_csv
 load_species_meta <- memoise::memoise(function(){
   meta <- system.file("metadata", "species.csv", package="rfishbase")
   species_meta <- as.data.frame(readr::read_csv(meta, col_types = "cclc"))
