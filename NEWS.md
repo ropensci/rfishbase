@@ -23,6 +23,13 @@ And constructed with the following guidelines:
 
 For more information on SemVer, please visit http://semver.org/.
 
+v 4.0.0
+--------
+
+* Major upgrade that introduces content-identifier based downloads and parquet-backed database interface.
+  Provides improved access to all tables and improved performance.
+* See README or details
+
 v 3.1.9
 -------
 
