@@ -52,6 +52,5 @@ Suggests:
     knitr,
     covr,
     spelling
-VignetteBuilder: knitr
 RoxygenNote: 7.1.2
 Language: en-US
