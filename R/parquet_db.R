@@ -113,7 +113,8 @@ create_view <- function(parquet, tblname, conn) {
                          "' AS SELECT * FROM parquet_scan('",
                          parquet,
                          "');")
-    DBI::dbSendQuery(conn, view_query)
+    dbSendQuery <- purrr::safely(DBI::dbSendQuery)
+    dbSendQuery(conn, view_query)
   }
   conn
 }
