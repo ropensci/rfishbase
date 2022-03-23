@@ -5,7 +5,6 @@
 \title{List all fields (column names) in a set of tables}
 \usage{
 list_fields(
-  import = FALSE,
   server = c("fishbase", "sealifebase"),
   version = "latest",
   db = fb_conn(server, version),
@@ -13,8 +12,6 @@ list_fields(
 )
 }
 \arguments{
-\item{import}{logical, default FALSE. Should we import missing tables first?}
-
 \item{server}{fishbase or sealifebase}
 
 \item{version}{release version}
@@ -22,8 +19,7 @@ list_fields(
 \item{db}{A cachable duckdb database connection}
 
 \item{tables}{list of tables of interest.  Missing tables will be imported
-first if import=TRUE. 
-Leave as NULL to query (and thus import) all tables (possibly slow!)}
+first.  Leave as NULL to query (and thus import) all tables (possibly slow!)}
 }
 \value{
 a named list of length(tables). Each element of the list is named

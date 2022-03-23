@@ -59,15 +59,15 @@ fb_import <- memoise::memoise(
 ## alternately, just cache the connection...
 
 #' @importFrom contentid resolve
-resolve_ids <- function(ids) {
+resolve_ids <- memoise::memoise(function(ids) {
   suppressMessages({
   purrr::map_chr(ids,
                  contentid::resolve,
                  store = TRUE,
                  dir = db_dir())
   
+  })
 })
-}
 
 parse_metadata <- function(prov, version = version) {
   who <- names(prov)
