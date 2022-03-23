@@ -44,7 +44,10 @@ fb_import <- memoise::memoise(
   parquets[misses] <- resolve_ids(meta_df$id[misses])
   
   if (any(is.na(parquets)))
-    error(paste("Some ids failed to resolve"))
+    warning(paste("Some ids failed to resolve:",
+                  paste0(meta_df$id[is.na(parquets)],collapse="\\n"),
+                         sep="\n")
+            )
   
   ## Create views in temporary table
   create_views(parquets, meta_df$name, conn = db)
@@ -56,15 +59,15 @@ fb_import <- memoise::memoise(
 ## alternately, just cache the connection...
 
 #' @importFrom contentid resolve
-resolve_ids <- memoise::memoise(function(ids) {
+resolve_ids <- function(ids) {
   suppressMessages({
   purrr::map_chr(ids,
                  contentid::resolve,
                  store = TRUE,
                  dir = db_dir())
-  })
+  
 })
-
+}
 
 parse_metadata <- function(prov, version = version) {
   who <- names(prov)
