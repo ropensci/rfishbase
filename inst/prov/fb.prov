@@ -2,6 +2,2726 @@
   "@context": "http://schema.org/",
   "@graph": [
     {
+      "id": "urn:uuid:05fc001a-b3ad-4286-838c-b417f492be34",
+      "type": "Dataset",
+      "creator": {
+        "id": "_:b0",
+        "type": "Organization",
+        "name": "FishBase.org"
+      },
+      "dateCreated": "2023-01-01",
+      "description": "Database snapshot prepared by rOpenSci courtesy of Fishbase.org",
+      "distribution": [
+        {
+          "id": "hash://sha256/8be0e572cde7ae0c5eb00d3c6e07c0a56c9fec05d947282f45b2f37bd58ddb0b",
+          "type": "DataDownload",
+          "contentSize": 136824,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/abundance.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/8be0e572cde7ae0c5eb00d3c6e07c0a56c9fec05d947282f45b2f37bd58ddb0b",
+            "hash://md5/7660babc0b4d95261f6054f55de696f9"
+          ],
+          "name": "abundance.parquet"
+        },
+        {
+          "id": "hash://sha256/89b0056746882c159ce8125b8d471d88c4585ce953966f9aebd7a420eb8ea75f",
+          "type": "DataDownload",
+          "contentSize": 3504,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/abundancedelta.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/89b0056746882c159ce8125b8d471d88c4585ce953966f9aebd7a420eb8ea75f",
+            "hash://md5/2f627bcea3ecd2f281b5047751c36f23"
+          ],
+          "name": "abundancedelta.parquet"
+        },
+        {
+          "id": "hash://sha256/3982ef1aba84b7c62e551c9748a63608f5c082199280ca077d2e956f568e10fc",
+          "type": "DataDownload",
+          "contentSize": 999562,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/acknowledge.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/3982ef1aba84b7c62e551c9748a63608f5c082199280ca077d2e956f568e10fc",
+            "hash://md5/3a7f05c9fb6f4f2fdf4b25db6189d7df"
+          ],
+          "name": "acknowledge.parquet"
+        },
+        {
+          "id": "hash://sha256/64e00e9588af8a73f23be281fca540ef9ec89e3cdabf407e6e1b2fd322dedf90",
+          "type": "DataDownload",
+          "contentSize": 8557,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/address.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/64e00e9588af8a73f23be281fca540ef9ec89e3cdabf407e6e1b2fd322dedf90",
+            "hash://md5/23cc703f8098a51844253afb88a6ebe5"
+          ],
+          "name": "address.parquet"
+        },
+        {
+          "id": "hash://sha256/12eb7246164c19d2f56f9e004c718179a32eb44442f9b4c351a298774cf6629a",
+          "type": "DataDownload",
+          "contentSize": 685,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/airbreathingref.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/12eb7246164c19d2f56f9e004c718179a32eb44442f9b4c351a298774cf6629a",
+            "hash://md5/37c3d6601fc0d0e2d4945c5dae2d4135"
+          ],
+          "name": "airbreathingref.parquet"
+        },
+        {
+          "id": "hash://sha256/2db88beb2393be3e406c80231663322dad0d2a0707442a107667622814128532",
+          "type": "DataDownload",
+          "contentSize": 79812,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/alieninvasive.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/2db88beb2393be3e406c80231663322dad0d2a0707442a107667622814128532",
+            "hash://md5/a56627d22dc263635365ff60f8cbe4dd"
+          ],
+          "name": "alieninvasive.parquet"
+        },
+        {
+          "id": "hash://sha256/9f3760bb9902647ba99ed26a63966b248fb21343dd474e06c9cc5bc446e3a478",
+          "type": "DataDownload",
+          "contentSize": 53869,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/allgenus.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/9f3760bb9902647ba99ed26a63966b248fb21343dd474e06c9cc5bc446e3a478",
+            "hash://md5/30994eca163e9f7bd22eac6a06bd1ef6"
+          ],
+          "name": "allgenus.parquet"
+        },
+        {
+          "id": "hash://sha256/6a5739568613922834bd5c54ba406e1c941f2461ab11bb3522f4081f9d67a4b2",
+          "type": "DataDownload",
+          "contentSize": 36432,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/aquamaint.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/6a5739568613922834bd5c54ba406e1c941f2461ab11bb3522f4081f9d67a4b2",
+            "hash://md5/d6938666f0285be6f8da75bb01bc0a58"
+          ],
+          "name": "aquamaint.parquet"
+        },
+        {
+          "id": "hash://sha256/1df93a09a47dc4bd95921b2a3e809c6b5172b8142f91e1fbc557a798f1a154b3",
+          "type": "DataDownload",
+          "contentSize": 736425,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/aquamaps.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/1df93a09a47dc4bd95921b2a3e809c6b5172b8142f91e1fbc557a798f1a154b3",
+            "hash://md5/5cda12d3e5217ff69e765c2e3bc07845"
+          ],
+          "name": "aquamaps.parquet"
+        },
+        {
+          "id": "hash://sha256/a8e7fa7d1e14e40dfb13af0015d002ec93c3bcc7ff34a7d651393d7ff4e2057e",
+          "type": "DataDownload",
+          "contentSize": 171686,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/aquarium.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/a8e7fa7d1e14e40dfb13af0015d002ec93c3bcc7ff34a7d651393d7ff4e2057e",
+            "hash://md5/3e231ca6fa403efe89dd4f60274f06c0"
+          ],
+          "name": "aquarium.parquet"
+        },
+        {
+          "id": "hash://sha256/5444a23a663a36187d3d5f5d93d1928c7f2f1c3004f28ba835eb36b3f94fa639",
+          "type": "DataDownload",
+          "contentSize": 1887,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/aquariumpic.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/5444a23a663a36187d3d5f5d93d1928c7f2f1c3004f28ba835eb36b3f94fa639",
+            "hash://md5/37f8030130df16fe72cfe02c79a36554"
+          ],
+          "name": "aquariumpic.parquet"
+        },
+        {
+          "id": "hash://sha256/ae0808b4d5b9e02d819f9d4fdf5ba03ddaf62f30407731f48642757dc7642a76",
+          "type": "DataDownload",
+          "contentSize": 5023,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/aquariumref.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/ae0808b4d5b9e02d819f9d4fdf5ba03ddaf62f30407731f48642757dc7642a76",
+            "hash://md5/b9bd18c5d839b736f73ca4c019c0f8b7"
+          ],
+          "name": "aquariumref.parquet"
+        },
+        {
+          "id": "hash://sha256/91f897329e2da6a963b4f7c20a103a3be23555915ef34ea79e0501b5d518c5b0",
+          "type": "DataDownload",
+          "contentSize": 965732,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/asfis.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/91f897329e2da6a963b4f7c20a103a3be23555915ef34ea79e0501b5d518c5b0",
+            "hash://md5/cc72137087ede4b5f66329e6f94f394d"
+          ],
+          "name": "asfis.parquet"
+        },
+        {
+          "id": "hash://sha256/893136096f3e3707f809ba78e66115f58952944eaa716cfedb790ab80dc727a5",
+          "type": "DataDownload",
+          "contentSize": 14327146,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/biblio.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/893136096f3e3707f809ba78e66115f58952944eaa716cfedb790ab80dc727a5",
+            "hash://md5/81da0401f2ed064990ff59c478627abc"
+          ],
+          "name": "biblio.parquet"
+        },
+        {
+          "id": "hash://sha256/ba7d4f43a0655c3570bfa10cc2120822f6974d31fa45debedd866af9bcbd059b",
+          "type": "DataDownload",
+          "contentSize": 6362,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/biblio2.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/ba7d4f43a0655c3570bfa10cc2120822f6974d31fa45debedd866af9bcbd059b",
+            "hash://md5/557a4047605a29bfafdfece99507e567"
+          ],
+          "name": "biblio2.parquet"
+        },
+        {
+          "id": "hash://sha256/a94d616c450937cdce8c58be795bbf3f9547b24213d981cbc46b6f58d9f4f4a6",
+          "type": "DataDownload",
+          "contentSize": 299272,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/brains.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/a94d616c450937cdce8c58be795bbf3f9547b24213d981cbc46b6f58d9f4f4a6",
+            "hash://md5/e713fe23f09135df5013df5e0ce23e97"
+          ],
+          "name": "brains.parquet"
+        },
+        {
+          "id": "hash://sha256/6a63655cf5ed9af1eddddb5f62b3ab0c294e118a7f0991fedd2a706207308ee6",
+          "type": "DataDownload",
+          "contentSize": 147693,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/broodstock.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/6a63655cf5ed9af1eddddb5f62b3ab0c294e118a7f0991fedd2a706207308ee6",
+            "hash://md5/188e2fe8e41baddc93b71f9660d9aabc"
+          ],
+          "name": "broodstock.parquet"
+        },
+        {
+          "id": "hash://sha256/7418df57f378994d715aa8c7800d12e09dc5b53344c20112ba8e6da414a5463a",
+          "type": "DataDownload",
+          "contentSize": 334196,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/bruvssample.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/7418df57f378994d715aa8c7800d12e09dc5b53344c20112ba8e6da414a5463a",
+            "hash://md5/512a267db92bd551436b59b3e60e87e6"
+          ],
+          "name": "bruvssample.parquet"
+        },
+        {
+          "id": "hash://sha256/1b70d965adb294147417d658a51f29b8bf58ae92a7e140941096b4bbf07d84da",
+          "type": "DataDownload",
+          "contentSize": 749740,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/bruvsspecies.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/1b70d965adb294147417d658a51f29b8bf58ae92a7e140941096b4bbf07d84da",
+            "hash://md5/4ab8cb0251ff50ac0c8aa650d99f7b7b"
+          ],
+          "name": "bruvsspecies.parquet"
+        },
+        {
+          "id": "hash://sha256/cf1f2fbc37332a448107d479a4c0457cb28ab10b27c632022c62a88a854977b6",
+          "type": "DataDownload",
+          "contentSize": 7985,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/bruvssurvey.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/cf1f2fbc37332a448107d479a4c0457cb28ab10b27c632022c62a88a854977b6",
+            "hash://md5/3467afc16ba18c50323b7975ed270fad"
+          ],
+          "name": "bruvssurvey.parquet"
+        },
+        {
+          "id": "hash://sha256/5666292cd05bf4ef9793bd0aeac4bc965b7b1e22bab2833c5897c8cbd8ff763f",
+          "type": "DataDownload",
+          "contentSize": 3102,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/checklist.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/5666292cd05bf4ef9793bd0aeac4bc965b7b1e22bab2833c5897c8cbd8ff763f",
+            "hash://md5/05b165ad34d8518426e65e618e51250b"
+          ],
+          "name": "checklist.parquet"
+        },
+        {
+          "id": "hash://sha256/f1afbd1bac970958e4b9d3b16e3640192401f6ff48b4e07f3320c484155664c5",
+          "type": "DataDownload",
+          "contentSize": 61354,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/cigua.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/f1afbd1bac970958e4b9d3b16e3640192401f6ff48b4e07f3320c484155664c5",
+            "hash://md5/776e624e20c0499dfbddaf1a523c288f"
+          ],
+          "name": "cigua.parquet"
+        },
+        {
+          "id": "hash://sha256/0b8022d15bdbfeb27eebb670cb5b8a5b7ad9fd0207881919a9248659ff9ab424",
+          "type": "DataDownload",
+          "contentSize": 14708,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/ciguafb.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/0b8022d15bdbfeb27eebb670cb5b8a5b7ad9fd0207881919a9248659ff9ab424",
+            "hash://md5/4b096d4b18dc84d2993bc633034989b7"
+          ],
+          "name": "ciguafb.parquet"
+        },
+        {
+          "id": "hash://sha256/70192b6205a8590ef8185c81ad24d9a04340d1a528c92ed437195c718087eea5",
+          "type": "DataDownload",
+          "contentSize": 105175,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/citesfb.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/70192b6205a8590ef8185c81ad24d9a04340d1a528c92ed437195c718087eea5",
+            "hash://md5/bc3954b018dbf0f286ad8ad1c2a5553c"
+          ],
+          "name": "citesfb.parquet"
+        },
+        {
+          "id": "hash://sha256/30e4b2090bbeec351120a1e4d4c34a902bc8e26ec6de519c62bbd41f3bb283c2",
+          "type": "DataDownload",
+          "contentSize": 58623,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/cl50.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/30e4b2090bbeec351120a1e4d4c34a902bc8e26ec6de519c62bbd41f3bb283c2",
+            "hash://md5/90d31984a4003d694287828a60900c6f"
+          ],
+          "name": "cl50.parquet"
+        },
+        {
+          "id": "hash://sha256/89933af92a9b71a174cc0f85c14109a97c68342cbc8626d7502702d6b48a7122",
+          "type": "DataDownload",
+          "contentSize": 7341,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/classes.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/89933af92a9b71a174cc0f85c14109a97c68342cbc8626d7502702d6b48a7122",
+            "hash://md5/d20fd99b8091e94b28cd40196fc93e65"
+          ],
+          "name": "classes.parquet"
+        },
+        {
+          "id": "hash://sha256/a153c77449ac1317114ceb34621f1878b74aab760870a2cfc83ade9d8756aab0",
+          "type": "DataDownload",
+          "contentSize": 352494,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/classification_tree.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/a153c77449ac1317114ceb34621f1878b74aab760870a2cfc83ade9d8756aab0",
+            "hash://md5/150e76f2788486d692a685e153347de7"
+          ],
+          "name": "classification_tree.parquet"
+        },
+        {
+          "id": "hash://sha256/a70801701e0f705b2f66819498662bc88e56c1c860e2b18b1d5219e31bc2a789",
+          "type": "DataDownload",
+          "contentSize": 309,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/coffversions.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/a70801701e0f705b2f66819498662bc88e56c1c860e2b18b1d5219e31bc2a789",
+            "hash://md5/ab1574188e562b45940d505a6ca1cfb5"
+          ],
+          "name": "coffversions.parquet"
+        },
+        {
+          "id": "hash://sha256/ad76fdad50cfef18ef03c23be115deeeb89d0c543d95b8a76087a2225d0801e4",
+          "type": "DataDownload",
+          "contentSize": 471121,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/collaborators.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/ad76fdad50cfef18ef03c23be115deeeb89d0c543d95b8a76087a2225d0801e4",
+            "hash://md5/78916a50016d8bf074f5de9a26b3af02"
+          ],
+          "name": "collaborators.parquet"
+        },
+        {
+          "id": "hash://sha256/787d7189415bbeac4367a3fa6d9a0ebb005162a9019e55f39accf73e0c3a7d91",
+          "type": "DataDownload",
+          "contentSize": 624943,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/collectionsref.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/787d7189415bbeac4367a3fa6d9a0ebb005162a9019e55f39accf73e0c3a7d91",
+            "hash://md5/d92a7b05bf6e591c11e7f7fcd2f96509"
+          ],
+          "name": "collectionsref.parquet"
+        },
+        {
+          "id": "hash://sha256/03e773d1541c14a51b51f03a164c94e7e3212f0706cdf7e38f4bfcfc279eed3b",
+          "type": "DataDownload",
+          "contentSize": 16254895,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/comnames.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/03e773d1541c14a51b51f03a164c94e7e3212f0706cdf7e38f4bfcfc279eed3b",
+            "hash://md5/959c9e1424db1d941cafe273aedd8e32"
+          ],
+          "name": "comnames.parquet"
+        },
+        {
+          "id": "hash://sha256/0a1ad98b266581a482d4e76ba42b51fb90cd1cfc47ebae13ec7f8293bcbc35ca",
+          "type": "DataDownload",
+          "contentSize": 16270520,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/comnames_bk_copy.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/0a1ad98b266581a482d4e76ba42b51fb90cd1cfc47ebae13ec7f8293bcbc35ca",
+            "hash://md5/86e7fa5f636b7c84c9a461ef21638a60"
+          ],
+          "name": "comnames_bk_copy.parquet"
+        },
+        {
+          "id": "hash://sha256/220d6f023659be3492c19467d0095f9d1b94166e34b0fb6845ed56cce6478bb0",
+          "type": "DataDownload",
+          "contentSize": 847359,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/countecosystem.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/220d6f023659be3492c19467d0095f9d1b94166e34b0fb6845ed56cce6478bb0",
+            "hash://md5/f24090d26ff7027b737adf802fd8b3eb"
+          ],
+          "name": "countecosystem.parquet"
+        },
+        {
+          "id": "hash://sha256/29ce133a014b0dca5b79dd6b1df527ec3b004bd71a78cbfe7e91562ccd822426",
+          "type": "DataDownload",
+          "contentSize": 1868299,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/countfao.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/29ce133a014b0dca5b79dd6b1df527ec3b004bd71a78cbfe7e91562ccd822426",
+            "hash://md5/dfe42c8b74eec790e0ee7e54bae7b7ad"
+          ],
+          "name": "countfao.parquet"
+        },
+        {
+          "id": "hash://sha256/f700ac6caddf02da13c91bed5853afd94d57fb2c3ab43537781ca3ae46e7ea71",
+          "type": "DataDownload",
+          "contentSize": 3581,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/countfaoref.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/f700ac6caddf02da13c91bed5853afd94d57fb2c3ab43537781ca3ae46e7ea71",
+            "hash://md5/bd66b5b33fb8a033e17370795f21a62a"
+          ],
+          "name": "countfaoref.parquet"
+        },
+        {
+          "id": "hash://sha256/87f5a6a0f6dd337c777956e87f4639077a5d1d172fcaa50e1e6176246e784891",
+          "type": "DataDownload",
+          "contentSize": 424153,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/countref.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/87f5a6a0f6dd337c777956e87f4639077a5d1d172fcaa50e1e6176246e784891",
+            "hash://md5/25590f082fce8ccf4e0f3f31d5a5a5d7"
+          ],
+          "name": "countref.parquet"
+        },
+        {
+          "id": "hash://sha256/77100d290d10e73a7c36910c420e05e533c722a9b10ea6beb5639f6217f613f7",
+          "type": "DataDownload",
+          "contentSize": 10028410,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/country.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/77100d290d10e73a7c36910c420e05e533c722a9b10ea6beb5639f6217f613f7",
+            "hash://md5/f459bcaf263d6c501fa116432fcd776a"
+          ],
+          "name": "country.parquet"
+        },
+        {
+          "id": "hash://sha256/ed4e89abe2e71abf5976e3355ed82ceade33f9032bba462ac819474eede159e1",
+          "type": "DataDownload",
+          "contentSize": 635,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/country_presencestatusranked.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/ed4e89abe2e71abf5976e3355ed82ceade33f9032bba462ac819474eede159e1",
+            "hash://md5/b2160506e33f6a8d00d5c5a03ff0e5c0"
+          ],
+          "name": "country_presencestatusranked.parquet"
+        },
+        {
+          "id": "hash://sha256/0c91181bca7dbf2aad68db8dee0a86b2a17ff7e9a9d7b90b76ba583bfae3559f",
+          "type": "DataDownload",
+          "contentSize": 1105303,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/countrysub.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/0c91181bca7dbf2aad68db8dee0a86b2a17ff7e9a9d7b90b76ba583bfae3559f",
+            "hash://md5/3bb46ecaca4f6adb8ac8db75f60ec004"
+          ],
+          "name": "countrysub.parquet"
+        },
+        {
+          "id": "hash://sha256/d42585cfe780bbbe50c0f545fe0e41f67107fca5b478ed83a30ae3cf1fc21750",
+          "type": "DataDownload",
+          "contentSize": 1541,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/countrysubfaoref.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/d42585cfe780bbbe50c0f545fe0e41f67107fca5b478ed83a30ae3cf1fc21750",
+            "hash://md5/56ae3cbf189037c38686ccb975304127"
+          ],
+          "name": "countrysubfaoref.parquet"
+        },
+        {
+          "id": "hash://sha256/d1cb5f92918b2dbde7e4801f56601493b3a42fffce4889b228dda8017c322b9f",
+          "type": "DataDownload",
+          "contentSize": 19525,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/countrysubref.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/d1cb5f92918b2dbde7e4801f56601493b3a42fffce4889b228dda8017c322b9f",
+            "hash://md5/885567487c1734a014400b8ab36141f8"
+          ],
+          "name": "countrysubref.parquet"
+        },
+        {
+          "id": "hash://sha256/b8b2ba4e4e2cd0e564308f9e2baf68047477325448edb6665c8891ab865fb3ff",
+          "type": "DataDownload",
+          "contentSize": 23784,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/cultspec.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/b8b2ba4e4e2cd0e564308f9e2baf68047477325448edb6665c8891ab865fb3ff",
+            "hash://md5/4734eeaeb9e93d5ac8b520951e98a029"
+          ],
+          "name": "cultspec.parquet"
+        },
+        {
+          "id": "hash://sha256/a27141908e65bc4b7d25b323245d1969f21cb5b17f248e69c81ca569cd0b19b3",
+          "type": "DataDownload",
+          "contentSize": 36880,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/cultsys.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/a27141908e65bc4b7d25b323245d1969f21cb5b17f248e69c81ca569cd0b19b3",
+            "hash://md5/6092a7d6121c6021d0fe28c7caeaf0dd"
+          ],
+          "name": "cultsys.parquet"
+        },
+        {
+          "id": "hash://sha256/53a4415124393a1209dda92f0e34a9aaddd3b414b73ac91cc0801dfcc38ea825",
+          "type": "DataDownload",
+          "contentSize": 2230,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/cultures.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/53a4415124393a1209dda92f0e34a9aaddd3b414b73ac91cc0801dfcc38ea825",
+            "hash://md5/406e09a27a5ebff2cc492e9fe14e0770"
+          ],
+          "name": "cultures.parquet"
+        },
+        {
+          "id": "hash://sha256/025818a04ac4d19dbdbb623f37c2a0fa1e2c29f0d746a323efcca49890ae05e0",
+          "type": "DataDownload",
+          "contentSize": 338691,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/diet.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/025818a04ac4d19dbdbb623f37c2a0fa1e2c29f0d746a323efcca49890ae05e0",
+            "hash://md5/af2291b862a5898e84512ec8a62355d2"
+          ],
+          "name": "diet.parquet"
+        },
+        {
+          "id": "hash://sha256/a16ee6775f499aea3b1ee3b497fff25541241b64bae48ae7a701103a2ff898cf",
+          "type": "DataDownload",
+          "contentSize": 996934,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/diet_items.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/a16ee6775f499aea3b1ee3b497fff25541241b64bae48ae7a701103a2ff898cf",
+            "hash://md5/92d18021018358124f99a7fa46bcd7ff"
+          ],
+          "name": "diet_items.parquet"
+        },
+        {
+          "id": "hash://sha256/00a036e28f7b9b833439925c98f33b8c7a4b12dc0c0d73292698dbe2795347b3",
+          "type": "DataDownload",
+          "contentSize": 152787,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/diseases.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/00a036e28f7b9b833439925c98f33b8c7a4b12dc0c0d73292698dbe2795347b3",
+            "hash://md5/3c1bef04395460c6bbf63fb8aa6622f3"
+          ],
+          "name": "diseases.parquet"
+        },
+        {
+          "id": "hash://sha256/4e1a73baf9f4ee3e478b620e0560f407f5cac30d66bf10d8dc2354bd1dd03890",
+          "type": "DataDownload",
+          "contentSize": 46440,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/dispic.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/4e1a73baf9f4ee3e478b620e0560f407f5cac30d66bf10d8dc2354bd1dd03890",
+            "hash://md5/a3b5d7c6204adef3d6bc85527a9520dc"
+          ],
+          "name": "dispic.parquet"
+        },
+        {
+          "id": "hash://sha256/c8eb31e9b18902ea8b03cb269f070b196a8879bb97cc52027d443f5abb9120cc",
+          "type": "DataDownload",
+          "contentSize": 221062,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/disref.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/c8eb31e9b18902ea8b03cb269f070b196a8879bb97cc52027d443f5abb9120cc",
+            "hash://md5/2d9684301b8944f9e918e87a61c74c68"
+          ],
+          "name": "disref.parquet"
+        },
+        {
+          "id": "hash://sha256/b078ebf1fc45524ad1e0bcdb0f01997878649ad1f4c4430955be224539fac6dc",
+          "type": "DataDownload",
+          "contentSize": 1588760,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/ecology.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/b078ebf1fc45524ad1e0bcdb0f01997878649ad1f4c4430955be224539fac6dc",
+            "hash://md5/862cd4ac56cf7de51696ac68aeacf77b"
+          ],
+          "name": "ecology.parquet"
+        },
+        {
+          "id": "hash://sha256/28631fe3a5cfd97ea26b00d62890ce0d90d96e4044f78b3060669e64def3b407",
+          "type": "DataDownload",
+          "contentSize": 712,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/ecosysfam.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/28631fe3a5cfd97ea26b00d62890ce0d90d96e4044f78b3060669e64def3b407",
+            "hash://md5/df2e86df57088debdbf56de5a81e1f0a"
+          ],
+          "name": "ecosysfam.parquet"
+        },
+        {
+          "id": "hash://sha256/1c70f28ba870589de12dab8cffcf6b5b4740e129b23e539ee6b368fdf88866e1",
+          "type": "DataDownload",
+          "contentSize": 1647,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/ecosyslhref.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/1c70f28ba870589de12dab8cffcf6b5b4740e129b23e539ee6b368fdf88866e1",
+            "hash://md5/784ba34d5591c86c7635bda3fc30c332"
+          ],
+          "name": "ecosyslhref.parquet"
+        },
+        {
+          "id": "hash://sha256/e7bfb0e43d9d6b4c873769ef0ab488f245c294f48049ae27617ee8d06e4f1cf9",
+          "type": "DataDownload",
+          "contentSize": 3587873,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/ecosystem.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/e7bfb0e43d9d6b4c873769ef0ab488f245c294f48049ae27617ee8d06e4f1cf9",
+            "hash://md5/07767904e8c00386c29dfa3f45ad1fa5"
+          ],
+          "name": "ecosystem.parquet"
+        },
+        {
+          "id": "hash://sha256/b59bf3537ce3b6702d78f23f9c50b73b2d5706886937e7ec3b6c27330599560b",
+          "type": "DataDownload",
+          "contentSize": 15357,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/ecosystemcntref.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/b59bf3537ce3b6702d78f23f9c50b73b2d5706886937e7ec3b6c27330599560b",
+            "hash://md5/d8818d6becbe34ca75dd2d52059904f6"
+          ],
+          "name": "ecosystemcntref.parquet"
+        },
+        {
+          "id": "hash://sha256/00cc2f2afa0f040a74f20580bb92dde41ba7144f06b07a98525dcf3e981db0d0",
+          "type": "DataDownload",
+          "contentSize": 2996309,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/ecosystemcountry.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/00cc2f2afa0f040a74f20580bb92dde41ba7144f06b07a98525dcf3e981db0d0",
+            "hash://md5/a0f04fb1cb9f5f450f28450a46555599"
+          ],
+          "name": "ecosystemcountry.parquet"
+        },
+        {
+          "id": "hash://sha256/4962133639b77d69ecd0c2c5eb90f66c2706937d1f25e9e9b075f3639a30747a",
+          "type": "DataDownload",
+          "contentSize": 9417,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/ecosystemfaoref.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/4962133639b77d69ecd0c2c5eb90f66c2706937d1f25e9e9b075f3639a30747a",
+            "hash://md5/7f880fc2be362d71615338aa7568406c"
+          ],
+          "name": "ecosystemfaoref.parquet"
+        },
+        {
+          "id": "hash://sha256/4b1e6b20d2d0de22b833672cd557345fb2045423036b7e7eef1250c812910c7a",
+          "type": "DataDownload",
+          "contentSize": 303775,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/ecosystemref.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/4b1e6b20d2d0de22b833672cd557345fb2045423036b7e7eef1250c812910c7a",
+            "hash://md5/84a7327bab63473d843e47520bb1ef7e"
+          ],
+          "name": "ecosystemref.parquet"
+        },
+        {
+          "id": "hash://sha256/4201a0236f0eb8c5324f598206ed403a8db775e4237864e4d5759d770142c041",
+          "type": "DataDownload",
+          "contentSize": 21314,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/eggdev.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/4201a0236f0eb8c5324f598206ed403a8db775e4237864e4d5759d770142c041",
+            "hash://md5/dd09f100dd96f2a2ff301eae9b567b14"
+          ],
+          "name": "eggdev.parquet"
+        },
+        {
+          "id": "hash://sha256/679e99641bdc6cee88467269544620fd1600ba9b247aa55174fed0bc254a1026",
+          "type": "DataDownload",
+          "contentSize": 47745,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/eggnurserysystem.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/679e99641bdc6cee88467269544620fd1600ba9b247aa55174fed0bc254a1026",
+            "hash://md5/5ee10a88d8ef616b990fa5fa346c837b"
+          ],
+          "name": "eggnurserysystem.parquet"
+        },
+        {
+          "id": "hash://sha256/59cfd1635fa5191c06859a534e929c70d7331468c7e0273acc546c1a0e2025ed",
+          "type": "DataDownload",
+          "contentSize": 165508,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/eggs.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/59cfd1635fa5191c06859a534e929c70d7331468c7e0273acc546c1a0e2025ed",
+            "hash://md5/98df60dbb77d5fc7119a8cbc488178bd"
+          ],
+          "name": "eggs.parquet"
+        },
+        {
+          "id": "hash://sha256/c7701e161861444ffd007fabcfe747763ded0ce2c7fbcd6d91a83b82dcea4527",
+          "type": "DataDownload",
+          "contentSize": 206855,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/elecdat.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/c7701e161861444ffd007fabcfe747763ded0ce2c7fbcd6d91a83b82dcea4527",
+            "hash://md5/8f8d373961204e513c088284d7584ab4"
+          ],
+          "name": "elecdat.parquet"
+        },
+        {
+          "id": "hash://sha256/da41ac4e65256d1726ab673008ed137410dab5406f7e2dbdd4bc174f5c1bc1b9",
+          "type": "DataDownload",
+          "contentSize": 51597,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/elecstudies.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/da41ac4e65256d1726ab673008ed137410dab5406f7e2dbdd4bc174f5c1bc1b9",
+            "hash://md5/7337762868e7fd3c44956469c48cd080"
+          ],
+          "name": "elecstudies.parquet"
+        },
+        {
+          "id": "hash://sha256/39b13c8ac208bab9ca56d5f65e9413263366e017e13c400530ead8bf7c6055c3",
+          "type": "DataDownload",
+          "contentSize": 176489,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/elecsub.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/39b13c8ac208bab9ca56d5f65e9413263366e017e13c400530ead8bf7c6055c3",
+            "hash://md5/9b46e00f2a9ba68938a1f536959c6448"
+          ],
+          "name": "elecsub.parquet"
+        },
+        {
+          "id": "hash://sha256/ed62ef887aee727494420c9fa4cf6cfb861e65569c5218c6fe1983388b660a02",
+          "type": "DataDownload",
+          "contentSize": 2294,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/enzymes.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/ed62ef887aee727494420c9fa4cf6cfb861e65569c5218c6fe1983388b660a02",
+            "hash://md5/568221180dd4b1a94ac052a2aae0931d"
+          ],
+          "name": "enzymes.parquet"
+        },
+        {
+          "id": "hash://sha256/f5168567e7a40af3267b6ac11f076c3a71c482afbff57ff0a1227e1271c3d393",
+          "type": "DataDownload",
+          "contentSize": 2822039,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/estimate.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/f5168567e7a40af3267b6ac11f076c3a71c482afbff57ff0a1227e1271c3d393",
+            "hash://md5/99d45445fefbb6d15301b1fa36aac493"
+          ],
+          "name": "estimate.parquet"
+        },
+        {
+          "id": "hash://sha256/b4ae1974534f6a629e72270448af48654c20e23f6d4bee050d19c3ea653aa08b",
+          "type": "DataDownload",
+          "contentSize": 70332,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/estimatedepth.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/b4ae1974534f6a629e72270448af48654c20e23f6d4bee050d19c3ea653aa08b",
+            "hash://md5/2e82af18a6af880d4725053f26aa7af0"
+          ],
+          "name": "estimatedepth.parquet"
+        },
+        {
+          "id": "hash://sha256/d82d045e53f3a9f5b4f3ac92546e785026a43db7f70ac0adffa3830a47591c45",
+          "type": "DataDownload",
+          "contentSize": 430336,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/families.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/d82d045e53f3a9f5b4f3ac92546e785026a43db7f70ac0adffa3830a47591c45",
+            "hash://md5/71f017fd8a8d96eb108073bc69013190"
+          ],
+          "name": "families.parquet"
+        },
+        {
+          "id": "hash://sha256/ccd6f1b1b517b3caee40abcc677f743f846693a94bf39db9f910f27d009dbe6d",
+          "type": "DataDownload",
+          "contentSize": 479398,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/faoaquacult.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/ccd6f1b1b517b3caee40abcc677f743f846693a94bf39db9f910f27d009dbe6d",
+            "hash://md5/c0f83fa9695b97174a1ff946541491c8"
+          ],
+          "name": "faoaquacult.parquet"
+        },
+        {
+          "id": "hash://sha256/2c1a7df50574be5b2aa9e8e99b44c82fac04fa0046230041fd46fdeed73027f6",
+          "type": "DataDownload",
+          "contentSize": 1274362,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/faoareas.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/2c1a7df50574be5b2aa9e8e99b44c82fac04fa0046230041fd46fdeed73027f6",
+            "hash://md5/89c9bf890276bd419ac1abc69a829598"
+          ],
+          "name": "faoareas.parquet"
+        },
+        {
+          "id": "hash://sha256/81e37355ee97d3d6bd8ec33a9476818aa473f21bd99ad753e049ab258045371c",
+          "type": "DataDownload",
+          "contentSize": 7444,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/faoarfam.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/81e37355ee97d3d6bd8ec33a9476818aa473f21bd99ad753e049ab258045371c",
+            "hash://md5/d59939668658a565bb7d75b4d867fc94"
+          ],
+          "name": "faoarfam.parquet"
+        },
+        {
+          "id": "hash://sha256/ac875b102a885c9d083521e3dd1e374e6c152224e90fb1b6d50114c11af852d6",
+          "type": "DataDownload",
+          "contentSize": 1826,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/faoarord.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/ac875b102a885c9d083521e3dd1e374e6c152224e90fb1b6d50114c11af852d6",
+            "hash://md5/0206327fa2c53bf23f82b113bac23e05"
+          ],
+          "name": "faoarord.parquet"
+        },
+        {
+          "id": "hash://sha256/f5c8238d77a36a8e4c8702303625f526382c6718d8225eba84216f196aabe01b",
+          "type": "DataDownload",
+          "contentSize": 10676,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/faoarref.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/f5c8238d77a36a8e4c8702303625f526382c6718d8225eba84216f196aabe01b",
+            "hash://md5/21790ea10725d0bb340ec4fb08d5463d"
+          ],
+          "name": "faoarref.parquet"
+        },
+        {
+          "id": "hash://sha256/9346653f9243a8da322af1ec318d78db683cf312a061d7ca29e2e7f4b30e28b6",
+          "type": "DataDownload",
+          "contentSize": 2228455,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/faocatch.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/9346653f9243a8da322af1ec318d78db683cf312a061d7ca29e2e7f4b30e28b6",
+            "hash://md5/08a57af51c078a1d1d85b88bf192bbf6"
+          ],
+          "name": "faocatch.parquet"
+        },
+        {
+          "id": "hash://sha256/b42b138745ac5071af6d70dbf2496d8826a2dfdb9d21897cf1d181d5d1c6bb0e",
+          "type": "DataDownload",
+          "contentSize": 12605,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/fbrelinks.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/b42b138745ac5071af6d70dbf2496d8826a2dfdb9d21897cf1d181d5d1c6bb0e",
+            "hash://md5/56093b2e3ff49b44cd3bacb36e819170"
+          ],
+          "name": "fbrelinks.parquet"
+        },
+        {
+          "id": "hash://sha256/998baa64624df3a54ed0f5d252c5e5871553615f6548de5c826adbbeb29a04c5",
+          "type": "DataDownload",
+          "contentSize": 511107,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/fbusers.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/998baa64624df3a54ed0f5d252c5e5871553615f6548de5c826adbbeb29a04c5",
+            "hash://md5/646a4c11f3f59d5a07bafd65c2ea4ca9"
+          ],
+          "name": "fbusers.parquet"
+        },
+        {
+          "id": "hash://sha256/87dba3c14daaa8489cc6484ad38619154cc77be8021d0a2e59240f6f43eedb5f",
+          "type": "DataDownload",
+          "contentSize": 337970,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/fecundity.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/87dba3c14daaa8489cc6484ad38619154cc77be8021d0a2e59240f6f43eedb5f",
+            "hash://md5/f0b4c60305644b48943614efc47605c9"
+          ],
+          "name": "fecundity.parquet"
+        },
+        {
+          "id": "hash://sha256/c1ad96d877b84b9c749474a827def5aa92ed1ee4cc63a5e880f67a165bae8eb2",
+          "type": "DataDownload",
+          "contentSize": 6252,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/fieldguide_pic.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/c1ad96d877b84b9c749474a827def5aa92ed1ee4cc63a5e880f67a165bae8eb2",
+            "hash://md5/b720c72cf7206c01a606f0b29bde31cf"
+          ],
+          "name": "fieldguide_pic.parquet"
+        },
+        {
+          "id": "hash://sha256/5d621d12378879b058a2a2f9ae5bff7e038c8aa81b2056a816baeb811ee704b4",
+          "type": "DataDownload",
+          "contentSize": 34881,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/fl_datasource.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/5d621d12378879b058a2a2f9ae5bff7e038c8aa81b2056a816baeb811ee704b4",
+            "hash://md5/aba0b60d837fdc607567cd9156efa0f3"
+          ],
+          "name": "fl_datasource.parquet"
+        },
+        {
+          "id": "hash://sha256/50cbc43af64d796bfb67223ee85b284277aec2e64d868e114916174e3670f7e2",
+          "type": "DataDownload",
+          "contentSize": 9368,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/fl_fish.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/50cbc43af64d796bfb67223ee85b284277aec2e64d868e114916174e3670f7e2",
+            "hash://md5/b0b963ecfc65b3ee8ac0b3d14be1f20f"
+          ],
+          "name": "fl_fish.parquet"
+        },
+        {
+          "id": "hash://sha256/98039edea4acbd06fd975b0c0395226b7156d5f84f6e437301d1fcfb7b754712",
+          "type": "DataDownload",
+          "contentSize": 1168,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/fl_fishingdetails.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/98039edea4acbd06fd975b0c0395226b7156d5f84f6e437301d1fcfb7b754712",
+            "hash://md5/da8e54133da2ba6cfb13d1df1672155c"
+          ],
+          "name": "fl_fishingdetails.parquet"
+        },
+        {
+          "id": "hash://sha256/34b89b74cdb578bee6ae8247b5f743e6dcb0615e8ed432e7bd50786b1e9a1689",
+          "type": "DataDownload",
+          "contentSize": 3125,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/fl_location.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/34b89b74cdb578bee6ae8247b5f743e6dcb0615e8ed432e7bd50786b1e9a1689",
+            "hash://md5/9e7980e48770a2337a6809830c44803c"
+          ],
+          "name": "fl_location.parquet"
+        },
+        {
+          "id": "hash://sha256/124106c817526e58c3e229b154c65ef5c6517b4d07d16529f6bf5c4c7ec558d8",
+          "type": "DataDownload",
+          "contentSize": 14798,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/fl_losses.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/124106c817526e58c3e229b154c65ef5c6517b4d07d16529f6bf5c4c7ec558d8",
+            "hash://md5/d41e1b0a0eb4be278807e0f6c346a5f4"
+          ],
+          "name": "fl_losses.parquet"
+        },
+        {
+          "id": "hash://sha256/71c61b7f566e031901c79c3706d780c86b4c98bfc31cd9a6a2ee1978c6a4811b",
+          "type": "DataDownload",
+          "contentSize": 3136,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/fl_lossesfinance.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/71c61b7f566e031901c79c3706d780c86b4c98bfc31cd9a6a2ee1978c6a4811b",
+            "hash://md5/7280e24045ab7b3b012d27f0e43b3cc6"
+          ],
+          "name": "fl_lossesfinance.parquet"
+        },
+        {
+          "id": "hash://sha256/edb70230ffcb867384db35eda6c0f3ee3ed9fbf51d7f8e8bf54304aa2c0be434",
+          "type": "DataDownload",
+          "contentSize": 1905,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/fl_lossesother.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/edb70230ffcb867384db35eda6c0f3ee3ed9fbf51d7f8e8bf54304aa2c0be434",
+            "hash://md5/21f1aba640befaa2b3db75ca4057c0ec"
+          ],
+          "name": "fl_lossesother.parquet"
+        },
+        {
+          "id": "hash://sha256/e5ae5f90032080fcb005cce7b633ec920a08d571bb4e89e02fb8ac640fa10f53",
+          "type": "DataDownload",
+          "contentSize": 1462,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/fl_processdetails.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/e5ae5f90032080fcb005cce7b633ec920a08d571bb4e89e02fb8ac640fa10f53",
+            "hash://md5/3c05b899f232cccb91088884ab8ea551"
+          ],
+          "name": "fl_processdetails.parquet"
+        },
+        {
+          "id": "hash://sha256/ae2947d2b5998b0e87848d8d7df1b5a6e7d56d0e3a5238c8b1a384224b5f7d1f",
+          "type": "DataDownload",
+          "contentSize": 6263,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/fl_storagedetails.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/ae2947d2b5998b0e87848d8d7df1b5a6e7d56d0e3a5238c8b1a384224b5f7d1f",
+            "hash://md5/f8f33c5d741ef77031d933585f9f4163"
+          ],
+          "name": "fl_storagedetails.parquet"
+        },
+        {
+          "id": "hash://sha256/d7dfd8890e05ded8f897621d21f6e7dbd5b1a7180985dd73d80529bfef90a221",
+          "type": "DataDownload",
+          "contentSize": 1487,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/fl_transportdetails.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/d7dfd8890e05ded8f897621d21f6e7dbd5b1a7180985dd73d80529bfef90a221",
+            "hash://md5/1b1fac586d5d70ee09b5b24318a68e89"
+          ],
+          "name": "fl_transportdetails.parquet"
+        },
+        {
+          "id": "hash://sha256/4f1a32f902a34938f19fc8101ffef27ffaace44a6c982c2221e072f9bb7a4050",
+          "type": "DataDownload",
+          "contentSize": 18489,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/food.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/4f1a32f902a34938f19fc8101ffef27ffaace44a6c982c2221e072f9bb7a4050",
+            "hash://md5/1ba58a3200fc87258320ab318aeee733"
+          ],
+          "name": "food.parquet"
+        },
+        {
+          "id": "hash://sha256/b742e08cacb3936600ed8ed928cc0437f622f1a555780ceb94a373a9ea42fe1d",
+          "type": "DataDownload",
+          "contentSize": 3525,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/foodecosystemtype.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/b742e08cacb3936600ed8ed928cc0437f622f1a555780ceb94a373a9ea42fe1d",
+            "hash://md5/3eef8b3cd297147496b8c8fe183741e0"
+          ],
+          "name": "foodecosystemtype.parquet"
+        },
+        {
+          "id": "hash://sha256/45e9ffccd70419fe616d4a3186cfe8fb6803fff7eeb1d16eb2a2c66eb5e448f1",
+          "type": "DataDownload",
+          "contentSize": 1729170,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/fooditems.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/45e9ffccd70419fe616d4a3186cfe8fb6803fff7eeb1d16eb2a2c66eb5e448f1",
+            "hash://md5/98451965a70caba002266a6c0c4aa8ea"
+          ],
+          "name": "fooditems.parquet"
+        },
+        {
+          "id": "hash://sha256/fa8d5e462ea73bb5716827e720f0b896268749b71359ff872accc2eac3c49d8e",
+          "type": "DataDownload",
+          "contentSize": 6388,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/foodtroph.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/fa8d5e462ea73bb5716827e720f0b896268749b71359ff872accc2eac3c49d8e",
+            "hash://md5/10f01289258e56ef52176241ade9e386"
+          ],
+          "name": "foodtroph.parquet"
+        },
+        {
+          "id": "hash://sha256/57a43f32c36ce957fc14e8573a745d12c05ac03d2af4fa16aa9008dcece649ab",
+          "type": "DataDownload",
+          "contentSize": 102366,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/frynurserysystem.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/57a43f32c36ce957fc14e8573a745d12c05ac03d2af4fa16aa9008dcece649ab",
+            "hash://md5/0ec115deb1966759b37cec356e4928a7"
+          ],
+          "name": "frynurserysystem.parquet"
+        },
+        {
+          "id": "hash://sha256/d7abc73668207ec36896dd6cfb1ab2fa1409f5f9e83062ade8dbc67c7d81bf37",
+          "type": "DataDownload",
+          "contentSize": 28495,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/fubh.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/d7abc73668207ec36896dd6cfb1ab2fa1409f5f9e83062ade8dbc67c7d81bf37",
+            "hash://md5/b1e48d747836a1da45cfc4a8c4cdb991"
+          ],
+          "name": "fubh.parquet"
+        },
+        {
+          "id": "hash://sha256/bbd1aa0d16fd9f3d1a765b033cf2de3da20f881d09f828783c838768302161cb",
+          "type": "DataDownload",
+          "contentSize": 81997,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/gazetteer.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/bbd1aa0d16fd9f3d1a765b033cf2de3da20f881d09f828783c838768302161cb",
+            "hash://md5/ce96acf9c0031c64c1ea1918ba3a4a4f"
+          ],
+          "name": "gazetteer.parquet"
+        },
+        {
+          "id": "hash://sha256/17181842e7b7bf3171a3bf8b2f5b2da6907d4caa27f92a84c819f41cfbc9707c",
+          "type": "DataDownload",
+          "contentSize": 12693,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/genedat.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/17181842e7b7bf3171a3bf8b2f5b2da6907d4caa27f92a84c819f41cfbc9707c",
+            "hash://md5/55bf3dfd61771b7de3ece901d7d802ed"
+          ],
+          "name": "genedat.parquet"
+        },
+        {
+          "id": "hash://sha256/d3e6a16ceb032d67db140d0da8db0b7928b00d98dd92f85ba77f8071b026997b",
+          "type": "DataDownload",
+          "contentSize": 1412376,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/genera.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/d3e6a16ceb032d67db140d0da8db0b7928b00d98dd92f85ba77f8071b026997b",
+            "hash://md5/db24e1361ab4eb1258297cb3929ba63c"
+          ],
+          "name": "genera.parquet"
+        },
+        {
+          "id": "hash://sha256/1e13e84655d559613ba919400c0b994e069c0726e7026a1f473e18a82f03ac2b",
+          "type": "DataDownload",
+          "contentSize": 425102,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/genetics.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/1e13e84655d559613ba919400c0b994e069c0726e7026a1f473e18a82f03ac2b",
+            "hash://md5/5348e4a386a8fab413606eea5e709a61"
+          ],
+          "name": "genetics.parquet"
+        },
+        {
+          "id": "hash://sha256/fc58c2b13fd0a0711fecc90da81b9ff1d2867207e72570770faf7cedda3d35a7",
+          "type": "DataDownload",
+          "contentSize": 1219201,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/gicim_photos.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/fc58c2b13fd0a0711fecc90da81b9ff1d2867207e72570770faf7cedda3d35a7",
+            "hash://md5/bcd42bd8ea3c08b9e217213db58f1758"
+          ],
+          "name": "gicim_photos.parquet"
+        },
+        {
+          "id": "hash://sha256/cde9f5097f6fa09e03dbbc4fa6e2924d312b022d1bb9fb7d475d768f8fa140ea",
+          "type": "DataDownload",
+          "contentSize": 10295,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/gillarea.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/cde9f5097f6fa09e03dbbc4fa6e2924d312b022d1bb9fb7d475d768f8fa140ea",
+            "hash://md5/b22ba531f41e97565fc9223a17d10f2d"
+          ],
+          "name": "gillarea.parquet"
+        },
+        {
+          "id": "hash://sha256/8fc75322bc52d2b1611d22f99f060fd4e77aeae89cf0a9cc4f9038f0ac3422df",
+          "type": "DataDownload",
+          "contentSize": 581868,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/globi.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/8fc75322bc52d2b1611d22f99f060fd4e77aeae89cf0a9cc4f9038f0ac3422df",
+            "hash://md5/409a9aa85b60e2ae8aaa1c5ba9a8fb89"
+          ],
+          "name": "globi.parquet"
+        },
+        {
+          "id": "hash://sha256/202f73a570427dbda815f08f8650e800c07ac0d7d16d91ef9f1cbdfe8dbff50a",
+          "type": "DataDownload",
+          "contentSize": 1623756,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/glossary.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/202f73a570427dbda815f08f8650e800c07ac0d7d16d91ef9f1cbdfe8dbff50a",
+            "hash://md5/c0e96ad5607837e1b39b71dedfef7a2a"
+          ],
+          "name": "glossary.parquet"
+        },
+        {
+          "id": "hash://sha256/b964524727eb90edbc3ad335ba2879f551815092f63f81fa6029dc33c73953c9",
+          "type": "DataDownload",
+          "contentSize": 12903,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/gomexsi.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/b964524727eb90edbc3ad335ba2879f551815092f63f81fa6029dc33c73953c9",
+            "hash://md5/172b0b0df70e0ef450c09874e866ccf4"
+          ],
+          "name": "gomexsi.parquet"
+        },
+        {
+          "id": "hash://sha256/ac28c11deeb14b713c8b54b925623a7fe55c5a0186bbb69e65b64ea5447bed31",
+          "type": "DataDownload",
+          "contentSize": 226159,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/graphcateg.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/ac28c11deeb14b713c8b54b925623a7fe55c5a0186bbb69e65b64ea5447bed31",
+            "hash://md5/3ae190cf418630bebde6d34a6a90ac1f"
+          ],
+          "name": "graphcateg.parquet"
+        },
+        {
+          "id": "hash://sha256/e7fea4ad234617aec23a761c55b3ebe9d42191f0cf69a77458f11ed42c06abf0",
+          "type": "DataDownload",
+          "contentSize": 1098920,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/icescatch.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/e7fea4ad234617aec23a761c55b3ebe9d42191f0cf69a77458f11ed42c06abf0",
+            "hash://md5/b3234d5537c1a9c1b5073c36b10b9376"
+          ],
+          "name": "icescatch.parquet"
+        },
+        {
+          "id": "hash://sha256/e0625335cc3082aa9f0716e0144213091298a04f81b166d6b113ff487fa1a7e5",
+          "type": "DataDownload",
+          "contentSize": 1114876,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/institution.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/e0625335cc3082aa9f0716e0144213091298a04f81b166d6b113ff487fa1a7e5",
+            "hash://md5/4337d71fbcd50a23b5628cf739e8426f"
+          ],
+          "name": "institution.parquet"
+        },
+        {
+          "id": "hash://sha256/d198ce50238969f82107e3bb1527427123506a927009efd4450baf9877769cf0",
+          "type": "DataDownload",
+          "contentSize": 1703,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/instlanguage.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/d198ce50238969f82107e3bb1527427123506a927009efd4450baf9877769cf0",
+            "hash://md5/59bce9d74e151ea30a438ad5da86744e"
+          ],
+          "name": "instlanguage.parquet"
+        },
+        {
+          "id": "hash://sha256/a50d4449b7294357254380238802d41becd0bcc26b79b933ad2e9c04782d335f",
+          "type": "DataDownload",
+          "contentSize": 32715,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/instmembership.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/a50d4449b7294357254380238802d41becd0bcc26b79b933ad2e9c04782d335f",
+            "hash://md5/f02c1203152b48df0ee4af99cbe048bb"
+          ],
+          "name": "instmembership.parquet"
+        },
+        {
+          "id": "hash://sha256/f6af2736789e0844f60edf391c825ee342625527dd10a54c083245700e044c9e",
+          "type": "DataDownload",
+          "contentSize": 3977,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/instspecies.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/f6af2736789e0844f60edf391c825ee342625527dd10a54c083245700e044c9e",
+            "hash://md5/8577c381d2a6d6af79a89986047f60b8"
+          ],
+          "name": "instspecies.parquet"
+        },
+        {
+          "id": "hash://sha256/40001d69b9bfca33ffd3713a7fb77f32c0e896c94f961c58432bd5b5ecac9727",
+          "type": "DataDownload",
+          "contentSize": 496542,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/intrcase.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/40001d69b9bfca33ffd3713a7fb77f32c0e896c94f961c58432bd5b5ecac9727",
+            "hash://md5/268ff991207d4963a01cde5c33600846"
+          ],
+          "name": "intrcase.parquet"
+        },
+        {
+          "id": "hash://sha256/4a0049ceffa5407c7fddbe89bf540b8283ad151a60fd13a996e1b924b1895a08",
+          "type": "DataDownload",
+          "contentSize": 1266250,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/isscaap.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/4a0049ceffa5407c7fddbe89bf540b8283ad151a60fd13a996e1b924b1895a08",
+            "hash://md5/a536e909eb79211aab40c5c2b854a1bf"
+          ],
+          "name": "isscaap.parquet"
+        },
+        {
+          "id": "hash://sha256/fb9ea937fb812ae6a694bdb3d50ead01832232acd940f567bb45196e8ecb5547",
+          "type": "DataDownload",
+          "contentSize": 1789642,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/keyquestions.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/fb9ea937fb812ae6a694bdb3d50ead01832232acd940f567bb45196e8ecb5547",
+            "hash://md5/dfd5ac633db0f61037add38035f59ec1"
+          ],
+          "name": "keyquestions.parquet"
+        },
+        {
+          "id": "hash://sha256/d37a9a5388139818257f8642c1bccad558b7ad73de13dbf18e5311c0e8937402",
+          "type": "DataDownload",
+          "contentSize": 88302,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/keys.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/d37a9a5388139818257f8642c1bccad558b7ad73de13dbf18e5311c0e8937402",
+            "hash://md5/2607d7ba17d871ac20450887a277eee9"
+          ],
+          "name": "keys.parquet"
+        },
+        {
+          "id": "hash://sha256/9b153368b0b884e65bca64d7fcf99b411d5780ad174d56f80f428f60dd2e3df4",
+          "type": "DataDownload",
+          "contentSize": 837898,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/label_index.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/9b153368b0b884e65bca64d7fcf99b411d5780ad174d56f80f428f60dd2e3df4",
+            "hash://md5/4b5d16d0c34aa35f2474e0f8d0a627e1"
+          ],
+          "name": "label_index.parquet"
+        },
+        {
+          "id": "hash://sha256/559345439f251e44132442f8a7ebc19b6dc0b3f62eb5ee0625a684a7ba16f348",
+          "type": "DataDownload",
+          "contentSize": 61846,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/language.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/559345439f251e44132442f8a7ebc19b6dc0b3f62eb5ee0625a684a7ba16f348",
+            "hash://md5/c90a46d1c5f27b25c5ff3f66e194a6ae"
+          ],
+          "name": "language.parquet"
+        },
+        {
+          "id": "hash://sha256/876e74e9cabe532ec44c958272c72ee0584d973a687d149df5e1922701e904e2",
+          "type": "DataDownload",
+          "contentSize": 18648,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/languagecountry.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/876e74e9cabe532ec44c958272c72ee0584d973a687d149df5e1922701e904e2",
+            "hash://md5/470e0cf939491938d8f8807c73327f54"
+          ],
+          "name": "languagecountry.parquet"
+        },
+        {
+          "id": "hash://sha256/9d657ec9f4026447599d80312e6ae1e4c5ebcd947bf130917c95ae905aa24eb5",
+          "type": "DataDownload",
+          "contentSize": 5528,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/languagegroup.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/9d657ec9f4026447599d80312e6ae1e4c5ebcd947bf130917c95ae905aa24eb5",
+            "hash://md5/525e73f8287c8d76f61f6391db7ffbb0"
+          ],
+          "name": "languagegroup.parquet"
+        },
+        {
+          "id": "hash://sha256/fea74074b81c6cad9d8a85572f4d29f7ef16e29c3945d61818858fc8d634e726",
+          "type": "DataDownload",
+          "contentSize": 24703,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/languagescript.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/fea74074b81c6cad9d8a85572f4d29f7ef16e29c3945d61818858fc8d634e726",
+            "hash://md5/50bd0227a179b7487e77fac091f8e50c"
+          ],
+          "name": "languagescript.parquet"
+        },
+        {
+          "id": "hash://sha256/ea98c3e01fa10e2651b3f5ad47cdf9bd05caae69b02c047b40530027835ea06c",
+          "type": "DataDownload",
+          "contentSize": 536087,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/larvae.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/ea98c3e01fa10e2651b3f5ad47cdf9bd05caae69b02c047b40530027835ea06c",
+            "hash://md5/beb845b31d053dc81212d9a281a03fb2"
+          ],
+          "name": "larvae.parquet"
+        },
+        {
+          "id": "hash://sha256/d1173ff1c7f6aeef47b7903925fa2378b490689398631fdad2b7e300cdc4f682",
+          "type": "DataDownload",
+          "contentSize": 34421,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/larvaepresence.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/d1173ff1c7f6aeef47b7903925fa2378b490689398631fdad2b7e300cdc4f682",
+            "hash://md5/a6adf069c750836cdb25b21f2111b526"
+          ],
+          "name": "larvaepresence.parquet"
+        },
+        {
+          "id": "hash://sha256/7f5bdd7bdb87a665b529c1df19aa50e8a29ea1952c7daed90cefef12157b0b21",
+          "type": "DataDownload",
+          "contentSize": 157681,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/larvalnurserysystem.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/7f5bdd7bdb87a665b529c1df19aa50e8a29ea1952c7daed90cefef12157b0b21",
+            "hash://md5/fd7d4d46cbfeaf3d45e3fe61ec124204"
+          ],
+          "name": "larvalnurserysystem.parquet"
+        },
+        {
+          "id": "hash://sha256/c150dc8dbb5d861367a0a88179e2006d1d1309c16e132eb6e5086357b7d1ba68",
+          "type": "DataDownload",
+          "contentSize": 4810,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/larvalswimspeed.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/c150dc8dbb5d861367a0a88179e2006d1d1309c16e132eb6e5086357b7d1ba68",
+            "hash://md5/684c11c4d4fe9256a5866ab96dbca535"
+          ],
+          "name": "larvalswimspeed.parquet"
+        },
+        {
+          "id": "hash://sha256/b3d02ede07264eadeaa9cc5ee1c94504656c5ebb53bd0fcaba9b73d6796a5fe2",
+          "type": "DataDownload",
+          "contentSize": 9041,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/larvdyn.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/b3d02ede07264eadeaa9cc5ee1c94504656c5ebb53bd0fcaba9b73d6796a5fe2",
+            "hash://md5/c99fd8b9bb93e2191a302ccac3a4b78d"
+          ],
+          "name": "larvdyn.parquet"
+        },
+        {
+          "id": "hash://sha256/36456e489c52b003788b622895927aa7355040b56f88e23f80273507912278d3",
+          "type": "DataDownload",
+          "contentSize": 236428,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/latgraphs.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/36456e489c52b003788b622895927aa7355040b56f88e23f80273507912278d3",
+            "hash://md5/f0f0c81b197c5f006cbc8877e2188ae0"
+          ],
+          "name": "latgraphs.parquet"
+        },
+        {
+          "id": "hash://sha256/b7e0a8feb21af1042740a30356318376e2a4c83ca24b6d11a924a4e2de77b625",
+          "type": "DataDownload",
+          "contentSize": 79267,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/massconversion.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/b7e0a8feb21af1042740a30356318376e2a4c83ca24b6d11a924a4e2de77b625",
+            "hash://md5/d7f0d5929b7aa779569282761330b29e"
+          ],
+          "name": "massconversion.parquet"
+        },
+        {
+          "id": "hash://sha256/140e8def781d1810719f04cacde231d121377c5e145da39ed0a1d14486d54b8d",
+          "type": "DataDownload",
+          "contentSize": 3229,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/materialsexamined.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/140e8def781d1810719f04cacde231d121377c5e145da39ed0a1d14486d54b8d",
+            "hash://md5/656ad0cb073ccce3921acc7179d1d03a"
+          ],
+          "name": "materialsexamined.parquet"
+        },
+        {
+          "id": "hash://sha256/6a57142e8b7511870f49e074c2340dc5a18e6e01cb05a8bfbc2aadf2804af798",
+          "type": "DataDownload",
+          "contentSize": 419675,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/maturity.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/6a57142e8b7511870f49e074c2340dc5a18e6e01cb05a8bfbc2aadf2804af798",
+            "hash://md5/b46c57839c344a2db7fefebe9973b464"
+          ],
+          "name": "maturity.parquet"
+        },
+        {
+          "id": "hash://sha256/1e17165935d798028a46a43ca535dd9d11b6e631f66ad2b3257388c2abdfad6c",
+          "type": "DataDownload",
+          "contentSize": 149225,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/miniessay.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/1e17165935d798028a46a43ca535dd9d11b6e631f66ad2b3257388c2abdfad6c",
+            "hash://md5/7ee1c6120477f47307f64e2e519617eb"
+          ],
+          "name": "miniessay.parquet"
+        },
+        {
+          "id": "hash://sha256/aa87d4248e4ec0754a36da188d271afaa3bb39b68830076a89217a852de134a7",
+          "type": "DataDownload",
+          "contentSize": 7312867,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/morphdat.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/aa87d4248e4ec0754a36da188d271afaa3bb39b68830076a89217a852de134a7",
+            "hash://md5/2d08b24562a2a637b2e01b1c7d155ffc"
+          ],
+          "name": "morphdat.parquet"
+        },
+        {
+          "id": "hash://sha256/fbf8f53aa3ea8e0c0038a1544cbd4febf4cdae1b6688b6f2ed34827feb1512c9",
+          "type": "DataDownload",
+          "contentSize": 1355743,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/morphmet.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/fbf8f53aa3ea8e0c0038a1544cbd4febf4cdae1b6688b6f2ed34827feb1512c9",
+            "hash://md5/ce88ffc9764ebe99104a35292c82b5f3"
+          ],
+          "name": "morphmet.parquet"
+        },
+        {
+          "id": "hash://sha256/2ff0adbcfaae0a89be910a0d480c91c1e6caf3830402650c61d18e7cc7637e94",
+          "type": "DataDownload",
+          "contentSize": 1968008,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/morphmettlratios.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/2ff0adbcfaae0a89be910a0d480c91c1e6caf3830402650c61d18e7cc7637e94",
+            "hash://md5/25eef6dc4026664b9ce0fdf2be9cbdb3"
+          ],
+          "name": "morphmettlratios.parquet"
+        },
+        {
+          "id": "hash://sha256/6e6e1026a8c2a61bc8298279bbe984860623fd5e9a78fc6b5a1a8539cc1f3d88",
+          "type": "DataDownload",
+          "contentSize": 9126,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/morphorders.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/6e6e1026a8c2a61bc8298279bbe984860623fd5e9a78fc6b5a1a8539cc1f3d88",
+            "hash://md5/dfc8a364a381adbb81d1aeac88a741e0"
+          ],
+          "name": "morphorders.parquet"
+        },
+        {
+          "id": "hash://sha256/78e0d807c6b20315ed679089e1349d021814af2b0538aa1261b51b3310e0c9ab",
+          "type": "DataDownload",
+          "contentSize": 17788,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/museum.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/78e0d807c6b20315ed679089e1349d021814af2b0538aa1261b51b3310e0c9ab",
+            "hash://md5/8caa93f27124c59040c6df1ab684651a"
+          ],
+          "name": "museum.parquet"
+        },
+        {
+          "id": "hash://sha256/c30bcc9a19f5fff306c8927008a3ccfd30927887c76347de143e4ed6f8e35fa8",
+          "type": "DataDownload",
+          "contentSize": 10323,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/myersbiblio.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/c30bcc9a19f5fff306c8927008a3ccfd30927887c76347de143e4ed6f8e35fa8",
+            "hash://md5/996af950b51304eb307fabae7fff54c3"
+          ],
+          "name": "myersbiblio.parquet"
+        },
+        {
+          "id": "hash://sha256/56c4ce1233efe0e4ef2aaaa048ce370105ccb7007028993dd8761883de850d53",
+          "type": "DataDownload",
+          "contentSize": 395514,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/myersdata.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/56c4ce1233efe0e4ef2aaaa048ce370105ccb7007028993dd8761883de850d53",
+            "hash://md5/364060252d936197f05eae2dcb7f4fb5"
+          ],
+          "name": "myersdata.parquet"
+        },
+        {
+          "id": "hash://sha256/08a8fb96737d7d9cb390b8016e30be51a3190c3654b42325216cf69ad81ae5c2",
+          "type": "DataDownload",
+          "contentSize": 119371,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/myersrecruitmentdatabase.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/08a8fb96737d7d9cb390b8016e30be51a3190c3654b42325216cf69ad81ae5c2",
+            "hash://md5/193b0363927db899304c8c9d2e412e8e"
+          ],
+          "name": "myersrecruitmentdatabase.parquet"
+        },
+        {
+          "id": "hash://sha256/426eeeea3572a7b75fcafa8c34c2f7be38be2224627d672b67194489efde5439",
+          "type": "DataDownload",
+          "contentSize": 34072,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/nutrients.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/426eeeea3572a7b75fcafa8c34c2f7be38be2224627d672b67194489efde5439",
+            "hash://md5/31d4d2044e7d90fa141fad8d7e7277d8"
+          ],
+          "name": "nutrients.parquet"
+        },
+        {
+          "id": "hash://sha256/4e0184886ea3764e734cb65804d81728cba27de4c83b1697d0fe906a9ae7ff00",
+          "type": "DataDownload",
+          "contentSize": 39154,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/nutrientssummary.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/4e0184886ea3764e734cb65804d81728cba27de4c83b1697d0fe906a9ae7ff00",
+            "hash://md5/1b968f91ba94af563445399d6d966959"
+          ],
+          "name": "nutrientssummary.parquet"
+        },
+        {
+          "id": "hash://sha256/da3918c071fc9a2e55db4af92133d689cefd6645ca2b75466a01abec8f59a2e5",
+          "type": "DataDownload",
+          "contentSize": 42557813,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/occurrence.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/da3918c071fc9a2e55db4af92133d689cefd6645ca2b75466a01abec8f59a2e5",
+            "hash://md5/bb08f46a351754a2b484d30d8b4e3b50"
+          ],
+          "name": "occurrence.parquet"
+        },
+        {
+          "id": "hash://sha256/72a96c9d019557bc6d9401ded603ff8c92a367a408f163887289684110a90ed2",
+          "type": "DataDownload",
+          "contentSize": 739,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/oceanprovfaoref.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/72a96c9d019557bc6d9401ded603ff8c92a367a408f163887289684110a90ed2",
+            "hash://md5/8ec9e2791afe8734801da48ae938e7ae"
+          ],
+          "name": "oceanprovfaoref.parquet"
+        },
+        {
+          "id": "hash://sha256/bdbe5177ae0703bbe75a9542662b7430f4fff2c380c5ffd424813401043eee9b",
+          "type": "DataDownload",
+          "contentSize": 349578,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/oceanprovinces.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/bdbe5177ae0703bbe75a9542662b7430f4fff2c380c5ffd424813401043eee9b",
+            "hash://md5/ad75aa53f3faeed902b223e44a40273b"
+          ],
+          "name": "oceanprovinces.parquet"
+        },
+        {
+          "id": "hash://sha256/d6ce00b192e170d7a38e36050703e71169f99b9ab7878bd5526316bb32563e13",
+          "type": "DataDownload",
+          "contentSize": 29862,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/oceanprovincesref.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/d6ce00b192e170d7a38e36050703e71169f99b9ab7878bd5526316bb32563e13",
+            "hash://md5/add0932ff7367d57be0dd1d25b2f71a7"
+          ],
+          "name": "oceanprovincesref.parquet"
+        },
+        {
+          "id": "hash://sha256/beacb491887af1f47e21128a5cb7c29ded072d8e0e35c23c281f67f8d826646e",
+          "type": "DataDownload",
+          "contentSize": 16962,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/orderage.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/beacb491887af1f47e21128a5cb7c29ded072d8e0e35c23c281f67f8d826646e",
+            "hash://md5/227210f567dafe67c564ff8b28fc5739"
+          ],
+          "name": "orderage.parquet"
+        },
+        {
+          "id": "hash://sha256/dfc4b79d75a668393e3741702979f25c4e594a4ed79a14a07a6874c8739acf81",
+          "type": "DataDownload",
+          "contentSize": 50445,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/orders.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/dfc4b79d75a668393e3741702979f25c4e594a4ed79a14a07a6874c8739acf81",
+            "hash://md5/5a2762007d237fed8e2cce97056121f4"
+          ],
+          "name": "orders.parquet"
+        },
+        {
+          "id": "hash://sha256/6900621b1b967ee94c3690afcb70ee31857cd1a51582147ff3fdf0adcd9190d8",
+          "type": "DataDownload",
+          "contentSize": 126515,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/otoliths.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/6900621b1b967ee94c3690afcb70ee31857cd1a51582147ff3fdf0adcd9190d8",
+            "hash://md5/257d9e9abee65bb7b9a85cc35384d242"
+          ],
+          "name": "otoliths.parquet"
+        },
+        {
+          "id": "hash://sha256/a2eb1caddfecdd37e6131d047fd3265276c9e266d2fb15a30db358b04d11fe21",
+          "type": "DataDownload",
+          "contentSize": 188441,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/oxygen.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/a2eb1caddfecdd37e6131d047fd3265276c9e266d2fb15a30db358b04d11fe21",
+            "hash://md5/0b79fe37f8066bb1d65c18fa5b32616a"
+          ],
+          "name": "oxygen.parquet"
+        },
+        {
+          "id": "hash://sha256/5cdea8b2cc836d0009889d82048332ecde92ab12687a1708f71d581d8c3d7b84",
+          "type": "DataDownload",
+          "contentSize": 3656146,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/picturesmain.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/5cdea8b2cc836d0009889d82048332ecde92ab12687a1708f71d581d8c3d7b84",
+            "hash://md5/76fec880cacc7db794c968914da9759f"
+          ],
+          "name": "picturesmain.parquet"
+        },
+        {
+          "id": "hash://sha256/2af94db482b217185505179a3ab73bfa06282a30582b76cae17a1406c2cfbb94",
+          "type": "DataDownload",
+          "contentSize": 170278,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/pop_r.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/2af94db482b217185505179a3ab73bfa06282a30582b76cae17a1406c2cfbb94",
+            "hash://md5/ca5e9ebef70486095195b1b27f300565"
+          ],
+          "name": "pop_r.parquet"
+        },
+        {
+          "id": "hash://sha256/ac18e621f9b869bd790f12e4d428458931651df87f2fd80efb445219bd06ab70",
+          "type": "DataDownload",
+          "contentSize": 10929,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/pop_rm.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/ac18e621f9b869bd790f12e4d428458931651df87f2fd80efb445219bd06ab70",
+            "hash://md5/0567bab0c0eebc494e4365b7b3640198"
+          ],
+          "name": "pop_rm.parquet"
+        },
+        {
+          "id": "hash://sha256/22bdaa1e6e1d01da93c03bb886d8c787bd570b4773dcc2e6b113a2572001d8ed",
+          "type": "DataDownload",
+          "contentSize": 750420,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/popchar.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/22bdaa1e6e1d01da93c03bb886d8c787bd570b4773dcc2e6b113a2572001d8ed",
+            "hash://md5/01faa7806f5747fcbe7d62033f9ac687"
+          ],
+          "name": "popchar.parquet"
+        },
+        {
+          "id": "hash://sha256/298fc3ce537ef12852e120a2e303ee330fa54dceeb36cedb9b9d8ffdb854dbe4",
+          "type": "DataDownload",
+          "contentSize": 962077,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/popgrowth.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/298fc3ce537ef12852e120a2e303ee330fa54dceeb36cedb9b9d8ffdb854dbe4",
+            "hash://md5/949d39f2339e92a90f8edbf38587b0ad"
+          ],
+          "name": "popgrowth.parquet"
+        },
+        {
+          "id": "hash://sha256/978942f3e82c3cd6629c4e6412e94738c44a2bec9f47a406314d2f1d437bb821",
+          "type": "DataDownload",
+          "contentSize": 163482,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/poplf.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/978942f3e82c3cd6629c4e6412e94738c44a2bec9f47a406314d2f1d437bb821",
+            "hash://md5/403c653930f7ef50802efa5a27f741f3"
+          ],
+          "name": "poplf.parquet"
+        },
+        {
+          "id": "hash://sha256/afe76f0c8c588de7dd3c987db55a56ef21ddaa1f96366a36f41831b8664d9442",
+          "type": "DataDownload",
+          "contentSize": 960044,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/poplfdata.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/afe76f0c8c588de7dd3c987db55a56ef21ddaa1f96366a36f41831b8664d9442",
+            "hash://md5/7ff3de345b00f006f5fe280732f416d1"
+          ],
+          "name": "poplfdata.parquet"
+        },
+        {
+          "id": "hash://sha256/1f2a9312fc4c6aaf81159a348b8993f7e5d3e0e6a405157eaac9ffd8c6515e0c",
+          "type": "DataDownload",
+          "contentSize": 618681,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/popll.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/1f2a9312fc4c6aaf81159a348b8993f7e5d3e0e6a405157eaac9ffd8c6515e0c",
+            "hash://md5/40e3c3687d637f0a7a1d7b97eb13908b"
+          ],
+          "name": "popll.parquet"
+        },
+        {
+          "id": "hash://sha256/7fc4052fa935e5d4a95de88adf2d467fe71bac61e233fc646623c8473fc45722",
+          "type": "DataDownload",
+          "contentSize": 1204239,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/poplw.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/7fc4052fa935e5d4a95de88adf2d467fe71bac61e233fc646623c8473fc45722",
+            "hash://md5/f577b075ede3c00a3102b63b282b07b5"
+          ],
+          "name": "poplw.parquet"
+        },
+        {
+          "id": "hash://sha256/3475adb95f3afbf9236a55be5a3b97d99bcf1df1ce2d99f42b6d6ea73ee314df",
+          "type": "DataDownload",
+          "contentSize": 16937,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/popqb.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/3475adb95f3afbf9236a55be5a3b97d99bcf1df1ce2d99f42b6d6ea73ee314df",
+            "hash://md5/48abd6e929a82001b8cb51a69d6a3716"
+          ],
+          "name": "popqb.parquet"
+        },
+        {
+          "id": "hash://sha256/b8592d97201cd78ee4e91da653c1d7d3bf78db49b5762d53e3d20a4d284b525d",
+          "type": "DataDownload",
+          "contentSize": 1080866,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/popular.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/b8592d97201cd78ee4e91da653c1d7d3bf78db49b5762d53e3d20a4d284b525d",
+            "hash://md5/fcfbc808e56a6864915cd0974c87b097"
+          ],
+          "name": "popular.parquet"
+        },
+        {
+          "id": "hash://sha256/6374442a842775896f9471902c821ad4b82a0d3258c07199f54584f2a2ee5787",
+          "type": "DataDownload",
+          "contentSize": 1964,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/predatorecosystemtype.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/6374442a842775896f9471902c821ad4b82a0d3258c07199f54584f2a2ee5787",
+            "hash://md5/8acd9c78f10e60c967cc289327bb296b"
+          ],
+          "name": "predatorecosystemtype.parquet"
+        },
+        {
+          "id": "hash://sha256/68518477efd0aae2aef6e3d06af6c2dc942712abef7efde0b28cdc153042aedb",
+          "type": "DataDownload",
+          "contentSize": 3582,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/predatorhierarchy.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/68518477efd0aae2aef6e3d06af6c2dc942712abef7efde0b28cdc153042aedb",
+            "hash://md5/fe506ffad5cde70a7ef12a651e8669b0"
+          ],
+          "name": "predatorhierarchy.parquet"
+        },
+        {
+          "id": "hash://sha256/cae99972c077dcb57493b5e2c0c01ea38e4d2f834ff8168bf772acd2654be608",
+          "type": "DataDownload",
+          "contentSize": 4266,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/predatortroph.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/cae99972c077dcb57493b5e2c0c01ea38e4d2f834ff8168bf772acd2654be608",
+            "hash://md5/246d90809108f3ea50e8a7453d1a4ba9"
+          ],
+          "name": "predatortroph.parquet"
+        },
+        {
+          "id": "hash://sha256/904796c3e62c2b19cbee390df1942a90c198babdf2e2a40477e30528285dc3af",
+          "type": "DataDownload",
+          "contentSize": 266218,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/predats.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/904796c3e62c2b19cbee390df1942a90c198babdf2e2a40477e30528285dc3af",
+            "hash://md5/563629005ed2fc66e5613b8bb6c5ab2c"
+          ],
+          "name": "predats.parquet"
+        },
+        {
+          "id": "hash://sha256/87c072f4ae8f96e955d315ec481e0401588a71cdd41fe9a3529d4f9ea25412fc",
+          "type": "DataDownload",
+          "contentSize": 128225,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/proxims.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/87c072f4ae8f96e955d315ec481e0401588a71cdd41fe9a3529d4f9ea25412fc",
+            "hash://md5/fbb63436caef3376bd3ac4d50959fa8b"
+          ],
+          "name": "proxims.parquet"
+        },
+        {
+          "id": "hash://sha256/61a2783c400e1c7d3eace5d18f9c63c026d7804089fa8667be4970d05bc7d6c4",
+          "type": "DataDownload",
+          "contentSize": 22234,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/ration.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/61a2783c400e1c7d3eace5d18f9c63c026d7804089fa8667be4970d05bc7d6c4",
+            "hash://md5/28101356f925d81eeb29d18725d88673"
+          ],
+          "name": "ration.parquet"
+        },
+        {
+          "id": "hash://sha256/1f8f5d9f0f44b5fc228bceab914eaca6d3ce59649572ec03b227e4d4a2e82567",
+          "type": "DataDownload",
+          "contentSize": 14166379,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/refrens.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/1f8f5d9f0f44b5fc228bceab914eaca6d3ce59649572ec03b227e4d4a2e82567",
+            "hash://md5/5aeb5663fdf1ac026ec404d942423b0a"
+          ],
+          "name": "refrens.parquet"
+        },
+        {
+          "id": "hash://sha256/b57f7ebe42dc3ff68137726264465ab053a0a803a8aadce647891cc941213bc8",
+          "type": "DataDownload",
+          "contentSize": 553265,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/reproduc.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/b57f7ebe42dc3ff68137726264465ab053a0a803a8aadce647891cc941213bc8",
+            "hash://md5/60873275722c8c63b1075fe7aaad5125"
+          ],
+          "name": "reproduc.parquet"
+        },
+        {
+          "id": "hash://sha256/eadd0428cdca0d4943fa29fa83d346b1e12d3509c70a07cefb255ca58a0de423",
+          "type": "DataDownload",
+          "contentSize": 12709,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/revisions.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/eadd0428cdca0d4943fa29fa83d346b1e12d3509c70a07cefb255ca58a0de423",
+            "hash://md5/14aecdb50d3a50b9105971e56b354542"
+          ],
+          "name": "revisions.parquet"
+        },
+        {
+          "id": "hash://sha256/4895230b53b7a0aafa39e1205e2086b78a9b6935e7a013c943fc3e0920bd6cdb",
+          "type": "DataDownload",
+          "contentSize": 9556,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/rmcaphotos.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/4895230b53b7a0aafa39e1205e2086b78a9b6935e7a013c943fc3e0920bd6cdb",
+            "hash://md5/410f34c5a8cb5125b4172aff37820b1d"
+          ],
+          "name": "rmcaphotos.parquet"
+        },
+        {
+          "id": "hash://sha256/384f3d0903bcc49b0593fcd96b42898b67197f4114df5c442d9dc28c80a0d036",
+          "type": "DataDownload",
+          "contentSize": 2329,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/rp_province.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/384f3d0903bcc49b0593fcd96b42898b67197f4114df5c442d9dc28c80a0d036",
+            "hash://md5/e24fa08ebc45b0ce34b1bd73654ecdac"
+          ],
+          "name": "rp_province.parquet"
+        },
+        {
+          "id": "hash://sha256/efdb389b98e7117a4eb74900fd3f7efd413f7e9d2d0dd9632d14a821729af42a",
+          "type": "DataDownload",
+          "contentSize": 1152,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/rp_region.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/efdb389b98e7117a4eb74900fd3f7efd413f7e9d2d0dd9632d14a821729af42a",
+            "hash://md5/c6006fcb13ef63f7f12c401c112bd547"
+          ],
+          "name": "rp_region.parquet"
+        },
+        {
+          "id": "hash://sha256/0b929962246e2ba733752d4d1be614b56a9118c1dafcc18153d6b92174db1761",
+          "type": "DataDownload",
+          "contentSize": 516110,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/seafoodad.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/0b929962246e2ba733752d4d1be614b56a9118c1dafcc18153d6b92174db1761",
+            "hash://md5/6dc0201aeaf122e835aadd4ab0464a6c"
+          ],
+          "name": "seafoodad.parquet"
+        },
+        {
+          "id": "hash://sha256/7e4b2bf7f6a44878270814d7160a78d277b952b8706c4daccba917e1a008641b",
+          "type": "DataDownload",
+          "contentSize": 7079,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/seafoodadref.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/7e4b2bf7f6a44878270814d7160a78d277b952b8706c4daccba917e1a008641b",
+            "hash://md5/94a568f9606caa2b55a3e431090c62c2"
+          ],
+          "name": "seafoodadref.parquet"
+        },
+        {
+          "id": "hash://sha256/70e67f54746ad1f05c51044444d898a65c9f103efa56637ed22e79795d088b42",
+          "type": "DataDownload",
+          "contentSize": 1148,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/searchpagestats.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/70e67f54746ad1f05c51044444d898a65c9f103efa56637ed22e79795d088b42",
+            "hash://md5/832b580c1f5a48a151cf8706408ce267"
+          ],
+          "name": "searchpagestats.parquet"
+        },
+        {
+          "id": "hash://sha256/a276465a32f243c75ecb1654eb7c361b3b1214932bbbef848d83d10a3723664d",
+          "type": "DataDownload",
+          "contentSize": 24438,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/sounds.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/a276465a32f243c75ecb1654eb7c361b3b1214932bbbef848d83d10a3723664d",
+            "hash://md5/7e954cc038ddcdcbd8f92f14c3ae1397"
+          ],
+          "name": "sounds.parquet"
+        },
+        {
+          "id": "hash://sha256/396439cd5e53201d1109fbe8e2f74d035deca0735e158bb55353aa543a864c3a",
+          "type": "DataDownload",
+          "contentSize": 60400,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/spawnagg.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/396439cd5e53201d1109fbe8e2f74d035deca0735e158bb55353aa543a864c3a",
+            "hash://md5/04f5923234e253ae2399c56f22514b5f"
+          ],
+          "name": "spawnagg.parquet"
+        },
+        {
+          "id": "hash://sha256/ba2aa16bd1300175c16d177119dcbea467d7f9bc21f2cb89a0f01abcc1e56cbe",
+          "type": "DataDownload",
+          "contentSize": 514591,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/spawning.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/ba2aa16bd1300175c16d177119dcbea467d7f9bc21f2cb89a0f01abcc1e56cbe",
+            "hash://md5/96be47309da5a06cb6b77a76e71a942d"
+          ],
+          "name": "spawning.parquet"
+        },
+        {
+          "id": "hash://sha256/616760c60e89c9fdbb67698a311a4801a01310a5e6199cd8301e8fd6b3a1d8e5",
+          "type": "DataDownload",
+          "contentSize": 5368572,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/species.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/616760c60e89c9fdbb67698a311a4801a01310a5e6199cd8301e8fd6b3a1d8e5",
+            "hash://md5/839595d6626a5482e91eb62385e2ca3e"
+          ],
+          "name": "species.parquet"
+        },
+        {
+          "id": "hash://sha256/d46bd611a425ec02400505c60db4646d47da98fbd9667f7cd3711573336a47c3",
+          "type": "DataDownload",
+          "contentSize": 1116212,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/speciesauthorsnames.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/d46bd611a425ec02400505c60db4646d47da98fbd9667f7cd3711573336a47c3",
+            "hash://md5/b462c0eb7e577434677cf731586facbd"
+          ],
+          "name": "speciesauthorsnames.parquet"
+        },
+        {
+          "id": "hash://sha256/d8b962116cf02895e5e1cbb187477a660365c44a3f0e3069e0617d4442a305b3",
+          "type": "DataDownload",
+          "contentSize": 475956,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/specieswithoutphoto.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/d8b962116cf02895e5e1cbb187477a660365c44a3f0e3069e0617d4442a305b3",
+            "hash://md5/803deb186f37716e8f7bf8544d208388"
+          ],
+          "name": "specieswithoutphoto.parquet"
+        },
+        {
+          "id": "hash://sha256/dfd50392bc65751ac0345ca36cc387172fa8e8f774a62058e3443e04ab99f9bc",
+          "type": "DataDownload",
+          "contentSize": 84040,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/specieswithpicture.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/dfd50392bc65751ac0345ca36cc387172fa8e8f774a62058e3443e04ab99f9bc",
+            "hash://md5/39e86bdfeb98f56bc47f45493596b21e"
+          ],
+          "name": "specieswithpicture.parquet"
+        },
+        {
+          "id": "hash://sha256/9d40a03fbd0db21f130c54f0532a85914fa68b58c4b67fe290b99e0ae7250c2b",
+          "type": "DataDownload",
+          "contentSize": 12655,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/speed.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/9d40a03fbd0db21f130c54f0532a85914fa68b58c4b67fe290b99e0ae7250c2b",
+            "hash://md5/8dde91e375ff8a251a42f7ec5e44d8bf"
+          ],
+          "name": "speed.parquet"
+        },
+        {
+          "id": "hash://sha256/b735901d49e030ce75d3a21e5a7a6fad353a872f7cc1f5c07274424eae4759d1",
+          "type": "DataDownload",
+          "contentSize": 57895,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/sponsors.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/b735901d49e030ce75d3a21e5a7a6fad353a872f7cc1f5c07274424eae4759d1",
+            "hash://md5/3b67a9e333e2aba55fbb88a4ebbe18f0"
+          ],
+          "name": "sponsors.parquet"
+        },
+        {
+          "id": "hash://sha256/2c0894ac7fd1a304da06592853f2a14edfdc0a895bfb32aa7564c90af79ee1a0",
+          "type": "DataDownload",
+          "contentSize": 4006778,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/stocks.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/2c0894ac7fd1a304da06592853f2a14edfdc0a895bfb32aa7564c90af79ee1a0",
+            "hash://md5/1d1fc11103c7b317eb1caf02576e5327"
+          ],
+          "name": "stocks.parquet"
+        },
+        {
+          "id": "hash://sha256/cb7f4c9f3d5205eee04fa64c4ddcfec6e08da0b8b787faacc97acb9fc77c46e9",
+          "type": "DataDownload",
+          "contentSize": 11567,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/strains.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/cb7f4c9f3d5205eee04fa64c4ddcfec6e08da0b8b787faacc97acb9fc77c46e9",
+            "hash://md5/b33458d81dce950172966a7ace8ac1a7"
+          ],
+          "name": "strains.parquet"
+        },
+        {
+          "id": "hash://sha256/9f9a55443009c2d00a1c086ed88e0a2b96fdee7de8fa74d88d4927a7bacb54e8",
+          "type": "DataDownload",
+          "contentSize": 24322,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/swimming.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/9f9a55443009c2d00a1c086ed88e0a2b96fdee7de8fa74d88d4927a7bacb54e8",
+            "hash://md5/b8958f785bd67fbb038a2bc5099ddb73"
+          ],
+          "name": "swimming.parquet"
+        },
+        {
+          "id": "hash://sha256/a7b4529382d0f6b8a7ad8d059dd02f3c7feb60cecfa415c6fba13760c0453713",
+          "type": "DataDownload",
+          "contentSize": 9419089,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/synonyms.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/a7b4529382d0f6b8a7ad8d059dd02f3c7feb60cecfa415c6fba13760c0453713",
+            "hash://md5/f2a7dda48f47366742bc4d68b7b00019"
+          ],
+          "name": "synonyms.parquet"
+        },
+        {
+          "id": "hash://sha256/06dc9b317988b9d95fea2deddcb9e4990d3ebc19457ad11eea8dfd5f51b3a1ee",
+          "type": "DataDownload",
+          "contentSize": 40959,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/tabnotes.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/06dc9b317988b9d95fea2deddcb9e4990d3ebc19457ad11eea8dfd5f51b3a1ee",
+            "hash://md5/11f42ac8ad70711c06cf7870085d1b9d"
+          ],
+          "name": "tabnotes.parquet"
+        },
+        {
+          "id": "hash://sha256/0b8fd3cf8123ae7098f280532a4061ccf0045e37d1c244e116840f0b7e50f189",
+          "type": "DataDownload",
+          "contentSize": 3563868,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/taxamatch.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/0b8fd3cf8123ae7098f280532a4061ccf0045e37d1c244e116840f0b7e50f189",
+            "hash://md5/1ba9a8bbd5d0d4e32b3115c40cb6a9a8"
+          ],
+          "name": "taxamatch.parquet"
+        },
+        {
+          "id": "hash://sha256/cede85eb13fce435aecda2eba33c91ff89f769d2941ff1f4c897a6fbf43153a4",
+          "type": "DataDownload",
+          "contentSize": 1292930,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/taxamatch_epithet.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/cede85eb13fce435aecda2eba33c91ff89f769d2941ff1f4c897a6fbf43153a4",
+            "hash://md5/08863d622efc5318a0a59850f7aa6e51"
+          ],
+          "name": "taxamatch_epithet.parquet"
+        },
+        {
+          "id": "hash://sha256/a652604283ee194d67ad7932cc92767ce332c391ea4a5a7dbe5871ef78242d66",
+          "type": "DataDownload",
+          "contentSize": 14942,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/vision.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/a652604283ee194d67ad7932cc92767ce332c391ea4a5a7dbe5871ef78242d66",
+            "hash://md5/43a71de7a2080066885d8a66ccef711b"
+          ],
+          "name": "vision.parquet"
+        },
+        {
+          "id": "hash://sha256/b6ff445f63d4bf19cb392515e161c7ddc7aa01d5048d14504ffb5027b3dfa77f",
+          "type": "DataDownload",
+          "contentSize": 13019,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/waterquality.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/b6ff445f63d4bf19cb392515e161c7ddc7aa01d5048d14504ffb5027b3dfa77f",
+            "hash://md5/386c127feaef2623f01fb04ca08c3543"
+          ],
+          "name": "waterquality.parquet"
+        },
+        {
+          "id": "hash://sha256/48926567e7333d1a29b18efeea9253052f2daea1209f94d308e744920e9e22a4",
+          "type": "DataDownload",
+          "contentSize": 6330,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/webfish.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/48926567e7333d1a29b18efeea9253052f2daea1209f94d308e744920e9e22a4",
+            "hash://md5/9e484ed50e733dcf9b0dc1380d20a2ac"
+          ],
+          "name": "webfish.parquet"
+        },
+        {
+          "id": "hash://sha256/5424c19d056179ae5093cc54840ea6e57a033f5e61bb470590ad49dbef7f5ac4",
+          "type": "DataDownload",
+          "contentSize": 42129,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/webuse.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/5424c19d056179ae5093cc54840ea6e57a033f5e61bb470590ad49dbef7f5ac4",
+            "hash://md5/f063f02d2f1e7b239274e045c9b4ffff"
+          ],
+          "name": "webuse.parquet"
+        },
+        {
+          "id": "hash://sha256/1727e20ce28f5dd04c07607ccbc484bb8eff5602541ed73dc5f9deb9a0bdb88b",
+          "type": "DataDownload",
+          "contentSize": 11216,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/whatsnew.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/1727e20ce28f5dd04c07607ccbc484bb8eff5602541ed73dc5f9deb9a0bdb88b",
+            "hash://md5/40b13a37d80d856aa034c0b7cc4adc6f"
+          ],
+          "name": "whatsnew.parquet"
+        },
+        {
+          "id": "hash://sha256/2c8755cabbe52a76028fee12b46d095fffe0a1cbc6344b752c5dfbce447a4b6d",
+          "type": "DataDownload",
+          "contentSize": 268815,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/withoutpicture.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/2c8755cabbe52a76028fee12b46d095fffe0a1cbc6344b752c5dfbce447a4b6d",
+            "hash://md5/1ff27c1b07276418ff85f261157264d3"
+          ],
+          "name": "withoutpicture.parquet"
+        },
+        {
+          "id": "hash://sha256/c29bc8eed13cefb225c75ea37104db6fa8bf2799fb0cc6b9b8a03c02bff7a79a",
+          "type": "DataDownload",
+          "contentSize": 73567,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/withphotos.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/c29bc8eed13cefb225c75ea37104db6fa8bf2799fb0cc6b9b8a03c02bff7a79a",
+            "hash://md5/ea6d3da9e1ffc8bda2cbd676912e9048"
+          ],
+          "name": "withphotos.parquet"
+        },
+        {
+          "id": "hash://sha256/4d4da50dba5e7b3123894c73d5489cfe94075c525f7ebb6decd5427b431f2cda",
+          "type": "DataDownload",
+          "contentSize": 107540,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/wpicture.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/4d4da50dba5e7b3123894c73d5489cfe94075c525f7ebb6decd5427b431f2cda",
+            "hash://md5/21fd7d8205b40ca3108283b5bee43546"
+          ],
+          "name": "wpicture.parquet"
+        },
+        {
+          "id": "hash://sha256/74d7e5e51a4ce3603a77c0347b474826c05bd573d8cee5ea0fc20ed8b70e1d8e",
+          "type": "DataDownload",
+          "contentSize": 9001633,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/zweb_cn3.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/74d7e5e51a4ce3603a77c0347b474826c05bd573d8cee5ea0fc20ed8b70e1d8e",
+            "hash://md5/2e52513eb41038fd0e567a9dbe47e0de"
+          ],
+          "name": "zweb_cn3.parquet"
+        },
+        {
+          "id": "hash://sha256/c2bd9cce20ed0302c3106d9a58a187dd4338afeb948dadada070155d0e859091",
+          "type": "DataDownload",
+          "contentSize": 591,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/zweb_continent.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/c2bd9cce20ed0302c3106d9a58a187dd4338afeb948dadada070155d0e859091",
+            "hash://md5/74de1c5e577a866f1aae518202e19dfa"
+          ],
+          "name": "zweb_continent.parquet"
+        },
+        {
+          "id": "hash://sha256/0b14fc264ff4c9f6c5c30aa48c40eed45b8267f878c3d0703f0c5e44dfb2154c",
+          "type": "DataDownload",
+          "contentSize": 503,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/zweb_country_importance.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/0b14fc264ff4c9f6c5c30aa48c40eed45b8267f878c3d0703f0c5e44dfb2154c",
+            "hash://md5/24195b8ad068b0de73a6642e0d3bace3"
+          ],
+          "name": "zweb_country_importance.parquet"
+        },
+        {
+          "id": "hash://sha256/a2a5b95baac980e2d2b6f6d737a203885d8fa7d649a3b03c845605437750977a",
+          "type": "DataDownload",
+          "contentSize": 80228,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/zweb_factsheetmaint.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/a2a5b95baac980e2d2b6f6d737a203885d8fa7d649a3b03c845605437750977a",
+            "hash://md5/eca634a6cb86a7b423643fa16c903b70"
+          ],
+          "name": "zweb_factsheetmaint.parquet"
+        },
+        {
+          "id": "hash://sha256/f2d36baaa3c9521b4044d6f979d6c9c270614c22b79d7e1f34fb0f62aee1366d",
+          "type": "DataDownload",
+          "contentSize": 2340,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/zweb_factsheetmaint_aquaculture.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/f2d36baaa3c9521b4044d6f979d6c9c270614c22b79d7e1f34fb0f62aee1366d",
+            "hash://md5/cda1c83d5612d4162d2153e5ba1d2808"
+          ],
+          "name": "zweb_factsheetmaint_aquaculture.parquet"
+        },
+        {
+          "id": "hash://sha256/956d2916ed49f49297712a36e9a910e4f43be9a7a1a24a98b821350274597f98",
+          "type": "DataDownload",
+          "contentSize": 530461,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/zweb_foridentification.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/956d2916ed49f49297712a36e9a910e4f43be9a7a1a24a98b821350274597f98",
+            "hash://md5/896327b52dea9910afea74c65438db5e"
+          ],
+          "name": "zweb_foridentification.parquet"
+        },
+        {
+          "id": "hash://sha256/a84247b84e04ea7940abd91a818641e4530b0b45a7e244c4f6de8c3eec03e5c2",
+          "type": "DataDownload",
+          "contentSize": 588,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/zweb_picturetype.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/a84247b84e04ea7940abd91a818641e4530b0b45a7e244c4f6de8c3eec03e5c2",
+            "hash://md5/49e2622aeac0587c0708980872cbf02c"
+          ],
+          "name": "zweb_picturetype.parquet"
+        },
+        {
+          "id": "hash://sha256/df6250f0116b0510ecb4a822b9a48b646ede81ce0ea6dbd1f56c970d2be4247b",
+          "type": "DataDownload",
+          "contentSize": 429,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/zweb_picturetype_lifestage.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/df6250f0116b0510ecb4a822b9a48b646ede81ce0ea6dbd1f56c970d2be4247b",
+            "hash://md5/c330f00f5f6b668a1534b643749fbed9"
+          ],
+          "name": "zweb_picturetype_lifestage.parquet"
+        },
+        {
+          "id": "hash://sha256/a0fa832583df831ae193052d9cc7c84136f5204f9cf0dd6f40bc667e0ea0c36d",
+          "type": "DataDownload",
+          "contentSize": 510,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/zweb_rdecomnamescountry.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/a0fa832583df831ae193052d9cc7c84136f5204f9cf0dd6f40bc667e0ea0c36d",
+            "hash://md5/78ceccf02174981441269b55bccac2e1"
+          ],
+          "name": "zweb_rdecomnamescountry.parquet"
+        },
+        {
+          "id": "hash://sha256/93405ee7bcf6dffe4fafd66432ae8b7a80316736d1fe98bcbde7e8bb1894dcfe",
+          "type": "DataDownload",
+          "contentSize": 454,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/zweb_rdecomnameslanguage.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/93405ee7bcf6dffe4fafd66432ae8b7a80316736d1fe98bcbde7e8bb1894dcfe",
+            "hash://md5/a3d84d7614c6565d16e8c37ec0055ae3"
+          ],
+          "name": "zweb_rdecomnameslanguage.parquet"
+        },
+        {
+          "id": "hash://sha256/395f34d9c17462a4a40129c6b440e3a79c2b9fb84ba85ea4576fd7977511b32c",
+          "type": "DataDownload",
+          "contentSize": 1563,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/zweb_rdecountrycoordinators.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/395f34d9c17462a4a40129c6b440e3a79c2b9fb84ba85ea4576fd7977511b32c",
+            "hash://md5/f57d09760eec997d3828189eb93c024a"
+          ],
+          "name": "zweb_rdecountrycoordinators.parquet"
+        },
+        {
+          "id": "hash://sha256/6808e1331ef94e416a2bcda114dc02642527ad18d772f737e84d091acf398aca",
+          "type": "DataDownload",
+          "contentSize": 7807,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/zweb_tour.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/6808e1331ef94e416a2bcda114dc02642527ad18d772f737e84d091acf398aca",
+            "hash://md5/8c73df5df581da4d35a2c13ce59fc900"
+          ],
+          "name": "zweb_tour.parquet"
+        },
+        {
+          "id": "hash://sha256/8f4c28af652b3ffd2c516cf5f811e72e40e45e2e24b1190f3be0543d63933e03",
+          "type": "DataDownload",
+          "contentSize": 568,
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/zweb_userstypelist.parquet",
+          "description": "output data",
+          "encodingFormat": "application/vnd.apache.parquet",
+          "identifier": [
+            "hash://sha256/8f4c28af652b3ffd2c516cf5f811e72e40e45e2e24b1190f3be0543d63933e03",
+            "hash://md5/d2855d87906c748dae08f3a11453822c"
+          ],
+          "name": "zweb_userstypelist.parquet"
+        }
+      ],
+      "license": "https://creativecommons.org/licenses/by-nc/3.0/",
+      "name": "Fishbase Database Snapshot: A Parquet serialization",
+      "version": "23.01"
+    },
+    {
       "id": "urn:uuid:6e6c12fb-3b2f-4a2b-a81d-cf662b5ae321",
       "type": "Dataset",
       "creator": {

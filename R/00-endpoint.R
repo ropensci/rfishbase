@@ -1,23 +1,4 @@
-new_endpoint <- function(endpt, join = NULL, by = NULL){
-  
-  function(species_list = NULL, 
-           fields = NULL, 
-           server = getOption("FISHBASE_API", "fishbase"), 
-           version = get_latest_release(),
-           db = default_db(server, version),
-           ...){
-    
-    df <- fb_tbl(endpt, server, version, db)
-    sp <- fb_tbl("species", server, version, db) %>%
-      mutate(sci_name = paste(Genus, Species)) %>%
-      select("SpecCode", "sci_name")
-      
-    sp %>%
-      filter(sci_name %in% species_list) %>% 
-      dplyr::inner_join(df) %>% 
-      collect()
-  }
-}
+
 utils::globalVariables("sci_name", package="rfishbase")
     
     
@@ -33,13 +14,21 @@ endpoint <- function(endpt, join = NULL, by = NULL){
            db = default_db(server, version),
            ...){
     
+    out <- fb_tbl(endpt, server, version, db) %>% fix_ids()
     
-    full_data <- fb_tbl(endpt, server, version, db) %>% fix_ids()
+    if(!is.null(species_list)){
+      species <-
+        dplyr::select(fb_tbl("species", server, version, db),
+                      "SpecCode", "Genus", "Species") %>%
+        dplyr::mutate(sci_name = paste(Genus, Species)) %>%
+        dplyr::filter(sci_name %in% species_list) %>%
+        dplyr::select(Species=sci_name, "SpecCode")
+      out <- dplyr::inner_join(species, out) %>% dplyr::distinct()
+    }
+    
 
-    out <- species_subset(species_list, full_data, server, version, db)
-    
     if(!is.null(fields)){
-      out <- select(out, !!fields)
+      out <- select(out, !!fields) %>% dplyr::distinct()
     }
     
     if(!is.null(join))
@@ -57,22 +46,21 @@ species_subset <- function(species_list,
                            version = get_latest_release(),
                            db = default_db()){
 
-  ## load_taxa provides "Genus species"-style species names for a consistent interface
-  species <- load_taxa(server, version, db, collect=FALSE) %>% 
-    dplyr::select("SpecCode", "Species")
+  
+  species <-
+    dplyr::select(dplyr::tbl(db, "species"),
+                  "SpecCode", "Genus", "Species") %>%
+    dplyr::mutate(sci_name = paste(Genus, Species)) %>%
+    dplyr::select("SpecCode", Species=sci_name) %>%
+    collect()
+
+  
   
   ## "Species" in many tables is just the epithet, we want full species name so drop that.
   if("Species" %in% colnames(full_data)){
     sp <- dplyr::sym("Species")
     full_data <- dplyr::select(full_data, - !!sp)
   }
-  
-  ## ensure that full_data is a remote table
-#  if(!inherits(full_data, "src_dbi")){
-#    tmp <- tmp_tablename()
-#    dplyr::copy_to(db, df = full_data, name = tmp, overwrite=TRUE, temporary=TRUE) 
-#    full_data <- dplyr::tbl(db, tmp)
-#  }
   
   if(is.null(species_list)){
     return(dplyr::left_join(species, full_data, by = "SpecCode"))

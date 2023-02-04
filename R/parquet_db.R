@@ -25,55 +25,36 @@ fb_tables <- function(server = c("fishbase", "sealifebase"),
 #' @export
 #' @examplesIf interactive()
 #' conn <- fb_import()
-#' @importFrom memoise memoise
-fb_import <- memoise::memoise(
-  function(server = c("fishbase", "sealifebase"),
-           version = "latest",
-           db = fb_conn(server, version),
-           tables = NULL) {
-  prov_document <- read_prov(server)
-  meta_df <- parse_metadata(prov_document, version = version)
-  if(!is.null(tables)){
-    meta_df <- meta_df[meta_df$name %in% tables, ]
+fb_import <- function(server = c("fishbase","sealifebase"),
+                      version=get_latest_release(),
+                      db = fb_conn(server, version), 
+                      tables = NULL) {
+  
+  meta <- parse_prov(read_prov(server), version)
+  if(!is.null(tables)) {
+    meta <- meta[meta$name %in% tables,]
   }
-  ## Resolve data sources (downloading if necessary)
-  parquets <- resolve_ids(meta_df$id)
   
-  ## re-attempt any
-  misses <- is.na(parquets)
-  parquets[misses] <- resolve_ids(meta_df$id[misses])
+  missing <- is.na(meta$url)
+  if(any(missing)) {
+    meta$url[missing] <- resolve_ids(meta$id[missing])
+  }
+
   
-  if (any(is.na(parquets)))
-    error(paste("Some ids failed to resolve"))
-  
-  ## Create views in temporary table
-  create_views(parquets, meta_df$name, conn = db)
-  db
-})
-
-## Slowest step, ~ 1.9 seconds even after paths are resolved
-## lots of small fs operations to repeatedly determine dirs, sizes, info take time!
-## alternately, just cache the connection...
-
-#' @importFrom contentid resolve
-resolve_ids <- memoise::memoise(function(ids) {
-  suppressMessages({
-  purrr::map_chr(ids,
-                 contentid::resolve,
-                 store = TRUE,
-                 dir = db_dir())
-  })
-})
+  duckdb_import(meta$url, meta$name, db)
+}
 
 
-parse_metadata <- function(prov, version = version) {
+
+
+parse_prov <- memoise::memoise(
+  function(prov = read_prov(), version = "latest") {
   who <- names(prov)
   if ("@graph" %in% who) {
     prov <- prov[["@graph"]]
   } else {
     prov <- list(prov)
   }
-  
   avail_versions <-  map_chr(prov, "version")
   if (version == "latest") {
     version <- max(avail_versions)
@@ -83,18 +64,16 @@ parse_metadata <- function(prov, version = version) {
   
   meta <- dataset$distribution
   meta_df <- tibble::tibble(
-    name = purrr::map(meta, "name") %>% 
+    name = purrr::map(meta, "name", .default=NA) %>% 
       purrr::map_chr(getElement,1) %>% tools::file_path_sans_ext(),
-    id =  purrr::map_chr(meta, "id"),
-    #  contentSize = purrr::map_chr(meta, "contentSize"),
-    description = purrr::map_chr(meta, "description"),
-    format = purrr::map_chr(meta, "encodingFormat"),
-    type =  purrr::map_chr(meta, "type")
+    id =  purrr::map_chr(meta, "id", .default=NA),
+    description = purrr::map_chr(meta, "description", .default=NA),
+    format = purrr::map_chr(meta, "encodingFormat", .default=NA),
+    type =  purrr::map_chr(meta, "type", .default=NA),
+    url =   purrr::map_chr(meta, "contentUrl", .default=NA)
   )
-  
-  
   meta_df[meta_df$type == "DataDownload",]
-}
+})
 
 create_views <- function(parquets,
                          tblnames,
@@ -102,21 +81,10 @@ create_views <- function(parquets,
   purrr::walk2(parquets, tblnames, create_view, conn)
   conn
 }
-create_view <- function(parquet, tblname, conn) {
-  if (!tblname %in% DBI::dbListTables(conn)) {
-    # query to create view in duckdb to the parquet file
-    view_query <- paste0("CREATE VIEW '",
-                         tblname,
-                         "' AS SELECT * FROM parquet_scan('",
-                         parquet,
-                         "');")
-    DBI::dbSendQuery(conn, view_query)
-  }
-  conn
-}
 
-
-read_prov <- function(server = c("fishbase", "sealifebase")) {
+read_prov <- memoise::memoise(function(server = c("fishbase", "sealifebase"),
+                                       local=getOption("rfishbase_local_prov", 
+                                                       FALSE)) {
   server <- match.arg(server)
   prov_latest <-
     switch(server,
@@ -130,6 +98,8 @@ read_prov <- function(server = c("fishbase", "sealifebase")) {
       sealifebase = system.file("prov", "slb.prov", package = "rfishbase")
     )
   
+  if(local) return(jsonlite::read_json(prov_local))
+  
   
   prov <- purrr::possibly(jsonlite::read_json,
                           otherwise = jsonlite::read_json(prov_local))
@@ -137,4 +107,14 @@ read_prov <- function(server = c("fishbase", "sealifebase")) {
     out <- prov(prov_latest)
   })
   out
-}
+})
+
+
+resolve_ids <- memoise::memoise(function(ids) {
+  suppressMessages({
+    purrr::map_chr(ids,
+                   contentid::resolve,
+                   store = TRUE,
+                   dir = db_dir())
+  })
+})

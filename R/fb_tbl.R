@@ -15,6 +15,8 @@ fb_tbl <-
            version = "latest",
            db = fb_conn(server, version),
            collect = TRUE){
+    
+    
     db <- fb_import(server, version, db, tbl)
     out <- dplyr::tbl(db, tbl)
     if(!collect) return(out)

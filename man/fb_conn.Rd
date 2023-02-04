@@ -4,7 +4,11 @@
 \alias{fb_conn}
 \title{Cacheable database connection}
 \usage{
-fb_conn(server = c("fishbase", "sealifebase"), version = "latest")
+fb_conn(
+  server = c("fishbase", "sealifebase"),
+  version = "latest",
+  dir = db_dir()
+)
 }
 \arguments{
 \item{server}{fishbase or sealifebase}

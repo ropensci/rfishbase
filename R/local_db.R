@@ -2,13 +2,18 @@
 #' Cacheable database connection
 #' @inheritParams fb_import
 fb_conn <- function(server = c("fishbase", "sealifebase"),
-                    version =  "latest"){
+                    version =  "latest",
+                    dir = db_dir()){
 
+  if(version == "latest"){
+    version <- get_latest_release()
+  }
   server <- match.arg(server)
   db_name <- paste(server,version, sep="_")
   db <- mget(db_name, envir = rfishbase_cache, ifnotfound = NA)[[1]]
+  path <- fs::path(dir, db_name)
   if(!inherits(db, "duckdb_connection")){
-   db <- DBI::dbConnect(drv = duckdb::duckdb())
+   db <- DBI::dbConnect(drv = duckdb::duckdb(), path)
    assign(db_name, db, envir = rfishbase_cache)
   }
   db
@@ -39,6 +44,6 @@ db_dir <- function(){
 
 
 fish_db <- function(version = "latest"){
-  db = default_db(version = version)
+  db = fb_conn(version = version)
   fb_import("fishbase", version = version, db)
 }
