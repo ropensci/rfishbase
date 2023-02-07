@@ -2833,10 +2833,7 @@
           "id": "hash://sha256/cd6a953ca76ff7cf6ac3621cc3590f350e5309c71e99e4a391c3d7631384c758",
           "type": "DataDownload",
           "contentSize": 502,
-          "contentUrl": [
-            "https://github.com/cboettig/rfishbase_board/raw/main/slb_parquet_2023-01/ecomodelfaoarea_hf51.parquet",
-            "https://github.com/cboettig/rfishbase_board/raw/main/slb_parquet_2023-01/ecomodelfaoarea_hf62.parquet"
-          ],
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/slb_parquet_2023-01/ecomodelfaoarea_hf51.parquet",
           "description": "output data",
           "encodingFormat": "application/vnd.apache.parquet",
           "identifier": [
@@ -2982,10 +2979,7 @@
           "id": "hash://sha256/5be7f817976196bc34d12fb51cd8116cba70b6041b2276fbb84f589fd69e7e8e",
           "type": "DataDownload",
           "contentSize": 2114,
-          "contentUrl": [
-            "https://github.com/cboettig/rfishbase_board/raw/main/slb_parquet_2023-01/ecosystemmatrix_01.parquet",
-            "https://github.com/cboettig/rfishbase_board/raw/main/slb_parquet_2023-01/ecosystemmatrix_08.parquet"
-          ],
+          "contentUrl": "https://github.com/cboettig/rfishbase_board/raw/main/slb_parquet_2023-01/ecosystemmatrix_01.parquet",
           "description": "output data",
           "encodingFormat": "application/vnd.apache.parquet",
           "identifier": [
@@ -3027,24 +3021,15 @@
           "id": "hash://sha256/d94b6605b023e1e0a0be9ee3ac3965d80f139c0f20163c311b9bff2c0cd0a616",
           "type": "DataDownload",
           "contentSize": 365,
-          "contentUrl": [
+          "contentUrl": 
             "https://github.com/cboettig/rfishbase_board/raw/main/slb_parquet_2023-01/ecosystemmatrix_04.parquet",
-            "https://github.com/cboettig/rfishbase_board/raw/main/slb_parquet_2023-01/ecosystemmatrix_05.parquet",
-            "https://github.com/cboettig/rfishbase_board/raw/main/slb_parquet_2023-01/ecosystemmatrix_06.parquet",
-            "https://github.com/cboettig/rfishbase_board/raw/main/slb_parquet_2023-01/ecosystemmatrix_07.parquet"
-          ],
           "description": "output data",
           "encodingFormat": "application/vnd.apache.parquet",
           "identifier": [
             "hash://sha256/d94b6605b023e1e0a0be9ee3ac3965d80f139c0f20163c311b9bff2c0cd0a616",
             "hash://md5/d8289935638fd3b679000c98b08f2b90"
           ],
-          "name": [
-            "ecosystemmatrix_04.parquet",
-            "ecosystemmatrix_05.parquet",
-            "ecosystemmatrix_06.parquet",
-            "ecosystemmatrix_07.parquet"
-          ]
+          "name": "ecosystemmatrix_04.parquet"
         },
         {
           "id": "hash://sha256/5755ec5d9017610b28dcc33922ff0c104295851ec635bedb573016ed4a211f1f",

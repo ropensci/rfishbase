@@ -1,14 +1,17 @@
 
 #' Cacheable database connection
 #' @inheritParams fb_import
+#' @param dir directory where database cache will be stored
+#' @importFrom fs path dir_create dir_ls
 fb_conn <- function(server = c("fishbase", "sealifebase"),
                     version =  "latest",
                     dir = db_dir()){
 
-  if(version == "latest"){
-    version <- get_latest_release()
-  }
   server <- match.arg(server)
+  
+  if(version == "latest"){
+    version <- get_latest_release(server)
+  }
   db_name <- paste(server,version, sep="_")
   db <- mget(db_name, envir = rfishbase_cache, ifnotfound = NA)[[1]]
   path <- fs::path(dir, db_name)

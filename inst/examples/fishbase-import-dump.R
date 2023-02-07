@@ -9,6 +9,7 @@ library(arrow)
 con <- dbConnect(RMariaDB::MariaDB(), dbname="fbapp", host="mariadb", password="password", user="root")
 tables <- dbListTables(con)
 
+#' @importFrom glue glue
 duckdb <- dbConnect(duckdb::duckdb())
 for(table in tables){
   df <- dplyr::collect(dplyr::tbl(con, table)) 

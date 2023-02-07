@@ -7,7 +7,7 @@ fb_tables <- function(server = c("fishbase", "sealifebase"),
                       version = "latest"){
   
   prov_document <- read_prov(server)
-  meta_df <- parse_metadata(prov_document, version = version)
+  meta_df <- parse_prov(prov_document, version = version)
   meta_df$name
 }
 
@@ -47,7 +47,7 @@ fb_import <- function(server = c("fishbase","sealifebase"),
 
 
 
-parse_prov <- memoise::memoise(
+parse_prov_ <- 
   function(prov = read_prov(), version = "latest") {
   who <- names(prov)
   if ("@graph" %in% who) {
@@ -73,16 +73,22 @@ parse_prov <- memoise::memoise(
     url =   purrr::map_chr(meta, "contentUrl", .default=NA)
   )
   meta_df[meta_df$type == "DataDownload",]
-})
+}
+parse_prov <- memoise::memoise(parse_prov_)
 
-create_views <- function(parquets,
+dummy_memoise <- function(f, ...) {
+  memoise::memoise(f, ...)
+}
+
+
+create_view <- function(parquets,
                          tblnames,
                          conn = DBI::dbConnect(drv = duckdb::duckdb())) {
   purrr::walk2(parquets, tblnames, create_view, conn)
   conn
 }
 
-read_prov <- memoise::memoise(function(server = c("fishbase", "sealifebase"),
+read_prov_ <-function(server = c("fishbase", "sealifebase"),
                                        local=getOption("rfishbase_local_prov", 
                                                        FALSE)) {
   server <- match.arg(server)
@@ -107,14 +113,16 @@ read_prov <- memoise::memoise(function(server = c("fishbase", "sealifebase"),
     out <- prov(prov_latest)
   })
   out
-})
+}
+read_prov <- memoise::memoise(read_prov_)
 
 
-resolve_ids <- memoise::memoise(function(ids) {
+resolve_ids_ <- function(ids) {
   suppressMessages({
     purrr::map_chr(ids,
                    contentid::resolve,
                    store = TRUE,
                    dir = db_dir())
   })
-})
+}
+resolve_ids <- memoise::memoise(resolve_ids_)

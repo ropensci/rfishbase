@@ -33,8 +33,8 @@ available_releases <- function(server = c("fishbase", "sealifebase")){
 
 #' @importFrom purrr map_chr
 #' @importFrom stringr str_extract
-get_latest_release <- function() {
-  available_releases()[[1]]
+get_latest_release <- function(server = c("fishbase", "sealifebase")) {
+  available_releases(server)[[1]]
 }
 
 
