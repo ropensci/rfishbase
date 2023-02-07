@@ -97,7 +97,7 @@ conn <- fb_import()
  
 ## Low-memory environments
 
-If you have very limited RAM (e.g. <= 2 GB available) it may be helpful to use `fishbase` tables in remote form by setting `collect = FALSE`.  This allows the tables to remain on disk, while the user is still able to use almost all `dplyr` functions (see the `dbplyr` vignette).  Once the table is appropriately subset, the user will need to call `dplyr::collect()` to use generic non-dplyr functions, such as plotting commmands.  
+If you have very limited RAM (e.g. <= 2 GB available) it may be helpful to use `fishbase` tables in remote form by setting `collect = FALSE`.  This allows the tables to remain on disk, while the user is still able to use almost all `dplyr` functions (see the `dbplyr` vignette).  Once the table is appropriately subset, the user will need to call `dplyr::collect()` to use generic non-dplyr functions, such as plotting commands.  
 
 ```{r}
 fb_tbl("occurrence", collect = FALSE)
