@@ -26,15 +26,15 @@ available_releases <- function(server = c("fishbase", "sealifebase")){
     prov <- list(prov)
   }
   
-  avail_versions <-  map_chr(prov, "version")
-  avail_versions
+  avail_versions <-  map_chr(prov, "version", .default=NA)
+  as.character(sort(na.omit(avail_versions), TRUE))
   
 }
 
 #' @importFrom purrr map_chr
 #' @importFrom stringr str_extract
-get_latest_release <- function() {
-  "latest"
+get_latest_release <- function(server = c("fishbase", "sealifebase")) {
+  available_releases(server)[[1]]
 }
 
 

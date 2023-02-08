@@ -6,7 +6,7 @@
 \usage{
 fb_import(
   server = c("fishbase", "sealifebase"),
-  version = "latest",
+  version = get_latest_release(),
   db = fb_conn(server, version),
   tables = NULL
 )

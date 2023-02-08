@@ -23,6 +23,15 @@ And constructed with the following guidelines:
 
 For more information on SemVer, please visit http://semver.org/.
 
+v 4.1.0
+--------
+
+* New data release, v23.01 (fishbase & sealifebase)
+* direct URL-based import supported, contentid now a fallback method.
+
+hash-achive.org resolver is down, and software-heritage API has strict rate limits,
+so direct URL access is preferable.  
+
 v 4.0.0
 --------
 

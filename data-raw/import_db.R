@@ -83,17 +83,19 @@ arrow::write_parquet(df, file.path(slb_parquet, paste0(table, ".parquet")))
 
 
 ## PROVENANCE
+
+fb_parquet <- "~/cboettig/rfishbase_board/fb_parquet_2023-01/"
 files <- fs::dir_ls(fb_parquet, regexp = "[.]parquet")
 prov::write_prov(data_out = files, 
                  title = "Fishbase Database Snapshot: A Parquet serialization",
                  description = "Database snapshot prepared by rOpenSci courtesy of Fishbase.org",
                  license = "https://creativecommons.org/licenses/by-nc/3.0/",
                  creator = list("type" = "Organization", name = "FishBase.org"),
-                 version = "21.06",
-                 issued = "2021-06-01",
+                 version = "23.01",
+                 issued = "2023-01-01",
                  code = "data-raw/import_db.R",
                  provdb = "inst/prov/fb.prov",
-                 append = FALSE,
+                 append = TRUE,
                  schema="http://schema.org")
 
 
@@ -113,25 +115,14 @@ prov::write_prov(data_out = files,
                  schema="http://schema.org")
 
 
+parquets <- basename(files)
 
-### CSV uploads
+urls <- paste0("https://github.com/cboettig/rfishbase_board/raw/main/fb_parquet_2023-01/", parquets)
+urls <- paste0("https://minio.thelio.carlboettiger.info/shared-data/fishbase/fb_parquet_2023-01/", parquets)
 
-## Check we aren't losing stuff
-#tbl(src, "comnames") %>% summarise(n())
-#readr::read_tsv("fb/comnames.tsv.bz2") %>% summarise(n())
+contentid::register(urls, registries = "https://hash-archive.carlboettiger.info")
 
-#tables <- readLines("data-raw/rfishbase_tables.txt")
 
-#cache <- fs::dir_ls(fb, type = "file")
-#piggyback::pb_upload(cache,
-#                     repo = "ropensci/rfishbase", 
-#                     tag = "fb-21.06", overwrite = TRUE)
-
-# local <- paste0("fb/", tables, ".tsv.bz2")
-# files <- local[local %in% cache]
-
-#cache <- fs::dir_ls(slb, type = "file")
-#piggyback::pb_upload(cache,
-#                     repo = "ropensci/rfishbase", 
-#                     tag = "slb-21.08", overwrite = TRUE)
+urls <- paste0("https://minio.thelio.carlboettiger.info/shared-data/fishbase/fb_parquet_2023-01/", parquets)
+contentid::register(urls, registries = "https://hash-archive.carlboettiger.info")
 

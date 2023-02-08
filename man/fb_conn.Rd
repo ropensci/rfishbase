@@ -4,12 +4,18 @@
 \alias{fb_conn}
 \title{Cacheable database connection}
 \usage{
-fb_conn(server = c("fishbase", "sealifebase"), version = "latest")
+fb_conn(
+  server = c("fishbase", "sealifebase"),
+  version = "latest",
+  dir = db_dir()
+)
 }
 \arguments{
 \item{server}{fishbase or sealifebase}
 
 \item{version}{release version}
+
+\item{dir}{directory where database cache will be stored}
 }
 \description{
 Cacheable database connection
