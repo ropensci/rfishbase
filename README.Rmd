@@ -7,7 +7,6 @@ output: github_document
 
 <!-- badges: start -->
 [![R-CMD-check](https://github.com/ropensci/rfishbase/workflows/R-CMD-check/badge.svg)](https://github.com/ropensci/rfishbase/actions)
-[![cran checks](https://cranchecks.info/badges/worst/rfishbase)](https://cranchecks.info/pkgs/rfishbase)
 [![Coverage status](https://codecov.io/gh/ropensci/rfishbase/branch/master/graph/badge.svg)](https://codecov.io/github/ropensci/rfishbase?branch=master)
 [![Onboarding](https://badges.ropensci.org/137_status.svg)](https://github.com/ropensci/software-review/issues/137)
 [![CRAN status](https://www.r-pkg.org/badges/version/rfishbase)](https://cran.r-project.org/package=rfishbase)
@@ -97,11 +96,32 @@ conn <- fb_import()
  
 ## Low-memory environments
 
-If you have very limited RAM (e.g. <= 2 GB available) it may be helpful to use `fishbase` tables in remote form by setting `collect = FALSE`.  This allows the tables to remain on disk, while the user is still able to use almost all `dplyr` functions (see the `dbplyr` vignette).  Once the table is appropriately subset, the user will need to call `dplyr::collect()` to use generic non-dplyr functions, such as plotting commands.  
+If you have very limited RAM (e.g. <= 1 GB available) it may be helpful to use `fishbase` tables in remote form by setting `collect = FALSE`.  This allows the tables to remain on disk, while the user is still able to use almost all `dplyr` functions (see the `dbplyr` vignette).  Once the table is appropriately subset, the user will need to call `dplyr::collect()` to use generic non-dplyr functions, such as plotting commands.  
 
 ```{r}
 fb_tbl("occurrence", collect = FALSE)
 ```
+
+## Local copy
+
+Set the option "rfishbase_local_db" = TRUE to create a local copy, otherwise will use a remote copy.
+Local copy will get better performance after initial import, but may experience conflicts when
+`duckdb` is upgraded or when multiple sessions attempt to access the directory.  Remove the default
+storage directory (given by `db_dir()`) after upgrading duckdb if using a local copy.  
+
+```{r}
+db_disconnect()
+options("rfishbase_local_db" = TRUE)
+
+species()
+
+
+# examine use a generic connection, note persistent dbdir:
+conn <- fb_conn() 
+conn
+```
+
+
 
 
 ## Interactive RStudio pane

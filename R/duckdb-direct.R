@@ -4,7 +4,7 @@
 duckdb_import <- function(urls,
                           tablenames = basename(urls),
                           conn = fb_conn(),
-                          local = getOption("rfishbase_local_db", TRUE)) {
+                          local = getOption("rfishbase_local_db", FALSE)) {
   
   
   DBI::dbExecute(conn, "INSTALL 'httpfs';") # import from HTTP

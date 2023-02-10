@@ -4,8 +4,6 @@
 <!-- badges: start -->
 
 [![R-CMD-check](https://github.com/ropensci/rfishbase/workflows/R-CMD-check/badge.svg)](https://github.com/ropensci/rfishbase/actions)
-[![cran
-checks](https://cranchecks.info/badges/worst/rfishbase)](https://cranchecks.info/pkgs/rfishbase)
 [![Coverage
 status](https://codecov.io/gh/ropensci/rfishbase/branch/master/graph/badge.svg)](https://codecov.io/github/ropensci/rfishbase?branch=master)
 [![Onboarding](https://badges.ropensci.org/137_status.svg)](https://github.com/ropensci/software-review/issues/137)
@@ -18,21 +16,20 @@ Welcome to `rfishbase 4`. This is the fourth rewrite of the original
 `rfishbase` package described in [Boettiger et
 al. (2012)](https://doi.org/10.1111/j.1095-8649.2012.03464.x).
 
--   `rfishbase 1.0` relied on parsing of XML pages served directly from
-    Fishbase.org.  
--   `rfishbase 2.0` relied on calls to a ruby-based API, `fishbaseapi`,
-    that provided access to SQL snapshots of about 20 of the more
-    popular tables in FishBase or SeaLifeBase.
--   `rfishbase 3.0` side-stepped the API by making queries which
-    directly downloaded compressed csv tables from a static web host.
-    This substantially improved performance a reliability, particularly
-    for large queries. The release largely remained backwards compatible
-    with 2.0, and added more tables.
--   `rfishbase 4.0` extends the static model and interface. Static
-    tables are distributed in parquet and accessed through a
-    provenance-based identifier. While old functions are retained, a new
-    interface is introduced to provide easy access to all fishbase
-    tables.
+- `rfishbase 1.0` relied on parsing of XML pages served directly from
+  Fishbase.org.  
+- `rfishbase 2.0` relied on calls to a ruby-based API, `fishbaseapi`,
+  that provided access to SQL snapshots of about 20 of the more popular
+  tables in FishBase or SeaLifeBase.
+- `rfishbase 3.0` side-stepped the API by making queries which directly
+  downloaded compressed csv tables from a static web host. This
+  substantially improved performance a reliability, particularly for
+  large queries. The release largely remained backwards compatible with
+  2.0, and added more tables.
+- `rfishbase 4.0` extends the static model and interface. Static tables
+  are distributed in parquet and accessed through a provenance-based
+  identifier. While old functions are retained, a new interface is
+  introduced to provide easy access to all fishbase tables.
 
 We welcome any feedback, issues or questions that users may encounter
 through our issues tracker on GitHub:
@@ -60,23 +57,24 @@ function:
 fb_tbl("ecosystem")
 ```
 
-    # A tibble: 155,792 × 18
-       autoctr E_CODE EcosystemRefno Speccode Stockcode Status CurrentPresence
-         <int>  <int>          <int>    <int>     <int> <chr>  <chr>          
-     1       1      1          50628      549       565 native Present        
-     2       2      1            189      552       568 native Present        
-     3       3      1            189      554       570 native Present        
-     4       4      1          79732      873       889 native Present        
-     5       5      1           5217      948       964 native Present        
-     6       7      1          39852      956       972 native Present        
-     7       8      1          39852      957       973 native Present        
-     8       9      1          39852      958       974 native Present        
-     9      10      1            188     1526      1719 native Present        
-    10      11      1            188     1626      1819 native Present        
-    # … with 155,782 more rows, and 11 more variables: Abundance <chr>,
-    #   LifeStage <chr>, Remarks <chr>, Entered <int>, Dateentered <dttm>,
-    #   Modified <int>, Datemodified <dttm>, Expert <int>, Datechecked <dttm>,
-    #   WebURL <chr>, TS <dttm>
+    # A tibble: 157,870 × 18
+       autoctr E_CODE Ecosy…¹ Specc…² Stock…³ Status Curre…⁴ Abund…⁵ LifeS…⁶ Remarks
+         <int>  <int>   <int>   <int>   <int> <chr>  <chr>   <chr>   <chr>   <chr>  
+     1       1      1   50628     549     565 native Present <NA>    adults  <NA>   
+     2       2      1     189     552     568 native Present <NA>    adults  <NA>   
+     3       3      1     189     554     570 native Present <NA>    adults  <NA>   
+     4       4      1   79732     873     889 native Present <NA>    adults  <NA>   
+     5       5      1    5217     948     964 native Present <NA>    adults  <NA>   
+     6       7      1   39852     956     972 native Present <NA>    adults  <NA>   
+     7       8      1   39852     957     973 native Present <NA>    adults  <NA>   
+     8       9      1   39852     958     974 native Present <NA>    adults  <NA>   
+     9      10      1     188    1526    1719 native Present <NA>    adults  <NA>   
+    10      11      1     188    1626    1819 native Present <NA>    adults  <NA>   
+    # … with 157,860 more rows, 8 more variables: Entered <int>,
+    #   Dateentered <dttm>, Modified <int>, Datemodified <dttm>, Expert <int>,
+    #   Datechecked <dttm>, WebURL <chr>, TS <dttm>, and abbreviated variable names
+    #   ¹​EcosystemRefno, ²​Speccode, ³​Stockcode, ⁴​CurrentPresence, ⁵​Abundance,
+    #   ⁶​LifeStage
 
 You can see all the tables using `fb_tables()` to see a list of all the
 table names (specify `sealifebase` if desired). Careful, there are a lot
@@ -117,26 +115,26 @@ parallels the database structure of Fishbase. As such, almost all
 fb_tbl("species", "sealifebase")
 ```
 
-    # A tibble: 97,220 × 109
-       SpecCode Genus  Species Author  SpeciesRefNo FBname FamCode Subfamily GenCode
-          <int> <chr>  <chr>   <chr>          <int> <chr>    <int> <chr>       <int>
-     1    32307 Aapto… americ… (Pilsb…           19 <NA>       815 <NA>        27838
-     2    32306 Aapto… brinto… Newman…        81749 <NA>       815 <NA>        27838
-     3    32308 Aapto… callis… (Pilsb…           19 <NA>       815 <NA>        27838
-     4    32304 Aapto… leptod… Newman…           19 <NA>       815 <NA>        27838
-     5    32305 Aapto… trider… Newman…           19 <NA>       815 <NA>        27838
-     6    51720 Aaptos aaptos  (Schmi…           19 <NA>      2630 <NA>         9253
-     7   165941 Aaptos bergma… de Lau…       108813 <NA>      2630 <NA>         9253
-     8   105687 Aaptos ciliata (Wilso…         3477 <NA>      2630 <NA>         9253
-     9   139407 Aaptos duchas… (Topse…        85482 <NA>      2630 <NA>         9253
-    10   130070 Aaptos laxosu… (Solla…        81108 <NA>      2630 <NA>         9253
-    # … with 97,210 more rows, and 100 more variables: TaxIssue <int>,
-    #   Remark <chr>, PicPreferredName <chr>, PicPreferredNameM <chr>,
-    #   PicPreferredNameF <chr>, PicPreferredNameJ <chr>, Source <chr>,
-    #   AuthorRef <int>, SubGenCode <int>, Fresh <int>, Brack <int>,
-    #   Saltwater <int>, Land <int>, BodyShapeI <chr>, DemersPelag <chr>,
-    #   AnaCat <chr>, MigratRef <int>, DepthRangeShallow <int>,
-    #   DepthRangeDeep <int>, DepthRangeRef <int>, DepthRangeComShallow <int>, …
+    # A tibble: 103,169 × 109
+       SpecCode Genus  Species Author Speci…¹ FBname FamCode Subfa…² GenCode TaxIs…³
+          <int> <chr>  <chr>   <chr>    <int> <chr>    <int> <chr>     <int>   <int>
+     1    10217 Abyss… cidaris Poore…    3113 <NA>       512 <NA>       9280       0
+     2    10218 Abyss… panope  Poore…    3113 <NA>       512 <NA>       9280       0
+     3    90399 Abyss… averin… Kussa…    3113 <NA>       502 <NA>      17490       0
+     4    52610 Abyss… millari Monni…    2585 <NA>       978 <NA>       9281       0
+     5    52611 Abyss… wyvill… Herdm…    2892 <NA>       978 <NA>       9281       0
+     6   138684 Abyss… planus  (Slad…   81020 <NA>      1615 <NA>      24229       0
+     7    90400 Abyss… acutil… Doti …    3113 <NA>       587 <NA>       9282       0
+     8    10219 Abyss… argent… Menzi…    3113 <NA>       587 <NA>       9282       0
+     9    10220 Abyss… bathya… Just,…    3113 <NA>       587 <NA>       9282       0
+    10    10221 Abyss… dentif… Menzi…    3113 <NA>       587 <NA>       9282       0
+    # … with 103,159 more rows, 99 more variables: Remark <chr>,
+    #   PicPreferredName <chr>, PicPreferredNameM <chr>, PicPreferredNameF <chr>,
+    #   PicPreferredNameJ <chr>, Source <chr>, AuthorRef <int>, SubGenCode <int>,
+    #   Fresh <int>, Brack <int>, Saltwater <int>, Land <int>, BodyShapeI <chr>,
+    #   DemersPelag <chr>, AnaCat <chr>, MigratRef <int>, DepthRangeShallow <int>,
+    #   DepthRangeDeep <int>, DepthRangeRef <int>, DepthRangeComShallow <int>,
+    #   DepthRangeComDeep <int>, DepthComRef <int>, LongevityWild <dbl>, …
 
 ## Versions and importing all tables
 
@@ -149,7 +147,7 @@ fishbase.org. Check available releases:
 available_releases()
 ```
 
-    [1] "21.06" "19.04"
+    [1] "23.01" "21.06" "19.04"
 
 Users can trigger a one-time download of all fishbase tables (or a list
 of desired tables) using `fb_import()`. This will ensure later use of
@@ -164,39 +162,33 @@ conn <- fb_import()
 
 ## Low-memory environments
 
-If you have very limited RAM (e.g. &lt;= 2 GB available) it may be
-helpful to use `fishbase` tables in remote form by setting
-`collect = FALSE`. This allows the tables to remain on disk, while the
-user is still able to use almost all `dplyr` functions (see the `dbplyr`
-vignette). Once the table is appropriately subset, the user will need to
-call `dplyr::collect()` to use generic non-dplyr functions, such as
-plotting commmands.
+If you have very limited RAM (e.g. \<= 2 GB available) it may be helpful
+to use `fishbase` tables in remote form by setting `collect = FALSE`.
+This allows the tables to remain on disk, while the user is still able
+to use almost all `dplyr` functions (see the `dbplyr` vignette). Once
+the table is appropriately subset, the user will need to call
+`dplyr::collect()` to use generic non-dplyr functions, such as plotting
+commands.
 
 ``` r
 fb_tbl("occurrence", collect = FALSE)
 ```
 
-    # Source:   table<occurrence> [?? x 106]
-    # Database: duckdb_connection
-       catnum2 OccurrenceRefNo SpecCode Syncode Stockcode GenusCol       SpeciesCol 
-         <int>           <int>    <int>   <int>     <int> <chr>          <chr>      
-     1   34424           36653      227   22902       241 "Megalops"     "cyprinoid…
-     2   95154           45880       NA      NA        NA ""             ""         
-     3   97606           45880       NA      NA        NA ""             ""         
-     4  100025           45880     5520   25676      5809 "Johnius"      "belangeri…
-     5   98993           45880     5676   16650      5969 "Chromis"      "retrofasc…
-     6   99316           45880      454   23112       468 "Drepane"      "punctata" 
-     7   99676           45880     5388  145485      5647 "Gymnothorax"  "boschi"   
-     8   99843           45880    16813  119925     15264 "Hemiramphus"  "balinensi…
-     9  100607           45880     8288   59635      8601 "Ostracion"    "rhinorhyn…
-    10  101529           45880       NA      NA        NA "Scomberoides" "toloo-par…
-    # … with more rows, and 99 more variables: ColName <chr>, PicName <chr>,
-    #   CatNum <chr>, URL <chr>, Station <chr>, Cruise <chr>, Gazetteer <chr>,
-    #   LocalityType <chr>, WaterDepthMin <dbl>, WaterDepthMax <dbl>,
-    #   AltitudeMin <int>, AltitudeMax <int>, LatitudeDeg <int>, LatitudeMin <dbl>,
-    #   NorthSouth <chr>, LatitudeDec <dbl>, LongitudeDeg <int>,
-    #   LongitudeMIn <dbl>, EastWest <chr>, LongitudeDec <dbl>, Accuracy <chr>,
-    #   Salinity <chr>, LatitudeTo <dbl>, LongitudeTo <dbl>, LatitudeDegTo <int>, …
+    # Source:   table<occurrence> [?? x 3]
+    # Database: DuckDB 0.6.2-dev1166 [unknown@Linux 5.17.15-76051715-generic:R 4.2.2/:memory:]
+       AreaCode RegionNo TS    
+          <int>    <int> <dttm>
+     1       18        1 NA    
+     2       21        1 NA    
+     3       21        2 NA    
+     4       21        6 NA    
+     5       21       15 NA    
+     6       27        2 NA    
+     7       27        3 NA    
+     8       27        4 NA    
+     9       27        6 NA    
+    10       27       11 NA    
+    # … with more rows
 
 ## Interactive RStudio pane
 
@@ -229,4 +221,4 @@ Please note that this package is released with a [Contributor Code of
 Conduct](https://ropensci.org/code-of-conduct/). By contributing to this
 project, you agree to abide by its terms.
 
-[![ropensci\_footer](https://ropensci.org/public_images/github_footer.png)](https://ropensci.org)
+[![ropensci_footer](https://ropensci.org/public_images/github_footer.png)](https://ropensci.org)
