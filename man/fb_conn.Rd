@@ -10,8 +10,6 @@ fb_conn(server = c("fishbase", "sealifebase"), version = "latest")
 \item{server}{fishbase or sealifebase}
 
 \item{version}{release version}
-
-\item{dir}{directory where database cache will be stored}
 }
 \description{
 Cacheable database connection

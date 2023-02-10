@@ -1,7 +1,6 @@
 
 #' Cacheable database connection
 #' @inheritParams fb_import
-#' @param dir directory where database cache will be stored
 #' @importFrom fs path dir_create dir_ls
 #' @export
 fb_conn <- function(server = c("fishbase", "sealifebase"),
@@ -50,7 +49,8 @@ db_disconnect <- function(db = NULL){
     }
   }
   if(inherits(db, "duckdb_connection")) {
-    DBI::dbDisconnect(db, shutdown=TRUE)
+    tryCatch(DBI::dbDisconnect(db, shutdown=TRUE), 
+             error = function(e) NULL, finally=NULL)
   }
   
 }
