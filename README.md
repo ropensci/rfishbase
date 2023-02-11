@@ -162,7 +162,7 @@ conn <- fb_import()
 
 ## Low-memory environments
 
-If you have very limited RAM (e.g. \<= 2 GB available) it may be helpful
+If you have very limited RAM (e.g. \<= 1 GB available) it may be helpful
 to use `fishbase` tables in remote form by setting `collect = FALSE`.
 This allows the tables to remain on disk, while the user is still able
 to use almost all `dplyr` functions (see the `dbplyr` vignette). Once
@@ -189,6 +189,27 @@ fb_tbl("occurrence", collect = FALSE)
      9       27        6 NA    
     10       27       11 NA    
     # … with more rows
+
+## Local copy
+
+Set the option “rfishbase_local_db” = TRUE to create a local copy,
+otherwise will use a remote copy. Local copy will get better performance
+after initial import, but may experience conflicts when `duckdb` is
+upgraded or when multiple sessions attempt to access the directory.
+Remove the default storage directory (given by `db_dir()`) after
+upgrading duckdb if using a local copy.
+
+``` r
+db_disconnect()
+options("rfishbase_local_db" = TRUE)
+
+species()
+
+
+# examine use a generic connection, note persistent dbdir:
+conn <- fb_conn() 
+conn
+```
 
 ## Interactive RStudio pane
 

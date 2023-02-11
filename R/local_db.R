@@ -45,7 +45,7 @@ db_disconnect <- function(db = NULL){
     db_name <- ls(envir = rfishbase_cache)
     if(length(db_name)>0) {
       db <- mget(db_name[[1]], envir = rfishbase_cache, ifnotfound = NA)[[1]]
-      rm(db_name, envir = rfishbase_cache)
+      remove(list = db_name[[1]], envir = rfishbase_cache)
     }
   }
   if(inherits(db, "duckdb_connection")) {

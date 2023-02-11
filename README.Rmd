@@ -29,6 +29,8 @@ We welcome any feedback, issues or questions that users may encounter through ou
 
 ```{r include=FALSE}
 knitr::opts_chunk$set(warning=FALSE, comment=NA)
+options("rfishbase_local_db" = FALSE)
+
 ```
 
 
@@ -109,7 +111,7 @@ Local copy will get better performance after initial import, but may experience 
 `duckdb` is upgraded or when multiple sessions attempt to access the directory.  Remove the default
 storage directory (given by `db_dir()`) after upgrading duckdb if using a local copy.  
 
-```{r}
+```{r eval=FALSE}
 db_disconnect()
 options("rfishbase_local_db" = TRUE)
 
