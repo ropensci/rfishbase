@@ -7,8 +7,8 @@ duckdb_import <- function(urls,
                           local = getOption("rfishbase_local_db", FALSE)) {
   
   
-  DBI::dbExecute(conn, "INSTALL 'httpfs';") # import from HTTP
-  DBI::dbExecute(conn, "LOAD 'httpfs';")
+  #DBI::dbExecute(conn, "INSTALL 'httpfs';") # import from HTTP
+  #DBI::dbExecute(conn, "LOAD 'httpfs';")
   
   current_tbls <- DBI::dbListTables(conn)
   remote_tbls <- tools::file_path_sans_ext(basename(urls))
@@ -21,6 +21,13 @@ duckdb_import <- function(urls,
   CMD <- "CREATE TABLE"
   if(!local) CMD <- "CREATE VIEW"
   
+  
+  # httpfs crashes windows, use local parquet
+  CMD <- "CREATE VIEW"
+  urls <- download_cache(urls)
+  
+  
+  
   send_query <- purrr::possibly(DBI::dbSendQuery, otherwise=NULL)
   
   for(i in seq_along(urls)){
@@ -31,4 +38,9 @@ duckdb_import <- function(urls,
     send_query(conn, view_query)
   }
   invisible(conn)
+}
+
+download_cache <- function(urls) {
+  ids <- lapply(urls, contentid::store)
+  vapply(ids, contentid::resolve, character(1L))
 }

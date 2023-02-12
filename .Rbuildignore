@@ -26,3 +26,4 @@ circle.yml
 ^slb$
 ^parquet$
 ^\.github$
+^CRAN-SUBMISSION$
