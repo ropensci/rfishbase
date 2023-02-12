@@ -1,6 +1,6 @@
 
 bibentry(
-  entry = 'article',
+  bibtype = 'article',
   title = 'rfishbase: exploring, manipulating and visualizing {FishBase} data from R',
   author = c(person("Carl", "Boettiger", role = c("cre", "aut"), email = "cboettig@ropensci.org"),
              person("Duncan", "Temple Lang", role="aut"), 
