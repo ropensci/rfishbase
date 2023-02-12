@@ -41,18 +41,20 @@ default_db <- fb_conn
 #' or [fb_import()].
 #' @export
 db_disconnect <- function(db = NULL){
-  if(is.null(db)){
-    db_name <- ls(envir = rfishbase_cache)
-    if(length(db_name)>0) {
-      db <- mget(db_name[[1]], envir = rfishbase_cache, ifnotfound = NA)[[1]]
-      remove(list = db_name[[1]], envir = rfishbase_cache)
+  if(!is.null(db)){
+    if(inherits(db, "duckdb_connection")) {
+      DBI::dbDisconnect(db, shutdown=TRUE)
     }
   }
-  if(inherits(db, "duckdb_connection")) {
-    tryCatch(DBI::dbDisconnect(db, shutdown=TRUE), 
-             error = function(e) NULL, finally=NULL)
+  db_name <- ls(envir = rfishbase_cache)
+  for(cached in db_name) {
+    db <- mget(cached, envir = rfishbase_cache, ifnotfound = NA)[[1]]
+    remove(list = cached, envir = rfishbase_cache)
+    if(inherits(db, "duckdb_connection")) {
+      duckdb::dbDisconnect(db, shutdown=TRUE)
+    }
+    
   }
-  
 }
 
 

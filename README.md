@@ -149,17 +149,6 @@ available_releases()
 
     [1] "23.01" "21.06" "19.04"
 
-Users can trigger a one-time download of all fishbase tables (or a list
-of desired tables) using `fb_import()`. This will ensure later use of
-any function can operate smoothly even when no internet connection is
-available. Any table already downloaded will not be re-downloaded.
-(Note: `fb_import()` also returns a remote duckdb database connection to
-the tables, for users who prefer to work with the remote data objects.)
-
-``` r
-conn <- fb_import()
-```
-
 ## Low-memory environments
 
 If you have very limited RAM (e.g. \<= 1 GB available) it may be helpful
@@ -171,24 +160,29 @@ the table is appropriately subset, the user will need to call
 commands.
 
 ``` r
-fb_tbl("occurrence", collect = FALSE)
+fb_tbl("occurrence")
 ```
 
-    # Source:   table<occurrence> [?? x 3]
-    # Database: DuckDB 0.6.2-dev1166 [unknown@Linux 5.17.15-76051715-generic:R 4.2.2/:memory:]
-       AreaCode RegionNo TS    
-          <int>    <int> <dttm>
-     1       18        1 NA    
-     2       21        1 NA    
-     3       21        2 NA    
-     4       21        6 NA    
-     5       21       15 NA    
-     6       27        2 NA    
-     7       27        3 NA    
-     8       27        4 NA    
-     9       27        6 NA    
-    10       27       11 NA    
-    # … with more rows
+    # A tibble: 1,097,303 × 106
+       catnum2 OccurrenceR…¹ SpecC…² Syncode Stock…³ Genus…⁴ Speci…⁵ ColName PicName
+         <int>         <int>   <int>   <int>   <int> <chr>   <chr>   <chr>   <chr>  
+     1   34424         36653     227   22902     241 "Megal… "cypri… "Megal… ""     
+     2   95154         45880      NA      NA      NA ""      ""      ""      ""     
+     3   97606         45880      NA      NA      NA ""      ""      ""      ""     
+     4  100025         45880    5520   25676    5809 "Johni… "belan… ""      ""     
+     5   98993         45880    5676   16650    5969 "Chrom… "retro… ""      ""     
+     6   99316         45880     454   23112     468 "Drepa… "punct… ""      ""     
+     7   99676         45880    5388  145485    5647 "Gymno… "bosch… ""      ""     
+     8   99843         45880   16813  119925   15264 "Hemir… "balin… ""      ""     
+     9  100607         45880    8288   59635    8601 "Ostra… "rhino… ""      ""     
+    10  101529         45880      NA      NA      NA "Scomb… "toloo… ""      ""     
+    # … with 1,097,293 more rows, 97 more variables: CatNum <chr>, URL <chr>,
+    #   Station <chr>, Cruise <chr>, Gazetteer <chr>, LocalityType <chr>,
+    #   WaterDepthMin <dbl>, WaterDepthMax <dbl>, AltitudeMin <int>,
+    #   AltitudeMax <int>, LatitudeDeg <int>, LatitudeMin <dbl>, NorthSouth <chr>,
+    #   LatitudeDec <dbl>, LongitudeDeg <int>, LongitudeMIn <dbl>, EastWest <chr>,
+    #   LongitudeDec <dbl>, Accuracy <chr>, Salinity <chr>, LatitudeTo <dbl>,
+    #   LongitudeTo <dbl>, LatitudeDegTo <int>, LatitudeMinTo <dbl>, …
 
 ## Local copy
 
@@ -200,16 +194,27 @@ Remove the default storage directory (given by `db_dir()`) after
 upgrading duckdb if using a local copy.
 
 ``` r
-db_disconnect()
 options("rfishbase_local_db" = TRUE)
+db_disconnect() # close previous remote connection
 
-species()
-
-
-# examine use a generic connection, note persistent dbdir:
-conn <- fb_conn() 
+conn <- fb_conn()
 conn
 ```
+
+    <duckdb_connection 5fa20 driver=<duckdb_driver 543a0 dbdir='/home/cboettig/.local/share/R/rfishbase/fishbase_23.01' read_only=FALSE bigint=numeric>>
+
+Users can trigger a one-time download of all fishbase tables (or a list
+of desired tables) using `fb_import()`. This will ensure later use of
+any function can operate smoothly even when no internet connection is
+available. Any table already downloaded will not be re-downloaded.
+(Note: `fb_import()` also returns a remote duckdb database connection to
+the tables, for users who prefer to work with the remote data objects.)
+
+``` r
+fb_import()
+```
+
+    <duckdb_connection 5fa20 driver=<duckdb_driver 543a0 dbdir='/home/cboettig/.local/share/R/rfishbase/fishbase_23.01' read_only=FALSE bigint=numeric>>
 
 ## Interactive RStudio pane
 

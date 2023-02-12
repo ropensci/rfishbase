@@ -90,19 +90,16 @@ By default, tables are downloaded the first time they are used.  `rfishbase` def
 available_releases()
 ```
 
-Users can trigger a one-time download of all fishbase tables (or a list of desired tables) using `fb_import()`. This will ensure later use of any function can operate smoothly even when no internet connection is available. Any table already downloaded will not be re-downloaded. (Note: `fb_import()` also returns a remote duckdb database connection to the tables, for users who prefer to work with the remote data objects.) 
 
-```{r}
-conn <- fb_import()
-```
  
 ## Low-memory environments
 
 If you have very limited RAM (e.g. <= 1 GB available) it may be helpful to use `fishbase` tables in remote form by setting `collect = FALSE`.  This allows the tables to remain on disk, while the user is still able to use almost all `dplyr` functions (see the `dbplyr` vignette).  Once the table is appropriately subset, the user will need to call `dplyr::collect()` to use generic non-dplyr functions, such as plotting commands.  
 
 ```{r}
-fb_tbl("occurrence", collect = FALSE)
+fb_tbl("occurrence")
 ```
+
 
 ## Local copy
 
@@ -111,18 +108,25 @@ Local copy will get better performance after initial import, but may experience 
 `duckdb` is upgraded or when multiple sessions attempt to access the directory.  Remove the default
 storage directory (given by `db_dir()`) after upgrading duckdb if using a local copy.  
 
-```{r eval=FALSE}
-db_disconnect()
+```{r}
 options("rfishbase_local_db" = TRUE)
+db_disconnect() # close previous remote connection
 
-species()
-
-
-# examine use a generic connection, note persistent dbdir:
-conn <- fb_conn() 
+conn <- fb_conn()
 conn
 ```
 
+Users can trigger a one-time download of all fishbase tables (or a list of desired tables) using `fb_import()`. This will ensure later use of any function can operate smoothly even when no internet connection is available. Any table already downloaded will not be re-downloaded. (Note: `fb_import()` also returns a remote duckdb database connection to the tables, for users who prefer to work with the remote data objects.) 
+
+```{r}
+fb_import()
+```
+
+
+ 
+```{r include=FALSE}
+db_disconnect(conn)
+```
 
 
 
