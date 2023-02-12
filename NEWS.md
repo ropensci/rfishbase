@@ -23,6 +23,11 @@ And constructed with the following guidelines:
 
 For more information on SemVer, please visit http://semver.org/.
 
+v 4.1.1
+-------
+
+* hotfix for bug in 4.1.0 on Windows -- duckdb httpfs on windows creates sigfault
+
 v 4.1.0
 --------
 
