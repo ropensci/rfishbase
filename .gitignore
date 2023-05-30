@@ -8,3 +8,6 @@ inst/doc
 .DS_Store
 *.7z
 parquet
+fbapp
+slbapp
+CRAN-SUBMISSION

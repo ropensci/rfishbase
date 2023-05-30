@@ -9,6 +9,9 @@ library(arrow)
 con <- dbConnect(RMariaDB::MariaDB(), dbname="fbapp", host="mariadb", password="password", user="root")
 tables <- dbListTables(con)
 
+fs::dir_delete("fbapp") # start clean
+
+fs::dir_create("fbapp")
 #' @importFrom glue glue
 duckdb <- dbConnect(duckdb::duckdb())
 for(table in tables){
@@ -25,8 +28,8 @@ prov::write_prov(data_out = urls,
                  description = "Database snapshot prepared by rOpenSci courtesy of Fishbase.org",
                  license = "https://creativecommons.org/licenses/by-nc/3.0/",
                  creator = list("type" = "Organization", name = "FishBase.org"),
-                 version = "23.01",
-                 issued = "2023-01-01",
+                 version = "23.05",
+                 issued = "2023-02-01",
                  provdb = "inst/prov/fb.prov",
                  append = TRUE,
                  schema="http://schema.org")
@@ -57,8 +60,8 @@ prov::write_prov(data_out = urls,
                  description = "Database snapshot prepared by rOpenSci courtesy of Fishbase.org",
                  license = "https://creativecommons.org/licenses/by-nc/3.0/",
                  creator = list("type" = "Organization", name = "FishBase.org"),
-                 version = "23.01",
-                 issued = "2023-01-01",
+                 version = "23.05",
+                 issued = "2023-04-01",
                  provdb = "inst/prov/slb.prov",
                  append = TRUE,
                  schema="http://schema.org")
