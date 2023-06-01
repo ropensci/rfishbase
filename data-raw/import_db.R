@@ -29,7 +29,7 @@ prov::write_prov(
   title = "FishBase Snapshots v23.05",
   description = "Parquet formatted Snapshots of FishBase Tables, distributed by rOpenSci",
   license = "https://creativecommons.org/licenses/by-nc/3.0/",
-  creator = list("type" = "Organization", name = "FishBase.org"),
+  creator = list("type" = "Organization", name = "FishBase.org", "@id" = "https://fishbase.org"),
   version = "23.05",
   issued = "2023-02-01",
   prov=fb.prov,
@@ -40,11 +40,9 @@ fs::file_copy(fb.prov, "fb_prov.json")
 fs::file_copy("fb_prov.json", fb.prov, overwrite = TRUE)
 
 jsonld::jsonld_frame(fb.prov,
-                     '{
+'{
   "@context": "http://schema.org/",
   "@type": "Dataset"
-
-  
 }') |> 
   readr::write_lines(fb.prov)
 
@@ -69,17 +67,30 @@ for(table in tables){
 urls <- paste0("https://github.com/cboettig/rfishbase_board/raw/main/slb_parquet_2023-01/", tables, ".parquet")
 
 
+slb.prov <- "inst/prov/slb.prov"
 
-prov::write_prov(data_out = urls, 
-                 title = "SeaLifeBase Database Snapshot: A Parquet serialization",
-                 description = "Database snapshot prepared by rOpenSci courtesy of Fishbase.org",
-                 license = "https://creativecommons.org/licenses/by-nc/3.0/",
-                 creator = list("type" = "Organization", name = "FishBase.org"),
-                 version = "23.05",
-                 issued = "2023-04-01",
-                 provdb = "inst/prov/slb.prov",
-                 append = TRUE,
-                 schema="http://schema.org")
+prov::write_prov(
+  data_out =  paste0("https://github.com/cboettig/rfishbase_board/raw/main/slb_parquet_2023-05/", 
+                     basename(fs::dir_ls("../rfishbase_board/slb_parquet_2023-05/"))),
+  title = "SeaLifeBase Snapshots v23.05",
+  description = "Parquet formatted Snapshots of FishBase Tables, distributed by rOpenSci",
+  license = "https://creativecommons.org/licenses/by-nc/3.0/",
+  creator = list("type" = "Organization", name = "FishBase.org", "@id" = "https://fishbase.org"),
+  version = "23.05",
+  issued = "2023-02-01",
+  prov=slb.prov,
+  schema="http://schema.org",
+  append=TRUE)
+
+fs::file_copy(slb.prov, "slb_prov.json")
+#fs::file_copy("slb_prov.json", slb.prov, overwrite = TRUE)
+
+jsonld::jsonld_frame(slb.prov,
+                     '{
+  "@context": "http://schema.org/",
+  "@type": "Dataset"
+}') |> 
+  readr::write_lines(slb.prov)
 
 
 
