@@ -28,14 +28,16 @@ parse_prov_ <-
   dataset <- prov[[i]]
   
   meta <- dataset$distribution
+  
+  # The pattern "map("term") |> map_chr(1)" takes first-match if multiples are found
   meta_df <- tibble::tibble(
     name = purrr::map(meta, "name", .default=NA) %>% 
-      purrr::map_chr(getElement,1) %>% tools::file_path_sans_ext(),
+      purrr::map_chr(1) %>% tools::file_path_sans_ext(),
     id =  purrr::map_chr(meta, "id", .default=NA),
     description = purrr::map_chr(meta, "description", .default=NA),
-    format = purrr::map_chr(meta, "encodingFormat", .default=NA),
+    format = purrr::map(meta, "encodingFormat", .default=NA)  |> map_chr(1),
     type =  purrr::map_chr(meta, "type", .default=NA),
-    url =   purrr::map_chr(meta, "contentUrl", .default=NA)
+    url =   purrr::map(meta, "contentUrl", .default=NA) |> map_chr(1)
   )
   meta_df[meta_df$type == "DataDownload",]
 }
