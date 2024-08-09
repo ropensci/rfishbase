@@ -113,7 +113,7 @@ faoareas <- function(species_list = NULL, fields = NULL,
   ref <- faoarrefs(server, version)
   out <- left_join(area, ref, by = "AreaCode")
   out <- select_fields(out, fields)
-  out |> filter(Species %in% species_list)
+  out |> species_subset(species_list, server=server, version=version)
 }
 
 select_fields <- function(df, fields = NULL){
@@ -193,7 +193,10 @@ species_by_ecosystem <- function(ecosystem, species_list = NULL,
 }
 
 species_subset <- function(species_list, full_data, server, version, db=NULL) {
-  full_data |> filter(Species %in% species_list)
+  codes <- fb_species(server, version) |> 
+    filter(Species %in% species_list)
+  
+  full_data |> inner_join(codes)
 }
 
 
