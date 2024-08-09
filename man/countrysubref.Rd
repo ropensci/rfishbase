@@ -15,6 +15,8 @@ countrysubref(
 \item{server}{Either "fishbase" or "sealifebase".}
 
 \item{version}{a version string for the database. See [available_releases()] for details.}
+
+\item{db}{database connection, now deprecated.}
 }
 \description{
 return a table of countrysubref

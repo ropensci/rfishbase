@@ -15,6 +15,8 @@ stocks(
 \arguments{
 \item{species_list}{A vector of scientific names (each element as "genus species"). If empty, a table for all fish will be returned.}
 
+\item{fields}{subset to these columns.  (recommend to omit this and handle manually)}
+
 \item{server}{Either "fishbase" or "sealifebase".}
 
 \item{version}{a version string for the database. See [available_releases()] for details.}

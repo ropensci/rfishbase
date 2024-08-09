@@ -1,5 +1,6 @@
 ## Consider information from: Countries | FAO areas | Ecosystems | Occurrences | Point map | Introductions | Faunaf
 
+default_db <- function() NULL
 
 # avoid globals
 DateEntered <- NA
@@ -123,8 +124,8 @@ select_fields <- function(df, fields = NULL){
 }
 
 faoarrefs <- function(server = getOption("FISHBASE_API", "fishbase"), 
-                      version = get_latest_release(),
-                      db = default_db()){
+                      version = "latest",
+                      db = NULL){
   fb_tbl("faoarref", server, version, db)
 }
 
@@ -145,11 +146,11 @@ faoarrefs <- function(server = getOption("FISHBASE_API", "fishbase"),
 ecosystem <-  function(species_list = NULL, 
                        fields = NULL, 
                        server = getOption("FISHBASE_API", "fishbase"), 
-                       version = get_latest_release(),
-                       db = default_db(),
+                       version = "latest",
+                       db = NULL,
                        ...){
   endpt = "ecosystem"
-  join = fb_tbl("ecosystemref", server = server, version = version, db = db)
+  join = fb_tbl("ecosystemref", server = server, version = version)
   by = "E_CODE"
   full_data <- fb_tbl(endpt, server, version, db) %>% fix_ids()
   out <- species_subset(species_list, full_data, server, version, db)
@@ -175,7 +176,7 @@ ecosystem <-  function(species_list = NULL,
 #' }
 species_by_ecosystem <- function(ecosystem, species_list = NULL,
   server = getOption("FISHBASE_API", "fishbase"),
-  version = get_latest_release(), db = default_db(), ...) {
+  version = "latest", db = NULL, ...) {
 
   ecosysref = fb_tbl("ecosystemref", server, version, db)
   ecosysname <- dplyr::filter(ecosysref, EcosystemName == ecosystem)
@@ -194,9 +195,9 @@ species_by_ecosystem <- function(ecosystem, species_list = NULL,
 
 species_subset <- function(species_list, full_data, server, version, db=NULL) {
   codes <- fb_species(server, version) |> 
-    filter(Species %in% species_list)
+    dplyr::filter(Species %in% species_list)
   
-  full_data |> inner_join(codes)
+  full_data |> dplyr::inner_join(codes)
 }
 
 

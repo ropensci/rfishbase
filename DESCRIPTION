@@ -33,7 +33,8 @@ Imports:
     dplyr,
     duckdbfs,
     rlang,
-    magrittr
+    magrittr,
+    memoise
 Suggests:
     testthat,
     rmarkdown,

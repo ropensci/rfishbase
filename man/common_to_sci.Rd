@@ -20,6 +20,8 @@ common_to_sci(
 \item{server}{Either "fishbase" or "sealifebase".}
 
 \item{version}{a version string for the database. See [available_releases()] for details.}
+
+\item{db}{database connection, now deprecated.}
 }
 \value{
 a character vector of scientific names

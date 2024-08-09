@@ -8,8 +8,8 @@ species_by_ecosystem(
   ecosystem,
   species_list = NULL,
   server = getOption("FISHBASE_API", "fishbase"),
-  version = get_latest_release(),
-  db = default_db(),
+  version = "latest",
+  db = NULL,
   ...
 )
 }
@@ -21,6 +21,8 @@ species_by_ecosystem(
 \item{server}{Either "fishbase" or "sealifebase".}
 
 \item{version}{a version string for the database. See [available_releases()] for details.}
+
+\item{db}{database connection, now deprecated.}
 }
 \value{
 a table of species ecosystems data

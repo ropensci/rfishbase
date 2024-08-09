@@ -21,7 +21,11 @@ common_names(
 
 \item{version}{a version string for the database. See [available_releases()] for details.}
 
+\item{db}{database connection, now deprecated.}
+
 \item{Language}{a string specifying the language for the common name, e.g. "English"}
+
+\item{fields}{subset to these columns.  (recommend to omit this and handle manually)}
 }
 \value{
 a data.frame of common names by species queried. If multiple species are queried,

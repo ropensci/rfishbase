@@ -18,6 +18,8 @@ synonyms(
 \item{server}{Either "fishbase" or "sealifebase".}
 
 \item{version}{a version string for the database. See [available_releases()] for details.}
+
+\item{db}{database connection, now deprecated.}
 }
 \value{
 A table with information about the synonym. Will generally be only a single
