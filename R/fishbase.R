@@ -6,11 +6,11 @@
 #' nearly 200,000 species records for all types of aquatic life not covered by
 #' FishBase.'
 #' @aliases rfishbase
-#' @docType package
-#' @title The new R interface to Fishbase, v2.0
+#' @docType _PACKAGE
+#' @title The new R interface to Fishbase, v5.0
 #' @author Carl Boettiger \email{carl@@ropensci.org}
 #' @author Scott Chamberlain \email{scott@@ropensci.org}
 #' @keywords package
-NULL
+
 
 

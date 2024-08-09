@@ -7,9 +7,9 @@
 common_to_sci(
   x,
   Language = "English",
-  server = getOption("FISHBASE_API", "fishbase"),
-  version = get_latest_release(),
-  db = default_db()
+  server = c("fishbase", "sealifebase"),
+  version = "latest",
+  db = NULL
 )
 }
 \arguments{
@@ -17,13 +17,9 @@ common_to_sci(
 
 \item{Language}{a string specifying the language for the common name, e.g. "English"}
 
-\item{server}{can be set to either "fishbase" or "sealifebase" to switch between databases. NOTE: it is usually
-easier to leave this as NULL and set the source instead using the environmental variable `FISHBASE_API`, e.g.
-`Sys.setenv(FISHBASE_API="sealifebase")`.}
+\item{server}{Either "fishbase" or "sealifebase".}
 
-\item{version}{a version string for the database, will default to the latest release. see [get_releases()] for details.}
-
-\item{db}{the}
+\item{version}{a version string for the database. See [available_releases()] for details.}
 }
 \value{
 a character vector of scientific names

@@ -17,7 +17,7 @@ Ecosystemname <- NA
 #' @export
 #' @examplesIf interactive() 
 #' \dontrun{
-#' country(species_list(Genus='Labroides'))
+#' country("Bolbometopon muricatum")
 #' }
 #' @details 
 #' e.g. http://www.fishbase.us/Country
@@ -84,29 +84,10 @@ c_code <- function(c_code = NULL,
 globalVariables(c("C_Code", "PAESE"))
 
 country_names <- function(server = getOption("FISHBASE_API", "fishbase"), 
-                          version = get_latest_release(),
-                          db = default_db()){
-  fb_tbl("countref", server, version, db) %>% select(country = PAESE, C_Code)
-}
-#' distribution
-#' 
-#' return a table of species locations as reported in FishBASE.org FAO location data
-#' 
-#' @inheritParams species
-#' @export
-#' @examplesIf interactive() 
-#' \dontrun{
-#' distribution(species_list(Genus='Labroides'))
-#' }
-#' @details currently this is ~ FAO areas table (minus "note" field)
-#' e.g. http://www.fishbase.us/Country/FaoAreaList.php?ID=5537
-distribution <- function(species_list=NULL, 
-                         fields = NULL, 
-                         server = getOption("FISHBASE_API", "fishbase"), 
-                         version = get_latest_release(),
-                         db = default_db(),
-                         ...){
-  faoareas(species_list, fields = fields, server = server, version, db) 
+                          version = "latest",
+                          db = NULL){
+  fb_tbl("countref", server, version, db) %>% 
+    select(country = PAESE, C_Code)
 }
 
 
@@ -122,20 +103,17 @@ distribution <- function(species_list=NULL,
 #' \dontrun{
 #'   faoareas()
 #' }
-#' @details currently this is ~ FAO areas table (minus "note" field)
 #' e.g. http://www.fishbase.us/Country/FaoAreaList.php?ID=5537
 faoareas <- function(species_list = NULL, fields = NULL, 
                      server = getOption("FISHBASE_API", "fishbase"), 
-                     version = get_latest_release(),
-                     db = default_db(),
+                     version = "latest",
+                     db = NULL,
                      ...){
-  area <- fb_tbl("faoareas", server, version, db)
-  ref <- faoarrefs(server, version, db)
+  area <- fb_tbl("faoareas", server, version)
+  ref <- faoarrefs(server, version)
   out <- left_join(area, ref, by = "AreaCode")
   out <- select_fields(out, fields)
-  
-  species_subset(species_list, out, server, version, db) %>%
-    dplyr::collect()
+  out |> filter(Species %in% species_list)
 }
 
 select_fields <- function(df, fields = NULL){
@@ -214,15 +192,10 @@ species_by_ecosystem <- function(ecosystem, species_list = NULL,
   dplyr::collect(out)
 }
 
-#' occurrence
-#' 
-#' @details THE OCCURRENCE TABLE HAS BEEN DROPPED BY FISHBASE - THIS
-#' FUNCTION NOW RETURNS A STOP MESSAGE.
-#' @export
-occurrence <- function() {
-  stop("occurrence is no longer available", call. = FALSE)
-  #endpoint("occurrence")
+species_subset <- function(species_list, full_data, server, version, db=NULL) {
+  full_data |> filter(Species %in% species_list)
 }
+
 
 #' introductions
 #' 

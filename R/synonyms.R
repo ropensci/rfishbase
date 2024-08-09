@@ -22,38 +22,36 @@
 #  species("Bolbometopon muricatum")
 #  }
 synonyms <- function(species_list = NULL,
-                     server = getOption("FISHBASE_API", "fishbase"),
-                     version = get_latest_release(),
-                     db = default_db(),
+                     server = c("fishbase", "sealifebase"),
+                     version = "latest",
+                     db = NULL,
                      ...){
+  server <- match.arg(server)
 
-  if (is.null(server))
-    server <- getOption("FISHBASE_API", FISHBASE_API)
   if (!grepl("sealifebase", server)) {
     syn <-
       fb_tbl("synonyms", server, version, db) %>%
       mutate(synonym = paste(SynGenus, SynSpecies)) %>%
-      select(synonym, Status, SpecCode, SynCode,
-             CoL_ID, TSN, WoRMS_ID, ZooBank_ID,
-             TaxonLevel)
+      select(dplyr::any_of(c("synonym", "Status", "SpecCode", "SynCode",
+             "CoL_ID", "TSN", "WoRMS_ID", "ZooBank_ID",
+             "TaxonLevel")))
   } else {
     syn <-
       fb_tbl("synonyms", server, version, db) %>%
       mutate(synonym = paste(SynGenus, SynSpecies)) %>%
-      select("synonym", "Status", "SpecCode", "SynCode",
+      select(dplyr::any_of(c("synonym", "Status", "SpecCode", "SynCode",
              "CoL_ID", "TSN", "ZooBank_ID",
-             "TaxonLevel")
+             "TaxonLevel")))
 
  }
 
   if(is.null(species_list))
-    return(collect(syn))
+    return(syn)
 
   df <- data.frame(synonym = species_list, stringsAsFactors = FALSE)
-  
+  codes <- fb_species(server, version)
   left_join(df, syn, by="synonym") %>%
-    left_join(fb_species(server, version, db), by = "SpecCode") %>%
-    collect()
+    left_join(codes, by = "SpecCode")
 }
 
 

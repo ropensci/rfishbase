@@ -8,7 +8,7 @@ fb_tbl(
   tbl,
   server = c("fishbase", "sealifebase"),
   version = "latest",
-  db = fb_conn(server, version),
+  db = NULL,
   collect = TRUE
 )
 }
@@ -16,11 +16,11 @@ fb_tbl(
 \item{tbl}{table name, as it appears in the database. See [fb_tables()]
 for a list.}
 
-\item{server}{fishbase or sealifebase}
+\item{server}{Access data from fishbase or sealifebase?}
 
-\item{version}{release version}
+\item{version}{Version, see [available_releases()]}
 
-\item{db}{A cachable duckdb database connection}
+\item{db}{database connection, deprecated}
 
 \item{collect}{should we return an in-memory table? Generally best to leave
 as TRUE unless RAM is too limited.  A remote table can be used with most

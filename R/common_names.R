@@ -22,15 +22,15 @@
 #' @importFrom purrr map_dfr
 common_to_sci <- function(x, 
                           Language = "English", 
-                          server = getOption("FISHBASE_API", "fishbase"), 
-                          version = get_latest_release(),
-                          db = default_db()){
+                          server = c("fishbase", "sealifebase"), 
+                          version = "latest",
+                          db = NULL){
   
-  comnames <- get_comnames(server, version, db) %>% dplyr::collect()
+  comnames <- get_comnames(server, version)
   subset <- 
     purrr::map_dfr(x, function(y){
       y <- stringr::str_to_lower(y)
-      y <- enquo(y) 
+      y <- rlang::enquo(y) 
       dplyr::filter(comnames, grepl(!!y, stringr::str_to_lower(ComName)))
     })
   
@@ -38,19 +38,20 @@ common_to_sci <- function(x,
 } 
 
 
-get_comnames <- function(server = getOption("FISHBASE_API", "fishbase"), 
-                         version = get_latest_release(),
-                         db = default_db(),
-                         lang = "English"){  
-  ## FIXME switch to SLB if server indicates
-  df <- fb_tbl("comnames", server, version, db)
+get_comnames <- function(server = c("fishbase", "sealifebase"), 
+                         version = "latest",
+                         db = NULL,
+                         lang = "English"){ 
+  ## Many spec-codes may have multiple Common Names in a given language!
+  sp_names <- fb_species(server, version)
+  df <- fb_tbl("comnames", server, version)
   Language <- rlang::sym("Language")
   value <- rlang::quo(lang)
   comnames <- df %>% 
     dplyr::select("ComName", "Language", "SpecCode") %>%  
     dplyr::filter(!!Language == !!value) %>% 
     dplyr::distinct() %>% 
-    dplyr::left_join(fb_species(server, version, db), by = "SpecCode") %>% 
+    dplyr::left_join(sp_names, by = "SpecCode") %>% 
     dplyr::select("Species", "ComName", "Language", "SpecCode")
   
   comnames
@@ -64,20 +65,22 @@ globalVariables(c("ComName", "Language"))
 #' @param Language a string specifying the language for the common name, e.g. "English"
 #' @return a data.frame of common names by species queried. If multiple species are queried,
 #' The resulting data.frames are concatenated. 
-#' @details Note that there are many common names for a given sci name, so sci_to_common doesn't make sense
+#' @details Note that there are many common names for a given sci name
 #' 
 #' @export common_names sci_to_common
 #' @aliases common_names sci_to_common
+#' @examplesIf interactive()
+#' common_names("Bolbometopon muricatum")
+#' 
 common_names <- function(species_list = NULL, 
-                         server = getOption("FISHBASE_API", "fishbase"), 
-                         version = get_latest_release(),
-                         db = default_db(),
+                         server = c("fishbase", "sealifebase"), 
+                         version = "latest",
+                         db = NULL,
                         Language = "English",
                         fields = NULL){
-  species_subset(species_list, 
-                 get_comnames(server, version, db, lang = Language), 
-                 server, version, db) %>% 
-    dplyr::collect()
+
+  get_comnames(server, version, db, lang = Language) |>
+    filter(Species %in% species_list)
 }  
 
 

@@ -8,26 +8,17 @@ faoareas(
   species_list = NULL,
   fields = NULL,
   server = getOption("FISHBASE_API", "fishbase"),
-  version = get_latest_release(),
-  db = default_db(),
+  version = "latest",
+  db = NULL,
   ...
 )
 }
 \arguments{
 \item{species_list}{A vector of scientific names (each element as "genus species"). If empty, a table for all fish will be returned.}
 
-\item{fields}{a character vector specifying which fields (columns) should be returned. By default,
-all available columns recognized by the parser are returned.  Mostly for backwards compatibility as users can subset by column later}
+\item{server}{Either "fishbase" or "sealifebase".}
 
-\item{server}{can be set to either "fishbase" or "sealifebase" to switch between databases. NOTE: it is usually
-easier to leave this as NULL and set the source instead using the environmental variable `FISHBASE_API`, e.g.
-`Sys.setenv(FISHBASE_API="sealifebase")`.}
-
-\item{version}{a version string for the database, will default to the latest release. see [get_releases()] for details.}
-
-\item{db}{the}
-
-\item{...}{unused; for backwards compatibility only}
+\item{version}{a version string for the database. See [available_releases()] for details.}
 }
 \value{
 a tibble, empty tibble if no results found
@@ -35,14 +26,11 @@ a tibble, empty tibble if no results found
 \description{
 return a table of species locations as reported in FishBASE.org FAO location data
 }
-\details{
-currently this is ~ FAO areas table (minus "note" field)
-e.g. http://www.fishbase.us/Country/FaoAreaList.php?ID=5537
-}
 \examples{
 \dontshow{if (interactive() ) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 \dontrun{
   faoareas()
 }
+e.g. http://www.fishbase.us/Country/FaoAreaList.php?ID=5537
 \dontshow{\}) # examplesIf}
 }

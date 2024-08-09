@@ -1,4 +1,19 @@
-hf <- "https://huggingface.co"
+
+
+fb_tbl <- function(tbl, 
+                   server = c("fishbase", "sealifebase"), 
+                   version = "latest",
+                   collect = TRUE) {
+  urls <- fb_urls(server, version)
+  names(urls) <- tbl_name(urls)
+  
+  url <- urls[tbl]
+  out <- duckdbfs::open_dataset(url)
+  if(collect)
+    out <- dplyr::collect(out)
+  
+  out  
+}
 
 
 hf_urls <- function(path  = "data/fb/v24.07/parquet", 
@@ -6,6 +21,7 @@ hf_urls <- function(path  = "data/fb/v24.07/parquet",
                     branch = "main"
                    ) { 
 
+  hf <- "https://huggingface.co"
   paths <-
     glue::glue("{hf}/api/{repo}/tree/{branch}/{path}") |>
     jsonlite::read_json() |> 
@@ -27,6 +43,7 @@ available_releases <- function(server = c("fishbase", "sealifebase")) {
   sv <- server_code(server)
   repo <- "datasets/cboettig/fishbase"
   path <- glue::glue("data/{sv}")
+  hf <- "https://huggingface.co"
   
   versions <-
     glue::glue("{hf}/api/{repo}/tree/{branch}/{path}") |>
@@ -37,43 +54,33 @@ available_releases <- function(server = c("fishbase", "sealifebase")) {
   versions
   
 }
-# "23.05" "23.01" "21.06" "19.04"
-#url |> duckdbfs::open_dataset()
 
 fb_urls <- function(server = c("fishbase", "sealifebase"), 
                       version = "latest") {
     
-    if(version == "latest") {
-      version <- max(available_releases(server))
+    releases <- available_releases(server)
+    if (version == "latest") {
+      version <- max(releases)
     }
-    
+    if ( !(version %in% releases) ) {
+      stop(
+        glue::glue("version {version} not in ",
+                   glue::glue_collapse(
+                     glue::glue("{releases}"), ", ", last = " or "))
+      )
+    }
+  
     sv <- server_code(server)
-    
     path  <- glue::glue("data/{sv}/v{version}/parquet")
     hf_urls(path)
-    
 }
 
 fb_tables <- function(server = c("fishbase", "sealifebase"), 
                       version = "latest") {
-  fb_urls(server, version) |>
-    basename() |>
-    stringr::str_remove(".parquet")
+  fb_urls(server, version) |> tbl_name()
+   
 }
 
-fb_table <- function(tbl, 
-                     server = c("fishbase", "sealifebase"), 
-                     version = "latest",
-                     collect = TRUE) {
-  urls <- fb_urls(server, version)
-  tbl_names <- urls |> basename() |> stringr::str_remove(".parquet")
-  names(urls) <- tbl_names
-  url <- urls[tbl]
-  
-  out <- duckdbfs::open_dataset(url)
-  if(collect)
-    out <- dplyr::collect(out)
-  
-  out  
+tbl_name <- function(urls) {
+  stringr::str_remove(basename(urls), ".parquet")
 }
-
