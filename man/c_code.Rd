@@ -20,17 +20,14 @@ c_code(
 \item{version}{a version string for the database. See [available_releases()] for details.}
 
 \item{db}{database connection, now deprecated.}
+
+\item{...}{additional arguments, currently ignored}
 }
 \description{
 return a table of country information for the requested c_code, as reported in FishBASE.org
 }
-\details{
-e.g. http://www.fishbase.us/Country
-}
 \examples{
 \dontshow{if (interactive() ) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-\dontrun{
 c_code(440)
-}
 \dontshow{\}) # examplesIf}
 }

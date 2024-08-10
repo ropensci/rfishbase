@@ -43,5 +43,5 @@ common_to_sci(c("Coho Salmon", "trout"))
 \dontshow{\}) # examplesIf}
 }
 \seealso{
-\code{\link{species_list}}, \code{\link{synonyms}}
+\code{\link{synonyms}}
 }

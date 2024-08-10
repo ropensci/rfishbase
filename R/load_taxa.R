@@ -26,7 +26,11 @@ load_taxa <- memoise::memoise(load_taxa_)
 
 
 
-
+dummy_fn <- function(f) {
+  # CRAN check doesn't recognize memoise use in the above and throws note:
+  # Namespace in Imports field not imported from: ‘memoise’
+  memoise::memoise(f)
+}
 
 
 

@@ -50,8 +50,10 @@ synonyms <- function(species_list = NULL,
 
   df <- data.frame(synonym = species_list, stringsAsFactors = FALSE)
   codes <- fb_species(server, version)
-  left_join(df, syn, by="synonym") %>%
-    left_join(codes, by = "SpecCode")
+  dplyr::left_join(df, syn, by="synonym", 
+            relationship = "many-to-many" 
+            ) %>%
+    dplyr::left_join(codes, by = "SpecCode")
 }
 
 

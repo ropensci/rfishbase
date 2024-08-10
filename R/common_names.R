@@ -15,7 +15,7 @@
 #' common_to_sci(c("Bicolor cleaner wrasse", "humphead parrotfish"), Language="English")
 #' common_to_sci(c("Coho Salmon", "trout"))
 #' }
-#' @seealso \code{\link{species_list}}, \code{\link{synonyms}}
+#' @seealso \code{\link{synonyms}}
 #' @export
 #' @importFrom dplyr filter select distinct collect
 #' @importFrom stringr str_to_lower

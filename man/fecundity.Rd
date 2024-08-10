@@ -9,6 +9,7 @@ fecundity(
   fields = NULL,
   server = c("fishbase", "sealifebase"),
   version = "latest",
+  db = NULL,
   ...
 )
 }
@@ -20,6 +21,10 @@ fecundity(
 \item{server}{Either "fishbase" or "sealifebase".}
 
 \item{version}{a version string for the database. See [available_releases()] for details.}
+
+\item{db}{database connection, now deprecated.}
+
+\item{...}{additional arguments, currently ignored}
 }
 \value{
 a table of species fecundity

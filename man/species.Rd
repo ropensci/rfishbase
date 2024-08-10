@@ -9,6 +9,7 @@ species(
   fields = NULL,
   server = c("fishbase", "sealifebase"),
   version = "latest",
+  db = NULL,
   ...
 )
 }
@@ -22,6 +23,8 @@ species(
 \item{version}{a version string for the database. See [available_releases()] for details.}
 
 \item{db}{database connection, now deprecated.}
+
+\item{...}{additional arguments, currently ignored}
 }
 \value{
 a data.frame with rows for species and columns for the fields returned by the query (FishBase 'species' table)

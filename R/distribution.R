@@ -20,8 +20,6 @@ Ecosystemname <- NA
 #' \dontrun{
 #' country("Bolbometopon muricatum")
 #' }
-#' @details 
-#' e.g. http://www.fishbase.us/Country
 country <- endpoint("country", join = country_names())
 
 #' countrysub
@@ -61,11 +59,7 @@ countrysubref <- function(server = getOption("FISHBASE_API", "fishbase"),
 #' @param c_code a C_Code or list of C_Codes (FishBase country code)
 #' @export
 #' @examplesIf interactive() 
-#' \dontrun{
 #' c_code(440)
-#' }
-#' @details 
-#' e.g. http://www.fishbase.us/Country
 c_code <- function(c_code = NULL, 
                    server = getOption("FISHBASE_API", "fishbase"), 
                    version = get_latest_release(),
@@ -101,10 +95,7 @@ country_names <- function(server = getOption("FISHBASE_API", "fishbase"),
 #' @export
 #' @return a tibble, empty tibble if no results found
 #' @examplesIf interactive() 
-#' \dontrun{
 #'   faoareas()
-#' }
-#' e.g. http://www.fishbase.us/Country/FaoAreaList.php?ID=5537
 faoareas <- function(species_list = NULL, fields = NULL, 
                      server = getOption("FISHBASE_API", "fishbase"), 
                      version = "latest",

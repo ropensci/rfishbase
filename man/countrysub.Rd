@@ -9,6 +9,7 @@ countrysub(
   fields = NULL,
   server = c("fishbase", "sealifebase"),
   version = "latest",
+  db = NULL,
   ...
 )
 }
@@ -20,6 +21,10 @@ countrysub(
 \item{server}{Either "fishbase" or "sealifebase".}
 
 \item{version}{a version string for the database. See [available_releases()] for details.}
+
+\item{db}{database connection, now deprecated.}
+
+\item{...}{additional arguments, currently ignored}
 }
 \description{
 return a table of countrysub for the requested species

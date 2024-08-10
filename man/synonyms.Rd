@@ -20,6 +20,8 @@ synonyms(
 \item{version}{a version string for the database. See [available_releases()] for details.}
 
 \item{db}{database connection, now deprecated.}
+
+\item{...}{additional arguments, currently ignored}
 }
 \value{
 A table with information about the synonym. Will generally be only a single

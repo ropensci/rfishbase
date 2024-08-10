@@ -27,7 +27,18 @@ as TRUE unless RAM is too limited.  A remote table can be used with most
 dplyr functions (filter, select, joins, etc) to further refine.}
 }
 \description{
-Access a fishbase or sealifebase table
+Please note that rfishbase accesses static snapshots of the raw database
+tables used by FishBase and Sealifebase websites. Because these are static
+snapshots, they may lag behind the latest available information on the web
+interface, but should provide stable results.
+}
+\details{
+Please also note that the website pages are not organized precisely along
+the lines of these tables.  A given page for a species may draw on data from
+multiple tables, and sometimes presents the data in a processed or summarized
+form.  Following RDB design, it is often
+necessary to join multiple tables.  Other data cleaning steps are sometimes
+necessary as well.
 }
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}

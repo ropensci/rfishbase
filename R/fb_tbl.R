@@ -1,5 +1,17 @@
 #' Access a fishbase or sealifebase table
 #' 
+#' 
+#' Please note that rfishbase accesses static snapshots of the raw database
+#' tables used by FishBase and Sealifebase websites. Because these are static
+#' snapshots, they may lag behind the latest available information on the web
+#' interface, but should provide stable results.  
+#' 
+#' Please also note that the website pages are not organized precisely along
+#' the lines of these tables.  A given page for a species may draw on data from
+#' multiple tables, and sometimes presents the data in a processed or summarized
+#' form.  Following RDB design, it is often
+#' necessary to join multiple tables.  Other data cleaning steps are sometimes
+#' necessary as well.  
 #' @param tbl table name, as it appears in the database. See [fb_tables()]
 #' for a list.
 #' @param server Access data from fishbase or sealifebase?
@@ -25,6 +37,13 @@ fb_tbl <- function(tbl,
   out  
 }
 
+#' List the tables available on fishbase/sealifebase
+#' 
+#' These table names can be used to access each of the corresponding tables
+#' using `[fb_tbl()]`.  Please note that following RDB design, it is often
+#' necessary to join multiple tables.  Other data cleaning steps are sometimes
+#' necessary as well.  
+#' @inheritParams fb_tbl
 #' @export
 #' @examplesIf interactive()
 #' fb_tables()

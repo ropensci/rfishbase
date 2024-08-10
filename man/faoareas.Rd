@@ -23,6 +23,8 @@ faoareas(
 \item{version}{a version string for the database. See [available_releases()] for details.}
 
 \item{db}{database connection, now deprecated.}
+
+\item{...}{additional arguments, currently ignored}
 }
 \value{
 a tibble, empty tibble if no results found
@@ -32,9 +34,6 @@ return a table of species locations as reported in FishBASE.org FAO location dat
 }
 \examples{
 \dontshow{if (interactive() ) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-\dontrun{
   faoareas()
-}
-e.g. http://www.fishbase.us/Country/FaoAreaList.php?ID=5537
 \dontshow{\}) # examplesIf}
 }
