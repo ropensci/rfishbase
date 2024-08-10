@@ -23,10 +23,35 @@ And constructed with the following guidelines:
 
 For more information on SemVer, please visit http://semver.org/.
 
+v 5.0.0
+-------
+
+Another streamlined re-design following new abilities for data hosting and access.
+This release relies on a HuggingFace datasets hosting for data and metadata hosting
+in parquet and schema.org.  
+
+Data access is simplified to use the simple HuggingFace datasets API instead
+of the previous contentid-based resolution. This allows metadata to be defined
+with directly alongside the data platform independent of the R package.  
+
+A simplified access protocol relies on `duckdbfs` for direct reads of tables.
+Several functions previously used only to manage connections are now deprecated
+or removed, along with a significant number of dependencies.
+
+Core use still centers around the same package API using the `fb_tbl()` function,
+with legacy helper functions for common tables like `species()` are still accessible and
+can still optionally filter by species name where appropriate.  As before, loading the
+full tables and sub-setting manually is still recommended.
+
+Historic helper  functions like `load_taxa()` (combining the taxonomic classification from Species,
+Genus, Family and Order tables), `validate_names()`, and `common_to_sci()` and 
+`sci_to_common()` should be in working order, all using table-based outputs.
+
+
 v 4.1.1
 -------
 
-* hotfix for bug in 4.1.0 on Windows -- duckdb httpfs on windows creates sigfault
+* hotfix for bug in 4.1.0 on Windows -- `duckdb` `httpfs` on windows created `segfault`
 
 v 4.1.0
 --------
