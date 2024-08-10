@@ -114,7 +114,7 @@ faoareas <- function(species_list = NULL, fields = NULL,
   ref <- faoarrefs(server, version)
   out <- left_join(area, ref, by = "AreaCode")
   out <- select_fields(out, fields)
-  out |> species_subset(species_list, server=server, version=version)
+  species_subset(species_list, out, server=server, version=version)
 }
 
 select_fields <- function(df, fields = NULL){
@@ -186,8 +186,8 @@ species_by_ecosystem <- function(ecosystem, species_list = NULL,
   e_code <- dplyr::collect(ecosysname)$E_CODE
   out <- dplyr::filter(ecosys, E_CODE == e_code)
   species <- dplyr::select(load_taxa(server, version, db, collect=FALSE), "SpecCode", "Species")
-  out <- left_join(out, species, by = "SpecCode")
-  out <- left_join(out, dplyr::select(ecosysref, E_CODE, EcosystemName),
+  out <- dplyr::left_join(out, species, by = "SpecCode")
+  out <- dplyr::left_join(out, dplyr::select(ecosysref, E_CODE, EcosystemName),
     by = "E_CODE")
   out <- dplyr::relocate(out, E_CODE, EcosystemName, SpecCode, Species)
   dplyr::collect(out)

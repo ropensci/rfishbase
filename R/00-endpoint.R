@@ -8,13 +8,14 @@ endpoint <- function(endpt, join = NULL, by = NULL){
            fields = NULL, 
            server = c("fishbase", "sealifebase"), 
            version = "latest",
+           db = NULL,
            ...){
     
-    out <- fb_tbl(endpt, server, version, db) %>% fix_ids()
+    out <- fb_tbl(endpt, server, version) %>% fix_ids()
     
     if(!is.null(species_list)){
       species <-
-        fb_tbl("species", server, version, db) %>%
+        fb_tbl("species", server, version) %>%
         dplyr::select("SpecCode", "Genus", "Species") %>%
         dplyr::mutate(sci_name = paste(Genus, Species)) %>%
         dplyr::filter(sci_name %in% species_list) %>%
@@ -69,7 +70,7 @@ fb_species <- function(server = getOption("FISHBASE_API", "fishbase"),
                        version = "latest",
                        db = NULL, 
                        ...){
-  load_taxa(server, version, db, collect = FALSE, ...) %>%
+  load_taxa(server, version, db=NULL, collect = FALSE, ...) %>%
     dplyr::select("SpecCode", "Species")
 }
 
