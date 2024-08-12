@@ -4,25 +4,13 @@
 \alias{load_taxa}
 \title{load_taxa}
 \usage{
-load_taxa(
-  server = getOption("FISHBASE_API", "fishbase"),
-  version = get_latest_release(),
-  db = default_db(server, version),
-  collect = TRUE,
-  ...
-)
+load_taxa(server = c("fishbase", "sealifebase"), version = "latest", ...)
 }
 \arguments{
 \item{server}{Either "fishbase" (the default) or "sealifebase"}
 
 \item{version}{the version of the database you want. Will default to the
-latest avialable; see [available_releases()].}
-
-\item{db}{A remote database connection. Will default to the best available
-system, see [default_db()].}
-
-\item{collect}{return a data.frame if TRUE, otherwise, a DBI connection to
-the table in the database}
+latest available; see [available_releases()].}
 
 \item{...}{for compatibility with previous versions}
 }

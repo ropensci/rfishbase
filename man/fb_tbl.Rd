@@ -8,7 +8,7 @@ fb_tbl(
   tbl,
   server = c("fishbase", "sealifebase"),
   version = "latest",
-  db = fb_conn(server, version),
+  db = NULL,
   collect = TRUE
 )
 }
@@ -16,18 +16,29 @@ fb_tbl(
 \item{tbl}{table name, as it appears in the database. See [fb_tables()]
 for a list.}
 
-\item{server}{fishbase or sealifebase}
+\item{server}{Access data from fishbase or sealifebase?}
 
-\item{version}{release version}
+\item{version}{Version, see [available_releases()]}
 
-\item{db}{A cachable duckdb database connection}
+\item{db}{database connection, deprecated}
 
 \item{collect}{should we return an in-memory table? Generally best to leave
 as TRUE unless RAM is too limited.  A remote table can be used with most
 dplyr functions (filter, select, joins, etc) to further refine.}
 }
 \description{
-Access a fishbase or sealifebase table
+Please note that rfishbase accesses static snapshots of the raw database
+tables used by FishBase and Sealifebase websites. Because these are static
+snapshots, they may lag behind the latest available information on the web
+interface, but should provide stable results.
+}
+\details{
+Please also note that the website pages are not organized precisely along
+the lines of these tables.  A given page for a species may draw on data from
+multiple tables, and sometimes presents the data in a processed or summarized
+form.  Following RDB design, it is often
+necessary to join multiple tables.  Other data cleaning steps are sometimes
+necessary as well.
 }
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}

@@ -1,39 +1,36 @@
 
-#' load_taxa
-#' 
-#' @param server Either "fishbase" (the default) or "sealifebase"
-#' @param version the version of the database you want. Will default to the
-#' latest avialable; see [available_releases()].
-#' @param db A remote database connection. Will default to the best available
-#' system, see [default_db()].
-#' @param collect return a data.frame if TRUE, otherwise, a DBI connection to
-#'  the table in the database
-#' @param ... for compatibility with previous versions
-#' @return the taxa list
-#' @export
-load_taxa <- function(server = getOption("FISHBASE_API", "fishbase"), 
-                      version = get_latest_release(),
-                      db = default_db(server, version),
-                      collect = TRUE,
+
+load_taxa_ <- function(server = c("fishbase", "sealifebase"), 
+                      version = "latest",
                       ...){
-  
-  #db_tbl <- tbl_name("taxa",  server, version)
-  #if(has_table(db_tbl)) return(dplyr::tbl(db, db_tbl))
-  
+  server <- match.arg(server)
   ## SeaLifeBase requires a different taxa table function:
-  if(is.null(server)) server <- getOption("FISHBASE_API", FISHBASE_API)
   if(grepl("sealifebase", server)){
-    taxa_table <- slb_taxa_table(server, version, db)
+    taxa_table <- slb_taxa_table(version)
   } else {
-    taxa_table<- fb_taxa_table(server, version, db)
+    taxa_table <- fb_taxa_table(version)
   }
-  
-  if(collect) return(dplyr::collect(taxa_table))
   
   taxa_table
 }
 
-  
+#' load_taxa
+#' 
+#' @param server Either "fishbase" (the default) or "sealifebase"
+#' @param version the version of the database you want. Will default to the
+#' latest available; see [available_releases()].
+#' @param ... for compatibility with previous versions
+#' @return the taxa list
+#' @export
+load_taxa <- memoise::memoise(load_taxa_)
+
+
+
+dummy_fn <- function(f) {
+  # CRAN check doesn't recognize memoise use in the above and throws note:
+  # Namespace in Imports field not imported from: ‘memoise’
+  memoise::memoise(f)
+}
 
 
 
@@ -41,28 +38,27 @@ globalVariables(c("SpecCode", "Species", "Genus", "Subfamily", "Family",
                   "Order", "Class", "SuperClass", "Phylum", "Kingdom", "tempcolumn"))
 
 
-fb_taxa_table <- 
-  function(server = getOption("FISHBASE_API", "fishbase"),
-           version = get_latest_release(),
-           db = default_db(server, version)){
+fb_taxa_table <- function(version = "latest", db = NULL){
+    
+  server <- "fishbase"
   
-  taxon_species <- fb_tbl("species", server, version, db) %>% 
+  taxon_species <- fb_tbl("species", server, version, db, collect=FALSE) %>% 
       select("SpecCode", "Species", "Genus", "Subfamily",
-      "GenCode", "SubGenCode", "FamCode")
+             "GenCode", "SubGenCode", "FamCode")
   
-  taxon_genus <- fb_tbl("genera", server, version, db) %>%
+  taxon_genus <- fb_tbl("genera", server, version, db, collect=FALSE) %>%
     select("GenCode", "GenName", "GenusCommonName" = "GenComName", 
            "FamCode", "Subfamily", "SubgenusOf")
   
-  taxon_family <- fb_tbl("families", server, version, db) %>% 
+  taxon_family <- fb_tbl("families", server, version, db, collect=FALSE) %>% 
     select("FamCode", "Family","FamilyCommonName" = "CommonName", "Order",
            "Ordnum", "Class", "ClassNum")
   
-  taxon_order <- fb_tbl("orders", server, version, db) %>%
+  taxon_order <- fb_tbl("orders", server, version, db, collect=FALSE) %>%
     select("Ordnum", "Order", "OrderCommonName" = "CommonName",
            "ClassNum", "Class") 
 
-  taxon_class <- fb_tbl("classes", server, version, db) %>% 
+  taxon_class <- fb_tbl("classes", server, version, db, collect=FALSE) %>% 
     select("ClassNum", "Class", "ClassCommonName" = "CommonName",
            "SuperClass", "Subclass")
   
@@ -78,7 +74,7 @@ fb_taxa_table <-
     dplyr::select("SpecCode", "Species", "Genus", "Subfamily", "Family", 
            "Order", "Class", "SuperClass") %>% 
     dplyr::mutate(Species = paste(Genus, Species)) %>%
-    dplyr::compute(temporary=FALSE)
+    dplyr::collect()
   taxa_table
   
 
@@ -87,7 +83,7 @@ fb_taxa_table <-
 
 
 
-slb_taxa_table <- function(server, version, db){
+slb_taxa_table <- function(version = "latest", db=NULL){
   
   server <- "sealifebase"
     
@@ -95,7 +91,8 @@ slb_taxa_table <- function(server, version, db){
     select("SpecCode", "Species", "Genus",
            "GenCode", "SubGenCode", "FamCode")
   taxon_genus <- fb_tbl("genera", server, version, db) %>% 
-    select("GenCode", "Genus" = "GEN_NAME", "GenusCommonName" = "CommonName", "FamCode" = "Famcode",
+    select("GenCode", "Genus" = "GEN_NAME",
+           "GenusCommonName" = "CommonName", "FamCode" = "Famcode",
            "Subfamily")
   taxon_family <- fb_tbl("families", server, version, db) %>% 
     select("FamCode", "Family","FamilyCommonName"="CommonName", "Order",

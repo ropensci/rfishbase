@@ -6,24 +6,22 @@
 \usage{
 synonyms(
   species_list = NULL,
-  server = getOption("FISHBASE_API", "fishbase"),
-  version = get_latest_release(),
-  db = default_db(),
+  server = c("fishbase", "sealifebase"),
+  version = "latest",
+  db = NULL,
   ...
 )
 }
 \arguments{
 \item{species_list}{A vector of scientific names (each element as "genus species"). If empty, a table for all fish will be returned.}
 
-\item{server}{can be set to either "fishbase" or "sealifebase" to switch between databases. NOTE: it is usually
-easier to leave this as NULL and set the source instead using the environmental variable `FISHBASE_API`, e.g.
-`Sys.setenv(FISHBASE_API="sealifebase")`.}
+\item{server}{Either "fishbase" or "sealifebase".}
 
-\item{version}{a version string for the database, will default to the latest release. see [get_releases()] for details.}
+\item{version}{a version string for the database. See [available_releases()] for details.}
 
-\item{db}{the}
+\item{db}{database connection, now deprecated.}
 
-\item{...}{unused; for backwards compatibility only}
+\item{...}{additional arguments, currently ignored}
 }
 \value{
 A table with information about the synonym. Will generally be only a single

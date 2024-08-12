@@ -19,8 +19,6 @@ test_that("Custom queries give desired result", {
   expect_is(rr, "tbl")
   expect_equal(nrow(rr), 2)
   
-  df <- species_names(2)
-  expect_is(df, "tbl")
 
 })
 

@@ -16,28 +16,6 @@ test_that("Check some classes and values of species table", {
 })
 
 
-test_that("We can pass a species_list based on taxanomic group", {
-  
-  needs_api()  
-  fish <- species_list(Genus = "Labroides") 
-  df <- species(fish)
-  expect_is(df, "data.frame")
-  expect_gt(dim(df)[1], 0)
-  
-  
-})
-
-test_that("We can pass a species_list based on taxanomic group", {
-  
-  needs_api()  
-  fish <- species_list(Genus = "Labroides") 
-  df <- species(fish)
-  expect_is(df, "data.frame")
-  expect_gt(dim(df)[1], 0)
-  
-  
-})
-
 ## Test filters
 test_that("We can filter on certain fields",{
   needs_api()  
@@ -45,8 +23,6 @@ test_that("We can filter on certain fields",{
                 fields=c('SpecCode', 'Species'))
   expect_is(df, "data.frame")
   expect_gt(dim(df)[1], 0)
-  
-  df <- load_species_meta()
   
 })
 

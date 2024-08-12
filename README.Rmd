@@ -13,9 +13,30 @@ output: github_document
 [![Downloads](https://cranlogs.r-pkg.org/badges/grand-total/rfishbase)](https://github.com/r-hub/cranlogs.app)
 <!-- badges: end -->
 
+Welcome to `rfishbase 5`! This is the fourth rewrite of the original `rfishbase` package described in [Boettiger et al. (2012)](https://doi.org/10.1111/j.1095-8649.2012.03464.x).   
 
 
-Welcome to `rfishbase 4`. This is the fourth rewrite of the original `rfishbase` package described in [Boettiger et al. (2012)](https://doi.org/10.1111/j.1095-8649.2012.03464.x).   
+Another streamlined re-design following new abilities for data hosting and access.
+This release relies on a HuggingFace datasets hosting for data and metadata hosting
+in parquet and schema.org.  
+
+Data access is simplified to use the simple HuggingFace datasets API instead
+of the previous contentid-based resolution. This allows metadata to be defined
+with directly alongside the data platform independent of the R package.  
+
+A simplified access protocol relies on `duckdbfs` for direct reads of tables.
+Several functions previously used only to manage connections are now deprecated
+or removed, along with a significant number of dependencies.
+
+Core use still centers around the same package API using the `fb_tbl()` function,
+with legacy helper functions for common tables like `species()` are still accessible and
+can still optionally filter by species name where appropriate.  As before, loading the
+full tables and sub-setting manually is still recommended.
+
+Historic helper  functions like `load_taxa()` (combining the taxonomic classification from Species,
+Genus, Family and Order tables), `validate_names()`, and `common_to_sci()` and 
+`sci_to_common()` should be in working order, all using table-based outputs.
+
 
 - `rfishbase 1.0` relied on parsing of XML pages served directly from Fishbase.org.  
 - `rfishbase 2.0` relied on calls to a ruby-based API, `fishbaseapi`, that provided access to SQL snapshots of about 20 of the more popular tables in FishBase or SeaLifeBase.
@@ -89,61 +110,6 @@ By default, tables are downloaded the first time they are used.  `rfishbase` def
 ```{r}
 available_releases()
 ```
-
-
- 
-## Low-memory environments
-
-If you have very limited RAM (e.g. <= 1 GB available) it may be helpful to use `fishbase` tables in remote form by setting `collect = FALSE`.  This allows the tables to remain on disk, while the user is still able to use almost all `dplyr` functions (see the `dbplyr` vignette).  Once the table is appropriately subset, the user will need to call `dplyr::collect()` to use generic non-dplyr functions, such as plotting commands.  
-
-```{r}
-fb_tbl("occurrence")
-```
-
-
-## Local copy
-
-Set the option "rfishbase_local_db" = TRUE to create a local copy, otherwise will use a remote copy.
-Local copy will get better performance after initial import, but may experience conflicts when
-`duckdb` is upgraded or when multiple sessions attempt to access the directory.  Remove the default
-storage directory (given by `db_dir()`) after upgrading duckdb if using a local copy.  
-
-```{r}
-options("rfishbase_local_db" = TRUE)
-db_disconnect() # close previous remote connection
-
-conn <- fb_conn()
-conn
-```
-
-Users can trigger a one-time download of all fishbase tables (or a list of desired tables) using `fb_import()`. This will ensure later use of any function can operate smoothly even when no internet connection is available. Any table already downloaded will not be re-downloaded. (Note: `fb_import()` also returns a remote duckdb database connection to the tables, for users who prefer to work with the remote data objects.) 
-
-```{r}
-fb_import()
-```
-
-
- 
-```{r include=FALSE}
-db_disconnect(conn)
-```
-
-
-
-## Interactive RStudio pane
-
-RStudio users can also browse all fishbase tables interactively in the RStudio connection browser by using the function `fisbase_pane()`.  Note that this function will first download a complete set of the fishbase tables.  
-
-## Backwards compatibility
-
-
-`rfishbase` 4.0 tries to maintain as much backwards compatibility as possible with rfishbase 3.0. Because parquet preserves native data types, some encoded types may differ from earlier versions. As before, these are not always the native type -- e.g. fishbase encodes some boolean (logical TRUE/FALSE) values as integer (-1, 0) or character types. Use `as.logical()` to coerce into the appropriate type in that case. 
-
-Toggling between fishbase and sealifebase servers using an environmental variable, `FISHBASE_API`, is now deprecated.  
-
-Note that fishbase will store downloaded files by hash in the app directory, given by `db_dir()`.  The default location can be set by configuring the desired path in the environmental variable, `FISHBASE_HOME`. 
-
-
 
 
 -----------

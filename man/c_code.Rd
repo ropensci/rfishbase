@@ -15,26 +15,19 @@ c_code(
 \arguments{
 \item{c_code}{a C_Code or list of C_Codes (FishBase country code)}
 
-\item{server}{can be set to either "fishbase" or "sealifebase" to switch between databases. NOTE: it is usually
-easier to leave this as NULL and set the source instead using the environmental variable `FISHBASE_API`, e.g.
-`Sys.setenv(FISHBASE_API="sealifebase")`.}
+\item{server}{Either "fishbase" or "sealifebase".}
 
-\item{version}{a version string for the database, will default to the latest release. see [get_releases()] for details.}
+\item{version}{a version string for the database. See [available_releases()] for details.}
 
-\item{db}{the}
+\item{db}{database connection, now deprecated.}
 
-\item{...}{unused; for backwards compatibility only}
+\item{...}{additional arguments, currently ignored}
 }
 \description{
 return a table of country information for the requested c_code, as reported in FishBASE.org
 }
-\details{
-e.g. http://www.fishbase.us/Country
-}
 \examples{
 \dontshow{if (interactive() ) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-\dontrun{
 c_code(440)
-}
 \dontshow{\}) # examplesIf}
 }

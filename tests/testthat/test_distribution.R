@@ -8,10 +8,10 @@ test_that("We can query locations", {
   sp <- c("Labroides bicolor",  "Labroides dimidiatus", 
           "Labroides pectoralis", "Labroides phthirophagus",
           "Labroides rubrolabiatus")
-  df <- distribution(sp)
+  df <- faoareas(sp)
   expect_is(df, "data.frame")
   
-  df <- distribution()
+  df <- faoareas()
   expect_is(df, "data.frame")
   
   ## currently these are remote tables
@@ -27,7 +27,6 @@ test_that("We can query locations", {
   df <- country_names()
   expect_is(df, "tbl")
   
-  expect_error(occurrence())
-  
+
 })
 
