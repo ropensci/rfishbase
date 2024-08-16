@@ -93,6 +93,42 @@ fb_tbl("species") %>%
 
 ```
 
+In most tables, species are identified by `SpecCode` (as per best practices) rather than scientific names.  Multiple tables can be joined on the `SpecCode` to more fully describe a species.  
+
+To filter species by taxonomic names, use the taxa table from `load_taxa()`, which provides a joined table of taxonomy from subspecies up through Class, along with the corresponding FishBase taxon ids codes.  Here is an example workflow joining two of the spawing tables and filtering to the grouper family, _Epinephelidae_:
+
+```{r  message=FALSE}
+library(rfishbase)
+library(dplyr)
+
+## Get the whole spawning and spawn agg table, joined together:
+spawn <- left_join(fb_tbl("spawning"),  
+                   fb_tbl("spawnagg"), 
+                   relationship = "many-to-many")
+
+# Filter taxa down to the desired species
+groupers <- load_taxa() |> filter(Family == "Epinephelidae")
+
+## A "filtering join" (inner join) 
+spawn |> inner_join(groupers)
+```
+
+## Species Names
+
+Always keep in mind that taxonomy is a dynamic concept. Species can be split or lumped based on new evidence, and naming authorities can disagree over which name is an 'accepted name' or 'synonym' for any given species. When providing your own list of species names, consider first checking that those names are "valid" in the current taxonomy established by FishBase:
+
+```{r message=FALSE}
+validate_names("Abramites ternetzi")
+```
+
+`rfishbase` can also provide tables of `synonyms()`, a table of `common_names()` in multiple languages, and convert `common_to_sci()` or `sci_to_common()`
+
+```{r message=FALSE}
+common_to_sci(c("Bicolor cleaner wrasse", "humphead parrotfish"), Language="English")
+```
+
+Note that the results are returned as a table, potentially indicating other common names for the same species, as well as potentially different species that match the provided common name! Please always be careful with names, and use unique SpecCodes to refer to unique species.  
+
 
 ## SeaLifeBase
 
