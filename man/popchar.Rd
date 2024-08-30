@@ -20,7 +20,7 @@ popchar(
 
 \item{server}{Either "fishbase" or "sealifebase".}
 
-\item{version}{a version string for the database. See [available_releases()] for details.}
+\item{version}{a version string for the database. See \code{\link[=available_releases]{available_releases()}} for details.}
 
 \item{db}{database connection, now deprecated.}
 
@@ -31,7 +31,7 @@ Table of maximum length (Lmax), weight (Wmax) and age (tmax)
 }
 \details{
 See references for official documentation.  From FishBase.org:
-This table presents information on maximum length (Lmax), 
+This table presents information on maximum length (Lmax),
 weight (Wmax) and age (tmax) from various localities where a species
 occurs. The largest values from this table are also entered in the
 SPECIES table. The POPCHAR table also indicates whether the Lmax,

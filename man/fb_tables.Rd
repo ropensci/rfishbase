@@ -9,11 +9,11 @@ fb_tables(server = c("fishbase", "sealifebase"), version = "latest")
 \arguments{
 \item{server}{Access data from fishbase or sealifebase?}
 
-\item{version}{Version, see [available_releases()]}
+\item{version}{Version, see \code{\link[=available_releases]{available_releases()}}}
 }
 \description{
 These table names can be used to access each of the corresponding tables
-using `[fb_tbl()]`.  Please note that following RDB design, it is often
+using \verb{[fb_tbl()]}.  Please note that following RDB design, it is often
 necessary to join multiple tables.  Other data cleaning steps are sometimes
 necessary as well.
 }

@@ -2,6 +2,7 @@
 % Please edit documentation in R/load_taxa.R
 \name{load_taxa}
 \alias{load_taxa}
+\alias{species_names}
 \title{load_taxa}
 \usage{
 load_taxa(server = c("fishbase", "sealifebase"), version = "latest", ...)
@@ -10,7 +11,7 @@ load_taxa(server = c("fishbase", "sealifebase"), version = "latest", ...)
 \item{server}{Either "fishbase" (the default) or "sealifebase"}
 
 \item{version}{the version of the database you want. Will default to the
-latest available; see [available_releases()].}
+latest available; see \code{\link[=available_releases]{available_releases()}}.}
 
 \item{...}{for compatibility with previous versions}
 }
@@ -18,5 +19,6 @@ latest available; see [available_releases()].}
 the taxa list
 }
 \description{
-load_taxa
+Show scientific classification of taxa
+Note: species_names() is an alias for load taxa.
 }

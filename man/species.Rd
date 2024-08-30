@@ -20,7 +20,7 @@ species(
 
 \item{server}{Either "fishbase" or "sealifebase".}
 
-\item{version}{a version string for the database. See [available_releases()] for details.}
+\item{version}{a version string for the database. See \code{\link[=available_releases]{available_releases()}} for details.}
 
 \item{db}{database connection, now deprecated.}
 
@@ -33,7 +33,7 @@ a data.frame with rows for species and columns for the fields returned by the qu
 Provide wrapper to work with species lists.
 }
 \details{
-The Species table is the heart of FishBase. This function provides a convenient way to 
+The Species table is the heart of FishBase. This function provides a convenient way to
 query, tidy, and assemble data from that table given an entire list of species.
 For details, see: http://www.fishbase.org/manual/english/fishbasethe_species_table.htm
 

@@ -21,7 +21,7 @@ length_weight(
 
 \item{server}{Either "fishbase" or "sealifebase".}
 
-\item{version}{a version string for the database. See [available_releases()] for details.}
+\item{version}{a version string for the database. See \code{\link[=available_releases]{available_releases()}} for details.}
 
 \item{db}{database connection, now deprecated.}
 
@@ -36,24 +36,24 @@ length-weight relationships of the form W = a x Lb, pertaining to about over 2,0
 }
 \details{
 See references for official documentation.  From FishBase.org:
-Length-weight relationships are important in fisheries science, 
+Length-weight relationships are important in fisheries science,
 notably to raise length-frequency samples to total catch, or to
-estimate biomass from underwater length observations. 
-The units of length and weight in FishBase are centimeter and gram, respectively. 
-Thus when length-weight relationships are not in cm-g, the intercept 'a' 
+estimate biomass from underwater length observations.
+The units of length and weight in FishBase are centimeter and gram, respectively.
+Thus when length-weight relationships are not in cm-g, the intercept 'a'
 is transformed as follows:
 
 a'(cm, g) = a (mm, g)*10^b
 a'(cm, g) = a (cm, kg)*1000
 a'(cm, g) = a (mm, mg)*10^b/1000
-a'(cm, g) = a (mm, kg)*10^b*1000
+a'(cm, g) = a (mm, kg)\emph{10^b}1000
 
 However, published length-weight relationships are sometimes difficult to use,
 as they may be based on a length measurement type (e.g., fork length) different
 from ones length measurements (expressed e.g., as total length).
 Therefore, to facilitate conversion between length types, an additional
 LENGTH-LENGTH table, #' presented below, was devised which presents linear
-regressions or ratios linking length types (e.g., FL vs. TL). 
+regressions or ratios linking length types (e.g., FL vs. TL).
 We included a calculated field with the weight of a 10 cm fish (which
 should be in the order of 10 g for normal, fusiform shaped fish),
 to allow identification of gross errors, given knowledge of the body

@@ -14,14 +14,14 @@ references(
 )
 }
 \arguments{
-\item{codes}{One or more Fishbase reference numbers, matching the RefNo 
+\item{codes}{One or more Fishbase reference numbers, matching the RefNo
 field}
 
 \item{fields}{subset to these columns.  (recommend to omit this and handle manually)}
 
 \item{server}{Either "fishbase" or "sealifebase".}
 
-\item{version}{a version string for the database. See [available_releases()] for details.}
+\item{version}{a version string for the database. See \code{\link[=available_releases]{available_releases()}} for details.}
 
 \item{db}{database connection, now deprecated.}
 
