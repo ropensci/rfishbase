@@ -13,12 +13,12 @@ fb_tbl(
 )
 }
 \arguments{
-\item{tbl}{table name, as it appears in the database. See [fb_tables()]
+\item{tbl}{table name, as it appears in the database. See \code{\link[=fb_tables]{fb_tables()}}
 for a list.}
 
 \item{server}{Access data from fishbase or sealifebase?}
 
-\item{version}{Version, see [available_releases()]}
+\item{version}{Version, see \code{\link[=available_releases]{available_releases()}}}
 
 \item{db}{database connection, deprecated}
 

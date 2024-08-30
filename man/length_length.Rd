@@ -21,7 +21,7 @@ length_length(
 
 \item{server}{Either "fishbase" or "sealifebase".}
 
-\item{version}{a version string for the database. See [available_releases()] for details.}
+\item{version}{a version string for the database. See \code{\link[=available_releases]{available_releases()}} for details.}
 
 \item{db}{database connection, now deprecated.}
 
@@ -39,7 +39,7 @@ species of fish, derived from different publications, e.g. Moutopoulos and Sterg
 Gaygusuz et al (2006), or from fish pictures, e.g. Collette and Nauen (1983), Compagno (1984)
 and Randall (1997). The relationships, which always refer to centimeters, may consist either of a
 regression linking two length types, of the form:
- Length type (2) = a + b x Length type (1)
+Length type (2) = a + b x Length type (1)
 Length type (2) = b' x Length type (1)
 The available length types are, as elsewhere in FishBase,
 TL = total length;

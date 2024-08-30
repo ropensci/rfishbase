@@ -22,7 +22,6 @@ Authors@R: c(person("Carl", "Boettiger",
                     comment = c(ORCID = "0000-0001-6619-9874")))
 URL: https://docs.ropensci.org/rfishbase/, https://github.com/ropensci/rfishbase
 BugReports: https://github.com/ropensci/rfishbase/issues
-LazyData: true
 Depends:
     R (>= 4.0)
 Imports:
@@ -40,6 +39,9 @@ Suggests:
     rmarkdown,
     knitr,
     covr,
-    spelling
+    spelling,
+    curl
 RoxygenNote: 7.3.1
 Language: en-US
+Roxygen: list(markdown = TRUE)
+
