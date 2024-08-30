@@ -5,7 +5,7 @@
 
 [![R-CMD-check](https://github.com/ropensci/rfishbase/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/ropensci/rfishbase/actions/workflows/R-CMD-check.yaml)
 [![Coverage
-status](https://codecov.io/gh/ropensci/rfishbase/branch/master/graph/badge.svg)](https://codecov.io/github/ropensci/rfishbase?branch=master)
+status](https://codecov.io/gh/ropensci/rfishbase/branch/master/graph/badge.svg)](https://app.codecov.io/github/ropensci/rfishbase?branch=master)
 [![Onboarding](https://badges.ropensci.org/137_status.svg)](https://github.com/ropensci/software-review/issues/137)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/rfishbase)](https://cran.r-project.org/package=rfishbase)
