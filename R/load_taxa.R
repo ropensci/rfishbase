@@ -22,12 +22,20 @@ load_taxa_ <- function(server = c("fishbase", "sealifebase"),
 #' @param version the version of the database you want. Will default to the
 #' latest available; see [available_releases()].
 #' @param ... for compatibility with previous versions
-#' @aliases species_names
 #' @return the taxa list
 #' @export
 load_taxa <- memoise::memoise(load_taxa_)
 
-
+#' species_names
+#' 
+#' Show scientific classification of taxa
+#' Note: species_names() is an alias for load_taxa().
+#' @param server Either "fishbase" (the default) or "sealifebase"
+#' @param version the version of the database you want. Will default to the
+#' latest available; see [available_releases()].
+#' @param ... for compatibility with previous versions
+#' @return the taxa list
+#' @export
 species_names <- memoise::memoise(load_taxa_)
 
 
