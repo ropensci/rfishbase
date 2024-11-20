@@ -28,6 +28,7 @@ Imports:
     glue,
     stringr,
     purrr,
+    httr,
     jsonlite,
     dplyr,
     duckdbfs,
