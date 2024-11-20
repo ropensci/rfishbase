@@ -64,7 +64,24 @@ available_releases <- function(server = c("fishbase", "sealifebase")) {
   sv <- server_code(server)
   repo <- "datasets/cboettig/fishbase"
   path <- glue::glue("data/{sv}")
-  hf <- "https://huggingface.co"
+  
+  is_user_in_china <- function() {
+    response <- httr::GET("https://ipinfo.io")
+    if (httr::status_code(response) == 200) {
+      data <- jsonlite::fromJSON(content(response, as = "text"))
+      country <- data$country
+      return(country == "CN")  
+    } else {
+      stop("can't get location")
+    }
+  }
+  
+  if (is_user_in_china()) {
+    hf <- "https://hf-mirror.com"
+  } else {
+    hf <- "https://huggingface.co"
+  }
+  
   branch <- "main"
   versions <-
     glue::glue("{hf}/api/{repo}/tree/{branch}/{path}") |>
@@ -85,7 +102,23 @@ hf_urls <- function(path  = "data/fb/v24.07/parquet",
                     branch = "main"
 ) { 
   
-  hf <- "https://huggingface.co"
+  is_user_in_china <- function() {
+    response <- httr::GET("https://ipinfo.io")
+    if (httr::status_code(response) == 200) {
+      data <- jsonlite::fromJSON(content(response, as = "text"))
+      country <- data$country
+      return(country == "CN")  
+    } else {
+      stop("can't get location")
+    }
+  }
+  
+  if (is_user_in_china()) {
+    hf <- "https://hf-mirror.com"
+  } else {
+    hf <- "https://huggingface.co"
+  }
+  
   paths <-
     glue::glue("{hf}/api/{repo}/tree/{branch}/{path}") |>
     jsonlite::read_json() |> 
