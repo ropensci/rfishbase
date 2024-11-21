@@ -6,7 +6,7 @@ Description: A programmatic interface to 'FishBase', re-written
     supports experimental access to 'SeaLifeBase' data, which contains
     nearly 200,000 species records for all types of aquatic life not covered by
     'FishBase.'
-Version: 5.0.0
+Version: 5.0.1
 Encoding: UTF-8
 License: CC0
 Authors@R: c(person("Carl", "Boettiger",
@@ -20,6 +20,8 @@ Authors@R: c(person("Carl", "Boettiger",
              person("Peter", "Wainwright", role = "aut"),
              person("Kevin", "Cazelles", role = "ctb", 
                     comment = c(ORCID = "0000-0001-6619-9874")))
+            person("Guohuan", "Su", role = "ctb", 
+                    comment = c(ORCID = "0000-0003-0091-9773")))
 URL: https://docs.ropensci.org/rfishbase/, https://github.com/ropensci/rfishbase
 BugReports: https://github.com/ropensci/rfishbase/issues
 Depends:
