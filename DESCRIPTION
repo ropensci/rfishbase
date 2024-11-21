@@ -19,7 +19,7 @@ Authors@R: c(person("Carl", "Boettiger",
              person("Duncan", "Temple Lang", role = "aut"),
              person("Peter", "Wainwright", role = "aut"),
              person("Kevin", "Cazelles", role = "ctb", 
-                    comment = c(ORCID = "0000-0001-6619-9874")))
+                    comment = c(ORCID = "0000-0001-6619-9874")),
              person("Guohuan", "Su", role = "ctb", 
                     comment = c(ORCID = "0000-0003-0091-9773")))
 URL: https://docs.ropensci.org/rfishbase/, https://github.com/ropensci/rfishbase
