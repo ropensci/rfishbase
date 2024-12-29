@@ -25,7 +25,8 @@ For more information on SemVer, please visit http://semver.org/.
 
 v 5.0.1
 -------
-Fix the issue faced by users in China who can't access the URL https://huggingface.co directly. When the user's ip address is detected to be in China, it will be automatically switched to the mirror URL https://hf-mirror.com
+Fix the issue faced by users in China who can't access the URL https://huggingface.co directly. 
+When the user's ip address is detected to be in China, it will be automatically switched to the mirror URL https://hf-mirror.com
 
 v 5.0.0
 -------

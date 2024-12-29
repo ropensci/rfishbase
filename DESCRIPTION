@@ -33,7 +33,7 @@ Imports:
     httr,
     jsonlite,
     dplyr,
-    duckdbfs,
+    duckdbfs (>= 0.0.9),
     rlang,
     magrittr,
     memoise

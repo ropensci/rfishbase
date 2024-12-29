@@ -2,6 +2,7 @@ CBinohlan
 CMD
 Collette
 Compagno
+Epinephelidae
 FAO
 FB
 FishBASE
@@ -18,13 +19,13 @@ POPCHAR
 RDB
 README
 RESTful
-RStudio
 RefNo
 SL
 SeaLifeBase
 Sealifebase
 SemVer
 SpecCode
+SpecCodes
 Stergiou
 WD
 Wmax
@@ -40,7 +41,6 @@ duckdb
 english
 et
 faoareas
-fb
 fishbase
 fishbaseapi
 fishbasethe
@@ -50,9 +50,11 @@ hotfix
 htm
 http
 https
+ip
 lengthfrequency
 memoization
 morphometrics
+name’
 popchar
 popgrowth
 poplf
@@ -60,6 +62,8 @@ popqb
 rappdirs
 ropensci
 sealifebase
+spawing
+synonym’
 tbl
 tibble
 tmax

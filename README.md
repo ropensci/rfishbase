@@ -136,7 +136,7 @@ on the `SpecCode` to more fully describe a species.
 To filter species by taxonomic names, use the taxa table from
 `load_taxa()`, which provides a joined table of taxonomy from subspecies
 up through Class, along with the corresponding FishBase taxon ids codes.
-Here is an example workflow joining two of the spawing tables and
+Here is an example workflow joining two of the spawning tables and
 filtering to the grouper family, *Epinephelidae*:
 
 ``` r
