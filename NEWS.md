@@ -23,6 +23,17 @@ And constructed with the following guidelines:
 
 For more information on SemVer, please visit http://semver.org/.
 
+v 5.0.2
+-------
+
+Data hosting has been migrated from HuggingFace to Source Cooperative (source.coop) 
+S3 storage. This change should resolve firewall and access issues that some users 
+experienced with HuggingFace, particularly in institutional or corporate environments. 
+The data is now served directly from AWS S3 (us-west-2.opendata.source.coop), providing
+more reliable access worldwide.
+
+Data updated to 2025-04 release as well.
+
 v 5.0.1
 -------
 Fix the issue faced by users in China who can't access the URL https://huggingface.co directly. 

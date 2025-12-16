@@ -17,13 +17,14 @@ Welcome to `rfishbase 5`! This is the fourth rewrite of the original
 al. (2012)](https://doi.org/10.1111/j.1095-8649.2012.03464.x).
 
 Another streamlined re-design following new abilities for data hosting
-and access. This release relies on a HuggingFace datasets hosting for
-data and metadata hosting in parquet and schema.org.
+and access. This release uses [Source Cooperative](https://source.coop/)
+S3 storage for data and metadata hosting in parquet format, providing
+improved reliability and resolving firewall issues that some users
+experienced with previous hosting solutions.
 
-Data access is simplified to use the simple HuggingFace datasets API
-instead of the previous contentid-based resolution. This allows metadata
-to be defined with directly alongside the data platform independent of
-the R package.
+Data access is simplified through direct S3 API queries instead of the
+previous contentid-based resolution. This allows metadata to be defined
+alongside the data, platform independent of the R package.
 
 A simplified access protocol relies on `duckdbfs` for direct reads of
 tables. Several functions previously used only to manage connections are
