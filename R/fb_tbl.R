@@ -124,7 +124,7 @@ s3_urls <- function(
 
   # Build full S3 URLs
   glue::glue(
-    "https://s3.us-west-2.amazonaws.com/{bucket}/{key}",
+    "https://data.source.coop/{key}",
     key = object_keys
   )
 }
