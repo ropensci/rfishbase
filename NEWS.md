@@ -34,6 +34,11 @@ requested, directing users to `fb_tables()`. Previously this produced a cryptic
 the argument was accepted but ignored, silently returning English results
 regardless of the language specified (fix for #275).
 
+Documentation for `length_length()` now clarifies the counterintuitive column
+naming convention: `Length1` is the unknown (predicted) length and `Length2`
+is the known (predictor), so the formula is `Length1 = a + b * Length2`
+(fix for #290).
+
 v 5.0.2
 -------
 
