@@ -26,12 +26,11 @@ common_to_sci <- function(x,
                           version = "latest",
                           db = NULL){
   
-  comnames <- get_comnames(server, version)
-  subset <- 
+  comnames <- get_comnames(server, version, db = db, lang = Language)
+  subset <-
     purrr::map_dfr(x, function(y){
       y <- stringr::str_to_lower(y)
-      y <- rlang::enquo(y) 
-      dplyr::filter(comnames, grepl(!!y, stringr::str_to_lower(ComName)))
+      dplyr::filter(comnames, grepl(y, stringr::str_to_lower(ComName)))
     })
   
   subset
