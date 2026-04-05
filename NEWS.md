@@ -23,6 +23,17 @@ And constructed with the following guidelines:
 
 For more information on SemVer, please visit http://semver.org/.
 
+v 5.0.3
+-------
+
+`fb_tbl()` now gives a clear error message when an unrecognized table name is
+requested, directing users to `fb_tables()`. Previously this produced a cryptic
+"missing value where TRUE/FALSE needed" error (fix for #320).
+
+`common_to_sci()` now correctly filters by the `Language` argument. Previously
+the argument was accepted but ignored, silently returning English results
+regardless of the language specified (fix for #275).
+
 v 5.0.2
 -------
 
