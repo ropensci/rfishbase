@@ -33,11 +33,34 @@ fb_tbl <- function(
   urls <- fb_urls(server, version)
   names(urls) <- tbl_name(urls)
 
+  if (is.na(urls[tbl])) {
+    stop(
+      glue::glue("Table '{tbl}' not found for {server[[1]]}."),
+      " Use fb_tables() to see available table names."
+    )
+  }
+
   duckdbfs::duckdb_config(enable_object_cache = 'true')
   out <- duckdbfs::open_dataset(urls[tbl])
 
   if (collect) {
-    out <- dplyr::collect(out)
+    out <- tryCatch(
+      dplyr::collect(out),
+      error = function(e) {
+        if (!grepl("null byte", conditionMessage(e))) stop(e)
+        cols <- colnames(out)
+        bad <- vapply(cols, function(col) {
+          inherits(
+            tryCatch(dplyr::collect(dplyr::select(out, dplyr::all_of(col))),
+                     error = function(e) e),
+            "error"
+          )
+        }, logical(1))
+        warning("Dropping column(s) with embedded null bytes: ",
+                paste(cols[bad], collapse = ", "), call. = FALSE)
+        dplyr::collect(dplyr::select(out, -dplyr::all_of(cols[bad])))
+      }
+    )
   }
 
   out
