@@ -39,6 +39,11 @@ naming convention: `Length1` is the unknown (predicted) length and `Length2`
 is the known (predictor), so the formula is `Length1 = a + b * Length2`
 (fix for #290).
 
+`fb_tbl()` now handles tables with embedded null bytes in string columns
+by dropping the affected column(s) with a warning rather than failing entirely.
+This fixes `ecosystem()` and `species_by_ecosystem()` with
+`server = "sealifebase"` (fix for #302).
+
 v 5.0.2
 -------
 
