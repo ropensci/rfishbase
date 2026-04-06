@@ -38,7 +38,7 @@ Return a table of common names
 Note that there are many common names for a given sci name
 }
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
 common_names("Bolbometopon muricatum")
 \dontshow{\}) # examplesIf}
 }

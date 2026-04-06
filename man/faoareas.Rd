@@ -33,7 +33,7 @@ a tibble, empty tibble if no results found
 return a table of species locations as reported in FishBASE.org FAO location data
 }
 \examples{
-\dontshow{if (interactive() ) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (interactive() ) withAutoprint(\{ # examplesIf}
   faoareas()
 \dontshow{\}) # examplesIf}
 }

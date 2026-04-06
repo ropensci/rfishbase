@@ -60,7 +60,7 @@ to allow identification of gross errors, given knowledge of the body
 form of a species.
 }
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
 \dontrun{
 length_weight("Oreochromis niloticus")
 }

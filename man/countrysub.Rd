@@ -30,7 +30,7 @@ countrysub(
 return a table of countrysub for the requested species
 }
 \examples{
-\dontshow{if (interactive() ) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (interactive() ) withAutoprint(\{ # examplesIf}
 \dontrun{
 countrysub(species_list(Genus='Labroides'))
 }

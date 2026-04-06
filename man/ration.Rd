@@ -33,7 +33,7 @@ a table of species ration
 ration
 }
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
 \dontrun{
 ration("Oreochromis niloticus")
 }

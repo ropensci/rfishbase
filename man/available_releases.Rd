@@ -13,7 +13,7 @@ available_releases(server = c("fishbase", "sealifebase"))
 List available releases
 }
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
 available_releases()
 \dontshow{\}) # examplesIf}
 }

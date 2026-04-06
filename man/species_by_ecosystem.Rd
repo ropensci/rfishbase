@@ -33,7 +33,7 @@ a table of species ecosystems data
 Species list by ecosystem
 }
 \examples{
-\dontshow{if (interactive() ) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (interactive() ) withAutoprint(\{ # examplesIf}
 \dontrun{
 species_by_ecosystem(ecosystem = "Arctic", server = "sealifebase")
 }

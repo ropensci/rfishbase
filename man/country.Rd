@@ -30,7 +30,7 @@ country(
 return a table of country for the requested species, as reported in FishBASE.org
 }
 \examples{
-\dontshow{if (interactive() ) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (interactive() ) withAutoprint(\{ # examplesIf}
 \dontrun{
 country("Bolbometopon muricatum")
 }

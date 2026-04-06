@@ -33,7 +33,7 @@ a table of estimates from some models on trophic levels
 estimate
 }
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
 \dontrun{
 estimate("Oreochromis niloticus")
 }

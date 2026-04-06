@@ -33,7 +33,7 @@ a table of species spawning
 spawning
 }
 \examples{
-\dontshow{if (interactive() ) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (interactive() ) withAutoprint(\{ # examplesIf}
 \dontrun{
 spawning("Oreochromis niloticus")
 }

@@ -31,7 +31,7 @@ Check for alternate versions of a scientific name and return
 the scientific names FishBase recognizes as valid
 }
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
 
   \donttest{
 validate_names("Abramites ternetzi")

@@ -34,7 +34,7 @@ a table of length_freq information by species; see details
 return a table of species fooditems
 }
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
 \dontrun{
 length_freq("Oreochromis niloticus")
 }

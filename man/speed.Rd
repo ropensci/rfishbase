@@ -33,7 +33,7 @@ a table of species speed data
 speed
 }
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
 \dontrun{
 speed("Oreochromis niloticus")
 }

@@ -52,9 +52,15 @@ the sex and the correlation coefficient are presented, if available.
 When a version of equation (2) is presented, the range and the correlation coefficient are omitted,
 as the ratio in (2) will usually be estimated from a single specimen, or a few fish covering a narrow
 range of lengths.
+
+\strong{Note on column naming:} The columns \code{Length1} and \code{Length2} follow FishBase's internal
+database convention, which may appear counterintuitive. \code{Length1} is the \emph{unknown} length
+being predicted, and \code{Length2} is the \emph{known} length used as the predictor. The formula
+is therefore: \code{Length1 = a + b * Length2}. This matches the FishBase website, which labels
+the columns "Unknown length" and "Known length" respectively.
 }
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
 \dontrun{
 length_length("Oreochromis niloticus")
 }

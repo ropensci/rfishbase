@@ -39,7 +39,7 @@ Wmax and tmax values or various combinations thereof refer to the
 same individual fish.
 }
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
 \dontrun{
 popchar("Oreochromis niloticus")
 }

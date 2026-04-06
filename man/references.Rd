@@ -34,7 +34,7 @@ a tibble (data.frame) of reference data
 references
 }
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
 \dontrun{
 references(codes = 1)
 references(codes = 1:6)

@@ -18,7 +18,7 @@ necessary to join multiple tables.  Other data cleaning steps are sometimes
 necessary as well.
 }
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
 fb_tables()
 \dontshow{\}) # examplesIf}
 }
