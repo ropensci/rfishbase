@@ -7,6 +7,7 @@ test_that("fishbase loads", {
 })
 
 test_that("sealifebase loads with expected structure", {
+  needs_api()
   df <- load_taxa(server = "sealifebase")
   expect_true(inherits(df, "tbl"))
   expect_true(all(

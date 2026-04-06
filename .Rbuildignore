@@ -27,3 +27,5 @@ circle.yml
 ^parquet$
 ^\.github$
 ^CRAN-SUBMISSION$
+^\.claude$
+^issues-triage\.md$
