@@ -54,11 +54,3 @@ newest, so once you publish, the comparison baseline becomes the new release.
   `mp_withphotos`, `country.orig`).  They are published as-is, since these are
   raw snapshots of the backend, but they show up in the verification diff as
   new tables — worth a glance before publishing.
-
-## Historical scripts
-
-`import_db.R`, `huggingface.R`, `write-prov.R` and `upload-and-register.R`
-document earlier iterations of this pipeline, when data was served from a
-GitHub-based pins board and later from HuggingFace, with provenance recorded
-via `prov`/`contentid`.  They are kept for reference only; nothing in the
-current workflow calls them.
