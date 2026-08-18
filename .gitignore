@@ -11,3 +11,4 @@ parquet
 fbapp
 slbapp
 CRAN-SUBMISSION
+__pycache__
