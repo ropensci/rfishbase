@@ -35,6 +35,15 @@ table was dropped.
 The workflow for importing a new database dump and publishing it to Source
 Cooperative is now scripted and documented in `data-raw/README.md`.
 
+Added a message from the FishBase team asking users to report mistakes, typos
+and taxonomic issues, and to share publications and references, directly to
+<fishbase@q-quatics.org>. It appears in the README and on the package help
+page.
+
+`?rfishbase` now resolves to a package help page. The roxygen block used
+`@docType _PACKAGE` rather than the `"_PACKAGE"` sentinel, so roxygen skipped
+it silently and no package-level documentation was ever generated.
+
 v 5.0.3
 -------
 
