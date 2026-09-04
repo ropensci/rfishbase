@@ -1,17 +1,17 @@
 #!/usr/bin/env bash
 # Publish a parquet export to Source Cooperative.
 #
-# Version tags encode the snapshot date of the dump (v26.07 = July 2026).  The
+# Version tags encode the snapshot date of the dump (v26.06 = June 2026).  The
 # two servers can carry different tags when their dumps arrive at different
 # times; `available_releases()` lists each server independently.
 #
 # Requires an `rclone` remote named `source` holding Source Cooperative creds.
 #
 # Usage:  bash data-raw/upload.sh <workdir> <fb-version> <slb-version>
-#   e.g.  bash data-raw/upload.sh /tmp/fishbase-import 26.07 26.04
+#   e.g.  bash data-raw/upload.sh /tmp/fishbase-import 26.06 26.06
 set -euo pipefail
 
-W="${1:?workdir}"; FB="${2:?fb version, e.g. 26.07}"; SLB="${3:?slb version, e.g. 26.04}"
+W="${1:?workdir}"; FB="${2:?fb version, e.g. 26.06}"; SLB="${3:?slb version, e.g. 26.06}"
 DEST="source:us-west-2.opendata.source.coop/cboettig/fishbase"
 
 # --s3-no-check-bucket: the publishing credentials can write the prefix but are
