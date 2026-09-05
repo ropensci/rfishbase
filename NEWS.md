@@ -26,11 +26,11 @@ For more information on SemVer, please visit http://semver.org/.
 v 5.0.4
 -------
 
-Data updated to the 2026 releases: FishBase `v26.07` and SeaLifeBase `v26.04`.
-These are now what `version = "latest"` resolves to. Earlier releases remain
-available via `available_releases()`. The new snapshots add 6 tables to
-FishBase (222 total) and 3 to SeaLifeBase (202 total); no previously published
-table was dropped.
+Data updated to the 2026 releases of FishBase and SeaLifeBase, both tagged
+`v26.06`. These are now what `version = "latest"` resolves to. Earlier
+releases remain available via `available_releases()`. The new snapshots add
+6 tables to FishBase (222 total) and 3 to SeaLifeBase (202 total); no
+previously published table was dropped.
 
 The workflow for importing a new database dump and publishing it to Source
 Cooperative is now scripted and documented in `data-raw/README.md`.

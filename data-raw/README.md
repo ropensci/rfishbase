@@ -7,7 +7,7 @@ FishBase and SeaLifeBase send `fbapp.7z` / `slbapp.7z` (7z-compressed
 # 1. drop the dumps in imports/ (git-ignored, excluded from the build), then
 bash data-raw/import_dumps.sh /tmp/fishbase-import
 # 2. read the verification summary, then publish (args are fb and slb versions)
-bash data-raw/upload.sh /tmp/fishbase-import 26.07 26.04
+bash data-raw/upload.sh /tmp/fishbase-import 26.06 26.06
 ```
 
 `import_dumps.sh` unpacks the dumps into a throwaway local MariaDB instance and
@@ -21,7 +21,7 @@ Nothing in the R package needs to change to ship a release:
 `available_releases()` reads the bucket and `version = "latest"` picks the
 highest version present.
 
-Version tags encode the *snapshot date* of the dump (`v26.07` = July 2026).
+Version tags encode the *snapshot date* of the dump (`v26.06` = June 2026).
 The two servers can carry different tags when their dumps arrive at different
 times, since releases are listed per server.
 
